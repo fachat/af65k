@@ -1,0 +1,22 @@
+
+The af65k core is my implementation of the 65k processor specification,
+a 6502 processor blown up to 64bit wide registers and address width.
+
+Homepage is: http://www.6502.org/users/andre/65k/index.html
+
+I am setting up the repository in preparation for publication
+
+The subdirectories are as follows:
+
+- generator: eclipse(tm) Java(tm) projects with code to generate parts of the
+  docs, the main opmap VHDL code and, in the future, decoding tables for the
+  cross-assembler
+
+- vhdl: the af65k VHDL. Currently contains a first alpha VHDL implementation for the 
+  af65002 variant, with maximum memory width of 8, 16, or 32, and maximum register width
+  of 16, 32, or 64.
+
+- doc: will contain programming information and implementation docs
+
+- a65k: will contain the 65k cross-assembler
+
