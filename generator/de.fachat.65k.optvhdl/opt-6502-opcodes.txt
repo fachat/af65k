@@ -1,0 +1,210 @@
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0066] !A0 & A1 & A2 & A5 & A6 & !A7 & !A8 & !A9> 
+[03fb 006a] | !A0 & A1 & A3 & !A4 & A5 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: ROR (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0026] !A0 & A1 & A2 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03fb 002a] | !A0 & A1 & A3 & !A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+> 
+Operation: ROL (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 00e6] !A0 & A1 & A2 & A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: INC (with 4 opcodes)
+  number of used input bits:8 (03e7)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 0041] A0 & !A1 & !A5 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: EOR (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 00e1] A0 & !A1 & A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: SBC (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0006] !A0 & A1 & A2 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03fb 000a] | !A0 & A1 & A3 & !A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+> 
+Operation: ASL (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 00c1] A0 & !A1 & !A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: CMP (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 00c6] !A0 & A1 & A2 & !A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: DEC (with 4 opcodes)
+  number of used input bits:8 (03e7)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0046] !A0 & A1 & A2 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03fb 004a] | !A0 & A1 & A3 & !A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: LSR (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 0021] A0 & !A1 & A5 & !A6 & !A7 & !A8 & !A9> 
+> 
+Operation: AND (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 0086] !A0 & A1 & A2 & !A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03ef 0086] | !A0 & A1 & A2 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: STX (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 0084] !A0 & !A1 & A2 & !A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03ef 0084] | !A0 & !A1 & A2 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: STY (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03eb 0081] A0 & !A1 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03e7 0085] | A0 & !A1 & A2 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03f3 0091] | A0 & !A1 & A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: STA (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03df 004c] !A0 & !A1 & A2 & A3 & !A4 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: JMP (with 2 opcodes)
+  number of used input bits:9 (03df)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 0061] A0 & !A1 & A5 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: ADC (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03fb 00e0] !A0 & !A1 & !A3 & !A4 & A5 & A6 & A7 & !A8 & !A9> 
+[03f7 00e4] | !A0 & !A1 & A2 & !A4 & A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: CPX (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 00a1] A0 & !A1 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: LDA (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03fb 00c0] !A0 & !A1 & !A3 & !A4 & !A5 & A6 & A7 & !A8 & !A9> 
+[03f7 00c4] | !A0 & !A1 & A2 & !A4 & !A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: CPY (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e3 0001] A0 & !A1 & !A5 & !A6 & !A7 & !A8 & !A9> 
+> 
+Operation: ORA (with 8 opcodes)
+  number of used input bits:7 (03e3)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03fb 00a2] !A0 & A1 & !A3 & !A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[03e7 00a6] | !A0 & A1 & A2 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: LDX (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03fb 00a0] !A0 & !A1 & !A3 & !A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[03e7 00a4] | !A0 & !A1 & A2 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: LDY (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 0024] !A0 & !A1 & A2 & !A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+> 
+Operation: BIT (with 2 opcodes)
+  number of used input bits:9 (03f7)
+  number of terms          :1
+===========================================================

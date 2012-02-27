@@ -1,0 +1,97 @@
+<ul>
+<li>
+ADB: Add value to B register</li>
+<li>
+ADE: Add value to E register</li>
+<li>
+ADS: Add value to stack pointer</li>
+<li>
+ASR: Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
+<li>
+BCN: Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
+<li>
+EXT: Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
+<li>
+FIL: Fill a memory area of size AC at address XR with a value from YR</li>
+<li>
+INV: invert AC, i.e. set AC to the 2s-complement of AC</li>
+<li>
+LDB: Load B with an immediate value</li>
+<li>
+LDE: Load E with an immediate value</li>
+<li>
+LEA: Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</li>
+<li>
+LLA: Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</li>
+<li>
+MVN: Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
+<li>
+MVP: Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
+<li>
+PEA: Push Effective Address: compute the effective address and push it onto the stack (always full width)</li>
+<li>
+PHB: Push B onto stack (full width)</li>
+<li>
+PHE: Push E onto stack (always full width)</li>
+<li>
+PLB: Pull E from stack (full width)</li>
+<li>
+PLE: Pull E from stack (full width)</li>
+<li>
+PRB: Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
+<li>
+RDL: Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
+<li>
+RMB: Read memory barrier: invalidates cache content (globally, or for a specific, given location)</li>
+<li>
+SAB: Swap A register with B register. Always done full width, no flags set.</li>
+<li>
+SAE: Swap AC with E register. Always done full width, no flags set.</li>
+<li>
+SAX: Swap AC with X register. Always done full width, no flags set.</li>
+<li>
+SAY: Swap AC with Y register. Always done full width, no flags set.</li>
+<li>
+SBB: Substract value from B register</li>
+<li>
+SBE: Add value to E register</li>
+<li>
+SBS: Substract value from stack pointer</li>
+<li>
+SCA: Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
+			LLA with same address (and no other LLA in same thread)</li>
+<li>
+SEB: Swap E register with B register. Always done full width, no flags set.</li>
+<li>
+STZ: Store zero into a memory location</li>
+<li>
+SWP: swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</li>
+<li>
+SXY: Swap X with Y register. Always done full width, no flags set.</li>
+<li>
+TAB: Transfer AC to B register</li>
+<li>
+TAE: Transfer AC to E register</li>
+<li>
+TBA: Transfer base register B to Accumulator</li>
+<li>
+TBE: Transfer content of B register into E register (full width)</li>
+<li>
+TEA: Transfer E register to Accumulator</li>
+<li>
+TEB: Transfer E to B register (full width)</li>
+<li>
+TPA: Transfer Program counter to Accumulator</li>
+<li>
+TRB: Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
+				memory location that are set in the accumulator.</li>
+<li>
+TSB: Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
+				memory location that are set in the accumulator.</li>
+<li>
+TSY: Transfer stack pointer to Y</li>
+<li>
+TYS: Transfer Y to stack pointer</li>
+<li>
+WMB: Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</li>
+</ul>

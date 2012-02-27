@@ -1,0 +1,3784 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cpu>
+    <creator>A. Fachat</creator>
+    <creationDate>2011-05-14T01:55:04.022+02:00</creationDate>
+    <identifier>af65002</identifier>
+
+	<!-- ################################# -->
+	<!-- opcode classes, when were they introduced -->
+		
+	<class>
+		<name>cmos</name>
+		<prio>1</prio>
+	</class>
+	<class>
+		<name>65k</name>
+		<prio>2</prio>
+	</class>
+
+	<!-- ################################# -->
+	<!-- actual opcode definitions -->
+	
+    <operation>
+        <name>BRK</name>
+        <desc>Starts the break routine.</desc>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x00</opcode>
+        </opcodes>
+    </operation>
+    
+	<!-- ################################# -->
+
+    <operation>
+        <name>BPL</name>
+        <desc>Branch on plus - take branch when N flag is cleared</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x10</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BMI</name>
+        <desc>Branch on minus - take branch when N flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x30</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BVC</name>
+        <desc>Branch on overflow clear - take branch when V flag is cleared</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x50</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BVS</name>
+        <desc>Branch on overflow set - take branch when V flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x70</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BCC</name>
+        <desc>Branch on carry clear - take branch when C flag is cleared</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x90</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BCS</name>
+        <desc>Branch on carry set - take branch when C flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xB0</opcode>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>BNE</name>
+        <desc>Branch on not equal - take branch when Z flag is cleared</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xD0</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BEQ</name>
+        <desc>Branch on equal - take branch when Z flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xf0</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>BRA</name>
+        <desc>Branch always - branch independent from any flags</desc>
+        <prefixBits>RS</prefixBits>
+      	<class>cmos</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x80</opcode>
+        </opcodes>
+    </operation>
+    
+	<!-- ################################# -->
+
+	<operation>
+		<name>JMP</name>
+		<desc>Jump to new code address</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <default-le>sign</default-le>
+		<opcodes>
+			<addressingMode>absindquad</addressingMode>
+			<opcode>0x07</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxindquad</addressingMode>
+			<opcode>0x27</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+		</opcodes>
+		<opcodes>
+			<addressingMode>addr</addressingMode>
+			<opcode>0x4c</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absind</addressingMode>
+			<opcode>0x6c</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxind</addressingMode>
+			<opcode>0x7c</opcode>
+		</opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x4c</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>addrlong</addressingMode>
+            <opcode>0x6c</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+	</operation>
+	
+    <operation>
+        <name>JSR</name>
+        <desc>Jump subroutine - jump to a new code location, save return address on stack for RTS</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <default-le>sign</default-le>
+        <opcodes>
+            <addressingMode>addr</addressingMode>
+            <opcode>0x20</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>addrlong</addressingMode>
+            <opcode>0xdc</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absind</addressingMode>
+            <opcode>0xdc</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxind</addressingMode>
+            <opcode>0xfc</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absindquad</addressingMode>
+            <opcode>0x87</opcode>
+            <class>65k</class>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxindquad</addressingMode>
+            <opcode>0xa7</opcode>
+            <class>65k</class>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x20</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>BSR</name>
+        <desc>Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <opcodes>
+            <addressingMode>relj</addressingMode>
+            <opcode>0x82</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>reljwide</addressingMode>
+            <opcode>0x44</opcode>
+        </opcodes>
+		<class>65k</class>
+	</operation>
+		
+	<operation>
+		<name>RTS</name>
+		<desc>Return from subroutine - read return address from stack</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>RS</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x60</opcode>
+		</opcodes>
+	</operation>  
+	  
+	<operation>
+		<name>RTI</name>
+		<desc>Return from interrupt</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x40</opcode>
+		</opcodes>
+	</operation>  
+	
+	<!-- ################################# -->
+
+	<operation>
+		<name>TSB</name>
+		<desc>Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
+				memory location that are set in the accumulator.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+		<class>cmos</class>
+		<opcodes>
+			<addressingMode>zp</addressingMode>
+			<opcode>0x04</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>abs</addressingMode>
+			<opcode>0x0c</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x0c</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TRB</name>
+		<desc>Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
+				memory location that are set in the accumulator.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+		<class>cmos</class>
+		<opcodes>
+			<addressingMode>zp</addressingMode>
+			<opcode>0x14</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>abs</addressingMode>
+			<opcode>0x1c</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x1c</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>BIT</name>
+		<desc>Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
+				zero) flags from the result. In case of the accumulator addressing, simply set the flags from the accumulator</desc>  
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>zp</addressingMode>
+			<opcode>0x24</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>abs</addressingMode>
+			<opcode>0x2c</opcode>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpx</addressingMode>
+			<opcode>0x34</opcode>
+			<class>cmos</class>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absx</addressingMode>
+			<opcode>0x3c</opcode>
+			<class>cmos</class>
+		</opcodes>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x89</opcode>
+			<class>cmos</class>
+		</opcodes>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x89</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x34</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	
+	<!-- ################################# -->
+
+    <operation>
+        <name>LDY</name>
+        <desc>Load Y register</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <default-le>zero</default-le>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xa0</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xa4</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xac</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xb4</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xbc</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xa0</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>LDX</name>
+        <desc>Load X register</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <default-le>zero</default-le>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xa2</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xa6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xae</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpy</addressingMode>
+            <opcode>0xb6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xbe</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xa2</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+
+    <operation>
+        <name>LDA</name>
+        <desc>Load accumulator</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <default-le>zero</default-le>
+        <opcodes>
+            <addressingMode>zpy</addressingMode>
+            <opcode>0x02</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absindy</addressingMode>
+            <opcode>0x42</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absindyquad</addressingMode>
+            <opcode>0x47</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxind</addressingMode>
+            <opcode>0x62</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxindquad</addressingMode>
+            <opcode>0x67</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0xa1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0xa3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xa5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xa9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xad</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0xb1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0xb2</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0xb3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xb5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0xb7</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xb9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xbd</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xa9</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+	<!-- ################################# -->
+    
+    <operation>
+        <name>CPY</name>
+        <desc>Compare Y register with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xc0</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xc4</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xcc</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xc0</opcode>
+            <oppage>EXT</oppage>
+            <class>65k</class>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>CPX</name>
+        <desc>Compare X register with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xe0</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xe4</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xec</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xe0</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>CMP</name>
+        <desc>Compare accumulator with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0xc1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0xc3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xc5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xc9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xcd</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0xd1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0xd2</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0xd3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0xd7</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xd5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xd9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xdd</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xc9</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+    
+	<!-- ################################# -->
+
+    <operation>
+        <name>ORA</name>
+        <desc>Bitwise OR accumulator with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0x01</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0x03</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x05</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x09</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x0d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0x11</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0x12</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0x13</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x15</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0x17</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x19</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x1d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x09</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>AND</name>
+        <desc>Bitwise AND accumulator with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0x21</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0x23</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x25</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x29</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x2d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0x31</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0x32</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0x33</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x35</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0x37</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x39</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x3d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x29</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>EOR</name>
+        <desc>Bitwise Exclusive-OR accumulator with content of memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0x41</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0x43</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x45</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x49</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x4d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0x51</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0x52</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0x53</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x55</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0x57</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x59</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x5d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x49</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>ADC</name>
+        <desc>Add content of memory location to accumulator</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0x61</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0x63</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x65</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x69</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x6d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0x71</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0x72</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0x73</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x75</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0x77</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x79</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x7d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x69</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    
+    <operation>
+        <name>SBC</name>   
+        <desc>Substract content of memory location from accumulator</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0xe1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0xe3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xe5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xe9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xed</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0xf1</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0xf2</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0xf3</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xf5</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0xf7</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xf9</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xfd</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xe9</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+	<!-- ################################# -->
+
+    <operation>
+        <name>ASR</name>
+        <desc>Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</desc>   
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x06</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x0a</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x0e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x16</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x1e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x1f</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x1d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>RDL</name>
+        <desc>Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</desc>   
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x26</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x2a</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x2e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x36</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x3e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x3f</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x3d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+
+    <operation>
+        <name>RDR</name>   
+        <desc>Rotate Direct Right - similar to ROR, but do not shift in carry, but the lowest bit of the original value</desc>   
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x66</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x6a</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x6e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x76</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x7e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x7f</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x7d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+	<!-- ################################# -->
+
+    <operation>
+        <name>ASL</name>   
+        <desc>Arithmetic Shift Left - shift accumulator one bit to the left, shifting in zero in bit 0</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x06</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x0a</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x0e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x16</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x1e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x1f</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x0d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>LSR</name>   
+        <desc>Logical Shift Right - shift accumulator one bit to the right, shifting in zero in the highest bit</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x46</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x4a</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x4e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x56</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x5e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x5f</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x4d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+
+    <operation>
+        <name>ROL</name>   
+        <desc>Rotate Left - shift accumulator one bit to the left, shifting in the carry flag in bit 0, and shifting the 
+        	highest bit into the carry flag instead.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x26</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x2a</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x2e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x36</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x3e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x3f</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x2d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+
+    <operation>
+        <name>ROR</name>   
+        <desc>Rotate Right - shift accumulator one bit to the right, shifting in the carry flag in the highest bit, and shifting 
+        	bit 0 into the carry flag instead.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x66</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x6a</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x6e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x76</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x7e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x7f</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x6d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>INC</name>   
+        <desc>Increment the content of a memory location by one</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xe6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x1a</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xee</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xf6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xfe</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xff</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xed</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>DEC</name>   
+        <desc>Decrement the content of a memory location by one</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0xc6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>A</addressingMode>
+            <opcode>0x3a</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0xce</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0xd6</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0xde</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xdf</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0xcd</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+
+
+	<!-- ################################# -->
+
+    <operation>
+        <name>STA</name>
+        <desc>Store the content of the accumulator into a memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <opcodes>
+            <addressingMode>zpy</addressingMode>
+            <opcode>0x22</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxind</addressingMode>
+            <opcode>0x81</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpxindquad</addressingMode>
+            <opcode>0x83</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x85</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x8d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindy</addressingMode>
+            <opcode>0x91</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpind</addressingMode>
+            <opcode>0x92</opcode>
+            <class>cmos</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindyquad</addressingMode>
+            <opcode>0x93</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x95</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpindquad</addressingMode>
+            <opcode>0x97</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x99</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x9d</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absindy</addressingMode>
+            <opcode>0xc2</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absindyquad</addressingMode>
+            <opcode>0xc7</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxind</addressingMode>
+            <opcode>0xe2</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absxindquad</addressingMode>
+            <opcode>0xe7</opcode>
+            <fixed>
+            	<name>AM</name>
+            	<value>1</value>
+            </fixed>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x8d</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>STZ</name>
+        <desc>Store zero into a memory location</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <class>cmos</class>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x64</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x74</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x9c</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x9e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0x9e</opcode>
+            <class>65k</class>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x9c</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+
+    <operation>
+        <name>STY</name>
+        <desc>Store the content of the Y register to memory.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x84</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x8c</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpx</addressingMode>
+            <opcode>0x94</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absx</addressingMode>
+            <opcode>0x9f</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x8c</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>STX</name>
+        <desc>Store the content of the X register to memory.</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <opcodes>
+            <addressingMode>zp</addressingMode>
+            <opcode>0x86</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>abs</addressingMode>
+            <opcode>0x8e</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>zpy</addressingMode>
+            <opcode>0x96</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>absy</addressingMode>
+            <opcode>0xbf</opcode>
+            <class>65k</class>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x8e</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+    </operation>
+    
+   
+	<!-- ################################# -->
+
+    <operation>
+        <name>TRP</name>
+        <desc>Trap into 65k supervisor mode</desc>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0xf4</opcode>
+        </opcodes>
+    </operation>
+
+<!--  
+    <operation>
+        <name>EXT prefix</name>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0x0f</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>SYS prefix</name>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0x2f</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>QUICK prefix</name>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0x4f</opcode>
+        </opcodes>
+    </operation>
+    
+    <operation>
+        <name>reserved prefix</name>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0x6f</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0x8f</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0xaf</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0xcf</opcode>
+        </opcodes>
+        <opcodes>
+            <addressingMode>prefix</addressingMode>
+            <opcode>0xef</opcode>
+        </opcodes>
+    </operation>
+-->
+    
+	<!-- ################################# -->
+
+	<operation>
+		<name>PHP</name>
+		<desc>Push processor status register onto the stack</desc> 
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x08</opcode>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>CLC</name>
+		<desc>Clear the C flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x18</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PLP</name>
+		<desc>Pull processor status register from the stack</desc> 
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x28</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>SEC</name>
+		<desc>Set the C flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x38</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PHA</name>
+		<desc>Push contents of the accumulator onto the stack</desc> 
+		<prefixBits>RS</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x48</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PHY</name>
+		<desc>Push contents of the Y register onto the stack</desc> 
+		<prefixBits>RS</prefixBits>
+		<prefixBits>UM</prefixBits>
+        <class>cmos</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x5a</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PHX</name>
+		<desc>Push contents of the X register onto the stack</desc> 
+		<prefixBits>RS</prefixBits>
+		<prefixBits>UM</prefixBits>
+        <class>cmos</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xda</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>CLI</name>
+		<desc>Clear the interrupt (I) flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x58</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PLA</name>
+		<desc>Pull the contents of the accumulator from the stack</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x68</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PLY</name>
+		<desc>Pull the contents of the Y register from the stack</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+        <class>cmos</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x7a</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>PLX</name>
+		<desc>Pull the contents of the X register from the stack</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+        <class>cmos</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xfa</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>SEI</name>
+		<desc>Set the interrupt (I) flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x78</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>DEY</name>
+		<desc>Decrement the Y register by one</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x88</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TYA</name>
+		<desc>Transfer the contents of the Y register into the accumulator</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x98</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TXA</name>
+		<desc>Transfer the contents of the X register into the accumulator</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x8a</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TSX</name>
+		<desc>Transfer the contents of the stack pointer into the X register (Note: needs RS to keep compatibility with 6502)</desc>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xba</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TXS</name>
+		<desc>Transfer the contents of X register into the stack pointer (Note: needs RS to keep compatibility with 6502)</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x9a</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TAY</name>
+		<desc>Transfer the contents of accumulator into the Y register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xa8</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>TAX</name>
+		<desc>Transfer the contents of accumulator into the X register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xaa</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>CLV</name>
+		<desc>Clear the overflow (V) flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xb8</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>INY</name>
+		<desc>Increment the content of the Y register by one</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xc8</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>CLD</name>
+		<desc>Clear the decimal (D) flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xd8</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>INX</name>
+		<desc>Increment the content of the X register by one</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xe8</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>DEX</name>
+		<desc>Decrement the content of the X register by one</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xca</opcode>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>SED</name>
+		<desc>Set the decimal (D) flag</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xf8</opcode>
+		</opcodes>
+	</operation>
+	    
+	<operation>
+		<name>NOP</name>
+		<desc>No operation</desc>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xea</opcode>
+		</opcodes>
+	</operation>
+
+	<!-- ################################# -->
+
+	<operation>
+		<name>LEA</name>
+		<desc>Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</desc>
+		<class>65k</class>
+		<prefixBits>AM</prefixBits>
+		<prefixBits>OF</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<opcodes>
+			<addressingMode>zpy</addressingMode>
+			<opcode>0x02</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absindy</addressingMode>
+			<opcode>0x42</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxind</addressingMode>
+			<opcode>0x62</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>rel</addressingMode>
+			<opcode>0x80</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpxind</addressingMode>
+			<opcode>0xa1</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zp</addressingMode>
+			<opcode>0x46</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>abs</addressingMode>
+			<opcode>0xae</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindy</addressingMode>
+			<opcode>0xb1</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpind</addressingMode>
+			<opcode>0xb2</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpx</addressingMode>
+			<opcode>0x56</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absy</addressingMode>
+			<opcode>0xb9</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absx</addressingMode>
+			<opcode>0xbe</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>relwide</addressingMode>
+			<opcode>0x44</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PEA</name>
+		<desc>Push Effective Address: compute the effective address and push it onto the stack (always full width)</desc>
+		<class>65k</class>
+		<prefixBits>AM</prefixBits>
+		<prefixBits>OF</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<opcodes>
+			<addressingMode>zpy</addressingMode>
+			<opcode>0x22</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absindy</addressingMode>
+			<opcode>0xc2</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxind</addressingMode>
+			<opcode>0xe2</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>rel</addressingMode>
+			<opcode>0x82</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpxind</addressingMode>
+			<opcode>0x81</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zp</addressingMode>
+			<opcode>0x85</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>abs</addressingMode>
+			<opcode>0xad</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindy</addressingMode>
+			<opcode>0x91</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpind</addressingMode>
+			<opcode>0x92</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpx</addressingMode>
+			<opcode>0x95</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absy</addressingMode>
+			<opcode>0x99</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absx</addressingMode>
+			<opcode>0xbd</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>relwide</addressingMode>
+			<opcode>0x54</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+		
+	<!-- ################################# -->
+
+	<operation>
+		<name>MVN</name>
+		<desc>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x04</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>MVP</name>
+		<desc>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x14</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>FIL</name>
+		<desc>Fill a memory area of size AC at address XR with a value from YR</desc>
+		<prefixBits>RS</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x24</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>WMB</name>
+		<desc>Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</desc>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x74</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xf4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>RMB</name>
+		<desc>Read memory barrier: invalidates cache content (globally, or for a specific, given location)</desc>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x64</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xe4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>INV</name>
+		<desc>invert AC, i.e. set AC to the 2s-complement of AC</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xa4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xac</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+	
+	<operation>
+		<name>BCN</name>
+		<desc>Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xb4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xbc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+
+	<operation>
+		<name>SWP</name>
+		<desc>swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xd4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+		
+	<operation>
+		<name>LDE</name>
+		<desc>Load E with an immediate value</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+        <default-le>sign</default-le>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x39</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>LDB</name>
+		<desc>Load B with an immediate value</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+        <default-le>sign</default-le>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x59</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+		
+	<operation>
+		<name>EXT</name>
+		<desc>Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xc4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>SCA</name>
+		<desc>Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
+			LLA with same address (and no other LLA in same thread)</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x84</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<operation>
+		<name>LLA</name>
+		<desc>Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x94</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+
+	<operation>
+		<name>PHE</name>
+		<desc>Push E onto stack (always full width)</desc>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x08</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PLE</name>
+		<desc>Pull E from stack (full width)</desc>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x28</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PHB</name>
+		<desc>Push B onto stack (full width)</desc>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x48</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PRB</name>
+		<desc>Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</desc>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x58</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PLB</name>
+		<desc>Pull E from stack (full width)</desc>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x68</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TPA</name>
+		<desc>Transfer Program counter to Accumulator</desc>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xc8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TBA</name>
+		<desc>Transfer base register B to Accumulator</desc>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xf8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TEA</name>
+		<desc>Transfer E register to Accumulator</desc>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x98</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TAE</name>
+		<desc>Transfer AC to E register</desc>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>RS</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x88</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TYS</name>
+		<desc>Transfer Y to stack pointer</desc>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x8a</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TSY</name>
+		<desc>Transfer stack pointer to Y</desc>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xca</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TAB</name>
+		<desc>Transfer AC to B register</desc>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>RS</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xe8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TEB</name>
+		<desc>Transfer E to B register (full width)</desc>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xea</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>TBE</name>
+		<desc>Transfer content of B register into E register (full width)</desc>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xfa</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SEB</name>
+		<desc>Swap E register with B register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xb8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SAB</name>
+		<desc>Swap A register with B register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xa8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SAE</name>
+		<desc>Swap AC with E register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xd8</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SAX</name>
+		<desc>Swap AC with X register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xba</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SAY</name>
+		<desc>Swap AC with Y register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xda</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+
+	<operation>
+		<name>SXY</name>
+		<desc>Swap X with Y register. Always done full width, no flags set.</desc>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0x9a</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	
+	<!-- ################################# -->
+
+	<operation>
+		<name>ADE</name>
+		<desc>Add value to E register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x25</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x35</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>ADS</name>
+		<desc>Add value to stack pointer</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x45</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x55</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>ADB</name>
+		<desc>Add value to B register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0x65</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x75</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SBE</name>
+		<desc>Add value to E register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0xa5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xb5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SBS</name>
+		<desc>Substract value from stack pointer</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0xc5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xd5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>SBB</name>
+		<desc>Substract value from B register</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>imm</addressingMode>
+			<opcode>0xe5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xf5</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+
+	<!-- ################################# -->
+
+	<syntax>
+		<id>implied</id>
+		<desc>Empty syntax, either AC or implied addressing modes.</desc>
+		<simplesyntax></simplesyntax>
+		<mode>
+			<!--width>0</width-->
+			<addrMode>A</addrMode>
+		</mode>
+		<mode>
+			<!--width>0</width-->
+			<addrMode>implied</addrMode>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>immediate</id>
+		<desc>Immediate addressing: operand directly follows the opcode.</desc>
+		<simplesyntax>#&lt;operand&gt;</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>imm</addrMode>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>imm2</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>01</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>4</width-->
+			<addrMode>imm4</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>10</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>8</width-->
+			<addrMode>imm8</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>11</value>
+			</prefix>
+		</mode>
+	</syntax>
+
+	<syntax>
+		<id>absolute</id>
+		<desc>Opcode is followed by an address for the operand</desc>
+		<simplesyntax>&lt;address&gt;</simplesyntax>
+		<mode>
+			<addrMode>zp</addrMode>
+		</mode>
+		<mode>
+			<addrMode>abs</addrMode>
+		</mode>
+		<mode>
+			<addrMode>long</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>quad</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>addr</addrMode>
+		</mode>
+		<mode>
+			<addrMode>addrlong</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>addrquad</addrMode>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>rel</addrMode>
+	        <simplesyntax>rel</simplesyntax>
+		</mode>
+		<mode>
+			<addrMode>relwide</addrMode>
+	        <simplesyntax>relwide</simplesyntax>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>01</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>rellong</addrMode>
+	        <simplesyntax>rellong</simplesyntax>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>10</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>relquad</addrMode>
+	        <simplesyntax>relquad</simplesyntax>
+			<class>65k</class>
+			<prefix>
+				<name>RS</name>
+				<value>11</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>relj</addrMode>
+	        <simplesyntax>rel</simplesyntax>
+		</mode>
+		<mode>
+			<addrMode>reljwide</addrMode>
+	        <simplesyntax>relwide</simplesyntax>
+			<class>65k</class>
+		</mode>
+		<mode>
+			<addrMode>reljlong</addrMode>
+	        <simplesyntax>rellong</simplesyntax>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>reljquad</addrMode>
+	        <simplesyntax>relquad</simplesyntax>
+			<class>65k</class>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+
+	<syntax>
+		<id>absolutex</id>
+		<desc>The X register is added to the operand following the opcode</desc>
+		<simplesyntax>&lt;address&gt;,X</simplesyntax>
+		<mode>
+			<addrMode>zpx</addrMode>
+		</mode>
+		<mode>
+			<addrMode>absx</addrMode>
+		</mode>
+		<mode>
+			<addrMode>longx</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>quadx</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>absolutey</id>
+		<desc>The Y register is added to the operand following the opcode</desc>
+		<simplesyntax>&lt;address&gt;,Y</simplesyntax>
+		<mode>
+			<addrMode>zpy</addrMode>
+		</mode>
+		<mode>
+			<addrMode>absy</addrMode>
+		</mode>
+		<mode>
+			<addrMode>longy</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>quady</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirect</id>
+		<desc>The opcode is followed by an address, from which the effective address of the operand is read.
+			The effective address is taken as a wide address (16 bit)</desc>
+		<simplesyntax>(&lt;address&gt;)</simplesyntax>
+		<mode>
+			<addrMode>zpind</addrMode>
+		</mode>
+		<mode>
+			<addrMode>absind</addrMode>
+		</mode>
+	</syntax>
+
+	<syntax>
+		<id>eindirect</id>
+		<desc>The effective operand address is taken from the E register</desc>
+		<simplesyntax>(E)</simplesyntax>
+		<mode>
+			<addrMode>eind</addrMode>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirectlong</id>
+		<desc>The opcode is followed by an address, from which the effective address of the operand is read.
+			The effective address is taken as a long address (32 bit)</desc>
+		<simplesyntax>[&lt;address&gt;]</simplesyntax>
+		<mode>
+			<addrMode>zpindlong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>absindlong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirectquad</id>
+		<desc>The opcode is followed by an address, from which the effective address of the operand is read.
+			The effective address is taken as a quad address (64 bit)</desc>
+		<simplesyntax>[[&lt;address&gt;]]</simplesyntax>
+		<mode>
+			<addrMode>zpindquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<addrMode>absindquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirecty</id>
+		<desc>The opcode is followed by an address, from which an address read.
+			This address is taken as a wide address (16 bit). The Y register is added to the address, the result
+			is taken as the effective address of the operand.</desc>
+		<simplesyntax>(&lt;address&gt;),Y</simplesyntax>
+		<mode>
+			<addrMode>zpindy</addrMode>
+		</mode>
+		<mode>
+			<addrMode>absindy</addrMode>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirectylong</id>
+		<desc>The opcode is followed by an address, from which an address read.
+			This address is taken as a long address (32 bit). The Y register is added to the address, the result
+			is taken as the effective address of the operand.</desc>
+		<simplesyntax>[&lt;address&gt;],Y</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>zpindylong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>absindylong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>indirectyquad</id>
+		<desc>The opcode is followed by an address, from which an address read.
+			This address is taken as a quad address (64 bit). The Y register is added to the address, the result
+			is taken as the effective address of the operand.</desc>
+		<simplesyntax>[[&lt;address&gt;]],Y</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>zpindyquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>absindyquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>xindirect</id>
+		<desc>The opcode is followed by an address. The X register is added to this address. From the result the effective operand address is read.
+			The effective address is taken as a wide address (16 bit).</desc>
+		<simplesyntax>(&lt;address&gt;,X)</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>zpxind</addrMode>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>absxind</addrMode>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>xindirectlong</id>
+		<desc>The opcode is followed by an address. The X register is added to this address. From the result the effective operand address is read.
+			The effective address is taken as a long address (32 bit).</desc>
+		<simplesyntax>[&lt;address&gt;,X]</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>zpxindlong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>absxindlong</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	<syntax>
+		<id>xindirectquad</id>
+		<desc>The opcode is followed by an address. The X register is added to this address. From the result the effective operand address is read.
+			The effective address is taken as a quad address (64 bit).</desc>
+		<simplesyntax>[[&lt;address&gt;,X]]</simplesyntax>
+		<mode>
+			<!--width>1</width-->
+			<addrMode>zpxindquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+		<mode>
+			<!--width>2</width-->
+			<addrMode>absxindquad</addrMode>
+			<prefix>
+				<name>AM</name>
+				<value>1</value>
+			</prefix>
+		</mode>
+	</syntax>
+	
+	
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Implied</name>
+        <desc>Implied by the operation</desc>
+        <identifier>implied</identifier>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>OF</ignoredPrefixes>
+        <width>0</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Accumulator</name>
+    	<identifier>A</identifier>
+    	<desc>Accumulator operation</desc>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>UM</ignoredPrefixes>
+        <ignoredPrefixes>OF</ignoredPrefixes>
+        <ignoredPrefixes>LE</ignoredPrefixes>
+        <width>0</width>
+    </addrmode>
+
+	<!-- ################################# -->
+	
+    <addrmode>
+    	<name>Address</name>
+        <desc>The parameter following the opcode is an address (16 bit; for JMP, JSR, JPU)</desc>
+        <identifier>addr</identifier>
+        <altMode>addrquad</altMode>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Address Long</name>
+        <desc>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</desc>
+        <identifier>addrlong</identifier>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Address Quad</name>
+        <desc>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</desc>
+        <identifier>addrquad</identifier>
+        <width>8</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	
+    <addrmode>
+    	<name>Immediate</name>
+        <desc>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a byte parameter</desc>
+        <identifier>imm</identifier>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>UM</ignoredPrefixes>
+        <ignoredPrefixes>OF</ignoredPrefixes>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Immediate 16bit</name>
+    	<altname>Wide immediate</altname>
+        <desc>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a word (16bit) parameter</desc>
+        <identifier>imm2</identifier>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>UM</ignoredPrefixes>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Immediate 32bit</name>
+    	<altname>Long immediate</altname>
+        <desc>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a long (32bit) parameter</desc>
+        <identifier>imm4</identifier>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>UM</ignoredPrefixes>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Immediate 64bit</name>
+        <desc>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a quad (64bit) parameter</desc>
+        <identifier>imm8</identifier>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>UM</ignoredPrefixes>
+        <width>8</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	
+    <addrmode>
+    	<name>E indirect</name>
+    	<identifier>eind</identifier>
+    	<desc>E-register indirect: the effective address is taken from the E register.</desc>
+    	<class>65k</class>
+        <ignoredPrefixes>AM</ignoredPrefixes>
+        <ignoredPrefixes>OF</ignoredPrefixes>
+        <width>0</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Zeropage</name>
+        <identifier>zp</identifier>
+        <desc>Zeropage address; The effective address of the operand is a zeropage address (i.e. 8bit)</desc>
+        <altMode>long</altMode>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Zeropage indexed with X</name>
+    	<altname>Zeropage X-indexed</altname>
+        <identifier>zpx</identifier>
+        <desc>Zeropage address, plus content of XR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the X register</desc>
+        <altMode>longx</altMode>
+        <width>1</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Zeropage indexed with Y</name>
+    	<altname>Zeropage Y-indexed</altname>
+        <identifier>zpy</identifier>
+        <desc>Zeropage address, plus content of YR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the Y register</desc>
+        <altMode>longy</altMode>
+        <width>1</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute 16bit</name>
+    	<altname>Absolute</altname>
+        <identifier>abs</identifier>
+        <desc>16 bit address; The effective address of the operand is the word address (i.e. 16 bit) given as opcode parameter</desc>
+        <altMode>quad</altMode>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute 16bit indexed with X</name>
+    	<altname>Absolute X-indexed</altname>
+        <identifier>absx</identifier>
+        <desc>16 bit address, plus content of XR; The effective address is the opcode parameter (word address), plus the value of the X register</desc>
+        <altMode>quadx</altMode>
+        <width>2</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute 16bit indexed with Y</name>
+    	<altname>Absolute Y-indexed</altname>
+        <identifier>absy</identifier>
+        <desc>16 bit address, plus content of YR; The effective address is the opcode parameter (word address), plus the value of the Y register</desc>
+        <altMode>quady</altMode>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute 32bit</name>
+    	<altname>Long absolute</altname>
+        <identifier>long</identifier>
+        <desc>32 bit address; The effective address is the opcode parameter, which is a long address (i.e. 32 bit)</desc>
+    	<class>65k</class>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute 32bit indexed with X</name>
+    	<altname>Long absolute X-indexed</altname>
+        <identifier>longx</identifier>
+        <desc>32 bit address, plus content of XR; The effective address is the opcode parameter (long address), plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>4</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute 32bit indexed with Y</name>
+    	<altname>Long absolute Y-indexed</altname>
+        <identifier>longy</identifier>
+        <desc>32 bit address, plus content of YR; The effective address is the opcode parameter (long address), plus the value of the Y register</desc>
+    	<class>65k</class>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute 64bit</name>
+    	<altname>Quad absolute</altname>
+        <identifier>quad</identifier>
+        <desc>64 bit address; The effective address is the opcode parameter, which is a quad address (i.e. 64 bit)</desc>
+    	<class>65k</class>
+        <width>8</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute 64bit indexed with X</name>
+    	<altname>Quad absolute X-indexed</altname>
+        <identifier>quadx</identifier>
+        <desc>64 bit address, plus content of XR; The effective address is the opcode parameter (quad address), plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>8</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute 64bit indexed with Y</name>
+    	<altname>Quad absolute Y-indexed</altname>
+        <identifier>quady</identifier>
+        <desc>64 bit address, plus content of YR; The effective address is the opcode parameter (quad address), plus the value of the Y register</desc>
+    	<class>65k</class>
+        <width>8</width>
+    </addrmode>
+
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Zeropage indirect 16bit</name>
+    	<altname>Zeropage indirect</altname>
+        <identifier>zpind</identifier>
+        <desc>Load effective 16 bit address from zeropage location given; Load effective word (16bit) address from zeropage location given as parameter.</desc>
+        <altMode>zpindlong</altMode>
+    	<class>cmos</class>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+        <name>Zeropage indirect 16bit indexed with Y</name>
+        <altname>Zeropage indirect Y-indexed</altname>
+        <identifier>zpindy</identifier>
+        <desc>Load effective 16 bit address from zeropage location given, then add content of YR; 
+        	The effective address is computed as the word (16bit) address read from the zeropage location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</desc>
+        <altMode>zpindylong</altMode>
+        <width>1</width>
+    </addrmode>
+
+    <addrmode>
+        <name>Zeropage indexed with X indirect 16bit</name>
+        <altname>Zeropage X-indexed indirect</altname>
+        <identifier>zpxind</identifier>
+        <desc>Load effective 16 bit address from zeropage location given plus content of XR; 
+        	The effective word (16bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</desc>
+        <altMode>zpxindlong</altMode>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 16bit</name>
+    	<altname>Absolute indirect</altname>
+        <identifier>absind</identifier>
+        <desc>Load effective 16 bit address from absolute location given; 
+        	The effective word (16bit) address is read from word location given as parameter.</desc>
+        <altMode>absindlong</altMode>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 16bit indexed with Y</name>
+    	<altname>Absolute indirect Y-indexed</altname>
+        <identifier>absindy</identifier>
+        <desc>Load effective 16 bit address from absolute location given, then add content of YR; 
+        	The effective address is computed as the word (16bit) address read from the word location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</desc>
+        <altMode>absindylong</altMode>
+        <class>65k</class>
+        <width>2</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute indexed with X indirect 16bit</name>
+    	<altname>Absolute X-indexed indirect</altname>
+        <identifier>absxind</identifier>
+        <desc>Load effective 16 bit address from absolute location given plus content of XR;
+        	The effective word address is read from the location that is computed as the word location given as parameter plus the value of the X register</desc>
+        <altMode>absxindlong</altMode>
+        <class>cmos</class>
+        <width>2</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+
+    <addrmode>
+    	<name>Zeropage indirect 32bit</name>
+    	<altname>Long Zeropage indirect</altname>
+        <identifier>zpindlong</identifier>
+        <desc>Load effective 32 bit address from zeropage location given; 
+        	The effective long (32bit) address is read from zeropage location given as parameter.</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Zeropage indirect 32bit indexed with Y</name>
+    	<altname>Zeropage long indirect Y-indexed</altname>
+        <identifier>zpindylong</identifier>
+        <desc>Load effective 32 bit address from zeropage location given, then add content of YR;
+        	The effective address is computed as the long (32bit) address read from the zeropage location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Zeropage indexed with X indirect 32bit</name>
+    	<altname>Zeropage X-indexed long indirect</altname>
+        <identifier>zpxindlong</identifier>
+        <desc>Load effective 32 bit address from zeropage location given plus content of XR;
+        	The effective long (32bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 32bit</name>
+    	<altname>Absolute long indirect</altname>
+        <identifier>absindlong</identifier>
+        <desc>Load effective 32 bit address from absolute location given;
+        	The effective long (32bit) address is read from word location given as parameter.</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 32bit indexed with Y</name>
+    	<altname>Absolute long indirect Y-indexed</altname>
+        <identifier>absindylong</identifier>
+        <desc>Load effective 32 bit address from absolute location given, then add content of YR;
+        	The effective address is computed as the long address read from the word location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute indexed with X indirect 32bit</name>
+    	<altname>Absolute X-indexed long indirect</altname>
+        <identifier>absxindlong</identifier>
+        <desc>Load effective 32 bit address from absolute location given plus content of XR;
+        	The effective long (32bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+
+    <addrmode>
+    	<name>Zeropage indirect 64bit</name>
+    	<altname>Zeropage quad indirect</altname>
+        <identifier>zpindquad</identifier>
+        <desc>Load effective 64 bit address from zeropage location given;
+        	The effective quad (64bit) address is read from zeropage location given as parameter.</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Zeropage indirect 64bit indexed with Y</name>
+    	<altname>Zeropage quad indirect Y-indexed</altname>
+        <identifier>zpindyquad</identifier>
+        <desc>Load effective 64 bit address from zeropage location given, then add content of YR;
+        	The effective address is computed as the quad (64bit) address read from the zeropage location given as parameter plus the value of the Y register</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Zeropage indexed with X indirect 64bit</name>
+    	<altname>Zeropage X-indexed quad indirect</altname>
+        <identifier>zpxindquad</identifier>
+        <desc>Load effective 64 bit address from zeropage location given plus content of XR;
+        	The effective quad (64bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 64bit</name>
+    	<altname>Absolute quad indirect</altname>
+        <identifier>absindquad</identifier>
+        <desc>Load effective 64 bit address from absolute location given;
+        	The effective quad (64bit) address is read from word location given as parameter.</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Absolute indirect 64bit indexed with Y</name>
+    	<altname>Absolute quad indirect Y-indexed</altname>
+        <identifier>absindyquad</identifier>
+        <desc>Load effective 64 bit address from absolute location given, then add content of YR;
+        	The effective address is computed as the quad address read from the word location given as parameter plus the value of the Y register</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+
+    <addrmode>
+    	<name>Absolute indexed with X indirect 64bit</name>
+    	<altname>Absolute X-indexed quad indirect</altname>
+        <identifier>absxindquad</identifier>
+        <desc>Load effective 64 bit address from absolute location given plus content of XR;
+        	The effective quad (64bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</desc>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Relative</name>
+        <desc>relative addressing modes, used in branches; from -128 to +127</desc>
+        <identifier>rel</identifier>
+        <altMode>rellong</altMode>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 16bit</name>
+    	<altname>Wide relative</altname>
+        <desc>relative addressing modes, used in branches; from -32768 to +32767</desc>
+        <identifier>relwide</identifier>
+    	<class>65k</class>
+        <altMode>relquad</altMode>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 32bit</name>
+    	<altname>Long relative</altname>
+        <desc>relative addressing modes, used in branches; from -2^32 to +2^32-1</desc>
+        <identifier>rellong</identifier>
+    	<class>65k</class>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 64bit</name>
+    	<altname>Quad relative</altname>
+        <desc>relative addressing modes, used in branches; from -2^64 to +2^64-1</desc>
+        <identifier>relquad</identifier>
+    	<class>65k</class>
+        <width>8</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Relative (BSR)</name>
+        <desc>relative addressing modes, used in BSR; from -128 to +127</desc>
+        <identifier>relj</identifier>
+        <altMode>reljlong</altMode>
+        <width>1</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 16bit (BSR)</name>
+    	<altname>Wide relative</altname>
+        <desc>relative addressing modes, used in BSR; from -32768 to +32767</desc>
+        <identifier>reljwide</identifier>
+        <altMode>reljquad</altMode>
+    	<class>65k</class>
+        <width>2</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 32bit (BSR)</name>
+    	<altname>Long relative</altname>
+        <desc>relative addressing modes, used in BSR; from -2^32 to +2^32-1</desc>
+        <identifier>reljlong</identifier>
+    	<class>65k</class>
+        <width>4</width>
+    </addrmode>
+    
+    <addrmode>
+    	<name>Relative 64bit (BSR)</name>
+    	<altname>Quad relative</altname>
+        <desc>relative addressing modes, used in BSR; from -2^64 to +2^64-1</desc>
+        <identifier>reljquad</identifier>
+    	<class>65k</class>
+        <width>8</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	    
+    <addrmode>
+    	<name>Prefix</name>
+        <desc>n/a</desc>
+        <identifier>prefix</identifier>
+    	<class>65k</class>
+        <width>0</width>
+    </addrmode>
+    
+	<!-- ################################# -->
+	
+    <prefix>
+    	<name>EXT</name>
+    	<value>0x0f</value>
+    	<page>EXT</page>
+    </prefix>
+    
+    <prefix>
+    	<name>SYS</name>
+    	<value>0x2f</value>
+    	<!-- page>SYS</page -->
+    </prefix>
+    
+    <prefix>
+    	<name>QUICK</name>
+    	<value>0x4f</value>
+    	<!-- page>QUICK</page -->
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0x6f</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0x8f</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0xaf</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0xcf</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0xef</value>
+    </prefix>
+    
+    <prefix>
+    	<name>prefix1</name>
+    	<value>0x03</value>
+    	<bits>
+	    	<name>Addressing modes</name>
+	    	<mask>0x04</mask>
+    	    <desc>The AM bit allows to extend the addressing modes to larger sizes. The zeropage addressing modes become 32-bit addressing modes, while the 16-bit addressing modes become 64-bit addressing modes</desc>
+        	<id>AM</id>
+	        <value>
+    	    	<value>0</value>
+        		<desc>normal addressing modes (8 / 16 bit)</desc>
+	        </value>
+    	    <value>
+        		<value>1</value>
+        		<desc>extended addressing modes (32 / 64 bit)</desc>
+        	</value>
+    	</bits>
+    	<bits>
+	    	<name>Register and operation size</name>
+	    	<mask>0x30</mask>
+    	    <desc>These bits determine the size of the operation, 8, 16, 32 or 64 bit width.</desc>
+        	<id>RS</id>
+	        <value>
+    	    	<value>00</value>
+        		<desc>8 bit register</desc>
+	        </value>
+    	    <value>
+        		<value>01</value>
+        		<desc>16 bit register</desc>
+	        	<syntaxval>W</syntaxval>
+    	    </value>
+        	<value>
+        		<value>10</value>
+	        	<desc>32 bit register</desc>
+    	    	<syntaxval>L</syntaxval>
+        	</value>
+	        <value>
+    	    	<value>11</value>
+        		<desc>64 bit register</desc>
+        		<syntaxval>Q</syntaxval>
+        	</value>
+    	</bits>
+    	<bits>
+	    	<name>Offset register</name>
+	    	<mask>0xc0</mask>
+    	    <desc>Allows to add either the stack pointer, program counter, or the base register to an address.
+        		For indirect addressing modes, the offset is added to the address of the indirect pointer, not the pointer value.
+        		I.e. for &lt;code&gt;LDA (zp),y&lt;/code&gt; the offset is added to the operand "zp", not to the value read from there.</desc>
+	        <id>OF</id>
+    	    <value>
+        		<value>00</value>
+        		<desc>No offset added to address</desc>
+	        </value>
+    	    <value>
+        		<value>01</value>
+        		<desc>Add Program Counter (PC) to address</desc>
+	        	<syntaxval>P</syntaxval>
+    	    </value>
+        	<value>
+        		<value>10</value>
+	        	<desc>Add Stack Pointer (SP) to address</desc>
+    	    	<syntaxval>S</syntaxval>
+        	</value>
+	        <value>
+    	    	<value>11</value>
+        		<desc>Add Base Offset Register (BR) to address</desc>
+        		<syntaxval>B</syntaxval>
+	        </value>
+    	</bits>
+    </prefix>
+    
+    <prefix>
+    	<name>prefix2</name>
+    	<value>0x0b</value>
+    	<bits>
+	    	<name>Load extension</name>
+	    	<mask>0x60</mask>
+    	    <desc>Determines how a value read is extended from width determine by RS to full width before it is given to an operation.</desc>
+        	<id>LE</id>
+	        <value>
+    	    	<value>00</value>
+        		<desc>Do not extend the value from RS-width.</desc>
+	        	<syntaxval>E</syntaxval>
+	        </value>
+    	    <value>
+        		<value>01</value>
+        		<desc>Extend with the sign of the value</desc>
+	        	<syntaxval>S</syntaxval>
+    	    </value>
+    	    <value>
+        		<value>10</value>
+        		<desc>Extend with zero</desc>
+	        	<syntaxval>0</syntaxval>
+    	    </value>
+    	    <value>
+        		<value>11</value>
+        		<desc>Extend with one</desc>
+	        	<syntaxval>1</syntaxval>
+    	    </value>
+    	</bits>
+    	<bits>
+	    	<name>User mode selector</name>
+	    	<mask>0x80</mask>
+    	    <desc>When the UM mode bit is set, the effective address it not computed using the current mode, but the user mode. This bit is ignored in user mode, but in supervisor mode it switches address calculation to user mode. The effective addressthen also points to user mode memory</desc>
+        	<id>UM</id>
+	        <value>
+    	    	<value>0</value>
+        		<desc>Current mode environment (user space/hypervisor mode)</desc>
+	        </value>
+    	    <value>
+        		<value>1</value>
+        		<desc>User mode environment (i.e. ignored when used in user mode); Stack Pointer for OF=10 is also User Space stack pointer </desc>
+	        	<syntaxval>U</syntaxval>
+    	    </value>
+    	</bits>
+    	<bits>
+	    	<name>No flags selector</name>
+	    	<mask>0x10</mask>
+    	    <desc>When this is set, flags are not updated after an operation as is normal done by the 6502.</desc>
+        	<id>NF</id>
+	        <value>
+    	    	<value>0</value>
+        		<desc>Flags are updated on each (relevant) operation according to standard 6502 rules</desc>
+	        </value>
+    	    <value>
+        		<value>1</value>
+        		<desc>Flags are not updated.</desc>
+	         	<syntaxval>N</syntaxval>
+    	    </value>
+    	</bits>
+    </prefix>
+        
+</cpu>

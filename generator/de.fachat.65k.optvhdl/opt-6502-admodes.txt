@@ -1,0 +1,131 @@
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[039f 0009] A0 & !A1 & !A2 & A3 & !A4 & !A7 & !A8 & !A9> 
+[03fd 00a0] | !A0 & !A2 & !A3 & !A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[03df 00c0] | !A0 & !A1 & !A2 & !A3 & !A4 & A6 & A7 & !A8 & !A9> 
+[033f 0029] | A0 & !A1 & !A2 & A3 & !A4 & A5 & !A8 & !A9> 
+[035f 0049] | A0 & !A1 & !A2 & A3 & !A4 & A6 & !A8 & !A9> 
+> 
+Addressing mode: Immediate (with 11 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[039f 000a] !A0 & A1 & !A2 & A3 & !A4 & !A7 & !A8 & !A9> 
+> 
+Addressing mode: Accumulator (with 4 opcodes)
+  number of used input bits:8 (039f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 0020] !A0 & !A1 & !A2 & !A3 & !A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[031f 000d] | A0 & !A1 & A2 & A3 & !A4 & !A8 & !A9> 
+[031f 000e] | !A0 & A1 & A2 & A3 & !A4 & !A8 & !A9> 
+[039d 008c] | !A0 & A2 & A3 & !A4 & A7 & !A8 & !A9> 
+[037d 004c] | !A0 & A2 & A3 & !A4 & !A5 & A6 & !A8 & !A9> 
+[037d 002c] | !A0 & A2 & A3 & !A4 & A5 & !A6 & !A8 & !A9> 
+> 
+Addressing mode: Absolute 16bit (with 23 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :6
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03b7 0000] !A0 & !A1 & !A2 & !A4 & !A5 & !A7 & !A8 & !A9> 
+[030f 0008] | !A0 & !A1 & !A2 & A3 & !A8 & !A9> 
+[03d7 0040] | !A0 & !A1 & !A2 & !A4 & A6 & !A7 & !A8 & !A9> 
+[03cd 0088] | !A0 & !A2 & A3 & !A6 & A7 & !A8 & !A9> 
+[039d 0088] | !A0 & !A2 & A3 & !A4 & A7 & !A8 & !A9> 
+> 
+Addressing mode: Implied (with 25 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0005] A0 & !A1 & A2 & !A3 & !A4 & !A8 & !A9> 
+[031f 0006] | !A0 & A1 & A2 & !A3 & !A4 & !A8 & !A9> 
+[039d 0084] | !A0 & A2 & !A3 & !A4 & A7 & !A8 & !A9> 
+[037d 0024] | !A0 & A2 & !A3 & !A4 & A5 & !A6 & !A8 & !A9> 
+> 
+Addressing mode: Zeropage (with 21 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0015] A0 & !A1 & A2 & !A3 & A4 & !A8 & !A9> 
+[039f 0016] | !A0 & A1 & A2 & !A3 & A4 & !A7 & !A8 & !A9> 
+[03de 0094] | !A1 & A2 & !A3 & A4 & !A6 & A7 & !A8 & !A9> 
+[035f 0056] | !A0 & A1 & A2 & !A3 & A4 & A6 & !A8 & !A9> 
+> 
+Addressing mode: Zeropage indexed with X (with 16 opcodes)
+  number of used input bits:9 (03df)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03df 0096] !A0 & A1 & A2 & !A3 & A4 & !A6 & A7 & !A8 & !A9> 
+> 
+Addressing mode: Zeropage indexed with Y (with 2 opcodes)
+  number of used input bits:9 (03df)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0001] A0 & !A1 & !A2 & !A3 & !A4 & !A8 & !A9> 
+> 
+Addressing mode: Zeropage indexed with X indirect 16bit (with 8 opcodes)
+  number of used input bits:7 (031f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0010] !A0 & !A1 & !A2 & !A3 & A4 & !A8 & !A9> 
+> 
+Addressing mode: Relative (with 8 opcodes)
+  number of used input bits:7 (031f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0011] A0 & !A1 & !A2 & !A3 & A4 & !A8 & !A9> 
+> 
+Addressing mode: Zeropage indirect 16bit indexed with Y (with 8 opcodes)
+  number of used input bits:7 (031f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 0019] A0 & !A1 & !A2 & A3 & A4 & !A8 & !A9> 
+[03ff 00be] | !A0 & A1 & A2 & A3 & A4 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Addressing mode: Absolute 16bit indexed with Y (with 9 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[031f 001d] A0 & !A1 & A2 & A3 & A4 & !A8 & !A9> 
+[039f 001e] | !A0 & A1 & A2 & A3 & A4 & !A7 & !A8 & !A9> 
+[03fe 00bc] | !A1 & A2 & A3 & A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[035f 005e] | !A0 & A1 & A2 & A3 & A4 & A6 & !A8 & !A9> 
+> 
+Addressing mode: Absolute 16bit indexed with X (with 15 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================

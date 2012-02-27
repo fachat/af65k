@@ -1,0 +1,464 @@
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0066] !A0 & A1 & A2 & A5 & A6 & !A7 & !A8 & !A9> 
+[03fb 006a] | !A0 & A1 & A3 & !A4 & A5 & A6 & !A7 & !A8 & !A9> 
+[03fe 007e] | A1 & A2 & A3 & A4 & A5 & A6 & !A7 & !A8 & !A9> 
+[03ff 016d] | A0 & !A1 & A2 & A3 & !A4 & A5 & A6 & !A7 & A8 & !A9> 
+> 
+Operation: ROR (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 0044] !A0 & !A1 & A2 & !A3 & !A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03ff 0082] | !A0 & A1 & !A2 & !A3 & !A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: BSR (with 2 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0026] !A0 & A1 & A2 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03fb 002a] | !A0 & A1 & A3 & !A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03fe 003e] | A1 & A2 & A3 & A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03ff 012d] | A0 & !A1 & A2 & A3 & !A4 & A5 & !A6 & !A7 & A8 & !A9> 
+> 
+Operation: ROL (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 001a] !A0 & A1 & !A2 & A3 & A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03e7 00e6] | !A0 & A1 & A2 & A5 & A6 & A7 & !A8 & !A9> 
+[03fe 00fe] | A1 & A2 & A3 & A4 & A5 & A6 & A7 & !A8 & !A9> 
+[03ff 01ed] | A0 & !A1 & A2 & A3 & !A4 & A5 & A6 & A7 & A8 & !A9> 
+> 
+Operation: INC (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 0041] A0 & !A2 & !A3 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03e3 0041] | A0 & !A1 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03fe 0052] | A1 & !A2 & !A3 & A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03f9 0051] | A0 & !A3 & A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+[02ff 0049] | A0 & !A1 & !A2 & A3 & !A4 & !A5 & A6 & !A7 & !A9> 
+> 
+Operation: EOR (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 01b4] !A0 & !A1 & A2 & A4 & A5 & !A6 & A7 & A8 & !A9> 
+> 
+Operation: BCN (with 2 opcodes)
+  number of used input bits:9 (03f7)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 0014] !A0 & !A1 & A2 & A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[02ff 001c] | !A0 & !A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !A9> 
+> 
+Operation: TRB (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 01e5] A0 & !A1 & A2 & !A3 & A5 & A6 & A7 & A8 & !A9> 
+> 
+Operation: SBB (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 00e1] A0 & !A2 & !A3 & A5 & A6 & A7 & !A8 & !A9> 
+[03e3 00e1] | A0 & !A1 & A5 & A6 & A7 & !A8 & !A9> 
+[03fe 00f2] | A1 & !A2 & !A3 & A4 & A5 & A6 & A7 & !A8 & !A9> 
+[03f9 00f1] | A0 & !A3 & A4 & A5 & A6 & A7 & !A8 & !A9> 
+[02ff 00e9] | A0 & !A1 & !A2 & A3 & !A4 & A5 & A6 & A7 & !A9> 
+> 
+Operation: SBC (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 01a5] A0 & !A1 & A2 & !A3 & A5 & !A6 & A7 & A8 & !A9> 
+> 
+Operation: SBE (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0006] !A0 & A1 & A2 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03fb 000a] | !A0 & A1 & A3 & !A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03fe 001e] | A1 & A2 & A3 & A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03ff 010d] | A0 & !A1 & A2 & A3 & !A4 & !A5 & !A6 & !A7 & A8 & !A9> 
+> 
+Operation: ASL (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0165] A0 & !A1 & A2 & !A3 & A5 & A6 & !A7 & A8 & !A9> 
+> 
+Operation: ADB (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03f7 0004] !A0 & !A1 & A2 & !A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[02ff 000c] | !A0 & !A1 & A2 & A3 & !A4 & !A5 & !A6 & !A7 & !A9> 
+> 
+Operation: TSB (with 3 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 00c1] A0 & !A2 & !A3 & !A5 & A6 & A7 & !A8 & !A9> 
+[03e3 00c1] | A0 & !A1 & !A5 & A6 & A7 & !A8 & !A9> 
+[03fe 00d2] | A1 & !A2 & !A3 & A4 & !A5 & A6 & A7 & !A8 & !A9> 
+[03f9 00d1] | A0 & !A3 & A4 & !A5 & A6 & A7 & !A8 & !A9> 
+[02ff 00c9] | A0 & !A1 & !A2 & A3 & !A4 & !A5 & A6 & A7 & !A9> 
+> 
+Operation: CMP (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0106] !A0 & A1 & A2 & !A5 & !A6 & !A7 & A8 & !A9> 
+[03fb 010a] | !A0 & A1 & A3 & !A4 & !A5 & !A6 & !A7 & A8 & !A9> 
+[03fd 011d] | A0 & A2 & A3 & A4 & !A5 & !A6 & !A7 & A8 & !A9> 
+> 
+Operation: ASR (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 01c5] A0 & !A1 & A2 & !A3 & !A5 & A6 & A7 & A8 & !A9> 
+> 
+Operation: SBS (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[02ff 0020] !A0 & !A1 & !A2 & !A3 & !A4 & A5 & !A6 & !A7 & !A9> 
+[03df 0087] | A0 & A1 & A2 & !A3 & !A4 & !A6 & A7 & !A8 & !A9> 
+[03df 00dc] | !A0 & !A1 & A2 & A3 & A4 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: JSR (with 6 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 003a] !A0 & A1 & !A2 & A3 & A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03e7 00c6] | !A0 & A1 & A2 & !A5 & A6 & A7 & !A8 & !A9> 
+[03fe 00de] | A1 & A2 & A3 & A4 & !A5 & A6 & A7 & !A8 & !A9> 
+[03ff 01cd] | A0 & !A1 & A2 & A3 & !A4 & !A5 & A6 & A7 & A8 & !A9> 
+> 
+Operation: DEC (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0046] !A0 & A1 & A2 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03fb 004a] | !A0 & A1 & A3 & !A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03fe 005e] | A1 & A2 & A3 & A4 & !A5 & A6 & !A7 & !A8 & !A9> 
+[03ff 014d] | A0 & !A1 & A2 & A3 & !A4 & !A5 & A6 & !A7 & A8 & !A9> 
+> 
+Operation: LSR (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :4
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 0021] A0 & !A2 & !A3 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03e3 0021] | A0 & !A1 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03fe 0032] | A1 & !A2 & !A3 & A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03f9 0031] | A0 & !A3 & A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[02ff 0029] | A0 & !A1 & !A2 & A3 & !A4 & A5 & !A6 & !A7 & !A9> 
+> 
+Operation: AND (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[037f 0174] !A0 & !A1 & A2 & !A3 & A4 & A5 & A6 & A8 & !A9> 
+> 
+Operation: WMB (with 2 opcodes)
+  number of used input bits:9 (037f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0086] !A0 & A1 & A2 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+[02ff 008e] | !A0 & A1 & A2 & A3 & !A4 & !A5 & !A6 & A7 & !A9> 
+[03ff 00bf] | A0 & A1 & A2 & A3 & A4 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: STX (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0084] !A0 & !A1 & A2 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+[02ff 008c] | !A0 & !A1 & A2 & A3 & !A4 & !A5 & !A6 & A7 & !A9> 
+[03ff 009f] | A0 & A1 & A2 & A3 & A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: STY (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0064] !A0 & !A1 & A2 & !A3 & A5 & A6 & !A7 & !A8 & !A9> 
+[02fd 009c] | !A0 & A2 & A3 & A4 & !A5 & !A6 & A7 & !A9> 
+> 
+Operation: STZ (with 6 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0145] A0 & !A1 & A2 & !A3 & !A5 & A6 & !A7 & A8 & !A9> 
+> 
+Operation: ADS (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 0022] !A0 & A1 & !A2 & !A3 & !A4 & A5 & !A6 & !A7 & !A8 & !A9> 
+[03ed 0081] | A0 & !A2 & !A3 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03fe 0092] | A1 & !A2 & !A3 & A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03f9 0091] | A0 & !A3 & A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03f3 0091] | A0 & !A1 & A4 & !A5 & !A6 & A7 & !A8 & !A9> 
+[03df 00c2] | !A0 & A1 & !A2 & !A3 & !A4 & A6 & A7 & !A8 & !A9> 
+[03e7 0085] | A0 & !A1 & A2 & !A5 & !A6 & A7 & !A8 & !A9> 
+[02ff 008d] | A0 & !A1 & A2 & A3 & !A4 & !A5 & !A6 & A7 & !A9> 
+[03df 00c7] | A0 & A1 & A2 & !A3 & !A4 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: STA (with 17 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :9
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03df 0007] A0 & A1 & A2 & !A3 & !A4 & !A6 & !A7 & !A8 & !A9> 
+[03df 004c] | !A0 & !A1 & A2 & A3 & !A4 & A6 & !A7 & !A8 & !A9> 
+[03ef 006c] | !A0 & !A1 & A2 & A3 & A5 & A6 & !A7 & !A8 & !A9> 
+> 
+Operation: JMP (with 5 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ef 0125] A0 & !A1 & A2 & !A3 & A5 & !A6 & !A7 & A8 & !A9> 
+> 
+Operation: ADE (with 2 opcodes)
+  number of used input bits:9 (03ef)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 0061] A0 & !A2 & !A3 & A5 & A6 & !A7 & !A8 & !A9> 
+[03e3 0061] | A0 & !A1 & A5 & A6 & !A7 & !A8 & !A9> 
+[03fe 0072] | A1 & !A2 & !A3 & A4 & A5 & A6 & !A7 & !A8 & !A9> 
+[03f9 0071] | A0 & !A3 & A4 & A5 & A6 & !A7 & !A8 & !A9> 
+[02ff 0069] | A0 & !A1 & !A2 & A3 & !A4 & A5 & A6 & !A7 & !A9> 
+> 
+Operation: ADC (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[02ff 00e0] !A0 & !A1 & !A2 & !A3 & !A4 & A5 & A6 & A7 & !A9> 
+[03f7 00e4] | !A0 & !A1 & A2 & !A4 & A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: CPX (with 4 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0166] !A0 & A1 & A2 & A5 & A6 & !A7 & A8 & !A9> 
+[03fb 016a] | !A0 & A1 & A3 & !A4 & A5 & A6 & !A7 & A8 & !A9> 
+[03fd 017d] | A0 & A2 & A3 & A4 & A5 & A6 & !A7 & A8 & !A9> 
+> 
+Operation: RDR (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03bf 0002] !A0 & A1 & !A2 & !A3 & !A4 & !A5 & !A7 & !A8 & !A9> 
+[03df 0042] | !A0 & A1 & !A2 & !A3 & !A4 & A6 & !A7 & !A8 & !A9> 
+[03ed 00a1] | A0 & !A2 & !A3 & A5 & !A6 & A7 & !A8 & !A9> 
+[03e3 00a1] | A0 & !A1 & A5 & !A6 & A7 & !A8 & !A9> 
+[03df 0047] | A0 & A1 & A2 & !A3 & !A4 & A6 & !A7 & !A8 & !A9> 
+[03fe 00b2] | A1 & !A2 & !A3 & A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[03f9 00b1] | A0 & !A3 & A4 & A5 & !A6 & A7 & !A8 & !A9> 
+[02ff 00a9] | A0 & !A1 & !A2 & A3 & !A4 & A5 & !A6 & A7 & !A9> 
+> 
+Operation: LDA (with 18 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :8
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[02ff 00c0] !A0 & !A1 & !A2 & !A3 & !A4 & !A5 & A6 & A7 & !A9> 
+[03f7 00c4] | !A0 & !A1 & A2 & !A4 & !A5 & A6 & A7 & !A8 & !A9> 
+> 
+Operation: CPY (with 4 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ff 0122] !A0 & A1 & !A2 & !A3 & !A4 & A5 & !A6 & !A7 & A8 & !A9> 
+[03eb 0181] | A0 & !A1 & !A3 & !A5 & !A6 & A7 & A8 & !A9> 
+[03ef 0182] | !A0 & A1 & !A2 & !A3 & !A5 & !A6 & A7 & A8 & !A9> 
+[03ff 0154] | !A0 & !A1 & A2 & !A3 & A4 & !A5 & A6 & !A7 & A8 & !A9> 
+[03f7 0191] | A0 & !A1 & !A2 & A4 & !A5 & !A6 & A7 & A8 & !A9> 
+[03df 01c2] | !A0 & A1 & !A2 & !A3 & !A4 & A6 & A7 & A8 & !A9> 
+[03ef 01ad] | A0 & !A1 & A2 & A3 & A5 & !A6 & A7 & A8 & !A9> 
+> 
+Operation: PEA (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :7
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[037f 0164] !A0 & !A1 & A2 & !A3 & !A4 & A5 & A6 & A8 & !A9> 
+> 
+Operation: RMB (with 2 opcodes)
+  number of used input bits:9 (037f)
+  number of terms          :1
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03ed 0001] A0 & !A2 & !A3 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03e3 0001] | A0 & !A1 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03fe 0012] | A1 & !A2 & !A3 & A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[03f9 0011] | A0 & !A3 & A4 & !A5 & !A6 & !A7 & !A8 & !A9> 
+[02ff 0009] | A0 & !A1 & !A2 & A3 & !A4 & !A5 & !A6 & !A7 & !A9> 
+> 
+Operation: ORA (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :5
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[02ff 00a2] !A0 & A1 & !A2 & !A3 & !A4 & A5 & !A6 & A7 & !A9> 
+[03e7 00a6] | !A0 & A1 & A2 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: LDX (with 6 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[02ff 00a0] !A0 & !A1 & !A2 & !A3 & !A4 & A5 & !A6 & A7 & !A9> 
+[03e7 00a4] | !A0 & !A1 & A2 & A5 & !A6 & A7 & !A8 & !A9> 
+> 
+Operation: LDY (with 6 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :2
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03bf 0102] !A0 & A1 & !A2 & !A3 & !A4 & !A5 & !A7 & A8 & !A9> 
+[03ff 0180] | !A0 & !A1 & !A2 & !A3 & !A4 & !A5 & !A6 & A7 & A8 & !A9> 
+[03ff 0144] | !A0 & !A1 & A2 & !A3 & !A4 & !A5 & A6 & !A7 & A8 & !A9> 
+[03df 0142] | !A0 & A1 & !A2 & !A3 & !A4 & A6 & !A7 & A8 & !A9> 
+[03ef 0186] | !A0 & A1 & A2 & !A3 & !A5 & !A6 & A7 & A8 & !A9> 
+[03ef 01a1] | A0 & !A1 & !A2 & !A3 & A5 & !A6 & A7 & A8 & !A9> 
+[03ff 01b2] | !A0 & A1 & !A2 & !A3 & A4 & A5 & !A6 & A7 & A8 & !A9> 
+[03f7 01b1] | A0 & !A1 & !A2 & A4 & A5 & !A6 & A7 & A8 & !A9> 
+[03ef 01ae] | !A0 & A1 & A2 & A3 & A5 & !A6 & A7 & A8 & !A9> 
+> 
+Operation: LEA (with 13 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :9
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0024] !A0 & !A1 & A2 & A5 & !A6 & !A7 & !A8 & !A9> 
+[02ff 0089] | A0 & !A1 & !A2 & A3 & !A4 & !A5 & !A6 & A7 & !A9> 
+[02ff 0034] | !A0 & !A1 & A2 & !A3 & A4 & A5 & !A6 & !A7 & !A9> 
+> 
+Operation: BIT (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
+> Checking bit 0
+> Needed 0 seconds (0.0 minutes)
+> Logic found for B0 = 
+[03e7 0126] !A0 & A1 & A2 & A5 & !A6 & !A7 & A8 & !A9> 
+[03fb 012a] | !A0 & A1 & A3 & !A4 & A5 & !A6 & !A7 & A8 & !A9> 
+[03fd 013d] | A0 & A2 & A3 & A4 & A5 & !A6 & !A7 & A8 & !A9> 
+> 
+Operation: RDL (with 7 opcodes)
+  number of used input bits:10 (03ff)
+  number of terms          :3
+===========================================================
