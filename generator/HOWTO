@@ -1,0 +1,34 @@
+
+HOWTO generate code
+-------------------
+
+The subdirectories in this directory are eclipse(tm) - http://www.eclipse.org - 
+Java IDE projects. These need to be imported into an eclipse workspace and can
+then be executed from within the IDE.
+
+0) Install the "egit" eclipse plugin to support repository handling in eclipse
+   (optional)
+
+1) start eclipse, create a new workspace outside this git repository
+
+2) "File" -> "Import" , in the popup window select "General" -> "Existing Projects into Workspace"
+   then click "Next". Check "Select root directory" and browse to this directory.
+   Select all projects. Make sure that "Copy projects into workspace" is NOT selected!
+   Click Finish
+
+3) Some of the projects contain a Java launcher configuration that can directly be
+   started from the eclipse IDE:
+
+	de.fachat.65k: 		DocGenerator.launch	
+		-> creates the opcode tables for the documentation
+	de.fachat.65k.optvhdl:	Optimized.launch
+		-> uses a Quine-McCluskey algorithm to determine 
+		   optimized logic equations for addressing modes and
+		   operations
+	de.fachat.65k.vhdlgen:	VhdlGen.launch
+		-> creates the opmap VHDL decoding tables for the VHDL core
+
+   All those generators use the af65002.xml file stored in de.fachat.65k as 
+   input
+
+   
