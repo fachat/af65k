@@ -1,0 +1,115 @@
+
+AF65K CPU
+=========
+
+WARNING!
+--------
+
+The code provided here is an early alpha release. It has never been tested on any real
+hardware. It has never been tested with a real-world code.
+Wear your hard hat. You are warned!
+
+
+CONTENT
+-------
+
+In this repository there are three folders. One is for the af65k core, one for the 
+"gecko65k" system (that can be used as default build shell), and one for the testbench.
+
+I used the Xilinx ISE Webpack. To use the VHDL core with ISE webpack, you have to create
+a new project. Then create a new library. As library name you can browse to the af65002
+folder and use this. ISE webpack will use the folder name and the folder content to create
+the library. 
+As the CPU has generics, you need a shell to actually compile it. Add a new file and use
+the gecko65k.vhd file from the gecko65k folder as source.
+
+For simulation in the testbench I use GNU ghdl and GTKWave. If you work on a Linux machine,
+with ghdl, GTKWave and make installed, just run "make smoke1" to run the first smoke test
+that I used to build it. A GTKWave save file is included. No further tests exists (so far).
+
+
+DOCUMENTATION
+-------------
+
+- fill follow over the next days/weeks
+
+
+COMMENTS
+--------
+
+This is my first real "big" VHDL project. I'm sure many of you will say "OMG, how can he do 
+this in that way". I probably will in some time too. Just bear with me for now...
+
+The code is structured in a number of files (entities) with separate functionalities in each
+entity. Here are some comments on some of them:
+
+* af65002cpu: This is the outermost "CPU" shell. It is a shell, as it combines one (or in later
+  versions more than one) cores, with an interrupt controller, and (in the near future) the
+  configuration registers (that are still missing).
+
+* af65002seq: this entity takes a memory read/write and a fetch interface from the core and
+  sequences the memory accesses. It also breaks up wide memory accesses according to the 
+  external bus width (each memory access requests a specific width, but reacts on the actual
+  access width. E.g. request a WORD access, and getting only a BYTE access, the sequencer
+  addes another BYTE access to write the second byte)
+
+* af65002core: this is the actual core. It combines and connects the various sub-components
+  together. Sub-components are (among others):
+
+* af65002decode: controls the fetch accesses, buffers the opcodes, decodes the program bytes
+  into operations and addressing modes etc - using the mostly generated opmap entity
+  
+* af65002control: controls the execution of opcodes. controls the memory read/write interface
+
+Unfortunately each functionaliy adds some length to the signal path. Currently the CPU would
+run at maximum about 13MHz only - far away from my target of 50MHz. Looking at the delay paths
+I see that each entity adds multiple levels of logic - more than I though it originally would.
+Maybe there is potential.
+
+I am also pretty sure the CPU is a resource hog compared to other 6502 implementations, even
+extended ones. 
+
+
+
+TODOs
+-----
+
+- Some few opcodes are still missing (none of the standard 6502 though)
+
+- check the need to provide the register number to read from the register file one cycle
+  ahead of the actual data need.  This leads to horribly complicated "predecode" 
+  controller logic.
+
+- timing is horrible. Currently ISE says it runs with less than 14MHz :-(
+
+- configuration registers are missing
+
+- many, many more tests, also with different bus/register widths
+
+- make the tests also more reproducible. the current smoke tests injects memory aborts
+  depending on timing - which can change, which is the reason they are currently not in
+  right place in smoke1
+
+- reduce the generic generation in favor of e.g. "minimum(W-1,31)" calculations.
+  Also reduce the extended lengths (from W/MW to full width) using such constructions.
+
+- the "restricted stack" feature (to have the stack in a 256 byte page) only currently work 
+  in the core. If the core tries to write e.g. a return address over the border of that page,
+  the sequencer will happily overstep that border -> needs to handle this as well
+
+- later optimization: in the decoder, store the buffered data from setting a new PC to the first
+  taken opcode, so it can be reused on subsequent branches to the same address (branch target
+  buffer)
+
+- ...
+
+
+COPYRIGHT
+---------
+
+The code provided in the af65002, gecko65k and testbench subdirectories is provided under
+the Lesser General Public License (LGPL).
+
+Xilinx, ISE Webpack and other trademarks and copyrights contained herein are owned by their 
+respective trademark and copyright holders.
+
