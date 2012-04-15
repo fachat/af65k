@@ -22,10 +22,49 @@
     <operation>
         <name>BRK</name>
         <desc>Starts the break routine.</desc>
+        <prefixBits>RS</prefixBits>
         <opcodes>
             <addressingMode>imm</addressingMode>
             <opcode>0x00</opcode>
         </opcodes>
+        <doc><p>
+        	The BRK opcode is used to jump to the BRK vector. It pushes the 
+        	return address and the status on the stack, then reads the BRK vector
+        	(doubling as IRQ vector) and jumps there. 
+        	</p><p>
+        	Please note that the address put on the stack is the address of the next
+        	instruction. And the BRK opcode is using the immediate addressing mode 
+        	(although the MOS manual does not state it). Thus the address put on the
+        	stack is two bytes behind the address of the BRK!
+        	</p><p>
+        	Before storing the status on the stack, the opcode sets the I-flag to
+        	avoid recursive calling of the interrupt routine.
+        	</p><p>
+        	When storing the status on the stack, the B-flag is set to indicate that
+        	the shared IRQ/BRK vector has been called from a BRK and not an IRQ.
+        	</p>
+        	<pre>
+        		Stack(SP--) &lt;= &gt; NextPC
+        		Stack(SP--) &lt;= &lt; NextPC
+        		Stack(SP--) &lt;= Status | B | I
+        		PC &lt;= ($FFFE)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	On the 65k, the RS prefix determines the size of the immediate operand,
+        	so that the return address that is pushed onto the stack depends on it.
+        	</p><p>
+        	As opposed to the IRQ, the BRK opcode stays in the user resp. hypervisor mode
+        	where it is executed.
+        	</p><p>
+        	In hypervisor mode, once the processor configuration register for abort vector table is set,
+        	the BRK vector is taken from the abort vector table. For details see the interrupt handling
+        	description.
+        	</p><p>
+        	In user mode the BRK always uses the standard two-byte $FFFE IRQ vector, sign-expanded to
+        	full address length. 
+        	</p>
+        </doc>
     </operation>
     
 	<!-- ################################# -->
@@ -38,6 +77,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x10</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	negative status flag is clear.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -48,6 +101,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x30</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	negative status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -58,6 +125,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x50</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	overflow status flag is clear.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -68,6 +149,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x70</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	overflow status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -78,6 +173,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x90</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is clear.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -88,6 +197,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0xB0</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
 
     <operation>
@@ -98,6 +221,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0xD0</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	zero status flag is clear.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -108,6 +245,20 @@
             <addressingMode>rel</addressingMode>
             <opcode>0xf0</opcode>
         </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	zero status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
     <operation>
@@ -119,6 +270,19 @@
             <addressingMode>rel</addressingMode>
             <opcode>0x80</opcode>
         </opcodes>
+        <doc><p>
+        	Branch (always) to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode).
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
     </operation>
     
 	<!-- ################################# -->
@@ -169,6 +333,21 @@
             <opcode>0x6c</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Jump to the address given by the operand (as computed depending on the respective addressing mode).
+        	</p>
+        	<pre>
+        		PC &lt;= Operand
+        		Status |= U when UM is set
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The AM, OF, LE and UM prefixes are evaluated by the addressing modes.
+        	Note that if UM is set, then the processor jumps into user mode.
+        	<p></p>
+        	If the operand is not as wide as required for an address, it is sign-extended.
+        	</p>
+        </doc>
 	</operation>
 	
     <operation>
@@ -177,7 +356,6 @@
         <prefixBits>AM</prefixBits>
         <prefixBits>OF</prefixBits>
         <prefixBits>RS</prefixBits>
-        <prefixBits>UM</prefixBits>
         <prefixBits>LE</prefixBits>
         <default-le>sign</default-le>
         <opcodes>
@@ -222,6 +400,25 @@
             <opcode>0x20</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Jump to the address given by the operand (as computed depending on the respective addressing mode) and
+        	store the return address (-1) on the stack to prepare for the RTS opcode
+        	</p><pre>
+        		Stack(SP--) &lt;= &gt; NextPC-1
+        		Stack(SP--) &lt;= &lt; NextPC-1
+        		PC &lt;= Operand
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, and LE prefixes are evaluated by the addressing modes.
+        	Note that the UM prefix is not supported.
+        	</p><p>
+        	If the operand is not wide enough as required for an address, it is sign-extended.
+        	</p><p>
+        	The RS prefix determines the width of the return address put on the stack. BYTE width is
+        	replaced with WORD, WORD is the default.
+        	</p>
+        </doc>
     </operation>
 
     <operation>
@@ -229,7 +426,6 @@
         <desc>Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</desc>
         <prefixBits>AM</prefixBits>
         <prefixBits>RS</prefixBits>
-        <prefixBits>UM</prefixBits>
         <opcodes>
             <addressingMode>relj</addressingMode>
             <opcode>0x82</opcode>
@@ -239,17 +435,56 @@
             <opcode>0x44</opcode>
         </opcodes>
 		<class>65k</class>
+        <doc><p>
+        	Branch to the address given by the operand as computed similar to the branch opcodes.
+        	Store the return address (-1) on the stack to prepare for the RTS opcode. 
+        	</p><pre>
+        		Stack(SP--) &lt;= &gt; NextPC-1
+        		Stack(SP--) &lt;= &lt; NextPC-1
+        		PC &lt;= NextPC + Operand
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM prefix is evaluated by the relative addressing modes. Note that the RS prefix is
+        	used to determine the return address size on the stack, so it cannot be used as parameter width
+        	selector. Thus there are two opcodes to define 8-bit or 16-bit parameter width, using the AM
+        	prefix to make that 32- or 64-bit respectively.
+        	</p><p>
+        	Note that the UM prefix is not supported.
+        	</p><p>
+        	If the operand is not wide enough as required for an address, it is sign-extended.
+        	</p><p>
+        	The RS prefix determines the width of the return address put on the stack. BYTE width is
+        	replaced with WORD, WORD is the default.
+        	</p>
+        </doc>
 	</operation>
 		
 	<operation>
 		<name>RTS</name>
 		<desc>Return from subroutine - read return address from stack</desc>
-        <prefixBits>AM</prefixBits>
         <prefixBits>RS</prefixBits>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x60</opcode>
 		</opcodes>
+        <doc><p>
+        	Take the return address from the stack, increment it by one, and continue at the new address.
+        	</p><pre>
+        		Tmp(0-7) &lt;= Stack(++SP)
+        		Tmp(8-15) &lt;= Stack(++SP)
+        		PC &lt;= Tmp + 1;
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the return address read from the stack. BYTE width is
+        	replaced with WORD, WORD is the default.
+        	</p><p>
+        	If the operand is not wide enough as required for an address, it is extended with the
+        	rest of the current PC. This is to support running "narrow" code within a e.g. a 64k window
+        	in a wide system.
+        	</p>
+        </doc>
 	</operation>  
 	  
 	<operation>
@@ -259,6 +494,45 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x40</opcode>
 		</opcodes>
+        <doc><p>
+        	Returns from an interrupt or a BRK opcode handling. It first pulls the status register from the stack, then
+        	takes the return address from the stack, increment it by one, and continue at the new address.
+        	</p><pre>
+        		Status &lt;= Stack(++SP)		-- bit 5=1
+        		Tmp(0-7) &lt;= Stack(++SP)
+        		Tmp(8-15) &lt;= Stack(++SP)
+        		PC &lt;= Tmp;
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RTI prefix first reads the status from the current stack. If the "Not extended" flag is set 
+        	(bit 5 is always 1 in the 6502 status register, so here it is used as "not extended" flag), then 
+        	the normal handling as described above takes place, 
+        	</p><p>
+        	If the "not extended" flag is clear, i.e. an extended stack frame is used:
+        	</p><pre>
+        		Status &lt;= Stack(++SP)		-- bit 5=0
+        		ExtStatus &lt;= Stack(++SP)
+        		Tmp(0-7) &lt;= Stack(++SP)
+        		Tmp(8-15) &lt;= Stack(++SP)
+        		...
+        		PC &lt;= Tmp;
+        	</pre>
+        	<p>
+        	Here the extended status byte is read after the standard status. In this extended status
+        	there are two bit that determine the size of the return address following on the stack.
+        	So the return address can be 16-, 32- or 64-bit.
+			</p><p>
+			Also the user mode bit is stored in the extended stack frame. If the user mode bit is the same as the
+			current mode, the execution continues in that mode. 
+			If the RTI code is executed in the supervisor mode, and the user mode bit is set, then the 
+			return address is interpreted as user mode address, and the execution continues in the 
+			user mode. If RTI is executed in user mode, and the user mode bit is clear (i.e. hypervisor mode),
+			and ABORT sequence is triggered.
+        	</p><p>
+        	If the operand is not wide enough as required for an address, it is sign-extended.
+        	</p>
+        </doc>
 	</operation>  
 	
 	<!-- ################################# -->
@@ -286,6 +560,27 @@
 			<opcode>0x0c</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then OR the operand with the accumulator
+        	and store the value back.  
+        	</p><p>
+        	The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-set" 
+        	primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write
+        	to make that operation atomic.
+        	</p><pre>
+        		Tmp &lt;= operand &amp; AC 
+        		Z &lt;= Z(Tmp)
+        		operand &lt; operand | AC
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	The NF prefix allows to implement a read-modify-write OR of a memory location (without the usual or/store
+        	sequence) - without setting a flag though.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -311,6 +606,28 @@
 			<opcode>0x1c</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then clear all bits in the operand 
+        	that are set in the accumulator (basically AND with the inverse of the accumulator),
+        	and store the value back.  
+        	</p><p>
+        	The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-clear" 
+        	primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write
+        	to make that operation atomic.
+        	</p><pre>
+        		Tmp &lt;= operand &amp; AC 
+        		Z &lt;= Z(Tmp)
+        		operand &lt; operand | AC
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	The NF prefix allows to implement a read-modify-write AND of a memory location (without the usual and/store
+        	sequence) - without setting a flag though.
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
@@ -356,6 +673,24 @@
 			<opcode>0x34</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Read the operand and set the N and V flags from the value (from the highest and next-to-highest bit respectively).
+        	Then take the operand, and AND it with the accumulator and evaluate the Z-flag.  
+        	</p><pre>
+        		N &lt;= Operand(7)
+        		V &lt;= Operand(6)
+        		Tmp &lt;= Operand &amp; AC 
+        		Z &lt;= Z(Tmp)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	The NF prefix allows to implement a read-modify-write AND of a memory location (without the usual and/store
+        	sequence) - without setting a flag though.
+        	</p>
+        </doc>
 	</operation>
 	
 	
@@ -396,6 +731,23 @@
             <opcode>0xa0</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Read the operand and store it in the Y register. Set the flags appropriately.
+        	</p><pre>
+        		N &lt;= Operand(7)
+        		Z &lt;= Z(Operand)
+        		Y &lt;= Operand
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	Note that the default load extension is "zero-extended", to "not surprise" programmers.
+        	</p><p>
+        	The NF prefix lets the flags unmodified.
+        	</p>
+        </doc>
     </operation>
     
     <operation>
@@ -433,6 +785,23 @@
             <opcode>0xa2</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Read the operand and store it in the X register. Set the flags appropriately.
+        	</p><pre>
+        		N &lt;= Operand(7)
+        		Z &lt;= Z(Operand)
+        		X &lt;= Operand
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	Note that the default load extension is "zero-extended", to "not surprise" programmers.
+        	</p><p>
+        	The NF prefix lets the flags unmodified.
+        	</p>
+        </doc>
     </operation>
     
 
@@ -543,6 +912,23 @@
             <opcode>0xa9</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Read the operand and store it in the Accumulator. Set the flags appropriately.
+        	</p><pre>
+        		N &lt;= Operand(7)
+        		Z &lt;= Z(Operand)
+        		Y &lt;= Operand
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	</p><p>
+        	Note that the default load extension is "zero-extended", to "not surprise" programmers.
+        	</p><p>
+        	The NF prefix lets the flags unmodified.
+        	</p>
+        </doc>
     </operation>
 
 	<!-- ################################# -->
