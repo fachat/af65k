@@ -43,6 +43,7 @@ ifeq ($(strip $(TESTBENCH)),)
 		@exit 2
 endif                                                                                             
 	mkdir -p simulation
+	mkdir -p af65002
 	$(GHDL_CMD) -i $(GHDL_FLAGS) --workdir=$(LIB65DIR) --work=$(LIB65)
 	$(GHDL_CMD) -i $(GHDL_FLAGS) -P$(LIB65DIR) --workdir=simulation --work=work $(TESTBENCHPATH) $(FILES) 
 	$(GHDL_CMD) -m  $(GHDL_FLAGS) -P$(LIB65DIR) --workdir=simulation --work=work $(TESTBENCH) 

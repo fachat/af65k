@@ -136,6 +136,7 @@ begin
 		when aRDL =>
 			result(0) <= inaw1;
 			result(W downto 1) <= ina_ext (W-1 downto 0) ;
+			carry_def <= WBIT;
 		when aRDR =>
 			result(W-2 downto 0) <= ina_ext (W-1 downto 1) ;
 			case rsw is

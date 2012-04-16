@@ -260,263 +260,89 @@ begin
 	-- generate the internal signals
 	--
 	
-	w16: if (W = 16) generate
-	begin
-		p_neg : process (reset, phi2_in, status_n_in, value_in, value_width_in, pull_in, status_n_out)
-		begin	
---			if (reset = '1') then
---				status_n_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_n_in is
+	p_neg : process (reset, phi2_in, status_n_in, value_in, value_width_in, pull_in, status_n_out)
+	begin	
+			case status_n_in is
+			when stVALUE =>
+				case value_width_in is
+				when wBYTE => status_n_int <= value_in(7);
+				when wWORD => status_n_int <= value_in(15);
+				when wLONG => status_n_int <= value_in(minimum(W-1, 31));
+				when wQUAD => status_n_int <= value_in(minimum(W-1, 63));
+				end case;
+			when stPULL =>
+				status_n_int <= pull_in(7);
+			when others =>
+				status_n_int <= status_n_out;
+			end case;
+	end process;
+
+	p_ovl : process (reset, phi2_in, status_v_in, value_in, value_width_in, status_c_int, status_n_int,
+			ext_so_in, pull_in, status_v_out)
+	begin	
+			if (ext_so_in = '1') then
+				status_v_int <= '1';
+			else
+				case status_v_in is
 				when stVALUE =>
 					case value_width_in is
-					when wBYTE => status_n_int <= value_in(7);
-					when wWORD | wLONG | wQUAD => status_n_int <= value_in(15);
+					when wBYTE => status_v_int <= value_in(6);
+					when wWORD => status_v_int <= value_in(14);
+					when wLONG => status_v_int <= value_in(minimum(W-2, 30));
+					when wQUAD => status_v_int <= value_in(minimum(W-2, 62));
 					end case;
+				when stCLR =>
+					status_v_int <= '0';
+				when stALU =>
+					status_v_int <= not(status_c_int xor status_n_int);
 				when stPULL =>
-					status_n_int <= pull_in(7);
+					status_v_int <= pull_in(6);
 				when others =>
-					status_n_int <= status_n_out;
+					status_v_int <= status_v_out;
 				end case;
---			end if;
-		end process;
+			end if;
+	end process;
 
-		p_ovl : process (reset, phi2_in, status_v_in, value_in, value_width_in, ext_so_in, pull_in, status_v_out)
-		begin	
---			if (reset = '1') then
---				status_v_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				if (ext_so_in = '1') then
-					status_v_int <= '1';
-				else
-					case status_v_in is
-					when stVALUE =>
-						case value_width_in is
-						when wBYTE => status_v_int <= value_in(6);
-						when wWORD | wLONG | wQUAD => status_v_int <= value_in(14);
-						end case;
-					when stCLR =>
-						status_v_int <= '0';
-					when stPULL =>
-						status_v_int <= pull_in(6);
-					when others =>
-						status_v_int <= status_v_out;
-					end case;
+	p_zero : process (reset, phi2_in, status_z_in, value_in, value_width_in,
+			pull_in, status_z_out)
+	begin	
+		case status_z_in is
+		when stVALUE =>
+			case value_width_in is
+			when wBYTE => 
+				if (value_in(7 downto 0) = (7 downto 0 => '0')) then
+					status_z_int <= '1';
+				else 
+					status_z_int <= '0';
 				end if;
---			end if;
-		end process;
-
-		p_zero : process (reset, phi2_in, status_z_in, value_in, value_width_in, pull_in, status_z_out)
-		begin	
---			if (reset = '1') then
---				status_z_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_z_in is
-				when stVALUE =>
-					case value_width_in is
-					when wBYTE => 
-						if (value_in(7 downto 0) = (7 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wWORD | wLONG | wQUAD => 
-						if (value_in(15 downto 0) = (15 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					end case;
-				when stPULL =>
-					status_z_int <= pull_in(1);
-				when others =>
-					status_z_int <= status_z_out;
-				end case;
---			end if;
-		end process;
-	end generate;
-	
-	w32: if (W = 32) generate
-	begin
-		p_neg : process (reset, phi2_in, status_n_in, value_in, value_width_in, pull_in, status_n_out)
-		begin	
---			if (reset = '1') then
---				status_n_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_n_in is
-				when stVALUE =>
-					case value_width_in is
-					when wBYTE => status_n_int <= value_in(7);
-					when wWORD => status_n_int <= value_in(15);
-					when wLONG | wQUAD => status_n_int <= value_in(31);
-					end case;
-				when stPULL =>
-					status_n_int <= pull_in(7);
-				when others =>
-					status_n_int <= status_n_out;
-				end case;
---			end if;
-		end process;
-
-		p_ovl : process (reset, phi2_in, status_v_in, value_in, value_width_in, pull_in, ext_so_in, status_v_out)
-		begin	
---			if (reset = '1') then
---				status_v_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				if (ext_so_in = '1') then
-					status_v_int <= '1';
-				else
-					case status_v_in is
-					when stVALUE =>
-						case value_width_in is
-						when wBYTE => status_v_int <= value_in(6);
-						when wWORD => status_v_int <= value_in(14);
-						when wLONG | wQUAD => status_v_int <= value_in(30);
-						end case;
-					when stCLR =>
-						status_v_int <= '0';
-					when stPULL =>
-						status_v_int <= pull_in(6);
-					when others =>
-						status_v_int <= status_v_out;
-					end case;
+			when wWORD => 
+				if (value_in(15 downto 0) = (15 downto 0 => '0')) then
+					status_z_int <= '1';
+				else 
+					status_z_int <= '0';
 				end if;
---			end if;
-		end process;
-
-		p_zero : process (reset, phi2_in, status_z_in, value_in, value_width_in, pull_in, status_z_out)
-		begin	
---			if (reset = '1') then
---				status_z_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_z_in is
-				when stVALUE =>
-					case value_width_in is
-					when wBYTE => 
-						if (value_in(7 downto 0) = (7 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wWORD => 
-						if (value_in(15 downto 0) = (15 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wLONG | wQUAD => 
-						if (value_in(31 downto 0) = (31 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					end case;
-				when stPULL =>
-					status_z_int <= pull_in(1);
-				when others =>
-					status_z_int <= status_z_out;
-				end case;
---			end if;
-		end process;
-	end generate;
-
-	w64: if (W = 64) generate
-	begin
-		p_neg : process (reset, phi2_in, status_n_in, value_in, value_width_in)
-		begin	
---			if (reset = '1') then
---				status_n_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_n_in is
-				when stVALUE =>
-					case value_width_in is
-					when wBYTE => status_n_int <= value_in(7);
-					when wWORD => status_n_int <= value_in(15);
-					when wLONG => status_n_int <= value_in(31);
-					when wQUAD => status_n_int <= value_in(63);
-					end case;
-				when stPULL =>
-					status_n_int <= pull_in(7);
-				when others =>
-					status_n_int <= status_n_out;
-				end case;
---			end if;
-		end process;
-
-		p_ovl : process (reset, phi2_in, status_v_in, value_in, value_width_in)
-		begin	
---			if (reset = '1') then
---				status_v_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				if (ext_so_in = '1') then
-					status_v_int <= '1';
-				else
-					case status_v_in is
-					when stVALUE =>
-						case value_width_in is
-						when wBYTE => status_v_int <= value_in(6);
-						when wWORD => status_v_int <= value_in(14);
-						when wLONG => status_v_int <= value_in(30);
-						when wQUAD => status_v_int <= value_in(62);
-						end case;
-					when stCLR =>
-						status_v_int <= '0';
-					when stPULL =>
-						status_v_int <= pull_in(6);
-					when others =>
-						status_v_int <= status_v_out;
-					end case;
+			when wLONG => 
+				if (value_in(minimum(W-1, 31) downto 0) = (minimum(W-1, 31) downto 0 => '0')) then
+					status_z_int <= '1';
+				else 
+					status_z_int <= '0';
 				end if;
---			end if;
-		end process;
-
-		p_zero : process (reset, phi2_in, status_z_in, value_in, value_width_in)
-		begin	
---			if (reset = '1') then
---				status_z_int <= '0';
---			elsif (falling_edge(phi2_in)) then
-				case status_z_in is
-				when stVALUE =>
-					case value_width_in is
-					when wBYTE => 
-						if (value_in(7 downto 0) = (7 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wWORD => 
-						if (value_in(15 downto 0) = (15 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wLONG => 
-						if (value_in(31 downto 0) = (31 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					when wQUAD => 
-						if (value_in(63 downto 0) = (63 downto 0 => '0')) then
-							status_z_int <= '1';
-						else 
-							status_z_int <= '0';
-						end if;
-					end case;
-				when stPULL =>
-					status_z_int <= pull_in(1);
-				when others =>
-					status_z_int <= status_z_out;
-				end case;
---			end if;
-		end process;
-	end generate;
+			when wQUAD => 
+				if (value_in(minimum(W-1, 63) downto 0) = (minimum(W-1, 63) downto 0 => '0')) then
+					status_z_int <= '1';
+				else 
+					status_z_int <= '0';
+				end if;
+			end case;
+		when stPULL =>
+			status_z_int <= pull_in(1);
+		when others =>
+			status_z_int <= status_z_out;
+		end case;
+	end process;
 	
 	p_carry : process (reset, phi2_in, status_c_in, alu_c_in, pull_in, status_c_out)
 	begin	
---		if (reset = '1') then
---			status_c_int <= '0';
---		elsif (falling_edge(phi2_in)) then
 			case status_c_in is
 			when stCLR =>
 				status_c_int <= '0';
@@ -529,14 +355,10 @@ begin
 			when others =>
 				status_c_int <= status_c_out;
 			end case;
---		end if;
 	end process;
 
 	p_irq : process (reset, phi2_in, status_i_in, pull_in, status_i_out)
 	begin	
---		if (reset = '1') then
---			status_i_int <= '1';
---		elsif (falling_edge(phi2_in)) then
 			case status_i_in is
 			when stCLR =>
 				status_i_int <= '0';
@@ -547,14 +369,10 @@ begin
 			when others =>
 				status_i_int <= status_i_out;
 			end case;
---		end if;
 	end process;
 	
 	p_dec : process (reset, phi2_in, status_d_in, pull_in, status_d_out)
 	begin	
---		if (reset = '1') then
---			status_d_int <= '0';
---		elsif (falling_edge(phi2_in)) then
 			case status_d_in is
 			when stCLR =>
 				status_d_int <= '0';
@@ -565,14 +383,10 @@ begin
 			when others =>
 				status_d_int <= status_d_out;
 			end case;
---		end if;
 	end process;	
 
 	p_ext : process (reset, phi2_in, status_x_in, pull_in, status_x_out)
 	begin	
---		if (reset = '1') then
---			status_x_int <= '0';
---		elsif (falling_edge(phi2_in)) then
 			case status_x_in is
 			when stCLR =>
 				status_x_int <= '0';
@@ -583,7 +397,6 @@ begin
 			when others =>
 				status_x_int <= status_x_out;
 			end case;
---		end if;
 	end process;	
 
 	p_user : process (reset, phi2_in, status_u_in, pull_in, status_u_out)
