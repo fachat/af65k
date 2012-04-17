@@ -417,6 +417,8 @@
         	</p><p>
         	The RS prefix determines the width of the return address put on the stack. Note that the
         	BYTE width prefix denotes the natural width of the processor (respectively its current mode).
+        	</p><p>
+        	The stack pointer used is the stack pointer of the current mode.
         	</p>
         </doc>
     </operation>
@@ -457,6 +459,8 @@
         	The RS prefix determines the width of the return address put on the stack. Note that the
         	BYTE width prefix denotes the natural width of the processor (respectively its current mode). This 
         	is the default.
+        	</p><p>
+        	The stack pointer used is the stack pointer of the current mode.
         	</p>
         </doc>
 	</operation>
@@ -485,6 +489,8 @@
         	If the operand is not wide enough as required for an address, it is extended with the
         	rest of the current PC. This is to support running "narrow" code within a e.g. a 64k window
         	in a wide system.
+        	</p><p>
+        	The stack pointer used is the stack pointer of the current mode.
         	</p>
         </doc>
 	</operation>  
@@ -2104,6 +2110,25 @@
             <opcode>0xed</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Increment the operand by one, i.e. binary add one.
+        	Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work
+        	on the accumulator alone as well.
+        	</p><pre>
+        		Operand &lt;= Operand + 1
+        		N &lt;= OperandC7)
+        		Z &lt;= Z(AC)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS also determine the width of the operation. There is no LE prefix, as the read and write
+        	widths are the same.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
 
     <operation>
@@ -2145,6 +2170,25 @@
             <opcode>0xcd</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Decrement the operand by one, i.e. binary substract one.
+        	Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work
+        	on the accumulator alone as well.
+        	</p><pre>
+        		Operand &lt;= Operand - 1
+        		N &lt;= OperandC7)
+        		Z &lt;= Z(AC)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS also determine the width of the operation. There is no LE prefix, as the read and write
+        	widths are the same.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
 
 
@@ -2250,6 +2294,20 @@
             <opcode>0x8d</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Store the accumulator into the address given by the operand.
+        	</p><pre>
+        		Operand &lt;= A
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space.
+        	</p><p>
+        	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
 
     <operation>
@@ -2287,6 +2345,20 @@
             <opcode>0x9c</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Store the zero into the address given by the operand.
+        	</p><pre>
+        		Operand &lt;= 0
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space.
+        	</p><p>
+        	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
 
     <operation>
@@ -2318,6 +2390,20 @@
             <opcode>0x8c</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Store the content of the Y register into the address given by the operand.
+        	</p><pre>
+        		Operand &lt;= A
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space.
+        	</p><p>
+        	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
     
     <operation>
@@ -2349,6 +2435,20 @@
             <opcode>0x8e</opcode>
             <oppage>EXT</oppage>
         </opcodes>
+        <doc><p>
+        	Store the content of the X register into the address given by the operand.
+        	</p><pre>
+        		Operand &lt;= A
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space.
+        	</p><p>
+        	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
     </operation>
     
    
@@ -2362,6 +2462,22 @@
             <addressingMode>imm</addressingMode>
             <opcode>0xf4</opcode>
         </opcodes>
+        <doc><p>
+        	Trap into supervisor mode. Pushes the return address on the hypervisor stack and jumps into hypervisor mode,
+        	using the appropriate trap vector.
+        	</p><pre>
+        		Stack(SP--) &lt;= &gt; NextPC-1
+        		Stack(SP--) &lt;= &lt; NextPC-1
+        		PC &lt;= TrapVector(Operand)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The address put on the stack always has the natural width of the processor. 
+        	Currently no further prefix is supported.
+        	</p><p>
+        	The stack pointer used is the stack pointer of the current mode.
+        	</p>
+        </doc>
     </operation>
 
 <!--  
