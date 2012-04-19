@@ -2463,19 +2463,65 @@
             <opcode>0xf4</opcode>
         </opcodes>
         <doc><p>
-        	Trap into supervisor mode. Pushes the return address on the hypervisor stack and jumps into hypervisor mode,
-        	using the appropriate trap vector.
+        	Trap into supervisor mode. Pushes the return address and the extended status byte
+        	on the hypervisor stack and jumps into hypervisor mode,
+        	using the appropriate trap vector. To return from the trap, the RTU operations is used.
+        	For compatibility with RTS, the return address minus one is stored on the stack.
         	</p><pre>
         		Stack(SP--) &lt;= &gt; NextPC-1
         		Stack(SP--) &lt;= &lt; NextPC-1
+        		Stack(SP--) &lt;= ExtStatus
         		PC &lt;= TrapVector(Operand)
         	</pre>
         </doc>
         <doc mode="65k"><p>
         	The address put on the stack always has the natural width of the processor. 
         	Currently no further prefix is supported.
+        	The stack pointer used is that of the hypervisor stack.
         	</p><p>
-        	The stack pointer used is the stack pointer of the current mode.
+        	This opcode can be used in user mode as well as in hypervisor mode. The extended status byte
+        	contains the user mode bit, so that the RTU opcode knows whether to return to user mode or
+        	hypervisor mode.
+        	</p><p>
+        	The extendend status byte also contains width bits that store the width of the return
+        	address on stack. BYTE is not used, but the real width is stored with the width bits.
+        	</p><p>
+        	Note for future expansions the RS prefix may extend the trap number (the immediate operand) 
+        	to word, or even wider widths.
+        	</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>RTU</name>
+        <desc>Return from trap handler.</desc>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x60</opcode>
+            <oppage>SYS</oppage>
+        </opcodes>
+        <doc><p>
+        	Return from trap handling. Reads the extended status byte and the return address from hypervisor stack,
+        	then jumps to the return address.
+        	</p><pre>
+        		&lt;Tmp &lt;= Stack(++SP)
+        		&gt;Tmp &lt;= Stack(++SP)
+        		Tmp &lt;= Tmp+1
+        		PC &lt;= Tmp;
+        		ExtStatus &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The extended status byte contains the width bits for the return address as well as the user mode bit
+        	from where the trap came. In RTU the user mode bit is restored, so the RTU opcode can return to 
+        	user as well as hypervisor mode. 
+        	</p><p>
+        	The stack pointer used is that of the hypervisor stack.
+        	</p><p>
+        	Note for future expansions the RS prefix may extend the number of traps to word, or even wider widths.
+        	</p><p>
+        	When executed in user mode, this opcode triggers an ABORT exception.
         	</p>
         </doc>
     </operation>
@@ -2539,10 +2585,27 @@
 	<operation>
 		<name>PHP</name>
 		<desc>Push processor status register onto the stack</desc> 
+        <prefixBits>UM</prefixBits>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x08</opcode>
 		</opcodes>
+        <doc><p>
+        	Push the standard status register on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= Status
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p><p>
+        	The not-extended bit is set (so the status is compatible with the 6502 and would denote a
+        	standard stack frame)
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
@@ -2552,6 +2615,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x18</opcode>
 		</opcodes>
+        <doc><p>
+        	Clear the carry status flag.
+        </p></doc>
 	</operation>
 	
 	<operation>
@@ -2561,6 +2627,19 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x28</opcode>
 		</opcodes>
+        <doc><p>
+        	Pull the standard status register on the stack.
+        	</p><pre>
+        		Status &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2570,6 +2649,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x38</opcode>
 		</opcodes>
+        <doc><p>
+        	Set the carry status flag.
+        </p></doc>
 	</operation>
 	
 	<operation>
@@ -2581,6 +2663,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x48</opcode>
 		</opcodes>
+        <doc><p>
+        	Push the content of the accumulator on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= A
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2593,6 +2690,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x5a</opcode>
 		</opcodes>
+        <doc><p>
+        	Push the content of the Y register on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= Y
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2605,6 +2717,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xda</opcode>
 		</opcodes>
+        <doc><p>
+        	Push the content of the X register on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= X
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2614,6 +2741,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x58</opcode>
 		</opcodes>
+        <doc><p>
+        	Clear the interrupt status flag.
+        </p></doc>
+        <doc mode="65k"><p>
+        	Note that the interrupt handling is much more sophisticated in the 65k. 
+        	In hypervisor mode setting the interrupt status flag disables all interrupts except the non-maskable interrupt.
+        	In user mode setting the interrupt status flag disables all "user level interrupts", but hypervisor interrupts
+        	are served. The interrupt level for user level interrupts can be configured in a configuration register.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2627,6 +2764,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x68</opcode>
 		</opcodes>
+        <doc><p>
+        	Pull the value of the accumulator from the stack.
+        	</p><pre>
+        		A &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2641,6 +2793,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x7a</opcode>
 		</opcodes>
+        <doc><p>
+        	Pull the value of the Y register from the stack.
+        	</p><pre>
+        		Y &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2655,6 +2822,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xfa</opcode>
 		</opcodes>
+        <doc><p>
+        	Pull the value of the X register from the stack.
+        	</p><pre>
+        		X &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the accumulator value as written on the stack.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2664,6 +2846,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x78</opcode>
 		</opcodes>
+        <doc><p>
+        	Set the interrupt status flag.
+        </p></doc>
+        <doc mode="65k"><p>
+        	Note that the interrupt handling is much more sophisticated in the 65k. 
+        	In hypervisor mode setting the interrupt status flag disables all interrupts except the non-maskable interrupt.
+        	In user mode setting the interrupt status flag disables all "user level interrupts", but hypervisor interrupts
+        	are served. The interrupt level for user level interrupts can be configured in a configuration register.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2675,6 +2867,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x88</opcode>
 		</opcodes>
+        <doc><p>
+        	Decrement the Y register by one (binary).
+        </p><pre>
+        	Y &lt;= Y-1
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the operation. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2687,6 +2889,17 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x98</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the Y register to the accumulator
+        </p><pre>
+        	A &lt;= Y
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2699,6 +2912,17 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x8a</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the X register to the accumulator
+        </p><pre>
+        	A &lt;= X
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2712,6 +2936,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xba</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the stack pointer to the X register
+        </p><pre>
+        	X &lt;= S
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p><p>
+        	The stack pointer used is the current stack pointer. If the user mode bit is set in hypervisor mode, 
+        	the stack pointer used is the user mode stack pointer. If the user mode bit is set in user mode,
+        	an ABORT exception is triggered. 
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2724,6 +2963,21 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0x9a</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the X register to the stack pointer.
+        </p><pre>
+        	S &lt;= X
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p><p>
+        	The stack pointer used is the current stack pointer. If the user mode bit is set in hypervisor mode, 
+        	the stack pointer used is the user mode stack pointer. If the user mode bit is set in user mode,
+        	an ABORT exception is triggered. 
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2736,6 +2990,17 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xa8</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the accumulator to the Y register
+        </p><pre>
+        	Y &lt;= A
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2748,6 +3013,17 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xaa</opcode>
 		</opcodes>
+        <doc><p>
+        	Transfer the value of the accumulator to the X register
+        </p><pre>
+        	X &lt;= A
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS and LE prefixes determines the width of the operation. LE determines how to extend the value
+        	loaded to the full (natural) width. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2757,6 +3033,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xb8</opcode>
 		</opcodes>
+        <doc><p>
+        	Clear the overflow status flag.
+        </p></doc>
 	</operation>
 	
 	<operation>
@@ -2768,6 +3047,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xc8</opcode>
 		</opcodes>
+        <doc><p>
+        	Increment the Y register by one (binary).
+        </p><pre>
+        	Y &lt;= Y+1
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the operation. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2777,6 +3066,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xd8</opcode>
 		</opcodes>
+        <doc><p>
+        	Clear the decimal mode status flag.
+        </p></doc>
 	</operation>
 	
 	<operation>
@@ -2788,6 +3080,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xe8</opcode>
 		</opcodes>
+        <doc><p>
+        	Increment the X register by one (binary).
+        </p><pre>
+        	X &lt;= X+1
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the operation. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2799,6 +3101,16 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xca</opcode>
 		</opcodes>
+        <doc><p>
+        	Decrement the X register by one (binary).
+        </p><pre>
+        	X &lt;= X-1
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The RS prefix determines the width of the operation. The NF flag allows to perform the operation
+        	without setting flags.
+        	</p>
+        </doc>
 	</operation>
 	
 	<operation>
@@ -2808,6 +3120,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xf8</opcode>
 		</opcodes>
+        <doc><p>
+        	Set the decimal mode status flag.
+        </p></doc>
 	</operation>
 	    
 	<operation>
@@ -2817,6 +3132,9 @@
 			<addressingMode>implied</addressingMode>
 			<opcode>0xea</opcode>
 		</opcodes>
+        <doc><p>
+        	No Operation.
+        </p></doc>
 	</operation>
 
 	<!-- ################################# -->
@@ -3207,6 +3525,21 @@
 			<opcode>0x08</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Push the content of the E register on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= E
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The value stored is always in the natural width of the processor (mode).
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
@@ -3220,6 +3553,21 @@
 			<opcode>0x28</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Pull the value of the E register from the stack.
+        	</p><pre>
+        		E &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The value retrieved is always in the natural width of the processor (mode).
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
@@ -3232,6 +3580,21 @@
 			<opcode>0x48</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Push the content of the B register on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= B
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The value stored is always in the natural width of the processor (mode).
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
@@ -3258,6 +3621,21 @@
 			<opcode>0x68</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Pull the value of the B register from the stack.
+        	</p><pre>
+        	B &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	The value retrieved is always in the natural width of the processor (mode).
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
 	</operation>
 
 	<operation>
