@@ -3212,6 +3212,27 @@
 			<opcode>0x44</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Load the effective address given by the addressing mode into the E register (without accessing
+        	the memory pointed to by the parameter).
+        </p><pre>
+        	E &lt;= EffectiveAddress
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The value stored in E is always in the natural (full) width of the processor.
+        	</p><p>
+        	The AM and OF prefixes are interpreted as usually when computing the address.
+        	</p><p>
+        	The memory and stack pointers used are the current ones when the user mode prefix is not set.
+        	When the user mode prefix is set in hypervisor mode, the memory and stack pointer is that of the
+        	user mode. When set in user mode an ABORT is triggered.
+        	</p><p>
+        	With this approach you can use this in trap handling:
+        	</p><pre>
+        		LEA.U S,$08			; load user space address of offset 8 on the user mode stack
+        		LDA.U (E)			; load the value from user space
+        	</pre>
+        </doc>
 	</operation>
 
 	<operation>
@@ -3286,6 +3307,26 @@
 			<opcode>0x54</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
+        <doc><p>
+        	Push the effective address given by the addressing mode onto the stack (without accessing
+        	the memory pointed to by the parameter).
+        </p><pre>
+        	Stack(SP--) &lt;= &gt;EffectiveAddress
+        	Stack(SP--) &lt;= &lt;EffectiveAddress
+        </pre></doc>
+        <doc mode="65k"><p>
+        	The value pushed is always in the natural (full) width of the processor.
+        	</p><p>
+        	The AM and OF prefixes are interpreted as usually when computing the address.
+        	</p><p>
+        	The memory and stack pointers used are the current ones when the user mode prefix is not set.
+        	When the user mode prefix is set in hypervisor mode, the memory and stack pointer is that of the
+        	user mode. When set in user mode an ABORT is triggered.
+        	</p><p>
+			Note that the stack used to actually store the address is always (no matter the user mode bit)
+			the current stack!
+			</p> 
+        </doc>
 	</operation>
 		
 	<!-- ################################# -->
@@ -3293,7 +3334,7 @@
 	<operation>
 		<name>MVN</name>
 		<desc>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</desc>
-		<class>65k</class>
+		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x04</opcode>
@@ -3304,7 +3345,7 @@
 	<operation>
 		<name>MVP</name>
 		<desc>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</desc>
-		<class>65k</class>
+		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x14</opcode>
@@ -3316,7 +3357,7 @@
 		<name>FIL</name>
 		<desc>Fill a memory area of size AC at address XR with a value from YR</desc>
 		<prefixBits>RS</prefixBits>
-		<class>65k</class>
+		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x24</opcode>
@@ -3328,7 +3369,7 @@
 		<name>WMB</name>
 		<desc>Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</desc>
 		<prefixBits>UM</prefixBits>
-		<class>65k</class>
+		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x74</opcode>
@@ -3345,7 +3386,7 @@
 		<name>RMB</name>
 		<desc>Read memory barrier: invalidates cache content (globally, or for a specific, given location)</desc>
 		<prefixBits>UM</prefixBits>
-		<class>65k</class>
+		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
 			<opcode>0x64</opcode>
