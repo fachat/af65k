@@ -8,11 +8,19 @@ ADS: Add value to stack pointer</li>
 <li>
 ASR: Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
 <li>
+AVG: Average a value with the accumulator, i.e. add the two values (without carry) then shift right one bit.</li>
+<li>
 BCN: Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
+<li>
+BSW: Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>
 <li>
 EXT: Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
 <li>
 FIL: Fill a memory area of size AC at address XR with a value from YR</li>
+<li>
+HBC: Highest Bit Clear: Determines the number of the highest bit that is set to zero.</li>
+<li>
+HBS: Highest Bit Set: Determines the number of the highest bit that is set to one.</li>
 <li>
 INV: invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>

@@ -10,12 +10,27 @@
 	<class>
 		<name>cmos</name>
 		<prio>1</prio>
+		<doc><p>
+			This class is for those opcodes that have been introduced with the CMOS version
+			of the 6502, the 65C02.
+			Note this does not include the extended bit set and clear opcodes of the Rockwell variant.
+		</p></doc>
 	</class>
 	<class>
 		<name>65k</name>
 		<prio>2</prio>
+		<doc><p>
+			This class contains the new opcodes and opcode extensions of the af65002 compared to the 65C02.
+		</p></doc>
 	</class>
-
+	<class>
+		<name>65k10</name>
+		<prio>2</prio>
+		<doc><p>
+			This class contains the new opcodes and opcode extensions of the af65010 compared to the af65002.
+		</p></doc>
+	</class>
+	
 	<!-- ################################# -->
 	<!-- actual opcode definitions -->
 	
@@ -204,6 +219,32 @@
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &lt;= NextPC + Operand when N=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BGT</name>
+        <desc>Branch on carry set - take branch when C flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xB0</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is set and the zero status flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
         	</pre>
         </doc>
         <doc mode="65k">
@@ -3400,24 +3441,34 @@
 	</operation>
 	
 	<operation>
-		<name>INV</name>
-		<desc>invert AC, i.e. set AC to the 2s-complement of AC</desc>
+		<name>SCA</name>
+		<desc>Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
+			LLA with same address (and no other LLA in same thread)</desc>
 		<prefixBits>RS</prefixBits>
-		<prefixBits>LE</prefixBits>
-		<prefixBits>NF</prefixBits>
-		<class>65k</class>
+		<prefixBits>UM</prefixBits>
+		<class>65k10</class>
 		<opcodes>
-			<addressingMode>A</addressingMode>
-			<opcode>0xa4</opcode>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x84</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
-		<!--opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0xac</opcode>
-			<oppage>EXT</oppage>
-		</opcodes-->
 	</operation>
 	
+	<operation>
+		<name>LLA</name>
+		<desc>Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>UM</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0x94</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
 	<operation>
 		<name>BCN</name>
 		<desc>Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</desc>
@@ -3437,6 +3488,161 @@
 	</operation>
 
 	<operation>
+		<name>BSW</name>
+		<desc>Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x38</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xbc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+
+	<operation>
+		<name>HBS</name>
+		<desc>Highest Bit Set: Determines the number of the highest bit that is set to one.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x78</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xbc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+
+	<operation>
+		<name>HBC</name>
+		<desc>Highest Bit Clear: Determines the number of the highest bit that is set to zero.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0x18</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xbc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+
+	<operation>
+		<name>AVG</name>
+		<desc>Average a value with the accumulator, i.e. add the two values (without carry) then shift right one bit.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k10</class>
+		<!--opcodes>
+			<addressingMode></addressingMode>
+			<opcode>0xac</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+		<opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xbc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+
+	<operation>
+		<name>PSH</name>
+		<desc>Push contents of all registers (A, X, Y, B, E) onto the stack</desc> 
+		<prefixBits>UM</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xac</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+        <doc><p>
+        	Push the content of all registers on the stack.
+        	</p><pre>
+        		Stack(SP--) &lt;= A
+        		Stack(SP--) &lt;= X
+        		Stack(SP--) &lt;= Y
+        		Stack(SP--) &lt;= B
+        		Stack(SP--) &lt;= E
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	All registers are stored in full (natural) width.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
+	</operation>
+
+	<operation>
+		<name>PLL</name>
+		<desc>Pull the contents of all registers from the stack</desc>
+		<prefixBits>UM</prefixBits>
+		<class>65k10</class>
+		<opcodes>
+			<addressingMode>implied</addressingMode>
+			<opcode>0xcc</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+        <doc><p>
+        	Pull the value of all registers from the stack.
+        	</p><pre>
+        		B &lt;= Stack(++SP)
+        		E &lt;= Stack(++SP)
+        		Y &lt;= Stack(++SP)
+        		X &lt;= Stack(++SP)
+        		A &lt;= Stack(++SP)
+        	</pre>
+        </doc>
+        <doc mode="65k"><p>
+        	All registers are restored in full (natural) width. Flags are not set.
+        	</p><p>
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	</p>
+        </doc>
+	</operation>
+
+	<!-- ################################# -->
+	
+	<operation>
+		<name>INV</name>
+		<desc>invert AC, i.e. set AC to the 2s-complement of AC</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xa4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<!--opcodes>
+			<addressingMode>eind</addressingMode>
+			<opcode>0xac</opcode>
+			<oppage>EXT</oppage>
+		</opcodes-->
+	</operation>
+	
+	<operation>
 		<name>SWP</name>
 		<desc>swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</desc>
 		<prefixBits>RS</prefixBits>
@@ -3449,6 +3655,22 @@
 		</opcodes>
 	</operation>
 		
+	<operation>
+		<name>EXT</name>
+		<desc>Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</desc>
+		<prefixBits>RS</prefixBits>
+		<prefixBits>LE</prefixBits>
+		<prefixBits>NF</prefixBits>
+		<class>65k</class>
+		<opcodes>
+			<addressingMode>A</addressingMode>
+			<opcode>0xc4</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+	</operation>
+	
+	<!-- ################################# -->
+	
 	<operation>
 		<name>LDE</name>
 		<desc>Load E with an immediate value</desc>
@@ -3512,49 +3734,6 @@
         </doc>
 	</operation>
 		
-	<operation>
-		<name>EXT</name>
-		<desc>Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</desc>
-		<prefixBits>RS</prefixBits>
-		<prefixBits>LE</prefixBits>
-		<prefixBits>NF</prefixBits>
-		<class>65k</class>
-		<opcodes>
-			<addressingMode>A</addressingMode>
-			<opcode>0xc4</opcode>
-			<oppage>EXT</oppage>
-		</opcodes>
-	</operation>
-	
-	<operation>
-		<name>SCA</name>
-		<desc>Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
-			LLA with same address (and no other LLA in same thread)</desc>
-		<prefixBits>RS</prefixBits>
-		<prefixBits>UM</prefixBits>
-		<class>65k</class>
-		<opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0x84</opcode>
-			<oppage>EXT</oppage>
-		</opcodes>
-	</operation>
-	
-	<operation>
-		<name>LLA</name>
-		<desc>Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</desc>
-		<prefixBits>RS</prefixBits>
-		<prefixBits>LE</prefixBits>
-		<prefixBits>UM</prefixBits>
-		<prefixBits>NF</prefixBits>
-		<class>65k</class>
-		<opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0x94</opcode>
-			<oppage>EXT</oppage>
-		</opcodes>
-	</operation>
-
 
 	<operation>
 		<name>PHE</name>
@@ -3795,6 +3974,8 @@
 			<oppage>EXT</oppage>
 		</opcodes>
 	</operation>
+
+	<!-- ################################# -->
 
 	<operation>
 		<name>SEB</name>
