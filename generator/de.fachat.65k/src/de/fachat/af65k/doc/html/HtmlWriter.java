@@ -1,28 +1,36 @@
 package de.fachat.af65k.doc.html;
 
 /*
-Documentation table generator for the af65k set of VHDL cores
+ Documentation table generator for the af65k set of VHDL cores
 
-Copyright (C) 2012  André Fachat
+ Copyright (C) 2012  André Fachat
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
 
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 import de.fachat.af65k.doc.DocWriter;
 import de.fachat.af65k.doc.HtmlEscape;
@@ -30,24 +38,16 @@ import de.fachat.af65k.doc.HtmlEscape;
 public class HtmlWriter implements DocWriter {
 
 	private static enum STATE {
-		DOC,
-		SECTION,
-		SUBSECTION,
-		SUBSUBSECTION,
-		TABLE,
-		ROW,
-		CELL,
-		HCELL,
-		PARAGRAPH, UNSORTEDLIST, LISTITEM
+		DOC, SECTION, SUBSECTION, SUBSUBSECTION, TABLE, ROW, CELL, HCELL, PARAGRAPH, UNSORTEDLIST, LISTITEM
 	}
-	
+
 	protected Stack<STATE> stack = new Stack<STATE>();
 	protected PrintWriter wr;
-	
+
 	public HtmlWriter(PrintWriter pwr) {
 		wr = pwr;
 	}
-	
+
 	@Override
 	public void startDoc() {
 		doStartDoc();
@@ -62,7 +62,7 @@ public class HtmlWriter implements DocWriter {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void startUnsortedList() {
 
@@ -70,14 +70,19 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case PARAGRAPH: doEndParagraph(); break;
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
 			case CELL:
 			case HCELL:
 			case SUBSECTION:
 			case SECTION:
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSection()");
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSection()");
 			}
 		}
 		doStartUnsortedList();
@@ -89,10 +94,15 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case LISTITEM: doEndListItem(); break;
-			case UNSORTEDLIST: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case LISTITEM:
+				doEndListItem();
+				break;
+			case UNSORTEDLIST:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 		doEndUnsortedList();
@@ -115,10 +125,15 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case LISTITEM: doEndListItem(); break;
-			case UNSORTEDLIST: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSection()");
+			case LISTITEM:
+				doEndListItem();
+				break;
+			case UNSORTEDLIST:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSection()");
 			}
 		}
 		doStartListItem();
@@ -130,9 +145,12 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case LISTITEM: doEndListItem(); break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case LISTITEM:
+				doEndListItem();
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 		doEndListItem();
@@ -149,25 +167,44 @@ public class HtmlWriter implements DocWriter {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void startSection(String name) {
-		
+
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case PARAGRAPH: doEndParagraph(); break;
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: doEndTable(); break;
-			case SUBSECTION: doEndSubsection(); break;
-			case SUBSUBSECTION: doEndSubsubsection(); break;
-			case SECTION: doEndSection(); break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSection()");
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case SUBSECTION:
+				doEndSubsection();
+				break;
+			case SUBSUBSECTION:
+				doEndSubsubsection();
+				break;
+			case SECTION:
+				doEndSection();
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSection()");
 			}
 		}
 		doStartSection();
@@ -183,27 +220,46 @@ public class HtmlWriter implements DocWriter {
 	private void doEndSection() {
 		stack.pop();
 	}
-	
+
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void startSubsection(String name) {
-		
+
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case PARAGRAPH: doEndParagraph(); break;
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: doEndTable(); break;
-			case SUBSECTION: doEndSubsection(); break;
-			case SUBSUBSECTION: doEndSubsubsection(); break;
-			case SECTION: end=true; break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case SUBSECTION:
+				doEndSubsection();
+				break;
+			case SUBSUBSECTION:
+				doEndSubsubsection();
+				break;
+			case SECTION:
+				end = true;
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -225,22 +281,41 @@ public class HtmlWriter implements DocWriter {
 
 	@Override
 	public void startSubsubsection(String name) {
-		
+
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case PARAGRAPH: doEndParagraph(); break;
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: doEndTable(); break;
-			case SUBSUBSECTION: doEndSubsubsection(); break;
-			case SECTION: end=true; break;
-			case SUBSECTION: end=true; break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case SUBSUBSECTION:
+				doEndSubsubsection();
+				break;
+			case SECTION:
+				end = true;
+				break;
+			case SUBSECTION:
+				end = true;
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -248,7 +323,7 @@ public class HtmlWriter implements DocWriter {
 	}
 
 	private void doStartSubsubsection(String name) {
-		wr.print("<h2>");
+		wr.print("<h3>");
 		wr.print(name);
 		wr.println("</h2>");
 		stack.push(STATE.SUBSECTION);
@@ -259,19 +334,28 @@ public class HtmlWriter implements DocWriter {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void startParagraph() {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case PARAGRAPH: doEndParagraph(); break;
-			case SUBSECTION: end=true; break;
-			case SECTION: end=true; break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
+			case SUBSECTION:
+				end = true;
+				break;
+			case SECTION:
+				end = true;
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -282,35 +366,52 @@ public class HtmlWriter implements DocWriter {
 		wr.print("<p>");
 		stack.push(STATE.PARAGRAPH);
 	}
-	
+
 	private void doEndParagraph() {
 		wr.println("</p>");
 		stack.pop();
 	}
-	
+
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void startTable() {
 		startTable(null);
 	}
-	
+
 	@Override
 	public void startTable(Map<String, String> atts) {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: doEndTable(); break;
-			case PARAGRAPH: doEndParagraph(); break;
-			case SUBSECTION: end=true; break;
-			case SECTION: end=true; break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case PARAGRAPH:
+				doEndParagraph();
+				break;
+			case SUBSECTION:
+				end = true;
+				break;
+			case SECTION:
+				end = true;
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -325,24 +426,33 @@ public class HtmlWriter implements DocWriter {
 		}
 		stack.push(STATE.TABLE);
 	}
-	
+
 	private void doEndTable() {
 		wr.println("</table>");
 		stack.pop();
 	}
-	
+
 	@Override
 	public void startTableRow() {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -353,34 +463,41 @@ public class HtmlWriter implements DocWriter {
 		wr.print("<tr>");
 		stack.push(STATE.ROW);
 	}
-	
+
 	private void doEndRow() {
 		wr.println("</tr>");
 		stack.pop();
 	}
-	
+
 	@Override
 	public void startTableCell() {
 		startTableCell(null);
 	}
-	
+
 	@Override
 	public void startTableCell(Map<String, String> atts) {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
 		doStartCell(atts);
 	}
-	
+
 	private void doStartCell(Map<String, String> atts) {
 		if (atts != null && atts.size() > 0) {
 			printStartWithAtts("td", atts);
@@ -394,29 +511,35 @@ public class HtmlWriter implements DocWriter {
 		wr.print("</td>");
 		stack.pop();
 	}
-	
 
 	@Override
 	public void startTableHeaderCell() {
 		startTableHeaderCell(null);
 	}
-	
+
 	@Override
 	public void startTableHeaderCell(Map<String, String> atts) {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case HCELL: doEndHCell(); break;
-			case CELL: doEndCell(); break;
-			case ROW: end=true; break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case CELL:
+				doEndCell();
+				break;
+			case ROW:
+				end = true;
+				break;
 			default:
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 		doStartHCell(atts);
 	}
-	
+
 	private void doStartHCell(Map<String, String> atts) {
 		if (atts != null && atts.size() > 0) {
 			printStartWithAtts("th", atts);
@@ -425,31 +548,40 @@ public class HtmlWriter implements DocWriter {
 		}
 		stack.push(STATE.HCELL);
 	}
-	
+
 	private void doEndHCell() {
 		wr.print("</th>");
 		stack.pop();
 	}
-	
+
 	@Override
 	public void endTable() {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 		doEndTable();
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	@Override
 	public void print(String content) {
 		if (content != null) {
@@ -468,15 +600,30 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
-			case CELL: doEndCell(); break;
-			case HCELL: doEndHCell(); break;
-			case ROW: doEndRow(); break;
-			case TABLE: doEndTable(); break;
-			case SUBSECTION: doEndSubsection(); break;
-			case SECTION: doEndSection(); break;
-			case DOC: end=true; break;
-			default: 
-				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case SUBSECTION:
+				doEndSubsection();
+				break;
+			case SECTION:
+				doEndSection();
+				break;
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
 			}
 		}
 
@@ -489,7 +636,7 @@ public class HtmlWriter implements DocWriter {
 	}
 
 	// -------------------------------------------------------------------------------------------------------
-	
+
 	private void printStartWithAtts(String ename, Map<String, String> atts) {
 		wr.print("<" + ename);
 		for (Map.Entry<String, String> en : atts.entrySet()) {
@@ -498,5 +645,67 @@ public class HtmlWriter implements DocWriter {
 			wr.print(" " + name + "=\"" + HtmlEscape.escape(val) + "\"");
 		}
 		wr.print(">");
+	}
+
+	private void append(StringBuilder sb, Node n) {
+		if (n instanceof Element) {
+			Element e = (Element) n;
+			String tag = e.getTagName();
+			sb.append("<").append(tag);
+			NamedNodeMap atts = e.getAttributes();
+			if (atts != null) {
+				int natts = atts.getLength();
+				if (natts > 0) {
+					for (int i = 0; i < natts; i++) {
+						Attr att = (Attr) atts.item(i);
+						sb.append(" ").append(att.getName());
+						sb.append("=\"").append(att.getNodeValue()).append("\"");
+					}
+				}
+			}
+			boolean closed = false;
+			NodeList children = e.getChildNodes();
+			if (children != null) {
+				int nch = children.getLength();
+				if (nch > 0) {
+					sb.append(">");
+					for (int i = 0; i < nch; i++) {
+						Node cn = children.item(i);
+						append(sb, cn);
+					}
+					sb.append("</").append(tag).append(">");
+					closed = true;
+				}
+			}
+			if (!closed) {
+				sb.append("</").append(tag).append(">");
+			}
+		} else
+		if (n instanceof Text) {
+			Text t = (Text) n;
+			sb.append(t.getTextContent());
+		}
+	}
+
+	@Override
+	public void print(Node n) {
+		StringBuilder sb = new StringBuilder();		
+		append(sb, n);
+		wr.print(sb.toString());
+	}
+	@Override
+	public void print(List<Node> nl) {
+		StringBuilder sb = new StringBuilder();		
+		for (Node n: nl) {
+			append(sb, n);
+		}
+		wr.print(sb.toString());
+	}
+
+	@Override
+	public void createAnchor(String id) {
+		wr.print("<a name=\"");
+		wr.print(HtmlEscape.escape(id));
+		wr.print("\"> </a>");
 	}
 }

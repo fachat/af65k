@@ -4,7 +4,7 @@ bin="$0"
 src="$1" 
 base="$2"
 target="$3"
-
+gendir="$4"
 
 print_disclaimer () {
 	echo "All Copyrights are acknowledged."
@@ -52,9 +52,8 @@ doinsert2 () {
 }
 
 
-#echo "Run: " $0 $root $up $upn $parent
+echo "Run: " $0 $src $target $base
 
-	#echo "d="`pwd`", i=" $i
 	t1=${target}_1;
 	t2=${target}_2;
 	to=$target
@@ -71,7 +70,62 @@ doinsert2 () {
 			cat src/$base-menu.src \
 				>> $t2
 			echo "</div>" >> $t2
-			doinsert2 $i $t2 "@MENU@"
+			doinsert2 $t1 $t2 "@MENU@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES1@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/opcodes-table-$base.html"
+			cat $gendir/opcodes-table-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES1@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES2@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/opcodes-table-$base.html"
+			cat $gendir/opcodes-desc-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES2@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES3@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/ext-table-$base.html"
+			cat $gendir/ext-table-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES3@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES4@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/ext-table-$base.html"
+			cat $gendir/ext-desc-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES4@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPDESC@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/opdoc-$base.html"
+			cat $gendir/opdoc-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPDESC@"
 		fi
 		mv $t2 $t1
 

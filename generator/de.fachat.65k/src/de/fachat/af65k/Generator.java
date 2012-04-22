@@ -120,7 +120,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", true);
+			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", false);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -165,7 +165,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OpdescDocGenerator docgen = new OpdescDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), "EXT", false);
+			docgen.generateOperationtable(new HtmlWriter(pwr));
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

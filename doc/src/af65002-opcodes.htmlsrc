@@ -1,0 +1,57 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> ]>
+<docpage name="af65002 Documentation">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	This page gives an overview over the 65002 opcodes, sorted by opcode page.
+	The default page is the standard, 6502 opcode page. The other pages require 
+	the corresponding prefix opcode.
+	</p>
+  </overview>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+  <section toc="std" name="Standard Opcode Table">
+	<desc>
+<verbatim> 
+@OPCODES1@ 
+</verbatim>
+<verbatim> 
+@OPCODES2@ 
+</verbatim>
+	</desc>
+  </section>
+
+  <section toc="std" name="EXT Opcode Table">
+	<desc>
+<verbatim> 
+@OPCODES3@ 
+</verbatim>
+<verbatim> 
+@OPCODES4@ 
+</verbatim>
+	</desc>
+  </section>
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2010-09-10.
+  </closing>
+</docpage>
+

@@ -20,26 +20,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
-import de.fachat.af65k.doc.html.HtmlWriter;
-import de.fachat.af65k.model.objs.FeatureClass;
-import de.fachat.af65k.model.objs.Operation;
-import de.fachat.af65k.model.objs.PrefixBit;
-import de.fachat.af65k.model.objs.PrefixSetting;
-import de.fachat.af65k.model.objs.SyntaxMode;
 import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.AModeEntry;
-import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 
 /**
  * this class provides methods to generate various types of (HTML) docs from the CPU definition.

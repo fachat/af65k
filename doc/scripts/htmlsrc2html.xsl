@@ -142,6 +142,10 @@
 	<title><xsl:value-of select="@name"/></title>
 </head><xsl:text>
 </xsl:text><body>
+<div id="headerbox">
+<div class="large">65002</div>
+<div>The 65k processor - a modern 6502 with 64 bit</div>
+</div>
 <div id="mainbox">
 <a name="top"/>
 <xsl:call-template name="commoncol"/>
@@ -165,7 +169,10 @@
 </div> <!-- overview -->
 <xsl:apply-templates select="news"/>
 <xsl:if test="toc"><xsl:call-template name="toc"/></xsl:if>
-<xsl:for-each select="itemlist|section">
+<xsl:for-each select="verbatim">
+        <xsl:copy-of select="*|text()"/>
+</xsl:for-each>
+<xsl:for-each select="section">
   <div class="h2">
     <xsl:call-template name="h2toc">
       <xsl:with-param name="hdr"><xsl:value-of select="@name"/></xsl:with-param>

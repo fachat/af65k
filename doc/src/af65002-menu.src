@@ -1,4 +1,10 @@
 <ul>
 <li><a href="af65002front.html">Overview</a></li>
-<li><a href="af65002opcodes.html">Opcode Docs</a></li>
+<li><a href="af65002opstruct.html">Opcode Structure</a></li>
+<li><a href="af65002prefixes.html">Prefixes</a></li>
+<li><a href="af65002opcodes.html">Opcode Overview</a></li>
+<li><a href="af65002opdesc.html">Opcode Docs</a></li>
+<li><a href="af65002int.html">Interrupts</a></li>
+<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002compat.html">Compatibility</a></li>
 </ul>

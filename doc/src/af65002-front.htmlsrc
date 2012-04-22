@@ -1,4 +1,4 @@
-<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> ]>
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
 <docpage name="af65002 Documentation">
   <!--author>
     <name>Andr&eacute; Fachat</name>
@@ -14,6 +14,13 @@
 	This is the reference documentation for the af65002 processor.
 	</p><p>
 	On the left hand menu you find the links to the various pages of the documentation.
+	</p><p>
+	The af65002 is an extension of the venerable 65C02 8&nbsp;bit processor. It extends the 
+	6502 with extra registers, wider registers, as well as a user and hypervisor mdoe, featuring
+	many new opcodes to use the new features.
+	</p><p>
+	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
+	extension (see the compatibility issues page).
 	</p>
   </overview>
   <!--news>

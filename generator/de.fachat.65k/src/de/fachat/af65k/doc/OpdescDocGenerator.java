@@ -26,20 +26,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-
-import javax.xml.bind.Element;
 
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.Doc;
-import de.fachat.af65k.model.objs.FeatureClass;
 import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
-import de.fachat.af65k.model.objs.PrefixBit;
-import de.fachat.af65k.model.objs.PrefixSetting;
-import de.fachat.af65k.model.objs.SyntaxMode;
 import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 
@@ -57,18 +50,23 @@ public class OpdescDocGenerator {
 		cpu = mycpu;
 	}
 	
-	public void generateOperationtable(HtmlWriter wr, String pagename, boolean includeOrig) {
+	public void generateOperationtable(HtmlWriter wr) {
 		
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
-		CodeMapEntry page[] = opcodes.get(pagename);	// get standard map
-		writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, includeOrig);
+
+		Map<String, Operation> ops = new TreeMap<String, Operation>();
+		
+		for (CodeMapEntry page[]: opcodes.values()) {
+			prepareOperationTable(ops, page, true);			
+		}
+		
+		createTable(wr, ops);		
 	}
 
 
-	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page,
-			String[] strings, boolean includeOrig) {
+	private void prepareOperationTable(Map<String, Operation> ops, CodeMapEntry[] page,
+			boolean includeOrig) {
 		
-		Map<String, Operation> ops = new TreeMap<String, Operation>();
 		for (int i = 0; i < 256; i++) {
 			CodeMapEntry en = page[i];
 			if (en != null) {
@@ -79,10 +77,14 @@ public class OpdescDocGenerator {
 			}
 		}
 		
+	}
+
+	private void createTable(DocWriter wr, Map<String, Operation> ops) {
 		for (Map.Entry<String, Operation> en: ops.entrySet()) {
 			Operation op = en.getValue();
 
 			wr.startSubsection(op.getName());			
+			wr.createAnchor(op.getName());
 			wr.startParagraph();
 			wr.print(op.getDesc());
 			
@@ -90,6 +92,8 @@ public class OpdescDocGenerator {
 			wr.startTableRow();
 			Map<String, String> atts = new HashMap<String, String>();
 			atts.put("colspan", "10");
+			wr.startTableHeaderCell(atts);
+			wr.print(op.getName());
 			wr.startTableRow();
 			wr.startTableHeaderCell();
 			wr.print("Page");
@@ -117,6 +121,11 @@ public class OpdescDocGenerator {
 				wr.startTableCell();
 				wr.print(opcode.getOpcode());
 				wr.startTableCell();
+				
+				String clss = opcode.getClazz();
+				if (clss == null || clss.length() == 0) {
+					clss = op.getClazz();
+				}
 				wr.print(opcode.getClazz());
 				wr.startTableCell();
 				Collection<String> prefs = prefixes;
@@ -148,7 +157,7 @@ public class OpdescDocGenerator {
 					}
 					wr.startSubsubsection(name);
 					
-					wr.print(doc.getTextStr());
+					wr.print(doc.getText());
 				}
 			}
 		}

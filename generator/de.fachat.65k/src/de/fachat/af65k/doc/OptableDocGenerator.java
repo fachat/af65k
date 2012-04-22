@@ -135,7 +135,7 @@ public class OptableDocGenerator {
 				int i = m * 16 + l;
 				CodeMapEntry entry = page[i];
 				String prefix = (prefixes == null) ? "" : prefixes[i];
-				if ((!doLong) && (prefix != null)) {
+				if ((!doLong) && (prefix != null && prefix.length() > 0)) {
 					wr.startTableCell(prefixatts);
 					wr.print(prefix);
 				} else

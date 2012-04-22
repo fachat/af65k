@@ -3381,7 +3381,7 @@
         	the memory pointed to by the parameter).
         </p><pre>
         	Stack(SP--) &lt;= &gt;EffectiveAddress
-        	Stack(SP--) &lt;= &lt;EffectiveAddress
+        	Stack(SP--) &lt;= &amp;lt;EffectiveAddress
         </pre></doc>
         <doc mode="65k"><p>
         	The value pushed is always in the natural (full) width of the processor.

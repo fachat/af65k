@@ -31,10 +31,9 @@ a:hover { color:#ff0000; text-decoration:none }
 DIV.top {
   	background-color: #ffffff; 
   	margin: 0;
-  	margin-top: 2em;
-  	margin-bottom: 0.6em;
+  	margin-top: 0px;
+  	margin-bottom: 1.6em;
   	padding: 15px;
-	
 }
 
 /* left/right cols have headers in the top level style */
@@ -91,8 +90,19 @@ div.toplink {
  * Layout
  */
 
+DIV#headerbox {
+   font-size: large;
+   background-color: #888;
+   color: #fff;
+   margin-bottom: 10px;
+}
+
+DIV#headerbox p.large {
+   font-size: xx-large;
+}
+
 DIV#mainbox {
-   padding-top: 1em;
+/*   padding-top: 0;*/
    font-size: medium;
 }
 
@@ -104,12 +114,13 @@ DIV#midcol {
   margin: 0;
   margin-left: 16%;
   margin-right: 16%;
+  padding: 0;
   font-size:small;
 }
 
 DIV#leftcol {
   float: left; 
-  width: 16%;
+  width: 15%;
   margin: 0; 
   padding: 0;
   font-size:small;
@@ -170,6 +181,9 @@ DIV#footer {
  * Menu formatting
  */
 
+DIV#menu {
+/*  background-color: #bbb; */
+}
 
 /****************************************
  * right side floating elements
@@ -245,23 +259,24 @@ ul.news div.i_oldnews {
 div#content table {
 	font-size: 100%;
 	width:auto;
+	border: 1px solid;
+	padding: 0px;
+	margin: 0px;
+	border-collapse: collapse;
 }
 
 
 div#content th {
 	background-color: #dddddd;
+	border: 1px solid;
+	padding: 2px;
+	margin: 0px;
 }
 
-table.content {
-	text-align:center;
-	empty-cells:show;
-	margin:5px;
-}
-table.content td {
-	padding:3px;
-}
-table.content th {
-	padding:5px;
+div#content td {
+	border: 1px solid;
+	padding: 2px;
+	margin: 0px;
 }
 
 /****************************************

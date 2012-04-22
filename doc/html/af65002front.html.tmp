@@ -10,18 +10,7 @@
 <link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
 <title>af65002 Documentation</title></head>
 <body><div id="headerbox"><div class="large">65002</div><div>The 65k processor - a modern 6502 with 64 bit</div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
-<div id="mtree">
-<ul>
-<li><a href="af65002front.html">Overview</a></li>
-<li><a href="af65002opstruct.html">Opcode Structure</a></li>
-<li><a href="af65002prefixes.html">Prefixes</a></li>
-<li><a href="af65002opcodes.html">Opcode Overview</a></li>
-<li><a href="af65002opdesc.html">Opcode Docs</a></li>
-<li><a href="af65002int.html">Interrupts</a></li>
-<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
-<li><a href="af65002compat.html">Compatibility</a></li>
-</ul>
-</div>
+		@MENU@
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
 		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div><div class="top" id="browser"><div class="tophead">browser</div><div><p>
@@ -46,9 +35,7 @@ more modern browser, like Internet Explorer 8 or later,
 	extension (see the compatibility issues page).
 	</p>
   </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
-All Copyrights are acknowledged.
-The information here is provided under the terms of the
-GNU Public License version 2 unless noted otherwise.
+@DISCLAIMER@
     </div></div><hr />
 Last updated 2010-09-10.
   </div></div><div id="footer"> </div></div><script type="text/javascript">myUp="%up%";</script><script type="text/javascript" src="%up%scripts-all.js"></script><script type="text/javascript" src="%up%jquery.socialshareprivacy.js"></script><script type="text/javascript">

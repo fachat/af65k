@@ -20,7 +20,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+import java.util.List;
 import java.util.Map;
+
+import org.w3c.dom.Node;
 
 /**
  * interface for document generation
@@ -137,4 +140,17 @@ public interface DocWriter {
 
 	void endListItem();
 	
+	/**
+	 * print an unescaped(!) XML node
+	 * @param n org.w3c.dom.Node
+	 */
+	void print(Node n);
+
+	void print(List<Node> nl);
+
+	/**
+	 * create a document anchor
+	 * @param id
+	 */
+	void createAnchor(String id);
 }
