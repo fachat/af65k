@@ -33,6 +33,7 @@ public class HtmlWriter implements DocWriter {
 		DOC,
 		SECTION,
 		SUBSECTION,
+		SUBSUBSECTION,
 		TABLE,
 		ROW,
 		CELL,
@@ -162,6 +163,7 @@ public class HtmlWriter implements DocWriter {
 			case ROW: doEndRow(); break;
 			case TABLE: doEndTable(); break;
 			case SUBSECTION: doEndSubsection(); break;
+			case SUBSUBSECTION: doEndSubsubsection(); break;
 			case SECTION: doEndSection(); break;
 			case DOC: end=true; break;
 			default: 
@@ -197,6 +199,7 @@ public class HtmlWriter implements DocWriter {
 			case ROW: doEndRow(); break;
 			case TABLE: doEndTable(); break;
 			case SUBSECTION: doEndSubsection(); break;
+			case SUBSUBSECTION: doEndSubsubsection(); break;
 			case SECTION: end=true; break;
 			case DOC: end=true; break;
 			default: 
@@ -204,12 +207,12 @@ public class HtmlWriter implements DocWriter {
 			}
 		}
 
-		doStartSubsection();
+		doStartSubsection(name);
 	}
 
-	private void doStartSubsection() {
+	private void doStartSubsection(String name) {
 		wr.print("<h2>");
-		wr.print("name");
+		wr.print(name);
 		wr.println("</h2>");
 		stack.push(STATE.SUBSECTION);
 	}
@@ -217,7 +220,44 @@ public class HtmlWriter implements DocWriter {
 	private void doEndSubsection() {
 		stack.pop();
 	}
-	
+
+	// -------------------------------------------------------------------------------------------------------
+
+	@Override
+	public void startSubsubsection(String name) {
+		
+		boolean end = false;
+		while ((!end) && (!stack.isEmpty())) {
+			STATE s = stack.peek();
+			switch (s) {
+			case PARAGRAPH: doEndParagraph(); break;
+			case CELL: doEndCell(); break;
+			case HCELL: doEndHCell(); break;
+			case ROW: doEndRow(); break;
+			case TABLE: doEndTable(); break;
+			case SUBSUBSECTION: doEndSubsubsection(); break;
+			case SECTION: end=true; break;
+			case SUBSECTION: end=true; break;
+			case DOC: end=true; break;
+			default: 
+				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
+			}
+		}
+
+		doStartSubsubsection(name);
+	}
+
+	private void doStartSubsubsection(String name) {
+		wr.print("<h2>");
+		wr.print(name);
+		wr.println("</h2>");
+		stack.push(STATE.SUBSECTION);
+	}
+
+	private void doEndSubsubsection() {
+		stack.pop();
+	}
+
 	// -------------------------------------------------------------------------------------------------------
 	
 	@Override
@@ -265,6 +305,7 @@ public class HtmlWriter implements DocWriter {
 			case HCELL: doEndHCell(); break;
 			case ROW: doEndRow(); break;
 			case TABLE: doEndTable(); break;
+			case PARAGRAPH: doEndParagraph(); break;
 			case SUBSECTION: end=true; break;
 			case SECTION: end=true; break;
 			case DOC: end=true; break;
@@ -357,6 +398,11 @@ public class HtmlWriter implements DocWriter {
 
 	@Override
 	public void startTableHeaderCell() {
+		startTableHeaderCell(null);
+	}
+	
+	@Override
+	public void startTableHeaderCell(Map<String, String> atts) {
 		boolean end = false;
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
@@ -368,12 +414,15 @@ public class HtmlWriter implements DocWriter {
 				throw new IllegalStateException("Illegal state '" + s + "' in startSubsection()");
 			}
 		}
-
-		doStartHCell();
+		doStartHCell(atts);
 	}
 	
-	private void doStartHCell() {
-		wr.print("<th>");
+	private void doStartHCell(Map<String, String> atts) {
+		if (atts != null && atts.size() > 0) {
+			printStartWithAtts("th", atts);
+		} else {
+			wr.print("<th>");
+		}
 		stack.push(STATE.HCELL);
 	}
 	

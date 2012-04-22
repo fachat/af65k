@@ -52,6 +52,9 @@ public class Operation {
 	// list of all supported addressing modes with related opcodes
 	List<Opcode> opcodes;
 
+	// list of all supported addressing modes with related opcodes
+	List<Doc> doc;
+
 	public String getDefaultLe() {
 		return defaultLe;
 	}
@@ -98,6 +101,14 @@ public class Operation {
 
 	public void setClazz(String clazz) {
 		this.clazz = clazz;
+	}
+
+	public List<Doc> getDoc() {
+		return doc;
+	}
+
+	public void setDoc(List<Doc> doc) {
+		this.doc = doc;
 	}
 	
 }

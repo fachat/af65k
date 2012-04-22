@@ -50,6 +50,13 @@ public interface DocWriter {
 	void startSubsection(String name);
 
 	/**
+	 * start a subsection
+	 * ends previous paragraph, table, subsection when appropriate
+	 * @param name
+	 */
+	void startSubsubsection(String name);
+
+	/**
 	 * start a new paragraph (ends previous paragraph as appropriate
 	 */
 	void startParagraph();
@@ -86,6 +93,12 @@ public interface DocWriter {
 	 * ends a previous cell when one were there
 	 */
 	void startTableHeaderCell();
+
+	/**
+	 * start a new table cell within a row
+	 * ends a previous cell when one were there
+	 */
+	void startTableHeaderCell(Map<String, String> attributes);
 
 	/**
 	 * print content, which will be escaped appropriately depending on output format

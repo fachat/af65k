@@ -22,14 +22,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.FeatureClass;
@@ -38,7 +36,6 @@ import de.fachat.af65k.model.objs.PrefixBit;
 import de.fachat.af65k.model.objs.PrefixSetting;
 import de.fachat.af65k.model.objs.SyntaxMode;
 import de.fachat.af65k.model.validation.Validator;
-import de.fachat.af65k.model.validation.Validator.AModeEntry;
 import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 
 /**
@@ -47,84 +44,14 @@ import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
  * @author fachat
  *
  */
-public class DocGenerator {
+public class OptableDocGenerator {
 
 	final Validator cpu;
 	
-	public DocGenerator(Validator mycpu) {
+	public OptableDocGenerator(Validator mycpu) {
 		cpu = mycpu;
 	}
 	
-	public void generateAddressingModeTable(DocWriter wr) {
-		
-		Map<String, String> tabatts = new HashMap<String, String>();
-		tabatts.put("class", "optable");
-		wr.startTable(tabatts);
-		
-		wr.startTableRow();
-		
-		wr.startTableHeaderCell();
-		wr.print("Name");
-		wr.startTableHeaderCell();
-		wr.print("Alternative Name");
-		wr.startTableHeaderCell();
-		wr.print("Prefix");
-		wr.startTableHeaderCell();
-		wr.print("Operand Length");
-		wr.startTableHeaderCell();
-		wr.print("Syntax");
-		wr.startTableHeaderCell();
-		wr.print("Origin");
-		wr.startTableHeaderCell();
-		wr.print("Description");
-		
-		List<AModeEntry> amodes = cpu.getAddressingModeList();
-		if (amodes != null) {
-			
-			TreeSet<AModeEntry> sortedAmodes = new TreeSet<Validator.AModeEntry>(new Comparator<AModeEntry>() {
-
-				@Override
-				public int compare(AModeEntry o1, AModeEntry o2) {
-					int d = o1.getAddrmode().getPos() - o2.getAddrmode().getPos();
-					if (d != 0) return d;
-					return o1.getLen() - o2.getLen();
-				}
-			});
-			sortedAmodes.addAll(amodes);
-			
-			for (AModeEntry am : sortedAmodes) {
-				wr.startTableRow();
-				
-				wr.startTableCell();
-				wr.print(am.getAddrmode().getName());
-				
-				wr.startTableCell();
-				wr.print(am.getAddrmode().getAltname());
-			
-				wr.startTableCell();
-				if (am.getPrefix() != null) {
-					wr.print(am.getPrefix().getName() + "=" + am.getPrefix().getValue());
-				}
-				
-				wr.startTableCell();
-				wr.print(String.valueOf(am.getLen()));
-				
-				wr.startTableCell();
-				//wr.print(am.getSyntax().getSimpleSyntax());
-				wr.print(am.getSimplesyntax());
-				
-				wr.startTableCell();
-				if (am.getFclass() != null) {
-					wr.print(am.getFclass().getName());
-				}
-				
-				wr.startTableCell();
-				wr.print(am.getAddrmode().getDesc());
-			}
-		}
-		wr.endTable();
-	}
-
 	public void generateOperationtable(HtmlWriter wr, String pagename, boolean includeOrig) {
 		
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
@@ -177,6 +104,9 @@ public class DocGenerator {
 		Map<String, String> tmp = new HashMap<String, String>();
 		tmp.put("class", "c65k");
 		classatts.put("65k", tmp);
+		tmp = new HashMap<String, String>();
+		tmp.put("class", "c65k10");
+		classatts.put("65k10", tmp);
 		tmp = new HashMap<String, String>();
 		tmp.put("class", "cmos");
 		classatts.put("cmos", tmp);

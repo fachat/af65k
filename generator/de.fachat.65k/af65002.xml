@@ -19,6 +19,7 @@
 	<class>
 		<name>65k</name>
 		<prio>2</prio>
+		<extends>cmos</extends>
 		<doc><p>
 			This class contains the new opcodes and opcode extensions of the af65002 compared to the 65C02.
 		</p></doc>
@@ -26,6 +27,7 @@
 	<class>
 		<name>65k10</name>
 		<prio>2</prio>
+		<extends>65k</extends>
 		<doc><p>
 			This class contains the new opcodes and opcode extensions of the af65010 compared to the af65002.
 		</p></doc>
@@ -230,7 +232,7 @@
 
     <operation>
         <name>BGT</name>
-        <desc>Branch on carry set - take branch when C flag is set</desc>
+        <desc>Branch if greater - take branch when C flag is set but Z flag is clear</desc>
         <prefixBits>RS</prefixBits>
         <class>65k</class>
         <opcodes>
@@ -242,6 +244,32 @@
         	Branch to the address given by adding the parameter to the address of the
         	next operation (after the branch opcode) given the condition that the
         	carry status flag is set and the zero status flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BLE</name>
+        <desc>Branch if less or equal - take branch when C flag is clear or Z flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x90</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is clear or the zero status flag is set.
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
@@ -3539,24 +3567,6 @@
 			<opcode>0xbc</opcode>
 			<oppage>EXT</oppage>
 		</opcodes-->
-	</operation>
-
-	<operation>
-		<name>AVG</name>
-		<desc>Average a value with the accumulator, i.e. add the two values (without carry) then shift right one bit.</desc>
-		<prefixBits>RS</prefixBits>
-		<prefixBits>NF</prefixBits>
-		<class>65k10</class>
-		<!--opcodes>
-			<addressingMode></addressingMode>
-			<opcode>0xac</opcode>
-			<oppage>EXT</oppage>
-		</opcodes-->
-		<opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0xbc</opcode>
-			<oppage>EXT</oppage>
-		</opcodes>
 	</operation>
 
 	<operation>

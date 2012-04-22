@@ -8,9 +8,11 @@ ADS: Add value to stack pointer</li>
 <li>
 ASR: Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
 <li>
-AVG: Average a value with the accumulator, i.e. add the two values (without carry) then shift right one bit.</li>
-<li>
 BCN: Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
+<li>
+BGT: Branch if greater - take branch when C flag is set but Z flag is clear</li>
+<li>
+BLE: Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
 <li>
 BSW: Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>
 <li>
@@ -46,7 +48,11 @@ PLB: Pull E from stack (full width)</li>
 <li>
 PLE: Pull E from stack (full width)</li>
 <li>
+PLL: Pull the contents of all registers from the stack</li>
+<li>
 PRB: Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
+<li>
+PSH: Push contents of all registers (A, X, Y, B, E) onto the stack</li>
 <li>
 RDL: Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
 <li>

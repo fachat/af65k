@@ -1,0 +1,640 @@
+<h2>ADB</h2>
+<p>Add value to B register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x65</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x75</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>ADE</h2>
+<p>Add value to E register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x25</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x35</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>ADS</h2>
+<p>Add value to stack pointer</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x45</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x55</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>ASR</h2>
+<p>Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x06</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0x0a</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td>EXT</td><td>0x0e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x16</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x1e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x1f</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x1d</td><td></td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the sign (uppermost bit) from the left.
+        	The bit shifted out is moved into the carry flag.
+        	Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work
+        	on the accumulator alone as well.
+        	&lt;/p&gt;&lt;pre&gt;
+        		C &lt;= AC(0)
+        		AC(6-0) &lt;= AC(7-1)
+        		N &lt;= AC7)
+        		Z &lt;= Z(AC)
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	&lt;/p&gt;&lt;p&gt;
+        	RS also determine the width of the operation. There is no LE prefix, as the read and write
+        	widths are the same.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	&lt;/p&gt;<h2>BCN</h2>
+<p>Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xb4</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>BGT</h2>
+<p>Branch if greater - take branch when C flag is set but Z flag is clear</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xB0</td><td></td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is set and the zero status flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	&lt;/p&gt;&lt;pre&gt;
+        		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.&lt;/p&gt;<h2>BLE</h2>
+<p>Branch if less or equal - take branch when C flag is clear or Z flag is set</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x90</td><td></td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	carry status flag is clear or the zero status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	&lt;/p&gt;&lt;pre&gt;
+        		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.&lt;/p&gt;<h2>BSW</h2>
+<p>Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x38</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>EXT</h2>
+<p>Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xc4</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>FIL</h2>
+<p>Fill a memory area of size AC at address XR with a value from YR</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x24</td><td></td><td>RS</td><td>Implied</td><td></td></tr>
+</table>
+<h2>HBC</h2>
+<p>Highest Bit Clear: Determines the number of the highest bit that is set to zero.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x18</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>HBS</h2>
+<p>Highest Bit Set: Determines the number of the highest bit that is set to one.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x78</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>INV</h2>
+<p>invert AC, i.e. set AC to the 2s-complement of AC</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xa4</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>LDB</h2>
+<p>Load B with an immediate value</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x59</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Read the operand and store it in the B register. Set the flags appropriately.
+        	&lt;/p&gt;&lt;pre&gt;
+        		N &lt;= Operand(7)
+        		Z &lt;= Z(Operand)
+        		B &lt;= Operand
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The LE and RS prefixes are evaluated by the addressing modes. 
+        	&lt;/p&gt;&lt;p&gt;
+        	Note that the default load extension is "sign-extended".
+        	&lt;/p&gt;&lt;p&gt;
+        	The NF prefix lets the flags unmodified.
+        	&lt;/p&gt;<h2>LDE</h2>
+<p>Load E with an immediate value</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x39</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Read the operand and store it in the E register. Set the flags appropriately.
+        	&lt;/p&gt;&lt;pre&gt;
+        		N &lt;= Operand(7)
+        		Z &lt;= Z(Operand)
+        		E &lt;= Operand
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The LE and RS prefixes are evaluated by the addressing modes. 
+        	&lt;/p&gt;&lt;p&gt;
+        	Note that the default load extension is "sign-extended".
+        	&lt;/p&gt;&lt;p&gt;
+        	The NF prefix lets the flags unmodified.
+        	&lt;/p&gt;<h2>LEA</h2>
+<p>Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x02</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x42</td><td></td><td>AM, OF, UM, NF</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x62</td><td></td><td>AM, OF, UM, NF</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x80</td><td></td><td>AM, OF, UM, NF</td><td>Relative</td><td></td></tr>
+<tr><td>EXT</td><td>0xa1</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x46</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0xae</td><td></td><td>AM, OF, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xb1</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xb2</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x56</td><td></td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xb9</td><td></td><td>AM, OF, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xbe</td><td></td><td>AM, OF, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x44</td><td></td><td>AM, OF, UM, NF</td><td>Relative 16bit</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Load the effective address given by the addressing mode into the E register (without accessing
+        	the memory pointed to by the parameter).
+        &lt;/p&gt;&lt;pre&gt;
+        	E &lt;= EffectiveAddress
+        &lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value stored in E is always in the natural (full) width of the processor.
+        	&lt;/p&gt;&lt;p&gt;
+        	The AM and OF prefixes are interpreted as usually when computing the address.
+        	&lt;/p&gt;&lt;p&gt;
+        	The memory and stack pointers used are the current ones when the user mode prefix is not set.
+        	When the user mode prefix is set in hypervisor mode, the memory and stack pointer is that of the
+        	user mode. When set in user mode an ABORT is triggered.
+        	&lt;/p&gt;&lt;p&gt;
+        	With this approach you can use this in trap handling:
+        	&lt;/p&gt;&lt;pre&gt;
+        		LEA.U S,$08			; load user space address of offset 8 on the user mode stack
+        		LDA.U (E)			; load the value from user space
+        	&lt;/pre&gt;<h2>LLA</h2>
+<p>Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x94</td><td></td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>MVN</h2>
+<p>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x04</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>MVP</h2>
+<p>Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x14</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>PEA</h2>
+<p>Push Effective Address: compute the effective address and push it onto the stack (always full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x22</td><td></td><td>AM, OF, UM</td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xc2</td><td></td><td>AM, OF, UM</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xe2</td><td></td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x82</td><td></td><td>AM, OF, UM</td><td>Relative</td><td></td></tr>
+<tr><td>EXT</td><td>0x81</td><td></td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x85</td><td></td><td>AM, OF, UM</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0xad</td><td></td><td>AM, OF, UM</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x91</td><td></td><td>AM, OF, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x92</td><td></td><td>AM, OF, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x95</td><td></td><td>AM, OF, UM</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x99</td><td></td><td>AM, OF, UM</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xbd</td><td></td><td>AM, OF, UM</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x54</td><td></td><td>AM, OF, UM</td><td>Relative 16bit</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Push the effective address given by the addressing mode onto the stack (without accessing
+        	the memory pointed to by the parameter).
+        &lt;/p&gt;&lt;pre&gt;
+        	Stack(SP--) &lt;= &gt;EffectiveAddress
+        	Stack(SP--) &lt;= &lt;EffectiveAddress
+        &lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value pushed is always in the natural (full) width of the processor.
+        	&lt;/p&gt;&lt;p&gt;
+        	The AM and OF prefixes are interpreted as usually when computing the address.
+        	&lt;/p&gt;&lt;p&gt;
+        	The memory and stack pointers used are the current ones when the user mode prefix is not set.
+        	When the user mode prefix is set in hypervisor mode, the memory and stack pointer is that of the
+        	user mode. When set in user mode an ABORT is triggered.
+        	&lt;/p&gt;&lt;p&gt;
+			Note that the stack used to actually store the address is always (no matter the user mode bit)
+			the current stack!
+			&lt;/p&gt;<h2>PHB</h2>
+<p>Push B onto stack (full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x48</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Push the content of the B register on the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Stack(SP--) &lt;= B
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value stored is always in the natural width of the processor (mode).
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>PHE</h2>
+<p>Push E onto stack (always full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x08</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Push the content of the E register on the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Stack(SP--) &lt;= E
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value stored is always in the natural width of the processor (mode).
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>PLB</h2>
+<p>Pull E from stack (full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x68</td><td></td><td>UM, NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Pull the value of the B register from the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        	B &lt;= Stack(++SP)
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value retrieved is always in the natural width of the processor (mode).
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>PLE</h2>
+<p>Pull E from stack (full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x28</td><td></td><td>UM, NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Pull the value of the E register from the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        		E &lt;= Stack(++SP)
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The value retrieved is always in the natural width of the processor (mode).
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>PLL</h2>
+<p>Pull the contents of all registers from the stack</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xcc</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Pull the value of all registers from the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        		B &lt;= Stack(++SP)
+        		E &lt;= Stack(++SP)
+        		Y &lt;= Stack(++SP)
+        		X &lt;= Stack(++SP)
+        		A &lt;= Stack(++SP)
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	All registers are restored in full (natural) width. Flags are not set.
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>PRB</h2>
+<p>Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x58</td><td></td><td>UM, NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>PSH</h2>
+<p>Push contents of all registers (A, X, Y, B, E) onto the stack</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xac</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Push the content of all registers on the stack.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Stack(SP--) &lt;= A
+        		Stack(SP--) &lt;= X
+        		Stack(SP--) &lt;= Y
+        		Stack(SP--) &lt;= B
+        		Stack(SP--) &lt;= E
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	All registers are stored in full (natural) width.
+        	&lt;/p&gt;&lt;p&gt;
+        	The stack pointer used is the one of the current stack if the UM prefix is not set.
+        	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
+        	user mode stack pointer and the value is stored in user mode memory. If executed in
+        	user mode with UM set an ABORT exception is triggered.
+        	&lt;/p&gt;<h2>RDL</h2>
+<p>Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x26</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0x2a</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td>EXT</td><td>0x2e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x36</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x3e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x3f</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x3d</td><td></td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the sign (uppermost bit) of
+        	the original value from the right.
+        	The bit shifted is also moved into the carry flag.
+        	Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work
+        	on the accumulator alone as well.
+        	&lt;/p&gt;&lt;pre&gt;
+        		C &lt;= AC(7)
+        		AC(7-1) &lt;= AC(6-0)
+        		AC(0) &lt;= C
+        		N &lt;= AC7)
+        		Z &lt;= Z(AC)
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	&lt;/p&gt;&lt;p&gt;
+        	RS also determine the width of the operation. There is no LE prefix, as the read and write
+        	widths are the same.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	&lt;/p&gt;<h2>RMB</h2>
+<p>Read memory barrier: invalidates cache content (globally, or for a specific, given location)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x64</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0xe4</td><td></td><td>UM</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>SAB</h2>
+<p>Swap A register with B register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xa8</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>SAE</h2>
+<p>Swap AC with E register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xd8</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>SAX</h2>
+<p>Swap AC with X register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xba</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>SAY</h2>
+<p>Swap AC with Y register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xda</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>SBB</h2>
+<p>Substract value from B register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xe5</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xf5</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>SBE</h2>
+<p>Add value to E register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xa5</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xb5</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>SBS</h2>
+<p>Substract value from stack pointer</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xc5</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xd5</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>SCA</h2>
+<p>Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
+			LLA with same address (and no other LLA in same thread)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x84</td><td></td><td>RS, UM</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>SEB</h2>
+<p>Swap E register with B register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xb8</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>STZ</h2>
+<p>Store zero into a memory location</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x64</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x74</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x9c</td><td></td><td>AM, OF, RS, UM</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x9e</td><td></td><td>AM, OF, RS, UM</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x9e</td><td>65k</td><td>AM, OF, RS, UM</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x9c</td><td></td><td>RS, UM</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Store the zero into the address given by the operand.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Operand &lt;= 0
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space.
+        	&lt;/p&gt;&lt;p&gt;
+        	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	&lt;/p&gt;<h2>SWP</h2>
+<p>swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xd4</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>SXY</h2>
+<p>Swap X with Y register. Always done full width, no flags set.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x9a</td><td></td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>TAB</h2>
+<p>Transfer AC to B register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xe8</td><td></td><td>NF, LE, RS</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TAE</h2>
+<p>Transfer AC to E register</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x88</td><td></td><td>NF, LE, RS</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TBA</h2>
+<p>Transfer base register B to Accumulator</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xf8</td><td></td><td>NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TBE</h2>
+<p>Transfer content of B register into E register (full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xfa</td><td></td><td>NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TEA</h2>
+<p>Transfer E register to Accumulator</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x98</td><td></td><td>NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TEB</h2>
+<p>Transfer E to B register (full width)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xea</td><td></td><td>NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TPA</h2>
+<p>Transfer Program counter to Accumulator</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xc8</td><td></td><td>NF</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TRB</h2>
+<p>Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
+				memory location that are set in the accumulator.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x14</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x1c</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x1c</td><td></td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then clear all bits in the operand 
+        	that are set in the accumulator (basically AND with the inverse of the accumulator),
+        	and store the value back.  
+        	&lt;/p&gt;&lt;p&gt;
+        	The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-clear" 
+        	primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write
+        	to make that operation atomic.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Tmp &lt;= operand &quot; AC 
+        		Z &lt;= Z(Tmp)
+        		operand &lt; operand | AC
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	&lt;/p&gt;&lt;p&gt;
+        	The NF prefix allows to implement a read-modify-write AND of a memory location (without the usual and/store
+        	sequence) - without setting a flag though.
+        	&lt;/p&gt;<h2>TSB</h2>
+<p>Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
+				memory location that are set in the accumulator.</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x04</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x0c</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x0c</td><td></td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h2>Description</h2>
+&lt;p&gt;
+        	Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then OR the operand with the accumulator
+        	and store the value back.  
+        	&lt;/p&gt;&lt;p&gt;
+        	The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-set" 
+        	primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write
+        	to make that operation atomic.
+        	&lt;/p&gt;&lt;pre&gt;
+        		Tmp &lt;= operand &quot; AC 
+        		Z &lt;= Z(Tmp)
+        		operand &lt; operand | AC
+        	&lt;/pre&gt;<h2>65k</h2>
+&lt;p&gt;
+        	The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the
+        	operand resides in user space or not. 
+        	&lt;/p&gt;&lt;p&gt;
+        	The NF prefix allows to implement a read-modify-write OR of a memory location (without the usual or/store
+        	sequence) - without setting a flag though.
+        	&lt;/p&gt;<h2>TSY</h2>
+<p>Transfer stack pointer to Y</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xca</td><td></td><td>NF, UM, RS, LE</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TYS</h2>
+<p>Transfer Y to stack pointer</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x8a</td><td></td><td>LE, RS, UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>WMB</h2>
+<p>Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</p>
+<table><tr></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x74</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0xf4</td><td></td><td>UM</td><td>E indirect</td><td></td></tr>
+</table>
