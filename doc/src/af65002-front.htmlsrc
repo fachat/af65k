@@ -1,0 +1,46 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> ]>
+<docpage name="af65002 Documentation">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	This is the reference documentation for the af65002 processor.
+	</p><p>
+	On the left hand menu you find the links to the various pages of the documentation.
+	</p>
+  </overview>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+<!--section toc="af65002" name="af65002">
+  <desc>
+    <p>Intro to the af65002</p>
+  </desc>
+  <subsection toc="x" name="x">
+     <desc>
+    	<p>Intro to the af65002</p>
+     </desc>
+  </subsection>
+</section-->
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2010-09-10.
+  </closing>
+</docpage>
+

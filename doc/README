@@ -1,0 +1,8 @@
+
+This directory contains the code to create the documentation,
+for only in HTML.
+
+Type "make" in this directory to build the documentation.
+
+The build process includes HTML fragments built by the generator.
+

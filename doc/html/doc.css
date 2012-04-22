@@ -1,0 +1,306 @@
+
+/****************************************
+ *
+ * style.css 
+ *
+ * (c) 2010 A. Fachat
+ *
+ * All rights reserved!
+ */
+
+/****************************************
+ *  global 
+ */
+
+BODY {
+ /* non CSS3 browsers */
+ background-color: #555;
+
+	/*font-family: "Arial","Sans Serif";*/
+	font-family: verdana,helvetica,arial,sans-serif;
+	font-size: 100%;
+}
+
+a:visited { color:#000080; text-decoration:none }
+a:link { color:#0000ff; text-decoration:none }
+a:active { color:#8888ff; text-decoration:none }
+a:focus { color:#888888; text-decoration:none }
+a:hover { color:#ff0000; text-decoration:none }
+
+/* top level style */
+DIV.top {
+  	background-color: #ffffff; 
+  	margin: 0;
+  	margin-top: 2em;
+  	margin-bottom: 0.6em;
+  	padding: 15px;
+	
+}
+
+/* left/right cols have headers in the top level style */
+DIV.tophead {
+	background-color: #888888;
+	font-size: 150%;
+
+	color: #fff;
+	margin: -15px;
+	margin-bottom: 3px;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+/* disable for IE6 */
+* html DIV#hot { display: none; }
+
+div#ie6warn { display: none; }
+* html DIV#ie6warn { display: block; 
+	background-color: #ff4444;
+}
+
+P.copyright {
+	font-size:larger;
+	font-weight:bold;
+}
+
+.quote {
+	font-style: italic;
+}
+
+LI.extlink {
+	list-style-position: outside;
+	list-style-image:url(imgs/icon_extlink.jpg);
+}
+
+A.extlink {
+    	background: url("imgs/icon_extlink.jpg") center right no-repeat;
+    	padding-right: 16px;
+}
+
+H2 {
+	border-top: 2px solid;
+}
+
+div.toplink {
+	float:right;
+	margin-top: -3em;
+}
+
+/****************************************
+ * Layout
+ */
+
+DIV#mainbox {
+   padding-top: 1em;
+   font-size: medium;
+}
+
+/****************************************
+ * parts of mainbox 
+ */
+
+DIV#midcol {
+  margin: 0;
+  margin-left: 16%;
+  margin-right: 16%;
+  font-size:small;
+}
+
+DIV#leftcol {
+  float: left; 
+  width: 16%;
+  margin: 0; 
+  padding: 0;
+  font-size:small;
+}
+
+DIV#rightcol {
+  float: right; 
+  width: 15%;
+  margin: 0; 
+  padding: 0;
+  font-size:small;
+}
+
+/****************************************
+ * visible top level elements, parts of columns
+ */
+
+/* disable for IE6 */
+* html DIV#oldnews { display: none; }
+
+DIV#oldnewscontent  {
+	height: 40em;
+	overflow: scroll;
+	margin-left: -0.7em;
+ /* FF/GC add the scrollbar to the width, so we need to compensate by making it
+  * smaller. IE includes the scrollbar, so there is a browser fork below
+  * other browsers */
+ /* this is currently for indexadv.html only, check to replace with percentage as above? */
+  	/*width: 10.0em;*/
+	margin-right: -0.7em;
+}
+
+DIV#browser {
+  display: block;
+  /*font-size:  xx-small;*/
+}
+
+DIV#breadcrumbs {
+  display: block;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid;
+}
+
+
+DIV#content {
+  text-align: left;
+}
+
+DIV#contentfooter {
+  border-top: 2px solid;
+}
+
+DIV#footer {
+  clear: both;
+}
+
+/****************************************
+ * Menu formatting
+ */
+
+
+/****************************************
+ * right side floating elements
+ */
+
+.rightimg {
+	float:right;
+	margin: 10px 0 10px 10px;
+	width: 300px;
+	background-color: #eee;
+	padding: 5px;
+}
+
+.leftimg {
+	float:left;
+	margin: 10px 0 10px 10px;
+	width: 300px;
+	background-color: #eee;
+	padding: 5px;
+}
+
+.sidenote {
+	float:right;
+	margin: 10px 0 10px 10px;
+	width: 300px;
+	background-color: #eee;
+	padding: 5px;
+}
+
+DIV.rightbar {
+  border-style: solid;
+  border-width: 2px;
+  float: right;
+  width: 25em;
+  margin-top: -1.7em;
+  margin-right: -2em;
+  background-color: #dddddd; 
+  font-size:smaller;
+}
+
+/****************************************
+ * news formatting
+ */
+
+ul.news li {
+	padding-top: 5px;
+	list-style-type: none;
+}
+
+ul.news li div {
+	margin-left:-28px;
+	display:inline;
+	float: left;
+	background:url(imgs/sprite.png) no-repeat;
+	width:28px;
+	height:28px;
+	background-position: -128px -32px;
+}
+
+ul.news div.i_hotnews {
+	background-position: -192px -32px;
+}
+
+ul.news div.i_oldnews {
+	background-position: -160px -32px;
+}
+	
+
+/****************************************
+ * general table formatting
+ */
+
+div#content table {
+	font-size: 100%;
+	width:auto;
+}
+
+
+div#content th {
+	background-color: #dddddd;
+}
+
+table.content {
+	text-align:center;
+	empty-cells:show;
+	margin:5px;
+}
+table.content td {
+	padding:3px;
+}
+table.content th {
+	padding:5px;
+}
+
+/****************************************
+ * table of content
+ */
+
+div#toc dir {
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	padding-left: 3em;
+}
+
+/****************************************
+ * text formatting
+ */
+
+div#content p.conclusion {
+	font-weight: bold;
+	font-size: 120%;
+}
+
+/****************************************
+ * twisties
+ */
+.h2t {
+	display: none;		/* only if enabled with javascript */
+	float: left;
+	margin-top: 0.4em;
+	background:url(imgs/sprite.png) no-repeat;
+	width:2em;
+	background-position: -288px -32px;
+}
+
+/****************************************
+ * min/max link
+ */
+
+#minmax {
+	display: none;
+	float: right;
+}
+
