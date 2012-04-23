@@ -110,6 +110,23 @@ DIV#mainbox {
  * parts of mainbox 
  */
 
+DIV#headerbox div#lefthdr {
+    font-size: 300%;
+    float: left;
+    /*display: inline;*/
+}
+DIV#headerbox div#righthdr {
+    text-align: right;
+}
+
+DIV#headerbox div#righthdr div.large {
+    font-size: 200%;
+}
+
+/****************************************
+ * parts of mainbox 
+ */
+
 DIV#midcol {
   margin: 0;
   margin-left: 16%;

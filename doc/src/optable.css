@@ -1,0 +1,59 @@
+
+table.bittable {
+	border: 1px solid;
+	background-color: #000000;
+	margin: 0;
+	padding: 0.1em;
+}
+
+table.bittable th {
+	width: 12%;
+}
+
+table.bittable td {
+	background-color: #ffffff;
+}
+
+table.optable {
+	border: 1px solid;
+	background-color: #000000;
+	margin: 0;
+	padding: 0.1em;
+}
+
+table.optable th {
+	margin: 0;
+	padding: 0.2em;
+	background-color: #aaaaaa;
+}
+
+table.optable td {
+	margin: 0;
+	padding: 0.2em;
+	background-color: #ffffff;
+}
+
+table.optable td.prefix {
+	background-color: #aaffaa;
+}
+
+table.optable td.cmos {
+	background-color: #ffaaaa;
+}
+
+table.optable td.c65k {
+	background-color: #aaaaff;
+}
+
+table.optable td.unused {
+	background-color: #aaaaaa;
+}
+
+table.optable td.dup {
+	background-color: #aaffaa;
+}
+
+table.optable td.x {
+	background-color: #ffaaaa;
+}
+

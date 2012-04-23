@@ -1,5 +1,9 @@
 package de.fachat.af65k.model.objs;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
 /*
 The model parser for the af65k set of VHDL cores
 
@@ -30,10 +34,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  * @author fachat
  *
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class FeatureClass {
 
 	String name;
 	int prio;
+	
+	@XmlElement(name="extends")
+	String xtends;
 	
 	public String getName() {
 		return name;
@@ -46,6 +54,12 @@ public class FeatureClass {
 	}
 	public void setPrio(int prio) {
 		this.prio = prio;
+	}
+	public String getXtends() {
+		return xtends;
+	}
+	public void setXtends(String xtends) {
+		this.xtends = xtends;
 	}
 	
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="6502 Software Compatibility Notes">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+        Here are some notes on compatibility with the 6502.
+	</p><p>
+	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
+	extension, as described on this page.
+	</p>
+  </overview>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+  <toc/>
+
+      <section toc="compatstack" name="Stack Frame">
+        <desc><p>
+          The 65k has, on purpose, an extended interrupt functionality. Thus it needs an extended stack frame
+          to store the additional information, as described above. Yet there is 6502 compatibility included:
+        </p>
+        <table border="1">
+        <tr><th colspan="3">Stack Frames</th></tr>
+        <tr><th>Address</th><th>6502</th><th>65k</th></tr>
+        <tr><th>S+10</th><td rowspan="3"></td><td>ADDR byte 7</td></tr>
+        <tr><th>S+5..9</th>                <td>ADDR byte 2..6</td></tr>
+        <tr><th>S+4</th>                <td>ADDR byte 1</td></tr>
+        <tr><th>S+3</th><td>ADDR byte 1</td><td>ADDR byte 0</td></tr>
+        <tr><th>S+2</th><td>ADDR byte 0</td><td>Extended Status Byte</td></tr>
+        <tr><th>S+1</th><td>Status register (bit5=1)</td><td>Status Register (bit5=0)</td></tr>
+        </table>
+        <p>
+          As you can see it is the status register bit 5 that determines whether an extended
+          stack frame is used or not. In a 6502 it is always 1.
+          As a result, if some 6502 software creates an artificial stack frame with bit5 cleared,
+          it will trigger the use of an extended stack frame and crash.
+        </p>
+        </desc>
+      </section>
+
+      <section toc="compatpointer" name="Interrupt Pointer">
+        <desc><p>
+          As the 65k has an extended interrupt functionality, the number - and size - of the 6502 interrupt
+          pointer does not suffice anymore for an efficient operation.
+        </p>
+        <p>
+          For compatibility reasons the CPU starts with a restricted set of 6502-compatible interrupt vectors
+          as described above. Only when the Interrupt Base Register is set, the extended, per interrupt
+          jump vectors are used.
+        </p><p>
+	  When the processor starts, it starts in hypervisor mode and the compatible interrupt vectors. 
+	  Interrupts stay in hypervisor mode and the only incompatibility is the extended stack frame.
+        </p>
+        </desc>
+      </section>
+
+      <section toc="compatretaddr" name="Subroutine Return Address">
+        <desc><p>
+	The 65k can be configured in 16, 32 or 64 bit width. Thus a return address for a subroutine is
+	16, 32, or 64 bit wide. Only a 16 bit wide return address is compatible though.
+	</p><p>
+	The user mode configuration register however allows to restrict the effective processor width
+	to 16 (or 32) bit. In this mode the return address is restricted to 16 bit, and the real address
+	is extended with the upper bits (16-31/63) of the program counter.
+        </p>
+        </desc>
+      </section>
+
+      <section toc="compattiming" name="Timing">
+        <desc><p>
+          The 65k will NOT be timing compatible with the 6502.
+        </p><p>
+          Although one might think of using an 8-bit accumulator and the typical 6502 pipelining to extend
+          the original 6502, this is not the goal of this design.
+          The goal is to venture into wider address and data bus sizes, and also use wider accumulators,
+          to effectively use the available features of today's programmable logic.
+          So this makes it very unlikely, if not impossible, that a timing-compatible 65k will ever exist.
+        </p>
+        </desc>
+      </section>
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2012-04-23.
+  </closing>
+</docpage>
+

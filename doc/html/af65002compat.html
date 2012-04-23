@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
+
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
+<title>6502 Software Compatibility Notes</title></head>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<div id="mtree">
+<ul>
+<li><a href="af65002front.html">Overview</a></li>
+<li><a href="af65002regs.html">Register Set</a></li>
+<li><a href="af65002opstruct.html">Opcode Structure</a></li>
+<li><a href="af65002prefixes.html">Prefixes</a></li>
+<li><a href="af65002opcodes.html">Opcode Overview</a></li>
+<li><a href="af65002opdesc.html">Opcode Docs</a></li>
+<li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
+<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002config.html">Configuration Registers</a></li>
+<li><a href="af65002compat.html">Compatibility</a></li>
+</ul>
+</div>
+		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div><div class="top" id="browser"><div class="tophead">browser</div><div><p>
+			Site has been tested with a number of browsers and systems. Javascript required for advanced menu, but degrades gracefully without Javascript. IE6 not supported anymore!
+			</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
+You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
+more modern browser, like Internet Explorer 8 or later, 
+<a target="_blank" class="extlink" href="http://www.firefox.com">Firefox</a>,
+<a target="_blank" class="extlink" href="http://www.google.com/chrome">Google Chrome</a>, or
+<a target="_blank" class="extlink" href="http://www.opera.com">Opera</a>.
+</div><div class="top" id="content"><div id="minmax"></div><h1>6502 Software Compatibility Notes</h1><div class="overview">
+	<p>
+        Here are some notes on compatibility with the 6502.
+	</p><p>
+	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
+	extension, as described on this page.
+	</p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#compatstack">Stack Frame</a></li><li><a href="#compatpointer">Interrupt Pointer</a></li><li><a href="#compatretaddr">Subroutine Return Address</a></li><li><a href="#compattiming">Timing</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatstack" id="compatstack">Stack Frame</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+          The 65k has, on purpose, an extended interrupt functionality. Thus it needs an extended stack frame
+          to store the additional information, as described above. Yet there is 6502 compatibility included:
+        </p>
+        <table border="1">
+        <tr><th colspan="3">Stack Frames</th></tr>
+        <tr><th>Address</th><th>6502</th><th>65k</th></tr>
+        <tr><th>S+10</th><td rowspan="3"></td><td>ADDR byte 7</td></tr>
+        <tr><th>S+5..9</th>                <td>ADDR byte 2..6</td></tr>
+        <tr><th>S+4</th>                <td>ADDR byte 1</td></tr>
+        <tr><th>S+3</th><td>ADDR byte 1</td><td>ADDR byte 0</td></tr>
+        <tr><th>S+2</th><td>ADDR byte 0</td><td>Extended Status Byte</td></tr>
+        <tr><th>S+1</th><td>Status register (bit5=1)</td><td>Status Register (bit5=0)</td></tr>
+        </table>
+        <p>
+          As you can see it is the status register bit 5 that determines whether an extended
+          stack frame is used or not. In a 6502 it is always 1.
+          As a result, if some 6502 software creates an artificial stack frame with bit5 cleared,
+          it will trigger the use of an extended stack frame and crash.
+        </p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatpointer" id="compatpointer">Interrupt Pointer</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+          As the 65k has an extended interrupt functionality, the number - and size - of the 6502 interrupt
+          pointer does not suffice anymore for an efficient operation.
+        </p>
+        <p>
+          For compatibility reasons the CPU starts with a restricted set of 6502-compatible interrupt vectors
+          as described above. Only when the Interrupt Base Register is set, the extended, per interrupt
+          jump vectors are used.
+        </p><p>
+	  When the processor starts, it starts in hypervisor mode and the compatible interrupt vectors. 
+	  Interrupts stay in hypervisor mode and the only incompatibility is the extended stack frame.
+        </p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatretaddr" id="compatretaddr">Subroutine Return Address</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+	The 65k can be configured in 16, 32 or 64 bit width. Thus a return address for a subroutine is
+	16, 32, or 64 bit wide. Only a 16 bit wide return address is compatible though.
+	</p><p>
+	The user mode configuration register however allows to restrict the effective processor width
+	to 16 (or 32) bit. In this mode the return address is restricted to 16 bit, and the real address
+	is extended with the upper bits (16-31/63) of the program counter.
+        </p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compattiming" id="compattiming">Timing</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+          The 65k will NOT be timing compatible with the 6502.
+        </p><p>
+          Although one might think of using an 8-bit accumulator and the typical 6502 pipelining to extend
+          the original 6502, this is not the goal of this design.
+          The goal is to venture into wider address and data bus sizes, and also use wider accumulators,
+          to effectively use the available features of today's programmable logic.
+          So this makes it very unlikely, if not impossible, that a timing-compatible 65k will ever exist.
+        </p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+All Copyrights are acknowledged.
+The information here is provided under the terms of the
+GNU Public License version 2 unless noted otherwise.
+    </div></div><hr />
+Last updated 2012-04-23.
+  </div></div><div id="footer"> </div></div><script type="text/javascript">myUp="%up%";</script><script type="text/javascript" src="%up%scripts-all.js"></script><script type="text/javascript" src="%up%jquery.socialshareprivacy.js"></script><script type="text/javascript">
+          jQuery(document).ready(function($){
+                  if($('#socialshareprivacy').length != 0){
+                            $('#socialshareprivacy').socialSharePrivacy();
+                  }
+          });
+  </script></body></html> 
+

@@ -143,8 +143,11 @@
 </head><xsl:text>
 </xsl:text><body>
 <div id="headerbox">
-<div class="large">65002</div>
-<div>The 65k processor - a modern 6502 with 64 bit</div>
+  <div id="lefthdr">The 65k Project</div>
+  <div id="righthdr">
+	<div class="large">65002</div>
+	<div class="small">The 65k processor - a modern 6502 with 64 bit</div>
+  </div>
 </div>
 <div id="mainbox">
 <a name="top"/>
@@ -201,6 +204,52 @@
 </body></html>
 <xsl:text> 
 </xsl:text>
+</xsl:template>
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+<xsl:template name="toc">
+<div id="toc" class="h2">
+<xsl:call-template name="h2toc">
+        <xsl:with-param name="hdr">Table of content</xsl:with-param>
+        </xsl:call-template>
+        <div class="h2c">
+        <ul>
+        <xsl:for-each select="section|itemlist">
+        <li><a href="#{@toc}"><xsl:value-of select="@name"/></a></li>
+        <xsl:if test="subsection|items/item">
+        <li style="list-style-type:none;"><ul>
+        <xsl:for-each select="subsection|items/item">
+        <li><a href="#{@toc}"><xsl:value-of select="@name"/></a></li>
+        </xsl:for-each>
+        </ul></li>
+        </xsl:if>
+        </xsl:for-each>
+        <xsl:if test="driver">
+        <li><a href="#driver">Driver</a></li>
+        <li style="list-style-type:none;"><ul>
+        <xsl:for-each select="driver">
+        <li><a href="#driver{position()}"><xsl:value-of select="name"/></a></li>
+        </xsl:for-each>
+        </ul></li>
+        </xsl:if>
+        <xsl:if test="rev">
+        <li><a href="#boards">Board Revisions</a></li>
+        <li style="list-style-type:none;"><ul>
+        <xsl:for-each select="rev">
+        <li><a href="#board{position()}"><xsl:value-of select="version"/></a> (<xsl:value-of select="status"/>)</li>
+        </xsl:for-each>
+        </ul></li>
+        </xsl:if>
+        <xsl:if test="diagram">
+        <li><a href="#blkdiag">Block diagram</a></li>
+        </xsl:if>
+        <!--xsl:if test="oldnews">
+             <li><a href="#oldnews">Old News</a></li>
+             </xsl:if -->
+</ul>
+</div><!-- h2c -->
+</div><!-- toc h2 -->
 </xsl:template>
 
 <!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
@@ -291,7 +340,10 @@
 <link rev="made" href="mailto:{author/email}"/><xsl:text>
 </xsl:text>
 <link rel="stylesheet" title="Default" type="text/css" href="doc.css"/>
-<xsl:text>
+<xsl:if test="style">
+  <link rel="stylesheet" type="text/css" href="{style}"/>
+  </xsl:if>
+  <xsl:text>
 </xsl:text>
 </xsl:template>
 

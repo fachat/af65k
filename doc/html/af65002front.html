@@ -9,16 +9,18 @@
 <link rev="made" href="mailto:" />
 <link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
 <title>af65002 Documentation</title></head>
-<body><div id="headerbox"><div class="large">65002</div><div>The 65k processor - a modern 6502 with 64 bit</div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <ul>
 <li><a href="af65002front.html">Overview</a></li>
+<li><a href="af65002regs.html">Register Set</a></li>
 <li><a href="af65002opstruct.html">Opcode Structure</a></li>
 <li><a href="af65002prefixes.html">Prefixes</a></li>
 <li><a href="af65002opcodes.html">Opcode Overview</a></li>
 <li><a href="af65002opdesc.html">Opcode Docs</a></li>
-<li><a href="af65002int.html">Interrupts</a></li>
+<li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
 <li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
 </ul>
 </div>
@@ -45,12 +47,29 @@ more modern browser, like Internet Explorer 8 or later,
 	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
 	extension (see the compatibility issues page).
 	</p>
-  </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+  </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="preface" id="preface">Preface</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><h3><a name="lic" id="lic">License</a></h3><p>
+        This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
+    </p><p>
+        Note this "content" includes this web page, but does not include the 6502.org header
+        and the left and right web page columns.  Click on the "Maximize" link to see
+        the contents covered by this license.
+    </p><ul><li><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode" target="_blank" class="extlink">CC-BY-SA legal code</a> </li><li><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="extlink">CC-BY-SA license deed (short form)</a> </li></ul><h3><a name="disc" id="disc">Disclaimer</a></h3><p>
+        The content comes with no warranty at all!
+        There is no guarantee and no promise that this specification is correct, consistent, will actually work,
+        or will ever be implemented at all.
+    </p><p>
+        To my understanding the techniques described here have been used by various processors for decades already.
+        Still there is no guarantee that a processor according to this spec would not be covered by some patents.
+    </p><p>
+        Subject to change without notice!
+    </p><h3><a name="cont" id="cont">Contributors</a></h3><ul>
+        <li>André  Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
+    </ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms of the
 GNU Public License version 2 unless noted otherwise.
     </div></div><hr />
-Last updated 2010-09-10.
+Last updated 2012-04-23.
   </div></div><div id="footer"> </div></div><script type="text/javascript">myUp="%up%";</script><script type="text/javascript" src="%up%scripts-all.js"></script><script type="text/javascript" src="%up%jquery.socialshareprivacy.js"></script><script type="text/javascript">
           jQuery(document).ready(function($){
                   if($('#socialshareprivacy').length != 0){

@@ -32,6 +32,38 @@
      </item>
   </news-->
 
+  <section toc="preface" name="Preface">
+  <subsection toc="lic" name="License">
+    <desc><p>
+        This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
+    </p><p>
+        Note this "content" includes this web page, but does not include the 6502.org header
+        and the left and right web page columns.  Click on the "Maximize" link to see
+        the contents covered by this license.
+    </p></desc>
+    <extlink name="CC-BY-SA legal code" link="http://creativecommons.org/licenses/by-sa/3.0/legalcode"/>
+    <extlink name="CC-BY-SA license deed (short form)" link="http://creativecommons.org/licenses/by-sa/3.0/"/>
+  </subsection>
+  <subsection toc="disc" name="Disclaimer">
+    <desc><p>
+        The content comes with no warranty at all!
+        There is no guarantee and no promise that this specification is correct, consistent, will actually work,
+        or will ever be implemented at all.
+    </p><p>
+        To my understanding the techniques described here have been used by various processors for decades already.
+        Still there is no guarantee that a processor according to this spec would not be covered by some patents.
+    </p><p>
+        Subject to change without notice!
+    </p></desc>
+  </subsection>
+  <subsection toc="cont" name="Contributors">
+    <desc><ul>
+        <li>Andr&eacute; Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
+    </ul></desc>
+  </subsection>
+  </section>
+
+
 <!--section toc="af65002" name="af65002">
   <desc>
     <p>Intro to the af65002</p>
@@ -47,7 +79,7 @@
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2010-09-10.
+Last updated 2012-04-23.
   </closing>
 </docpage>
 

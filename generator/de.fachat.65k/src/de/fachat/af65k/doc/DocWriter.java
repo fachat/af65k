@@ -153,4 +153,8 @@ public interface DocWriter {
 	 * @param id
 	 */
 	void createAnchor(String id);
+
+	void startLink(String string);
+
+	void endLink();
 }

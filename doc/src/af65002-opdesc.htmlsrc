@@ -1,5 +1,5 @@
 <!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> ]>
-<docpage name="af65002 Documentation">
+<docpage name="65002 Operation Documentation">
   <!--author>
     <name>Andr&eacute; Fachat</name>
     <email>@EMAIL@</email>
@@ -31,7 +31,7 @@
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2010-09-10.
+Last updated 2012-04-23.
   </closing>
 </docpage>
 

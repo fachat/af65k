@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.w3c.dom.CDATASection;
+
 import de.fachat.af65k.logging.Logger;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.CPU;
@@ -170,6 +172,10 @@ public class Validator {
 		if (!allAdModes.isEmpty()) {
 			LOG.error("Not all addressing modes have syntax defined. Missing modes are: " + allAdModes);
 		}
+	}
+	
+	public FeatureClass getFClass(String fc) {
+		return fclass.get(fc);
 	}
 	
 	public static class CodeMapEntry {
@@ -322,6 +328,9 @@ public class Validator {
 								codeFClass = opFClass;
 							}
 						}
+					}
+					if (codeFClass != null) {
+						opcode.setClazz(codeFClass.getName());
 					}
 
 					Set<SyntaxMode> synmodes = syntaxModesPerAM.get(admode.getIdentifier());

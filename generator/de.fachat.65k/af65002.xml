@@ -753,6 +753,7 @@
 			<addressingMode>A</addressingMode>
 			<opcode>0x34</opcode>
 			<oppage>EXT</oppage>
+			<class>65k</class>
 		</opcodes>
         <doc><p>
         	Read the operand and set the N and V flags from the value (from the highest and next-to-highest bit respectively).
@@ -1916,8 +1917,9 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0x1f</opcode>
+            <opcode>0x0f</opcode>
             <class>65k</class>
+            <oppage>EXT</oppage>
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
@@ -1978,7 +1980,8 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0x5f</opcode>
+            <opcode>0x4f</opcode>
+            <oppage>EXT</oppage>
             <class>65k</class>
         </opcodes>
         <opcodes>
@@ -2042,8 +2045,9 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0x3f</opcode>
+            <opcode>0x2f</opcode>
             <class>65k</class>
+            <oppage>EXT</oppage>
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
@@ -2107,8 +2111,9 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0x7f</opcode>
+            <opcode>0x6f</opcode>
             <class>65k</class>
+            <oppage>EXT</oppage>
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
@@ -2171,7 +2176,8 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0xff</opcode>
+            <opcode>0xef</opcode>
+            <oppage>EXT</oppage>
             <class>65k</class>
         </opcodes>
         <opcodes>
@@ -2231,7 +2237,8 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0xdf</opcode>
+            <opcode>0xcf</opcode>
+            <oppage>EXT</oppage>
             <class>65k</class>
         </opcodes>
         <opcodes>
@@ -2451,8 +2458,9 @@
         </opcodes>
         <opcodes>
             <addressingMode>absx</addressingMode>
-            <opcode>0x9f</opcode>
+            <opcode>0x8f</opcode>
             <class>65k</class>
+            <oppage>EXT</oppage>
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
@@ -2496,8 +2504,9 @@
         </opcodes>
         <opcodes>
             <addressingMode>absy</addressingMode>
-            <opcode>0xbf</opcode>
+            <opcode>0xaf</opcode>
             <class>65k</class>
+            <oppage>EXT</oppage>
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
@@ -2595,59 +2604,6 @@
         </doc>
     </operation>
 
-<!--  
-    <operation>
-        <name>EXT prefix</name>
-        <class>65k</class>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0x0f</opcode>
-        </opcodes>
-    </operation>
-    
-    <operation>
-        <name>SYS prefix</name>
-        <class>65k</class>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0x2f</opcode>
-        </opcodes>
-    </operation>
-    
-    <operation>
-        <name>QUICK prefix</name>
-        <class>65k</class>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0x4f</opcode>
-        </opcodes>
-    </operation>
-    
-    <operation>
-        <name>reserved prefix</name>
-        <class>65k</class>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0x6f</opcode>
-        </opcodes>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0x8f</opcode>
-        </opcodes>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0xaf</opcode>
-        </opcodes>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0xcf</opcode>
-        </opcodes>
-        <opcodes>
-            <addressingMode>prefix</addressingMode>
-            <opcode>0xef</opcode>
-        </opcodes>
-    </operation>
--->
     
 	<!-- ################################# -->
 
@@ -5086,7 +5042,17 @@
     
     <prefix>
     	<name>reserved prefix</name>
+    	<value>0x9f</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
     	<value>0xaf</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0xbf</value>
     </prefix>
     
     <prefix>
@@ -5096,7 +5062,17 @@
     
     <prefix>
     	<name>reserved prefix</name>
+    	<value>0xdf</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
     	<value>0xef</value>
+    </prefix>
+    
+    <prefix>
+    	<name>reserved prefix</name>
+    	<value>0xff</value>
     </prefix>
     
     <prefix>

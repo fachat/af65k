@@ -26,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.JAXB;
 
@@ -60,6 +62,9 @@ public class Generator {
 		
 		Validator val = new Validator(logger, cpu);
 				
+		Map<String, String> cpu2fclass = new HashMap<String, String>();
+		cpu2fclass.put("af65002", "65k");
+		cpu2fclass.put("af65010", "65k10");
 				
 //				() {
 //			
@@ -165,7 +170,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OpdescDocGenerator docgen = new OpdescDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr));
+			docgen.generateOperationtable(new HtmlWriter(pwr), cpu2fclass.get(cpuname));
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

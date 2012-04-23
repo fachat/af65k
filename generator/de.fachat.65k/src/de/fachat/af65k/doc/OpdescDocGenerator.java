@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import java.util.TreeMap;
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.Doc;
+import de.fachat.af65k.model.objs.FeatureClass;
 import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.validation.Validator;
@@ -50,7 +52,7 @@ public class OpdescDocGenerator {
 		cpu = mycpu;
 	}
 	
-	public void generateOperationtable(HtmlWriter wr) {
+	public void generateOperationtable(HtmlWriter wr, String fclass) {
 		
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
 
@@ -60,7 +62,18 @@ public class OpdescDocGenerator {
 			prepareOperationTable(ops, page, true);			
 		}
 		
-		createTable(wr, ops);		
+		Collection<String> fclasses = new HashSet<String>();
+		fclasses.add(fclass);
+		while (cpu.getFClass(fclass) != null) {
+			FeatureClass fc = cpu.getFClass(fclass);
+			fclass = fc.getXtends();
+			if (fclass != null) {
+				fclasses.add(fclass);
+			}
+		}
+		createToc(wr, ops, fclasses);
+		
+		createTable(wr, ops, fclasses);		
 	}
 
 
@@ -79,87 +92,118 @@ public class OpdescDocGenerator {
 		
 	}
 
-	private void createTable(DocWriter wr, Map<String, Operation> ops) {
+	private void createToc(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
+
+		wr.startSubsection("List of operations");
+		wr.startUnsortedList();
+		
 		for (Map.Entry<String, Operation> en: ops.entrySet()) {
 			Operation op = en.getValue();
 
-			wr.startSubsection(op.getName());			
-			wr.createAnchor(op.getName());
-			wr.startParagraph();
-			wr.print(op.getDesc());
-			
-			wr.startTable();
-			wr.startTableRow();
-			Map<String, String> atts = new HashMap<String, String>();
-			atts.put("colspan", "10");
-			wr.startTableHeaderCell(atts);
-			wr.print(op.getName());
-			wr.startTableRow();
-			wr.startTableHeaderCell();
-			wr.print("Page");
-			wr.startTableHeaderCell();
-			wr.print("Opcode");
-			wr.startTableHeaderCell();
-			wr.print("Class");
-			wr.startTableHeaderCell();
-			wr.print("Prefixes");
-			wr.startTableHeaderCell();
-			wr.print("Addressing Mode");
-			wr.startTableHeaderCell();
-			wr.print("Syntax");
+			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
 
-			Collection<String> prefixes = op.getPrefixBits();
-			
-			for (Opcode opcode: op.getOpcodes()) {
+				wr.startListItem();
+				wr.startLink("#" + op.getName());
+				wr.print(op.getName());
+				wr.print(" - ");
+				wr.print(op.getDesc());
+				wr.endLink();
 				
-				String admode = opcode.getAddressingMode();
-				AddressingMode am = cpu.getAddressingMode(admode);
+			}				
+		}
+		wr.endUnsortedList();
+	}
+
+	private void createTable(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
+		
+		for (Map.Entry<String, Operation> en: ops.entrySet()) {
+			Operation op = en.getValue();
+
+			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
 				
+				wr.startSubsection(op.getName());			
+				wr.createAnchor(op.getName());
+				wr.startParagraph();
+				wr.print(op.getDesc());
+				
+				wr.startTable();
 				wr.startTableRow();
-				wr.startTableCell();
-				wr.print(opcode.getOppage());
-				wr.startTableCell();
-				wr.print(opcode.getOpcode());
-				wr.startTableCell();
-				
-				String clss = opcode.getClazz();
-				if (clss == null || clss.length() == 0) {
-					clss = op.getClazz();
-				}
-				wr.print(opcode.getClazz());
-				wr.startTableCell();
-				Collection<String> prefs = prefixes;
-				if (prefs != null) {
-					if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
-						prefs = new ArrayList<String>(prefs.size());
-						prefs.addAll(prefixes);
-						prefs.removeAll(am.getIgnoredPrefixes());
-					}
-					Iterator<String> pref = prefs.iterator(); 
-					while (pref.hasNext()) {
-						wr.print(pref.next());
-						if (pref.hasNext()) wr.print(", ");
-					}
-				}
-				wr.startTableCell();
-				wr.print(am.getName());
-				wr.startTableCell();
-			}
-			wr.endTable();
+				Map<String, String> atts = new HashMap<String, String>();
+				atts.put("colspan", "10");
+				wr.startTableHeaderCell(atts);
+				wr.print(op.getName());
+				wr.startTableRow();
+				wr.startTableHeaderCell();
+				wr.print("Page");
+				wr.startTableHeaderCell();
+				wr.print("Opcode");
+				wr.startTableHeaderCell();
+				wr.print("Class");
+				wr.startTableHeaderCell();
+				wr.print("Prefixes");
+				wr.startTableHeaderCell();
+				wr.print("Addressing Mode");
+				wr.startTableHeaderCell();
+				wr.print("Syntax");
 
-			List<Doc> docs = op.getDoc();
-			
-			if (docs != null) {
-				for (Doc doc : docs) {
-					String name = doc.getMode();
-					if (name == null || name.length() == 0) {
-						name = "Description";
-					}
-					wr.startSubsubsection(name);
+				Collection<String> prefixes = op.getPrefixBits();
+				
+				for (Opcode opcode: op.getOpcodes()) {
 					
-					wr.print(doc.getText());
+					if (opcode.getClazz() == null || fclasses.contains(opcode.getClazz())) {
+						String admode = opcode.getAddressingMode();
+						AddressingMode am = cpu.getAddressingMode(admode);
+						
+						wr.startTableRow();
+						wr.startTableCell();
+						wr.print(opcode.getOppage());
+						wr.startTableCell();
+						wr.print(opcode.getOpcode());
+						wr.startTableCell();
+						
+						String clss = opcode.getClazz();
+						if (clss == null || clss.length() == 0) {
+							clss = op.getClazz();
+						}
+						wr.print(opcode.getClazz());
+						wr.startTableCell();
+						Collection<String> prefs = prefixes;
+						if (prefs != null) {
+							if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
+								prefs = new ArrayList<String>(prefs.size());
+								prefs.addAll(prefixes);
+								prefs.removeAll(am.getIgnoredPrefixes());
+							}
+							Iterator<String> pref = prefs.iterator(); 
+							while (pref.hasNext()) {
+								wr.print(pref.next());
+								if (pref.hasNext()) wr.print(", ");
+							}
+						}
+						wr.startTableCell();
+						wr.print(am.getName());
+						wr.startTableCell();
+						
+					}
+				}
+				wr.endTable();
+
+				List<Doc> docs = op.getDoc();
+				
+				if (docs != null) {
+					for (Doc doc : docs) {
+						String name = doc.getMode();
+						if (name == null || name.length() == 0) {
+							name = "Description";
+						}
+						wr.startSubsubsection(name);
+						
+						wr.print(doc.getText());
+					}
 				}
 			}
+				
 		}
 	}
+
 }

@@ -38,7 +38,8 @@ import de.fachat.af65k.doc.HtmlEscape;
 public class HtmlWriter implements DocWriter {
 
 	private static enum STATE {
-		DOC, SECTION, SUBSECTION, SUBSUBSECTION, TABLE, ROW, CELL, HCELL, PARAGRAPH, UNSORTEDLIST, LISTITEM
+		DOC, SECTION, SUBSECTION, SUBSUBSECTION, TABLE, ROW, CELL, HCELL, PARAGRAPH, UNSORTEDLIST, LISTITEM,
+		LINK
 	}
 
 	protected Stack<STATE> stack = new Stack<STATE>();
@@ -80,6 +81,9 @@ public class HtmlWriter implements DocWriter {
 			case DOC:
 				end = true;
 				break;
+			case LINK:
+				doEndLink();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSection()");
@@ -99,6 +103,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case UNSORTEDLIST:
 				end = true;
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
@@ -131,6 +138,9 @@ public class HtmlWriter implements DocWriter {
 			case UNSORTEDLIST:
 				end = true;
 				break;
+			case LINK:
+				doEndLink();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSection()");
@@ -147,6 +157,9 @@ public class HtmlWriter implements DocWriter {
 			switch (s) {
 			case LISTITEM:
 				doEndListItem();
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
@@ -202,6 +215,9 @@ public class HtmlWriter implements DocWriter {
 			case DOC:
 				end = true;
 				break;
+			case LINK:
+				doEndLink();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSection()");
@@ -256,6 +272,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case DOC:
 				end = true;
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
@@ -313,6 +332,9 @@ public class HtmlWriter implements DocWriter {
 			case DOC:
 				end = true;
 				break;
+			case LINK:
+				doEndLink();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSubsection()");
@@ -325,7 +347,7 @@ public class HtmlWriter implements DocWriter {
 	private void doStartSubsubsection(String name) {
 		wr.print("<h3>");
 		wr.print(name);
-		wr.println("</h2>");
+		wr.println("</h3>");
 		stack.push(STATE.SUBSECTION);
 	}
 
@@ -352,6 +374,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case DOC:
 				end = true;
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
@@ -408,6 +433,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case DOC:
 				end = true;
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
@@ -572,6 +600,9 @@ public class HtmlWriter implements DocWriter {
 			case TABLE:
 				end = true;
 				break;
+			case LINK:
+				doEndLink();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSubsection()");
@@ -617,6 +648,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case SECTION:
 				doEndSection();
+				break;
+			case LINK:
+				doEndLink();
 				break;
 			case DOC:
 				end = true;
@@ -708,4 +742,30 @@ public class HtmlWriter implements DocWriter {
 		wr.print(HtmlEscape.escape(id));
 		wr.print("\"> </a>");
 	}
+
+	// -------------------------------------------------------------------------------------------------------
+	
+	@Override
+	public void endLink() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void startLink(String link) {
+		doStartLink(link);
+	}
+
+	private void doStartLink(String link) {
+		wr.print("<a href=\"");
+		wr.print(HtmlEscape.escape(link));
+		wr.print("\">");
+		stack.push(STATE.LINK);
+	}
+
+	private void doEndLink() {
+		wr.println("</a>");
+		stack.pop();
+	}
+
 }
