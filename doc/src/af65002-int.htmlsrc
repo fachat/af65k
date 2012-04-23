@@ -1,5 +1,5 @@
 <!DOCTYPE webpage [ <!ENTITY eacute "&#233; "><!ENTITY nbsp "&#160; "> ]>
-<docpage name="65002 Operation Documentation">
+<docpage name="65002 Interrupts and Traps">
   <!--author>
     <name>Andr&eacute; Fachat</name>
     <email>@EMAIL@</email>

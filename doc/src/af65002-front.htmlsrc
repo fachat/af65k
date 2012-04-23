@@ -1,5 +1,5 @@
 <!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
-<docpage name="af65002 Documentation">
+<docpage name="65002 Documentation">
   <!--author>
     <name>Andr&eacute; Fachat</name>
     <email>@EMAIL@</email>
@@ -63,6 +63,65 @@
   </subsection>
   </section>
 
+  <section toc="chg" name="Changes">
+    <desc><p>This section describes the changes to the documentation:</p>
+      <table border="1">
+        <tr><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>2010-10-23</td><td>Andr&eacute; Fachat</td><td>First working draft</td></tr>
+        <tr><td>2010-11-04</td><td>Andr&eacute; Fachat</td><td>Defined the interrupt status/mask/effective
+                mask register; Constrained the interrupt/trap/abort vectors to two-byte vectors;
+                integrated the various extra registers into the configuration register file (for less
+                opcodes necessary); add WAI, STP and FIL/FILU</td></tr>
+        <tr><td>2010-12-22</td><td>Andr&eacute; Fachat</td><td>Added the "NF" prefix bit</td></tr>
+        <tr><td>2010-12-28</td><td>Andr&eacute; Fachat</td><td>Moved some LSB $f opcodes to the extension page
+                to add STX abs,Y and STY abs,X</td></tr>
+        <tr><td>2011-01-02</td><td>Andr&eacute; Fachat</td><td>Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes</td></tr>
+        <tr><td>2011-05-01</td><td>Andr&eacute; Fachat</td><td><ul>
+                <li>WAI becomes privileged</li>
+                <li>Moved no-operand opcodes in EXT page from column $f to $8, to be more aligned with standard opcode page</li>
+                <li>Added the INV opcode for the 2s-complement</li>
+                <li>Moved SWP to the EXT page, reordered the prefix codes</li>
+                <li>reordered the EXT column $8 and $a codes</li>
+                <li>Removed the INE/INB/DEE/DEB quick opcodes, added SLX/SRX/SLY/SRY quick opcodes instead</li>
+                <li>Reordered opcode column $f, so all non-prefix opcodes have addressing mode abs,X</li>
+                <li>removed NOP zp/abs, moved STX abs,Y to previous NOP abs location</li>
+                <li>Cleaned up duplicate opcodes for AM=1, clarified table description</li>
+                <li>Changed the BSR prefix usage definition to one similar to JSR, which removes the need
+                        for one of the BSR duplicate opcodes</li>
+                <li>Added the EE "early extension" prefix flag</li>
+                <li>reordered some EXT codes</li>
+                <li>Added the stack peek opcodes PKA, PKX, PKY</li>
+                <li>Added the EXT and CUT opcodes</li>
+                <li>Added the Accumulator addressing modes for ADE/ADB/ADS/SBE/SBB/SBS</li>
+                </ul></td></tr>
+        <tr><td>2011-12-23</td><td>Andr&eacute; Fachat</td><td><ul>
+                <li>Remove the EE prefix bit, and replace it with a second bit for the ZE extension - to allow
+                        to extend with ones and with the sign. Semantics of ZE changed as well, thus renamed to LE,
+                        load extend. Old ZE functionality is covered by EXT opcode</li>
+                <li>Fix the description of the SLX/SLY/SRX/SRY opcodes</li>
+                <li>Deprecated CLX/CLY opcodes, changed CLA to full width only</li>
+                <li>Added "BIT A" variant</li>
+                <li>Removed CUT, as it is the same as EXT</li>
+                <li>Some small changes here and there, esp. clarifications around the interrupt handling</li>
+                <li>Added the Software Compatibility section</li>
+                </ul></td></tr>
+        <tr><td>2011-12-31</td><td>Andr&eacute; Fachat</td><td><ul>
+                <li>Replace manually maintained tables (std/EXT pages and addressing modes) with
+                        ones generated from an XML file which will be the basis for an assembler
+                        and some VHDL code generation.</li>
+                <li>Added LEA/PEA with relwide addressing modes</li>
+                <li>Cleared up some flag settings</li>
+                <li>Add the RDR/RDL/ASR opcodes, moved a number of opcodes around in the EXT page,
+                        also rearranged the QUICK page to accomodate for the new opcodes.</li>
+                </ul></td></tr>
+        <tr><td>2012-04-23</td><td>Andr&eacute; Fachat</td><td><ul>
+		<li>Separated the one-pager into multiple pages and integrated into the af65002 doc build process</li>
+		<li>Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more 
+			possible future expansions (prefix3 could now be $8F-$FF).</li>
+                </ul></td></tr>
+      </table>
+    </desc>
+  </section>
 
 <!--section toc="af65002" name="af65002">
   <desc>

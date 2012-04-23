@@ -358,6 +358,7 @@ more modern browser, like Internet Explorer 8 or later,
 </xsl:template>
 
 <xsl:template name="bottom">
+<!--
   <script type="text/javascript">myUp="%up%";</script>
   <script type="text/javascript" src="%up%scripts-all.js"></script>
   <script type="text/javascript" src="%up%jquery.socialshareprivacy.js"></script>
@@ -368,6 +369,7 @@ more modern browser, like Internet Explorer 8 or later,
                   }
           });
   </script>
+  -->
 </xsl:template>
 
 </xsl:stylesheet>
