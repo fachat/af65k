@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
+
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
+<title>65002 Register Set</title></head>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<div id="mtree">
+<ul>
+<li><a href="af65002front.html">Overview</a></li>
+<li><a href="af65002regs.html">Register Set</a></li>
+<li><a href="af65002opstruct.html">Opcode Structure</a></li>
+<li><a href="af65002prefixes.html">Prefixes</a></li>
+<li><a href="af65002opcodes.html">Opcode Overview</a></li>
+<li><a href="af65002opdesc.html">Opcode Docs</a></li>
+<li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
+<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002config.html">Configuration Registers</a></li>
+<li><a href="af65002compat.html">Compatibility</a></li>
+</ul>
+</div>
+		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div><div class="top" id="browser"><div class="tophead">browser</div><div><p>
+			Site has been tested with a number of browsers and systems. Javascript required for advanced menu, but degrades gracefully without Javascript. IE6 not supported anymore!
+			</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
+You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
+more modern browser, like Internet Explorer 8 or later, 
+<a target="_blank" class="extlink" href="http://www.firefox.com">Firefox</a>,
+<a target="_blank" class="extlink" href="http://www.google.com/chrome">Google Chrome</a>, or
+<a target="_blank" class="extlink" href="http://www.opera.com">Opera</a>.
+</div><div class="top" id="content"><div id="minmax"></div><h1>65002 Register Set</h1><div class="overview">
+	<p>
+	This page describes the register set of the 65002.
+	</p><p>
+        The register set is very similar to the 6502, with only a few extensions...
+        As there are different options for register widths, "W" describes the width
+        option, i.e. either 16, 32 or 64 bit.
+        </p><p>In addition to the core registers there are registers for the memory management.</p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#core">Core Register Set</a></li><li><a href="#intregs">Interrupt Registers</a></li><li><a href="#mode">User- and Hypervisor Mode Control</a></li><li><a href="#regmem">Memory Management Register</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="core" id="core">Core Register Set</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+    <table border="1">
+        <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
+        <tr><td>PC</td><td>Program Counter</td><td>16 bit</td><td>W bit</td><td></td></tr>
+        <tr><td>A</td><td>Accumulator</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
+        <tr><td>X</td><td>X register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
+        <tr><td>Y</td><td>Y register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
+        <tr><td>E</td><td>Effective Address Register</td><td>-</td><td>W bit</td><td>Stores effective address for opcodes</td></tr>
+        <tr><td>B</td><td>Base Offset Register</td><td>-</td><td>W bit</td><td>Address offset for addressing modes</td></tr>
+        <tr><td>S(U)</td><td>User mode Stack pointer</td><td>-</td><td>W bit</td><td></td></tr>
+        <tr><td>S(H)</td><td>Hypervisor mode Stack pointer</td><td>8 bit, with high byte set to 1</td><td>W bit</td><td></td></tr>
+        <tr><td>SR</td><td>Status Register</td><td>8 bit, with bit 5 set to 1</td><td>8 bit</td><td>Same as 6502, bit5 set to 0, high 8 bit see below</td></tr>
+        <tr><td>ESR</td><td>Extended Status Register</td><td>-</td><td>8 bit</td><td>See below</td></tr>
+    </table>
+    <p>The A, X and Y registers are similar to the 6502 registers, only that they are at least 16  bit wide.</p>
+    <p>The status register is divided into two bytes, the status and the extended status. The first mirrors the original 6502 status byte:</p>
+    <table border="1">
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>N</td><td>V</td><td>0</td><td>B</td><td>D</td><td>I</td><td>Z</td><td>C</td></tr>
+    </table>
+	<p>Explanation of the status bits:</p>
+    <table border="1">
+<tr><th>Bit</th><th>Name</th><th>Explanation</th></tr>
+<tr><td>N</td><td>Negative</td><td>Set when operation results in a negative value (bit 7 set)</td></tr>
+<tr><td>V</td><td>Overflow</td><td>Set when arithmetic operation or compare results in an overflow value</td></tr>
+<tr><td>B</td><td>Break</td><td>Set when a BRK opcode has been executed, is only written to the stack</td></tr>
+<tr><td>D</td><td>Decimal</td><td>Decimal flag</td></tr>
+<tr><td>I</td><td>Interrupt</td><td>Set to disable interrupts (deprecated)</td></tr>
+<tr><td>Z</td><td>Zero</td><td>Set when operation results in a zero value</td></tr>
+<tr><td>C</td><td>Carry</td><td>Carry for arithmetic operations and compares</td></tr>
+    </table>
+    <p>The second byte is an extended status byte. It is written on the stack frame on TRAP (user and
+        hypervisor mode) and interrupts in hypervisor mode:</p>
+    <table border="1">
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>H</td><td>0</td><td>SF1</td><td>SF0</td></tr>
+    </table>
+    <table border="1">
+<tr><th>Bit</th><th>Name</th><th>Explanation</th><th>State on Reset</th></tr>
+<tr><td>H</td><td>Hypervisor mode</td><td>Set when the processor is in hypervisor mode</td><td>1</td></tr>
+<tr><td>SF1/SF0</td><td>Stack Frame Size</td><td>Determines the stack frame size for a TRAP or an interrupt
+        (01=2 byte, 10=4 byte, 11=8 byte return address. 00 is the native size of the processor)
+        </td><td>01</td></tr>
+        <p>
+        Note that the value read from the stack on RTI and RTU opcodes is fully executed only when read from the
+        supervisor stack. 
+        If the hypervisor mode bit H is set when reading from user stack, a privilege violation abort (PRIVRTI) is executed.
+        If H is not set, the stack frame size bits SF are evaluated and the return address is read from the stack
+        with a size according to SF.
+        </p>
+    </table>
+   </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="intregs" id="intregs">Interrupt Registers</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+     <table>
+        <tr><th colspan="5">Interrupt Management Registers</th></tr>
+        <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
+        <tr><td>IMR</td><td>Interrupt Level Mask Register</td><td>-</td><td>8 bit</td><td>Interrupt Mask - define which interrupt levels are accepted</td></tr>
+        <tr><td>EIM</td><td>Effective Interrupt Level Mask Register</td><td>-</td><td>8 bit</td><td>Temporary Interrupt Mask. set from the ISR when an interrupt routine is initiated. Reset to IMR on RTI.</td></tr>
+        <tr><td>ISR</td><td>Interrupt Level Status Register</td><td>-</td><td>8 bit</td><td>Interrupt line status - number of highest active interrupt line</td></tr>
+        <tr><td>IV</td><td>Interrupt base register</td><td>-</td><td>W bit</td><td>Base address for interrupt vectors</td></tr>
+        <tr><td>TV</td><td>Trap vector base register</td><td>-</td><td>W bit</td><td>Base address for trap vectors</td></tr>
+        <tr><td>AV</td><td>Abort vector base register</td><td>-</td><td>W bit</td><td>Base address for abort vectors</td></tr>
+        <tr><td>TMV</td><td>Trap maximum allowed vector number</td><td>-</td><td>W bit</td><td>set the maximum allowed trap vector number + 1 
+		(i.e. zero means none allowed)</td></tr>
+    </table>
+
+    <p>The interrupt registers allow to query the current interrupt state and
+        to control interrupt execution. They are not stored on the stack frame.
+        </p>
+    <table border="1">
+<tr><th>Register</th><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>Value</th><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><th>IMR</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>IMR2</td><td>IMR1</td><td>IMR0</td></tr>
+<tr><th>EIM</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>EIM2</td><td>EIM1</td><td>EIM0</td></tr>
+<tr><th>ISR</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>ISR2</td><td>ISR1</td><td>ISR0</td></tr>
+    </table>
+	<p>Description of the interrupt registers:</p>
+    <table border="1">
+<tr><th>Bit</th><th>Name</th><th>Explanation</th><th>Default</th></tr>
+<tr><td>IMR2/IMR1/IMR0</td><td>Interrupt Priority Mask</td><td>Defines a number from 0 to 3. Each interrupt that
+        has a vector number above the value set here is disabled. Lower or equal interrupt numbers are enabled.
+        I.e. value 0 disables all interrupts but NMI. Value 3 enables all interrupts.
+        </td><td>00 (all interrupts but NMI disabled)</td></tr>
+<tr><td>ISR2/ISR1/ISR0</td><td>Interrupt Status Register</td><td>Defines a number from 0 to 3 that determines the
+        current interrupt level, i.e. the highest priority of all current - maskable - active interrupts,
+        even if the interrupt itself is masked. 00 means no interrupt. For example 01 means interrupt 1 is active,
+        but none other, while 10 means interrupt 2 is active, no matter if interrupt 1 is active or not.
+        </td></tr>
+<tr><td>EIM2/EIM1/EIM0</td><td>Temporary Interrupt Priority Mask</td><td>This value is set from the
+        interrupt mask register on RTI and CLEIM (both only on hypervisor mode), and set to the
+        interrupt level when the interrupt occurs. An interrupt routine is initiated when
+        EIM has a lower value than ISR - e.g. after an RTI or CLEIM when a lower priority interrupt is pending.</td></tr>
+    </table>
+    <p>Please note that in the following a higher value means a lower register value and vice versa.</p>
+	<p>The three interrupt registers work as follows.
+        The supervisor-writable IMR defines which interrupts initiate
+        an interrupt routine. For example if the value is set to 2, interrupts with priority values 0 (NMI), 1 and 2 are enabled.
+        Interrupt with priority 3 and more are disabled.
+	</p><p>
+        The ISR presents the "highest" interrupt priority (lowest value(!)) that is currently active.
+        For example if interrupt lines 2, 5, and 7 are active, the ISR presents "2" as current status.
+	</p><p>
+        When the ISR has a priority that is higher or equal than the IMR value, an interrupt routine is initiated.
+        To stop the processor from continously starting the interrupt routine, when an interrupt routine is
+        initiated, the EIM is used. It is the effective interrupt mask and normally set to the IMR value.
+        When an interrupt routine is initiated, the EIM is set to the ISR value. Then, as long as the ISR value is equal or larger than
+        EIM, no further (stacked) interrupt routine is initiated. Only when a new interrupt with a higher
+        priority (lower value) appears, the ISR value gets lower than EIM and a stacked interrupt routine
+        is initiated.
+	</p><p>
+        EIM is reset to the highest value
+        on RTI or CLEIM when executed in supervisor mode.
+    </p>
+
+    <p>The vector base registers allow define the addresses where interrupt, trap and abort vectors are
+        fetched from.
+        </p>
+    <table border="1">
+<tr><th>Register</th><th>Description</th></tr>
+<tr><th>IV</th><td>Address of interrupt vectors table; lowest 8 bit are reserved and must be 0</td></tr>
+<tr><th>TV</th><td>Address of trap vectors table; lowest 8 bit are reserved and must be 0</td></tr>
+<tr><th>AV</th><td>Address of abort vectors table; lowest 8 bit are reserved and must be 0</td></tr>
+    </table>
+	<p>For details see the <a href="af65002-int.html">Interrupts page</a>.</p>
+  </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="mode" id="mode">User- and Hypervisor Mode Control</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+     <table>
+        <tr><th colspan="5">Mode Control Registers</th></tr>
+        <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
+        <tr><td>UMM</td><td>User Mode Match register</td><td>-</td><td>8 bit</td><td>Match register for user mode</td></tr>
+        <tr><td>HMM</td><td>Hypervisor Mode Match register</td><td>-</td><td>8 bit</td><td>Match register for hypervisor mode</td></tr>
+        <tr><td>UMC</td><td>User Mode Configuration Register</td><td>-</td><td>8 bit</td><td>Configuring user mode options</td></tr>
+        <tr><td>UIM</td><td>User Mode Interrupt Mask Register</td><td>-</td><td>8 bit</td><td>Interrupt mask effective when SEI is set in user mode.</td></tr>
+    </table>
+
+    <p>The match codes - UMM and HMM - are used to identify matching memory management configurations (see below).</p>
+        <p>The User Mode Configuration register UMC defines a set of control bits for the user mode:</p>
+    <table border="1">
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>-</td><td>-</td><td>-</td><td>RSS</td><td>-</td><td>-</td><td>UMW1</td><td>UMW0</td></tr>
+    </table>
+	<p>User Mode Configuration Bits:</p>
+    <table border="1">
+<tr><th>Bit</th><th>Name</th><th>Explanation</th><th>State on Reset</th></tr>
+<tr><td>RSS</td><td>Restricted Stack Size</td><td>when set, the user mode stack is restricted to the page $01xx</td><td>Cleared</td></tr>
+<tr><td>UMW1/UMW0</td><td>User Mode Width</td><td>defines the "natural" address width for the user mode. 00=full width, 01=word, 10=long, 11=quad.</td><td>00 (natural width)</td></tr>
+    </table>
+	<p>The User Mode Interrupt Mask register UIM defines which interrupts are masked when the interrupt status
+	flag is set in user mode.</p>
+    <table border="1">
+<tr><th>Register</th><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>Value</th><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><th>UIM</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>UIM2</td><td>UIM1</td><td>UIM0</td></tr>
+    </table>
+	<p>User Mode Interrupt Mask bits:</p>
+    <table border="1">
+<tr><th>Bit</th><th>Name</th><th>Explanation</th><th>State on Reset</th></tr>
+<tr><td>UIM2/UIM1/UIM0</td><td>User mode interrupt mask register</td><td>When the interrupt status bit is set in user mode (e.g. with SEI), 
+	interrupts can be masked with this setting.</td><td>Reset to the lowest priority interrupt ("110" - so that this is blocked).</td></tr>
+    </table>
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="regmem" id="regmem">Memory Management Register</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>The container management has a number of register sets. Each set contains three full size (W bits)
+        registers:</p>
+    <table border="1">
+        <tr><th>Container-Register</th><th>Definition</th><th>Comment</th></tr>
+        <tr><td>Addr/matchcode mask</td><td>0-7: matchcode mask<br />
+                                        8-W: address mask</td><td></td></tr>
+        <tr><td>Addr/matchcode compare value</td><td>0-7: matchcode compare value<br />
+                                        8-W: address compare value</td><td></td></tr>
+        <tr><td>Addr offset/container control</td><td>0-7: Container control<br />
+                                        8-W: address offset value</td><td></td></tr>
+    </table><p>
+        There can be any number of register sets. The number can be read from a configuration register.
+        If there are register sets, there must be at least four sets.
+	</p><p>
+	To identify which register set is active, the current match code is ANDed with the matchcode mask, then compared with the
+	matchcode compare value. If the values match, the register set is active.
+	</p><p>
+	When a register set is active, the address mask is ANDed with the CPU address, and compared with the address compare value.
+	If the values match, then the CPU address is ANDed with the inverse of the address mask, and ORed with the address offset. 
+	</p><p>
+	To avoid priority encoding, all inverse address masks are ANDed and all address offsets are ORed before processing the CPU address.
+	</p>
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+All Copyrights are acknowledged.
+The information here is provided under the terms of the
+GNU Public License version 2 unless noted otherwise.
+    </div></div><hr />
+Last updated 2012-04-23.
+  </div></div><div id="footer"> </div></div></body></html> 
+

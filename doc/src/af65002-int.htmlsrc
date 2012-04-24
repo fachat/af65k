@@ -194,8 +194,8 @@
 	original 6502 interrupt.
       </p><p>
 	First the current program counter is written to the hypervisor stack. 
-	Note that this can be either the user or hypervisor mode programm counter, as interrupts can
-	happen in both modes.
+	Note that no matter whether the interrupt happens while in user mode or hypervisor mode, 
+	the stack used to store the programm counter is the hypervisor mode stack.
 	As the program counter can be wider than the original 6502's program counter, the value
 	written on the stack can be variable width. 
       </p><p>
@@ -226,6 +226,28 @@
       </p></desc>
     </section>
 
+    <section toc="brkproc" name="BRK Procedure">
+      <desc><p>
+	The BRK procedure is different from the interrupt procedure in that it stays in the
+	current mode - either supervisor or user mode.
+	more 
+      </p><p>
+	First the current program counter is written to the current stack. 
+	As the program counter can be wider than the original 6502's program counter, the value
+	written on the stack can be variable width. As width of the return address the native
+	width (of the current mode) is used.
+      </p><p>
+	Then the standard status register is pushed on the stack. Here the Bit5 is set, to indicate
+	that it is a standard stack frame - without the extended status byte.
+      </p><p>
+	After that the BRK address vector is fetched and jumped to. In hypervisor mode this is either
+	the vector at $fffe (if the interrupt base register has not been written to) or the BRK 
+	vector in the ABORT table. Those addresses are taken as hypervisor mode addresses.
+	In user mode the vector at $fffe is used and interpreted as a user mode address. In both
+	cases the address is sign-extended from a two-byte vector to the full address.
+      </p></desc>
+    </section>
+
     <section toc="intret" name="Interrupt Return">
       <desc><p>
 	For the return from an interrupt, there is the RTI opcode. 
@@ -240,6 +262,19 @@
 	byte return address from the stack. In this case the hypervisor flags are not modified and the processor stays in its
 	current mode.
 	The address that has been read is then sign-extended to full address width.
+	It then jumps to the return address.
+      </p></desc>
+    </section>
+
+    <section toc="brkret" name="BRK Return">
+      <desc><p>
+	For the return from a BRK routine the same RTI opcode as to return from an interrupt is used.
+	It first pulls the status byte from this stack and restores it. 
+	In case of a BRK bit 5 is one, indicating a standard stack frame.
+	It thus just pulls the return address from the stack.
+	</p><p>
+	The address is read in the native width (of the current mode).
+	This address is then sign-extended to full address width.
 	It then jumps to the return address.
       </p></desc>
     </section>
