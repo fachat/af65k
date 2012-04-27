@@ -65,12 +65,12 @@
 				<xsl:apply-templates select="oldnews"/>
 			</div></div>
 		</xsl:if>
-		<div class="top" id="browser">
+		<!--div class="top" id="browser">
 			<div class="tophead">browser</div>
 			<div><p>
 			Site has been tested with a number of browsers and systems. Javascript required for advanced menu, but degrades gracefully without Javascript. IE6 not supported anymore!
 			</p></div>
-		</div>
+		</div-->
 	</div>
 </xsl:template>
 

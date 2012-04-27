@@ -1,12 +1,17 @@
 
 GENDIR=../generator/de.fachat.65k
 XSL=scripts/htmlsrc2html.xsl
-TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html
+TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html html/af65002opstruct.html
 INSERT_SH=scripts/inserts.sh
 
 all: $(TARGET)
 
 html/af65002front.html: src/af65002-front.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	xsltproc $(XSL) $< > $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002opstruct.html: src/af65002-opstruct.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src $(GENDIR)/opcodes-table-af65002.html
 	xsltproc $(XSL) $< > $@.tmp
 	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
 	rm $@.tmp

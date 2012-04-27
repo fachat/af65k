@@ -2510,7 +2510,7 @@
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
-            <opcode>0x8e</opcode>
+            <opcode>0x9d</opcode>
             <oppage>EXT</oppage>
         </opcodes>
         <doc><p>
@@ -3289,7 +3289,7 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>zpxind</addressingMode>
-			<opcode>0x81</opcode>
+			<opcode>0xc1</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3299,12 +3299,12 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>abs</addressingMode>
-			<opcode>0xad</opcode>
+			<opcode>0xce</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>zpindy</addressingMode>
-			<opcode>0x91</opcode>
+			<opcode>0xd1</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3324,7 +3324,7 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>absx</addressingMode>
-			<opcode>0xbd</opcode>
+			<opcode>0xde</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>

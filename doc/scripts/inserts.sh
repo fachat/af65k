@@ -8,8 +8,8 @@ gendir="$4"
 
 print_disclaimer () {
 	echo "All Copyrights are acknowledged."
-	echo "The information here is provided under the terms of the"
-	echo "GNU Public License version 2 unless noted otherwise."
+	echo "The information here is provided under the terms as described"
+	echo "in <a href="af65002front.html#lic">the license section</a>."
 }
 
 # insert a text in the middle at the position of a keyword
@@ -119,6 +119,17 @@ echo "Run: " $0 $src $target $base
 		mv $t2 $t1
 
 		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES5@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/opcodes-longtable-$base.html"
+			cat $gendir/opcodes-longtable-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES5@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
 		doinsert1 $t1 $t2 "@OPDESC@"
 		v=$?
 		if [ $v -eq 1 ]; then
@@ -126,6 +137,17 @@ echo "Run: " $0 $src $target $base
 			cat $gendir/opdoc-$base.html \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPDESC@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@ADMODES@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/admodes-table-$base.html"
+			cat $gendir/admodes-table-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@ADMODES@"
 		fi
 		mv $t2 $t1
 

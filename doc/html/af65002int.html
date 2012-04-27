@@ -14,8 +14,7 @@
 <ul>
 <li><a href="af65002front.html">Overview</a></li>
 <li><a href="af65002regs.html">Register Set</a></li>
-<li><a href="af65002opstruct.html">Opcode Structure</a></li>
-<li><a href="af65002prefixes.html">Prefixes</a></li>
+<li><a href="af65002opstruct.html">Opcodes, Prefixes and Addressing Modes </a></li>
 <li><a href="af65002opcodes.html">Opcode Overview</a></li>
 <li><a href="af65002opdesc.html">Opcode Docs</a></li>
 <li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
@@ -26,9 +25,7 @@
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
 		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
-		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div><div class="top" id="browser"><div class="tophead">browser</div><div><p>
-			Site has been tested with a number of browsers and systems. Javascript required for advanced menu, but degrades gracefully without Javascript. IE6 not supported anymore!
-			</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
+		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
 <a target="_blank" class="extlink" href="http://www.firefox.com">Firefox</a>,
@@ -38,7 +35,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<p>
 	This page lists all the opcodes of the 65002 with appropriate explanations.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">TODO: Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="reset" id="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">TODO: Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li><li><a href="#sei">SEI handling</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="reset" id="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	Upon Reset the processor fetches a two-byte Reset vector from "-4".
 	In a 16  bit processor option this translates to the original 6502's
 	$FFFC reset vector.
@@ -292,10 +289,25 @@ more modern browser, like Internet Explorer 8 or later,
 	<li>From the privilege exception, restore the hypervisor mode registers and execute an RTI
 		in hypervisor to end the standard interrupt procedure.</li>
 	</ol>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="sei" id="sei">SEI handling</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+	The original 6502 has the interrupt flag in the status register. When it is set, all
+	interrupts (except the NMI) are disabled. Due to the interrupt registers described above
+	the interrupt flag would not be necessary. For compatibility reasons the interrupt 
+	flag is kept and handled similarly to the original 6502. When it is set in the supervisor
+	mode, all interrupts except the NMI are blocked. However, the interrupt flag is not set
+	when the processor jumps into supervisor mode when an interrupt occurs. It can still be
+	set with SEI and cleared with CLI.
+	</p><p>
+	CLI and RTI clear the interrupt flag, and with that clear the effective interrupt mask EIM
+	to allow new interrupts to occur. 
+	</p><p>
+	When the interrupt flag is set in user mode, interrupts should in general not be blocked.
+	However, with the User mode Interrupt Mask UIM the interrupt priority levels that are 
+	blocked can be configured.
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
-The information here is provided under the terms of the
-GNU Public License version 2 unless noted otherwise.
+The information here is provided under the terms as described
+in <a href=af65002front.html#lic>the license section</a>.
     </div></div><hr />
 Last updated 2012-04-23.
   </div></div><div id="footer"> </div></div></body></html> 

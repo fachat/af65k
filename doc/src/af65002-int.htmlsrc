@@ -328,6 +328,25 @@
       </desc>
     </section>
 
+    <section toc="sei" name="SEI handling">
+      <desc><p>
+	The original 6502 has the interrupt flag in the status register. When it is set, all
+	interrupts (except the NMI) are disabled. Due to the interrupt registers described above
+	the interrupt flag would not be necessary. For compatibility reasons the interrupt 
+	flag is kept and handled similarly to the original 6502. When it is set in the supervisor
+	mode, all interrupts except the NMI are blocked. However, the interrupt flag is not set
+	when the processor jumps into supervisor mode when an interrupt occurs. It can still be
+	set with SEI and cleared with CLI.
+	</p><p>
+	CLI and RTI clear the interrupt flag, and with that clear the effective interrupt mask EIM
+	to allow new interrupts to occur. 
+	</p><p>
+	When the interrupt flag is set in user mode, interrupts should in general not be blocked.
+	However, with the User mode Interrupt Mask UIM the interrupt priority levels that are 
+	blocked can be configured.
+      </p></desc>
+    </section>
+
 
     <disclaimer name="Disclaimer">
 @DISCLAIMER@

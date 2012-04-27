@@ -1,0 +1,354 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="65002 Opcode Structure">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <style>optable.css</style>
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	This page describes the opcode structure for the 65k line of processors.
+	</p>
+  </overview>
+  <toc/>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+  <section toc="opstruct" name="Opcode Structure">
+    <desc><p>
+	The original 6502 opcode structure always consists of a single byte opcode and an operand.
+	For the 65k opcodes extension the opcodes left in the 256 byte opcode page do not provide
+	enough space. Therefore the opcode structure is being extended with prefix bytes.
+	</p>
+	<table>
+	<tr><th colspan="13">Bytes</th></tr>
+	<tr><td width="5%">-4</td><td width="5%">-3</td><td width="5%">-2</td><td width="5%">-1</td><td width="5%">0</td><td width="5%">1</td><td width="5%">2</td><td width="5%">3</td><td width="5%">4</td><td width="5%">5</td><td width="5%">6</td><td width="5%">7</td><td width="5%">8</td></tr>
+	<tr><th colspan="13">6502 opcodes</th></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td>relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td colspan="2">address operand</td><td colspan="6">-</td></tr>
+	<tr><th colspan="13">65002 opcodes</th></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td>byte relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="2">word relative/ immediate/ address operand</td><td colspan="6">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="4">long relative/ immediate/ address operand</td><td colspan="4">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="8">quad relative/ immediate/ address operand</td></tr>
+	<tr><th colspan="13">65010 opcodes</th></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td>byte relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="2">word relative/ immediate/ address operand</td><td colspan="6">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="4">long relative/ immediate/ address operand</td><td colspan="4">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="8">quad relative/ immediate/ address operand</td></tr>
+	</table>
+	<p>
+	As you can see in this table, each opcode can have up to two (resp. three for the 65010) prefix bytes,
+	plus an opcode page selector before the actual opcode. 
+	Also the operands can now be byte, word, long and quad wide - 1, 2, 4 or 8 byte long.
+	</p><p>
+	All of the prefix bytes, as well as the page selector are optional. I.e. any of those must be
+	within the original 6502 opcode table to be distinguishable from an original opcode.
+	The following table shows the distribution of the prefix bytes in the 6502 opcode space:
+	</p>
+@OPCODES5@
+
+<p>Legend:</p>
+<table class="optable">
+<tr><td>NMOS Opcodes</td><td class="cmos">CMOS Opcodes</td><td class="c65k">New 65k opcodes</td><td class="prefix">65k Prefix codes</td><td class="unused">Unused/Reserved</td></tr>
+</table>
+
+        <p>
+        Some of the opcode fields are named prefix1 and prefix2, these are the modifiers to other opcodes as described above.
+        Others are named like "QUICK prefix" or "EXT prefix". Those are page table selectors.
+        These opcodes provide a way to extend the opcode list by having a second opcode byte follow the prefix. Thus there
+        could be 256 additional "QUICK" opcodes, and 256 additional "EXT opcodes" and so on. These opcode planes are
+        described below.
+        </p><p>
+	The prefix codes define a number of modifier bits. The prefix bits relevant for the opcode are 
+	shown in the respective table cell for each opcode as well. The meaning of the prefix bits is given 
+	below.
+        </p><p>
+        Note that there is still "plenty" of room for extensions. There are nine reserved prefix bytes - 4 of them could be used to
+        implement further modification bits (like going 128 bits ...yuck!) or they could be used as further opcode planes. Some plans exist for the 65010.
+        The one prefix at $6F should be reserved for extensions like floating point or vector processors or other extensions
+        that do not "just" modify existing opcodes.
+        </p>
+   </desc>	
+  </section>
+
+   <section toc="ovpref" name="Prefix Overview">
+        <desc><p>
+        In the opcode map there are 32 codes designated as "prefix1" and 16 codes designated as "prefix2". These opcodes are no operations in themselves, but
+        modify the following operation. The prefix has these values:</p>
+<table class="bittable">
+<tr><th colspan="8">prefix1</th></tr>
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>OF1</td><td>OF0</td><td>RS1</td><td>RS0</td><td>0</td><td>AM</td><td>1</td><td>1</td></tr>
+</table><p>
+        I.e. in prefix1 the lowest two bits are always one and bit 2 (value 4) is always zero, but all of the other five
+        bits have a special meaning.</p>
+<table class="bittable">
+<tr><th colspan="8">prefix2</th></tr>
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>UM</td><td>LE1</td><td>LE0</td><td>NF</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+</table><p>
+        For prefix2 the low four bit are fixed, the other bits are used as prefix.
+</p>
+<p>
+        The following table explains the prefix bits.
+</p>
+<table class="optable">
+<tr><th>AM</th><th>Adressing Modes</th></tr>
+<tr><td>0</td><td>normal addressing modes (8 / 16 bit)</td></tr>
+<tr><td>1</td><td>extended addressing modes (32 / 64 bit)</td></tr>
+<tr><th>LE</th><th>Load extension</th></tr>
+<tr><td>0/0</td><td>Do not extend values to full register width when loading a value with RS width; operations use RS width - default for all AC-related operations.</td></tr>
+<tr><td>0/1</td><td>Sign-extend values to full register width when loading a value with RS width; operations use full width</td></tr>
+<tr><td>1/0</td><td>Zero-extend values to full register width when loading a value with RS width; operations use full width - default for XR/YR-related operations.</td></tr>
+<tr><td>1/1</td><td>One-extend values to full register width when loading a value with RS width; operations use full width</td></tr>
+<tr><th>RS1/RS0</th><th>Register Size</th></tr>
+<tr><td>0/0</td><td>8 bit register</td></tr>
+<tr><td>0/1</td><td>16 bit register</td></tr>
+<tr><td>1/0</td><td>32 bit register</td></tr>
+<tr><td>1/1</td><td>64 bit register</td></tr>
+<tr><th>OF1/OF0</th><th>Offset Register</th></tr>
+<tr><td>0/0</td><td>No offset added to address</td></tr>
+<tr><td>0/1</td><td>Add Program Counter (PC) to address</td></tr>
+<tr><td>1/0</td><td>Add Stack Pointer (SP) to address</td></tr>
+<tr><td>1/1</td><td>Add Base Offset Register (BR) to address</td></tr>
+<tr><th>UM</th><th>User mode selector</th></tr>
+<tr><td>0</td><td>Current mode environment (user space/hypervisor mode)</td></tr>
+<tr><td>1</td><td>User mode environment, privileged operation; Stack Pointer for OF=10 is also User Space stack pointer </td></tr>
+<tr><th>NF</th><th>No Flags selector</th></tr>
+<tr><td>0</td><td>Flags are updated on each (relevant) operation according to standard 6502 rules</td></tr>
+<tr><td>1</td><td>Flags are not updated.</td></tr>
+</table>
+<p>
+        These prefix opcodes modify the following opcodes in various aspects. The following opcodes
+        are taken from the original 8&nbsp;bit opcodes. I.e. there could be a new opcode
+        </p><pre>
+        LDA.L #$12345678
+        </pre><p>to load the accumulator with a long (32&nbsp;bit) value, that is implemented as
+        </p><pre>
+        23 A9 78 56 34 12
+        </pre><p>. Here 23 is the prefix with RS=%10, i.e. 32&nbsp;bit registers, and A9 is the original
+        LDA immediate opcode - only the parameter is now 4 byte (32&nbsp;bit) not 1 byte anymore.
+        </p><p>
+        Please note that when all variable prefix bits are zero, the original 6502 operation is executed.
+        </p><p>
+        Please also note that the order of the prefix bytes is well defined. prefix1 must be before prefix2,
+        which is before the actual opcode. This way the prefix1 codes can be reused in the actual prefixed opcode.
+        This would not be the case if prefix2 was before prefix1, because then it would not be distinguishable
+        of the byte following prefix2 is a prefix1 or a reused opcode.
+        </p><p>
+        The LE flags only apply to opcodes that read an operand from memory, but not to read-modify-write opcodes.
+        (It does not apply to store operations (which could have been done switching memory and register sides), but
+        as the processor is available in different full-size register width, the software would expect to have a specific
+        width, binding the software to a specific width)
+        </p><p>
+        The NF flag does not apply to compare opcodes - their only purpose is to set the flags...
+        </p>
+       <p>
+        The grey fields note opcodes that do not use any prefix bits.
+        </p><p>
+        Note that the Register size option for the RTS and JSR opcodes determine the size of the
+        return address as put on the stack (with the 8&nbsp;bit register size option also mapping to the
+        16&nbsp;bit address width).
+        </p><p>
+        The Register size option for the branch opcodes determines the size of the relative address
+        offset. For the BSR opcode this is in conflict with the size options for the address on
+        the stack. Therefore BSR is handled similar to JSR, in that RS determines the size of the
+        return address on the stack, and AM modifies the relative offset from "rel" to "rellong"
+        resp. from "relwide" to "relquad".
+        </p><p>
+        Note that the TRAP opcode is marked as using no prefix bits, but still written down in that
+        table. This is for future extensions, when RS may be used to allow more than 256 trap codes.
+        </p><p>
+        The green cells are duplicate opcodes. These take the place of prefix1 <!--resp. some opcodes that
+        do not use prefix flags (like CLC)--> and require at least one prefix bit set (AM in the current cases).
+        These duplicate opcodes allow to extend an indirect opcode, more specifically to have more options
+        for the size of the address stored at the indirect location. <!--For a description see below.-->
+        </p>
+<p>
+        Normally not all addressing modes would be supported with direct addressing mode replacements.
+        The quad (longlong) indirect addressing modes
+        are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect
+        addressing modes.
+        Row LSB 1 is mirrored thus to row LSB 3, as well as row LSB 2 is mirrored to LSB 7.
+        These values are marked with a green background in the table. The LSB 3 and 7 rows then change from
+        indirect addressing modes to quad (longlong) indirect addressing modes.
+        </p><p>
+        Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address.
+        </p><p>
+        TODO: JMP and JSR opcodes?
+        </p>
+     </desc>
+     <subsection toc="prefof" name="Offset prefix">
+      <desc>
+        <p>
+        The offset prefix bits allows to add an address offset to the effective address of the operand.
+        Four options are available:
+        </p><table class="optable">
+        <tr><th>OF1/0</th><th>Register</th><th>Register Name</th><th>Syntax</th><th>Examples</th></tr>
+        <tr><td>00</td><td>-</td><td>no register value added</td><td>-</td><td>LDA $1234</td></tr>
+        <tr><td>01</td><td>PC</td><td>Program Counter</td><td>Address prefix P,</td><td>LDA P,$1234; LDA (P,$12),Y</td></tr>
+        <tr><td>10</td><td>SR</td><td>Stack Pointer</td><td>Address prefix S,</td><td>LDA S,$1234; LDA [S,$23,X]</td></tr>
+        <tr><td>11</td><td>BR</td><td>Base Register</td><td>Address prefix B,</td><td>LDA B,$1234; LDA B,$12,X</td></tr>
+        </table><p>
+        For (non-indirect) zeropage/absolute and indexed addressing modes to compute the effective address
+        the standard addressing mode effective address is computed, then the register value is added to get the
+        final effective address.
+        </p><p>
+        For the indirect addressing mode that situation is more complex. The offset register value is added
+        to the zeropage or absolute address given in the opcode, to compute the indirect address.
+        For indexed with XR addressing modes XR is added to this address to get the real indirect address.
+        Then the effective address is read from the computed indirect address, for indexed with YR then
+        the value of YR is added to the address read, to get the real effective address. Here the offset
+        is not added again.
+        </p>
+<p>
+        Note that the size of the address read from the indirect address is defined by the addressing mode
+        alone (which is also determined by the AM prefix bit).
+        </p>
+       </desc>
+     </subsection>
+     <subsection toc="prefrs" name="Register Size prefix">
+       <desc>
+        <p>
+        The maximum register size depends on the used processor option. Each operation has a possibly smaller width.
+        The Register size prefix defines the operation width. I.e. this determines the number of bytes to read from
+        memory (from the effective address), the number of bytes to store to memory, or the number bytes to use
+        from resp. store in a register.
+        </p><p>
+        The different width prefixes are written as postfixes to the opcode:
+        </p>
+        <table class="optable">
+        <tr><th>RS1/0</th><th>width</th><th>Postfix</th><th>Example</th></tr>
+        <tr><td>00</td><td>8</td><td></td><td>LDA #$12</td></tr>
+        <tr><td>01</td><td>16</td><td>.W</td><td>LDA.W #$1234</td></tr>
+        <tr><td>10</td><td>32</td><td>.L</td><td>LDA.L #$12345678</td></tr>
+        <tr><td>11</td><td>64</td><td>.Q</td><td>LDA.Q #$123456789ABCDEF0</td></tr>
+        </table><p>
+        Please note that 8&nbsp;bit width has no postfix.
+        </p><p>
+        TODO: rename to "OS" = "Operation size" or "OW" = "Operation width"?
+        </p>
+       </desc>
+     </subsection>
+     <subsection toc="prefle" name="Load Extensions prefix">
+       <desc>
+        <p>
+        The registers have a defined width - depending on processor option - of 16, 32 or 64&nbsp;bit. Operations can be
+        from 8 to 64&nbsp;bit.
+        There are some use cases where some adaption of a value to the register size is practical. For example if
+        an 8-bit value is used on a 32-bit operation - like adding <code>#8</code> to an address register.
+        </p><p>
+        For this purpose the LE bits define how a value loaded from memory (or from another register in the case of the
+        Txy opcodes) is extended to full register size. Four options are available:</p>
+        <table class="optable">
+        <tr><th>LE1/0</th><th>Extension type</th><th>Postfix</th><th>Example</th><th>Description</th></tr>
+        <tr><td rowspan="2">00</td><td rowspan="2">no extension</td><td></td><td>ADC #$92</td>
+                <td>Adds $92 to AC in 8 bit operation, leaves upper bits untouched.
+                Default for non-load/transfer operations.</td></tr>
+        <tr><td>.E</td><td>LDY.E #$92</td><td>Loads $92 into YR, leaves upper bits untouched.</td></tr>
+        <tr><td>01</td><td>sign-extension</td><td>.S</td><td>ADC.S #$92</td><td>Because the sign of $92 is 1, this
+                adds $ffffffffffffff92 to AC with a 64 bit operation, truncated to actual processor width.</td></tr>
+        <tr><td rowspan="2">10</td><td rowspan="2">zero-extension</td><td>.0</td><td>ADC.0 #$92</td><td>Extends with zeros and
+                adds $0000000000000092 to AC in a 64 bit operation, truncated to actual AC width.
+                </td></tr>
+        <tr><td></td><td>LDY #$92</td><td>Extends with zeros and
+                loads $0000000000000092 into a 64 bit YR, truncated to actual processor width.
+                Default for loads and transfer operations</td></tr>
+        <tr><td>11</td><td>ones-extension</td><td>.1</td><td>ADC.1 #$92</td><td>Extends with ones and
+                adds $ffffffffffffff92 to AC in a 64 bit operation, truncated to actual processor width.</td></tr>
+        </table>
+        <p>
+        When the result of an operation is written to a memory location or register, the data is written
+        in the same width as the operation.
+        </p><p>
+        Using this extension - i.e. having a value of not 00 - modifies the meaning of the RS prefix. RS then actually
+        defines the width of the memory location to be read. The actual operation happens after loading the value,
+        and it happens at full width.
+        For operations other than loads, the flags are set appropriately from the
+        full width operation result value. For loads (LDA, LDX, LDY) and transfers (TAX, ...), however,
+        the flags are set from the RS-width value that is read from memory (note: if you need flags from
+        the full width value, use BIT A, but in general you should know the outcome of the extension of a load opcode).
+        </p><p>
+        There is another difference between loads/transfers and other operations. Loads and transfers do a zero-extension
+        by default, while other opcodes do not extend. To change the load/transfer default behaviour, use an explicit LE prefix
+        of 00. The assembler should take care to create the correct prefix when using another prefix bit in prefix2.
+        For example doing a LDA.U should automatically be set to LDA.U0.
+        </p><p>
+        This somewhat inconsistent behaviour between loads/stores and others implements a "least surprise" strategy
+        for loads. X and Y are always used full-width in address calculation. Doing an LDY #0 would not clear all bits
+        and depending what previously executed code left in those bits this leads to unexpected behaviour.
+        Even with the extension, however, the flags need to be set from the width that has been read - in general 8 bits,
+        to be compatible with 6502 code.
+        </p><p>
+        So when loading a register, the upper bits are filled with zero by default - but flags are set
+        from the original width (as defined by RS). To load AC with the lower bits only, explicitely
+        set the prefix with LE0=LE1=0 (using the postfix .E). This would normally denote the original 6502
+        behaviour and could thus be left out, but not in this case as the default - for loads/transfers - is not the
+        6502 behaviour, yet compatible.
+        </p>
+       </desc>
+     </subsection>
+     <subsection toc="prefum" name="User Mode selector">
+       <desc>
+        <p>
+        Normally the opcode uses the current processor mode - user or hypervisor - to compute the correct address.
+        For the supervisor mode there is an option, however, to use an address from user mode as operand.
+        This is what the User Mode selector bit (UM) is for.
+        </p><p>
+        When the User Mode selector is set, the operand following the opcode is read from the current (hypervisor mode)
+        memory environment (as defined by the matchcode). Then the processor temporarily switches to user mode,
+        using the user mode matchcode and usermode stack pointer. For non-indirect addressing modes then the operand
+        is written to or read from the computed address. For indirect addressing modes the indirect address is
+        read from user mode, then the actual operand is read from or written to user mode as well.
+        </p><p>
+        Note that this bit is a privileged operation - unavailable if no hypervisor mode option is present, and
+        trapping into an abort if executed in user mode.
+        </p><p>
+        With the user mode selector such operations as PHA or PLX etc can be easily redirected to the user space
+        stack.
+        </p>
+	</desc>
+   </subsection>
+  </section>
+
+  <section toc="ovadmd" name="Addressing Modes Overview">
+        <desc><p>
+        This section describes an overview on the addressing modes of the 65k processor. An addressing mode determines
+        effective address of an operand (no matter what size the operand is). The addressing modes are
+        described in detail below.
+        </p>
+
+<!-- admodes-table-af65002.html -->
+@ADMODES@
+
+<p>
+        You will note that not all of these addressing modes are shown in the above table. Here the prefix codes come into play.
+        </p></desc>
+   </section>
+
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2012-04-23.
+  </closing>
+</docpage>
+

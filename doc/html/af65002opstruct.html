@@ -1,0 +1,422 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
+
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" /><link rel="stylesheet" type="text/css" href="optable.css" />
+<title>65002 Opcode Structure</title></head>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<div id="mtree">
+<ul>
+<li><a href="af65002front.html">Overview</a></li>
+<li><a href="af65002regs.html">Register Set</a></li>
+<li><a href="af65002opstruct.html">Opcodes, Prefixes and Addressing Modes </a></li>
+<li><a href="af65002opcodes.html">Opcode Overview</a></li>
+<li><a href="af65002opdesc.html">Opcode Docs</a></li>
+<li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
+<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002config.html">Configuration Registers</a></li>
+<li><a href="af65002compat.html">Compatibility</a></li>
+</ul>
+</div>
+		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
+You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
+more modern browser, like Internet Explorer 8 or later, 
+<a target="_blank" class="extlink" href="http://www.firefox.com">Firefox</a>,
+<a target="_blank" class="extlink" href="http://www.google.com/chrome">Google Chrome</a>, or
+<a target="_blank" class="extlink" href="http://www.opera.com">Opera</a>.
+</div><div class="top" id="content"><div id="minmax"></div><h1>65002 Opcode Structure</h1><div class="overview">
+	<p>
+	This page describes the opcode structure for the 65k line of processors.
+	</p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#opstruct">Opcode Structure</a></li><li><a href="#ovpref">Prefix Overview</a></li><li style="list-style-type:none;"><ul><li><a href="#prefof">Offset prefix</a></li><li><a href="#prefrs">Register Size prefix</a></li><li><a href="#prefle">Load Extensions prefix</a></li><li><a href="#prefum">User Mode selector</a></li></ul></li><li><a href="#ovadmd">Addressing Modes Overview</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="opstruct" id="opstruct">Opcode Structure</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+	The original 6502 opcode structure always consists of a single byte opcode and an operand.
+	For the 65k opcodes extension the opcodes left in the 256 byte opcode page do not provide
+	enough space. Therefore the opcode structure is being extended with prefix bytes.
+	</p>
+	<table>
+	<tr><th colspan="13">Bytes</th></tr>
+	<tr><td width="5%">-4</td><td width="5%">-3</td><td width="5%">-2</td><td width="5%">-1</td><td width="5%">0</td><td width="5%">1</td><td width="5%">2</td><td width="5%">3</td><td width="5%">4</td><td width="5%">5</td><td width="5%">6</td><td width="5%">7</td><td width="5%">8</td></tr>
+	<tr><th colspan="13">6502 opcodes</th></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td>relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>Opcode</td><td colspan="2">address operand</td><td colspan="6">-</td></tr>
+	<tr><th colspan="13">65002 opcodes</th></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td>byte relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="2">word relative/ immediate/ address operand</td><td colspan="6">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="4">long relative/ immediate/ address operand</td><td colspan="4">-</td></tr>
+	<tr><td>-</td><td>(prefix1)</td><td>(prefix2)</td><td>(page)</td><td>Opcode</td><td colspan="8">quad relative/ immediate/ address operand</td></tr>
+	<tr><th colspan="13">65010 opcodes</th></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="8">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td>byte relative/ immediate/ zeropage operand</td><td colspan="7">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="2">word relative/ immediate/ address operand</td><td colspan="6">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="4">long relative/ immediate/ address operand</td><td colspan="4">-</td></tr>
+	<tr><td>(prefix1)</td><td>(prefix2)</td><td>(prefix3)</td><td>(page)</td><td>Opcode</td><td colspan="8">quad relative/ immediate/ address operand</td></tr>
+	</table>
+	<p>
+	As you can see in this table, each opcode can have up to two (resp. three for the 65010) prefix bytes,
+	plus an opcode page selector before the actual opcode. 
+	Also the operands can now be byte, word, long and quad wide - 1, 2, 4 or 8 byte long.
+	</p><p>
+	All of the prefix bytes, as well as the page selector are optional. I.e. any of those must be
+	within the original 6502 opcode table to be distinguishable from an original opcode.
+	The following table shows the distribution of the prefix bytes in the 6502 opcode space:
+	</p>
+<table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td>BRK #byte<br/>RS</td><td>ORA (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="c65k">LDA zp,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">ORA [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td class="cmos">TSB zp<br/>NF,RS,UM,OF,AM</td><td>ORA zp<br/>NF,RS,UM,OF,LE,AM</td><td>ASL zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">JMP [[abs]]<br/>UM,OF,LE,AM=1</td><td>PHP <br/>UM</td><td>ORA #byte<br/>NF,RS,LE</td><td>ASL <br/>NF,RS</td><td class="prefix">prefix2</td><td class="cmos">TSB abs<br/>NF,RS,UM,OF,AM</td><td>ORA abs<br/>NF,RS,UM,OF,LE,AM</td><td>ASL abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">EXT</td></tr>
+<tr><th>1</th><td>BPL rel<br/>RS</td><td>ORA (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">ORA (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">ORA [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td class="cmos">TRB zp<br/>NF,RS,UM,OF,AM</td><td>ORA zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>ASL zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">ORA [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>CLC </td><td>ORA abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">INC <br/>NF,RS</td><td class="prefix">prefix2</td><td class="cmos">TRB abs<br/>NF,RS,UM,OF,AM</td><td>ORA abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>ASL abs,X<br/>NF,RS,UM,OF,AM</td><td class="unused"></td></tr>
+<tr><th>2</th><td>JSR abs<br/>RS,OF,LE,AM</td><td>AND (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="c65k">STA zp,Y<br/>RS,UM,OF,AM</td><td class="prefix">AND [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>BIT zp<br/>NF,RS,UM,OF,LE,AM</td><td>AND zp<br/>NF,RS,UM,OF,LE,AM</td><td>ROL zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">JMP [[abs,X]]<br/>UM,OF,LE,AM=1</td><td>PLP </td><td>AND #byte<br/>NF,RS,LE</td><td>ROL <br/>NF,RS</td><td class="prefix">prefix2</td><td>BIT abs<br/>NF,RS,UM,OF,LE,AM</td><td>AND abs<br/>NF,RS,UM,OF,LE,AM</td><td>ROL abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">SYS</td></tr>
+<tr><th>3</th><td>BMI rel<br/>RS</td><td>AND (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">AND (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">AND [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td class="cmos">BIT zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>AND zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>ROL zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">AND [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>SEC </td><td>AND abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">DEC <br/>NF,RS</td><td class="prefix">prefix2</td><td class="cmos">BIT abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>AND abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>ROL abs,X<br/>NF,RS,UM,OF,AM</td><td class="unused"></td></tr>
+<tr><th>4</th><td>RTI </td><td>EOR (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="c65k">LDA (abs),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">EOR [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td class="c65k">BSR relwide<br/>RS,AM</td><td>EOR zp<br/>NF,RS,UM,OF,LE,AM</td><td>LSR zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">LDA [[abs]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td>PHA <br/>RS,UM</td><td>EOR #byte<br/>NF,RS,LE</td><td>LSR <br/>NF,RS</td><td class="prefix">prefix2</td><td>JMP abs<br/>UM,OF,LE,AM</td><td>EOR abs<br/>NF,RS,UM,OF,LE,AM</td><td>LSR abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">QUICK</td></tr>
+<tr><th>5</th><td>BVC rel<br/>RS</td><td>EOR (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">EOR (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">EOR [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td class="unused"></td><td>EOR zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>LSR zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">EOR [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>CLI </td><td>EOR abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">PHY <br/>RS,UM</td><td class="prefix">prefix2</td><td class="unused"></td><td>EOR abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>LSR abs,X<br/>NF,RS,UM,OF,AM</td><td class="unused"></td></tr>
+<tr><th>6</th><td>RTS <br/>RS</td><td>ADC (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="c65k">LDA (abs,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">ADC [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td class="cmos">STZ zp<br/>RS,UM,OF,AM</td><td>ADC zp<br/>NF,RS,UM,OF,LE,AM</td><td>ROR zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">LDA [[abs,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>PLA <br/>NF,RS,UM,LE</td><td>ADC #byte<br/>NF,RS,LE</td><td>ROR <br/>NF,RS</td><td class="prefix">prefix2</td><td>JMP (abs)<br/>UM,OF,LE,AM</td><td>ADC abs<br/>NF,RS,UM,OF,LE,AM</td><td>ROR abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>7</th><td>BVS rel<br/>RS</td><td>ADC (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">ADC (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">ADC [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td class="cmos">STZ zp,X<br/>RS,UM,OF,AM</td><td>ADC zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>ROR zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">ADC [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>SEI </td><td>ADC abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">PLY <br/>NF,RS,UM,LE</td><td class="prefix">prefix2</td><td class="cmos">JMP (abs,X)<br/>UM,OF,LE,AM</td><td>ADC abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>ROR abs,X<br/>NF,RS,UM,OF,AM</td><td class="unused"></td></tr>
+<tr><th>8</th><td class="cmos">BRA rel<br/>RS</td><td>STA (zp,X)<br/>RS,UM,OF,AM</td><td class="c65k">BSR rel<br/>RS,AM</td><td class="prefix">STA [[zp,X]]<br/>RS,UM,OF,AM=1</td><td>STY zp<br/>RS,UM,OF,AM</td><td>STA zp<br/>RS,UM,OF,AM</td><td>STX zp<br/>RS,UM,OF,AM</td><td class="prefix">JSR [[abs]]<br/>RS,OF,LE,AM=1</td><td>DEY <br/>NF,RS</td><td class="cmos">BIT #byte<br/>NF,RS,LE</td><td>TXA <br/>NF,RS,LE</td><td class="prefix">prefix2</td><td>STY abs<br/>RS,UM,OF,AM</td><td>STA abs<br/>RS,UM,OF,AM</td><td>STX abs<br/>RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>9</th><td>BCC rel<br/>RS</td><td>STA (zp),Y<br/>RS,UM,OF,AM</td><td class="cmos">STA (zp)<br/>RS,UM,OF,AM</td><td class="prefix">STA [[zp]],Y<br/>RS,UM,OF,AM=1</td><td>STY zp,X<br/>RS,UM,OF,AM</td><td>STA zp,X<br/>RS,UM,OF,AM</td><td>STX zp,Y<br/>RS,UM,OF,AM</td><td class="prefix">STA [[zp]]<br/>RS,UM,OF,AM=1</td><td>TYA <br/>NF,RS,LE</td><td>STA abs,Y<br/>RS,UM,OF,AM</td><td>TXS <br/>RS,UM,LE</td><td class="prefix">prefix2</td><td class="cmos">STZ abs<br/>RS,UM,OF,AM</td><td>STA abs,X<br/>RS,UM,OF,AM</td><td class="cmos">STZ abs,X<br/>RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>A</th><td>LDY #byte<br/>NF,RS,LE</td><td>LDA (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td>LDX #byte<br/>NF,RS,LE</td><td class="prefix">LDA [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>LDY zp<br/>NF,RS,UM,OF,LE,AM</td><td>LDA zp<br/>NF,RS,UM,OF,LE,AM</td><td>LDX zp<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">JSR [[abs,X]]<br/>RS,OF,LE,AM=1</td><td>TAY <br/>NF,RS,LE</td><td>LDA #byte<br/>NF,RS,LE</td><td>TAX <br/>NF,RS,LE</td><td class="prefix">prefix2</td><td>LDY abs<br/>NF,RS,UM,OF,LE,AM</td><td>LDA abs<br/>NF,RS,UM,OF,LE,AM</td><td>LDX abs<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>B</th><td>BCS rel<br/>RS</td><td>LDA (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">LDA (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">LDA [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td>LDY zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>LDA zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>LDX zp,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">LDA [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>CLV </td><td>LDA abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td>TSX <br/>NF,RS,UM,LE</td><td class="prefix">prefix2</td><td>LDY abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>LDA abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>LDX abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>C</th><td>CPY #byte<br/>RS,LE</td><td>CMP (zp,X)<br/>RS,UM,OF,LE,AM</td><td class="c65k">STA (abs),Y<br/>RS,UM,OF,AM</td><td class="prefix">CMP [[zp,X]]<br/>RS,UM,OF,LE,AM=1</td><td>CPY zp<br/>RS,UM,OF,LE,AM</td><td>CMP zp<br/>RS,UM,OF,LE,AM</td><td>DEC zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">STA [[abs]],Y<br/>RS,UM,OF,AM=1</td><td>INY <br/>NF,RS</td><td>CMP #byte<br/>RS,LE</td><td>DEX <br/>NF,RS</td><td class="prefix">prefix2</td><td>CPY abs<br/>RS,UM,OF,LE,AM</td><td>CMP abs<br/>RS,UM,OF,LE,AM</td><td>DEC abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>D</th><td>BNE rel<br/>RS</td><td>CMP (zp),Y<br/>RS,UM,OF,LE,AM</td><td class="cmos">CMP (zp)<br/>RS,UM,OF,LE,AM</td><td class="prefix">CMP [[zp]],Y<br/>RS,UM,OF,LE,AM=1</td><td class="unused"></td><td>CMP zp,X<br/>RS,UM,OF,LE,AM</td><td>DEC zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">CMP [[zp]]<br/>RS,UM,OF,LE,AM=1</td><td>CLD </td><td>CMP abs,Y<br/>RS,UM,OF,LE,AM</td><td class="cmos">PHX <br/>RS,UM</td><td class="prefix">prefix2</td><td class="c65k">JSR (abs)<br/>RS,OF,LE,AM</td><td>CMP abs,X<br/>RS,UM,OF,LE,AM</td><td>DEC abs,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>E</th><td>CPX #byte<br/>RS,LE</td><td>SBC (zp,X)<br/>NF,RS,UM,OF,LE,AM</td><td class="c65k">STA (abs,X)<br/>RS,UM,OF,AM</td><td class="prefix">SBC [[zp,X]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>CPX zp<br/>RS,UM,OF,LE,AM</td><td>SBC zp<br/>NF,RS,UM,OF,LE,AM</td><td>INC zp<br/>NF,RS,UM,OF,AM</td><td class="prefix">STA [[abs,X]]<br/>RS,UM,OF,AM=1</td><td>INX <br/>NF,RS</td><td>SBC #byte<br/>NF,RS,LE</td><td>NOP </td><td class="prefix">prefix2</td><td>CPX abs<br/>RS,UM,OF,LE,AM</td><td>SBC abs<br/>NF,RS,UM,OF,LE,AM</td><td>INC abs<br/>NF,RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+<tr><th>F</th><td>BEQ rel<br/>RS</td><td>SBC (zp),Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">SBC (zp)<br/>NF,RS,UM,OF,LE,AM</td><td class="prefix">SBC [[zp]],Y<br/>NF,RS,UM,OF,LE,AM=1</td><td class="c65k">TRP #byte</td><td>SBC zp,X<br/>NF,RS,UM,OF,LE,AM</td><td>INC zp,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">SBC [[zp]]<br/>NF,RS,UM,OF,LE,AM=1</td><td>SED </td><td>SBC abs,Y<br/>NF,RS,UM,OF,LE,AM</td><td class="cmos">PLX <br/>NF,RS,UM,LE</td><td class="prefix">prefix2</td><td class="c65k">JSR (abs,X)<br/>RS,OF,LE,AM</td><td>SBC abs,X<br/>NF,RS,UM,OF,LE,AM</td><td>INC abs,X<br/>NF,RS,UM,OF,AM</td><td class="prefix">reserved prefix</td></tr>
+</table>
+
+<p>Legend:</p>
+<table class="optable">
+<tr><td>NMOS Opcodes</td><td class="cmos">CMOS Opcodes</td><td class="c65k">New 65k opcodes</td><td class="prefix">65k Prefix codes</td><td class="unused">Unused/Reserved</td></tr>
+</table>
+
+        <p>
+        Some of the opcode fields are named prefix1 and prefix2, these are the modifiers to other opcodes as described above.
+        Others are named like "QUICK prefix" or "EXT prefix". Those are page table selectors.
+        These opcodes provide a way to extend the opcode list by having a second opcode byte follow the prefix. Thus there
+        could be 256 additional "QUICK" opcodes, and 256 additional "EXT opcodes" and so on. These opcode planes are
+        described below.
+        </p><p>
+	The prefix codes define a number of modifier bits. The prefix bits relevant for the opcode are 
+	shown in the respective table cell for each opcode as well. The meaning of the prefix bits is given 
+	below.
+        </p><p>
+        Note that there is still "plenty" of room for extensions. There are nine reserved prefix bytes - 4 of them could be used to
+        implement further modification bits (like going 128 bits ...yuck!) or they could be used as further opcode planes. Some plans exist for the 65010.
+        The one prefix at $6F should be reserved for extensions like floating point or vector processors or other extensions
+        that do not "just" modify existing opcodes.
+        </p>
+   </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="ovpref" id="ovpref">Prefix Overview</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+        In the opcode map there are 32 codes designated as "prefix1" and 16 codes designated as "prefix2". These opcodes are no operations in themselves, but
+        modify the following operation. The prefix has these values:</p>
+<table class="bittable">
+<tr><th colspan="8">prefix1</th></tr>
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>OF1</td><td>OF0</td><td>RS1</td><td>RS0</td><td>0</td><td>AM</td><td>1</td><td>1</td></tr>
+</table><p>
+        I.e. in prefix1 the lowest two bits are always one and bit 2 (value 4) is always zero, but all of the other five
+        bits have a special meaning.</p>
+<table class="bittable">
+<tr><th colspan="8">prefix2</th></tr>
+<tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
+<tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr>
+<tr><td>UM</td><td>LE1</td><td>LE0</td><td>NF</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+</table><p>
+        For prefix2 the low four bit are fixed, the other bits are used as prefix.
+</p>
+<p>
+        The following table explains the prefix bits.
+</p>
+<table class="optable">
+<tr><th>AM</th><th>Adressing Modes</th></tr>
+<tr><td>0</td><td>normal addressing modes (8 / 16 bit)</td></tr>
+<tr><td>1</td><td>extended addressing modes (32 / 64 bit)</td></tr>
+<tr><th>LE</th><th>Load extension</th></tr>
+<tr><td>0/0</td><td>Do not extend values to full register width when loading a value with RS width; operations use RS width - default for all AC-related operations.</td></tr>
+<tr><td>0/1</td><td>Sign-extend values to full register width when loading a value with RS width; operations use full width</td></tr>
+<tr><td>1/0</td><td>Zero-extend values to full register width when loading a value with RS width; operations use full width - default for XR/YR-related operations.</td></tr>
+<tr><td>1/1</td><td>One-extend values to full register width when loading a value with RS width; operations use full width</td></tr>
+<tr><th>RS1/RS0</th><th>Register Size</th></tr>
+<tr><td>0/0</td><td>8 bit register</td></tr>
+<tr><td>0/1</td><td>16 bit register</td></tr>
+<tr><td>1/0</td><td>32 bit register</td></tr>
+<tr><td>1/1</td><td>64 bit register</td></tr>
+<tr><th>OF1/OF0</th><th>Offset Register</th></tr>
+<tr><td>0/0</td><td>No offset added to address</td></tr>
+<tr><td>0/1</td><td>Add Program Counter (PC) to address</td></tr>
+<tr><td>1/0</td><td>Add Stack Pointer (SP) to address</td></tr>
+<tr><td>1/1</td><td>Add Base Offset Register (BR) to address</td></tr>
+<tr><th>UM</th><th>User mode selector</th></tr>
+<tr><td>0</td><td>Current mode environment (user space/hypervisor mode)</td></tr>
+<tr><td>1</td><td>User mode environment, privileged operation; Stack Pointer for OF=10 is also User Space stack pointer </td></tr>
+<tr><th>NF</th><th>No Flags selector</th></tr>
+<tr><td>0</td><td>Flags are updated on each (relevant) operation according to standard 6502 rules</td></tr>
+<tr><td>1</td><td>Flags are not updated.</td></tr>
+</table>
+<p>
+        These prefix opcodes modify the following opcodes in various aspects. The following opcodes
+        are taken from the original 8  bit opcodes. I.e. there could be a new opcode
+        </p><pre>
+        LDA.L #$12345678
+        </pre><p>to load the accumulator with a long (32  bit) value, that is implemented as
+        </p><pre>
+        23 A9 78 56 34 12
+        </pre><p>. Here 23 is the prefix with RS=%10, i.e. 32  bit registers, and A9 is the original
+        LDA immediate opcode - only the parameter is now 4 byte (32  bit) not 1 byte anymore.
+        </p><p>
+        Please note that when all variable prefix bits are zero, the original 6502 operation is executed.
+        </p><p>
+        Please also note that the order of the prefix bytes is well defined. prefix1 must be before prefix2,
+        which is before the actual opcode. This way the prefix1 codes can be reused in the actual prefixed opcode.
+        This would not be the case if prefix2 was before prefix1, because then it would not be distinguishable
+        of the byte following prefix2 is a prefix1 or a reused opcode.
+        </p><p>
+        The LE flags only apply to opcodes that read an operand from memory, but not to read-modify-write opcodes.
+        (It does not apply to store operations (which could have been done switching memory and register sides), but
+        as the processor is available in different full-size register width, the software would expect to have a specific
+        width, binding the software to a specific width)
+        </p><p>
+        The NF flag does not apply to compare opcodes - their only purpose is to set the flags...
+        </p>
+       <p>
+        The grey fields note opcodes that do not use any prefix bits.
+        </p><p>
+        Note that the Register size option for the RTS and JSR opcodes determine the size of the
+        return address as put on the stack (with the 8  bit register size option also mapping to the
+        16  bit address width).
+        </p><p>
+        The Register size option for the branch opcodes determines the size of the relative address
+        offset. For the BSR opcode this is in conflict with the size options for the address on
+        the stack. Therefore BSR is handled similar to JSR, in that RS determines the size of the
+        return address on the stack, and AM modifies the relative offset from "rel" to "rellong"
+        resp. from "relwide" to "relquad".
+        </p><p>
+        Note that the TRAP opcode is marked as using no prefix bits, but still written down in that
+        table. This is for future extensions, when RS may be used to allow more than 256 trap codes.
+        </p><p>
+        The green cells are duplicate opcodes. These take the place of prefix1 <!--resp. some opcodes that
+        do not use prefix flags (like CLC)--> and require at least one prefix bit set (AM in the current cases).
+        These duplicate opcodes allow to extend an indirect opcode, more specifically to have more options
+        for the size of the address stored at the indirect location. <!--For a description see below.-->
+        </p>
+<p>
+        Normally not all addressing modes would be supported with direct addressing mode replacements.
+        The quad (longlong) indirect addressing modes
+        are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect
+        addressing modes.
+        Row LSB 1 is mirrored thus to row LSB 3, as well as row LSB 2 is mirrored to LSB 7.
+        These values are marked with a green background in the table. The LSB 3 and 7 rows then change from
+        indirect addressing modes to quad (longlong) indirect addressing modes.
+        </p><p>
+        Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address.
+        </p><p>
+        TODO: JMP and JSR opcodes?
+        </p>
+     <h3><a name="prefof" id="prefof">Offset prefix</a></h3>
+        <p>
+        The offset prefix bits allows to add an address offset to the effective address of the operand.
+        Four options are available:
+        </p><table class="optable">
+        <tr><th>OF1/0</th><th>Register</th><th>Register Name</th><th>Syntax</th><th>Examples</th></tr>
+        <tr><td>00</td><td>-</td><td>no register value added</td><td>-</td><td>LDA $1234</td></tr>
+        <tr><td>01</td><td>PC</td><td>Program Counter</td><td>Address prefix P,</td><td>LDA P,$1234; LDA (P,$12),Y</td></tr>
+        <tr><td>10</td><td>SR</td><td>Stack Pointer</td><td>Address prefix S,</td><td>LDA S,$1234; LDA [S,$23,X]</td></tr>
+        <tr><td>11</td><td>BR</td><td>Base Register</td><td>Address prefix B,</td><td>LDA B,$1234; LDA B,$12,X</td></tr>
+        </table><p>
+        For (non-indirect) zeropage/absolute and indexed addressing modes to compute the effective address
+        the standard addressing mode effective address is computed, then the register value is added to get the
+        final effective address.
+        </p><p>
+        For the indirect addressing mode that situation is more complex. The offset register value is added
+        to the zeropage or absolute address given in the opcode, to compute the indirect address.
+        For indexed with XR addressing modes XR is added to this address to get the real indirect address.
+        Then the effective address is read from the computed indirect address, for indexed with YR then
+        the value of YR is added to the address read, to get the real effective address. Here the offset
+        is not added again.
+        </p>
+<p>
+        Note that the size of the address read from the indirect address is defined by the addressing mode
+        alone (which is also determined by the AM prefix bit).
+        </p>
+       <h3><a name="prefrs" id="prefrs">Register Size prefix</a></h3>
+        <p>
+        The maximum register size depends on the used processor option. Each operation has a possibly smaller width.
+        The Register size prefix defines the operation width. I.e. this determines the number of bytes to read from
+        memory (from the effective address), the number of bytes to store to memory, or the number bytes to use
+        from resp. store in a register.
+        </p><p>
+        The different width prefixes are written as postfixes to the opcode:
+        </p>
+        <table class="optable">
+        <tr><th>RS1/0</th><th>width</th><th>Postfix</th><th>Example</th></tr>
+        <tr><td>00</td><td>8</td><td></td><td>LDA #$12</td></tr>
+        <tr><td>01</td><td>16</td><td>.W</td><td>LDA.W #$1234</td></tr>
+        <tr><td>10</td><td>32</td><td>.L</td><td>LDA.L #$12345678</td></tr>
+        <tr><td>11</td><td>64</td><td>.Q</td><td>LDA.Q #$123456789ABCDEF0</td></tr>
+        </table><p>
+        Please note that 8  bit width has no postfix.
+        </p><p>
+        TODO: rename to "OS" = "Operation size" or "OW" = "Operation width"?
+        </p>
+       <h3><a name="prefle" id="prefle">Load Extensions prefix</a></h3>
+        <p>
+        The registers have a defined width - depending on processor option - of 16, 32 or 64  bit. Operations can be
+        from 8 to 64  bit.
+        There are some use cases where some adaption of a value to the register size is practical. For example if
+        an 8-bit value is used on a 32-bit operation - like adding <code>#8</code> to an address register.
+        </p><p>
+        For this purpose the LE bits define how a value loaded from memory (or from another register in the case of the
+        Txy opcodes) is extended to full register size. Four options are available:</p>
+        <table class="optable">
+        <tr><th>LE1/0</th><th>Extension type</th><th>Postfix</th><th>Example</th><th>Description</th></tr>
+        <tr><td rowspan="2">00</td><td rowspan="2">no extension</td><td></td><td>ADC #$92</td>
+                <td>Adds $92 to AC in 8 bit operation, leaves upper bits untouched.
+                Default for non-load/transfer operations.</td></tr>
+        <tr><td>.E</td><td>LDY.E #$92</td><td>Loads $92 into YR, leaves upper bits untouched.</td></tr>
+        <tr><td>01</td><td>sign-extension</td><td>.S</td><td>ADC.S #$92</td><td>Because the sign of $92 is 1, this
+                adds $ffffffffffffff92 to AC with a 64 bit operation, truncated to actual processor width.</td></tr>
+        <tr><td rowspan="2">10</td><td rowspan="2">zero-extension</td><td>.0</td><td>ADC.0 #$92</td><td>Extends with zeros and
+                adds $0000000000000092 to AC in a 64 bit operation, truncated to actual AC width.
+                </td></tr>
+        <tr><td></td><td>LDY #$92</td><td>Extends with zeros and
+                loads $0000000000000092 into a 64 bit YR, truncated to actual processor width.
+                Default for loads and transfer operations</td></tr>
+        <tr><td>11</td><td>ones-extension</td><td>.1</td><td>ADC.1 #$92</td><td>Extends with ones and
+                adds $ffffffffffffff92 to AC in a 64 bit operation, truncated to actual processor width.</td></tr>
+        </table>
+        <p>
+        When the result of an operation is written to a memory location or register, the data is written
+        in the same width as the operation.
+        </p><p>
+        Using this extension - i.e. having a value of not 00 - modifies the meaning of the RS prefix. RS then actually
+        defines the width of the memory location to be read. The actual operation happens after loading the value,
+        and it happens at full width.
+        For operations other than loads, the flags are set appropriately from the
+        full width operation result value. For loads (LDA, LDX, LDY) and transfers (TAX, ...), however,
+        the flags are set from the RS-width value that is read from memory (note: if you need flags from
+        the full width value, use BIT A, but in general you should know the outcome of the extension of a load opcode).
+        </p><p>
+        There is another difference between loads/transfers and other operations. Loads and transfers do a zero-extension
+        by default, while other opcodes do not extend. To change the load/transfer default behaviour, use an explicit LE prefix
+        of 00. The assembler should take care to create the correct prefix when using another prefix bit in prefix2.
+        For example doing a LDA.U should automatically be set to LDA.U0.
+        </p><p>
+        This somewhat inconsistent behaviour between loads/stores and others implements a "least surprise" strategy
+        for loads. X and Y are always used full-width in address calculation. Doing an LDY #0 would not clear all bits
+        and depending what previously executed code left in those bits this leads to unexpected behaviour.
+        Even with the extension, however, the flags need to be set from the width that has been read - in general 8 bits,
+        to be compatible with 6502 code.
+        </p><p>
+        So when loading a register, the upper bits are filled with zero by default - but flags are set
+        from the original width (as defined by RS). To load AC with the lower bits only, explicitely
+        set the prefix with LE0=LE1=0 (using the postfix .E). This would normally denote the original 6502
+        behaviour and could thus be left out, but not in this case as the default - for loads/transfers - is not the
+        6502 behaviour, yet compatible.
+        </p>
+       <h3><a name="prefum" id="prefum">User Mode selector</a></h3>
+        <p>
+        Normally the opcode uses the current processor mode - user or hypervisor - to compute the correct address.
+        For the supervisor mode there is an option, however, to use an address from user mode as operand.
+        This is what the User Mode selector bit (UM) is for.
+        </p><p>
+        When the User Mode selector is set, the operand following the opcode is read from the current (hypervisor mode)
+        memory environment (as defined by the matchcode). Then the processor temporarily switches to user mode,
+        using the user mode matchcode and usermode stack pointer. For non-indirect addressing modes then the operand
+        is written to or read from the computed address. For indirect addressing modes the indirect address is
+        read from user mode, then the actual operand is read from or written to user mode as well.
+        </p><p>
+        Note that this bit is a privileged operation - unavailable if no hypervisor mode option is present, and
+        trapping into an abort if executed in user mode.
+        </p><p>
+        With the user mode selector such operations as PHA or PLX etc can be easily redirected to the user space
+        stack.
+        </p>
+	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="ovadmd" id="ovadmd">Addressing Modes Overview</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+        This section describes an overview on the addressing modes of the 65k processor. An addressing mode determines
+        effective address of an operand (no matter what size the operand is). The addressing modes are
+        described in detail below.
+        </p>
+
+
+<table class="optable"><tr><th>Name</th><th>Alternative Name</th><th>Prefix</th><th>Operand Length</th><th>Syntax</th><th>Origin</th><th>Description</th></tr>
+<tr><td>Implied</td><td></td><td></td><td>0</td><td></td><td></td><td>Implied by the operation</td></tr>
+<tr><td>Accumulator</td><td></td><td></td><td>0</td><td></td><td></td><td>Accumulator operation</td></tr>
+<tr><td>Address</td><td></td><td></td><td>2</td><td>abs</td><td></td><td>The parameter following the opcode is an address (16 bit; for JMP, JSR, JPU)</td></tr>
+<tr><td>Address Long</td><td></td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</td></tr>
+<tr><td>Address Quad</td><td></td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</td></tr>
+<tr><td>Immediate</td><td></td><td></td><td>1</td><td>#byte</td><td></td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a byte parameter</td></tr>
+<tr><td>Immediate 16bit</td><td>Wide immediate</td><td>RS=01</td><td>2</td><td>#word</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a word (16bit) parameter</td></tr>
+<tr><td>Immediate 32bit</td><td>Long immediate</td><td>RS=10</td><td>4</td><td>#long</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a long (32bit) parameter</td></tr>
+<tr><td>Immediate 64bit</td><td></td><td>RS=11</td><td>8</td><td>#quad</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a quad (64bit) parameter</td></tr>
+<tr><td>E indirect</td><td></td><td></td><td>0</td><td>(E)</td><td>65k</td><td>E-register indirect: the effective address is taken from the E register.</td></tr>
+<tr><td>Zeropage</td><td></td><td></td><td>1</td><td>zp</td><td></td><td>Zeropage address; The effective address of the operand is a zeropage address (i.e. 8bit)</td></tr>
+<tr><td>Zeropage indexed with X</td><td>Zeropage X-indexed</td><td></td><td>1</td><td>zp,X</td><td></td><td>Zeropage address, plus content of XR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the X register</td></tr>
+<tr><td>Zeropage indexed with Y</td><td>Zeropage Y-indexed</td><td></td><td>1</td><td>zp,Y</td><td></td><td>Zeropage address, plus content of YR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the Y register</td></tr>
+<tr><td>Absolute 16bit</td><td>Absolute</td><td></td><td>2</td><td>abs</td><td></td><td>16 bit address; The effective address of the operand is the word address (i.e. 16 bit) given as opcode parameter</td></tr>
+<tr><td>Absolute 16bit indexed with X</td><td>Absolute X-indexed</td><td></td><td>2</td><td>abs,X</td><td></td><td>16 bit address, plus content of XR; The effective address is the opcode parameter (word address), plus the value of the X register</td></tr>
+<tr><td>Absolute 16bit indexed with Y</td><td>Absolute Y-indexed</td><td></td><td>2</td><td>abs,Y</td><td></td><td>16 bit address, plus content of YR; The effective address is the opcode parameter (word address), plus the value of the Y register</td></tr>
+<tr><td>Absolute 32bit</td><td>Long absolute</td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>32 bit address; The effective address is the opcode parameter, which is a long address (i.e. 32 bit)</td></tr>
+<tr><td>Absolute 32bit indexed with X</td><td>Long absolute X-indexed</td><td>AM=1</td><td>4</td><td>long,X</td><td>65k</td><td>32 bit address, plus content of XR; The effective address is the opcode parameter (long address), plus the value of the X register</td></tr>
+<tr><td>Absolute 32bit indexed with Y</td><td>Long absolute Y-indexed</td><td>AM=1</td><td>4</td><td>long,Y</td><td>65k</td><td>32 bit address, plus content of YR; The effective address is the opcode parameter (long address), plus the value of the Y register</td></tr>
+<tr><td>Absolute 64bit</td><td>Quad absolute</td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>64 bit address; The effective address is the opcode parameter, which is a quad address (i.e. 64 bit)</td></tr>
+<tr><td>Absolute 64bit indexed with X</td><td>Quad absolute X-indexed</td><td>AM=1</td><td>8</td><td>quad,X</td><td>65k</td><td>64 bit address, plus content of XR; The effective address is the opcode parameter (quad address), plus the value of the X register</td></tr>
+<tr><td>Absolute 64bit indexed with Y</td><td>Quad absolute Y-indexed</td><td>AM=1</td><td>8</td><td>quad,Y</td><td>65k</td><td>64 bit address, plus content of YR; The effective address is the opcode parameter (quad address), plus the value of the Y register</td></tr>
+<tr><td>Zeropage indirect 16bit</td><td>Zeropage indirect</td><td></td><td>1</td><td>(zp)</td><td>cmos</td><td>Load effective 16 bit address from zeropage location given; Load effective word (16bit) address from zeropage location given as parameter.</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with Y</td><td>Zeropage indirect Y-indexed</td><td></td><td>1</td><td>(zp),Y</td><td></td><td>Load effective 16 bit address from zeropage location given, then add content of YR; 
+        	The effective address is computed as the word (16bit) address read from the zeropage location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</td></tr>
+<tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus content of XR; 
+        	The effective word (16bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
+<tr><td>Absolute indirect 16bit</td><td>Absolute indirect</td><td></td><td>2</td><td>(abs)</td><td></td><td>Load effective 16 bit address from absolute location given; 
+        	The effective word (16bit) address is read from word location given as parameter.</td></tr>
+<tr><td>Absolute indirect 16bit indexed with Y</td><td>Absolute indirect Y-indexed</td><td></td><td>2</td><td>(abs),Y</td><td>65k</td><td>Load effective 16 bit address from absolute location given, then add content of YR; 
+        	The effective address is computed as the word (16bit) address read from the word location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</td></tr>
+<tr><td>Absolute indexed with X indirect 16bit</td><td>Absolute X-indexed indirect</td><td></td><td>2</td><td>(abs,X)</td><td>cmos</td><td>Load effective 16 bit address from absolute location given plus content of XR;
+        	The effective word address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
+<tr><td>Zeropage indirect 32bit</td><td>Long Zeropage indirect</td><td>AM=1</td><td>1</td><td>[zp]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given; 
+        	The effective long (32bit) address is read from zeropage location given as parameter.</td></tr>
+<tr><td>Zeropage indirect 32bit indexed with Y</td><td>Zeropage long indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[zp],Y</td><td>65k</td><td>Load effective 32 bit address from zeropage location given, then add content of YR;
+        	The effective address is computed as the long (32bit) address read from the zeropage location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</td></tr>
+<tr><td>Zeropage indexed with X indirect 32bit</td><td>Zeropage X-indexed long indirect</td><td>AM=1</td><td>1</td><td>[zp,X]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given plus content of XR;
+        	The effective long (32bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
+<tr><td>Absolute indirect 32bit</td><td>Absolute long indirect</td><td>AM=1</td><td>2</td><td>[abs]</td><td>65k</td><td>Load effective 32 bit address from absolute location given;
+        	The effective long (32bit) address is read from word location given as parameter.</td></tr>
+<tr><td>Absolute indirect 32bit indexed with Y</td><td>Absolute long indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[abs],Y</td><td>65k</td><td>Load effective 32 bit address from absolute location given, then add content of YR;
+        	The effective address is computed as the long address read from the word location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</td></tr>
+<tr><td>Absolute indexed with X indirect 32bit</td><td>Absolute X-indexed long indirect</td><td>AM=1</td><td>2</td><td>[abs,X]</td><td>65k</td><td>Load effective 32 bit address from absolute location given plus content of XR;
+        	The effective long (32bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
+<tr><td>Zeropage indirect 64bit</td><td>Zeropage quad indirect</td><td>AM=1</td><td>1</td><td>[[zp]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given;
+        	The effective quad (64bit) address is read from zeropage location given as parameter.</td></tr>
+<tr><td>Zeropage indirect 64bit indexed with Y</td><td>Zeropage quad indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[[zp]],Y</td><td>65k</td><td>Load effective 64 bit address from zeropage location given, then add content of YR;
+        	The effective address is computed as the quad (64bit) address read from the zeropage location given as parameter plus the value of the Y register</td></tr>
+<tr><td>Zeropage indexed with X indirect 64bit</td><td>Zeropage X-indexed quad indirect</td><td>AM=1</td><td>1</td><td>[[zp,X]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given plus content of XR;
+        	The effective quad (64bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
+<tr><td>Absolute indirect 64bit</td><td>Absolute quad indirect</td><td>AM=1</td><td>2</td><td>[[abs]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given;
+        	The effective quad (64bit) address is read from word location given as parameter.</td></tr>
+<tr><td>Absolute indirect 64bit indexed with Y</td><td>Absolute quad indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[[abs]],Y</td><td>65k</td><td>Load effective 64 bit address from absolute location given, then add content of YR;
+        	The effective address is computed as the quad address read from the word location given as parameter plus the value of the Y register</td></tr>
+<tr><td>Absolute indexed with X indirect 64bit</td><td>Absolute X-indexed quad indirect</td><td>AM=1</td><td>2</td><td>[[abs,X]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given plus content of XR;
+        	The effective quad (64bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
+<tr><td>Relative</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in branches; from -128 to +127</td></tr>
+<tr><td>Relative 16bit</td><td>Wide relative</td><td>RS=01</td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in branches; from -32768 to +32767</td></tr>
+<tr><td>Relative 32bit</td><td>Long relative</td><td>RS=10</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in branches; from -2^32 to +2^32-1</td></tr>
+<tr><td>Relative 64bit</td><td>Quad relative</td><td>RS=11</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in branches; from -2^64 to +2^64-1</td></tr>
+<tr><td>Relative (BSR)</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in BSR; from -128 to +127</td></tr>
+<tr><td>Relative 16bit (BSR)</td><td>Wide relative</td><td></td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in BSR; from -32768 to +32767</td></tr>
+<tr><td>Relative 32bit (BSR)</td><td>Long relative</td><td>AM=1</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^32 to +2^32-1</td></tr>
+<tr><td>Relative 64bit (BSR)</td><td>Quad relative</td><td>AM=1</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^64 to +2^64-1</td></tr>
+</table>
+
+<p>
+        You will note that not all of these addressing modes are shown in the above table. Here the prefix codes come into play.
+        </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in <a href=af65002front.html#lic>the license section</a>.
+    </div></div><hr />
+Last updated 2012-04-23.
+  </div></div><div id="footer"> </div></div></body></html> 
+
