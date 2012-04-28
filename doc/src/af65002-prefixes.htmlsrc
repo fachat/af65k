@@ -97,14 +97,9 @@
 	With AM=1 a prefix1 byte must be set, so there can be additional opcodes in the prefix1 space
 	that use extended <a href="af65002admodes.html">addressing modes</a>.
         </p><p>
-	The following table gives an overview on which prefix applies to which opcode.
+	The table below gives an overview on which prefix applies to which opcode.
 	</p>
-
-@OPCODES5@
-
-       <p>
-        The grey fields note opcodes that do not use any prefix bits.
-        </p>	<p>
+	<p>
         The LE flags only apply to opcodes that read an operand from memory, but not to read-modify-write opcodes.
         It does not apply to store operations (which could have been done switching memory and register sides).
 	However, as the processor is available in different native register widths, the store would
@@ -296,6 +291,24 @@
 	The NF bit, when set, prevents the status register bits from being changed.
 	For example you can do index register increments for example without 
 	losing the contents of the Z and N status register flags.
+        </p>
+	</desc>
+  </section>
+
+   <section toc="preftables" name="Opcode Tables">
+    <desc>
+        <p>
+	The following tables describe which prefixes apply to which opcode.
+	</p><p>
+	This table describes the standard opcode page:
+	</p>
+@OPCODES5@
+	<p>
+	This table describes the EXT opcode page:
+	</p>
+@EXTLONG@
+       <p>
+        The grey fields note opcodes that are not used in the 65002.
         </p>
 	</desc>
   </section>

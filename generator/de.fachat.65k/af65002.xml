@@ -26,7 +26,7 @@
 	</class>
 	<class>
 		<name>65k10</name>
-		<prio>2</prio>
+		<prio>3</prio>
 		<extends>65k</extends>
 		<doc><p>
 			This class contains the new opcodes and opcode extensions of the af65010 compared to the af65002.
@@ -864,7 +864,7 @@
         </opcodes>
         <opcodes>
             <addressingMode>eind</addressingMode>
-            <opcode>0xa2</opcode>
+            <opcode>0xad</opcode>
             <oppage>EXT</oppage>
         </opcodes>
         <doc><p>
@@ -1580,6 +1580,48 @@
         </doc>
     </operation>
 
+    <operation>
+        <name>ADD</name>
+        <desc>Add content of memory location to accumulator without using carry as input</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x05</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x00</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Add the operand to the accumulator and store back in the accumulator.
+        	Set the flags from the result. Use Binary mode add only.
+        	Do not use the Carry flag as input.
+        	</p><pre>
+        		AC, C, V &lt;= AC + Operand
+        		N &lt;= Tmp(7)
+        		Z &lt;= Z(Tmp)
+        	</pre>
+        	<p>For a handling of the V-flag please see 
+        	<a href="http://www.6502.org/tutorials/vflag.html">http://www.6502.org/tutorials/vflag.html</a>.
+        	</p>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS and LE together also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
+    </operation>
+
     
     <operation>
         <name>SBC</name>   
@@ -1661,6 +1703,48 @@
         	decimal mode status bis is set or not respectively. C status flag is used as borrow.
         	</p><pre>
         		AC, C, V &lt;= AC - Operand, C
+        		N &lt;= Tmp(7)
+        		Z &lt;= Z(Tmp)
+        	</pre>
+        	<p>For a handling of the V-flag please see 
+        	<a href="http://www.6502.org/tutorials/vflag.html">http://www.6502.org/tutorials/vflag.html</a>.
+        	</p>
+        </doc>
+        <doc mode="65k"><p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS and LE together also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>SUB</name>   
+        <desc>Substract content of memory location from accumulator without using the carry flag as input</desc>
+        <prefixBits>AM</prefixBits>
+        <prefixBits>OF</prefixBits>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>LE</prefixBits>
+        <prefixBits>UM</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <opcodes>
+            <addressingMode>imm</addressingMode>
+            <opcode>0x85</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <opcodes>
+            <addressingMode>eind</addressingMode>
+            <opcode>0x80</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Substract the operand from the accumulator and store back in the accumulator.
+        	Set the flags from the result. Use Binary mode add only. C status flag is not used as
+        	input, but set as borrow from the result.
+        	</p><pre>
+        		AC, C, V &lt;= AC - Operand
         		N &lt;= Tmp(7)
         		Z &lt;= Z(Tmp)
         	</pre>
@@ -3174,22 +3258,32 @@
 		<prefixBits>NF</prefixBits>
 		<opcodes>
 			<addressingMode>zpy</addressingMode>
-			<opcode>0x02</opcode>
+			<opcode>0xf6</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absindyquad</addressingMode>
+			<opcode>0x61</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxindquad</addressingMode>
+			<opcode>0x71</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absindy</addressingMode>
-			<opcode>0x42</opcode>
+			<opcode>0x21</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absxind</addressingMode>
-			<opcode>0x62</opcode>
+			<opcode>0x31</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>rel</addressingMode>
-			<opcode>0x80</opcode>
+			<opcode>0xa2</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3218,13 +3312,28 @@
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
+			<addressingMode>absind</addressingMode>
+			<opcode>0x32</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindquad</addressingMode>
+			<opcode>0xf2</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absindquad</addressingMode>
+			<opcode>0x72</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
 			<addressingMode>zpx</addressingMode>
 			<opcode>0x56</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absy</addressingMode>
-			<opcode>0xb9</opcode>
+			<opcode>0xbf</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3234,7 +3343,17 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>relwide</addressingMode>
-			<opcode>0x44</opcode>
+			<opcode>0x22</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindyquad</addressingMode>
+			<opcode>0xe1</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpxindquad</addressingMode>
+			<opcode>0xf1</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
         <doc><p>
@@ -3268,18 +3387,28 @@
 		<prefixBits>OF</prefixBits>
 		<prefixBits>UM</prefixBits>
 		<opcodes>
+			<addressingMode>absindyquad</addressingMode>
+			<opcode>0x41</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absxindquad</addressingMode>
+			<opcode>0x51</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
 			<addressingMode>zpy</addressingMode>
-			<opcode>0x22</opcode>
+			<opcode>0xd6</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absindy</addressingMode>
-			<opcode>0xc2</opcode>
+			<opcode>0x01</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absxind</addressingMode>
-			<opcode>0xe2</opcode>
+			<opcode>0x11</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3289,12 +3418,12 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>zpxind</addressingMode>
-			<opcode>0xc1</opcode>
+			<opcode>0x81</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>zp</addressingMode>
-			<opcode>0x85</opcode>
+			<opcode>0x86</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3304,7 +3433,7 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>zpindy</addressingMode>
-			<opcode>0xd1</opcode>
+			<opcode>0x91</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3313,13 +3442,28 @@
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
+			<addressingMode>absind</addressingMode>
+			<opcode>0x12</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindquad</addressingMode>
+			<opcode>0xd2</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>absindquad</addressingMode>
+			<opcode>0x52</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
 			<addressingMode>zpx</addressingMode>
-			<opcode>0x95</opcode>
+			<opcode>0x96</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
 			<addressingMode>absy</addressingMode>
-			<opcode>0x99</opcode>
+			<opcode>0xdf</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 		<opcodes>
@@ -3329,7 +3473,17 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>relwide</addressingMode>
-			<opcode>0x54</opcode>
+			<opcode>0x02</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpindyquad</addressingMode>
+			<opcode>0xc1</opcode>
+			<oppage>EXT</oppage>
+		</opcodes>
+		<opcodes>
+			<addressingMode>zpxindquad</addressingMode>
+			<opcode>0xd1</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
         <doc><p>
@@ -3402,7 +3556,7 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>eind</addressingMode>
-			<opcode>0xf4</opcode>
+			<opcode>0xfc</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 	</operation>
@@ -3419,7 +3573,7 @@
 		</opcodes>
 		<opcodes>
 			<addressingMode>eind</addressingMode>
-			<opcode>0xe4</opcode>
+			<opcode>0xec</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 	</operation>
@@ -3433,7 +3587,7 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>eind</addressingMode>
-			<opcode>0x84</opcode>
+			<opcode>0x2c</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 	</operation>
@@ -3448,7 +3602,7 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>eind</addressingMode>
-			<opcode>0x94</opcode>
+			<opcode>0x3c</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
 	</operation>
@@ -3479,14 +3633,9 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>A</addressingMode>
-			<opcode>0x38</opcode>
+			<opcode>0xf4</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
-		<!--opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0xbc</opcode>
-			<oppage>EXT</oppage>
-		</opcodes-->
 	</operation>
 
 	<operation>
@@ -3497,14 +3646,9 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>A</addressingMode>
-			<opcode>0x78</opcode>
+			<opcode>0x84</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
-		<!--opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0xbc</opcode>
-			<oppage>EXT</oppage>
-		</opcodes-->
 	</operation>
 
 	<operation>
@@ -3515,14 +3659,9 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>A</addressingMode>
-			<opcode>0x18</opcode>
+			<opcode>0x94</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
-		<!--opcodes>
-			<addressingMode>eind</addressingMode>
-			<opcode>0xbc</opcode>
-			<oppage>EXT</oppage>
-		</opcodes-->
 	</operation>
 
 	<operation>
@@ -3532,7 +3671,7 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
-			<opcode>0xac</opcode>
+			<opcode>0x44</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
         <doc><p>
@@ -3563,7 +3702,7 @@
 		<class>65k10</class>
 		<opcodes>
 			<addressingMode>implied</addressingMode>
-			<opcode>0xcc</opcode>
+			<opcode>0x54</opcode>
 			<oppage>EXT</oppage>
 		</opcodes>
         <doc><p>

@@ -827,8 +827,19 @@ public class HtmlWriter implements DocWriter {
 	
 	@Override
 	public void endLink() {
-		// TODO Auto-generated method stub
-		
+		boolean end = false;
+		while ((!end) && (!stack.isEmpty())) {
+			STATE s = stack.peek();
+			switch (s) {
+			case LINK:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
+			}
+		}
+		doEndLink();
 	}
 	
 	@Override

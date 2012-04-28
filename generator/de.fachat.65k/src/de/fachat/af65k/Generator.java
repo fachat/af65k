@@ -95,7 +95,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), null, false);
+			docgen.generateOpcodetable(new HtmlWriter(pwr), null, false, cpu2fclass.get(cpuname));
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -110,7 +110,22 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), null, true);
+			docgen.generateOpcodetable(new HtmlWriter(pwr), null, true, cpu2fclass.get(cpuname));
+			pwr.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			FileOutputStream fos = new FileOutputStream("ext-longtable-" + cpuname + ".html");
+			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+			PrintWriter pwr = new PrintWriter(osw);
+			OptableDocGenerator docgen = new OptableDocGenerator(val);
+			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", true, cpu2fclass.get(cpuname));
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -125,7 +140,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", false);
+			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", false, cpu2fclass.get(cpuname));
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

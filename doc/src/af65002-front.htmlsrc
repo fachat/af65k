@@ -119,6 +119,14 @@
 		<li>Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more 
 			possible future expansions (prefix3 could now be $8F-$FF).</li>
                 </ul></td></tr>
+        <tr><td>2012-04-29</td><td>Andr&eacute; Fachat</td><td><ul>
+		<li>Reorganized the EXT page. It's less oriented on the standard page, but much more
+			regular now. </li>
+		<li>Added LEA and PEA addressing modes for zp/abs indirect quad, plus
+			zp/abs indirect/indexed quad modes that were all missing. </li>
+		<li>Added the ADD and SUB opcodes with immediate and
+			E-indirect addressing modes.</li>
+                </ul></td></tr>
       </table>
     </desc>
   </section>

@@ -1,460 +1,460 @@
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
-<tr><th>0</th><td><div>BRK #byte</div>
+<tr><th>0</th><td><div class="opc">BRK #byte</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>ORA (zp,X)</div>
+</td><td><div class="opc">ORA (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>LDA zp,Y</div>
+</td><td class="c65k"><div class="opc">LDA zp,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>ORA [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">ORA [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="cmos"><div>TSB zp</div>
+</td><td class="cmos"><div class="opc">TSB zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td><div>ORA zp</div>
+</td><td><div class="opc">ORA zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ASL zp</div>
+</td><td><div class="opc">ASL zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>JMP [[abs]]</div>
+</td><td class="prefix"><div class="opc">JMP [[abs]]</div>
 <div class="prefixes"><br/>UM, OF, LE, AM=1</div>
-</td><td><div>PHP </div>
+</td><td><div class="opc">PHP </div>
 <div class="prefixes"><br/>UM</div>
-</td><td><div>ORA #byte</div>
+</td><td><div class="opc">ORA #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>ASL </div>
+</td><td><div class="opc">ASL </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td class="cmos"><div>TSB abs</div>
+</td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">TSB abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td><div>ORA abs</div>
+</td><td><div class="opc">ORA abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ASL abs</div>
+</td><td><div class="opc">ASL abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">EXT</td></tr>
-<tr><th>1</th><td><div>BPL rel</div>
+<tr><th>1</th><td><div class="opc">BPL rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>ORA (zp),Y</div>
+</td><td><div class="opc">ORA (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>ORA (zp)</div>
+</td><td class="cmos"><div class="opc">ORA (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>ORA [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">ORA [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="cmos"><div>TRB zp</div>
+</td><td class="cmos"><div class="opc">TRB zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td><div>ORA zp,X</div>
+</td><td><div class="opc">ORA zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ASL zp,X</div>
+</td><td><div class="opc">ASL zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>ORA [[zp]]</div>
+</td><td class="prefix"><div class="opc">ORA [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>CLC </div>
+</td><td><div class="opc">CLC </div>
 <div class="prefixes"></div>
-</td><td><div>ORA abs,Y</div>
+</td><td><div class="opc">ORA abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>INC </div>
+</td><td class="cmos"><div class="opc">INC </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td class="cmos"><div>TRB abs</div>
+</td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">TRB abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td><div>ORA abs,X</div>
+</td><td><div class="opc">ORA abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ASL abs,X</div>
+</td><td><div class="opc">ASL abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="unused"></td></tr>
-<tr><th>2</th><td><div>JSR abs</div>
+<tr><th>2</th><td><div class="opc">JSR abs</div>
 <div class="prefixes"><br/>RS, OF, LE, AM</div>
-</td><td><div>AND (zp,X)</div>
+</td><td><div class="opc">AND (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>STA zp,Y</div>
+</td><td class="c65k"><div class="opc">STA zp,Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>AND [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">AND [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>BIT zp</div>
+</td><td><div class="opc">BIT zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>AND zp</div>
+</td><td><div class="opc">AND zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROL zp</div>
+</td><td><div class="opc">ROL zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>JMP [[abs,X]]</div>
+</td><td class="prefix"><div class="opc">JMP [[abs,X]]</div>
 <div class="prefixes"><br/>UM, OF, LE, AM=1</div>
-</td><td><div>PLP </div>
+</td><td><div class="opc">PLP </div>
 <div class="prefixes"></div>
-</td><td><div>AND #byte</div>
+</td><td><div class="opc">AND #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>ROL </div>
+</td><td><div class="opc">ROL </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td><div>BIT abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">BIT abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>AND abs</div>
+</td><td><div class="opc">AND abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROL abs</div>
+</td><td><div class="opc">ROL abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">SYS</td></tr>
-<tr><th>3</th><td><div>BMI rel</div>
+<tr><th>3</th><td><div class="opc">BMI rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>AND (zp),Y</div>
+</td><td><div class="opc">AND (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>AND (zp)</div>
+</td><td class="cmos"><div class="opc">AND (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>AND [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">AND [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="cmos"><div>BIT zp,X</div>
+</td><td class="cmos"><div class="opc">BIT zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>AND zp,X</div>
+</td><td><div class="opc">AND zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROL zp,X</div>
+</td><td><div class="opc">ROL zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>AND [[zp]]</div>
+</td><td class="prefix"><div class="opc">AND [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>SEC </div>
+</td><td><div class="opc">SEC </div>
 <div class="prefixes"></div>
-</td><td><div>AND abs,Y</div>
+</td><td><div class="opc">AND abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>DEC </div>
+</td><td class="cmos"><div class="opc">DEC </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td class="cmos"><div>BIT abs,X</div>
+</td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">BIT abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>AND abs,X</div>
+</td><td><div class="opc">AND abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROL abs,X</div>
+</td><td><div class="opc">ROL abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="unused"></td></tr>
-<tr><th>4</th><td><div>RTI </div>
+<tr><th>4</th><td><div class="opc">RTI </div>
 <div class="prefixes"></div>
-</td><td><div>EOR (zp,X)</div>
+</td><td><div class="opc">EOR (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>LDA (abs),Y</div>
+</td><td class="c65k"><div class="opc">LDA (abs),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>EOR [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">EOR [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="c65k"><div>BSR relwide</div>
+</td><td class="c65k"><div class="opc">BSR relwide</div>
 <div class="prefixes"><br/>RS, AM</div>
-</td><td><div>EOR zp</div>
+</td><td><div class="opc">EOR zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LSR zp</div>
+</td><td><div class="opc">LSR zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>LDA [[abs]],Y</div>
+</td><td class="prefix"><div class="opc">LDA [[abs]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>PHA </div>
+</td><td><div class="opc">PHA </div>
 <div class="prefixes"><br/>RS, UM</div>
-</td><td><div>EOR #byte</div>
+</td><td><div class="opc">EOR #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>LSR </div>
+</td><td><div class="opc">LSR </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td><div>JMP abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">JMP abs</div>
 <div class="prefixes"><br/>UM, OF, LE, AM</div>
-</td><td><div>EOR abs</div>
+</td><td><div class="opc">EOR abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LSR abs</div>
+</td><td><div class="opc">LSR abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">QUICK</td></tr>
-<tr><th>5</th><td><div>BVC rel</div>
+<tr><th>5</th><td><div class="opc">BVC rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>EOR (zp),Y</div>
+</td><td><div class="opc">EOR (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>EOR (zp)</div>
+</td><td class="cmos"><div class="opc">EOR (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>EOR [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">EOR [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="unused"></td><td><div>EOR zp,X</div>
+</td><td class="unused"></td><td><div class="opc">EOR zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LSR zp,X</div>
+</td><td><div class="opc">LSR zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>EOR [[zp]]</div>
+</td><td class="prefix"><div class="opc">EOR [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>CLI </div>
+</td><td><div class="opc">CLI </div>
 <div class="prefixes"></div>
-</td><td><div>EOR abs,Y</div>
+</td><td><div class="opc">EOR abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>PHY </div>
+</td><td class="cmos"><div class="opc">PHY </div>
 <div class="prefixes"><br/>RS, UM</div>
-</td><td class="prefix">prefix2</td><td class="unused"></td><td><div>EOR abs,X</div>
+</td><td class="prefix">prefix2</td><td class="unused"></td><td><div class="opc">EOR abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LSR abs,X</div>
+</td><td><div class="opc">LSR abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="unused"></td></tr>
-<tr><th>6</th><td><div>RTS </div>
+<tr><th>6</th><td><div class="opc">RTS </div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>ADC (zp,X)</div>
+</td><td><div class="opc">ADC (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>LDA (abs,X)</div>
+</td><td class="c65k"><div class="opc">LDA (abs,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>ADC [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">ADC [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="cmos"><div>STZ zp</div>
+</td><td class="cmos"><div class="opc">STZ zp</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>ADC zp</div>
+</td><td><div class="opc">ADC zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROR zp</div>
+</td><td><div class="opc">ROR zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>LDA [[abs,X]]</div>
+</td><td class="prefix"><div class="opc">LDA [[abs,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>PLA </div>
+</td><td><div class="opc">PLA </div>
 <div class="prefixes"><br/>NF, RS, UM, LE</div>
-</td><td><div>ADC #byte</div>
+</td><td><div class="opc">ADC #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>ROR </div>
+</td><td><div class="opc">ROR </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td><div>JMP (abs)</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">JMP (abs)</div>
 <div class="prefixes"><br/>UM, OF, LE, AM</div>
-</td><td><div>ADC abs</div>
+</td><td><div class="opc">ADC abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROR abs</div>
+</td><td><div class="opc">ROR abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>7</th><td><div>BVS rel</div>
+<tr><th>7</th><td><div class="opc">BVS rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>ADC (zp),Y</div>
+</td><td><div class="opc">ADC (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>ADC (zp)</div>
+</td><td class="cmos"><div class="opc">ADC (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>ADC [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">ADC [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="cmos"><div>STZ zp,X</div>
+</td><td class="cmos"><div class="opc">STZ zp,X</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>ADC zp,X</div>
+</td><td><div class="opc">ADC zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROR zp,X</div>
+</td><td><div class="opc">ROR zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>ADC [[zp]]</div>
+</td><td class="prefix"><div class="opc">ADC [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>SEI </div>
+</td><td><div class="opc">SEI </div>
 <div class="prefixes"></div>
-</td><td><div>ADC abs,Y</div>
+</td><td><div class="opc">ADC abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>PLY </div>
+</td><td class="cmos"><div class="opc">PLY </div>
 <div class="prefixes"><br/>NF, RS, UM, LE</div>
-</td><td class="prefix">prefix2</td><td class="cmos"><div>JMP (abs,X)</div>
+</td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">JMP (abs,X)</div>
 <div class="prefixes"><br/>UM, OF, LE, AM</div>
-</td><td><div>ADC abs,X</div>
+</td><td><div class="opc">ADC abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>ROR abs,X</div>
+</td><td><div class="opc">ROR abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="unused"></td></tr>
-<tr><th>8</th><td class="cmos"><div>BRA rel</div>
+<tr><th>8</th><td class="cmos"><div class="opc">BRA rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>STA (zp,X)</div>
+</td><td><div class="opc">STA (zp,X)</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="c65k"><div>BSR rel</div>
+</td><td class="c65k"><div class="opc">BSR rel</div>
 <div class="prefixes"><br/>RS, AM</div>
-</td><td class="prefix"><div>STA [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">STA [[zp,X]]</div>
 <div class="prefixes"><br/>RS, UM, OF, AM=1</div>
-</td><td><div>STY zp</div>
+</td><td><div class="opc">STY zp</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STA zp</div>
+</td><td><div class="opc">STA zp</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STX zp</div>
+</td><td><div class="opc">STX zp</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>JSR [[abs]]</div>
+</td><td class="prefix"><div class="opc">JSR [[abs]]</div>
 <div class="prefixes"><br/>RS, OF, LE, AM=1</div>
-</td><td><div>DEY </div>
+</td><td><div class="opc">DEY </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="cmos"><div>BIT #byte</div>
+</td><td class="cmos"><div class="opc">BIT #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>TXA </div>
+</td><td><div class="opc">TXA </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td class="prefix">prefix2</td><td><div>STY abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">STY abs</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STA abs</div>
+</td><td><div class="opc">STA abs</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STX abs</div>
+</td><td><div class="opc">STX abs</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>9</th><td><div>BCC rel</div>
+<tr><th>9</th><td><div class="opc">BCC rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>STA (zp),Y</div>
+</td><td><div class="opc">STA (zp),Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="cmos"><div>STA (zp)</div>
+</td><td class="cmos"><div class="opc">STA (zp)</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>STA [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">STA [[zp]],Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM=1</div>
-</td><td><div>STY zp,X</div>
+</td><td><div class="opc">STY zp,X</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STA zp,X</div>
+</td><td><div class="opc">STA zp,X</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STX zp,Y</div>
+</td><td><div class="opc">STX zp,Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>STA [[zp]]</div>
+</td><td class="prefix"><div class="opc">STA [[zp]]</div>
 <div class="prefixes"><br/>RS, UM, OF, AM=1</div>
-</td><td><div>TYA </div>
+</td><td><div class="opc">TYA </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>STA abs,Y</div>
+</td><td><div class="opc">STA abs,Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>TXS </div>
+</td><td><div class="opc">TXS </div>
 <div class="prefixes"><br/>RS, UM, LE</div>
-</td><td class="prefix">prefix2</td><td class="cmos"><div>STZ abs</div>
+</td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">STZ abs</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td><div>STA abs,X</div>
+</td><td><div class="opc">STA abs,X</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="cmos"><div>STZ abs,X</div>
+</td><td class="cmos"><div class="opc">STZ abs,X</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>A</th><td><div>LDY #byte</div>
+<tr><th>A</th><td><div class="opc">LDY #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>LDA (zp,X)</div>
+</td><td><div class="opc">LDA (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDX #byte</div>
+</td><td><div class="opc">LDX #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td class="prefix"><div>LDA [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">LDA [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>LDY zp</div>
+</td><td><div class="opc">LDY zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDA zp</div>
+</td><td><div class="opc">LDA zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDX zp</div>
+</td><td><div class="opc">LDX zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>JSR [[abs,X]]</div>
+</td><td class="prefix"><div class="opc">JSR [[abs,X]]</div>
 <div class="prefixes"><br/>RS, OF, LE, AM=1</div>
-</td><td><div>TAY </div>
+</td><td><div class="opc">TAY </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>LDA #byte</div>
+</td><td><div class="opc">LDA #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>TAX </div>
+</td><td><div class="opc">TAX </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td class="prefix">prefix2</td><td><div>LDY abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">LDY abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDA abs</div>
+</td><td><div class="opc">LDA abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDX abs</div>
+</td><td><div class="opc">LDX abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>B</th><td><div>BCS rel</div>
+<tr><th>B</th><td><div class="opc">BCS rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>LDA (zp),Y</div>
+</td><td><div class="opc">LDA (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>LDA (zp)</div>
+</td><td class="cmos"><div class="opc">LDA (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>LDA [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">LDA [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>LDY zp,X</div>
+</td><td><div class="opc">LDY zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDA zp,X</div>
+</td><td><div class="opc">LDA zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDX zp,Y</div>
+</td><td><div class="opc">LDX zp,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>LDA [[zp]]</div>
+</td><td class="prefix"><div class="opc">LDA [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>CLV </div>
+</td><td><div class="opc">CLV </div>
 <div class="prefixes"></div>
-</td><td><div>LDA abs,Y</div>
+</td><td><div class="opc">LDA abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>TSX </div>
+</td><td><div class="opc">TSX </div>
 <div class="prefixes"><br/>NF, RS, UM, LE</div>
-</td><td class="prefix">prefix2</td><td><div>LDY abs,X</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">LDY abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDA abs,X</div>
+</td><td><div class="opc">LDA abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>LDX abs,Y</div>
+</td><td><div class="opc">LDX abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>C</th><td><div>CPY #byte</div>
+<tr><th>C</th><td><div class="opc">CPY #byte</div>
 <div class="prefixes"><br/>RS, LE</div>
-</td><td><div>CMP (zp,X)</div>
+</td><td><div class="opc">CMP (zp,X)</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>STA (abs),Y</div>
+</td><td class="c65k"><div class="opc">STA (abs),Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>CMP [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">CMP [[zp,X]]</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM=1</div>
-</td><td><div>CPY zp</div>
+</td><td><div class="opc">CPY zp</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>CMP zp</div>
+</td><td><div class="opc">CMP zp</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>DEC zp</div>
+</td><td><div class="opc">DEC zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>STA [[abs]],Y</div>
+</td><td class="prefix"><div class="opc">STA [[abs]],Y</div>
 <div class="prefixes"><br/>RS, UM, OF, AM=1</div>
-</td><td><div>INY </div>
+</td><td><div class="opc">INY </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td><div>CMP #byte</div>
+</td><td><div class="opc">CMP #byte</div>
 <div class="prefixes"><br/>RS, LE</div>
-</td><td><div>DEX </div>
+</td><td><div class="opc">DEX </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td class="prefix">prefix2</td><td><div>CPY abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">CPY abs</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>CMP abs</div>
+</td><td><div class="opc">CMP abs</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>DEC abs</div>
+</td><td><div class="opc">DEC abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>D</th><td><div>BNE rel</div>
+<tr><th>D</th><td><div class="opc">BNE rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>CMP (zp),Y</div>
+</td><td><div class="opc">CMP (zp),Y</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>CMP (zp)</div>
+</td><td class="cmos"><div class="opc">CMP (zp)</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>CMP [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">CMP [[zp]],Y</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM=1</div>
-</td><td class="unused"></td><td><div>CMP zp,X</div>
+</td><td class="unused"></td><td><div class="opc">CMP zp,X</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>DEC zp,X</div>
+</td><td><div class="opc">DEC zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>CMP [[zp]]</div>
+</td><td class="prefix"><div class="opc">CMP [[zp]]</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM=1</div>
-</td><td><div>CLD </div>
+</td><td><div class="opc">CLD </div>
 <div class="prefixes"></div>
-</td><td><div>CMP abs,Y</div>
+</td><td><div class="opc">CMP abs,Y</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>PHX </div>
+</td><td class="cmos"><div class="opc">PHX </div>
 <div class="prefixes"><br/>RS, UM</div>
-</td><td class="prefix">prefix2</td><td class="c65k"><div>JSR (abs)</div>
+</td><td class="prefix">prefix2</td><td class="c65k"><div class="opc">JSR (abs)</div>
 <div class="prefixes"><br/>RS, OF, LE, AM</div>
-</td><td><div>CMP abs,X</div>
+</td><td><div class="opc">CMP abs,X</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>DEC abs,X</div>
+</td><td><div class="opc">DEC abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>E</th><td><div>CPX #byte</div>
+<tr><th>E</th><td><div class="opc">CPX #byte</div>
 <div class="prefixes"><br/>RS, LE</div>
-</td><td><div>SBC (zp,X)</div>
+</td><td><div class="opc">SBC (zp,X)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="c65k"><div>STA (abs,X)</div>
+</td><td class="c65k"><div class="opc">STA (abs,X)</div>
 <div class="prefixes"><br/>RS, UM, OF, AM</div>
-</td><td class="prefix"><div>SBC [[zp,X]]</div>
+</td><td class="prefix"><div class="opc">SBC [[zp,X]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>CPX zp</div>
+</td><td><div class="opc">CPX zp</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>SBC zp</div>
+</td><td><div class="opc">SBC zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>INC zp</div>
+</td><td><div class="opc">INC zp</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>STA [[abs,X]]</div>
+</td><td class="prefix"><div class="opc">STA [[abs,X]]</div>
 <div class="prefixes"><br/>RS, UM, OF, AM=1</div>
-</td><td><div>INX </div>
+</td><td><div class="opc">INX </div>
 <div class="prefixes"><br/>NF, RS</div>
-</td><td><div>SBC #byte</div>
+</td><td><div class="opc">SBC #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td><div>NOP </div>
+</td><td><div class="opc">NOP </div>
 <div class="prefixes"></div>
-</td><td class="prefix">prefix2</td><td><div>CPX abs</div>
+</td><td class="prefix">prefix2</td><td><div class="opc">CPX abs</div>
 <div class="prefixes"><br/>RS, UM, OF, LE, AM</div>
-</td><td><div>SBC abs</div>
+</td><td><div class="opc">SBC abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>INC abs</div>
+</td><td><div class="opc">INC abs</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
-<tr><th>F</th><td><div>BEQ rel</div>
+<tr><th>F</th><td><div class="opc">BEQ rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td><div>SBC (zp),Y</div>
+</td><td><div class="opc">SBC (zp),Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>SBC (zp)</div>
+</td><td class="cmos"><div class="opc">SBC (zp)</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="prefix"><div>SBC [[zp]],Y</div>
+</td><td class="prefix"><div class="opc">SBC [[zp]],Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td class="c65k"><div>TRP #byte</div>
+</td><td class="c65k"><div class="opc">TRP #byte</div>
 <div class="prefixes"></div>
-</td><td><div>SBC zp,X</div>
+</td><td><div class="opc">SBC zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>INC zp,X</div>
+</td><td><div class="opc">INC zp,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
-</td><td class="prefix"><div>SBC [[zp]]</div>
+</td><td class="prefix"><div class="opc">SBC [[zp]]</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM=1</div>
-</td><td><div>SED </div>
+</td><td><div class="opc">SED </div>
 <div class="prefixes"></div>
-</td><td><div>SBC abs,Y</div>
+</td><td><div class="opc">SBC abs,Y</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td class="cmos"><div>PLX </div>
+</td><td class="cmos"><div class="opc">PLX </div>
 <div class="prefixes"><br/>NF, RS, UM, LE</div>
-</td><td class="prefix">prefix2</td><td class="c65k"><div>JSR (abs,X)</div>
+</td><td class="prefix">prefix2</td><td class="c65k"><div class="opc">JSR (abs,X)</div>
 <div class="prefixes"><br/>RS, OF, LE, AM</div>
-</td><td><div>SBC abs,X</div>
+</td><td><div class="opc">SBC abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, LE, AM</div>
-</td><td><div>INC abs,X</div>
+</td><td><div class="opc">INC abs,X</div>
 <div class="prefixes"><br/>NF, RS, UM, OF, AM</div>
 </td><td class="prefix">reserved prefix</td></tr>
 </table>

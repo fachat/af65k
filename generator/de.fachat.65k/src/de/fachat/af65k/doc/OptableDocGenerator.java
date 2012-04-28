@@ -23,6 +23,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -80,21 +81,34 @@ public class OptableDocGenerator {
 			Operation op = en.getValue();
 			
 			wr.startListItem();
-			wr.print(op.getName() + ": " + op.getDesc());
+			wr.startLink(cpu.id() + "opdesc.html#" + op.getName());
+			wr.print(op.getName() + ": ");
+			wr.endLink();
+			wr.print(op.getDesc());
 		}
 		wr.endUnsortedList();
 	}
 
-	public void generateOpcodetable(DocWriter wr, String pagename, boolean doLong) {
+	public void generateOpcodetable(DocWriter wr, String pagename, boolean doLong, String fclass) {
 		
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
 		CodeMapEntry page[] = opcodes.get(pagename);	// get standard map
-		writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong);
+		writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong, fclass);
 	}
 
-	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong) {
+	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong, String fclass) {
 		final String hex = "0123456789ABCDEF";
 		
+		Collection<String> fclasses = new HashSet<String>();
+		fclasses.add(fclass);
+		while (cpu.getFClass(fclass) != null) {
+			FeatureClass fc = cpu.getFClass(fclass);
+			fclass = fc.getXtends();
+			if (fclass != null) {
+				fclasses.add(fclass);
+			}
+		}
+
 		Map<String, String> unusedatts = new HashMap<String, String>();
 		unusedatts.put("class", "unused");
 		Map<String, String> prefixatts = new HashMap<String, String>();
@@ -102,6 +116,7 @@ public class OptableDocGenerator {
 		Map<String, String> prefixdivatts = new HashMap<String, String>();
 		prefixdivatts.put("class", "prefixes");
 		Map<String, String> opcodedivatts = new HashMap<String, String>();
+		opcodedivatts.put("class", "opc");
 		
 		Map<String, Map<String, String>> classatts = new HashMap<String, Map<String,String>>();
 		Map<String, String> tmp = new HashMap<String, String>();
@@ -148,8 +163,13 @@ public class OptableDocGenerator {
 						atts.put("class", "prefix");
 					} else {
 						FeatureClass fc = entry.getFclass();
+						
 						if (fc != null) {
-							atts.putAll(classatts.get(fc.getName()));
+							if (fclasses.contains(fc.getName())) {
+								atts.putAll(classatts.get(fc.getName()));
+							} else {
+								atts.putAll(unusedatts);								
+							}
 						}
 						if (prefixes == null && atts.containsKey("class")) {
 							if (atts.get("class").equals("c65k")) {

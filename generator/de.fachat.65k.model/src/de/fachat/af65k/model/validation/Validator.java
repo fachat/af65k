@@ -282,7 +282,7 @@ public class Validator {
 			} else {
 				opFClass = fclass.get(fclassStr);
 			}
-			
+
 			// find valid prefix bits
 			Map<String, PrefixBit> pbs = new HashMap<String,PrefixBit>();
 			Collection<String> pbitns = op.getPrefixBits();
@@ -449,5 +449,9 @@ public class Validator {
 	
 	public AddressingMode getAddressingMode(String id) {
 		return admodes.get(id);
+	}
+
+	public String id() {
+		return cpu.getIdentifier();
 	}
 }

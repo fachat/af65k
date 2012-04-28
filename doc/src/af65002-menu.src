@@ -1,3 +1,4 @@
+<p>Specification</p>
 <ul>
 <li><a href="af65002front.html">Overview</a></li>
 <li><a href="af65002regs.html">Register Set</a></li>
@@ -11,3 +12,5 @@
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
 </ul>
+<p>Implementation</p>
+

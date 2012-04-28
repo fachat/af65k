@@ -1,111 +1,164 @@
 <ul>
 <li>
-ADB: Add value to B register</li>
+<a href="af65002opdesc.html#ADB">ADB: </a>
+Add value to B register</li>
 <li>
-ADE: Add value to E register</li>
+<a href="af65002opdesc.html#ADE">ADE: </a>
+Add value to E register</li>
 <li>
-ADS: Add value to stack pointer</li>
+<a href="af65002opdesc.html#ADS">ADS: </a>
+Add value to stack pointer</li>
 <li>
-ASR: Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
+<a href="af65002opdesc.html#ASR">ASR: </a>
+Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
 <li>
-BCN: Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
+<a href="af65002opdesc.html#BCN">BCN: </a>
+Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
 <li>
-BGT: Branch if greater - take branch when C flag is set but Z flag is clear</li>
+<a href="af65002opdesc.html#BGT">BGT: </a>
+Branch if greater - take branch when C flag is set but Z flag is clear</li>
 <li>
-BLE: Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
+<a href="af65002opdesc.html#BLE">BLE: </a>
+Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
 <li>
-BSW: Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>
+<a href="af65002opdesc.html#BSW">BSW: </a>
+Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>
 <li>
-EXT: Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
+<a href="af65002opdesc.html#EXT">EXT: </a>
+Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
 <li>
-FIL: Fill a memory area of size AC at address XR with a value from YR</li>
+<a href="af65002opdesc.html#FIL">FIL: </a>
+Fill a memory area of size AC at address XR with a value from YR</li>
 <li>
-HBC: Highest Bit Clear: Determines the number of the highest bit that is set to zero.</li>
+<a href="af65002opdesc.html#HBC">HBC: </a>
+Highest Bit Clear: Determines the number of the highest bit that is set to zero.</li>
 <li>
-HBS: Highest Bit Set: Determines the number of the highest bit that is set to one.</li>
+<a href="af65002opdesc.html#HBS">HBS: </a>
+Highest Bit Set: Determines the number of the highest bit that is set to one.</li>
 <li>
-INV: invert AC, i.e. set AC to the 2s-complement of AC</li>
+<a href="af65002opdesc.html#INV">INV: </a>
+invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
-LDB: Load B with an immediate value</li>
+<a href="af65002opdesc.html#LDB">LDB: </a>
+Load B with an immediate value</li>
 <li>
-LDE: Load E with an immediate value</li>
+<a href="af65002opdesc.html#LDE">LDE: </a>
+Load E with an immediate value</li>
 <li>
-LEA: Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</li>
+<a href="af65002opdesc.html#LEA">LEA: </a>
+Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</li>
 <li>
-LLA: Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</li>
+<a href="af65002opdesc.html#LLA">LLA: </a>
+Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</li>
 <li>
-MVN: Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
+<a href="af65002opdesc.html#MVN">MVN: </a>
+Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
 <li>
-MVP: Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
+<a href="af65002opdesc.html#MVP">MVP: </a>
+Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
 <li>
-PEA: Push Effective Address: compute the effective address and push it onto the stack (always full width)</li>
+<a href="af65002opdesc.html#PEA">PEA: </a>
+Push Effective Address: compute the effective address and push it onto the stack (always full width)</li>
 <li>
-PHB: Push B onto stack (full width)</li>
+<a href="af65002opdesc.html#PHB">PHB: </a>
+Push B onto stack (full width)</li>
 <li>
-PHE: Push E onto stack (always full width)</li>
+<a href="af65002opdesc.html#PHE">PHE: </a>
+Push E onto stack (always full width)</li>
 <li>
-PLB: Pull E from stack (full width)</li>
+<a href="af65002opdesc.html#PLB">PLB: </a>
+Pull E from stack (full width)</li>
 <li>
-PLE: Pull E from stack (full width)</li>
+<a href="af65002opdesc.html#PLE">PLE: </a>
+Pull E from stack (full width)</li>
 <li>
-PLL: Pull the contents of all registers from the stack</li>
+<a href="af65002opdesc.html#PLL">PLL: </a>
+Pull the contents of all registers from the stack</li>
 <li>
-PRB: Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
+<a href="af65002opdesc.html#PRB">PRB: </a>
+Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
 <li>
-PSH: Push contents of all registers (A, X, Y, B, E) onto the stack</li>
+<a href="af65002opdesc.html#PSH">PSH: </a>
+Push contents of all registers (A, X, Y, B, E) onto the stack</li>
 <li>
-RDL: Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
+<a href="af65002opdesc.html#RDL">RDL: </a>
+Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
 <li>
-RMB: Read memory barrier: invalidates cache content (globally, or for a specific, given location)</li>
+<a href="af65002opdesc.html#RMB">RMB: </a>
+Read memory barrier: invalidates cache content (globally, or for a specific, given location)</li>
 <li>
-SAB: Swap A register with B register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SAB">SAB: </a>
+Swap A register with B register. Always done full width, no flags set.</li>
 <li>
-SAE: Swap AC with E register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SAE">SAE: </a>
+Swap AC with E register. Always done full width, no flags set.</li>
 <li>
-SAX: Swap AC with X register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SAX">SAX: </a>
+Swap AC with X register. Always done full width, no flags set.</li>
 <li>
-SAY: Swap AC with Y register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SAY">SAY: </a>
+Swap AC with Y register. Always done full width, no flags set.</li>
 <li>
-SBB: Substract value from B register</li>
+<a href="af65002opdesc.html#SBB">SBB: </a>
+Substract value from B register</li>
 <li>
-SBE: Add value to E register</li>
+<a href="af65002opdesc.html#SBE">SBE: </a>
+Add value to E register</li>
 <li>
-SBS: Substract value from stack pointer</li>
+<a href="af65002opdesc.html#SBS">SBS: </a>
+Substract value from stack pointer</li>
 <li>
-SCA: Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
+<a href="af65002opdesc.html#SCA">SCA: </a>
+Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
 			LLA with same address (and no other LLA in same thread)</li>
 <li>
-SEB: Swap E register with B register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SEB">SEB: </a>
+Swap E register with B register. Always done full width, no flags set.</li>
 <li>
-STZ: Store zero into a memory location</li>
+<a href="af65002opdesc.html#STZ">STZ: </a>
+Store zero into a memory location</li>
 <li>
-SWP: swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</li>
+<a href="af65002opdesc.html#SWP">SWP: </a>
+swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</li>
 <li>
-SXY: Swap X with Y register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#SXY">SXY: </a>
+Swap X with Y register. Always done full width, no flags set.</li>
 <li>
-TAB: Transfer AC to B register</li>
+<a href="af65002opdesc.html#TAB">TAB: </a>
+Transfer AC to B register</li>
 <li>
-TAE: Transfer AC to E register</li>
+<a href="af65002opdesc.html#TAE">TAE: </a>
+Transfer AC to E register</li>
 <li>
-TBA: Transfer base register B to Accumulator</li>
+<a href="af65002opdesc.html#TBA">TBA: </a>
+Transfer base register B to Accumulator</li>
 <li>
-TBE: Transfer content of B register into E register (full width)</li>
+<a href="af65002opdesc.html#TBE">TBE: </a>
+Transfer content of B register into E register (full width)</li>
 <li>
-TEA: Transfer E register to Accumulator</li>
+<a href="af65002opdesc.html#TEA">TEA: </a>
+Transfer E register to Accumulator</li>
 <li>
-TEB: Transfer E to B register (full width)</li>
+<a href="af65002opdesc.html#TEB">TEB: </a>
+Transfer E to B register (full width)</li>
 <li>
-TPA: Transfer Program counter to Accumulator</li>
+<a href="af65002opdesc.html#TPA">TPA: </a>
+Transfer Program counter to Accumulator</li>
 <li>
-TRB: Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
+<a href="af65002opdesc.html#TRB">TRB: </a>
+Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
 				memory location that are set in the accumulator.</li>
 <li>
-TSB: Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
+<a href="af65002opdesc.html#TSB">TSB: </a>
+Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
 				memory location that are set in the accumulator.</li>
 <li>
-TSY: Transfer stack pointer to Y</li>
+<a href="af65002opdesc.html#TSY">TSY: </a>
+Transfer stack pointer to Y</li>
 <li>
-TYS: Transfer Y to stack pointer</li>
+<a href="af65002opdesc.html#TYS">TYS: </a>
+Transfer Y to stack pointer</li>
 <li>
-WMB: Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</li>
+<a href="af65002opdesc.html#WMB">WMB: </a>
+Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</li>
 </ul>

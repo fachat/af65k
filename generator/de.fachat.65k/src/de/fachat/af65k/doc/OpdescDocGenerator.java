@@ -105,10 +105,9 @@ public class OpdescDocGenerator {
 				wr.startListItem();
 				wr.startLink("#" + op.getName());
 				wr.print(op.getName());
+				wr.endLink();
 				wr.print(" - ");
 				wr.print(op.getDesc());
-				wr.endLink();
-				
 			}				
 		}
 		wr.endUnsortedList();

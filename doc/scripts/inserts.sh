@@ -130,6 +130,17 @@ echo "Run: " $0 $src $target $base
 		mv $t2 $t1
 
 		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@EXTLONG@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/ext-longtable-$base.html"
+			cat $gendir/ext-longtable-$base.html \
+				>> $t2
+			doinsert2 $t1 $t2 "@EXTLONG@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
 		doinsert1 $t1 $t2 "@OPDESC@"
 		v=$?
 		if [ $v -eq 1 ]; then

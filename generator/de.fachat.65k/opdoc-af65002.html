@@ -1,328 +1,334 @@
 <h2>List of operations</h2>
 <ul>
 <li>
-<a href="#ADB">ADB - Add value to B register</a>
-</li>
+<a href="#ADB">ADB</a>
+ - Add value to B register</li>
 <li>
-<a href="#ADC">ADC - Add content of memory location to accumulator</a>
-</li>
+<a href="#ADC">ADC</a>
+ - Add content of memory location to accumulator</li>
 <li>
-<a href="#ADE">ADE - Add value to E register</a>
-</li>
+<a href="#ADD">ADD</a>
+ - Add content of memory location to accumulator without using carry as input</li>
 <li>
-<a href="#ADS">ADS - Add value to stack pointer</a>
-</li>
+<a href="#ADE">ADE</a>
+ - Add value to E register</li>
 <li>
-<a href="#AND">AND - Bitwise AND accumulator with content of memory location</a>
-</li>
+<a href="#ADS">ADS</a>
+ - Add value to stack pointer</li>
 <li>
-<a href="#ASL">ASL - Arithmetic Shift Left - shift accumulator one bit to the left, shifting in zero in bit 0</a>
-</li>
+<a href="#AND">AND</a>
+ - Bitwise AND accumulator with content of memory location</li>
 <li>
-<a href="#ASR">ASR - Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</a>
-</li>
+<a href="#ASL">ASL</a>
+ - Arithmetic Shift Left - shift accumulator one bit to the left, shifting in zero in bit 0</li>
 <li>
-<a href="#BCC">BCC - Branch on carry clear - take branch when C flag is cleared</a>
-</li>
+<a href="#ASR">ASR</a>
+ - Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
 <li>
-<a href="#BCN">BCN - Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</a>
-</li>
+<a href="#BCC">BCC</a>
+ - Branch on carry clear - take branch when C flag is cleared</li>
 <li>
-<a href="#BCS">BCS - Branch on carry set - take branch when C flag is set</a>
-</li>
+<a href="#BCN">BCN</a>
+ - Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
 <li>
-<a href="#BEQ">BEQ - Branch on equal - take branch when Z flag is set</a>
-</li>
+<a href="#BCS">BCS</a>
+ - Branch on carry set - take branch when C flag is set</li>
 <li>
-<a href="#BGT">BGT - Branch if greater - take branch when C flag is set but Z flag is clear</a>
-</li>
+<a href="#BEQ">BEQ</a>
+ - Branch on equal - take branch when Z flag is set</li>
 <li>
-<a href="#BIT">BIT - Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
-				zero) flags from the result. In case of the accumulator addressing, simply set the flags from the accumulator</a>
-</li>
+<a href="#BGT">BGT</a>
+ - Branch if greater - take branch when C flag is set but Z flag is clear</li>
 <li>
-<a href="#BLE">BLE - Branch if less or equal - take branch when C flag is clear or Z flag is set</a>
-</li>
+<a href="#BIT">BIT</a>
+ - Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
+				zero) flags from the result. In case of the accumulator addressing, simply set the flags from the accumulator</li>
 <li>
-<a href="#BMI">BMI - Branch on minus - take branch when N flag is set</a>
-</li>
+<a href="#BLE">BLE</a>
+ - Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
 <li>
-<a href="#BNE">BNE - Branch on not equal - take branch when Z flag is cleared</a>
-</li>
+<a href="#BMI">BMI</a>
+ - Branch on minus - take branch when N flag is set</li>
 <li>
-<a href="#BPL">BPL - Branch on plus - take branch when N flag is cleared</a>
-</li>
+<a href="#BNE">BNE</a>
+ - Branch on not equal - take branch when Z flag is cleared</li>
 <li>
-<a href="#BRA">BRA - Branch always - branch independent from any flags</a>
-</li>
+<a href="#BPL">BPL</a>
+ - Branch on plus - take branch when N flag is cleared</li>
 <li>
-<a href="#BRK">BRK - Starts the break routine.</a>
-</li>
+<a href="#BRA">BRA</a>
+ - Branch always - branch independent from any flags</li>
 <li>
-<a href="#BSR">BSR - Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</a>
-</li>
+<a href="#BRK">BRK</a>
+ - Starts the break routine.</li>
 <li>
-<a href="#BVC">BVC - Branch on overflow clear - take branch when V flag is cleared</a>
-</li>
+<a href="#BSR">BSR</a>
+ - Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</li>
 <li>
-<a href="#BVS">BVS - Branch on overflow set - take branch when V flag is set</a>
-</li>
+<a href="#BVC">BVC</a>
+ - Branch on overflow clear - take branch when V flag is cleared</li>
 <li>
-<a href="#CLC">CLC - Clear the C flag</a>
-</li>
+<a href="#BVS">BVS</a>
+ - Branch on overflow set - take branch when V flag is set</li>
 <li>
-<a href="#CLD">CLD - Clear the decimal (D) flag</a>
-</li>
+<a href="#CLC">CLC</a>
+ - Clear the C flag</li>
 <li>
-<a href="#CLI">CLI - Clear the interrupt (I) flag</a>
-</li>
+<a href="#CLD">CLD</a>
+ - Clear the decimal (D) flag</li>
 <li>
-<a href="#CLV">CLV - Clear the overflow (V) flag</a>
-</li>
+<a href="#CLI">CLI</a>
+ - Clear the interrupt (I) flag</li>
 <li>
-<a href="#CMP">CMP - Compare accumulator with content of memory location</a>
-</li>
+<a href="#CLV">CLV</a>
+ - Clear the overflow (V) flag</li>
 <li>
-<a href="#CPX">CPX - Compare X register with content of memory location</a>
-</li>
+<a href="#CMP">CMP</a>
+ - Compare accumulator with content of memory location</li>
 <li>
-<a href="#CPY">CPY - Compare Y register with content of memory location</a>
-</li>
+<a href="#CPX">CPX</a>
+ - Compare X register with content of memory location</li>
 <li>
-<a href="#DEC">DEC - Decrement the content of a memory location by one</a>
-</li>
+<a href="#CPY">CPY</a>
+ - Compare Y register with content of memory location</li>
 <li>
-<a href="#DEX">DEX - Decrement the content of the X register by one</a>
-</li>
+<a href="#DEC">DEC</a>
+ - Decrement the content of a memory location by one</li>
 <li>
-<a href="#DEY">DEY - Decrement the Y register by one</a>
-</li>
+<a href="#DEX">DEX</a>
+ - Decrement the content of the X register by one</li>
 <li>
-<a href="#EOR">EOR - Bitwise Exclusive-OR accumulator with content of memory location</a>
-</li>
+<a href="#DEY">DEY</a>
+ - Decrement the Y register by one</li>
 <li>
-<a href="#EXT">EXT - Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</a>
-</li>
+<a href="#EOR">EOR</a>
+ - Bitwise Exclusive-OR accumulator with content of memory location</li>
 <li>
-<a href="#INC">INC - Increment the content of a memory location by one</a>
-</li>
+<a href="#EXT">EXT</a>
+ - Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
 <li>
-<a href="#INV">INV - invert AC, i.e. set AC to the 2s-complement of AC</a>
-</li>
+<a href="#INC">INC</a>
+ - Increment the content of a memory location by one</li>
 <li>
-<a href="#INX">INX - Increment the content of the X register by one</a>
-</li>
+<a href="#INV">INV</a>
+ - invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
-<a href="#INY">INY - Increment the content of the Y register by one</a>
-</li>
+<a href="#INX">INX</a>
+ - Increment the content of the X register by one</li>
 <li>
-<a href="#JMP">JMP - Jump to new code address</a>
-</li>
+<a href="#INY">INY</a>
+ - Increment the content of the Y register by one</li>
 <li>
-<a href="#JSR">JSR - Jump subroutine - jump to a new code location, save return address on stack for RTS</a>
-</li>
+<a href="#JMP">JMP</a>
+ - Jump to new code address</li>
 <li>
-<a href="#LDA">LDA - Load accumulator</a>
-</li>
+<a href="#JSR">JSR</a>
+ - Jump subroutine - jump to a new code location, save return address on stack for RTS</li>
 <li>
-<a href="#LDB">LDB - Load B with an immediate value</a>
-</li>
+<a href="#LDA">LDA</a>
+ - Load accumulator</li>
 <li>
-<a href="#LDE">LDE - Load E with an immediate value</a>
-</li>
+<a href="#LDB">LDB</a>
+ - Load B with an immediate value</li>
 <li>
-<a href="#LDX">LDX - Load X register</a>
-</li>
+<a href="#LDE">LDE</a>
+ - Load E with an immediate value</li>
 <li>
-<a href="#LDY">LDY - Load Y register</a>
-</li>
+<a href="#LDX">LDX</a>
+ - Load X register</li>
 <li>
-<a href="#LEA">LEA - Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</a>
-</li>
+<a href="#LDY">LDY</a>
+ - Load Y register</li>
 <li>
-<a href="#LSR">LSR - Logical Shift Right - shift accumulator one bit to the right, shifting in zero in the highest bit</a>
-</li>
+<a href="#LEA">LEA</a>
+ - Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</li>
 <li>
-<a href="#NOP">NOP - No operation</a>
-</li>
+<a href="#LSR">LSR</a>
+ - Logical Shift Right - shift accumulator one bit to the right, shifting in zero in the highest bit</li>
 <li>
-<a href="#ORA">ORA - Bitwise OR accumulator with content of memory location</a>
-</li>
+<a href="#NOP">NOP</a>
+ - No operation</li>
 <li>
-<a href="#PEA">PEA - Push Effective Address: compute the effective address and push it onto the stack (always full width)</a>
-</li>
+<a href="#ORA">ORA</a>
+ - Bitwise OR accumulator with content of memory location</li>
 <li>
-<a href="#PHA">PHA - Push contents of the accumulator onto the stack</a>
-</li>
+<a href="#PEA">PEA</a>
+ - Push Effective Address: compute the effective address and push it onto the stack (always full width)</li>
 <li>
-<a href="#PHB">PHB - Push B onto stack (full width)</a>
-</li>
+<a href="#PHA">PHA</a>
+ - Push contents of the accumulator onto the stack</li>
 <li>
-<a href="#PHE">PHE - Push E onto stack (always full width)</a>
-</li>
+<a href="#PHB">PHB</a>
+ - Push B onto stack (full width)</li>
 <li>
-<a href="#PHP">PHP - Push processor status register onto the stack</a>
-</li>
+<a href="#PHE">PHE</a>
+ - Push E onto stack (always full width)</li>
 <li>
-<a href="#PHX">PHX - Push contents of the X register onto the stack</a>
-</li>
+<a href="#PHP">PHP</a>
+ - Push processor status register onto the stack</li>
 <li>
-<a href="#PHY">PHY - Push contents of the Y register onto the stack</a>
-</li>
+<a href="#PHX">PHX</a>
+ - Push contents of the X register onto the stack</li>
 <li>
-<a href="#PLA">PLA - Pull the contents of the accumulator from the stack</a>
-</li>
+<a href="#PHY">PHY</a>
+ - Push contents of the Y register onto the stack</li>
 <li>
-<a href="#PLB">PLB - Pull E from stack (full width)</a>
-</li>
+<a href="#PLA">PLA</a>
+ - Pull the contents of the accumulator from the stack</li>
 <li>
-<a href="#PLE">PLE - Pull E from stack (full width)</a>
-</li>
+<a href="#PLB">PLB</a>
+ - Pull E from stack (full width)</li>
 <li>
-<a href="#PLP">PLP - Pull processor status register from the stack</a>
-</li>
+<a href="#PLE">PLE</a>
+ - Pull E from stack (full width)</li>
 <li>
-<a href="#PLX">PLX - Pull the contents of the X register from the stack</a>
-</li>
+<a href="#PLP">PLP</a>
+ - Pull processor status register from the stack</li>
 <li>
-<a href="#PLY">PLY - Pull the contents of the Y register from the stack</a>
-</li>
+<a href="#PLX">PLX</a>
+ - Pull the contents of the X register from the stack</li>
 <li>
-<a href="#PRB">PRB - Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</a>
-</li>
+<a href="#PLY">PLY</a>
+ - Pull the contents of the Y register from the stack</li>
 <li>
-<a href="#RDL">RDL - Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</a>
-</li>
+<a href="#PRB">PRB</a>
+ - Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
 <li>
-<a href="#RDR">RDR - Rotate Direct Right - similar to ROR, but do not shift in carry, but the lowest bit of the original value</a>
-</li>
+<a href="#RDL">RDL</a>
+ - Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
 <li>
-<a href="#ROL">ROL - Rotate Left - shift accumulator one bit to the left, shifting in the carry flag in bit 0, and shifting the 
-        	highest bit into the carry flag instead.</a>
-</li>
+<a href="#RDR">RDR</a>
+ - Rotate Direct Right - similar to ROR, but do not shift in carry, but the lowest bit of the original value</li>
 <li>
-<a href="#ROR">ROR - Rotate Right - shift accumulator one bit to the right, shifting in the carry flag in the highest bit, and shifting 
-        	bit 0 into the carry flag instead.</a>
-</li>
+<a href="#ROL">ROL</a>
+ - Rotate Left - shift accumulator one bit to the left, shifting in the carry flag in bit 0, and shifting the 
+        	highest bit into the carry flag instead.</li>
 <li>
-<a href="#RTI">RTI - Return from interrupt</a>
-</li>
+<a href="#ROR">ROR</a>
+ - Rotate Right - shift accumulator one bit to the right, shifting in the carry flag in the highest bit, and shifting 
+        	bit 0 into the carry flag instead.</li>
 <li>
-<a href="#RTS">RTS - Return from subroutine - read return address from stack</a>
-</li>
+<a href="#RTI">RTI</a>
+ - Return from interrupt</li>
 <li>
-<a href="#RTU">RTU - Return from trap handler.</a>
-</li>
+<a href="#RTS">RTS</a>
+ - Return from subroutine - read return address from stack</li>
 <li>
-<a href="#SAB">SAB - Swap A register with B register. Always done full width, no flags set.</a>
-</li>
+<a href="#RTU">RTU</a>
+ - Return from trap handler.</li>
 <li>
-<a href="#SAE">SAE - Swap AC with E register. Always done full width, no flags set.</a>
-</li>
+<a href="#SAB">SAB</a>
+ - Swap A register with B register. Always done full width, no flags set.</li>
 <li>
-<a href="#SAX">SAX - Swap AC with X register. Always done full width, no flags set.</a>
-</li>
+<a href="#SAE">SAE</a>
+ - Swap AC with E register. Always done full width, no flags set.</li>
 <li>
-<a href="#SAY">SAY - Swap AC with Y register. Always done full width, no flags set.</a>
-</li>
+<a href="#SAX">SAX</a>
+ - Swap AC with X register. Always done full width, no flags set.</li>
 <li>
-<a href="#SBB">SBB - Substract value from B register</a>
-</li>
+<a href="#SAY">SAY</a>
+ - Swap AC with Y register. Always done full width, no flags set.</li>
 <li>
-<a href="#SBC">SBC - Substract content of memory location from accumulator</a>
-</li>
+<a href="#SBB">SBB</a>
+ - Substract value from B register</li>
 <li>
-<a href="#SBE">SBE - Add value to E register</a>
-</li>
+<a href="#SBC">SBC</a>
+ - Substract content of memory location from accumulator</li>
 <li>
-<a href="#SBS">SBS - Substract value from stack pointer</a>
-</li>
+<a href="#SBE">SBE</a>
+ - Add value to E register</li>
 <li>
-<a href="#SEB">SEB - Swap E register with B register. Always done full width, no flags set.</a>
-</li>
+<a href="#SBS">SBS</a>
+ - Substract value from stack pointer</li>
 <li>
-<a href="#SEC">SEC - Set the C flag</a>
-</li>
+<a href="#SEB">SEB</a>
+ - Swap E register with B register. Always done full width, no flags set.</li>
 <li>
-<a href="#SED">SED - Set the decimal (D) flag</a>
-</li>
+<a href="#SEC">SEC</a>
+ - Set the C flag</li>
 <li>
-<a href="#SEI">SEI - Set the interrupt (I) flag</a>
-</li>
+<a href="#SED">SED</a>
+ - Set the decimal (D) flag</li>
 <li>
-<a href="#STA">STA - Store the content of the accumulator into a memory location</a>
-</li>
+<a href="#SEI">SEI</a>
+ - Set the interrupt (I) flag</li>
 <li>
-<a href="#STX">STX - Store the content of the X register to memory.</a>
-</li>
+<a href="#STA">STA</a>
+ - Store the content of the accumulator into a memory location</li>
 <li>
-<a href="#STY">STY - Store the content of the Y register to memory.</a>
-</li>
+<a href="#STX">STX</a>
+ - Store the content of the X register to memory.</li>
 <li>
-<a href="#STZ">STZ - Store zero into a memory location</a>
-</li>
+<a href="#STY">STY</a>
+ - Store the content of the Y register to memory.</li>
 <li>
-<a href="#SWP">SWP - swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</a>
-</li>
+<a href="#STZ">STZ</a>
+ - Store zero into a memory location</li>
 <li>
-<a href="#SXY">SXY - Swap X with Y register. Always done full width, no flags set.</a>
-</li>
+<a href="#SUB">SUB</a>
+ - Substract content of memory location from accumulator without using the carry flag as input</li>
 <li>
-<a href="#TAB">TAB - Transfer AC to B register</a>
-</li>
+<a href="#SWP">SWP</a>
+ - swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</li>
 <li>
-<a href="#TAE">TAE - Transfer AC to E register</a>
-</li>
+<a href="#SXY">SXY</a>
+ - Swap X with Y register. Always done full width, no flags set.</li>
 <li>
-<a href="#TAX">TAX - Transfer the contents of accumulator into the X register</a>
-</li>
+<a href="#TAB">TAB</a>
+ - Transfer AC to B register</li>
 <li>
-<a href="#TAY">TAY - Transfer the contents of accumulator into the Y register</a>
-</li>
+<a href="#TAE">TAE</a>
+ - Transfer AC to E register</li>
 <li>
-<a href="#TBA">TBA - Transfer base register B to Accumulator</a>
-</li>
+<a href="#TAX">TAX</a>
+ - Transfer the contents of accumulator into the X register</li>
 <li>
-<a href="#TBE">TBE - Transfer content of B register into E register (full width)</a>
-</li>
+<a href="#TAY">TAY</a>
+ - Transfer the contents of accumulator into the Y register</li>
 <li>
-<a href="#TEA">TEA - Transfer E register to Accumulator</a>
-</li>
+<a href="#TBA">TBA</a>
+ - Transfer base register B to Accumulator</li>
 <li>
-<a href="#TEB">TEB - Transfer E to B register (full width)</a>
-</li>
+<a href="#TBE">TBE</a>
+ - Transfer content of B register into E register (full width)</li>
 <li>
-<a href="#TPA">TPA - Transfer Program counter to Accumulator</a>
-</li>
+<a href="#TEA">TEA</a>
+ - Transfer E register to Accumulator</li>
 <li>
-<a href="#TRB">TRB - Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
-				memory location that are set in the accumulator.</a>
-</li>
+<a href="#TEB">TEB</a>
+ - Transfer E to B register (full width)</li>
 <li>
-<a href="#TRP">TRP - Trap into 65k supervisor mode</a>
-</li>
+<a href="#TPA">TPA</a>
+ - Transfer Program counter to Accumulator</li>
 <li>
-<a href="#TSB">TSB - Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
-				memory location that are set in the accumulator.</a>
-</li>
+<a href="#TRB">TRB</a>
+ - Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
+				memory location that are set in the accumulator.</li>
 <li>
-<a href="#TSX">TSX - Transfer the contents of the stack pointer into the X register (Note: needs RS to keep compatibility with 6502)</a>
-</li>
+<a href="#TRP">TRP</a>
+ - Trap into 65k supervisor mode</li>
 <li>
-<a href="#TSY">TSY - Transfer stack pointer to Y</a>
-</li>
+<a href="#TSB">TSB</a>
+ - Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
+				memory location that are set in the accumulator.</li>
 <li>
-<a href="#TXA">TXA - Transfer the contents of the X register into the accumulator</a>
-</li>
+<a href="#TSX">TSX</a>
+ - Transfer the contents of the stack pointer into the X register (Note: needs RS to keep compatibility with 6502)</li>
 <li>
-<a href="#TXS">TXS - Transfer the contents of X register into the stack pointer (Note: needs RS to keep compatibility with 6502)</a>
-</li>
+<a href="#TSY">TSY</a>
+ - Transfer stack pointer to Y</li>
 <li>
-<a href="#TYA">TYA - Transfer the contents of the Y register into the accumulator</a>
-</li>
+<a href="#TXA">TXA</a>
+ - Transfer the contents of the X register into the accumulator</li>
 <li>
-<a href="#TYS">TYS - Transfer Y to stack pointer</a>
-</li>
+<a href="#TXS">TXS</a>
+ - Transfer the contents of X register into the stack pointer (Note: needs RS to keep compatibility with 6502)</li>
+<li>
+<a href="#TYA">TYA</a>
+ - Transfer the contents of the Y register into the accumulator</li>
+<li>
+<a href="#TYS">TYS</a>
+ - Transfer Y to stack pointer</li>
 </ul>
 <h2>ADB</h2>
 <a name="ADB"> </a><p>Add value to B register</p>
@@ -356,6 +362,31 @@
         	decimal mode status bis is set or not respectively.
         	</p><pre>
         		AC, C, V <= AC + Operand, C
+        		N <= Tmp(7)
+        		Z <= Z(Tmp)
+        	</pre><p>For a handling of the V-flag please see 
+        	<a href="http://www.6502.org/tutorials/vflag.html">http://www.6502.org/tutorials/vflag.html</a>.
+        	</p><h3>65k</h3>
+<p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS and LE together also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p><h2>ADD</h2>
+<a name="ADD"> </a><p>Add content of memory location to accumulator without using carry as input</p>
+<table><tr><th colspan="10">ADD</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x05</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x00</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Add the operand to the accumulator and store back in the accumulator.
+        	Set the flags from the result. Use Binary mode add only.
+        	Do not use the Carry flag as input.
+        	</p><pre>
+        		AC, C, V <= AC + Operand
         		N <= Tmp(7)
         		Z <= Z(Tmp)
         	</pre><p>For a handling of the V-flag please see 
@@ -1197,7 +1228,7 @@
 <tr><td></td><td>0xae</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xb6</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xbe</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0xa2</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>EXT</td><td>0xad</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1244,19 +1275,26 @@
 <a name="LEA"> </a><p>Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</p>
 <table><tr><th colspan="10">LEA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x02</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x42</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x62</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x80</td><td>65k</td><td>AM, OF, UM, NF</td><td>Relative</td><td></td></tr>
+<tr><td>EXT</td><td>0xf6</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x61</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 64bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x71</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indexed with X indirect 64bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x21</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x31</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xa2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Relative</td><td></td></tr>
 <tr><td>EXT</td><td>0xa1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
 <tr><td>EXT</td><td>0x46</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage</td><td></td></tr>
 <tr><td>EXT</td><td>0xae</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td>EXT</td><td>0xb1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0xb2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x32</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xf2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x72</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 64bit</td><td></td></tr>
 <tr><td>EXT</td><td>0x56</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0xb9</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xbf</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0xbe</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0x44</td><td>65k</td><td>AM, OF, UM, NF</td><td>Relative 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x22</td><td>65k</td><td>AM, OF, UM, NF</td><td>Relative 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xe1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xf1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X indirect 64bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1356,19 +1394,26 @@
 <a name="PEA"> </a><p>Push Effective Address: compute the effective address and push it onto the stack (always full width)</p>
 <table><tr><th colspan="10">PEA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x22</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0xc2</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0xe2</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x41</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 64bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x51</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 64bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xd6</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x01</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x11</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
 <tr><td>EXT</td><td>0x82</td><td>65k</td><td>AM, OF, UM</td><td>Relative</td><td></td></tr>
-<tr><td>EXT</td><td>0xc1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x85</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0x81</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x86</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage</td><td></td></tr>
 <tr><td>EXT</td><td>0xce</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x91</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0x92</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x95</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0x99</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x12</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xd2</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 64bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x52</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 64bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x96</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xdf</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0xde</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0x54</td><td>65k</td><td>AM, OF, UM</td><td>Relative 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x02</td><td>65k</td><td>AM, OF, UM</td><td>Relative 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0xc1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 64bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2073,6 +2118,31 @@
         	whether the operand is in user space.
         	</p><p>
         	RS also determine the width of the operation.
+        	Note that the default is to use BYTE-wide operation without load extension.
+        	</p><h2>SUB</h2>
+<a name="SUB"> </a><p>Substract content of memory location from accumulator without using the carry flag as input</p>
+<table><tr><th colspan="10">SUB</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x85</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x80</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Substract the operand from the accumulator and store back in the accumulator.
+        	Set the flags from the result. Use Binary mode add only. C status flag is not used as
+        	input, but set as borrow from the result.
+        	</p><pre>
+        		AC, C, V <= AC - Operand
+        		N <= Tmp(7)
+        		Z <= Z(Tmp)
+        	</pre><p>For a handling of the V-flag please see 
+        	<a href="http://www.6502.org/tutorials/vflag.html">http://www.6502.org/tutorials/vflag.html</a>.
+        	</p><h3>65k</h3>
+<p>
+        	The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines 
+        	whether the operand is in user space. NF allows to not set the flags.
+        	</p><p>
+        	RS and LE together also determine the width of the operation.
         	Note that the default is to use BYTE-wide operation without load extension.
         	</p><h2>SWP</h2>
 <a name="SWP"> </a><p>swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</p>

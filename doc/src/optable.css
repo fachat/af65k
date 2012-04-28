@@ -31,10 +31,17 @@ table.optable td {
 	margin: 0;
 	padding: 0.2em;
 	background-color: #ffffff;
+	vertical-align: top;
 }
 
 table.optable td div.prefixes {
 	font-size: smaller;
+	vertical-align: bottom;
+	font-style: italic;
+}
+
+table.optable td div.opc {
+	vertical-align: top;
 }
 
 table.optable td.prefix {
@@ -47,6 +54,10 @@ table.optable td.cmos {
 
 table.optable td.c65k {
 	background-color: #aaaaff;
+}
+
+table.optable td.c65k10 {
+	background-color: #aaaaaa;
 }
 
 table.optable td.unused {
