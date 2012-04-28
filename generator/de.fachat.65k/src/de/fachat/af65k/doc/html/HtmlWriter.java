@@ -39,7 +39,7 @@ public class HtmlWriter implements DocWriter {
 
 	private static enum STATE {
 		DOC, SECTION, SUBSECTION, SUBSUBSECTION, TABLE, ROW, CELL, HCELL, PARAGRAPH, UNSORTEDLIST, LISTITEM,
-		LINK
+		LINK, DIV
 	}
 
 	protected Stack<STATE> stack = new Stack<STATE>();
@@ -79,6 +79,7 @@ public class HtmlWriter implements DocWriter {
 			case SUBSECTION:
 			case SECTION:
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -103,6 +104,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case UNSORTEDLIST:
 				end = true;
+				break;
+			case DIV:
+				doEndDiv();
 				break;
 			case LINK:
 				doEndLink();
@@ -161,6 +165,9 @@ public class HtmlWriter implements DocWriter {
 			case LINK:
 				doEndLink();
 				break;
+			case DIV:
+				doEndDiv();
+				break;
 			default:
 				throw new IllegalStateException("Illegal state '" + s
 						+ "' in startSubsection()");
@@ -213,6 +220,7 @@ public class HtmlWriter implements DocWriter {
 				doEndSection();
 				break;
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -271,6 +279,7 @@ public class HtmlWriter implements DocWriter {
 				end = true;
 				break;
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -324,12 +333,9 @@ public class HtmlWriter implements DocWriter {
 				doEndSubsubsection();
 				break;
 			case SECTION:
-				end = true;
-				break;
 			case SUBSECTION:
-				end = true;
-				break;
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -373,6 +379,7 @@ public class HtmlWriter implements DocWriter {
 				end = true;
 				break;
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -426,12 +433,9 @@ public class HtmlWriter implements DocWriter {
 				doEndParagraph();
 				break;
 			case SUBSECTION:
-				end = true;
-				break;
 			case SECTION:
-				end = true;
-				break;
 			case DOC:
+			case DIV:
 				end = true;
 				break;
 			case LINK:
@@ -475,6 +479,9 @@ public class HtmlWriter implements DocWriter {
 			case ROW:
 				doEndRow();
 				break;
+			case DIV:
+				doEndDiv();
+				break;
 			case TABLE:
 				end = true;
 				break;
@@ -513,6 +520,9 @@ public class HtmlWriter implements DocWriter {
 				break;
 			case HCELL:
 				doEndHCell();
+				break;
+			case DIV:
+				doEndDiv();
 				break;
 			case ROW:
 				end = true;
@@ -557,6 +567,9 @@ public class HtmlWriter implements DocWriter {
 			case CELL:
 				doEndCell();
 				break;
+			case DIV:
+				doEndDiv();
+				break;
 			case ROW:
 				end = true;
 				break;
@@ -588,6 +601,9 @@ public class HtmlWriter implements DocWriter {
 		while ((!end) && (!stack.isEmpty())) {
 			STATE s = stack.peek();
 			switch (s) {
+			case DIV:
+				doEndDiv();
+				break;
 			case CELL:
 				doEndCell();
 				break;
@@ -652,6 +668,9 @@ public class HtmlWriter implements DocWriter {
 			case LINK:
 				doEndLink();
 				break;
+			case DIV:
+				doEndDiv();
+				break;
 			case DOC:
 				end = true;
 				break;
@@ -668,6 +687,67 @@ public class HtmlWriter implements DocWriter {
 	public void printline() {
 		wr.print("<br/>");
 	}
+
+	// -------------------------------------------------------------------------------------------------------
+
+	@Override
+	public void endDiv() {
+		boolean end = false;
+		while ((!end) && (!stack.isEmpty())) {
+			STATE s = stack.peek();
+			switch (s) {
+			case CELL:
+				doEndCell();
+				break;
+			case HCELL:
+				doEndHCell();
+				break;
+			case ROW:
+				doEndRow();
+				break;
+			case TABLE:
+				doEndTable();
+				break;
+			case SUBSECTION:
+				doEndSubsection();
+				break;
+			case SUBSUBSECTION:
+				doEndSubsubsection();
+				break;
+			case SECTION:
+				doEndSection();
+				break;
+			case LINK:
+				doEndLink();
+				break;
+			case DIV:
+			case DOC:
+				end = true;
+				break;
+			default:
+				throw new IllegalStateException("Illegal state '" + s
+						+ "' in startSubsection()");
+			}
+		}
+
+		doEndDiv();
+	}
+
+	@Override
+	public void startDiv(Map<String, String> atts) {
+		doStartDiv(atts);
+	}
+
+	private void doStartDiv(Map<String, String> atts) {
+		printStartWithAtts("div", atts);
+		stack.push(STATE.DIV);
+	}
+
+	private void doEndDiv() {
+		wr.println("</div>");
+		stack.pop();
+	}
+
 
 	// -------------------------------------------------------------------------------------------------------
 

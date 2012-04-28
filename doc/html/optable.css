@@ -33,6 +33,10 @@ table.optable td {
 	background-color: #ffffff;
 }
 
+table.optable td div.prefixes {
+	font-size: smaller;
+}
+
 table.optable td.prefix {
 	background-color: #aaffaa;
 }

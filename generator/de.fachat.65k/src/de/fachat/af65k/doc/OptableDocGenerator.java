@@ -99,6 +99,9 @@ public class OptableDocGenerator {
 		unusedatts.put("class", "unused");
 		Map<String, String> prefixatts = new HashMap<String, String>();
 		prefixatts.put("class", "prefix");
+		Map<String, String> prefixdivatts = new HashMap<String, String>();
+		prefixdivatts.put("class", "prefixes");
+		Map<String, String> opcodedivatts = new HashMap<String, String>();
 		
 		Map<String, Map<String, String>> classatts = new HashMap<String, Map<String,String>>();
 		Map<String, String> tmp = new HashMap<String, String>();
@@ -155,6 +158,7 @@ public class OptableDocGenerator {
 						}
 					}
 					wr.startTableCell(atts);
+					wr.startDiv(opcodedivatts);
 					wr.print(entry.getOperation().getName());
 					Set<SyntaxMode> synmodes = entry.getSynmodes();
 					if (synmodes != null) {
@@ -164,7 +168,9 @@ public class OptableDocGenerator {
 							wr.print(sm.getSimplesyntax());
 						}
 					}
+					wr.endDiv();
 					if (doLong) {
+						wr.startDiv(prefixdivatts);
 						List<PrefixSetting> fixed = entry.getOpcode().getFixed();
 						if (!entry.getPrefixbits().isEmpty()) {
 							wr.printline();
@@ -185,10 +191,11 @@ public class OptableDocGenerator {
 									}
 								}
 								if (it.hasNext()) {
-									wr.print(",");
+									wr.print(", ");
 								}
 							}
 						}						
+						wr.endDiv();
 					}
 				} else
 				if (prefix != null && prefix.length() > 0) {

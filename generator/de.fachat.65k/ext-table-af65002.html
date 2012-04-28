@@ -1,18 +1,157 @@
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
-<tr><th>0</th><td class="unused"></td><td class="unused"></td><td>LEA zp,Y</td><td class="unused"></td><td class="c65k10">MVN </td><td class="unused"></td><td>ASR zp</td><td class="unused"></td><td>PHE </td><td>ORA (E)</td><td>ASR </td><td class="unused"></td><td>TSB (E)</td><td>ASL (E)</td><td>ASR abs</td><td>ASL abs,Y</td></tr>
-<tr><th>1</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="c65k10">MVP </td><td class="unused"></td><td>ASR zp,X</td><td class="unused"></td><td class="c65k10">HBC </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>TRB (E)</td><td>ASR (E)</td><td>ASR abs,X</td><td>ASR abs,Y</td></tr>
-<tr><th>2</th><td>JSR (E)</td><td class="unused"></td><td>PEA zp,Y</td><td class="unused"></td><td class="c65k10">FIL </td><td>ADE #byte</td><td>RDL zp</td><td class="unused"></td><td>PLE </td><td>AND (E)</td><td>RDL </td><td class="unused"></td><td class="unused"></td><td>ROL (E)</td><td>RDL abs</td><td>ROL abs,Y</td></tr>
-<tr><th>3</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>BIT </td><td>ADE </td><td>RDL zp,X</td><td class="unused"></td><td class="c65k10">BSW </td><td>LDE #byte</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>RDL (E)</td><td>RDL abs,X</td><td>RDL abs,Y</td></tr>
-<tr><th>4</th><td class="unused"></td><td class="unused"></td><td>LEA (abs),Y</td><td class="unused"></td><td>LEA relwide</td><td>ADS #byte</td><td>LEA zp</td><td class="unused"></td><td>PHB </td><td>EOR (E)</td><td class="unused"></td><td class="unused"></td><td>JMP (E)</td><td>LSR (E)</td><td class="unused"></td><td>LSR abs,Y</td></tr>
-<tr><th>5</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>PEA relwide</td><td>ADS </td><td>LEA zp,X</td><td class="unused"></td><td>PRB </td><td>LDB #byte</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
-<tr><th>6</th><td class="unused"></td><td class="unused"></td><td>LEA (abs,X)</td><td class="unused"></td><td class="c65k10">RMB </td><td>ADB #byte</td><td>RDR zp</td><td class="unused"></td><td>PLB </td><td>ADC (E)</td><td>RDR </td><td class="unused"></td><td>JMP long</td><td>ROR (E)</td><td>RDR abs</td><td>ROR abs,Y</td></tr>
-<tr><th>7</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="c65k10">WMB </td><td>ADB </td><td>RDR zp,X</td><td class="unused"></td><td class="c65k10">HBS </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>RDR (E)</td><td>RDR abs,X</td><td>RDR abs,Y</td></tr>
-<tr><th>8</th><td>LEA rel</td><td class="unused"></td><td>PEA rel</td><td class="unused"></td><td>SCA (E)</td><td>PEA zp</td><td class="unused"></td><td class="unused"></td><td>TAE </td><td>BIT (E)</td><td>TYS </td><td class="unused"></td><td>STY (E)</td><td>STA (E)</td><td class="unused"></td><td>STY abs,X</td></tr>
-<tr><th>9</th><td>BLE rel</td><td class="unused"></td><td>PEA (zp)</td><td class="unused"></td><td>LLA (E)</td><td>PEA zp,X</td><td class="unused"></td><td class="unused"></td><td>TEA </td><td>PEA abs,Y</td><td>SXY </td><td class="unused"></td><td>STZ (E)</td><td>STX (E)</td><td>STZ abs,Y</td><td class="unused"></td></tr>
-<tr><th>A</th><td>LDY (E)</td><td>LEA (zp,X)</td><td>LDX (E)</td><td class="unused"></td><td>INV </td><td>SBE #byte</td><td class="unused"></td><td class="unused"></td><td>SAB </td><td>LDA (E)</td><td class="unused"></td><td class="unused"></td><td class="c65k10">PSH </td><td class="unused"></td><td>LEA abs</td><td>STX abs,Y</td></tr>
-<tr><th>B</th><td>BGT rel</td><td>LEA (zp),Y</td><td>LEA (zp)</td><td class="unused"></td><td>BCN </td><td>SBE </td><td class="unused"></td><td class="unused"></td><td>SEB </td><td>LEA abs,Y</td><td>SAX </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>LEA abs,X</td><td class="unused"></td></tr>
-<tr><th>C</th><td>CPY (E)</td><td>PEA (zp,X)</td><td>PEA (abs),Y</td><td class="unused"></td><td>EXT </td><td>SBS #byte</td><td class="unused"></td><td class="unused"></td><td>TPA </td><td>CMP (E)</td><td>TSY </td><td class="unused"></td><td class="c65k10">PLL </td><td>DEC (E)</td><td>PEA abs</td><td>DEC abs,Y</td></tr>
-<tr><th>D</th><td class="unused"></td><td>PEA (zp),Y</td><td class="unused"></td><td class="unused"></td><td>SWP </td><td>SBS </td><td class="unused"></td><td class="unused"></td><td>SAE </td><td class="unused"></td><td>SAY </td><td class="unused"></td><td>JSR long</td><td class="unused"></td><td>PEA abs,X</td><td class="unused"></td></tr>
-<tr><th>E</th><td>CPX (E)</td><td class="unused"></td><td>PEA (abs,X)</td><td class="unused"></td><td>RMB (E)</td><td>SBB #byte</td><td class="unused"></td><td class="unused"></td><td>TAB </td><td>SBC (E)</td><td>TEB </td><td class="unused"></td><td class="unused"></td><td>INC (E)</td><td class="unused"></td><td>INC abs,Y</td></tr>
-<tr><th>F</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td>WMB (E)</td><td>SBB </td><td class="unused"></td><td class="unused"></td><td>TBA </td><td class="unused"></td><td>TBE </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>0</th><td class="unused"></td><td class="unused"></td><td><div>LEA zp,Y</div>
+</td><td class="unused"></td><td class="c65k10"><div>MVN </div>
+</td><td class="unused"></td><td><div>ASR zp</div>
+</td><td class="unused"></td><td><div>PHE </div>
+</td><td><div>ORA (E)</div>
+</td><td><div>ASR </div>
+</td><td class="unused"></td><td><div>TSB (E)</div>
+</td><td><div>ASL (E)</div>
+</td><td><div>ASR abs</div>
+</td><td><div>ASL abs,Y</div>
+</td></tr>
+<tr><th>1</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="c65k10"><div>MVP </div>
+</td><td class="unused"></td><td><div>ASR zp,X</div>
+</td><td class="unused"></td><td class="c65k10"><div>HBC </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>TRB (E)</div>
+</td><td><div>ASR (E)</div>
+</td><td><div>ASR abs,X</div>
+</td><td><div>ASR abs,Y</div>
+</td></tr>
+<tr><th>2</th><td><div>JSR (E)</div>
+</td><td class="unused"></td><td><div>PEA zp,Y</div>
+</td><td class="unused"></td><td class="c65k10"><div>FIL </div>
+</td><td><div>ADE #byte</div>
+</td><td><div>RDL zp</div>
+</td><td class="unused"></td><td><div>PLE </div>
+</td><td><div>AND (E)</div>
+</td><td><div>RDL </div>
+</td><td class="unused"></td><td class="unused"></td><td><div>ROL (E)</div>
+</td><td><div>RDL abs</div>
+</td><td><div>ROL abs,Y</div>
+</td></tr>
+<tr><th>3</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>BIT </div>
+</td><td><div>ADE </div>
+</td><td><div>RDL zp,X</div>
+</td><td class="unused"></td><td class="c65k10"><div>BSW </div>
+</td><td><div>LDE #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>RDL (E)</div>
+</td><td><div>RDL abs,X</div>
+</td><td><div>RDL abs,Y</div>
+</td></tr>
+<tr><th>4</th><td class="unused"></td><td class="unused"></td><td><div>LEA (abs),Y</div>
+</td><td class="unused"></td><td><div>LEA relwide</div>
+</td><td><div>ADS #byte</div>
+</td><td><div>LEA zp</div>
+</td><td class="unused"></td><td><div>PHB </div>
+</td><td><div>EOR (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>JMP (E)</div>
+</td><td><div>LSR (E)</div>
+</td><td class="unused"></td><td><div>LSR abs,Y</div>
+</td></tr>
+<tr><th>5</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>PEA relwide</div>
+</td><td><div>ADS </div>
+</td><td><div>LEA zp,X</div>
+</td><td class="unused"></td><td><div>PRB </div>
+</td><td><div>LDB #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>6</th><td class="unused"></td><td class="unused"></td><td><div>LEA (abs,X)</div>
+</td><td class="unused"></td><td class="c65k10"><div>RMB </div>
+</td><td><div>ADB #byte</div>
+</td><td><div>RDR zp</div>
+</td><td class="unused"></td><td><div>PLB </div>
+</td><td><div>ADC (E)</div>
+</td><td><div>RDR </div>
+</td><td class="unused"></td><td><div>JMP long</div>
+</td><td><div>ROR (E)</div>
+</td><td><div>RDR abs</div>
+</td><td><div>ROR abs,Y</div>
+</td></tr>
+<tr><th>7</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="c65k10"><div>WMB </div>
+</td><td><div>ADB </div>
+</td><td><div>RDR zp,X</div>
+</td><td class="unused"></td><td class="c65k10"><div>HBS </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>RDR (E)</div>
+</td><td><div>RDR abs,X</div>
+</td><td><div>RDR abs,Y</div>
+</td></tr>
+<tr><th>8</th><td><div>LEA rel</div>
+</td><td class="unused"></td><td><div>PEA rel</div>
+</td><td class="unused"></td><td><div>SCA (E)</div>
+</td><td><div>PEA zp</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>TAE </div>
+</td><td><div>BIT (E)</div>
+</td><td><div>TYS </div>
+</td><td class="unused"></td><td><div>STY (E)</div>
+</td><td><div>STA (E)</div>
+</td><td class="unused"></td><td><div>STY abs,X</div>
+</td></tr>
+<tr><th>9</th><td><div>BLE rel</div>
+</td><td class="unused"></td><td><div>PEA (zp)</div>
+</td><td class="unused"></td><td><div>LLA (E)</div>
+</td><td><div>PEA zp,X</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>TEA </div>
+</td><td><div>PEA abs,Y</div>
+</td><td><div>SXY </div>
+</td><td class="unused"></td><td><div>STZ (E)</div>
+</td><td><div>STX (E)</div>
+</td><td><div>STZ abs,Y</div>
+</td><td class="unused"></td></tr>
+<tr><th>A</th><td><div>LDY (E)</div>
+</td><td><div>LEA (zp,X)</div>
+</td><td><div>LDX (E)</div>
+</td><td class="unused"></td><td><div>INV </div>
+</td><td><div>SBE #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>SAB </div>
+</td><td><div>LDA (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="c65k10"><div>PSH </div>
+</td><td class="unused"></td><td><div>LEA abs</div>
+</td><td><div>STX abs,Y</div>
+</td></tr>
+<tr><th>B</th><td><div>BGT rel</div>
+</td><td><div>LEA (zp),Y</div>
+</td><td><div>LEA (zp)</div>
+</td><td class="unused"></td><td><div>BCN </div>
+</td><td><div>SBE </div>
+</td><td class="unused"></td><td class="unused"></td><td><div>SEB </div>
+</td><td><div>LEA abs,Y</div>
+</td><td><div>SAX </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>LEA abs,X</div>
+</td><td class="unused"></td></tr>
+<tr><th>C</th><td><div>CPY (E)</div>
+</td><td><div>PEA (zp,X)</div>
+</td><td><div>PEA (abs),Y</div>
+</td><td class="unused"></td><td><div>EXT </div>
+</td><td><div>SBS #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>TPA </div>
+</td><td><div>CMP (E)</div>
+</td><td><div>TSY </div>
+</td><td class="unused"></td><td class="c65k10"><div>PLL </div>
+</td><td><div>DEC (E)</div>
+</td><td><div>PEA abs</div>
+</td><td><div>DEC abs,Y</div>
+</td></tr>
+<tr><th>D</th><td class="unused"></td><td><div>PEA (zp),Y</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>SWP </div>
+</td><td><div>SBS </div>
+</td><td class="unused"></td><td class="unused"></td><td><div>SAE </div>
+</td><td class="unused"></td><td><div>SAY </div>
+</td><td class="unused"></td><td><div>JSR long</div>
+</td><td class="unused"></td><td><div>PEA abs,X</div>
+</td><td class="unused"></td></tr>
+<tr><th>E</th><td><div>CPX (E)</div>
+</td><td class="unused"></td><td><div>PEA (abs,X)</div>
+</td><td class="unused"></td><td><div>RMB (E)</div>
+</td><td><div>SBB #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div>TAB </div>
+</td><td><div>SBC (E)</div>
+</td><td><div>TEB </div>
+</td><td class="unused"></td><td class="unused"></td><td><div>INC (E)</div>
+</td><td class="unused"></td><td><div>INC abs,Y</div>
+</td></tr>
+<tr><th>F</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div>WMB (E)</div>
+</td><td><div>SBB </div>
+</td><td class="unused"></td><td class="unused"></td><td><div>TBA </div>
+</td><td class="unused"></td><td><div>TBE </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 </table>

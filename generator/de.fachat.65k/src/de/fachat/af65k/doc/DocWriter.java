@@ -157,4 +157,8 @@ public interface DocWriter {
 	void startLink(String string);
 
 	void endLink();
+
+	void startDiv(Map<String, String> opcodedivatts);
+
+	void endDiv();
 }
