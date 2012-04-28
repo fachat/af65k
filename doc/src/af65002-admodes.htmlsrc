@@ -1,0 +1,121 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="65002 Addressing Modes">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <style>optable.css</style>
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	This page describes the addressing modes for the 65k line of processors.
+	</p>
+  </overview>
+  <toc/>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+  <section toc="admam" name="Addressing Modes Introduction">
+ 	<desc><p>
+	The 65k is a 64&nbsp;bit processor. As such the addressing modes of the 6502 are not
+	sufficient to really use the up to 64&nbsp;bit address space. Adding arbitrary new 
+	addressing modes would clutter the opcode space. So I defined a prefix bit that 
+	converts existing addressing modes into new, extended addressing modes.
+	</p><p>
+        Looking at the opcode table for example in <a href="af65002opcodes.html">this page</a> 
+	you will notice that no new addressing modes are shown. Here the AM prefix code comes into play.
+        </p>
+        <p>The addressing mode prefix bit AM allows to extend the existing addressing modes from zeropage (8&nbsp;bit) and
+        absolute (16&nbsp;bit) to long (32&nbsp;bit) and longlong (64&nbsp;bit). The following table shows the
+        modifications when AM is set.</p>
+<table class="optable">
+<tr><th>Original Addressing Mode</th><th>New Addressing Mode</th><th>Comment</th></tr>
+<tr><td>zp</td><td>long</td><td>use a long (32&nbsp;bit) address instead of a zeropage address</td></tr>
+<tr><td>zp,X</td><td>long,X</td><td>use a long (32&nbsp;bit) address instead of a zeropage address</td></tr>
+<tr><td>zp,Y</td><td>long,Y</td><td>use a long (32&nbsp;bit) address instead of a zeropage address</td></tr>
+<tr><td>abs</td><td>longlong</td><td>use a longlong (64&nbsp;bit) address instead of an absolute address</td></tr>
+<tr><td>abs,X</td><td>longlong,X</td><td>use a longlong (64&nbsp;bit) address instead of an absolute address</td></tr>
+<tr><td>abs,Y</td><td>longlong,Y</td><td>use a longlong (64&nbsp;bit) address instead of an absolute address</td></tr>
+<tr><td>(zp)</td><td>[zp]</td><td>from the given zeropage location, read a long address instead of an absolute address</td></tr>
+<tr><td>(zp),Y</td><td>[zp],Y</td><td>from the given zeropage location, read a long address instead of an absolute address, then add YR</td></tr>
+<tr><td>(zp,X)</td><td>[zp,X]</td><td>from the given zeropage location (plus XR as given by the addressing mode), read a long address instead of an absolute address</td></tr>
+<tr><td>(abs)</td><td>[abs]</td><td>from the given absolute location, read a long address instead of an absolute address</td></tr>
+<tr><td>(abs),Y</td><td>[abs],Y</td><td>from the given absolute location, read a long address instead of an absolute address, then add YR</td></tr>
+<tr><td>(abs,X)</td><td>[abs,X]</td><td>from the given absolute location (plus XR as given by the addressing mode), read a long address instead of an absolute address</td></tr>
+<tr><td class="dup">(zp)</td><td>[[zp]]</td><td>from the given zeropage location, read a quad (longlong)  address instead of an absolute address</td></tr>
+<tr><td class="dup">(zp),Y</td><td>[[zp]],Y</td><td>from the given zeropage location, read a quad (longlong) address instead of an absolute address, then add YR</td></tr>
+<tr><td class="dup">(zp,X)</td><td>[[zp,X]]</td><td>from the given zeropage location (plus XR as given by the addressing mode), read a quad (longlong) address instead of an absolute address</td></tr>
+<tr><td class="dup">(abs)</td><td>[[abs]]</td><td>from the given absolute location, read a quad (longlong) address instead of an absolute address</td></tr>
+<tr><td class="dup">(abs),Y</td><td>[[abs]],Y</td><td>from the given absolute location, read a quad (longlong) address instead of an absolute address, then add YR</td></tr>
+<tr><td class="dup">(abs,X)</td><td>[[abs,X]]</td><td>from the given absolute location (plus XR as given by the addressing mode), read a quad (longlong) address instead of an absolute address</td></tr>
+<tr><td>imm</td><td>imm</td><td>unchanged</td></tr>
+<tr><td>implied</td><td>implied</td><td>unchanged</td></tr>
+<tr><td>rel</td><td>rellong</td><td>extend the relative offset from an 8 bit to a 32 bit value</td></tr>
+<tr><td>relwide</td><td>relquad</td><td>extend the relative offset from a 16 bit to a 64 bit value</td></tr>
+</table>
+	<p>
+        With a simple translation not all new addressing modes would be supported. The indirect addressing modes
+	normally (6502) read a word address, with the AM bit set they read a long address - but for
+	using a quad address another solution is needed.
+        Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect
+        addressing modes.
+        Opcode Row LSB 1 is mirrored to row LSB 3, as well as row LSB 2 is mirrored to LSB 7.
+        These values are marked with a green background in the table
+	in <a href="af65002opstruct.html">the opcode structure page</a>. The LSB 3 and 7 rows need to have
+	the AM prefix set to 1, and use the quad (longlong) indirect addressing modes.
+        </p><p>
+        Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address. This can be overcome with the offset prefix though.
+	</p></desc>
+  </section>
+
+   <section toc="prefof" name="Offset prefix">
+      <desc>
+        <p>
+	As has been shown in the <a href="af65002prefixes#prefof">Prefixes page</a> two prefix bits
+	can be used to add a register value to an operand. This creates PC-relative, Stack-relative and
+	B-register-relative addressing modes. The table from that page is reproduced here for convenience:
+        </p><table class="optable">
+        <tr><th>OF1/0</th><th>Register</th><th>Register Name</th><th>Syntax</th><th>Examples</th></tr>
+        <tr><td>00</td><td>-</td><td>no register value added</td><td>-</td><td>LDA $1234</td></tr>
+        <tr><td>01</td><td>PC</td><td>Program Counter</td><td>Address prefix P,</td><td>LDA P,$1234; LDA (P,$12),Y</td></tr>
+        <tr><td>10</td><td>SR</td><td>Stack Pointer</td><td>Address prefix S,</td><td>LDA S,$1234; LDA [S,$23,X]</td></tr>
+        <tr><td>11</td><td>BR</td><td>Base Register</td><td>Address prefix B,</td><td>LDA B,$1234; LDA B,$12,X</td></tr>
+        </table><p>
+        Note that the size of the address read from the indirect address is defined by the addressing mode
+        alone (which is also determined by the AM prefix bit).
+        </p>
+       </desc>
+   </section>
+
+  <section toc="admlst" name="Addressing Modes List">
+        <desc><p>
+        This section describes an overview on the addressing modes of the 65k processor. An addressing mode determines
+        effective address of an operand (no matter what size the operand is). The addressing modes are
+        described in detail below.
+        </p>
+
+<!-- admodes-table-af65002.html -->
+@ADMODES@
+
+</desc>
+   </section>
+
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2012-04-23.
+  </closing>
+</docpage>
+
