@@ -1,0 +1,319 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160;"> ]>
+<docpage name="The 65k Project - Architecture Overview">
+  <author>
+    <name>Andr&eacute; Fachat</name> 
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2010</yearstart>
+    <yearend>2011</yearend>
+  </author>
+  <keywords>6502 16bit 32bit expansion</keywords>
+  <metadesc>6502 16bit 32bit expansion</metadesc>
+  <forum type="6502.org">http://forum.6502.org/viewtopic.php?p=12180</forum>
+  <overview>
+	<p>
+	This page describes an overview on the 65k architecture.
+	</p><p>
+	</p>
+  </overview>
+  <news>
+    <item date="2012-04-11">
+	Moved and updated to 65002R0
+    </item>
+    <item date="2010-10-23">
+	Published this page
+    </item>
+    <item date="2010-10-14">
+	Started this page
+    </item>
+  </news>
+  <toc/>
+
+  <section toc="preface" name="Preface">
+  <subsection toc="lic" name="License">
+    <desc><p>
+        This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
+    </p><p>
+        Note this "content" includes this web page, but does not include the 6502.org header
+        and the left and right web page columns.  Click on the "Maximize" link to see
+        the contents covered by this license.
+    </p></desc>
+    <extlink name="CC-BY-SA legal code" link="http://creativecommons.org/licenses/by-sa/3.0/legalcode"/>
+    <extlink name="CC-BY-SA license deed (short form)" link="http://creativecommons.org/licenses/by-sa/3.0/"/>
+  </subsection>
+  <subsection toc="disc" name="Disclaimer">
+    <desc><p>
+        The content comes with no warranty at all!
+        There is no guarantee and no promise that this specification is correct, consistent, will actually work,
+        or will ever be implemented at all.
+    </p><p>
+        To my understanding the techniques described here have been used by various processors for decades already.
+        Still there is no guarantee that a processor according to this spec would not be covered by some patents.
+    </p><p>
+        Subject to change without notice!
+    </p></desc>
+  </subsection>
+  <subsection toc="cont" name="Contributors">
+    <desc><ul>
+        <li>Andr&eacute; Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
+    </ul></desc>
+  </subsection>
+  <subsection toc="chg" name="Changes">
+    <desc><p>This section describes the changes to the document:</p>
+      <table border="1">
+        <tr><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>2010-10-25</td><td>Andr&eacute; Fachat</td><td>Updated Core Architecture Diagram and Description</td></tr>
+      </table>
+    </desc>
+  </subsection>
+  </section>
+
+  <section toc="top" name="Top Level Architecture">
+     <desc><p>This section describes the top level architecture, i.e. the top level
+	building blocks of the processor and their relations. Compared to the 6502
+	there are more such building blocks, the processor is more complex. The 6502
+	basically compares to the core - which is described in more detail below.</p>
+	<div class="rightimg"><a href="archtop.svg"><img width="300" src="archtop.png"/></a>The top level
+	architecture</div>
+	<p>
+	The following sections describe the components.
+	</p>
+     </desc>
+     <subsection toc="topcore" name="Core">
+	<desc>
+	<p>
+	The core is the actual processor. It contains registers, ALU, and so on. With the 
+	rest of the system it communicates using three bus interfaces:
+	</p>
+	<ol>
+	<li>Instruction fetch bus - read the next instruction</li>
+	<li>Data read bus - read some data word</li>
+	<li>Data write bus - write some data word </li>
+	</ol>
+	<p>
+	</p>
+       	</desc>
+     </subsection>
+     <subsection toc="rwseq" name="Read / Write Data Sequencer, Read Arbiter">
+	<desc>
+	  <p>
+	  The read and write sequencers break down misaligned memory accesses
+	  into accesses that can be executed on the external bus.
+	  The core has two channels to the read/write sequencer - one for data reads and writes,
+	  one for opcode fetches.
+	  </p><p>
+	  The read/write sequencer is adaptable and prepares for and accepts read/write transfers
+	  in any bus width available. I.e. you can connect byte wide, word wide or long wide 
+	  memory. The core provides write data such that each type of memory gets the data on
+	  the correct bits. Depending on the address offset the memory has to actually overwrite
+	  only the changed parts. For example:
+	  </p>
+	  <table border="1">
+	  <tr><th>Write width</th><th>Address offset</th><th>Output</th></tr>
+	  <tr><td>8</td><td>3</td><td>
+		<table border="1">
+			<tr><th>output byte</th><th>data byte</th><th>valid</th><th>comment</th></tr>
+			<tr><td>0</td><td>0</td><td>yes</td><td>byte wide memory</td></tr>
+			<tr><td>1</td><td>0</td><td>yes</td><td>word wide memory</td></tr>
+			<tr><td>2</td><td></td><td>no</td><td></td></tr>
+			<tr><td>3</td><td>0</td><td>yes</td><td>long wide memory</td></tr>
+		</table>
+		</td></tr>
+	  <tr><td>16</td><td>1</td><td>
+		<table border="1">
+			<tr><th>output byte</th><th>data byte</th><th>valid</th><th>comment</th></tr>
+			<tr><td>0</td><td>0</td><td>yes</td><td>byte wide memory</td></tr>
+			<tr><td>1</td><td>0</td><td>yes</td><td>word/long wide memory (word requires a second access)</td></tr>
+			<tr><td>2</td><td>1</td><td>yes</td><td>long wide memory</td></tr>
+			<tr><td>3</td><td></td><td>no</td><td></td></tr>
+		</table>
+		</td></tr>
+	  <tr><td>16</td><td>2</td><td>
+		<table border="1">
+			<tr><th>output byte</th><th>data byte</th><th>valid</th><th>comment</th></tr>
+			<tr><td>0</td><td>0</td><td>yes</td><td>byte/word wide memory</td></tr>
+			<tr><td>1</td><td>1</td><td>yes</td><td>word wide memory</td></tr>
+			<tr><td>2</td><td>0</td><td>yes</td><td>long wide memory</td></tr>
+			<tr><td>3</td><td>1</td><td>yes</td><td>long wide memory</td></tr>
+		</table>
+		</td></tr>
+	  </table>
+	  <p>
+	  Note that the address offset is the lowest two bits of the address (for up to long memory
+	  access, quad access would need the lowest three bits) - depending on the requested 
+	  access width and the address offset the attached memory must only overwrite the valid
+	  data to be written (i.e. create the select/write enable signals). 
+	  The attached memory then signals the memory width to the read/write sequencer, which 
+	  increases the address and determines if a second (or more) access is required.
+	  </p><p>
+	  For read accesses, the attached memory signals the access width to the core, and the
+	  read/write sequencer picks the right bytes from the input signals. It then 
+	  updates the address accordingly depending on attached memory width and address offset,
+	  and checks if the access is done.
+	  </p><p>
+	  In the read/write sequencer the data read/write accesses take precedence over the
+	  instruction fetches. Another difference is that the data read/write accesses
+	  are broken down from the requested width to the memory access width, and accesses
+	  are done in sequence until the full data has been transferred. The fetch access
+ 	  always requests full width - but accepts chunks of data in all width, just as they
+	  come in.
+	  </p>
+       	</desc>
+     </subsection>
+
+     <subsection toc="shell" name="CPU Shell">
+	<desc>
+	  <p>
+		The CPU shell passes the memory accesses to and from the read/write sequencer.
+		If the system had mulitple cores, the shell would select from which core the
+		access would come from.
+	  </p><p>
+		The CPU shell also handles the interrupt input signals, passes them to the
+		interrupt arbiter, and then to the cores.
+	  </p><p>
+		In the future it will also handle the processor configuration register handling.
+	  </p>
+       	</desc>
+     </subsection>
+
+     <subsection toc="irqarb" name="IRQ arbiter">
+	<desc>
+	  <p>
+		The IRQ arbiter receives the interrupt signals from the external interface
+		and can distribute the interrupt signals the different cores. 
+	  </p><p>
+		The current version just routes all interrupts to the first core.
+	  </p>
+       	</desc>
+     </subsection>
+
+  </section>
+
+  <section toc="core" name="Core Architecture">
+     <desc><p>
+	This section describes the architecture of the processor core. A block diagram is on the right side, 
+	click it to enlarge.
+	</p>
+	<div class="rightimg"><a href="archcore.svg"><img width="300" src="archcore.png"/></a>The core 
+	architecture</div>
+	<p>
+	The general principle of the core is that every action takes one cycle, from falling phi2 to falling phi2.
+	Within this cycle, the values from one or two registers (including data bus input for example) is transferred
+	to another register, including address or data output busses.
+	</p><p>
+	Within the core there are registers, bus extenders, 
+	an ALU, a fetch logic, controller, and a bus interface. All those are described below.
+	The components are placed around three busses, the "outbus" (main purpose: output from the ALU), the "inbus" (main purpose:
+	input from the data bus) and the "regbus" (main purpose: output from a register). During the programming of the
+	opcodes I found that I had to provide many more connections to avoid moving data around or adding extra temporary registers,
+	so the three busses now have many more inputs than originally planned.
+	</p>
+     </desc>
+
+     <subsection toc="regs" name="Registers">
+     <desc><p>
+	The registers are implemented in different components: A temporary register, the register file, 
+	a constant register file, and the status register.
+	</p><p>
+	The constant register is the most simple one, it just provides a number of constant values (e.g. to add or substract address 
+	offsets during address computation).
+	</p><p>
+	The temporary register stores, at falling phi2, the input value and presents it on the output.
+	</p><p>
+	The register file contains the A,X,Y,B,E as well as USP and SSP registers. It takes a read register number at falling phi2
+	and presents the contents of the register after the falling phi2. It holds the last value read even if the read register
+	number drops. At the same time it allows to write any of the registers using the write register number.
+	This synchronous operation allows to use block RAM in an FPGA (once I have figured out how to do this...)
+	The USP and SSP registers behave differenly. Both are implemented twice, the original register and a fallback register
+	that is updated when the opcode is finished. The reason is that in case of an abort the fallback register needs to be
+	written back to the original register. This is done as part of the register file, not of the operation sequencer.
+	</p><p>
+	The status register contains the status bits. These bits are the same as in the original 6502, but add the
+	u and x flags. The "u" flag is set in user mode and clear in hypervisor more. The "x" flag is used as part of the
+	stack frame to signal an extended stack frame. Apart from the "usual" inputs to the status register e.g. from the 
+	ALU to set the flags, the status register has connections to the outbus and regbus to handle stack pulls and pushes
+	of the status register. Similar to USP and SSP the status register flags are implemented as original and fallback
+	to be able to correctly handle ABORT situations.
+	</p><p>
+	Note that only status, USP and SSP require ABORT handling.
+	</p>
+     </desc>
+     </subsection>
+
+     <subsection toc="ext" name="Extenders">
+     <desc><p>
+	The bus extenders for the inbus and outbus allow extending values to the full bus width using zero-, one-, or 
+	sign-extension (or pass through the value). This is not only used according to the prefix bits, but also to extend
+	the offset parameters for example.
+     </p></desc>
+     </subsection>
+
+     <subsection toc="alu" name="ALU">
+     <desc><p>
+	The ALU provides the aritmethical and logical operations. Note that besides the ADC and SBC operations it
+	also supports ADD and SUB that do not use the carry flag. Those are used for example in address computations.
+	The ALU is asynchronous.
+     </p></desc>
+     </subsection>
+
+     <subsection toc="fetch" name="Fetch" >
+     <desc><p>
+	The opcode fetch requests data from the read/write sequencer and stores it into the input buffer.
+	Once it has determined that the input buffer contains the full opcode, this opcode is presented
+	to the control sequencer until it is taken.
+	</p><p>
+	Meanwhile the fetch logic fills up the input buffer, so that subsequent opcodes can be fed directly
+	from the fetch logic to the sequencer even without memory access.
+	</p><p>
+	In case of an interrupt the fetch logic injects an IRQ handling opcode into the opcode sequence.
+	The same basically happens on ABORT, only that an ABORT is signalled by the control sequencer when
+	a memory access problem ("seg fault") has been detected.
+     </p></desc>
+     </subsection>
+
+     <subsection toc="ctrl" name="Control (sequencer)" >
+     <desc><p>
+	The control sequencer takes the opcode from the fetch logic, and sequences it into control signals 
+	for all the other components. It stops counting when a memory access takes more than one cycle, so it
+	handles the RDY stuff.
+     </p></desc>
+     </subsection>
+
+  </section>
+
+  <section toc="discussion" name="Discussion">
+     <desc><p>
+	Now that the first revision has been made, there is need of some discussion.
+	</p>
+     </desc>
+
+     <subsection toc="d_predec" name="Predecoding and register RAM">
+     <desc><p>
+	The control sequencer is implementing some prefetch logic for when the opcode is being taken from the
+	fetch logic. Before the opcode is actually stored, it is used to compute a read register number to send
+	to the register file, so that the register value can be used in the next cycle. 
+	This is done to allow the use of block RAM in the register file.
+	</p><p>
+	Although this predecode
+	is already interleaved with the last cycle of the previous opcode, it introduces 
+	complexity and path length which reduces the overall clock frequency. It is not clear to me if it
+	actually helps that much with the block RAM to justify this effort.
+	</p><p>
+	At one time this path was the critical path for the timing calculations.
+     </p></desc>
+     </subsection>
+
+     <subsection toc="d_pathlen" name="Path length">
+     <desc><p>
+	The current version (as of april 11, 2012) has a maximum of 32 levels of logic and a clock limit of about 12 MHz when implemented in a
+	4ns Spartan 3. This is the result of a long path length, that also seems to be routed all across
+	the CPU. I don't really understand those paths yet though. The paths that are shown in the tool's analysis should not exist...
+     </p></desc>
+     </subsection>
+
+  </section>
+
+  <closing>
+@FOOTER@
+  </closing>
+</docpage>

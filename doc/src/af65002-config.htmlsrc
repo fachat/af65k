@@ -1,0 +1,75 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="65002 Configuration Registers">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	This section describes the configuration registers of the 65002.
+	Please note that more detail is available in the respective feature
+	page related to the configuration register.
+	</p><p>
+	Note that there are two opcodes that allow reading and writing the
+	processor configuration registers, LCR, SCR. Also there is BCR, a BIT
+	of AC with the value of the processor configuration register.
+	</p>
+  </overview>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+  <section toc="cr" name="Processor Configuration Registers">
+    <desc><p>
+        The configuration value registers are basically constant values that the program can query from the
+        processor. These values can then be used by the program to identify the processor, resp. adapt
+        itself to the processor features present. They also allow to peek into some of the runtime
+	registers, and allow to control e.g. interrupt handling.
+	</p><p>
+        The following processor configuration registers are defined (note narrow values are always zero-extended):</p>
+<table border="1">
+<tr><th>Register#</th><th>rw/ro</th><th>global/per core</th><th>Name</th><th>Width</th><th>Value</th></tr>
+<tr><td>$00</td><td>ro</td><td>global</td><td>VENDOR</td><td>16&nbsp;bit</td><td>Defines the vendor of the processor.
+                        Currently defined are:
+                        <table><tr><td>$AF</td><td>A. Fachat</td></tr></table></td></tr>
+<tr><td>$01</td><td>ro</td><td>per core</td><td>MC_MYCORE</td><td>W bit</td><td>Number of the core executing the load</td></tr>
+<tr><td>$02</td><td>ro</td><td>global</td><td>MC_NCORE</td><td>W bit</td><td>Number of cores</td></tr>
+<tr><td>$03</td><td>ro</td><td>global</td><td>MC_ACTCORE</td><td>W bit</td><td>Bitmask of active cores, can be set to start cores and cleared to stop them (except the own core)</td></tr>
+
+<tr><td>$10</td><td>ro</td><td>per core</td><td>ST_SR</td><td>16 bit</td><td>Status register</td></tr>
+<tr><td>$11</td><td>rw</td><td>global</td><td>ST_IMR</td><td>8 bit</td><td>interrupt mask register</td></tr>
+<tr><td>$12</td><td>ro</td><td>global</td><td>ST_ISR</td><td>8 bit</td><td>interrupt status register</td></tr>
+<tr><td>$13</td><td>ro</td><td>global</td><td>ST_EIM</td><td>8 bit</td><td>effective interrupt mask register</td></tr>
+<tr><td>$14</td><td>ro</td><td>per core</td><td>ST_SP</td><td>8 bit</td><td>stack pointer (hypervisor)</td></tr>
+<tr><td>$15</td><td>ro</td><td>per core</td><td>ST_USP</td><td>8 bit</td><td>stack pointer (user mode)</td></tr>
+<tr><td>$16</td><td>rw</td><td>per core</td><td>ST_MH</td><td>8 bit</td><td>match code (hypervisor)</td></tr>
+<tr><td>$17</td><td>rw</td><td>per core</td><td>ST_MU</td><td>8 bit</td><td>match code (user mode)</td></tr>
+
+<tr><td>$20</td><td>rw</td><td>global</td><td>ST_IV</td><td>W bit</td><td>Interrupt vector base register</td></tr>
+<tr><td>$21</td><td>rw</td><td>global</td><td>ST_AV</td><td>W bit</td><td>Abort vector base register</td></tr>
+<tr><td>$22</td><td>rw</td><td>global</td><td>ST_TV</td><td>W bit</td><td>Trap vector base register</td></tr>
+
+<tr><td>$30</td><td>ro</td><td>global</td><td>MM_CONT</td><td>8&nbsp;bit</td><td>Number of memory management containers</td></tr>
+</table>
+
+    </desc>
+  </section>
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2012-04-23.
+  </closing>
+</docpage>
+

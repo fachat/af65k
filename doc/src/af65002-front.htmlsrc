@@ -23,6 +23,7 @@
 	extension (see the compatibility issues page).
 	</p>
   </overview>
+  <toc/>
   <!--news>
     <item date="2012-04-12" state="hot">
         First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
@@ -61,6 +62,17 @@
         <li>Andr&eacute; Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
     </ul></desc>
   </subsection>
+  </section>
+
+  <section toc="todo" name="TODO">
+    <desc><p>
+	Here is a list of items still to do:
+    </p>
+    <ul>
+	<li>Clarify how the memory mapping should work of multiple matches occur</li>
+	<li>Add the LCR/SCR/BCR opcodes. Add the SYS page and related opcodes</li>
+    </ul>
+    </desc>
   </section>
 
   <section toc="chg" name="Changes">
@@ -126,6 +138,7 @@
 			zp/abs indirect/indexed quad modes that were all missing. </li>
 		<li>Added the ADD and SUB opcodes with immediate and
 			E-indirect addressing modes.</li>
+		<li>Added all missing tables, plus a TODO section on this page</li>
                 </ul></td></tr>
       </table>
     </desc>

@@ -222,7 +222,7 @@
 	When a register set is active, the address mask is ANDed with the CPU address, and compared with the address compare value.
 	If the values match, then the CPU address is ANDed with the inverse of the address mask, and ORed with the address offset. 
 	</p><p>
-	To avoid priority encoding, all inverse address masks are ANDed and all address offsets are ORed before processing the CPU address.
+	For more details see the <a href="af65002mem.html">Memory Management page</a>.
 	</p>
     </desc>
   </section>
@@ -231,7 +231,7 @@
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2012-04-23.
+Last updated 2012-04-29.
   </closing>
 </docpage>
 

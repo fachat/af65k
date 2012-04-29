@@ -270,17 +270,23 @@
         For the supervisor mode there is an option, however, to use an address from user mode as operand.
         This is what the User Mode selector bit (UM) is for.
         </p><p>
-        When the User Mode selector is set, the operand following the opcode is read from the current (hypervisor mode)
+        When the User Mode selector is set, <!--the operand following the opcode is read from the current (hypervisor mode)
         memory environment (as defined by the matchcode). Then the processor temporarily switches to user mode,
         using the user mode matchcode and usermode stack pointer. For non-indirect addressing modes then the operand
         is written to or read from the computed address. For indirect addressing modes the indirect address is
-        read from user mode, then the actual operand is read from or written to user mode as well.
+        read from user mode, then the actual operand is read from or written to user mode as well.-->
+	the address calculation is still done in hypervisor mode (including fetching the indirect addresses),
+	but the actual operation reads and/or writes the operand from/to user mode memory.
         </p><p>
         Note that this bit is a privileged operation - unavailable if no hypervisor mode option is present, and
         trapping into an abort if executed in user mode.
         </p><p>
         With the user mode selector such operations as PHA or PLX etc can be easily redirected to the user space
         stack.
+        </p><p>	
+	If it is needed to also compute the address in user mode - relevant only for the indirect addresses -
+	use LEA.U with the indirect addressing mode. This computes the address in user mode and stores it in E. 
+	Then use the E-indirect addressing mode on the actual operation.
         </p>
 	</desc>
   </section>

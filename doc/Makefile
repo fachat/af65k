@@ -1,13 +1,33 @@
 
 GENDIR=../generator/de.fachat.65k
 XSL=scripts/htmlsrc2html.xsl
-TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html html/af65002opstruct.html html/af65002prefixes.html html/af65002admodes.html
+TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html html/af65002opstruct.html html/af65002prefixes.html html/af65002admodes.html html/af65002hyper.html html/af65002mem.html html/af65002config.html html/af65002arch.html html/archcore.png html/archtop.png html/archtop.svg html/archcore.svg
 
 INSERT_SH=scripts/inserts.sh
 
 all: $(TARGET)
 
 html/af65002front.html: src/af65002-front.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	xsltproc $(XSL) $< > $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002hyper.html: src/af65002-hyper.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	xsltproc $(XSL) $< > $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002arch.html: src/af65002-arch.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	xsltproc $(XSL) $< > $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002config.html: src/af65002-config.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	xsltproc $(XSL) $< > $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002mem.html: src/af65002-mem.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
 	xsltproc $(XSL) $< > $@.tmp
 	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
 	rm $@.tmp
@@ -57,4 +77,17 @@ html/doc.css: src/doc.css
 
 html/optable.css: src/optable.css
 	cp $< $@
+
+html/archcore.png: src/archcore.png
+	cp $< $@
+
+html/archtop.png: src/archtop.png
+	cp $< $@
+
+html/archcore.svg: src/archcore.svg
+	cp $< $@
+
+html/archtop.svg: src/archtop.svg
+	cp $< $@
+
 

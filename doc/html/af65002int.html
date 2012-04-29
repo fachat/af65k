@@ -22,10 +22,14 @@
 <li><a href="af65002opdesc.html">Opcode Docs</a></li>
 <li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
 <li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002mem.html">Memory Management</a></li>
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
 </ul>
 <p>Implementation</p>
+<ul>
+<li><a href="af65002arch.html">Architecture Overview</a></li>
+</ul>
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
@@ -40,7 +44,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<p>
 	This page lists all the opcodes of the 65002 with appropriate explanations.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">TODO: Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li><li><a href="#sei">SEI handling</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="reset" id="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li><li><a href="#sei">SEI handling</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="reset" id="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	Upon Reset the processor fetches a two-byte Reset vector from "-4".
 	In a 16  bit processor option this translates to the original 6502's
 	$FFFC reset vector.
@@ -265,7 +269,7 @@ more modern browser, like Internet Explorer 8 or later,
 	</p><p>
 	Note that RTU does not restore the standard status byte, as it is supposed to pass the status information from
 	hypervisor to user mode.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="jpu" id="jpu">TODO: Jump to User Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="jpu" id="jpu">Jump to User Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	To go to a user space program - as set up by the user mode matchcode and user mode 
 	stack pointer - the JPU opcode is used. It reads the operand address (from hypervisor mode),
 	then clears the hypervisor bit. After that it either jumps to the operand address in

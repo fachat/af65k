@@ -291,7 +291,7 @@
       </p></desc>
     </section>
 
-    <section toc="jpu" name="TODO: Jump to User Mode">
+    <section toc="jpu" name="Jump to User Mode">
       <desc><p>
 	To go to a user space program - as set up by the user mode matchcode and user mode 
 	stack pointer - the JPU opcode is used. It reads the operand address (from hypervisor mode),

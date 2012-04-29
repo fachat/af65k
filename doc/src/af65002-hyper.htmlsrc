@@ -1,0 +1,170 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="65002 User- and Hypervisor mode">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2012</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 documentation</metadesc>
+  <overview>
+	<p>
+	The 65k processors have two modes of operation, the user mode and the hypervisor mode.
+	In the hypervisor mode the processor has all privileges and access to all registers.
+	The purpose of the hypervisor mode is to run operating system level code.
+	The user mode is restricted and is intended to run application programs.
+	Critical instructions that modify or leak system state can only be executed in hypervisor mode.
+	</p><p>
+	All such instructions are trapped into an ABORT so that the user mode can actually run
+	a hypervisor mode program, as long as all such ABORTS are trapped and replaced with 
+	emulation code.
+	</p>
+  </overview>
+  <!--news>
+    <item date="2012-04-12" state="hot">
+        First release! Documented the first R0 version of the af65002 in its own <a href="65k/af65002/index.html">af65002 page</a>.
+    </item>
+     <item date="2012-01-01">
+        Added a separate page for 6502-based <a href="hwinfo/usb/index.html">USB</a> solutions.
+     </item>
+  </news-->
+
+<section toc="overview" name="Overview">
+  <desc>
+    <p>When the 65k boots it boots into hypervisor mode. The hypervisor mode is 
+	stored in the extended status byte.</p>
+  </desc>
+    <subsection toc="jpu" name="Jump to User Mode">
+      <desc><p>
+        To go to a user space program - as set up by the user mode matchcode and user mode
+        stack pointer - the JPU opcode is used. It reads the operand address (from hypervisor mode),
+        then clears the hypervisor bit. After that it either jumps to the operand address in
+        user mode (absolute jump), or it reads the effective address from user mode (indirect jump)
+        and jumps there.
+      </p><p>
+        To emulate the behaviour of the original 6502, you would do a</p>
+        <pre>
+        JPU ($FFFC)
+        </pre>
+      </desc>
+    </subsection>
+    <subsection toc="irq" name="Interrupts and ABORTs">
+     <desc>
+    	<p>When an interrupt occurs the processor jumps into hypervisor mode.
+	I.e. the stack pointer to store the return address and the status values
+	is the hypervisor stack pointer, and hypervisor memory is used.
+	In this native mode the extended stack frame is used that includes the
+	hypervisor mode bit in the extended status byte (it is stored in hypervisor
+	memory, so it is not leaked).
+	</p><p>
+	The RTI instruction returns from the interrupt. It reads the extended stack frame
+	and restores the hypervisor mode bit as it was before.
+	</p><p>
+	The same happens on ABORTs.
+	</p><p>
+	For more information see the <a href="af65002int.html">Interrupts page</a>.
+	</p>
+     </desc>
+    </subsection>
+    <subsection toc="trap" name="TRAP">
+     <desc>
+    	<p>When an TRP is executed the processor jumps into hypervisor mode.
+	I.e. the stack pointer to store the return address and the extended status values
+	is the hypervisor stack pointer, and hypervisor memory is used.
+	In this native mode the extended stack frame without the standard status byte is used.
+	That frame includes the
+	hypervisor mode bit in the extended status byte (it is stored in hypervisor
+	memory, so it is not leaked).
+	</p><p>
+	The RTU instruction returns from the TRP handler. It reads the extended stack frame
+	and restores the hypervisor mode bit as it was before.
+	</p><p>
+	For more information see the <a href="af65002int.html">Interrupts page</a>.
+	</p>
+     </desc>
+    </subsection>
+</section>
+
+<section toc="mem" name="Memory Management">
+  <desc><p>
+	Each of the two modes has its own memory management setting.
+	The memory management is controlled by a so-called matchcode. Each mode
+	has its own matchcode as set in the processor configuration registers.
+	From the matchcode then the memory configuration is derived.
+	For more details on this see the <a href="af65002mem.html">Memory Management page</a>.
+	</p>
+  </desc>
+  <subsection toc="uprefix" name="User Mode Prefix">
+     <desc><p>	
+	To access the user mode memory from hypervisor mode (e.g. for stack parameters of a TRP
+	execution), a prefix bit is implemented.
+	This user mode prefix bit is used to access user mode memory from hypervisor mode code.
+	When it is set, then the operand address is seen as user mode memory.
+	For more details please see the <a href="af65002prefixes.html#prefum">Prefixes page</a>.
+	</p>
+     </desc>
+  </subsection>
+</section>
+
+<section toc="critins" name="Critical Instructions">
+  <desc><p>
+	This section lists the critical instructions that are allowed in hypervisor mode only
+	</p>
+  </desc>
+  <subsection toc="critst" name="Status Register">
+     <desc>
+    	<p>The Extended Status Register byte contains the hypervisor mode.
+	This extended status byte is not accessible through such an operation like
+	PHP. Thus a program can actually not determine whether it is running
+	in user mode or hypervisor mode.
+	</p>
+     </desc>
+  </subsection>
+  <subsection toc="jpu" name="Jump to user space and Return to user space">
+     <desc><p>	
+	The JPU operation is protected. I.e. when a user mode program tries to JPU somewhere,
+	the processor goes into an ABORT.</p>
+	<p>Similarly the RTU opcode is protected, as it also allows returning from hypervisor mode
+	to user mode.
+	</p><p>
+	Note: would they not be protected, the processor could not trap them in a virtualized
+	hypervisor mode (i.e. running in user space) and emulate their behaviour appropriately.
+	</p>
+     </desc>
+  </subsection>
+  <subsection toc="rti" name="Return From Interrupt">
+     <desc><p>	
+	The RTI opcode allows extended stack frames that include the hypervisor mode bit to be restored.
+	In general, when the RTI opcode is executed in user mode it is not protected. Only when the
+	RTI instruction tries to restore a set hypervisor bit (to jump into hypervisor mode), this
+	instruction ABORTs.
+	</p>
+     </desc>
+  </subsection>
+  <subsection toc="uprefix" name="User Mode Prefix">
+     <desc><p>	
+	The user mode prefix bit is used to access user mode memory from hypervisor mode code.
+	Any instruction that has this bit set and is executed from user mode traps into 
+	an ABORT.
+	</p>
+     </desc>
+  </subsection>
+  <subsection toc="pcr" name="Processor Configuration Register">
+     <desc><p>	
+	The opcodes accessing (reading and writing) the processor configuration registers are 
+	protected and trap into an ABORT when executed in user mode.
+	</p>
+     </desc>
+  </subsection>
+</section>
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2012-04-23.
+  </closing>
+</docpage>
+

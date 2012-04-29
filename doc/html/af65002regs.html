@@ -22,10 +22,14 @@
 <li><a href="af65002opdesc.html">Opcode Docs</a></li>
 <li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
 <li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002mem.html">Memory Management</a></li>
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
 </ul>
 <p>Implementation</p>
+<ul>
+<li><a href="af65002arch.html">Architecture Overview</a></li>
+</ul>
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
@@ -225,13 +229,13 @@ more modern browser, like Internet Explorer 8 or later,
 	When a register set is active, the address mask is ANDed with the CPU address, and compared with the address compare value.
 	If the values match, then the CPU address is ANDed with the inverse of the address mask, and ORed with the address offset. 
 	</p><p>
-	To avoid priority encoding, all inverse address masks are ANDed and all address offsets are ORed before processing the CPU address.
+	For more details see the <a href="af65002mem.html">Memory Management page</a>.
 	</p>
     </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href=af65002front.html#lic>the license section</a>.
     </div></div><hr />
-Last updated 2012-04-23.
+Last updated 2012-04-29.
   </div></div><div id="footer"> </div></div></body></html> 
 
