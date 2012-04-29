@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,9 @@ public class OpdescDocGenerator {
 	}
 
 	private void createTable(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
+
+		Map<String, String> optable = new HashMap<String, String>();
+		optable.put("class", "optable");
 		
 		for (Map.Entry<String, Operation> en: ops.entrySet()) {
 			Operation op = en.getValue();
@@ -125,7 +129,7 @@ public class OpdescDocGenerator {
 				wr.startParagraph();
 				wr.print(op.getDesc());
 				
-				wr.startTable();
+				wr.startTable(optable);
 				wr.startTableRow();
 				Map<String, String> atts = new HashMap<String, String>();
 				atts.put("colspan", "10");

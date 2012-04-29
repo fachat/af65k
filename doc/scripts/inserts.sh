@@ -9,7 +9,7 @@ gendir="$4"
 print_disclaimer () {
 	echo "All Copyrights are acknowledged."
 	echo "The information here is provided under the terms as described"
-	echo "in <a href="af65002front.html#lic">the license section</a>."
+	echo "in <a href=\"af65002front.html#lic\">the license section</a>."
 }
 
 # insert a text in the middle at the position of a keyword

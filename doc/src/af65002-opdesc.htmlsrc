@@ -7,12 +7,14 @@
     <yearstart>2011</yearstart>
     <yearend>2012</yearend>
   </author-->
+  <style>optable.css</style>
   <keywords>8-bit,6502,65002</keywords>
   <metadesc>65002 documentation</metadesc>
   <overview>
 	<p>
 	This page lists all the opcodes of the 65002 with appropriate explanations.
 	</p>
+@OPDESC@ 
   </overview>
   <!--news>
     <item date="2012-04-12" state="hot">
@@ -23,9 +25,7 @@
      </item>
   </news-->
 
-<verbatim> 
-@OPDESC@ 
-</verbatim>
+
 
     <disclaimer name="Disclaimer">
 @DISCLAIMER@
