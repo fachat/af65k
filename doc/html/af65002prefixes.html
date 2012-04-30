@@ -268,23 +268,32 @@ more modern browser, like Internet Explorer 8 or later,
         For the supervisor mode there is an option, however, to use an address from user mode as operand.
         This is what the User Mode selector bit (UM) is for.
         </p><p>
-        When the User Mode selector is set, <!--the operand following the opcode is read from the current (hypervisor mode)
+        When the User Mode selector is set, the operand following the opcode is read from the current (hypervisor mode)
         memory environment (as defined by the matchcode). Then the processor temporarily switches to user mode,
         using the user mode matchcode and usermode stack pointer. For non-indirect addressing modes then the operand
         is written to or read from the computed address. For indirect addressing modes the indirect address is
-        read from user mode, then the actual operand is read from or written to user mode as well.-->
-	the address calculation is still done in hypervisor mode (including fetching the indirect addresses),
-	but the actual operation reads and/or writes the operand from/to user mode memory.
+        read from user mode, then the actual operand is read from or written to user mode as well.
         </p><p>
+	The main purpose of this bit is to enable the following situation:
+	</p>
+	<ol>
+	<li>user mode prepares stack with trap parameters</li>
+	<li>user mode executes a TRP, jumping to hypervisor trap handler. Note that the return address
+		is stored on the hypervisor stack, so the user mode stack pointer still points to the
+		parameters.</li>
+	<li>hypervisor mode trap handler then does for example <code>LDA.U S,$00</code> to read the first
+		parameter byte from the user mode stack</li>
+	</ol>
+        <p>
         Note that this bit is a privileged operation - unavailable if no hypervisor mode option is present, and
         trapping into an abort if executed in user mode.
         </p><p>
         With the user mode selector such operations as PHA or PLX etc can be easily redirected to the user space
         stack.
         </p><p>	
-	If it is needed to also compute the address in user mode - relevant only for the indirect addresses -
-	use LEA.U with the indirect addressing mode. This computes the address in user mode and stores it in E. 
-	Then use the E-indirect addressing mode on the actual operation.
+	If it is needed to also compute the address in hypervisor mode - relevant only for the indirect addresses -
+	use LEA with the indirect addressing mode. This computes the address in hypervisor mode and stores it in E. 
+	Then use the E-indirect addressing mode on the actual operation for example with <code>LDA.U (E)</code>.
         </p>
 	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefnf" id="prefnf">No Flags prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>

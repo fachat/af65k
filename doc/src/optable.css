@@ -1,4 +1,25 @@
 
+div#content table {
+        font-size: 100%;
+        width:auto;
+        border-collapse: collapse;
+        border-style: solid;
+        border-width: 1px;
+}
+
+
+div#content th {
+        background-color: #dddddd;
+        border-style: solid;
+        border-width: 1px;
+}
+
+div#content td {
+        border-style: solid;
+        border-width: 1px;
+}
+
+
 table.bittable {
 	border: 1px solid;
 	background-color: #000000;
