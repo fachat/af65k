@@ -482,13 +482,13 @@ begin
 				-- covers LONG interfaces
 				DOUT(MW-1 downto 16) <= memrw_data_out_aligned(MW-17 downto 0);
 				-- for WORD and BYTE interfaces
-				DOUT(15 downto 0) <= memrw_data_out_aligned(15 downto 0);
+				DOUT(minimum(MW-1,15) downto 0) <= memrw_data_out_aligned(15 downto 0);
 			when "11" =>
 				-- covers LONG interfaces
 				DOUT(MW-1 downto 24) <= memrw_data_out_aligned(MW-25 downto 0);
 				DOUT(minimum(MW-1,23) downto 16) <= (others => '0');
 				-- WORD interfaces
-				DOUT(15 downto 8) <= memrw_data_out_aligned(7 downto 0);
+				DOUT(minimum(MW-1,15) downto 8) <= memrw_data_out_aligned(7 downto 0);
 				-- for BYTE interfaces
 				DOUT(7 downto 0) <= memrw_data_out_aligned(7 downto 0);
 			when others =>
