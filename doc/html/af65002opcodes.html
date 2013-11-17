@@ -480,7 +480,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">ASR abs</div>
 </td><td><div class="opc">ASL abs,Y</div>
 </td></tr>
-<tr><th>1</th><td class="unused"></td><td><div class="opc">PEA (abs,X)</div>
+<tr><th>1</th><td><div class="opc">BEV rel</div>
+</td><td><div class="opc">PEA (abs,X)</div>
 </td><td><div class="opc">PEA (abs)</div>
 </td><td class="unused"></td><td class="unused"><div class="opc">MVP </div>
 </td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
@@ -503,7 +504,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">RDL abs</div>
 </td><td><div class="opc">ROL abs,Y</div>
 </td></tr>
-<tr><th>3</th><td class="unused"></td><td><div class="opc">LEA (abs,X)</div>
+<tr><th>3</th><td><div class="opc">BOD rel</div>
+</td><td><div class="opc">LEA (abs,X)</div>
 </td><td><div class="opc">LEA (abs)</div>
 </td><td class="unused"></td><td><div class="opc">BIT </div>
 </td><td><div class="opc">ADE </div>
@@ -524,7 +526,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">LSR (E)</div>
 </td><td class="unused"></td><td><div class="opc">LSR abs,Y</div>
 </td></tr>
-<tr><th>5</th><td class="unused"></td><td><div class="opc">PEA [[abs,X]]</div>
+<tr><th>5</th><td><div class="opc">BLTS rel</div>
+</td><td><div class="opc">PEA [[abs,X]]</div>
 </td><td><div class="opc">PEA [[abs]]</div>
 </td><td class="unused"></td><td class="unused"><div class="opc">PLL </div>
 </td><td><div class="opc">ADS </div>
@@ -544,7 +547,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">RDR abs</div>
 </td><td><div class="opc">ROR abs,Y</div>
 </td></tr>
-<tr><th>7</th><td class="unused"></td><td><div class="opc">LEA [[abs,X]]</div>
+<tr><th>7</th><td><div class="opc">BGES rel</div>
+</td><td><div class="opc">LEA [[abs,X]]</div>
 </td><td><div class="opc">LEA [[abs]]</div>
 </td><td class="unused"></td><td class="unused"><div class="opc">WMB </div>
 </td><td><div class="opc">ADB </div>
@@ -609,7 +613,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">PEA abs</div>
 </td><td><div class="opc">DEC abs,Y</div>
 </td></tr>
-<tr><th>D</th><td class="unused"></td><td><div class="opc">PEA [[zp,X]]</div>
+<tr><th>D</th><td><div class="opc">BLES rel</div>
+</td><td><div class="opc">PEA [[zp,X]]</div>
 </td><td><div class="opc">PEA [[zp]]</div>
 </td><td class="unused"></td><td><div class="opc">SWP </div>
 </td><td><div class="opc">SBS </div>
@@ -630,7 +635,8 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">INC (E)</div>
 </td><td class="unused"></td><td><div class="opc">INC abs,Y</div>
 </td></tr>
-<tr><th>F</th><td class="unused"></td><td><div class="opc">LEA [[zp,X]]</div>
+<tr><th>F</th><td><div class="opc">BGTS rel</div>
+</td><td><div class="opc">LEA [[zp,X]]</div>
 </td><td><div class="opc">LEA [[zp]]</div>
 </td><td class="unused"></td><td class="unused"><div class="opc">BSW </div>
 </td><td><div class="opc">SBB </div>
@@ -657,11 +663,29 @@ Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, no
 <a href="af65002opdesc.html#BCN">BCN: </a>
 Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
 <li>
+<a href="af65002opdesc.html#BEV">BEV: </a>
+Branch on even</li>
+<li>
+<a href="af65002opdesc.html#BGES">BGES: </a>
+Branch on signed greater or equal than</li>
+<li>
 <a href="af65002opdesc.html#BGT">BGT: </a>
 Branch if greater - take branch when C flag is set but Z flag is clear</li>
 <li>
+<a href="af65002opdesc.html#BGTS">BGTS: </a>
+Branch if greater - take branch when signed greater or equal G flag is set but Z flag is clear</li>
+<li>
 <a href="af65002opdesc.html#BLE">BLE: </a>
 Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
+<li>
+<a href="af65002opdesc.html#BLES">BLES: </a>
+Branch if less or equal - take branch when signed greater or equal flag G is clear or Z flag is set</li>
+<li>
+<a href="af65002opdesc.html#BLTS">BLTS: </a>
+Branch on signed less than</li>
+<li>
+<a href="af65002opdesc.html#BOD">BOD: </a>
+Branch on odd</li>
 <li>
 <a href="af65002opdesc.html#BSW">BSW: </a>
 Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>

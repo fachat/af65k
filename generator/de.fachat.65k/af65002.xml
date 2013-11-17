@@ -184,6 +184,7 @@
     
     <operation>
         <name>BCC</name>
+        <synonym>BLT</synonym>
         <desc>Branch on carry clear - take branch when C flag is cleared</desc>
         <prefixBits>RS</prefixBits>
         <opcodes>
@@ -193,7 +194,7 @@
         <doc><p>
         	Branch to the address given by adding the parameter to the address of the
         	next operation (after the branch opcode) given the condition that the
-        	carry status flag is clear.
+        	carry status flag is clear. After a CMP this is a synonym for "less than".
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &amp;lt;= NextPC + Operand when N=1 else NextPC
@@ -208,6 +209,7 @@
     
     <operation>
         <name>BCS</name>
+        <synonym>BGE</synonym>
         <desc>Branch on carry set - take branch when C flag is set</desc>
         <prefixBits>RS</prefixBits>
         <opcodes>
@@ -217,7 +219,7 @@
         <doc><p>
         	Branch to the address given by adding the parameter to the address of the
         	next operation (after the branch opcode) given the condition that the
-        	carry status flag is set.
+        	carry status flag is set. After a CMP this is a synonym for "greater or equal".
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &amp;lt;= NextPC + Operand when N=1 else NextPC
@@ -344,7 +346,159 @@
         	next operation (after the branch opcode).
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
-        		PC &amp;lt;= NextPC + Operand when N=1 else NextPC
+        		PC &amp;lt;= NextPC + Operand
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BEV</name>
+        <desc>Branch on even</desc>
+        <prefixBits>RS</prefixBits>
+      	<class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x10</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the odd status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when O=0 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BOD</name>
+        <desc>Branch on odd</desc>
+        <prefixBits>RS</prefixBits>
+      	<class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x30</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the odd status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when O=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BLTS</name>
+        <desc>Branch on signed less than</desc>
+        <prefixBits>RS</prefixBits>
+      	<class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x50</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the signed greater status or equal flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when G=0 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BGES</name>
+        <desc>Branch on signed greater or equal than</desc>
+        <prefixBits>RS</prefixBits>
+      	<class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0x70</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the signed greater or equal status flag G is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when G=1 else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BLES</name>
+        <desc>Branch if less or equal - take branch when signed greater or equal flag G is clear or Z flag is set</desc>
+        <prefixBits>RS</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xD0</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	signed greater status flag is clear or the zero status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when (G=0 or Z=1) else NextPC
+        	</pre>
+        </doc>
+        <doc mode="65k">
+        	<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>BGTS</name>
+        <desc>Branch if greater - take branch when signed greater or equal G flag is set but Z flag is clear</desc>
+        <prefixBits>RS</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>rel</addressingMode>
+            <opcode>0xF0</opcode>
+            <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	signed greater status flag is set and the zero status flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &amp;lt;= NextPC + Operand when (G=1 and Z=0) else NextPC
         	</pre>
         </doc>
         <doc mode="65k">

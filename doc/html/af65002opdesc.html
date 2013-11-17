@@ -82,8 +82,17 @@ more modern browser, like Internet Explorer 8 or later,
 <a href="#BEQ">BEQ</a>
  - Branch on equal - take branch when Z flag is set</li>
 <li>
+<a href="#BEV">BEV</a>
+ - Branch on even</li>
+<li>
+<a href="#BGES">BGES</a>
+ - Branch on signed greater or equal than</li>
+<li>
 <a href="#BGT">BGT</a>
  - Branch if greater - take branch when C flag is set but Z flag is clear</li>
+<li>
+<a href="#BGTS">BGTS</a>
+ - Branch if greater - take branch when signed greater or equal G flag is set but Z flag is clear</li>
 <li>
 <a href="#BIT">BIT</a>
  - Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
@@ -92,11 +101,20 @@ more modern browser, like Internet Explorer 8 or later,
 <a href="#BLE">BLE</a>
  - Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
 <li>
+<a href="#BLES">BLES</a>
+ - Branch if less or equal - take branch when signed greater or equal flag G is clear or Z flag is set</li>
+<li>
+<a href="#BLTS">BLTS</a>
+ - Branch on signed less than</li>
+<li>
 <a href="#BMI">BMI</a>
  - Branch on minus - take branch when N flag is set</li>
 <li>
 <a href="#BNE">BNE</a>
  - Branch on not equal - take branch when Z flag is cleared</li>
+<li>
+<a href="#BOD">BOD</a>
+ - Branch on odd</li>
 <li>
 <a href="#BPL">BPL</a>
  - Branch on plus - take branch when N flag is cleared</li>
@@ -554,7 +572,8 @@ more modern browser, like Internet Explorer 8 or later,
         	widths are the same.
         	Note that the default is to use BYTE-wide operation without load extension.
         	</p><h2>BCC</h2>
-<a name="BCC"> </a><p>Branch on carry clear - take branch when C flag is cleared</p>
+<a name="BCC"> </a><p>Synonyms: BLT</p>
+<p>Branch on carry clear - take branch when C flag is cleared</p>
 <table class="optable"><tr><th colspan="10">BCC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x90</td><td></td><td>RS</td><td>Relative</td><td></td></tr>
@@ -563,7 +582,7 @@ more modern browser, like Internet Explorer 8 or later,
 <p>
         	Branch to the address given by adding the parameter to the address of the
         	next operation (after the branch opcode) given the condition that the
-        	carry status flag is clear.
+        	carry status flag is clear. After a CMP this is a synonym for "less than".
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &lt;= NextPC + Operand when N=1 else NextPC
@@ -577,7 +596,8 @@ more modern browser, like Internet Explorer 8 or later,
 <tr><td>EXT</td><td>0xb4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
 <h2>BCS</h2>
-<a name="BCS"> </a><p>Branch on carry set - take branch when C flag is set</p>
+<a name="BCS"> </a><p>Synonyms: BGE</p>
+<p>Branch on carry set - take branch when C flag is set</p>
 <table class="optable"><tr><th colspan="10">BCS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0xB0</td><td></td><td>RS</td><td>Relative</td><td></td></tr>
@@ -586,7 +606,7 @@ more modern browser, like Internet Explorer 8 or later,
 <p>
         	Branch to the address given by adding the parameter to the address of the
         	next operation (after the branch opcode) given the condition that the
-        	carry status flag is set.
+        	carry status flag is set. After a CMP this is a synonym for "greater or equal".
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &lt;= NextPC + Operand when N=1 else NextPC
@@ -610,6 +630,38 @@ more modern browser, like Internet Explorer 8 or later,
         	</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default is 8-bit.
         	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BEV</h2>
+<a name="BEV"> </a><p>Branch on even</p>
+<table class="optable"><tr><th colspan="10">BEV</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x10</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the odd status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when O=0 else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BGES</h2>
+<a name="BGES"> </a><p>Branch on signed greater or equal than</p>
+<table class="optable"><tr><th colspan="10">BGES</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x70</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the signed greater or equal status flag G is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when G=1 else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
         	and so on.</p><h2>BGT</h2>
 <a name="BGT"> </a><p>Branch if greater - take branch when C flag is set but Z flag is clear</p>
 <table class="optable"><tr><th colspan="10">BGT</th></tr>
@@ -624,6 +676,23 @@ more modern browser, like Internet Explorer 8 or later,
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
         		PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BGTS</h2>
+<a name="BGTS"> </a><p>Branch if greater - take branch when signed greater or equal G flag is set but Z flag is clear</p>
+<table class="optable"><tr><th colspan="10">BGTS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xF0</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	signed greater status flag is set and the zero status flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when (G=1 and Z=0) else NextPC
         	</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default is 8-bit.
         	With a 16-bit parameter the jump distances can be from -32768 to +32767
@@ -673,6 +742,39 @@ more modern browser, like Internet Explorer 8 or later,
         	</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default is 8-bit.
         	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BLES</h2>
+<a name="BLES"> </a><p>Branch if less or equal - take branch when signed greater or equal flag G is clear or Z flag is set</p>
+<table class="optable"><tr><th colspan="10">BLES</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xD0</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) given the condition that the
+        	signed greater status flag is clear or the zero status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when (G=0 or Z=1) else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BLTS</h2>
+<a name="BLTS"> </a><p>Branch on signed less than</p>
+<table class="optable"><tr><th colspan="10">BLTS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x50</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the signed greater status or equal flag is not set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when G=0 else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
         	and so on.</p><h2>BMI</h2>
 <a name="BMI"> </a><p>Branch on minus - take branch when N flag is set</p>
 <table class="optable"><tr><th colspan="10">BMI</th></tr>
@@ -707,6 +809,22 @@ more modern browser, like Internet Explorer 8 or later,
         	</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default is 8-bit.
         	With a 16-bit parameter the jump distances can be from -32768 to +32767
+        	and so on.</p><h2>BOD</h2>
+<a name="BOD"> </a><p>Branch on odd</p>
+<table class="optable"><tr><th colspan="10">BOD</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x30</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+        	Branch to the address given by adding the parameter to the address of the
+        	next operation (after the branch opcode) if the odd status flag is set.
+        	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
+        	</p><pre>
+        		PC &lt;= NextPC + Operand when O=1 else NextPC
+        	</pre><h3>65k</h3>
+<p>The RS prefix determines the width of the parameter, the default is 8-bit.
+        	With a 16-bit parameter the jump distances can be from -32768 to +32767
         	and so on.</p><h2>BPL</h2>
 <a name="BPL"> </a><p>Branch on plus - take branch when N flag is cleared</p>
 <table class="optable"><tr><th colspan="10">BPL</th></tr>
@@ -736,7 +854,7 @@ more modern browser, like Internet Explorer 8 or later,
         	next operation (after the branch opcode).
         	The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.
         	</p><pre>
-        		PC &lt;= NextPC + Operand when N=1 else NextPC
+        		PC &lt;= NextPC + Operand
         	</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default is 8-bit.
         	With a 16-bit parameter the jump distances can be from -32768 to +32767

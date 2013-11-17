@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -126,6 +125,13 @@ public class OpdescDocGenerator {
 				
 				wr.startSubsection(op.getName());			
 				wr.createAnchor(op.getName());
+				if (op.getSynonyms() != null && op.getSynonyms().size() > 0) {
+					wr.startParagraph();
+					wr.print("Synonyms:");
+					for (String syn : op.getSynonyms()) {
+						wr.print(" " + syn);
+					}
+				}
 				wr.startParagraph();
 				wr.print(op.getDesc());
 				

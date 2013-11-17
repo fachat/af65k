@@ -45,6 +45,9 @@ public class Operation {
 	
 	@XmlElement(name="default-le")
 	String defaultLe;
+
+	@XmlElement(name="synonym")
+	List<String> synonyms;
 	
 	// list of identifiers for prefix bits relevant to the operation
 	List<String> prefixBits;
@@ -109,6 +112,14 @@ public class Operation {
 
 	public void setDoc(List<Doc> doc) {
 		this.doc = doc;
+	}
+
+	public List<String> getSynonyms() {
+		return synonyms;
+	}
+
+	public void setSynonyms(List<String> synonyms) {
+		this.synonyms = synonyms;
 	}
 	
 }
