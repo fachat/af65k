@@ -1,7 +1,7 @@
 
 GENDIR=../generator/de.fachat.65k
 XSL=scripts/htmlsrc2html.xsl
-TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html html/af65002opstruct.html html/af65002prefixes.html html/af65002admodes.html html/af65002hyper.html html/af65002mem.html html/af65002config.html html/af65002arch.html html/archcore.png html/archtop.png html/archtop.svg html/archcore.svg
+TARGET=html/doc.css html/optable.css html/af65002front.html html/af65002opdesc.html html/af65002opcodes.html html/af65002int.html html/af65002compat.html html/af65002regs.html html/af65002opstruct.html html/af65002prefixes.html html/af65002admodes.html html/af65002hyper.html html/af65002mem.html html/af65002config.html html/af65002arch.html html/archcore.png html/archtop.png html/archtop.svg html/archcore.svg html/af65002usage.html
 
 INSERT_SH=scripts/inserts.sh
 XSLT_SH=scripts/doxsl.sh
@@ -59,6 +59,11 @@ html/af65002int.html: src/af65002-int.htmlsrc $(XSL) $(INSERT_SH) src/af65002-me
 	rm $@.tmp
 
 html/af65002compat.html: src/af65002-compat.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
+	$(XSLT_SH) $(XSL) $<  $@.tmp
+	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
+	rm $@.tmp
+
+html/af65002usage.html: src/af65002-usage.htmlsrc $(XSL) $(INSERT_SH) src/af65002-menu.src
 	$(XSLT_SH) $(XSL) $<  $@.tmp
 	$(INSERT_SH) $@.tmp af65002 $@ $(GENDIR)
 	rm $@.tmp

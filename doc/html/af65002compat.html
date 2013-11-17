@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="author" content="" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="">
 
-<meta name="description" content="65002 documentation" />
-<meta name="keywords" content="8-bit,6502,65002" />
-<link rev="made" href="mailto:" />
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
+<meta name="description" content="65002 documentation">
+<meta name="keywords" content="8-bit,6502,65002">
+<link rev="made" href="mailto:">
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
 <title>6502 Software Compatibility Notes</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -25,6 +24,7 @@
 <li><a href="af65002mem.html">Memory Management</a></li>
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
+<li><a href="af65002usage.html">Usage</a></li>
 </ul>
 <p>Implementation</p>
 <ul>
@@ -33,7 +33,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -47,7 +47,7 @@ more modern browser, like Internet Explorer 8 or later,
 	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
 	extension, as described on this page.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#compatstack">Stack Frame</a></li><li><a href="#compatpointer">Interrupt Pointer</a></li><li><a href="#compatretaddr">Subroutine Return Address</a></li><li><a href="#compattiming">Timing</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatstack" id="compatstack">Stack Frame</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#compatstack">Stack Frame</a></li><li><a href="#compatpointer">Interrupt Pointer</a></li><li><a href="#compatretaddr">Subroutine Return Address</a></li><li><a href="#compattiming">Timing</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="compatstack">Stack Frame</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
           The 65k has, on purpose, an extended interrupt functionality. Thus it needs an extended stack frame
           to store the additional information, as described above. Yet there is 6502 compatibility included:
         </p>
@@ -67,7 +67,12 @@ more modern browser, like Internet Explorer 8 or later,
           As a result, if some 6502 software creates an artificial stack frame with bit5 cleared,
           it will trigger the use of an extended stack frame and crash.
         </p>
-        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatpointer" id="compatpointer">Interrupt Pointer</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+	<p>A similar result will happen on a PLP, as PLP reads the extended status register
+	  if in the normal status register on the stack bit 5 is zero (The extended status
+	  register has the G and OE flags that are available from user mode. All other bits
+	  are set to zero)
+	</p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="compatpointer">Interrupt Pointer</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
           As the 65k has an extended interrupt functionality, the number - and size - of the 6502 interrupt
           pointer does not suffice anymore for an efficient operation.
         </p>
@@ -79,15 +84,15 @@ more modern browser, like Internet Explorer 8 or later,
 	  When the processor starts, it starts in hypervisor mode and the compatible interrupt vectors. 
 	  Interrupts stay in hypervisor mode and the only incompatibility is the extended stack frame.
         </p>
-        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compatretaddr" id="compatretaddr">Subroutine Return Address</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="compatretaddr">Subroutine Return Address</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The 65k can be configured in 16, 32 or 64 bit width. Thus a return address for a subroutine is
 	16, 32, or 64 bit wide. Only a 16 bit wide return address is compatible though.
 	</p><p>
-	The user mode configuration register however allows to restrict the effective processor width
+	The user mode configuration register however allows to restrict the effective processor address width
 	to 16 (or 32) bit. In this mode the return address is restricted to 16 bit, and the real address
 	is extended with the upper bits (16-31/63) of the program counter.
         </p>
-        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="compattiming" id="compattiming">Timing</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="compattiming">Timing</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
           The 65k will NOT be timing compatible with the 6502.
         </p><p>
           Although one might think of using an 8-bit accumulator and the typical 6502 pipelining to extend
@@ -96,11 +101,10 @@ more modern browser, like Internet Explorer 8 or later,
           to effectively use the available features of today's programmable logic.
           So this makes it very unlikely, if not impossible, that a timing-compatible 65k will ever exist.
         </p>
-        </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+        </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr />
-Last updated 2012-04-23.
-  </div></div><div id="footer"> </div></div></body></html> 
-
+    </div></div><hr>
+Last updated 2013-11-17.
+  </div></div><div id="footer">&nbsp;</div></div></body></html> 

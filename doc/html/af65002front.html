@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="author" content="" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="">
 
-<meta name="description" content="65002 documentation" />
-<meta name="keywords" content="8-bit,6502,65002" />
-<link rev="made" href="mailto:" />
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
+<meta name="description" content="65002 documentation">
+<meta name="keywords" content="8-bit,6502,65002">
+<link rev="made" href="mailto:">
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
 <title>65002 Documentation</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -25,6 +24,7 @@
 <li><a href="af65002mem.html">Memory Management</a></li>
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
+<li><a href="af65002usage.html">Usage</a></li>
 </ul>
 <p>Implementation</p>
 <ul>
@@ -33,7 +33,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -46,20 +46,20 @@ more modern browser, like Internet Explorer 8 or later,
 	</p><p>
 	On the left hand menu you find the links to the various pages of the documentation.
 	</p><p>
-	The af65002 is an extension of the venerable 65C02 8  bit processor. It extends the 
+	The af65002 is an extension of the venerable 65C02 8&nbsp; bit processor. It extends the 
 	6502 with extra registers, wider registers, as well as a user and hypervisor mdoe, featuring
 	many new opcodes to use the new features.
 	</p><p>
 	The 65002 is binary compatible with the 65C02 - except for minor quirks required for the
 	extension (see the compatibility issues page).
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#preface">Preface</a></li><li style="list-style-type:none;"><ul><li><a href="#lic">License</a></li><li><a href="#disc">Disclaimer</a></li><li><a href="#cont">Contributors</a></li></ul></li><li><a href="#todo">TODO</a></li><li><a href="#chg">Changes</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="preface" id="preface">Preface</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><h3><a name="lic" id="lic">License</a></h3><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#preface">Preface</a></li><li style="list-style-type:none;"><ul><li><a href="#lic">License</a></li><li><a href="#disc">Disclaimer</a></li><li><a href="#cont">Contributors</a></li></ul></li><li><a href="#todo">TODO</a></li><li><a href="#chg">Changes</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="preface">Preface</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><h3><a name="lic">License</a></h3><p>
         This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
     </p><p>
         Note this "content" includes this web page, but does not include the 6502.org header
         and the left and right web page columns.  Click on the "Maximize" link to see
         the contents covered by this license.
-    </p><ul><li><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode" target="_blank" class="extlink">CC-BY-SA legal code</a> </li><li><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="extlink">CC-BY-SA license deed (short form)</a> </li></ul><h3><a name="disc" id="disc">Disclaimer</a></h3><p>
+    </p><ul><li><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode" target="_blank" class="extlink">CC-BY-SA legal code</a> </li><li><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="extlink">CC-BY-SA license deed (short form)</a> </li></ul><h3><a name="disc">Disclaimer</a></h3><p>
         The content comes with no warranty at all!
         There is no guarantee and no promise that this specification is correct, consistent, will actually work,
         or will ever be implemented at all.
@@ -68,28 +68,28 @@ more modern browser, like Internet Explorer 8 or later,
         Still there is no guarantee that a processor according to this spec would not be covered by some patents.
     </p><p>
         Subject to change without notice!
-    </p><h3><a name="cont" id="cont">Contributors</a></h3><ul>
-        <li>André  Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
-    </ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="todo" id="todo">TODO</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+    </p><h3><a name="cont">Contributors</a></h3><ul>
+        <li>Andr&eacute;  Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
+    </ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="todo">TODO</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	Here is a list of items still to do:
     </p>
     <ul>
 	<li>Clarify how the memory mapping should work of multiple matches occur</li>
 	<li>Add the LCR/SCR/BCR opcodes. Add the SYS page and related opcodes</li>
     </ul>
-    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="chg" id="chg">Changes</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the changes to the documentation:</p>
+    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="chg">Changes</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the changes to the documentation:</p>
       <table border="1">
         <tr><th>Date</th><th>Author</th><th>Changes</th></tr>
-        <tr><td>2010-10-23</td><td>André  Fachat</td><td>First working draft</td></tr>
-        <tr><td>2010-11-04</td><td>André  Fachat</td><td>Defined the interrupt status/mask/effective
+        <tr><td>2010-10-23</td><td>Andr&eacute;  Fachat</td><td>First working draft</td></tr>
+        <tr><td>2010-11-04</td><td>Andr&eacute;  Fachat</td><td>Defined the interrupt status/mask/effective
                 mask register; Constrained the interrupt/trap/abort vectors to two-byte vectors;
                 integrated the various extra registers into the configuration register file (for less
                 opcodes necessary); add WAI, STP and FIL/FILU</td></tr>
-        <tr><td>2010-12-22</td><td>André  Fachat</td><td>Added the "NF" prefix bit</td></tr>
-        <tr><td>2010-12-28</td><td>André  Fachat</td><td>Moved some LSB $f opcodes to the extension page
+        <tr><td>2010-12-22</td><td>Andr&eacute;  Fachat</td><td>Added the "NF" prefix bit</td></tr>
+        <tr><td>2010-12-28</td><td>Andr&eacute;  Fachat</td><td>Moved some LSB $f opcodes to the extension page
                 to add STX abs,Y and STY abs,X</td></tr>
-        <tr><td>2011-01-02</td><td>André  Fachat</td><td>Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes</td></tr>
-        <tr><td>2011-05-01</td><td>André  Fachat</td><td><ul>
+        <tr><td>2011-01-02</td><td>Andr&eacute;  Fachat</td><td>Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes</td></tr>
+        <tr><td>2011-05-01</td><td>Andr&eacute;  Fachat</td><td><ul>
                 <li>WAI becomes privileged</li>
                 <li>Moved no-operand opcodes in EXT page from column $f to $8, to be more aligned with standard opcode page</li>
                 <li>Added the INV opcode for the 2s-complement</li>
@@ -107,7 +107,7 @@ more modern browser, like Internet Explorer 8 or later,
                 <li>Added the EXT and CUT opcodes</li>
                 <li>Added the Accumulator addressing modes for ADE/ADB/ADS/SBE/SBB/SBS</li>
                 </ul></td></tr>
-        <tr><td>2011-12-23</td><td>André  Fachat</td><td><ul>
+        <tr><td>2011-12-23</td><td>Andr&eacute;  Fachat</td><td><ul>
                 <li>Remove the EE prefix bit, and replace it with a second bit for the ZE extension - to allow
                         to extend with ones and with the sign. Semantics of ZE changed as well, thus renamed to LE,
                         load extend. Old ZE functionality is covered by EXT opcode</li>
@@ -118,7 +118,7 @@ more modern browser, like Internet Explorer 8 or later,
                 <li>Some small changes here and there, esp. clarifications around the interrupt handling</li>
                 <li>Added the Software Compatibility section</li>
                 </ul></td></tr>
-        <tr><td>2011-12-31</td><td>André  Fachat</td><td><ul>
+        <tr><td>2011-12-31</td><td>Andr&eacute;  Fachat</td><td><ul>
                 <li>Replace manually maintained tables (std/EXT pages and addressing modes) with
                         ones generated from an XML file which will be the basis for an assembler
                         and some VHDL code generation.</li>
@@ -127,12 +127,12 @@ more modern browser, like Internet Explorer 8 or later,
                 <li>Add the RDR/RDL/ASR opcodes, moved a number of opcodes around in the EXT page,
                         also rearranged the QUICK page to accomodate for the new opcodes.</li>
                 </ul></td></tr>
-        <tr><td>2012-04-23</td><td>André  Fachat</td><td><ul>
+        <tr><td>2012-04-23</td><td>Andr&eacute;  Fachat</td><td><ul>
 		<li>Separated the one-pager into multiple pages and integrated into the af65002 doc build process</li>
 		<li>Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more 
 			possible future expansions (prefix3 could now be $8F-$FF).</li>
                 </ul></td></tr>
-        <tr><td>2012-04-29</td><td>André  Fachat</td><td><ul>
+        <tr><td>2012-04-29</td><td>Andr&eacute;  Fachat</td><td><ul>
 		<li>Reorganized the EXT page. It's less oriented on the standard page, but much more
 			regular now. </li>
 		<li>Added LEA and PEA addressing modes for zp/abs indirect quad, plus
@@ -142,11 +142,10 @@ more modern browser, like Internet Explorer 8 or later,
 		<li>Added all missing tables, plus a TODO section on this page</li>
                 </ul></td></tr>
       </table>
-    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr />
+    </div></div><hr>
 Last updated 2012-04-23.
-  </div></div><div id="footer"> </div></div></body></html> 
-
+  </div></div><div id="footer">&nbsp;</div></div></body></html> 

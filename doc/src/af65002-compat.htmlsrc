@@ -48,6 +48,11 @@
           As a result, if some 6502 software creates an artificial stack frame with bit5 cleared,
           it will trigger the use of an extended stack frame and crash.
         </p>
+	<p>A similar result will happen on a PLP, as PLP reads the extended status register
+	  if in the normal status register on the stack bit 5 is zero (The extended status
+	  register has the G and OE flags that are available from user mode. All other bits
+	  are set to zero)
+	</p>
         </desc>
       </section>
 
@@ -72,7 +77,7 @@
 	The 65k can be configured in 16, 32 or 64 bit width. Thus a return address for a subroutine is
 	16, 32, or 64 bit wide. Only a 16 bit wide return address is compatible though.
 	</p><p>
-	The user mode configuration register however allows to restrict the effective processor width
+	The user mode configuration register however allows to restrict the effective processor address width
 	to 16 (or 32) bit. In this mode the return address is restricted to 16 bit, and the real address
 	is extended with the upper bits (16-31/63) of the program counter.
         </p>
@@ -96,7 +101,7 @@
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2012-04-23.
+Last updated 2013-11-17.
   </closing>
 </docpage>
 

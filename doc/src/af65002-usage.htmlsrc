@@ -1,0 +1,82 @@
+<!DOCTYPE webpage [ <!ENTITY eacute "&#233; "> <!ENTITY nbsp "&#160; "> ]>
+<docpage name="6502 Software Application and Usage Notes">
+  <!--author>
+    <name>Andr&eacute; Fachat</name>
+    <email>@EMAIL@</email>
+    <homepage>@WEBROOT@</homepage>
+    <yearstart>2011</yearstart>
+    <yearend>2013</yearend>
+  </author-->
+  <keywords>8-bit,6502,65002</keywords>
+  <metadesc>65002 application notes</metadesc>
+  <overview>
+	<p>
+        Here are some notes on how to implement certain functionalities or use cases 
+	with the new 65k features available.
+	</p>
+  </overview>
+  <news>
+    <item date="2013-11-17">
+	Started this page to show how to efficiently use the new features.
+     </item>
+  </news>
+  <toc/>
+
+      <section toc="localglobalstatic" name="Accessing local, static and global variables">
+        <desc><p>
+		The idea of the B register, together with the stack-/PC- and B-relative addressing
+		modes comes from this use case: how do I access local, static and global variables?
+		(static in the Java sense - local to a class, i.e. all instances at the same time)
+	</p><p>
+		The idea behind is that:
+	</p>
+	<ul>
+		<li>The stack contains local variables, i.e. variables available to this thread only.
+		  The code would look about this:
+<pre>
+	.(		; start of subroutine
+	SBS #20		; make place for local variables
+	STA (S,0)	; use values on stack with stack-relative addressing
+	...
+	ADS #20		; clean up stack
+	RTS
+	.)
+</pre>
+		</li>
+		<li>The B-register would point to a parameter block. This would be the parameters
+		  for the method. Variables there would be accessed by
+<pre>
+	...
+	LDA (B,12)	; load parameter
+	...
+</pre>
+		</li>
+		<li>The code itself is compiled to a specific address, and "static" variables
+		  belonging to this code are compiled into a fixed offset (or one that is adjusted
+		  ad load time). So variables accessible to all threads running this code could use:
+<pre>
+	...
+	LDA (P,10)	; load shared variable
+	...
+</pre>
+		</li>
+		<li>Finally, global variables can be accessed via non-offset addresses as ususal:
+<pre>
+	...
+	LDA $1234
+	...
+</pre>
+		</li>
+	</ul>
+        </desc>
+      </section>
+
+
+    <disclaimer name="Disclaimer">
+@DISCLAIMER@
+    </disclaimer>
+  <closing>
+Last updated 2013-11-17.
+  </closing>
+</docpage>
+

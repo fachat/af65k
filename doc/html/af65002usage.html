@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="">
+
+<meta name="description" content="65002 application notes">
+<meta name="keywords" content="8-bit,6502,65002">
+<link rev="made" href="mailto:">
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
+<title>6502 Software Application and Usage Notes</title></head>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<div id="mtree">
+<p>Specification</p>
+<ul>
+<li><a href="af65002front.html">Overview</a></li>
+<li><a href="af65002regs.html">Register Set</a></li>
+<li><a href="af65002opstruct.html">Opcodes Structure </a></li>
+<li><a href="af65002admodes.html">Addressing Modes </a></li>
+<li><a href="af65002prefixes.html">Prefixes</a></li>
+<li><a href="af65002opcodes.html">Opcode Overview</a></li>
+<li><a href="af65002opdesc.html">Opcode Docs</a></li>
+<li><a href="af65002int.html">Reset, Traps and Interrupts</a></li>
+<li><a href="af65002hyper.html">User/Hypervisor Mode</a></li>
+<li><a href="af65002mem.html">Memory Management</a></li>
+<li><a href="af65002config.html">Configuration Registers</a></li>
+<li><a href="af65002compat.html">Compatibility</a></li>
+<li><a href="af65002usage.html">Usage</a></li>
+</ul>
+<p>Implementation</p>
+<ul>
+<li><a href="af65002arch.html">Architecture Overview</a></li>
+</ul>
+
+</div>
+		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
+		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
+You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
+more modern browser, like Internet Explorer 8 or later, 
+<a target="_blank" class="extlink" href="http://www.firefox.com">Firefox</a>,
+<a target="_blank" class="extlink" href="http://www.google.com/chrome">Google Chrome</a>, or
+<a target="_blank" class="extlink" href="http://www.opera.com">Opera</a>.
+</div><div class="top" id="content"><div id="minmax"></div><h1>6502 Software Application and Usage Notes</h1><div class="overview">
+	<p>
+        Here are some notes on how to implement certain functionalities or use cases 
+	with the new 65k features available.
+	</p>
+  </div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="news">News:</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul class="news"><li><div>&nbsp;</div><small>2013-11-17</small>
+	Started this page to show how to efficiently use the new features.
+     </li></ul></div></div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#localglobalstatic">Accessing local, static and global variables</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="localglobalstatic">Accessing local, static and global variables</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+		The idea of the B register, together with the stack-/PC- and B-relative addressing
+		modes comes from this use case: how do I access local, static and global variables?
+		(static in the Java sense - local to a class, i.e. all instances at the same time)
+	</p><p>
+		The idea behind is that:
+	</p>
+	<ul>
+		<li>The stack contains local variables, i.e. variables available to this thread only.
+		  The code would look about this:
+<pre>
+	.(		; start of subroutine
+	SBS #20		; make place for local variables
+	STA (S,0)	; use values on stack with stack-relative addressing
+	...
+	ADS #20		; clean up stack
+	RTS
+	.)
+</pre>
+		</li>
+		<li>The B-register would point to a parameter block. This would be the parameters
+		  for the method. Variables there would be accessed by
+<pre>
+	...
+	LDA (B,12)	; load parameter
+	...
+</pre>
+		</li>
+		<li>The code itself is compiled to a specific address, and "static" variables
+		  belonging to this code are compiled into a fixed offset (or one that is adjusted
+		  ad load time). So variables accessible to all threads running this code could use:
+<pre>
+	...
+	LDA (P,10)	; load shared variable
+	...
+</pre>
+		</li>
+		<li>Finally, global variables can be accessed via non-offset addresses as ususal:
+<pre>
+	...
+	LDA $1234
+	...
+</pre>
+		</li>
+	</ul>
+        </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in <a href="af65002front.html#lic">the license section</a>.
+    </div></div><hr>
+Last updated 2013-11-17.
+  </div></div><div id="footer">&nbsp;</div></div></body></html> 

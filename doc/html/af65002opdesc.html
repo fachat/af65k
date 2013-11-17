@@ -24,6 +24,7 @@
 <li><a href="af65002mem.html">Memory Management</a></li>
 <li><a href="af65002config.html">Configuration Registers</a></li>
 <li><a href="af65002compat.html">Compatibility</a></li>
+<li><a href="af65002usage.html">Usage</a></li>
 </ul>
 <p>Implementation</p>
 <ul>
@@ -1658,7 +1659,7 @@ more modern browser, like Internet Explorer 8 or later,
 <a name="PHP"> </a><p>Push processor status register onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x08</td><td></td><td>UM</td><td>Implied</td><td></td></tr>
+<tr><td></td><td>0x08</td><td></td><td>UM, RS</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1673,7 +1674,13 @@ more modern browser, like Internet Explorer 8 or later,
         	user mode with UM set an ABORT exception is triggered.
         	</p><p>
         	The not-extended bit is set (so the status is compatible with the 6502 and would denote a
-        	standard stack frame)
+        	standard stack frame) as long as RS is 00.
+        	</p><p>
+        	If RS indicates a word-wide push, the G and OE flags of the extended status registers are 
+        	pushed (with all other bits zero) before the standard status register. The standard status
+        	register has the not-extended bit cleared in this case.
+        	</p><p>
+        	RS set to long or quad lengths are illegal and trap into an ABORT.
         	</p><h2>PHX</h2>
 <a name="PHX"> </a><p>Push contents of the X register onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHX</th></tr>
@@ -1786,6 +1793,13 @@ more modern browser, like Internet Explorer 8 or later,
         	If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the 
         	user mode stack pointer and the value is stored in user mode memory. If executed in
         	user mode with UM set an ABORT exception is triggered.
+        	</p><p>
+        	When the status register has bit 5 (the not-extended bit) set, then PLP reads the standard
+        	status register only.
+        	</p><p>
+        	When the status register has bit 5 cleared, it reads a second byte from the stack and 
+        	restores the G and OE flags from that byte into the extended status register.
+			(Note that this introduces a slight incompatibility with the 6502. So this behaviour may change to require the RS width set to word.)        	
         	</p><h2>PLX</h2>
 <a name="PLX"> </a><p>Pull the contents of the X register from the stack</p>
 <table class="optable"><tr><th colspan="10">PLX</th></tr>
