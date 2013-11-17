@@ -100,7 +100,8 @@ architecture Behavioral of af65002mcpu is
 
         -- core registers; note they are implemented as array as to allow use of block RAM
 	subtype reg_t 		is std_logic_vector(W-1 downto 0);
-	signal regs		: array(0 to 4) of reg_t;
+	type regs_t			is array(0 to 4) of reg_t;
+	signal regs		: regs_t;
 
 	constant r_ac		: integer := 0;
 	constant r_xr		: integer := 1;

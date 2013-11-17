@@ -76,7 +76,7 @@ package af65km is
 	function of_type_slv (A : std_logic_vector(1 downto 0)) return of_type;
 	
 	type ext_type is (
-		eNONE
+		eNONE,
 		eSIGN, 
 		eZERO, 
 		eONE, 

@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="author" content="" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="">
 
-<meta name="description" content="65002 documentation" />
-<meta name="keywords" content="8-bit,6502,65002" />
-<link rev="made" href="mailto:" />
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css" /><link rel="stylesheet" type="text/css" href="optable.css" />
+<meta name="description" content="65002 documentation">
+<meta name="keywords" content="8-bit,6502,65002">
+<link rev="made" href="mailto:">
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css"><link rel="stylesheet" type="text/css" href="optable.css">
 <title>65002 Opcode Prefixes</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +32,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
+		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -44,7 +43,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<p>
 	This page describes the opcode structure for the 65k line of processors.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#ovpref">Prefix Overview</a></li><li><a href="#prefam">Addressing Mode</a></li><li><a href="#prefof">Offset prefix</a></li><li><a href="#prefrs">Register Size prefix</a></li><li><a href="#prefle">Load Extensions prefix</a></li><li><a href="#prefum">User Mode selector</a></li><li><a href="#prefnf">No Flags prefix</a></li><li><a href="#preftables">Opcode Tables</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="ovpref" id="ovpref">Prefix Overview</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#ovpref">Prefix Overview</a></li><li><a href="#prefam">Addressing Mode</a></li><li><a href="#prefof">Offset prefix</a></li><li><a href="#prefrs">Register Size prefix</a></li><li><a href="#prefle">Load Extensions prefix</a></li><li><a href="#prefum">User Mode selector</a></li><li><a href="#prefnf">No Flags prefix</a></li><li><a href="#preftables">Opcode Tables</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="ovpref">Prefix Overview</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
         In the opcode map there are 32 codes designated as "prefix1" and 16 codes designated as "prefix2". These opcodes are no operations in themselves, but
         modify the following operation. The prefix has these values:</p>
 <table class="bittable">
@@ -94,14 +93,14 @@ more modern browser, like Internet Explorer 8 or later,
 </table>
 <p>
         These prefix opcodes modify the following opcodes in various aspects. The following opcodes
-        are taken from the original 8  bit opcodes. I.e. there could be a new opcode
+        are taken from the original 8&nbsp; bit opcodes. I.e. there could be a new opcode
         </p><pre>
         LDA.L #$12345678
-        </pre><p>to load the accumulator with a long (32  bit) value, that is implemented as
+        </pre><p>to load the accumulator with a long (32&nbsp; bit) value, that is implemented as
         </p><pre>
         23 A9 78 56 34 12
-        </pre><p>Here 23 is the prefix with RS=%10, i.e. 32  bit registers, and A9 is the original
-        LDA immediate opcode - only the parameter is now 4 byte (32  bit) not 1 byte anymore.
+        </pre><p>Here 23 is the prefix with RS=%10, i.e. 32&nbsp; bit registers, and A9 is the original
+        LDA immediate opcode - only the parameter is now 4 byte (32&nbsp; bit) not 1 byte anymore.
         </p><p>
         Please note that when all variable prefix bits are zero, the original 6502 operation is executed - 
 	with the notable exception on LD* opcodes as described in the section about
@@ -127,7 +126,7 @@ more modern browser, like Internet Explorer 8 or later,
         The NF flag does not apply to compare opcodes - their only purpose is to set the flags...
         </p> <p>
         Note that the Register size option for the RTS and JSR opcodes determine the size of the
-        return address as put on the stack. The RS=00 (8  bit register size option) however is mapped to the
+        return address as put on the stack. The RS=00 (8&nbsp; bit register size option) however is mapped to the
         natural address width of the processor (mode).
         </p><p>
         The Register size option for the branch opcodes determines the size of the relative address
@@ -155,13 +154,13 @@ more modern browser, like Internet Explorer 8 or later,
         Also note that there a are no indirect addressing modes that take a long or quad (longlong) value 
 	as indirect address.
         </p>
-     </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefam" id="prefam">Addressing Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+     </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefam">Addressing Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The AM prefix allows to select an alternative addressing mode compared to the original 6502
 	addressing mode. For example the "zeropage" addressing mode is converted to the "long"
 	alternative addressing mode.
 	</p><p>
 	For more details on this please see the <a href="af65002admodes.html">addressing modes</a> page.
-	</p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefof" id="prefof">Offset prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefof">Offset prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
         The offset prefix bits allows to add an address offset to the effective address of the operand.
         Four options are available:
@@ -187,7 +186,7 @@ more modern browser, like Internet Explorer 8 or later,
         Note that the size of the address read from the indirect address is defined by the addressing mode
         alone (which is also determined by the AM prefix bit).
         </p>
-       </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefrs" id="prefrs">Register Size prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+       </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefrs">Register Size prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
         The maximum register size depends on the used processor option. Each operation has a possibly smaller width.
         The Register size prefix defines the operation width. I.e. this determines the number of bytes to read from
@@ -203,14 +202,14 @@ more modern browser, like Internet Explorer 8 or later,
         <tr><td>10</td><td>32</td><td>.L</td><td>LDA.L #$12345678</td></tr>
         <tr><td>11</td><td>64</td><td>.Q</td><td>LDA.Q #$123456789ABCDEF0</td></tr>
         </table><p>
-        Please note that 8  bit width has no postfix.
+        Please note that 8&nbsp; bit width has no postfix.
         </p><p>
         TODO: rename to "OS" = "Operation size" or "OW" = "Operation width"?
         </p>
-       </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefle" id="prefle">Load Extensions prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+       </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefle">Load Extensions prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
-        The registers have a defined width - depending on processor option - of 16, 32 or 64  bit. Operations can be
-        from 8 to 64  bit.
+        The registers have a defined width - depending on processor option - of 16, 32 or 64&nbsp; bit. Operations can be
+        from 8 to 64&nbsp; bit.
         There are some use cases where some adaption of a value to the register size is practical. For example if
         an 8-bit value is used on a 32-bit operation - like adding <code>#8</code> to an address register.
         </p><p>
@@ -262,7 +261,7 @@ more modern browser, like Internet Explorer 8 or later,
         behaviour and could thus be left out, but not in this case as the default - for loads/transfers - is not the
         6502 behaviour, yet compatible.
         </p>
-       </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefum" id="prefum">User Mode selector</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+       </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefum">User Mode selector</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
         Normally the opcode uses the current processor mode - user or hypervisor - to compute the correct address.
         For the supervisor mode there is an option, however, to use an address from user mode as operand.
@@ -295,13 +294,13 @@ more modern browser, like Internet Explorer 8 or later,
 	use LEA with the indirect addressing mode. This computes the address in hypervisor mode and stores it in E. 
 	Then use the E-indirect addressing mode on the actual operation for example with <code>LDA.U (E)</code>.
         </p>
-	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="prefnf" id="prefnf">No Flags prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="prefnf">No Flags prefix</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
 	The NF bit, when set, prevents the status register bits from being changed.
 	For example you can do index register increments for example without 
 	losing the contents of the Z and N status register flags.
         </p>
-	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="preftables" id="preftables">Opcode Tables</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="preftables">Opcode Tables</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
         <p>
 	The following tables describe which prefixes apply to which opcode.
 	</p><p>
@@ -1105,11 +1104,10 @@ more modern browser, like Internet Explorer 8 or later,
        <p>
         The grey fields note opcodes that are not used in the 65002.
         </p>
-	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr />
+    </div></div><hr>
 Last updated 2012-04-23.
-  </div></div><div id="footer"> </div></div></body></html> 
-
+  </div></div><div id="footer">&nbsp;</div></div></body></html> 
