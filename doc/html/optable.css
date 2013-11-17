@@ -49,6 +49,7 @@ table.optable th {
 }
 
 table.optable td {
+	font-size: smaller;
 	margin: 0;
 	padding: 0.2em;
 	background-color: #ffffff;
