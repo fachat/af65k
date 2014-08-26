@@ -65,7 +65,7 @@ hash_t *hash_init(int approx_size, int nbuckets,
 }
 
 
-void *hash_add(hash_t *hash, void *value) {
+void *hash_put(hash_t *hash, void *value) {
 
 	void *removed = NULL;
 

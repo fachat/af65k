@@ -20,6 +20,7 @@
 ****************************************************************************/
 
 #include <string.h>
+#include <strings.h>
 
 #include "log.h"
 #include "mem.h"

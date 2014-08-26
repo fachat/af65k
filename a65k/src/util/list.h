@@ -42,9 +42,10 @@ typedef struct {
 typedef struct {
 	void		(*add)(list_t *list, void *data);
 	list_iterator_t	*(*iterator)(list_t *list);
-	void		*(*next)(list_iterator_t *iter);
-	bool_t		(*has_next)(list_iterator_t *iter);
-	void		(*free)(list_iterator_t *iter);
+	void		*(*iter_next)(list_iterator_t *iter);
+	void		*(*iter_remove)(list_iterator_t *iter);
+	bool_t		(*iter_has_next)(list_iterator_t *iter);
+	void		(*iter_free)(list_iterator_t *iter);
 	void		*(*pop)(list_t *list);
 	void		*(*get_last)(list_t *list);
 } list_type_t;
@@ -89,16 +90,22 @@ static inline list_iterator_t *list_iterator(list_t *list) {
 
 static inline bool_t list_iterator_has_next(list_iterator_t *iter) {
 	list_check_mod(iter);
-	return ((list_type_t*)iter->list->type)->has_next(iter);
+	return ((list_type_t*)iter->list->type)->iter_has_next(iter);
 }
 
 static inline void *list_iterator_next(list_iterator_t *iter) {
 	list_check_mod(iter);
-	return ((list_type_t*)iter->list->type)->next(iter);
+	return ((list_type_t*)iter->list->type)->iter_next(iter);
+}
+
+// remove the object that has been last returned by list_iterator_next()
+static inline void *list_iterator_remove(list_iterator_t *iter) {
+	list_check_mod(iter);
+	return ((list_type_t*)iter->list->type)->iter_remove(iter);
 }
 
 static inline void list_iterator_free(list_iterator_t *iter) {
-	((list_type_t*)iter->list->type)->free(iter);
+	((list_type_t*)iter->list->type)->iter_free(iter);
 }
 
 #endif

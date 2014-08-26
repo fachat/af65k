@@ -28,31 +28,6 @@
 #include "types.h"
 #include "list.h"
 
-typedef struct {
-	void		*next;		// array list of buckets
-	void	 	*prev;
-	int		bucket_size;
-	void		**data;		// pointer to array of data pointers
-} array_list_bucket_t;
-
-typedef struct {
-	// pointer shared with other list implementations 
-	list_type_t		type;
-	// array list struct
-	array_list_bucket_t 	*first;
-	array_list_bucket_t 	*last;
-	int 			size;
-	int			bucket_max_size;
-} array_list_t;
-
-typedef struct {
-	// pointer shared with other list implementations to 
-	list_iterator_t		type;
-	// array list stuff
-	array_list_bucket_t	*current_bucket;
-	int			current_in_bucket;
-} array_list_iterator_t;
-
 
 list_t *array_list_init(int bucket_size);
 

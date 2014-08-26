@@ -68,16 +68,22 @@ static void main_init() {
 	// parser
 	parser_init();
 
-	// pass 1
-	pass1();
-
 }
 
 int main(int argc, char *argv[]) {
 
+	// initialize modules
+
 	main_init();
 
+	// parse command line parameters
+	// TODO: need two functions, one legacy xa, one new a65k
 	main_parse_args(argc, argv);
 
+	// first pass
+	pass1();
+
+	// second pass
+	// pass2();
 }
 

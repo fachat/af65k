@@ -64,7 +64,7 @@ hash_t *hash_init(int approx_size, int nbuckets,
 		bool_t (*match_equals)(void *fromhash, void *tobeadded));
 
 // adds a new entry; returns any entry that has been removed (if match_equals is set)
-void *hash_add(hash_t *, void *value);
+void *hash_put(hash_t *, void *value);
 
 void *hash_get(hash_t *hash, void *matchparam);
 
