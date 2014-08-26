@@ -28,29 +28,6 @@
 #include "types.h"
 #include "list.h"
 
-/*
-typedef struct {
-	void		*next;
-	void	 	*prev;
-	void		*data;
-} linked_list_item_t;
-
-typedef struct {
-        // pointer shared with other list implementations to 
-        // struct with method pointers
-        list_type_t             type;
-	// linked list specific
-	linked_list_item_t 	*first;
-	linked_list_item_t 	*last;
-} linked_list_t;
-
-typedef struct {
-        // pointer shared with other list implementations 
-        list_iterator_t         type;
-	// linked list stuff
-	linked_list_item_t	*current;
-} linked_list_iterator_t;
-*/
 
 list_t *linked_list_init();
 

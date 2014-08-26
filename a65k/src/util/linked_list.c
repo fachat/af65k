@@ -26,11 +26,13 @@
 #include "mem.h"
 
 
-typedef struct {
-        void            *next;
-        void            *prev;
-        void            *data;
-} linked_list_item_t;
+typedef struct _linked_list_item linked_list_item_t;
+
+struct _linked_list_item {
+        linked_list_item_t            	*next;
+        linked_list_item_t            	*prev;
+        void            		*data;
+};
 
 typedef struct {
         // pointer shared with other list implementations to 
@@ -46,6 +48,7 @@ typedef struct {
         list_iterator_t         type;
         // linked list stuff
         linked_list_item_t      *current;
+        linked_list_item_t      *last;
 } linked_list_iterator_t;
 
 // static struct inits
@@ -68,18 +71,20 @@ static type_t list_iterator_memtype = {
 
 static void            	llist_add(list_t *list, void *data);
 static list_iterator_t 	*llist_iterator(list_t *list);
-static void            	*llist_next(list_iterator_t *iter);
-static bool_t          	llist_has_next(list_iterator_t *iter);
-static void 		llist_free(list_iterator_t *iter);
+static void            	*llist_iter_next(list_iterator_t *iter);
+static void            	*llist_iter_remove(list_iterator_t *iter);
+static bool_t          	llist_iter_has_next(list_iterator_t *iter);
+static void 		llist_iter_free(list_iterator_t *iter);
 static void            	*llist_pop(list_t *list);
 static void            	*llist_get_last(list_t *list);
 
 static list_type_t list_type = {
 	llist_add,
 	llist_iterator,
-	llist_next,
-	llist_has_next,
-	llist_free,
+	llist_iter_next,
+	llist_iter_remove,
+	llist_iter_has_next,
+	llist_iter_free,
 	llist_pop,
 	llist_get_last
 };
@@ -95,10 +100,6 @@ list_t *linked_list_init() {
 	list->last = NULL;
 
 	return (list_t*) list;
-}
-
-static void llist_free(list_iterator_t *iter) {
-	mem_free(iter);
 }
 
 static void list_item_free(linked_list_item_t *item) {
@@ -139,7 +140,7 @@ static void *llist_pop(list_t *_list) {
 
 	linked_list_item_t *last = list->last;
 	if (list->last != NULL) {
-		linked_list_item_t *newlast = (linked_list_item_t*) last->prev;
+		linked_list_item_t *newlast = last->prev;
 		list->last = newlast;
 		if (newlast != NULL) {
 			newlast->next = NULL;
@@ -166,16 +167,20 @@ list_iterator_t *llist_iterator(list_t *_list) {
 
 	list_iterator_init((list_iterator_t*)iter, _list);
 	iter->current = list->first;
+	iter->last = NULL;
 
 	return (list_iterator_t*) iter;
 }
 
 
-static void *llist_next(list_iterator_t *_iter) {
+static void *llist_iter_next(list_iterator_t *_iter) {
 
 	linked_list_iterator_t *iter = (linked_list_iterator_t*)_iter;
 
 	linked_list_item_t *item = iter->current;
+	// save for _remove
+	iter->last = item;
+	// get next one
 	if (item != NULL) {
 		iter->current = item->next;
 		return item->data;
@@ -183,10 +188,35 @@ static void *llist_next(list_iterator_t *_iter) {
 	return NULL;
 }
 
+static void *llist_iter_remove(list_iterator_t *_iter) {
 
-static bool_t llist_has_next(list_iterator_t *iter) {
+	linked_list_iterator_t *iter = (linked_list_iterator_t*)_iter;
 
-	return ((linked_list_iterator_t*)iter)->current != NULL;
+	linked_list_item_t *item = iter->last;
+	if (item != NULL) {
+		void *removed = item->data;
+		if (item->prev != NULL) {
+			item->prev->next = item->next;
+		}
+		if (item->next != NULL) {
+			item->next->prev = item->prev;
+		}
+		list_item_free(item);
+
+		return removed;
+	}
+	return NULL;
+}
+
+
+static bool_t llist_iter_has_next(list_iterator_t *iter) {
+
+	return ((linked_list_iterator_t*)iter)->current != NULL
+		&& ((linked_list_iterator_t*)iter)->current->next != NULL;
 }
  
+static void llist_iter_free(list_iterator_t *iter) {
+	mem_free(iter);
+}
+
 
