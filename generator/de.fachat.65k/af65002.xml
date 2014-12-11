@@ -1735,6 +1735,52 @@
     </operation>
 
     <operation>
+        <name>DAD</name>
+        <desc>Decimal adjust of a normal ADC of two BCD numbers.</desc>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>implied</addressingMode>
+            <opcode>0x1a</opcode>
+	    <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>Adjust the result of an ADC operation to BCD format. For example adding $14 and $08 with ADC (and C=0) gives $1c in normal mode.
+		As an addition of two BCD numbers this should be $22 instead. DAD adjusts the non-BCD result back into a BCD result.
+		DAD only works on the accumulator, i.e. takes the value from there and stores the result there.
+        	Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.
+        	</p><pre>
+        		AC, C &amp;lt;= DecimalAdjustAdd(AC)
+        		N &amp;lt;= Tmp(7)
+        		Z &amp;lt;= Z(Tmp)
+        	</pre>
+        </doc>
+    </operation>
+
+    <operation>
+        <name>DAS</name>
+        <desc>Decimal adjust of a normal SBC of two BCD numbers.</desc>
+        <prefixBits>RS</prefixBits>
+        <prefixBits>NF</prefixBits>
+        <class>65k</class>
+        <opcodes>
+            <addressingMode>implied</addressingMode>
+            <opcode>0x3a</opcode>
+	    <oppage>EXT</oppage>
+        </opcodes>
+        <doc><p>Adjust the result of an SBC operation to BCD format. For example substracting $08 from $24 with SBC (and C=1) gives $1c in normal mode.
+		As a substraction of two BCD numbers this should be $16 instead. DAD adjusts the non-BCD result back into a BCD result.
+		DAD only works on the accumulator, i.e. takes the value from there and stores the result there.
+        	Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.
+        	</p><pre>
+        		AC, C &amp;lt;= DecimalAdjustSub(AC)
+        		N &amp;lt;= Tmp(7)
+        		Z &amp;lt;= Z(Tmp)
+        	</pre>
+        </doc>
+    </operation>
+
+    <operation>
         <name>ADD</name>
         <desc>Add content of memory location to accumulator without using carry as input</desc>
         <prefixBits>AM</prefixBits>
@@ -1743,6 +1789,7 @@
         <prefixBits>LE</prefixBits>
         <prefixBits>UM</prefixBits>
         <prefixBits>NF</prefixBits>
+        <class>65k</class>
         <opcodes>
             <addressingMode>imm</addressingMode>
             <opcode>0x05</opcode>
@@ -1883,6 +1930,7 @@
         <prefixBits>LE</prefixBits>
         <prefixBits>UM</prefixBits>
         <prefixBits>NF</prefixBits>
+        <class>65k</class>
         <opcodes>
             <addressingMode>imm</addressingMode>
             <opcode>0x85</opcode>

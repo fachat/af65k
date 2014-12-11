@@ -110,6 +110,12 @@
 <a href="#CPY">CPY</a>
  - Compare Y register with content of memory location</li>
 <li>
+<a href="#DAD">DAD</a>
+ - Decimal adjust of a normal ADC of two BCD numbers.</li>
+<li>
+<a href="#DAS">DAS</a>
+ - Decimal adjust of a normal SBC of two BCD numbers.</li>
+<li>
 <a href="#DEC">DEC</a>
  - Decrement the content of a memory location by one</li>
 <li>
@@ -395,7 +401,7 @@
 <a name="ADD"> </a><p>Add content of memory location to accumulator without using carry as input</p>
 <table class="optable"><tr><th colspan="10">ADD</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x05</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x05</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td>EXT</td><td>0x00</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
 </table>
 <h3>Description</h3>
@@ -1042,7 +1048,37 @@
         	whether the operand is in user space. 
         	</p><p>
         	Note that the default is to use BYTE-wide operation without load extension.
-        	</p><h2>DEC</h2>
+        	</p><h2>DAD</h2>
+<a name="DAD"> </a><p>Decimal adjust of a normal ADC of two BCD numbers.</p>
+<table class="optable"><tr><th colspan="10">DAD</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x1a</td><td>65k</td><td>RS, NF</td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>Adjust the result of an ADC operation to BCD format. For example adding $14 and $08 with ADC (and C=0) gives $1c in normal mode.
+		As an addition of two BCD numbers this should be $22 instead. DAD adjusts the non-BCD result back into a BCD result.
+		DAD only works on the accumulator, i.e. takes the value from there and stores the result there.
+        	Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.
+        	</p><pre>
+        		AC, C &lt;= DecimalAdjustAdd(AC)
+        		N &lt;= Tmp(7)
+        		Z &lt;= Z(Tmp)
+        	</pre><h2>DAS</h2>
+<a name="DAS"> </a><p>Decimal adjust of a normal SBC of two BCD numbers.</p>
+<table class="optable"><tr><th colspan="10">DAS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x3a</td><td>65k</td><td>RS, NF</td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>Adjust the result of an SBC operation to BCD format. For example substracting $08 from $24 with SBC (and C=1) gives $1c in normal mode.
+		As a substraction of two BCD numbers this should be $16 instead. DAD adjusts the non-BCD result back into a BCD result.
+		DAD only works on the accumulator, i.e. takes the value from there and stores the result there.
+        	Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.
+        	</p><pre>
+        		AC, C &lt;= DecimalAdjustSub(AC)
+        		N &lt;= Tmp(7)
+        		Z &lt;= Z(Tmp)
+        	</pre><h2>DEC</h2>
 <a name="DEC"> </a><p>Decrement the content of a memory location by one</p>
 <table class="optable"><tr><th colspan="10">DEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -2254,7 +2290,7 @@
 <a name="SUB"> </a><p>Substract content of memory location from accumulator without using the carry flag as input</p>
 <table class="optable"><tr><th colspan="10">SUB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x85</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0x85</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td>EXT</td><td>0x80</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td></tr>
 </table>
 <h3>Description</h3>
