@@ -1,0 +1,38 @@
+DBG:hashmap:
+DBG:hash for 'a' is 110
+DBG:hash for 'b' is 111
+DBG:hash for 'c' is 112
+DBG:hash for 'd' is 113
+DBG:equals for 'a' vs. 'd' is -1
+DBG:hash for 'e' is 114
+DBG:equals for 'b' vs. 'e' is -1
+DBG:hash for 'f' is 115
+DBG:equals for 'c' vs. 'f' is -1
+DBG:hash for 'g' is 116
+DBG:equals for 'a' vs. 'g' is -1
+DBG:equals for 'd' vs. 'g' is -1
+DBG:hash for 'h' is 117
+DBG:equals for 'b' vs. 'h' is -1
+DBG:equals for 'e' vs. 'h' is -1
+DBG:hash for 'i' is 118
+DBG:equals for 'c' vs. 'i' is -1
+DBG:equals for 'f' vs. 'i' is -1
+DBG:hash for '4' is 65
+DBG:equals for 'a' vs. '4' is 1
+DBG:equals for 'd' vs. '4' is 1
+DBG:equals for 'g' vs. '4' is 1
+DBG:retrieved '<null>'
+DBG:hash for 'e' is 114
+DBG:equals for 'b' vs. 'e' is -1
+DBG:equals for 'e' vs. 'e' is 0
+DBG:retrieved '55'
+DBG:hash for 'e' is 114
+DBG:equals for 'b' vs. 'e' is -1
+DBG:equals for 'e' vs. 'e' is 0
+DBG:removed '55'
+DBG:hash for 'e' is 114
+DBG:equals for 'b' vs. 'e' is -1
+DBG:equals for 'h' vs. 'e' is 1
+DBG:equals for 'h' vs. 'e' is 1
+DBG:equals for 'e' vs. 'e' is 0
+DBG:retrieved '66'

@@ -1,21 +1,27 @@
 
+TESTS=hash1 list1
 
-CFLAGS=-Wall -pedantic -O2 -std=gnu99 -DMALLOC_CHECK_=3 -I../src -g
+SRCDIR=../src
 
-DEPS=../src/*.h
+CFLAGS=-Wall -pedantic -O2 -std=gnu99 -DMALLOC_CHECK_=3 -g
 
-SRC=../src/log.o ../src/linked_list.o ../src/array_list.o ../src/mem.o ../src/hashmap.o
+# Sorting include paths and defines simplifies checking them
+INCPATHS=. util base
+INCLUDES=$(sort $(addprefix -I$(SRCDIR)/,$(INCPATHS)))
 
-all: list1 hash1
+DEPS=$(addsuffix /*.h,$(INCLUDES))
 
-a65k: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o
+OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
+
+all: $(TESTS)
 
 clean:
-	rm $(OBJS)
+	rm -f *.o $(TESTS)
 
-%: %.c $(DEPS) $(SRC)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(SRC) $< 
+%: %.c $(OBJ)
+	echo "INCLUDES=" $(INCLUDES)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(OBJ) $< 
 	./$@ > $@.x
 	cmp $@.out $@.x
 	rm $@.x

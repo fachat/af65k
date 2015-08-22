@@ -45,19 +45,17 @@ static inline int bucket_from_hash(hash_t *hash, int hashval) {
 }
 
 hash_t *hash_init(int approx_size, int nbuckets, 
-		int (*hashfunc_from_param)(void *data), 
-		int (*hashfunc_from_entry)(void *data), 
-		bool_t (*matchfunc_key)(void *fromhash, void *fromparam),
-		bool_t (*matchfunc_equals)(void *fromhash, void *tobeadded)) {
+		int (*hash_from_key)(const void *key), 
+		const void* (*key_from_entry)(const void *entry), 
+		bool_t (*equals_key)(const void *fromhash, const void *tobeadded)) {
 
 	hash_t *hash = mem_alloc(&hash_memtype);
 
 	hash->approx_size = approx_size;
 	hash->n_buckets = nbuckets;
-	hash->hash_from_param = hashfunc_from_param;
-	hash->hash_from_entry = hashfunc_from_entry;
-	hash->match_key = matchfunc_key;
-	hash->match_equals = matchfunc_equals;
+	hash->hash_from_key = hash_from_key;
+	hash->key_from_entry = key_from_entry;
+	hash->equals_key = equals_key;
 
 	hash->buckets = mem_alloc_n(nbuckets, &hash_bucket_memtype);
 
@@ -69,8 +67,10 @@ void *hash_put(hash_t *hash, void *value) {
 
 	void *removed = NULL;
 
+	const void *key = hash->key_from_entry(value);
+
 	// calculate hash
-	int hashval = hash->hash_from_entry(value);
+	int hashval = hash->hash_from_key(key);
 
 	// find bucket by computing the modulo of the hash value
 	int bucketno = bucket_from_hash(hash, hashval);
@@ -80,14 +80,12 @@ void *hash_put(hash_t *hash, void *value) {
 		// first with this value
 		bucket_list = array_list_init(hash->approx_size / hash->n_buckets);
 		hash->buckets[bucketno].bucket_list = bucket_list;
-	}
-
-	if (hash->match_equals) {
+	} else {
 		list_iterator_t *iter = list_iterator(bucket_list);
 		while (list_iterator_has_next(iter)) {
 			void *entry = list_iterator_next(iter);
 
-			if (hash->match_equals(entry, value)) {
+			if (hash->equals_key(hash->key_from_entry(entry), key)) {
 				list_iterator_remove(iter);
 				removed = entry;
 				break;
@@ -102,10 +100,10 @@ void *hash_put(hash_t *hash, void *value) {
 }
 
 
-void *hash_get(hash_t *hash, void *matchparam) {
+void *hash_get(hash_t *hash, void *key) {
 
 	// calculate hash
-	int hashval = hash->hash_from_param(matchparam);
+	int hashval = hash->hash_from_key(key);
 
 	// find bucket by computing the modulo of the hash value
 	int bucketno = bucket_from_hash(hash, hashval);
@@ -122,7 +120,7 @@ void *hash_get(hash_t *hash, void *matchparam) {
 
 		void *fromhash = list_iterator_next(iter);
 	
-		if (hash->match_key(fromhash, matchparam)) {
+		if (hash->equals_key(hash->key_from_entry(fromhash), key)) {
 
 			list_iterator_free(iter);
 

@@ -43,33 +43,28 @@ typedef struct {
 	int		n_buckets;
 	// ptr to array of buckets
 	hash_bucket_t	*buckets;
-	// ptr to hash function - hash from match parameter
-	int		(*hash_from_param)(void *fromparam);
-	// ptr to hash function - hash from hash entry or add parameter
-	int		(*hash_from_entry)(void *fromhash);
-	// ptr to match function, returns true when parameter matches fromhash, or value derived from it
-	// note that both pointers need not be of the same type. you could have a pointer
-	// with a key and a value in the hash, while the match parameter is matched with the key only
-	bool_t		(*match_key)(void *fromhash, void *fromparam);
+	// ptr to hash function - hash from key
+	int		(*hash_from_key)(const void *key);
+	// get the key from an entry that is put into the map
+	const void*	(*key_from_entry)(const void *entry);
 	// optional - when set, check newly added entries if they are equal with a 
 	// previous entry and remove the previous one
-	bool_t		(*match_equals)(void *fromhash, void *tobeadded);
+	bool_t		(*equals_key)(const void *fromhash, const void *tobeadded);
 } hash_t;
 
 
 hash_t *hash_init(int approx_size, int nbuckets, 
-		int (*hashfunc_from_param)(void *data), 
-		int (*hashfunc_from_entry)(void *data), 
-		bool_t (*match_key)(void *fromhash, void *fromparam),
-		bool_t (*match_equals)(void *fromhash, void *tobeadded));
+		int (*hash_from_key)(const void *data), 
+		const void* (*key_from_entry)(const void *entry),
+		bool_t (*equals_entry)(const void *fromhash, const void *tobeadded));
 
 // adds a new entry; returns any entry that has been removed (if match_equals is set)
 void *hash_put(hash_t *, void *value);
 
-void *hash_get(hash_t *hash, void *matchparam);
+void *hash_get(hash_t *hash, void *key);
 
-static inline bool_t hash_contains(hash_t *hash, void *matchparam) {
-        return NULL != hash_get(hash, matchparam);
+static inline bool_t hash_contains(hash_t *hash, void *key) {
+        return NULL != hash_get(hash, key);
 }
 
 #endif

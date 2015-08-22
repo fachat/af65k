@@ -211,8 +211,7 @@ static void *llist_iter_remove(list_iterator_t *_iter) {
 
 static bool_t llist_iter_has_next(list_iterator_t *iter) {
 
-	return ((linked_list_iterator_t*)iter)->current != NULL
-		&& ((linked_list_iterator_t*)iter)->current->next != NULL;
+	return ((linked_list_iterator_t*)iter)->current != NULL;
 }
  
 static void llist_iter_free(list_iterator_t *iter) {
