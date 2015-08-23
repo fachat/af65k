@@ -45,6 +45,24 @@ char *mem_alloc_str(const char *orig) {
 	return ptr;
 }
 
+// allocate memory and copy given string, up to number of chars given
+char *mem_alloc_strn(const char *orig, int nchars) {
+
+	int len = strlen(orig);
+	
+	if (len < nchars) {
+		nchars = len;
+	}
+
+	char *ptr = malloc(nchars+1);
+	
+	strncpy(ptr, orig, nchars);
+
+	ptr[nchars] = 0;
+
+	return ptr;
+}
+
 
 void *mem_alloc(const type_t *type) {
 	// for now just malloc()
@@ -54,6 +72,7 @@ void *mem_alloc(const type_t *type) {
 
 void *mem_alloc_c(size_t n, const char *name) {
 	// for now just malloc()
+	(void) name;
 
 	return malloc(n);
 }

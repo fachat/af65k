@@ -23,6 +23,8 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <stdbool.h>
+
 typedef struct _type type_t;
 
 // more or less a class definition type
@@ -31,7 +33,12 @@ struct _type {
 	int		sizeoftype;
 };
 
-typedef int 	bool_t;
+typedef bool 	bool_t;
+
+// because the standard isprint() does not handle UTF8 codes
+static inline bool_t isPrint(char c) {
+	return c > 31;
+}
 
 #endif
 

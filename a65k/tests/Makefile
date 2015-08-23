@@ -11,7 +11,7 @@ INCLUDES=$(sort $(addprefix -I$(SRCDIR)/,$(INCPATHS)))
 
 DEPS=$(addsuffix /*.h,$(INCLUDES))
 
-OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
 all: $(TESTS)

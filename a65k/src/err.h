@@ -1,7 +1,8 @@
+
 /****************************************************************************
 
-    65k processor assembler
-    Copyright (C) 2012 Andre Fachat
+    error defnitions
+    Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,36 +20,20 @@
 
 ****************************************************************************/
 
-#ifndef MEM_H
-#define MEM_H
 
-#include <stdio.h>
+#ifndef ERR_H
+#define ERR_H
 
-#include "types.h"
 
-/*
- * basically a malloc/free wrapper
- */
+typedef enum {
+	E_TOK_DIGITRANGE 	= 100,		// illegal digit when parsing an int value
+	E_TOK_EMPTY		= 101,		// empty token (e.g. "$" hex indicator, but no digits), or empty string
+	E_TOK_NONPRINT		= 102,		// illegal (non-printable) character in parsed string
+	E_TOK_UNKNOWN		= 103,		// unknown token
+	
+} err_t;
 
-void mem_init(void);
-
-void mem_free(void *ptr);
-
-// alloc single object
-void *mem_alloc(type_t *type);
-
-// alloc multiple object, returning a pointer to an array
-void *mem_alloc_n(size_t n, type_t *type);
-
-// alloc multiple object, returning a pointer to an array
-void *mem_alloc_c(size_t n, char *name);
-
-// allocate memory and copy given string
-char *mem_alloc_str(const char *orig);
-
-// allocate memory and copy given string, up to given number of chars;
-// Note: result will always be null byte terminated.
-char *mem_alloc_strn(const char *orig, int nchars);
 
 #endif
+
 
