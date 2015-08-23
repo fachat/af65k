@@ -1,5 +1,7 @@
 
-TESTS=hash1 list1
+TESTS=hash1 list1 tokenizer1
+
+TESTBINS=$(addprefix bin/,$(TESTS))
 
 SRCDIR=../src
 
@@ -14,16 +16,16 @@ DEPS=$(addsuffix /*.h,$(INCLUDES))
 OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
-all: $(TESTS)
+all: $(TESTBINS)
 
 clean:
-	rm -f *.o $(TESTS)
+	rm -f *.o $(TESTBINS)
 
-%: %.c $(OBJ)
+bin/%: %.c $(OBJ)
 	echo "INCLUDES=" $(INCLUDES)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(OBJ) $< 
 	./$@ > $@.x
-	cmp $@.out $@.x
+	cmp `echo "$@" | sed -e 's%bin/%%g'`.out $@.x
 	rm $@.x
 
  
