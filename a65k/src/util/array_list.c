@@ -118,6 +118,11 @@ list_t *array_list_init(int bucket_size) {
 
 	log_debug("%p: Creating array_list with max bucket size %d\n", list, bucket_size);
 
+	if (bucket_size == 0) {
+		log_error("%p: bucket size is zero, setting to 10!\n", list);
+		bucket_size = 10;
+	}
+
 	list->bucket_max_size = bucket_size;
 
 	list->size = 0;

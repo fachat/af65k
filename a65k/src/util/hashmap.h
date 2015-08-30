@@ -53,15 +53,19 @@ typedef struct {
 } hash_t;
 
 
+// initialize a hashmap. nbuckets is the number of hash values that are actually used
+// The bucket number is computed by taking the modulo of the hash value to the base nbucket.
+// The approximate size is divided by nbuckets to determine the initial size of 
+// an allocated bucket.
 hash_t *hash_init(int approx_size, int nbuckets, 
 		int (*hash_from_key)(const void *data), 
 		const void* (*key_from_entry)(const void *entry),
-		bool_t (*equals_entry)(const void *fromhash, const void *tobeadded));
+		bool_t (*equals_key)(const void *fromhash, const void *tobeadded));
 
 // adds a new entry; returns any entry that has been removed (if match_equals is set)
 void *hash_put(hash_t *, void *value);
 
-void *hash_get(hash_t *hash, void *key);
+void *hash_get(hash_t *hash, const void *key);
 
 static inline bool_t hash_contains(hash_t *hash, void *key) {
         return NULL != hash_get(hash, key);
