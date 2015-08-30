@@ -27,9 +27,9 @@
 #include "array_list.h"
 #include "hashmap.h"
 #include "mem.h"
-#include "block.h"
 #include "context.h"
 #include "label.h"
+#include "block.h"
 #include "astring.h"
 
 
@@ -44,9 +44,8 @@ static type_t block_memtype = {
 
 // key is the label name
 static int block_hash_from_key(const void *data) {
-	label_t *label = (label_t*) data;
 
-	return string_hash(label->name);
+	return string_hash((const char *)data);
 }
 
 static const void *block_key_from_entry(const void *entry) {
@@ -82,7 +81,7 @@ label_t *block_add_label(block_t *blk, label_t *label) {
 	const void *key = block_key_from_entry(label);
 	block_t *b = blk;
 	while (b != NULL) {
-		conflict = hash_get(blk->labels, key);
+		conflict = hash_get(b->labels, key);
 		if (conflict != NULL) {
 			return conflict;
 		}

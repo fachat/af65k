@@ -35,6 +35,19 @@ typedef struct {
 } label_t;
 
 
+static type_t label_memtype = {
+	"label",
+	sizeof(label_t)
+};
+
+static inline label_t *label_init(context_t *ctx, const char *name) {
+	label_t *label = mem_alloc(&label_memtype);
+
+	label->ctx = ctx;
+	label->name = name;
+	return label;
+}
+
 
 
 #endif
