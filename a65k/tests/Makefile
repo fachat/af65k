@@ -1,5 +1,5 @@
 
-TESTS=hash1 list1 tokenizer1
+TESTS=hash1 list1 tokenizer1 infiles1
 
 TESTBINS=$(addprefix bin/,$(TESTS))
 
@@ -13,10 +13,12 @@ INCLUDES=$(sort $(addprefix -I$(SRCDIR)/,$(INCPATHS)))
 
 DEPS=$(addsuffix /*.h,$(INCLUDES))
 
-OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
 all: $(TESTBINS)
+
+%: bin/%
 
 clean:
 	rm -f *.o $(TESTBINS)

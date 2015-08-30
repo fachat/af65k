@@ -21,8 +21,11 @@
 
 #define	DEBUG
 
+#include <stdio.h>
+
 #include "log.h"
 
+#include "infiles.h"
 #include "parser.h"
 
 
@@ -30,9 +33,9 @@ void parser_init(void) {
 
 }
 
-void parser_push(char *line) {
+void parser_push(line_t *line) {
 
-	log_debug("parser pushed: %s\n", line);
+	log_debug("parser pushed: %03d: %s\n", line->lineno, line->line);
 }
 
 

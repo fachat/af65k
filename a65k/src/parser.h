@@ -25,7 +25,7 @@
 
 void parser_init(void);
 
-void parser_push(char *line);
+void parser_push(line_t *line);
 
 
 #endif

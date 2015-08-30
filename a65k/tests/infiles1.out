@@ -1,0 +1,27 @@
+infiles:
+got f='main.a65', l=001: 
+got f='main.a65', l=002: this file is the main test root
+got f='main.a65', l=003: 
+got f='main.a65', l=004: // include dir test
+got f='main.a65', l=005: include inc.i65
+got f='inc.i65', l=001: included file
+got f='inc.i65', l=002: 
+got f='inc.i65', l=003: 
+got f='main.a65', l=006: 
+got f='main.a65', l=007: // file without ln at the end of file
+got f='main.a65', l=008: include file_without_ln.a65
+got f='file_without_ln.a65', l=001: this file does not have a new line at its end
+got f='file_without_ln.a65', l=002: next to last line
+got f='file_without_ln.a65', l=003: last line
+got f='main.a65', l=009: 
+got f='main.a65', l=010: include oversize_line.a65
+ERR:Line buffer overflow on line 1 of file oversize_line.a65 after 4096 bytes
+got f='oversize_line.a65', l=001: /****************************************************************************    tokenizing a line  ...
+ERR:Line buffer overflow on line 2 of file oversize_line.a65 after 4096 bytes
+got f='oversize_line.a65', l=002: UAL;				tok->len++;				return true;			default:				// default				return true;			}		} else {			// ">" ...
+ERR:Line buffer overflow on line 3 of file oversize_line.a65 after 4096 bytes
+got f='oversize_line.a65', l=003: eral Public License    along with this program; if not, write to the Free Software    Foundation, In...
+got f='oversize_line.a65', l=004: nfile_iter = list_iterator(infiles);	}	if (current_file != NULL && feof(current_file->filep)) {		// ...
+got f='main.a65', l=011: 
+got f='main.a65', l=012: last line
+got f='main.a65', l=013: 

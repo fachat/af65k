@@ -32,14 +32,7 @@
 
 #define	INITIAL_BUFFER_SIZE	4096
 
-typedef struct {
-	char 		*filename;	// the file name part
-	char 		*filepath;	// the path part
-	int		current_line;
-	FILE		*filep;
-	int		buffer_size;
-	char		*buffer;
-} openfile_t;
+
 
 static type_t openfile_memtype = {
 	"openfile",
@@ -47,6 +40,8 @@ static type_t openfile_memtype = {
 };
 
 static openfile_t *current_file = NULL;
+
+static line_t line;
 
 // contains the stack of open files
 // with entries of openfile_t. Note that entries are not 
@@ -66,7 +61,7 @@ static list_t *incdirs;
 void infiles_init(void) {
 
 	infiles = linked_list_init();
-	infile_iter = list_iterator(infiles);
+	infile_iter = NULL;
 
 	incdirs = linked_list_init();
 
@@ -102,13 +97,14 @@ static char *alloc_fullpath(const char *path, const char *name) {
 	fp[0] = '\0';
 	if (path != NULL) {
 		strcat(fp, path);
+		strcat(fp, PATH_SEPARATOR_STR);
 	}
-	strcat(fp, PATH_SEPARATOR_STR);
 	strcat(fp, name);
 	
 	return fp;
 }
 
+// low level open given single path. Return NULL on not found
 static openfile_t *open_file(char *filepath) {
 
 	FILE *filep = fopen(filepath, "r");
@@ -137,13 +133,13 @@ static openfile_t *open_file(char *filepath) {
 		return of;
 	} else {
 		// file not opened
-		log_errno("Could not open file: '%s'", filepath);
+		log_debug("Could not open file: '%s'", filepath);
 		mem_free(filepath);
 		return NULL;
 	}
 }
 
-// open a file
+// open a file, checking all the include dirs
 static openfile_t *infile_open(const char *filename) {
 
 
@@ -178,15 +174,45 @@ static openfile_t *infile_open(const char *filename) {
 	return ofile;
 }
 
+void infiles_include(const char *filename) {
 
-char *infiles_readline() {
+	list_add(filestack, current_file);
+
+	current_file = infile_open(filename);
+}
+
+// low level close, also releases the allocated attributes (buffer)
+// but not the struct itself, as references to it can be held 
+static void infiles_close(openfile_t *file) {
+
+	fclose(file->filep);
+
+	mem_free(file->buffer);
+	file->buffer = NULL;
+
+	if (current_file == file) {
+		current_file = NULL;
+	}
+}
+
+line_t *infiles_readline() {
+
+	if (infile_iter == NULL) {
+		infile_iter = list_iterator(infiles);
+	}
 
 	if (current_file != NULL && feof(current_file->filep)) {
 		// file completely read, close it
-		fclose(current_file->filep);
-		current_file = NULL;
+		infiles_close(current_file);
 	}
 
+	// first check if we are in an include, and return to parent file
+	if (current_file == NULL) {
+
+		current_file = list_pop(filestack);
+	}
+
+	// we were not in an include, so try the next top level file	
 	if (current_file == NULL) {
 
 		char *filename = list_iterator_next(infile_iter);
@@ -214,27 +240,35 @@ char *infiles_readline() {
 		// EOF without chars, or error
 		if (ferror(current_file->filep)) {
 			log_error("Error on reading file %s\n", current_file->filename);
+			infiles_close(current_file);
 			return NULL;
 		}
 		// EOF without chars
 		// should not happen
-		fclose(current_file->filep);
 
 		log_warn("EOF for file %s without chars!\n", current_file->filename);
-		// fake return
-		return "";
+		// fake return empty line
+		strcpy(current_file->buffer, "\n");
 	}
 
 	int len = strlen(buffer);
 	if (buffer[len-1] != '\n') {
-		// buffer overflow
-		log_error("Line buffer overflow on line %d of file %s\n", 
-			current_file->current_line, current_file->filename);
+		if (len >= current_file->buffer_size - 1) {
+			// buffer overflow
+			log_error("Line buffer overflow on line %d of file %s after %d bytes\n", 
+				current_file->current_line, current_file->filename, current_file->buffer_size);
+		}
 	} else {
 		// overwrite final newline
 		buffer[len-1] = 0;
 	}
-	
-	return buffer;
+
+
+	line.file = current_file;
+	line.line = buffer;
+	line.lineno = current_file->current_line;
+
+	current_file->current_line++;
+	return &line;
 }
 

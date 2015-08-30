@@ -40,10 +40,10 @@ Each bucket has the same max size, as defined in the main array list, so
 for each bucket the "bucket_size" is the current number of entries in the
 bucket.
 
- */
+*/
 
 typedef struct {
-        void            *next;          // array list of buckets
+        void            *next;          // linked list of buckets
         void            *prev;
         int             bucket_size;
         void            **data;         // pointer to array of data pointers

@@ -1,0 +1,12 @@
+
+this file is the main test root
+
+// include dir test
+include inc.i65
+
+// file without ln at the end of file
+include file_without_ln.a65
+
+include oversize_line.a65
+
+last line

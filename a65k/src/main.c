@@ -37,7 +37,7 @@
  */
 static void pass1() {
 
-	char *line;
+	line_t *line;
 
 	line = infiles_readline();
 	while (line != NULL) {

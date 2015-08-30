@@ -23,6 +23,24 @@
 #ifndef INFILES_H
 #define INFILES_H
 
+struct openfile {
+        char            *filename;      // the file name part
+        char            *filepath;      // the path part
+        int             current_line;
+        FILE            *filep;
+        int             buffer_size;
+        char            *buffer;
+};
+typedef struct openfile openfile_t;
+
+
+typedef struct {
+	const struct openfile 	*file;
+	const char 		*line;
+	int 			lineno;
+} line_t;
+
+
 void infiles_init(void);
 
 // add an include directory to the input file processing
@@ -31,8 +49,16 @@ void infiles_includedir(const char *filename);
 // register a top level input file 
 void infiles_register(const char *filename);
 
-// read a line from the input
-char *infiles_readline();
+// read a line from the input. Note the result is static and must not be freed.
+// Ownership of the components stays with the infile module, so line must be copied
+// when a modifyable version, or one that exists longer than the next call to infile_readline
+// is needed.
+line_t *infiles_readline();
 
+// during read operation, and after parsing, an "include" operation can occur. 
+// The indiles_include call opens the file given, and reads from there until end of file,
+// before returning to the original file.
+void infiles_include(const char *filename);
+ 
 #endif
 
