@@ -1,8 +1,8 @@
 
 /****************************************************************************
 
-    context management
-    Copyright (C) 2012,2015 Andre Fachat
+    block management
+    Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,7 +27,6 @@
 #include "array_list.h"
 #include "hashmap.h"
 #include "mem.h"
-#include "context.h"
 #include "label.h"
 #include "block.h"
 #include "astring.h"
@@ -38,7 +37,7 @@
 #define	DEFAULT_SIZE_LABELS_BUCKETS	128
 
 static type_t block_memtype = {
-	"context",
+	"block_t",
 	sizeof(block_t)
 };
 

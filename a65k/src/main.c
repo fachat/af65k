@@ -62,11 +62,11 @@ static void main_parse_args(int argc, char *argv[]) {
 static void main_init() {
 
 	// memory handling
-	mem_init();
+	mem_module_init();
 	// input files
-	infiles_init();
+	infiles_module_init();
 	// parser
-	parser_init();
+	parser_module_init();
 
 }
 

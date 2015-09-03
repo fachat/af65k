@@ -20,11 +20,16 @@
 
 ****************************************************************************/
 
+#include <stdio.h>
+#include <string.h>
 
 #include "types.h"
+#include "infiles.h"
 #include "array_list.h"
 #include "hashmap.h"
 #include "mem.h"
+#include "cpu.h"
+#include "segment.h"
 #include "context.h"
 
 
@@ -35,16 +40,30 @@ static type_t context_memtype = {
 	sizeof(context_t)
 };
 
-// create a new context, links it with parent (both ways)
-// when parent is given. parent can be NULL
-context_t *context_init(context_t *parent) {
+
+// create a new context. Usually only called at beginning of parse
+context_t *context_init(openfile_t* file, segment_t *segment, cpu_t *cpu) {
 
 	context_t *ctx = mem_alloc(&context_memtype);
 
-	ctx->children = array_list_init(DEFAULT_SIZE_CHILDREN_BUCKET);
-	ctx->parent = parent;
+	ctx->sourcefile = file;
+	ctx->segment = segment;
+	ctx->cpu = cpu;
+
+	ctx->cpu_width = cpu->cpu_width;
+	ctx->index_width = false;
+	ctx->acc_width = false;
 
 	return ctx;
+}
+
+// duplicates context, so attributes can be modified
+context_t *context_dup(context_t *parent) {
+
+
+	context_t *ctx = mem_alloc(&context_memtype);
+
+	return memcpy(ctx, parent, sizeof(context_t));
 }
 
 

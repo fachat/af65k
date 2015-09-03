@@ -29,7 +29,7 @@
 
 #include "types.h"
 
-void mem_init(void) {
+void mem_module_init(void) {
 }
 
 

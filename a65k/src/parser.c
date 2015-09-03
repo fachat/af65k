@@ -29,7 +29,7 @@
 #include "parser.h"
 
 
-void parser_init(void) {
+void parser_module_init(void) {
 
 }
 

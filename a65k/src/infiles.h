@@ -41,7 +41,7 @@ typedef struct {
 } line_t;
 
 
-void infiles_init(void);
+void infiles_module_init(void);
 
 // add an include directory to the input file processing
 void infiles_includedir(const char *filename);

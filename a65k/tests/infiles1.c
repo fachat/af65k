@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
 
 	printf("infiles:\n");
 
-	infiles_init();
+	infiles_module_init();
 
 	infiles_register("testfiles/main.a65");
 	infiles_includedir("testfiles/incdir1");

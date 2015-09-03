@@ -30,7 +30,7 @@
  * basically a malloc/free wrapper
  */
 
-void mem_init(void);
+void mem_module_init(void);
 
 void mem_free(void *ptr);
 

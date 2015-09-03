@@ -2,7 +2,7 @@
 /****************************************************************************
 
     context management
-    Copyright (C) 2012,2015 Andre Fachat
+    Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@
 
 ****************************************************************************/
 
+// The context is what describes the current assembler context.
+// It contains information about the source file, the current segment,
+// the current CPU and its CPU modes (e.g. 65816 index register width,
+// or 65k width)
 
 #ifndef CONTEXT_H
 #define CONTEXT_H
@@ -28,17 +32,19 @@
 typedef struct context_s context_t;
 
 struct context_s {
-	// parent context
-	context_t	*parent;
-	// child contexts
-	list_t		*children;
-	// labels defined in this context
-	hash_t		*labels;
+	openfile_t	*sourcefile;
+	segment_t	*segment;
+	cpu_t		*cpu;
+	int		cpu_width;	// CPU width, normally taken from *cpu, but can be modified with .width
+        bool_t          index_width;    // true when index registers are wide in 65816 (.xe/.xs)
+        bool_t          acc_width;      // true when accumulator is wide in 65816 
 };
 
-// create a new context, links it with parent (both ways)
-// when parent is given. parent can be NULL
-context_t *context_init(context_t *parent);
+// create a new context. Usually only called at beginning of parse
+context_t *context_init(openfile_t* file, segment_t *segment, cpu_t *cpu);
+
+// duplicates context, so attributes can be modified
+context_t *context_dup(context_t *parent);
 
 
 

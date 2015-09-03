@@ -25,6 +25,7 @@
 #define LABEL_H
 
 
+typedef struct context_s context_t;
 
 typedef struct {
 	// context

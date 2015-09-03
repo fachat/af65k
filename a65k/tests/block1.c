@@ -2,7 +2,6 @@
 #include "mem.h"
 #include "list.h"
 #include "hashmap.h"
-#include "context.h"
 #include "label.h"
 #include "block.h"
 

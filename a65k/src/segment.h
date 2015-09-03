@@ -1,7 +1,8 @@
+
 /****************************************************************************
 
-    parser
-    Copyright (C) 2012 Andre Fachat
+    segment management
+    Copyright (C) 2012,2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +21,33 @@
 ****************************************************************************/
 
 
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef SEGMENT_H
+#define SEGMENT_H
 
-void parser_module_init(void);
 
-void parser_push(line_t *line);
+typedef struct segment_s segment_t;
+
+typedef enum {
+	SEG_ANY,	// "any" type of segment, like original 6502 assembler
+	SEG_TEXT,	// code
+	SEG_ZP,		// zeropage data
+	SEG_DATA,	// data
+	SEG_ZPBSS,	// zeropage bss
+	SEG_BSS		// bss
+} seg_type;
+
+struct segment_s {
+	const char 	*name;
+	const seg_type	type;
+	bool_t		readonly;
+	int		cpu_width;	// for 65k; segment.cpu_width >= context.cpu_width
+};
+
+// create a new segment or find an existing, matching one; parent is optional
+segment_t *segment_new(segment_t *parent, seg_type type, cpu_type cpu);
+
+// duplicate a segment, to be able to modify it
+segment_t *segment_dup(segment_t *orig);
 
 
 #endif

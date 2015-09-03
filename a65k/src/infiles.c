@@ -58,7 +58,7 @@ static list_iterator_t *infile_iter;
 // be it from the command line or from include statements
 static list_t *incdirs;
 
-void infiles_init(void) {
+void infiles_module_init(void) {
 
 	infiles = linked_list_init();
 	infile_iter = NULL;
