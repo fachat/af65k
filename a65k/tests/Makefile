@@ -1,5 +1,7 @@
 
-TESTS=hash1 list1 tokenizer1 infiles1 block1 
+.PHONY: clean
+
+TESTS=hash1 list1 tokenizer1 infiles1 block1 cpu1 context1 stringhash
 
 TESTBINS=$(addprefix bin/,$(TESTS))
 
@@ -9,26 +11,25 @@ CFLAGS=-Wall -pedantic -O2 -std=gnu99 -DMALLOC_CHECK_=3 -g
 
 # Sorting include paths and defines simplifies checking them
 INCPATHS=. util base
-INCLUDES=$(sort $(addprefix -I$(SRCDIR)/,$(INCPATHS)))
+INCLUDES=$(addprefix -I$(SRCDIR)/,$(INCPATHS))
+DEPS=$(addprefix $(SRCDIR)/,$(addsuffix /*.h,$(INCPATHS)))
 
-DEPS=$(addsuffix /*.h,$(INCLUDES))
-
-OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o cpu.o context.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
 all: $(TESTBINS)
 
-%: bin/%
-
-clean:
-	rm -f *.o $(TESTBINS)
-
-bin/%: %.c $(OBJ)
-	echo "INCLUDES=" $(INCLUDES)
+bin/%: %.c $(OBJ) $(DEPS)
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $(OBJ) $< 
 	./$@ > $@.x
 	cmp `echo "$@" | sed -e 's%bin/%%g'`.out $@.x
 	rm $@.x
+
+%: bin/%
+	# not empty
+
+clean:
+	rm -f *.o $(TESTBINS)
 
  
 

@@ -47,6 +47,9 @@ static const cpu_t cpus[12] = {
 static hash_t *cpu_typemap = NULL;
 
 static int cpu_hash_from_key(const void *data) {
+
+	log_debug("cpu_hash_from_key '%s'\n", data);
+	
 	return string_hash((const char *)data);
 }
 static const void *cpu_key_from_entry(const void *entry) {
@@ -54,6 +57,9 @@ static const void *cpu_key_from_entry(const void *entry) {
 	return cpu->name;
 }
 static bool_t cpu_equals_key(const void *fromhash, const void *tobeadded) {
+
+        log_debug("equals for '%s' vs. '%s' is %d\n", fromhash, tobeadded, strcmp((char*)fromhash, (char*)tobeadded));
+
 	return !strcmp(fromhash, tobeadded);
 }
 

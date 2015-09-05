@@ -46,6 +46,10 @@ static type_t hash_bucket_memtype = {
 static inline int bucket_from_hash(hash_t *hash, int hashval) {
 	// find bucket by computing the modulo of the hash value
 	int bucketno = hashval % hash->n_buckets;
+
+	if (bucketno < 0) {
+		bucketno = -bucketno;
+	}
 	return bucketno;
 }
 

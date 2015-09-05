@@ -53,5 +53,7 @@ typedef struct {
 
 void cpu_module_init();
 
+cpu_t *cpu_by_name(const char *name);
+
 #endif
 

@@ -1,0 +1,2 @@
+nmos -> nmos, type=0, base=0, width=16, has_bcd=1, has_illegal=0
+rcmos -> cmos_rockwell, type=3, base=2, width=16, has_bcd=1, has_illegal=0

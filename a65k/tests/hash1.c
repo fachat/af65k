@@ -5,6 +5,7 @@
 #define	DEBUG
 
 #include "log.h"
+#include "astring.h"
 #include "hashmap.h"
 
 typedef struct {
@@ -21,7 +22,8 @@ static entry_t data[] = {
 	{ "f", "66" }, 
 	{ "g", "77" }, 
 	{ "h", "88" }, 
-	{ "i", "99" }
+	{ "i", "99" },
+	{ "nmos_illegal_nobcd", "has negative hash caused illegal pointer reference" },
 };
 
 static bool_t equals_key(const void *data1, const void *data2) {
@@ -43,18 +45,20 @@ static int hash_from_key(const void *data) {
 	
 	char *cdata = (char*)data;
 
-	int len = strlen(cdata);
-	
-	int hash = len;
+//	int len = strlen(cdata);
+//	
+//	int hash = len;
+//
+//	// the hash algorithm used below only makes sense
+//	// for up to 8 bytes ( 13^8 approx. 32 bit )
+//	if (len > 8) {
+//		len = 8;
+//	}
+//	for (int i = 0; i < len; i++) {
+//		hash = hash * 13 + cdata[i];
+//	}
 
-	// the hash algorithm used below only makes sense
-	// for up to 8 bytes ( 13^8 approx. 32 bit )
-	if (len > 8) {
-		len = 8;
-	}
-	for (int i = 0; i < len; i++) {
-		hash = hash * 13 + cdata[i];
-	}
+	int hash = string_hash(cdata);
 
 	log_debug("hash for '%s' is %d\n", cdata, hash);
 
@@ -80,7 +84,10 @@ int main(int argc, char *argv[]) {
 
 void do_test(hash_t *hash) {
 
-	for (int i = 0; i < 9; i++) {
+	int datasize = sizeof(data)/sizeof(entry_t);
+	printf ("sizeof data=%d\n", datasize);
+	
+	for (int i = 0; i < datasize; i++) {
 		
 		hash_put(hash, (void*)&(data[i]));
 	}
