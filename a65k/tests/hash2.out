@@ -1,0 +1,32 @@
+DBG:hashmap:
+sizeof data=10
+DBG:hash for 'a' is 14
+DBG:hash for 'b' is 15
+DBG:hash for 'c' is 16
+DBG:hash for 'd' is 17
+DBG:hash for 'e' is 18
+DBG:hash for 'f' is 19
+DBG:hash for 'g' is 20
+DBG:hash for 'h' is 13
+DBG:hash for 'i' is 14
+DBG:equals for 'a' vs. 'i' is -1
+DBG:hash for 'nmos_illegal_nobcd' is 3125
+DBG:hash for '4' is 17
+DBG:equals for 'd' vs. '4' is 1
+DBG:retrieved '<null>'
+DBG:hash for 'e' is 18
+DBG:equals for 'e' vs. 'e' is 0
+DBG:retrieved '55'
+DBG:hash for 'e' is 18
+DBG:equals for 'e' vs. 'e' is 0
+DBG:removed '55'
+DBG:hash for 'e' is 18
+DBG:equals for 'e' vs. 'e' is 0
+DBG:retrieved '66'
+DBG:hash for 'i' is 14
+DBG:equals for 'a' vs. 'i' is -1
+DBG:equals for 'i' vs. 'i' is 0
+DBG:retrieved '99'
+DBG:hash for 'a' is 14
+DBG:equals for 'a' vs. 'a' is 0
+DBG:retrieved '11'

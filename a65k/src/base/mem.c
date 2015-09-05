@@ -84,6 +84,13 @@ void *mem_alloc_n(const size_t n, const type_t *type) {
 	return calloc(n, type->sizeoftype);
 }
 
+// NOTE: does not handle padding, this must be fixed in the type->sizeofstruct value!
+void *mem_realloc_n(const size_t n, const type_t *type, void *data) {
+	// for now just malloc()
+
+	return realloc(data, n * type->sizeoftype);
+}
+
 void mem_free(void *ptr) {
 	
 	free(ptr);

@@ -35,9 +35,43 @@
 #include "hashmap.h"
 #include "astring.h"
 
+// internal entry
+typedef struct {
+	int 		hash;
+	const void 	*key;
+	void	 	*data;
+} entry_t;
+
+// internal bucket
+typedef struct {
+	int		num_allocated;
+	int		num_filled;
+	entry_t		*array;
+} hash_bucket_t;
+
+struct hash_s {
+      // initial size of a new bucket
+      int             initial_bucket_size;
+      // number of buckets
+      int             n_buckets;
+      // ptr to array of buckets
+      hash_bucket_t   *buckets;
+      // ptr to hash function - hash from key
+      int             (*hash_from_key)(const void *key);
+      // get the key from an entry that is put into the map
+      const void*     (*key_from_entry)(const void *entry);
+      // optional - when set, check newly added entries if they are equal with a 
+      // previous entry and remove the previous one
+      bool_t          (*equals_key)(const void *fromhash, const void *tobeadded);
+};
+
+static type_t entry_memtype = {
+	"entry_t",
+	sizeof(entry_t)
+};
 
 static type_t hash_memtype = {
-	"hashmap",
+	"hash_t",
 	sizeof(hash_t)
 };
 
@@ -79,14 +113,22 @@ hash_t *hash_init(int approx_size, int nbuckets,
 
 	hash_t *hash = mem_alloc(&hash_memtype);
 
-	hash->approx_size = approx_size;
+	hash->initial_bucket_size = approx_size / nbuckets;
+	if (hash->initial_bucket_size == 0) {
+		hash->initial_bucket_size = 1;
+	}
 	hash->n_buckets = nbuckets;
 	hash->hash_from_key = hash_from_key;
 	hash->key_from_entry = key_from_entry;
 	hash->equals_key = equals_key;
 
+	// allocate buckets and initialize them as empty
 	hash->buckets = mem_alloc_n(nbuckets, &hash_bucket_memtype);
-
+	for (int i = 0; i < nbuckets; i++) {
+		hash->buckets[i].num_allocated = 0;
+		hash->buckets[i].num_filled = 0;
+		hash->buckets[i].array = NULL;
+	}
 	return hash;
 }
 
@@ -103,27 +145,44 @@ void *hash_put(hash_t *hash, void *value) {
 	// find bucket by computing the modulo of the hash value
 	int bucketno = bucket_from_hash(hash, hashval);
 
-	list_t *bucket_list = hash->buckets[bucketno].bucket_list;
-	if (bucket_list == NULL) {
-		// first with this value
-		bucket_list = array_list_init(hash->approx_size / hash->n_buckets);
-		hash->buckets[bucketno].bucket_list = bucket_list;
-	} else {
-		list_iterator_t *iter = list_iterator(bucket_list);
-		while (list_iterator_has_next(iter)) {
-			void *entry = list_iterator_next(iter);
+	// find a suitable entry in the bucket
+	entry_t *entry = NULL;
 
-			if (hash->equals_key(hash->key_from_entry(entry), key)) {
-				list_iterator_remove(iter);
-				removed = entry;
+	hash_bucket_t *bucket_list = &hash->buckets[bucketno];
+	if (bucket_list->array == NULL) {
+		// bucket still empty, first with this value, so allocate first
+		bucket_list->num_allocated = hash->initial_bucket_size;
+		bucket_list->array = mem_alloc_n(bucket_list->num_allocated, &entry_memtype);
+		
+		entry = bucket_list->array;
+		bucket_list->num_filled = 1;
+	} else {
+		// find the entry in the bucket
+		int i = 0;
+		for (i = 0; i < bucket_list->num_filled; i++) {
+			entry = &bucket_list->array[i];
+			if (entry->hash == hashval && hash->equals_key(entry->key, key)) {
+				// found
+				removed = entry->data;
 				break;
 			}
 		}
-		list_iterator_free(iter);
+		if (i >= bucket_list->num_filled) {
+			// not found
+			if (bucket_list->num_filled >= bucket_list->num_allocated) {
+				// no more space in the bucket, increase bucket
+				bucket_list->num_allocated = bucket_list->num_allocated * 2;
+				bucket_list->array = mem_realloc_n(bucket_list->num_allocated, &entry_memtype, bucket_list->array);
+			}
+			// now we are sure to have space in the array
+			entry = &bucket_list->array[bucket_list->num_filled];
+			bucket_list->num_filled ++;
+		}
 	}
+	entry->key = key;
+	entry->hash = hashval;
+	entry->data = value;
 	
-	list_add(bucket_list, value);
-
 	return removed;
 }
 
@@ -136,28 +195,17 @@ void *hash_get(hash_t *hash, const void *key) {
 	// find bucket by computing the modulo of the hash value
 	int bucketno = bucket_from_hash(hash, hashval);
 
-	list_t *bucket_list = hash->buckets[bucketno].bucket_list;
+	hash_bucket_t *bucket_list = &hash->buckets[bucketno];
 
-	if (bucket_list == NULL) {
-		return NULL;
-	}
-
-	list_iterator_t *iter = list_iterator(bucket_list);
-
-	while (list_iterator_has_next(iter)) {
-
-		void *fromhash = list_iterator_next(iter);
-	
-		if (hash->equals_key(hash->key_from_entry(fromhash), key)) {
-
-			list_iterator_free(iter);
-
-			return fromhash;
-		}
-	}
-
-	list_iterator_free(iter);
-
+	entry_t *entry = NULL;
+        // find the entry in the bucket
+        for (int i = 0; i < bucket_list->num_filled; i++) {
+	        entry = &bucket_list->array[i];
+	        if (entry->hash == hashval && hash->equals_key(entry->key, key)) {
+		        // found
+			return entry->data;
+	        }
+        }
 	return NULL;
 }
 

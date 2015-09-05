@@ -34,7 +34,7 @@
 
 An array_list is a an array-based list of pointers to any kind of 
 other objects. For performance reasons, the full array of the array list
-is separated into sublists, called buckets.
+is separated into a linked sublists, called buckets.
 
 Each bucket has the same max size, as defined in the main array list, so
 for each bucket the "bucket_size" is the current number of entries in the

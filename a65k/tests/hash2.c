@@ -41,11 +41,23 @@ static const void* key_from_entry(const void *data) {
 }
 
 
-static int hash_from_key(const void *data) {
+// short hash algorithm to provoke hash conflicts
+static int shorthash_from_key(const void *data) {
 	
 	char *cdata = (char*)data;
 
-	int hash = string_hash(cdata);
+	int len = strlen(cdata);
+	
+	int hash = len;
+
+	// the hash algorithm used below only makes sense
+	// for up to 2 bytes 
+	if (len > 2) {
+		len = 2;
+	}
+	for (int i = 0; i < len; i++) {
+		hash = hash * 13 + (cdata[i] & 0x07);
+	}
 
 	log_debug("hash for '%s' is %d\n", cdata, hash);
 
@@ -61,7 +73,7 @@ int main(int argc, char *argv[]) {
 
 	log_debug("hashmap:\n");
 
-	hash = hash_init(10, 3, hash_from_key, key_from_entry, equals_key);
+	hash = hash_init(3, 3, shorthash_from_key, key_from_entry, equals_key);
 
 	do_test(hash);
 
@@ -81,21 +93,34 @@ void do_test(hash_t *hash) {
 
 
 	entry_t *data = (entry_t*) hash_get(hash, "4");
-
 	log_debug("retrieved '%s'\n",data == NULL ? "<null>" : data->data);
+	if (data != NULL) { log_error("Retrieved value %s for '4', expected NULL\n", data->data);}
 
 	data = (entry_t*) hash_get(hash, "e");
-
 	log_debug("retrieved '%s'\n",data == NULL ? "<null>" : data->data);
+	if (data == NULL) { log_error("Retrieved NULL for 'e'\n");}
 
 	entry_t new_e = { "e", "66" };
 
 	data = hash_put(hash, &new_e);
-
 	log_debug("removed '%s'\n",data == NULL ? "<null>" : data->data);
 
 	data = (entry_t*) hash_get(hash, "e");
-
 	log_debug("retrieved '%s'\n",data == NULL ? "<null>" : data->data);
+	if (data == NULL) { log_error("Retrieved NULL for 'e'\n");}
+	else if (strcmp("66", data->data)) {
+		log_error("Did not retrieve the right value, expected '%s', got '%s'\n", 
+			"66", data->data);
+	}
+
+	data = (entry_t*) hash_get(hash, "i");
+	log_debug("retrieved '%s'\n",data == NULL ? "<null>" : data->data);
+	data = (entry_t*) hash_get(hash, "a");
+	log_debug("retrieved '%s'\n",data == NULL ? "<null>" : data->data);
+	if (data == NULL) { log_error("Retrieved NULL for 'a'\n");}
+	else if (strcmp("11", data->data)) {
+		log_error("Did not retrieve the right value, expected '%s', got '%s'\n", 
+			"11", data->data);
+	}
 }
 

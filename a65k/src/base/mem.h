@@ -40,6 +40,9 @@ void *mem_alloc(const type_t *type);
 // alloc multiple object, returning a pointer to an array
 void *mem_alloc_n(size_t n, const type_t *type);
 
+// re-alloc multiple objects, returning a pointer to the new array
+void *mem_realloc_n(size_t n, const type_t *type, void *orig);
+
 // alloc multiple object, returning a pointer to an array
 void *mem_alloc_c(size_t n, const char *name);
 
