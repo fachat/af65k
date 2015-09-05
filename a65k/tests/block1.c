@@ -28,6 +28,10 @@ int main(int argc, char *argv[]) {
 
 	block_t *blk = block_init(NULL, pos);
 
+	if (blk->blk_start != pos) {
+		printf("ERROR: block start not equal: got %d, expected %d\n", blk->blk_start->lineno, pos->lineno);
+	}
+
 	position_t *pos2 = mem_alloc(&position_memtype);
 	pos->file = NULL;
 	pos->lineno = 2;
@@ -36,6 +40,9 @@ int main(int argc, char *argv[]) {
 	label_t *ladd1 = block_add_label(blk, label1);
 	if (ladd1 != NULL) {
 		printf("ERROR: l1add not null\n");
+	}
+	if (label1->position != pos2) {
+		printf("ERROR: label position not equal: got %d, expected %d\n", label1->position->lineno, pos2->lineno);
 	}
 
 	position_t *pos3 = mem_alloc(&position_memtype);
