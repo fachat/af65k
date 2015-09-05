@@ -21,6 +21,7 @@
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <string.h>
 #include <strings.h>
@@ -73,7 +74,7 @@ void log_warn(const char *msg, ...) {
        va_start(args, msg);
 
        printf("WRN:");
-        vprintf(msg, args);
+       vprintf(msg, args);
 }
 
 void log_error(const char *msg, ...) {
@@ -81,7 +82,7 @@ void log_error(const char *msg, ...) {
        va_start(args, msg);
 
        printf("ERR:");
-        vprintf(msg, args);
+       vprintf(msg, args);
 }
 
 void log_info(const char *msg, ...) {
@@ -89,7 +90,7 @@ void log_info(const char *msg, ...) {
        va_start(args, msg);
 
        printf("INF:");
-        vprintf(msg, args);
+       vprintf(msg, args);
 }
 
 void log_debug(const char *msg, ...) {
@@ -97,7 +98,17 @@ void log_debug(const char *msg, ...) {
        va_start(args, msg);
 
        printf("DBG:");
-        vprintf(msg, args);
+       vprintf(msg, args);
+}
+
+void log_fatal(const char *msg, ...) {
+       va_list args;
+       va_start(args, msg);
+
+       printf("FAT:");
+       vprintf(msg, args);
+
+	exit(-1);
 }
 
 

@@ -27,6 +27,8 @@ void log_errno(const char *msg, ...);
 
 void log_error(const char *msg, ...);
 
+void log_fatal(const char *msg, ...);
+
 #ifdef DEBUG
 
 void log_warn(const char *msg, ...);

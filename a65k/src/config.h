@@ -1,6 +1,7 @@
+
 /****************************************************************************
 
-    parser
+    config management
     Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
@@ -19,23 +20,33 @@
 
 ****************************************************************************/
 
-#define	DEBUG
+// The configuration contains all the options that are available.
+// They are set with functions only, and exported as const only,
+// so only setters are required.
 
-#include <stdio.h>
+// The configuration is set during startup only, and then stays
+// constant. This is even enforced.
 
-#include "log.h"
-
-#include "infiles.h"
-#include "parser.h"
+#ifndef CONFIG_H
+#define CONFIG_H
 
 
-void parser_module_init(void) {
 
-}
+typedef struct {
+	const char	 	*initial_cpu_name;
+	bool_t			is_cpu_change_allowed;
+} config_t;
 
-void parser_push(line_t *line) {
+void config_module_init();
+// freeze config; any change after that results in exit
+void config_freeze();
 
-	log_debug("parser pushed: %03d: %s\n", line->lineno, line->line);
-}
+// get the current configuration
+const config_t *config();
 
+void conf_initial_cpu_name(const char *initial_cpu_name);
+void conf_is_cpu_change_allowed(bool_t);
+
+
+#endif
 
