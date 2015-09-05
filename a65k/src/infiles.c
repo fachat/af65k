@@ -39,6 +39,11 @@ static type_t openfile_memtype = {
 	sizeof(openfile_t)
 };
 
+static type_t position_memtype = {
+	"position_t",
+	sizeof(position_t)
+};
+
 static openfile_t *current_file = NULL;
 
 static line_t line;
@@ -264,9 +269,10 @@ line_t *infiles_readline() {
 	}
 
 
-	line.file = current_file;
+	line.position = mem_alloc(&position_memtype);
+	line.position->file = current_file;
+	line.position->lineno = current_file->current_line;
 	line.line = buffer;
-	line.lineno = current_file->current_line;
 
 	current_file->current_line++;
 	return &line;

@@ -28,6 +28,10 @@
 #include "mem.h"
 #include "log.h"
 #include "infiles.h"
+#include "config.h"
+#include "cpu.h"
+#include "segment.h"
+#include "context.h"
 #include "parser.h"
 
 
@@ -37,12 +41,16 @@
  */
 static void pass1() {
 
+	const cpu_t *cpu = cpu_by_name(config()->initial_cpu_name);
+	const segment_t *segment = segment_new(NULL, SEG_ANY, cpu->type, false);
+	context_init(segment, cpu);
+
 	line_t *line;
 
 	line = infiles_readline();
 	while (line != NULL) {
 	
-		parser_push(line);
+		parser_push(context(), line);
 
 		line = infiles_readline();
 	}
@@ -63,8 +71,12 @@ static void main_init() {
 
 	// memory handling
 	mem_module_init();
+	// configuration
+	config_module_init();
 	// input files
 	infiles_module_init();
+	// segments
+	segment_module_init();
 	// parser
 	parser_module_init();
 

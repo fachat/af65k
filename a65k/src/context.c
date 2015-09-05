@@ -40,13 +40,14 @@ static type_t context_memtype = {
 	sizeof(context_t)
 };
 
+static context_t *current_context = NULL;
+
 
 // create a new context. Usually only called at beginning of parse
-context_t *context_init(openfile_t* file, segment_t *segment, cpu_t *cpu) {
+const context_t *context_init(const segment_t *segment, const cpu_t *cpu) {
 
 	context_t *ctx = mem_alloc(&context_memtype);
 
-	ctx->sourcefile = file;
 	ctx->segment = segment;
 	ctx->cpu = cpu;
 
@@ -54,17 +55,28 @@ context_t *context_init(openfile_t* file, segment_t *segment, cpu_t *cpu) {
 	ctx->index_width = false;
 	ctx->acc_width = false;
 
-	return ctx;
+	current_context = ctx;
+
+	return current_context;
 }
 
 // duplicates context, so attributes can be modified
-context_t *context_dup(context_t *parent) {
+context_t *context_dup() {
 
 
-	context_t *ctx = mem_alloc(&context_memtype);
+	context_t *newctx = mem_alloc(&context_memtype);
 
-	return memcpy(ctx, parent, sizeof(context_t));
+	context_t *oldctx = current_context;
+
+	memcpy(newctx, oldctx, sizeof(context_t));
+
+	current_context = newctx;
+
+	return current_context;
 }
 
 
+const context_t *context() {
+	return current_context;
+}
 

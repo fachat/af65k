@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 
 	cpu_module_init();
 
-	cpu_t *c = cpu_by_name("nmos");
+	const cpu_t *c = cpu_by_name("nmos");
 
 	printf("nmos -> %s, type=%d, base=%d, width=%d, has_bcd=%d, has_illegal=%d\n",
 		c->name, c->type, c->base, c->cpu_width, c->has_bcd, c->has_illegal);
@@ -23,6 +23,15 @@ int main(int argc, char *argv[]) {
 
 	c = cpu_by_name("cmos_rockwell");
 	printf("rcmos -> %s, type=%d, base=%d, width=%d, has_bcd=%d, has_illegal=%d\n",
+		c->name, c->type, c->base, c->cpu_width, c->has_bcd, c->has_illegal);
+
+	c = cpu_by_type(-123);
+	if (c != NULL) {
+		printf("found wrong CPU type %d\n", -123);
+	}
+
+	c = cpu_by_type(CPU_816);
+	printf("816 -> %s, type=%d, base=%d, width=%d, has_bcd=%d, has_illegal=%d\n",
 		c->name, c->type, c->base, c->cpu_width, c->has_bcd, c->has_illegal);
 
 }

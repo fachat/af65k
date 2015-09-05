@@ -23,9 +23,10 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+
 void parser_module_init(void);
 
-void parser_push(line_t *line);
+void parser_push(const context_t *context, const line_t *line);
 
 
 #endif

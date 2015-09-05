@@ -25,12 +25,12 @@
 #define LABEL_H
 
 
-typedef struct context_s context_t;
-
 typedef struct {
 	// context
 	context_t	*ctx;
-	// child contexts
+	// position in file where defined
+	position_t	*position;
+	// name
 	const char 	*name;
 	// TODO value, state etc
 } label_t;
@@ -41,11 +41,13 @@ static type_t label_memtype = {
 	sizeof(label_t)
 };
 
-static inline label_t *label_init(context_t *ctx, const char *name) {
+static inline label_t *label_init(context_t *ctx, const char *name, position_t *pos) {
 	label_t *label = mem_alloc(&label_memtype);
 
 	label->ctx = ctx;
 	label->name = name;
+	label->position = pos;
+
 	return label;
 }
 

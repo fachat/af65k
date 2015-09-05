@@ -24,18 +24,41 @@
 #include <stdio.h>
 
 #include "log.h"
+#include "mem.h"
+#include "list.h"
+#include "hashmap.h"
 
 #include "infiles.h"
+#include "cpu.h"
+#include "segment.h"
+#include "context.h"
 #include "parser.h"
+#include "label.h"
+#include "block.h"
 
 
+typedef struct {
+	block_t		*blk;
+	context_t	*ctx;
+} parser_t;
+
+parser_t p = { NULL };
+	
 void parser_module_init(void) {
-
 }
 
-void parser_push(line_t *line) {
+void parser_push(const context_t *ctx, const line_t *line) {
 
-	log_debug("parser pushed: %03d: %s\n", line->lineno, line->line);
+	position_t *pos = line->position;
+
+	// is the first block already set?
+	if (p.blk == NULL) {
+		p.blk = block_init(NULL, pos);
+	}
+
+	// tokenize the line
+	
+	log_debug("parser pushed: %03d: %s\n", pos->lineno, line->line);
 }
 
 

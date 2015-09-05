@@ -28,9 +28,12 @@
  * and hold our own arrays of [{ hash, &entry }]
  */
 
+#include <string.h>
+
 #include "mem.h"
 #include "array_list.h"
 #include "hashmap.h"
+#include "astring.h"
 
 
 static type_t hash_memtype = {
@@ -43,6 +46,13 @@ static type_t hash_bucket_memtype = {
 	sizeof(hash_bucket_t)
 };
 
+static int hash_from_stringkey(const void *data) {
+	return string_hash((const char *)data);
+}
+static bool_t equals_stringkey(const void *fromhash, const void *tobeadded) {
+	return !strcmp((const char*)fromhash, (const char*)tobeadded);
+}
+
 static inline int bucket_from_hash(hash_t *hash, int hashval) {
 	// find bucket by computing the modulo of the hash value
 	int bucketno = hashval % hash->n_buckets;
@@ -51,6 +61,15 @@ static inline int bucket_from_hash(hash_t *hash, int hashval) {
 		bucketno = -bucketno;
 	}
 	return bucketno;
+}
+
+hash_t *hash_init_stringkey(int approx_size, int nbuckets, 
+		const void* (*key_from_entry)(const void *entry)) {
+
+	return hash_init(approx_size, nbuckets, 
+		hash_from_stringkey,
+		key_from_entry,
+		equals_stringkey);
 }
 
 hash_t *hash_init(int approx_size, int nbuckets, 

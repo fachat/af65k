@@ -28,8 +28,11 @@
 typedef struct block_s block_t;
 
 struct block_s {
-	// context
+	// parent block
 	block_t 	*parent;
+	// line where block starts and end
+	position_t	*blk_start;
+	position_t	*blk_end;
 	// child contexts
 	list_t		*children;
 	// labels
@@ -38,10 +41,13 @@ struct block_s {
 
 // create a new block, links it with parent (both ways)
 // when parent is given. parent can be NULL
-block_t *block_init(block_t *parent);
+block_t *block_init(block_t *parent, position_t *start_position);
 
 // returns NULL when successful. Returns a conflicting label when there is a conflict
 label_t *block_add_label(block_t *blk, label_t *label);
+
+// closes a block, and returns its parent (when available, NULL otherwise)
+block_t *block_close(block_t *blk, position_t *end_position);
 
 #endif
 

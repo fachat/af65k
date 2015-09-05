@@ -35,13 +35,13 @@ void mem_module_init(void);
 void mem_free(void *ptr);
 
 // alloc single object
-void *mem_alloc(type_t *type);
+void *mem_alloc(const type_t *type);
 
 // alloc multiple object, returning a pointer to an array
-void *mem_alloc_n(size_t n, type_t *type);
+void *mem_alloc_n(size_t n, const type_t *type);
 
 // alloc multiple object, returning a pointer to an array
-void *mem_alloc_c(size_t n, char *name);
+void *mem_alloc_c(size_t n, const char *name);
 
 // allocate memory and copy given string
 char *mem_alloc_str(const char *orig);

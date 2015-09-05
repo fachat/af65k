@@ -22,12 +22,18 @@
 
 
 #include <string.h>
+#include <stdio.h>
 
 #include "types.h"
+#include "infiles.h"
 #include "array_list.h"
 #include "hashmap.h"
 #include "mem.h"
+#include "cpu.h"
+#include "segment.h"
+#include "context.h"
 #include "label.h"
+#include "infiles.h"
 #include "block.h"
 #include "astring.h"
 
@@ -59,12 +65,14 @@ static bool_t block_equals_entry(const void *fromhash, const void *tobeadded) {
 
 // create a new block, links it with parent (both ways)
 // when parent is given. parent can be NULL
-block_t *block_init(block_t *parent) {
+block_t *block_init(block_t *parent, position_t *start_pos) {
 
 	block_t *blk = mem_alloc(&block_memtype);
 
 	blk->children = array_list_init(DEFAULT_SIZE_CHILDREN_BUCKET);
 	blk->parent = parent;
+	blk->blk_start = start_pos;
+	blk->blk_end = NULL;
 
 	blk->labels = hash_init(DEFAULT_SIZE_LABELS_MAP, DEFAULT_SIZE_LABELS_BUCKETS,
 		block_hash_from_key, block_key_from_entry, block_equals_entry);

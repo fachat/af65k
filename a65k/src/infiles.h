@@ -33,13 +33,15 @@ struct openfile {
 };
 typedef struct openfile openfile_t;
 
+typedef struct {
+        const openfile_t        *file;
+        int                     lineno;
+} position_t;
 
 typedef struct {
-	const struct openfile 	*file;
 	const char 		*line;
-	int 			lineno;
+	position_t		*position;
 } line_t;
-
 
 void infiles_module_init(void);
 
@@ -50,15 +52,16 @@ void infiles_includedir(const char *filename);
 void infiles_register(const char *filename);
 
 // read a line from the input. Note the result is static and must not be freed.
-// Ownership of the components stays with the infile module, so line must be copied
+// Ownership of the actual line stays with the infile module, so line must be copied
 // when a modifyable version, or one that exists longer than the next call to infile_readline
-// is needed.
+// is needed. The position_t pointed to in the line is transferred to the caller
+// and should/can be freed
 line_t *infiles_readline();
 
 // during read operation, and after parsing, an "include" operation can occur. 
 // The indiles_include call opens the file given, and reads from there until end of file,
 // before returning to the original file.
 void infiles_include(const char *filename);
- 
+
 #endif
 

@@ -2,7 +2,7 @@
 /****************************************************************************
 
     segment management
-    Copyright (C) 2012,2015 Andre Fachat
+    Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,6 +24,14 @@
 #ifndef SEGMENT_H
 #define SEGMENT_H
 
+// default names for the xa65 default segments
+// can the compiler optimize that into a single text?
+// otherwise still use the preprocessor...
+extern const char *SEG_ANY_NAME;
+extern const char *SEG_BSS_NAME;
+extern const char *SEG_TEXT_NAME;
+extern const char *SEG_DATA_NAME;
+extern const char *SEG_ZP_NAME;
 
 typedef struct segment_s segment_t;
 
@@ -38,16 +46,16 @@ typedef enum {
 
 struct segment_s {
 	const char 	*name;
-	const seg_type	type;
+	seg_type	type;
 	bool_t		readonly;
 	int		cpu_width;	// for 65k; segment.cpu_width >= context.cpu_width
 };
 
-// create a new segment or find an existing, matching one; parent is optional
-segment_t *segment_new(segment_t *parent, seg_type type, cpu_type cpu);
+void segment_module_init();
 
-// duplicate a segment, to be able to modify it
-segment_t *segment_dup(segment_t *orig);
+// create a new segment or find an existing, matching one; match is by name
+segment_t *segment_new(const char *name, seg_type type, cpu_type cpu, bool_t readonly);
+
 
 
 #endif

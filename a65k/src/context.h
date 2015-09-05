@@ -32,21 +32,22 @@
 typedef struct context_s context_t;
 
 struct context_s {
-	openfile_t	*sourcefile;
-	segment_t	*segment;
-	cpu_t		*cpu;
+	const segment_t	*segment;
+	const cpu_t	*cpu;
 	int		cpu_width;	// CPU width, normally taken from *cpu, but can be modified with .width
         bool_t          index_width;    // true when index registers are wide in 65816 (.xe/.xs)
         bool_t          acc_width;      // true when accumulator is wide in 65816 
 };
 
-// create a new context. Usually only called at beginning of parse
-context_t *context_init(openfile_t* file, segment_t *segment, cpu_t *cpu);
+// create the initial context. Usually only called at beginning of parse
+const context_t *context_init(const segment_t *segment, const cpu_t *cpu);
 
-// duplicates context, so attributes can be modified
-context_t *context_dup(context_t *parent);
+// duplicates context, so attributes can be modified. The new context becomes the 
+// current context.
+context_t *context_dup();
 
-
+// return the current context
+const context_t *context();
 
 #endif
 
