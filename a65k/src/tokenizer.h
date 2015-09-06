@@ -79,15 +79,15 @@ typedef struct {
 	int		strptr;		// pointer to start of string for T_STRING_LITERAL
 	int		strlen;		// length of string for T_STRING_LITERAL
 	long		value;		// value for decimal, octal, binary, or hex literal
-} tokenizer_r;
+} tokenizer_t;
 
 // initialize a tokenizer 
-tokenizer_r *tokenizer_init(const char *line);
+tokenizer_t *tokenizer_init(const char *line);
 
 // set to next token; return true when there is a valid token
-bool_t tokenizer_next(tokenizer_r *tok);
+bool_t tokenizer_next(tokenizer_t *tok);
 
-void tokenizer_free(tokenizer_r *tok);
+void tokenizer_free(tokenizer_t *tok);
 
 #endif
 

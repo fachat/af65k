@@ -31,14 +31,14 @@
 
 
 static type_t tokenizer_memtype = {
-	"tokenizer_r",
-	sizeof(tokenizer_r)
+	"tokenizer_t",
+	sizeof(tokenizer_t)
 };
 
 // initialize a tokenizer 
-tokenizer_r *tokenizer_init(const char *line) {
+tokenizer_t *tokenizer_init(const char *line) {
 	
-	tokenizer_r *tok = mem_alloc(&tokenizer_memtype);
+	tokenizer_t *tok = mem_alloc(&tokenizer_memtype);
 
 	tok->line = line;
 	tok->ptr = 0;
@@ -49,7 +49,7 @@ tokenizer_r *tokenizer_init(const char *line) {
 	return tok;
 }
 
-static bool_t parse_base(tokenizer_r *tok, int ptr, int base) {
+static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 
 	int limit = base - 10;
 	const char *line = tok->line;
@@ -92,31 +92,31 @@ static bool_t parse_base(tokenizer_r *tok, int ptr, int base) {
 	return true;
 }
 
-static inline bool_t parse_decimal(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_decimal(tokenizer_t *tok, int ptr) {
 
 	tok->type = T_DECIMAL_LITERAL;
 	return parse_base(tok, ptr, 10);
 }
 
-static inline bool_t parse_octal(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_octal(tokenizer_t *tok, int ptr) {
 
 	tok->type = T_OCTAL_LITERAL;
 	return parse_base(tok, ptr, 8);
 }
 
-static inline bool_t parse_binary(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_binary(tokenizer_t *tok, int ptr) {
 
 	tok->type = T_BINARY_LITERAL;
 	return parse_base(tok, ptr, 2);
 }
 
-static inline bool_t parse_hex(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_hex(tokenizer_t *tok, int ptr) {
 
 	tok->type = T_HEX_LITERAL;
 	return parse_base(tok, ptr, 16);
 }
 
-static inline bool_t parse_string(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 
 	const char *line = tok->line;
 
@@ -155,7 +155,7 @@ static inline bool_t parse_string(tokenizer_r *tok, int ptr) {
 	return true;
 }
 
-static inline bool_t parse_name(tokenizer_r *tok, int ptr) {
+static inline bool_t parse_name(tokenizer_t *tok, int ptr) {
 
 	const char *line = tok->line;
 	tok->type = T_NAME;
@@ -169,7 +169,7 @@ static inline bool_t parse_name(tokenizer_r *tok, int ptr) {
 	return true;
 }
 
-static inline bool_t parse_token(tokenizer_r *tok, int ptr, int can_have_operator) {
+static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operator) {
 
 	const char *line = tok->line;
 
@@ -301,7 +301,7 @@ static inline bool_t parse_token(tokenizer_r *tok, int ptr, int can_have_operato
 }
 
 // set to next token; return true when there is a valid token
-bool_t tokenizer_next(tokenizer_r *tok) {
+bool_t tokenizer_next(tokenizer_t *tok) {
 
 	tok->value = 0;
 
@@ -392,7 +392,7 @@ bool_t tokenizer_next(tokenizer_r *tok) {
 }
 
 
-void tokenizer_free(tokenizer_r *tok) {
+void tokenizer_free(tokenizer_t *tok) {
 	
 	tok->line = NULL;
 
