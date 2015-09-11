@@ -21,42 +21,17 @@
 ****************************************************************************/
 
 
-#ifndef CPU_H
-#define CPU_H
+#ifndef OPERATION_H
+#define OPERATION_H
 
 
-
-typedef enum {
-	CPU_NMOS,		// only legal NMOS opcodes
-	CPU_NMOS_ILLEGAL,	// legal and illegal NMOS opcodes
-	CPU_CMOS,		// CMOS opcodes (without Rockwell extensions)
-	CPU_RCMOS,		// CMOS plus Rockwell extensions
-	CPU_NOBCD,		// NMOS but without BCD mode
-	CPU_NOBCD_ILLEGAL,	// NMOS with illegal opcodes, but without BCD mode
-	CPU_802,		// 65802
-	CPU_816,		// 65816
-	CPU_65K,		// base 65k CPU (implicitely 64 bit, modifyable with .width) 
-	CPU_65K_W,		// 65k CPU 16-bit width
-	CPU_65K_L,		// 65k CPU 32-bit width
-	CPU_65K_Q,		// 65k CPU 64-bit width
-} cpu_type;
-
+// operation - equivalent to the mnemonic, like "lda", "adc", "inx", ...
 typedef struct {
-	const cpu_type	type;
-	const char 	*name;
-	const cpu_type	base;
-	const int	cpu_width;	// memory model size 16, 24, 32, 64
-	const bool_t	has_bcd;
-	const bool_t	has_illegal;
-} cpu_t;
+	const char	*name;
+	const bool_t	is_illegal;
+} operation_t;
 
-
-void cpu_module_init();
-
-const cpu_t *cpu_by_name(const char *name);
-
-const cpu_t *cpu_by_type(cpu_type type);
-
+operation_t *operation_find(const cpu_t *cpu, const char *name);
 
 #endif
 
