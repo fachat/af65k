@@ -29,6 +29,30 @@
 #include "operation.h"
 
 
+static struct { 
+	cpu_type cpu; 
+	isa_type isa;
+	width_map width;
+} cpu_isa[] = {
+	{ CPU_NMOS,		ISA_NMOS + ISA_NMOS_BCD,			W_8 + W_16	},
+	{ CPU_NMOS_ILLEGAL,	ISA_NMOS + ISA_NMOS_ILLEGAL + ISA_NMOS_BCD,	W_8 + W_16 	},
+	{ CPU_CMOS,		ISA_NMOS + ISA_CMOS,				W_8 + W_16	},
+	{ CPU_RCMOS,		ISA_NMOS + ISA_CMOS + ISA_CMOS_ROCKWELL,	W_8 + W_16	},
+	{ CPU_NOBCD,		ISA_NMOS, 					W_8 + W_16	},
+	{ CPU_NOBCD_ILLEGAL,	ISA_NMOS + ISA_NMOS_ILLEGAL,			W_8 + W_16	},
+	{ CPU_802,		ISA_NMOS + ISA_CMOS + ISA_816,			W_8 + W_16 + W_24 },
+	{ CPU_816,		ISA_NMOS + ISA_CMOS + ISA_816,			W_8 + W_16 + W_24 },
+	{ CPU_65K,		ISA_NMOS + ISA_CMOS + ISA_65K,			W_8 + W_16 + W_32 + W_64 },
+	{ CPU_65K_W,		ISA_NMOS + ISA_CMOS + ISA_65K,			W_8 + W_16 	},
+	{ CPU_65K_L,		ISA_NMOS + ISA_CMOS + ISA_65K,			W_8 + W_16 + W_32 },
+	{ CPU_65K_Q,		ISA_NMOS + ISA_CMOS + ISA_65K,			W_8 + W_16 + W_32 + W_64 },
+	
+};
+
+void operation_module_init() {
+}
+
+
 operation_t *operation_find(const cpu_t *cpu, const char *name) {
 	(void) cpu;
 	(void) name;

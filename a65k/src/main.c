@@ -33,6 +33,7 @@
 #include "segment.h"
 #include "context.h"
 #include "parser.h"
+#include "operation.h"
 
 
 /**
@@ -75,6 +76,8 @@ static void main_init() {
 	config_module_init();
 	// input files
 	infiles_module_init();
+	// operation
+	operation_module_init();
 	// segments
 	segment_module_init();
 	// parser
