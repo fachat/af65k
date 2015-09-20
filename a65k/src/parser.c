@@ -101,7 +101,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 			switch(tok->type) {
 			case T_NAME:
 				name = mem_alloc_strn(tok->line + tok->ptr, tok->len);
-				op = operation_find(ctx->cpu, name);
+				op = operation_find(name);
 				if (op == NULL) {
 					// label
 					label = label_init(ctx, name, pos);

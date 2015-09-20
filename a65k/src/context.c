@@ -51,7 +51,7 @@ const context_t *context_init(const segment_t *segment, const cpu_t *cpu) {
 	ctx->segment = segment;
 	ctx->cpu = cpu;
 
-	ctx->cpu_width = cpu->cpu_width;
+	ctx->cpu_width = cpu->width;
 	ctx->index_width = false;
 	ctx->acc_width = false;
 

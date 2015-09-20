@@ -25,61 +25,130 @@
 #define OPERATION_H
 
 
-// operation - equivalent to the mnemonic, like "lda", "adc", "inx", ...
-typedef struct {
-	const char	*name;
-	const bool_t	is_illegal;
-} operation_t;
 
 typedef enum {
-	ISA_NMOS		= 1,	// standard NMOS
-	ISA_NMOS_ILLEGAL	= 2,	// NMOS illegal opcodes
-	ISA_NMOS_BCD		= 4,	// NMOS SED opcode
-	ISA_CMOS		= 8,	// CMOS extensions
-	ISA_CMOS_ROCKWELL	= 16,	// RMB/SMB/BBS/BBR opcodes
-	ISA_816			= 32,	// 65816 extensions to CMOS 6502
-	ISA_65K			= 64,	// 65K extensions to CMOS 6502
-} isa_type;
+	SY_IMP		= 0,	// implied
+	SY_IMM		= 1,	// immediate
+	
+	SY_ABS		= 2,	// absolute/relative address: zp; word; long; quad; rel; relwide; rellong; relquad
+	SY_ABSX		= 3,	// absolute x-indexed: zp,x; word,x; long,x; quad,x
+	SY_ABSY		= 4,	// absolute y-indexed: zp,y; word,y; long,y; quad,y
+
+	SY_IND		= 5,	// zp/word-indirect, word address: (zp); (word)
+	SY_INDY		= 6,	// zp/word-indirect, y-indexed, word address: (zp),y; (word),y
+	SY_XIND		= 7,	// x-indexed, zp/word-indirect, word address: (zp,x); (word,x)
+
+	SY_INDL		= 8,	// zp/word-indirect, long address: [zp]; [word]
+	SY_INDYL	= 9,	// zp/word-indirect, y-indexed, long address: [zp],y; [word],y
+	SY_XINDL	= 10,	// x-indexed, zp/word-indirect, long address: [zp,x]; [word,x]
+
+	SY_INDQ		= 11,	// zp/word-indirect, quad address: [[zp]]; [[word]]
+	SY_INDYQ	= 12,	// zp/word-indirect, y-indexed, quad address: [[zp]],y; [[word]],y
+	SY_XINDQ	= 13,	// x-indexed, zp/word-indirect, quad address: [[zp,x]]; [[word,x]]
+	
+	SY_MV		= 14,	// two byte 65816 MVN/MVP addressing
+	SY_BBREL	= 15,	// zeropage address, plus relative address, R65C02 BBR/BBS
+	
+	SY_MAX		= 16,	// end
+
+	// virtual addressing modes. Will be mapped to SY_IND, SY_INDL or SY_INDQ depending
+	// on memory model used during assembly
+	SY_INDD		= 17,	// zp/word-indirect, dynamic address: ((zp)); ((word))
+	SY_INDYD	= 18,	// zp/word-zp-indirect, y-indexed, dynamic address: ((zp)),y; ((word)),y
+	SY_XINDD	= 19,	// x-indexed, zp/word-indirect, dynamic address: ((zp,x)); ((word,x))
+
+} syntax_type;
+
 
 typedef enum {
-	W_8			= 1,
-	W_16			= 2,
-	W_24			= 4,
-	W_32			= 8,
-	W_64			= 16,
-} width_map;
+	AM_NONE		= -1,
 
-typedef enum {
 	AM_IMP		= 0,	// implied
-	AM_IMM		= 1,	// immediate
+	AM_IMM8		= 1,	// immediate
+	AM_IMM16	= 2,	// immediate
+	AM_IMM32	= 3,	// immediate
+	AM_IMM64	= 4,	// immediate
 	
-	AM_ABS		= 2,	// absolute address: zp; word; long; quad; rel; relwide; rellong; relquad
-	AM_ABSX		= 3,	// absolute x-indexed: zp,x; word,x; long,x; quad,x
-	AM_ABSY		= 4,	// absolute y-indexed: zp,y; word,y; long,y; quad,y
+	AM_ABS8		= 5,	// absolute/relative address: zp
+	AM_ABS16	= 6,	// absolute/relative address: word
+	AM_ABS24	= 7,	// absolute address: word+bank byte
+	AM_ABS32	= 8,	// absolute/relative address: long
+	AM_ABS64	= 9,	// absolute/relative address: quad
 
-	AM_INDD		= 5,	// zp/word-indirect, dynamic address: ((zp)); ((word))
-	AM_INDYD	= 6,	// zp/word-zp-indirect, y-indexed, dynamic address: ((zp)),y; ((word)),y
-	AM_XINDD	= 7,	// x-indexed, zp/word-indirect, dynamic address: ((zp,x)); ((word,x))
+	AM_ABS8X	= 10,	// absolute x-indexed: zp,x
+	AM_ABS16X	= 11,	// absolute x-indexed: word,x
+	AM_ABS32X	= 12,	// absolute x-indexed: long,x
+	AM_ABS64X	= 13,	// absolute x-indexed: quad,x
 
-	AM_IND		= 8,	// zp/word-indirect, word address: (zp); (word)
-	AM_INDY		= 9,	// zp/word-indirect, y-indexed, word address: (zp),y; (word),y
-	AM_XIND		= 10,	// x-indexed, zp/word-indirect, word address: (zp,x); (word,x)
+	AM_ABS8Y	= 14,	// absolute y-indexed: zp,y
+	AM_ABS16Y	= 15,	// absolute y-indexed: word,y
+	AM_ABS32Y	= 16,	// absolute y-indexed: long,y
+	AM_ABS64Y	= 17,	// absolute y-indexed: quad,y
 
-	AM_INDL		= 11,	// zp/word-indirect, long address: [zp]; [word]
-	AM_INDYL	= 12,	// zp/word-indirect, y-indexed, long address: [zp],y; [word],y
-	AM_XINDL	= 13,	// x-indexed, zp/word-indirect, long address: [zp,x]; [word,x]
+	AM_IND8		= 18,	// zp/word-indirect, word address: (zp)
+	AM_IND16	= 19,	// zp/word-indirect, word address: (word)
+	AM_IND8Y	= 20,	// zp/word-indirect, y-indexed, word address: (zp),y
+	AM_IND16Y	= 21,	// zp/word-indirect, y-indexed, word address: (word),y
+	AM_XIND8	= 22,	// x-indexed, zp/word-indirect, word address: (zp,x)
+	AM_XIND16	= 23,	// x-indexed, zp/word-indirect, word address: (word,x)
 
-	AM_INDQ		= 14,	// zp/word-indirect, quad address: [[zp]]; [[word]]
-	AM_INDYQ	= 15,	// zp/word-indirect, y-indexed, quad address: [[zp]],y; [[word]],y
-	AM_XINDQ	= 16,	// x-indexed, zp/word-indirect, quad address: [[zp,x]]; [[word,x]]
+	AM_IND8L	= 24,	// zp/word-indirect, long address: [zp]
+	AM_IND16L	= 25,	// zp/word-indirect, long address: [word]
+	AM_IND8YL	= 26,	// zp/word-indirect, y-indexed, long address: [zp],y
+	AM_IND16YL	= 27,	// zp/word-indirect, y-indexed, long address: [word],y
+	AM_XIND8L	= 28,	// x-indexed, zp/word-indirect, long address: [zp,x]
+	AM_XIND16L	= 29,	// x-indexed, zp/word-indirect, long address: [word,x]
+
+	AM_IND8Q	= 30,	// zp/word-indirect, quad address: [[zp]]
+	AM_IND16Q	= 31,	// zp/word-indirect, quad address: [[word]]
+	AM_IND8YQ	= 32,	// zp/word-indirect, y-indexed, quad address: [[zp]],y
+	AM_IND16YQ	= 33,	// zp/word-indirect, y-indexed, quad address: [[word]],y
+	AM_XIND8Q	= 34,	// x-indexed, zp/word-indirect, quad address: [[zp,x]]
+	AM_XIND16Q	= 35,	// x-indexed, zp/word-indirect, quad address: [[word,x]]
 	
-	AM_MV		= 17,	// two byte 65816 MVN/MVP addressing
-	AM_BBREL	= 18,	// zeropage address, plus relative address, R65C02 BBR/BBS
-} amode_t;
+	AM_MV		= 36,	// two byte 65816 MVN/MVP addressing
+	AM_BBREL	= 37,	// zeropage address, plus relative address, R65C02 BBR/BBS
 	
+	AM_MAX		= 38,	// end
+} amode_type;
+	
+typedef enum {
+	PG_BASE		= 0,	// base page, no page prefix needed
+	PG_EXT		= 1,	// extended page
+	PG_QUICK	= 2,	// quick page
+	PG_SYS		= 3,	// system page
+} pg_type;
+
+
+typedef struct {
+	bool_t		is_valid;
+	unsigned char	code;
+	pg_type 	page_prefix;
+} opcode_t;
+
+// operation - equivalent to the mnemonic, like "lda", "adc", "inx", ...
+typedef struct operation_s operation_t;
+struct operation_s {
+	const char	*name;
+	const isa_map	isa;		// what ISA is it from? Also selects BCD and Illegal opcodes
+	const bool_t	abs_is_rel;	// is branch with relative addressing?
+	operation_t	*next;
+	opcode_t	opcodes[AM_MAX];
+};
+
+typedef struct {
+	bool_t		set_am_prefix;
+	bool_t		rs_is_width;		// use RS-prefix for width
+	pg_type		page_prefix;
+	unsigned char	code;
+} codepoint_t;
+
 void operation_module_init();
 
-operation_t *operation_find(const cpu_t *cpu, const char *name);
+const operation_t *operation_find(const char *name);
+
+bool_t opcode_find(const position_t *loc, const cpu_t *cpu, const operation_t *op, syntax_type syntax, int opsize_in_bytes,
+	codepoint_t *returned_code);
 
 #endif
 

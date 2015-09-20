@@ -61,7 +61,7 @@ segment_t *segment_new(const char *name, seg_type type, cpu_type cpu, bool_t rea
 		existing->name = mem_alloc_str(name);
 		existing->type = type;
 		existing->readonly = readonly;
-		existing->cpu_width = cpu_by_type(cpu)->cpu_width;
+		existing->cpu_width = cpu_by_type(cpu)->width;
 	}
 
 	return existing;

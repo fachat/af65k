@@ -37,6 +37,7 @@ struct context_s {
 	int		cpu_width;	// CPU width, normally taken from *cpu, but can be modified with .width
         bool_t          index_width;    // true when index registers are wide in 65816 (.xe/.xs)
         bool_t          acc_width;      // true when accumulator is wide in 65816 
+        bool_t          dec_mode;       // true when accumulator is in decimal mode
 };
 
 // create the initial context. Usually only called at beginning of parse

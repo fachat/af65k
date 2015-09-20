@@ -34,22 +34,6 @@
 
 typedef struct hash_s hash_t;
 
-//typedef struct {
-//	// approximate size when filled
-//	int		approx_size;
-//	// number of buckets
-//	int		n_buckets;
-//	// ptr to array of buckets
-//	hash_bucket_t	*buckets;
-//	// ptr to hash function - hash from key
-//	int		(*hash_from_key)(const void *key);
-//	// get the key from an entry that is put into the map
-//	const void*	(*key_from_entry)(const void *entry);
-//	// optional - when set, check newly added entries if they are equal with a 
-//	// previous entry and remove the previous one
-//	bool_t		(*equals_key)(const void *fromhash, const void *tobeadded);
-//} hash_t;
-
 // initialize a hashmap. nbuckets is the number of hash values that are actually used
 // The bucket number is computed by taking the modulo of the hash value to the base nbucket.
 // The approximate size is divided by nbuckets to determine the initial size of 
