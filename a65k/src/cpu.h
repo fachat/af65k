@@ -90,7 +90,7 @@ void cpu_module_init();
 
 const cpu_t *cpu_by_name(const char *name);
 
-const cpu_t *cpu_by_type(cpu_type type);
+const cpu_t *cpu_by_type(const position_t *loc, cpu_type type);
 
 
 #endif

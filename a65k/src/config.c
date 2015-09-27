@@ -25,6 +25,7 @@
 #include "types.h"
 #include "mem.h"
 #include "log.h"
+#include "infiles.h"
 #include "cpu.h"
 #include "config.h"
 
@@ -62,7 +63,7 @@ const config_t *config() {
 void conf_initial_cpu_name(const char *initial_cpu_name) {
 
 	if (frozen) {
-		log_fatal("conf_initial_cpu_name while frozen\n");
+		log_fatal("conf_initial_cpu_name (%s) while frozen", initial_cpu_name);
 	}
 	mem_free((char*)conf.initial_cpu_name);	
 	conf.initial_cpu_name = mem_alloc_str(initial_cpu_name);
@@ -71,7 +72,7 @@ void conf_initial_cpu_name(const char *initial_cpu_name) {
 
 void conf_is_cpu_change_allowed(bool_t p) {
 	if (frozen) {
-		log_fatal("conf_is_cpu_change_allowed while frozen\n");
+		log_fatal("conf_is_cpu_change_allowed (%d) while frozen", p);
 	}
 	conf.is_cpu_change_allowed = p;
 }

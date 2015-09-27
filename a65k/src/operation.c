@@ -25,9 +25,10 @@
 #include "mem.h"
 #include "hashmap.h"
 #include "astring.h"
-#include "cpu.h"
 #include "infiles.h"		// position_t
+#include "cpu.h"
 #include "operation.h"
+#include "infiles.h"
 #include "errors.h"
 
 

@@ -1,7 +1,7 @@
 
 
-CFLAGS=-Wall -pedantic -O2 -std=gnu99 -DMALLOC_CHECK_=3 -g
-CFLAGS=-g -W -Wall -pedantic -ansi -std=c99 -funsigned-char $(INCLUDE) 
+#CFLAGS=-Wall -pedantic -O2 -std=gnu99 -DMALLOC_CHECK_=3 -g
+CFLAGS=-g -W -Wall -pedantic -ansi -std=c11 -funsigned-char $(INCLUDE) 
 
 
 # Enable verbose compile with make V=1
@@ -56,6 +56,7 @@ vpath %.c . base util
 # Compile C files
 $(OBJDIR)%.o: %.c
 	$(V2) CC $<
+	@#@echo "#"compile $< with CFLAGS=$(CFLAGS)
 	$(V1) $(CC) $(CFLAGS) $(AUTODEP) -c $< -o $@
 
 # Link object files

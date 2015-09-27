@@ -14,7 +14,7 @@ INCPATHS=. util base
 INCLUDES=$(addprefix -I$(SRCDIR)/,$(INCPATHS))
 DEPS=$(addprefix $(SRCDIR)/,$(addsuffix /*.h,$(INCPATHS)))
 
-OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o cpu.o context.o
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o cpu.o context.o errors.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
 all: $(TESTBINS)

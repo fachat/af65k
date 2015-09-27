@@ -43,7 +43,7 @@
 static void pass1() {
 
 	const cpu_t *cpu = cpu_by_name(config()->initial_cpu_name);
-	const segment_t *segment = segment_new(NULL, SEG_ANY, cpu->type, false);
+	const segment_t *segment = segment_new(NULL, NULL, SEG_ANY, cpu->type, false);
 	context_init(segment, cpu);
 
 	line_t *line;

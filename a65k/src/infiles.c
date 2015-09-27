@@ -232,7 +232,7 @@ line_t *infiles_readline() {
 
 		if (current_file == NULL) {
 			// could not open file
-			log_error("Could not open file from all include dirs: %s\n", filename);
+			log_error("Could not open file from all include dirs: %s", filename);
 			return NULL;
 		}
 	}
@@ -244,14 +244,14 @@ line_t *infiles_readline() {
 	if (r == NULL) {
 		// EOF without chars, or error
 		if (ferror(current_file->filep)) {
-			log_error("Error on reading file %s\n", current_file->filename);
+			log_error("Error on reading file %s", current_file->filename);
 			infiles_close(current_file);
 			return NULL;
 		}
 		// EOF without chars
 		// should not happen
 
-		log_warn("EOF for file %s without chars!\n", current_file->filename);
+		log_debug("EOF for file %s without chars!", current_file->filename);
 		// fake return empty line
 		strcpy(current_file->buffer, "\n");
 	}
@@ -260,7 +260,7 @@ line_t *infiles_readline() {
 	if (buffer[len-1] != '\n') {
 		if (len >= current_file->buffer_size - 1) {
 			// buffer overflow
-			log_error("Line buffer overflow on line %d of file %s after %d bytes\n", 
+			log_error("Line buffer overflow on line %d of file %s after %d bytes", 
 				current_file->current_line, current_file->filename, current_file->buffer_size);
 		}
 	} else {

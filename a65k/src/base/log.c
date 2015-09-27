@@ -28,6 +28,21 @@
 #include <stdarg.h>
 #include <ctype.h>
 
+#include "infiles.h"
+#include "log.h"
+
+
+static err_level level = LEV_WARN;
+
+void log_module_init(err_level l) {
+	level = l;
+}
+
+void log_set_level(err_level l) {
+	level = l;
+}
+
+
 void log_term(const char *msg) {
 	
 	int newline = 0;
@@ -69,47 +84,28 @@ void log_errno(const char *msg, ...) {
         printf(">> %s: errno=%d: %s\n", msg, errno, strerror(errno));
 }
 
-void log_warn(const char *msg, ...) {
-       va_list args;
-       va_start(args, msg);
+void log_x(err_level lev, const char *msg, ...) {
 
-       printf("WRN:");
-       vprintf(msg, args);
+	const char *prefix = ">>>";
+	switch (lev) {
+	case LEV_TRACE: prefix = "TRC:"; break;
+	case LEV_DEBUG: prefix = "DBG:"; break;
+	case LEV_INFO: 	prefix = "INF:"; break;
+	case LEV_WARN: 	prefix = "WRN:"; break;
+	case LEV_ERROR: prefix = "ERR:"; break;
+	case LEV_FATAL: prefix = "FTL:"; break;
+	}
+
+	if (lev >= level) {
+       		va_list args;
+       		va_start(args, msg);
+
+       		printf(prefix);
+       		vprintf(msg, args);
+		printf("\n");
+	}
 }
 
-void log_error(const char *msg, ...) {
-       va_list args;
-       va_start(args, msg);
-
-       printf("ERR:");
-       vprintf(msg, args);
-}
-
-void log_info(const char *msg, ...) {
-       va_list args;
-       va_start(args, msg);
-
-       printf("INF:");
-       vprintf(msg, args);
-}
-
-void log_debug(const char *msg, ...) {
-       va_list args;
-       va_start(args, msg);
-
-       printf("DBG:");
-       vprintf(msg, args);
-}
-
-void log_fatal(const char *msg, ...) {
-       va_list args;
-       va_start(args, msg);
-
-       printf("FAT:");
-       vprintf(msg, args);
-
-	exit(-1);
-}
 
 
 

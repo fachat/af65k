@@ -12,6 +12,7 @@ void do_test();
 
 int main(int argc, char *argv[]) {
 
+	log_module_init(LEV_DEBUG);
 
 	printf("infiles:\n");
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 
-    generic logging interface
-    Copyright (C) 2012 Andre Fachat
+    logging 
+    Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,39 +19,31 @@
 
 ****************************************************************************/
 
+#include <stdio.h>
+#include <stdarg.h>
+#include <stdlib.h>
 
-#ifndef LOG_H
-#define LOG_H
+#include "infiles.h"
+#include "log.h"
+#include "errors.h"
 
-typedef enum {
-	LEV_TRACE	= 0,
-	LEV_DEBUG	= 1,
-	LEV_INFO	= 2,
-	LEV_WARN	= 3,
-	LEV_ERROR	= 4,
-	LEV_FATAL	= 5
-} err_level;
+#define	MAX_BUF	8192
+static char buf[MAX_BUF];
 
-void log_module_init(err_level l);
+void error_module_init() {
+}
 
-void log_set_level(err_level l);
+void loclog(err_level l, const position_t *loc, const char *msg, ...) {
+	va_list va;
 
-void log_errno(const char *msg, ...);
+	va_start(va, msg);
+	
+	vsnprintf(buf, MAX_BUF, msg, va);
 
-void log_x(err_level l, const char *msg, ...);
+	const char *filename = (loc == NULL) ? "<>" : loc->file->filename;
+	int lineno = (loc == NULL) ? 0 : loc->lineno;
 
-#define	log_error(msg, ...)	log_x(LEV_ERROR, msg, __VA_ARGS__)
-#define	log_warn(msg, ...)	log_x(LEV_WARN,  msg, __VA_ARGS__)
-#define	log_info(msg, ...)	log_x(LEV_INFO,  msg, __VA_ARGS__)
-#define	log_debug(msg, ...)	log_x(LEV_DEBUG, msg, __VA_ARGS__)
-#define	log_trace(msg, ...)	log_x(LEV_TRACE, msg, __VA_ARGS__)
-#define	log_fatal(msg, ...)	log_x(LEV_FATAL, msg, __VA_ARGS__)
+	log_x(l, "%s:%d %s", filename, lineno, buf);
+}
 
-
-void log_term(const char *msg);
-
-#define	log_rv(rv)	log_error("ERROR RETURN: %d\n", (rv))
-
-
-#endif
 

@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
 
 	const context_t *ctx = context_init(s, c);
 
-	if (ctx->cpu_width != c->cpu_width) {
-		printf("cpu width mismatch, was %d, expected %d\n", ctx->cpu_width, c->cpu_width);
+	if (ctx->cpu_width != c->width) {
+		printf("cpu width mismatch, was %d, expected %d\n", ctx->cpu_width, c->width);
 	}
 
 	context_t *dup = context_dup();

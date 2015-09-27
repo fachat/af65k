@@ -23,6 +23,7 @@
 #include "mem.h"
 #include "types.h"
 #include "hashmap.h"
+#include "infiles.h"
 #include "cpu.h"
 #include "segment.h"
 
@@ -51,7 +52,7 @@ void segment_module_init() {
 }
 
 // create a new segment or find an existing, matching one
-segment_t *segment_new(const char *name, seg_type type, cpu_type cpu, bool_t readonly) {
+segment_t *segment_new(const position_t *loc, const char *name, seg_type type, cpu_type cpu, bool_t readonly) {
 
 	segment_t *existing = hash_get(segments, name);
 
@@ -61,7 +62,7 @@ segment_t *segment_new(const char *name, seg_type type, cpu_type cpu, bool_t rea
 		existing->name = mem_alloc_str(name);
 		existing->type = type;
 		existing->readonly = readonly;
-		existing->cpu_width = cpu_by_type(cpu)->width;
+		existing->cpu_width = cpu_by_type(loc, cpu)->width;
 	}
 
 	return existing;

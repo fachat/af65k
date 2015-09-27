@@ -25,6 +25,7 @@
 #include "mem.h"
 #include "hashmap.h"
 #include "astring.h"
+#include "infiles.h"
 #include "cpu.h"
 
 #include "infiles.h"
@@ -107,11 +108,11 @@ const cpu_t *cpu_by_name(const char *name) {
 	return cpu;
 }
 
-const cpu_t *cpu_by_type(cpu_type type) {
+const cpu_t *cpu_by_type(const position_t *loc, cpu_type type) {
 
 	unsigned int num_cpus = sizeof(cpus)/sizeof(cpu_t);
 	if (type >= num_cpus) {
-		error_illegal_cpu_type(type, num_cpus);
+		error_illegal_cpu_type(loc, type, num_cpus);
 		return NULL;
 	}
 	return &cpus[type];

@@ -4,8 +4,10 @@ got f='main.a65', l=002: this file is the main test root
 got f='main.a65', l=003: 
 got f='main.a65', l=004: // include dir test
 got f='main.a65', l=005: include inc.i65
+DBG:Could not open file: 'testfiles/inc.i65'
 got f='inc.i65', l=001: included file
 got f='inc.i65', l=002: 
+DBG:EOF for file inc.i65 without chars!
 got f='inc.i65', l=003: 
 got f='main.a65', l=006: 
 got f='main.a65', l=007: // file without ln at the end of file
@@ -24,4 +26,5 @@ got f='oversize_line.a65', l=003: eral Public License    along with this program
 got f='oversize_line.a65', l=004: nfile_iter = list_iterator(infiles);	}	if (current_file != NULL && feof(current_file->filep)) {		// ...
 got f='main.a65', l=011: 
 got f='main.a65', l=012: last line
+DBG:EOF for file main.a65 without chars!
 got f='main.a65', l=013: 

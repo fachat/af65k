@@ -54,7 +54,7 @@ struct segment_s {
 void segment_module_init();
 
 // create a new segment or find an existing, matching one; match is by name
-segment_t *segment_new(const char *name, seg_type type, cpu_type cpu, bool_t readonly);
+segment_t *segment_new(const position_t *loc, const char *name, seg_type type, cpu_type cpu, bool_t readonly);
 
 
 
