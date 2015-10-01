@@ -25,10 +25,10 @@
 #include "mem.h"
 #include "hashmap.h"
 #include "astring.h"
-#include "infiles.h"
-#include "cpu.h"
+#include "position.h"
 
 #include "infiles.h"
+#include "cpu.h"
 #include "errors.h"
 
 

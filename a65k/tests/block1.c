@@ -4,7 +4,7 @@
 #include "hashmap.h"
 
 
-#include "infiles.h"
+#include "position.h"
 #include "cpu.h"
 #include "segment.h"
 #include "context.h"
@@ -23,7 +23,7 @@ static const type_t position_memtype = {
 int main(int argc, char *argv[]) {
 
 	position_t *pos = mem_alloc(&position_memtype);
-	pos->file = NULL;
+	pos->filename = NULL;
 	pos->lineno = 1;
 
 	block_t *blk = block_init(NULL, pos);
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	position_t *pos2 = mem_alloc(&position_memtype);
-	pos->file = NULL;
+	pos->filename = NULL;
 	pos->lineno = 2;
 
 	label_t *label1 = label_init(NULL, "label1", pos2);
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	position_t *pos3 = mem_alloc(&position_memtype);
-	pos->file = NULL;
+	pos->filename = NULL;
 	pos->lineno = 3;
 
 	label_t *label2 = label_init(NULL, "label2", pos3);

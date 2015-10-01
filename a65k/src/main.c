@@ -27,11 +27,12 @@
 #include "main.h"
 #include "mem.h"
 #include "log.h"
-#include "infiles.h"
+#include "position.h"
 #include "config.h"
 #include "cpu.h"
 #include "segment.h"
 #include "context.h"
+#include "infiles.h"
 #include "parser.h"
 #include "operation.h"
 

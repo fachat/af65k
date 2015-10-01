@@ -1,6 +1,6 @@
 /****************************************************************************
 
-    logging 
+    file position
     Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
@@ -19,31 +19,20 @@
 
 ****************************************************************************/
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 
-#include "position.h"
-#include "log.h"
-#include "errors.h"
+#ifndef POSITION_H
+#define POSITION_H
 
-#define	MAX_BUF	8192
-static char buf[MAX_BUF];
 
-void error_module_init() {
-}
+typedef struct {
+        const char	        *filename;
+        int                     lineno;
+} position_t;
 
-void loclog(err_level l, const position_t *loc, const char *msg, ...) {
-	va_list va;
+typedef struct {
+        const char              *line;
+        position_t              *position;
+} line_t;
 
-	va_start(va, msg);
-	
-	vsnprintf(buf, MAX_BUF, msg, va);
-
-	const char *filename = (loc == NULL) ? "<>" : loc->filename;
-	int lineno = (loc == NULL) ? 0 : loc->lineno;
-
-	log_x(l, "%s:%d %s", filename, lineno, buf);
-}
-
+#endif
 

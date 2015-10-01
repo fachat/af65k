@@ -27,8 +27,8 @@
 #include "mem.h"
 #include "list.h"
 #include "hashmap.h"
+#include "position.h"
 
-#include "infiles.h"
 #include "cpu.h"
 #include "segment.h"
 #include "context.h"

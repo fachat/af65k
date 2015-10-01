@@ -24,6 +24,7 @@
 
 #include "log.h"
 #include "mem.h"
+#include "position.h"
 #include "infiles.h"
 #include "linked_list.h"
 
@@ -270,7 +271,7 @@ line_t *infiles_readline() {
 
 
 	line.position = mem_alloc(&position_memtype);
-	line.position->file = current_file;
+	line.position->filename = current_file->filename;
 	line.position->lineno = current_file->current_line;
 	line.line = buffer;
 

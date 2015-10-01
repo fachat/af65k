@@ -24,7 +24,7 @@
 #include <string.h>
 
 #include "types.h"
-#include "infiles.h"
+#include "position.h"
 #include "array_list.h"
 #include "hashmap.h"
 #include "mem.h"

@@ -33,15 +33,6 @@ struct openfile {
 };
 typedef struct openfile openfile_t;
 
-typedef struct {
-        const openfile_t        *file;
-        int                     lineno;
-} position_t;
-
-typedef struct {
-	const char 		*line;
-	position_t		*position;
-} line_t;
 
 void infiles_module_init(void);
 

@@ -25,7 +25,7 @@
 #include "types.h"
 #include "mem.h"
 #include "log.h"
-#include "infiles.h"
+#include "position.h"
 #include "cpu.h"
 #include "config.h"
 

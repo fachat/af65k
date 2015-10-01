@@ -28,7 +28,7 @@
 #include <stdarg.h>
 #include <ctype.h>
 
-#include "infiles.h"
+#include "position.h"
 #include "log.h"
 
 

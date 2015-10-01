@@ -23,7 +23,7 @@
 #include "mem.h"
 #include "types.h"
 #include "hashmap.h"
-#include "infiles.h"
+#include "position.h"
 #include "cpu.h"
 #include "segment.h"
 

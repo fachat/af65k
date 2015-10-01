@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #include "types.h"
-#include "infiles.h"
+#include "position.h"
 #include "cpu.h"
 
 

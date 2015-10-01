@@ -5,6 +5,7 @@
 
 #include "log.h"
 #include "mem.h"
+#include "position.h"
 #include "infiles.h"
 
 
@@ -44,7 +45,7 @@ void do_test() {
 		if (strlen(tmp) > 110) {
 			strcpy(tmp+100, "...");
 		}
-		printf("got f='%s', l=%03d: %s\n", line->position->file->filename, line->position->lineno, tmp);
+		printf("got f='%s', l=%03d: %s\n", line->position->filename, line->position->lineno, tmp);
 
 		char *tok = strtok_r(tmp, " ", &ptr);
 		if (tok != NULL && !strcmp("include", tok)) {
