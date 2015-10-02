@@ -66,6 +66,28 @@ static inline void trace_no_opcode_for(const position_t *loc, const char *op_nam
 			op_name, am_name, cpu_name);
 }
 
+static inline void trace_narrow_operand_wide_ac(const position_t *loc, const char *op_name, const char *am_name, const char *cpu_name) {
+	loclog_trace(loc, "AC in opcode %s with addressing mode %s for CPU %s is wide (word), operand is narrow (byte)",
+			op_name, am_name, cpu_name);
+}
+
+static inline void error_wide_operand_narrow_ac(const position_t *loc, const char *op_name, const char *am_name, const char *cpu_name) {
+	loclog_error(loc, "AC in opcode %s with addressing mode %s for CPU %s is narrow (byte), operand is wide (word)",
+			op_name, am_name, cpu_name);
+}
+
+
+static inline void trace_narrow_operand_wide_idx(const position_t *loc, const char *op_name, const char *am_name, const char *cpu_name) {
+	loclog_trace(loc, "Index in opcode %s with addressing mode %s for CPU %s is wide (word), operand is narrow (byte)",
+			op_name, am_name, cpu_name);
+}
+
+static inline void error_wide_operand_narrow_idx(const position_t *loc, const char *op_name, const char *am_name, const char *cpu_name) {
+	loclog_error(loc, "Index in opcode %s with addressing mode %s for CPU %s is narrow (byte), operand is wide (word)",
+			op_name, am_name, cpu_name);
+}
+
+
 
 #endif
 

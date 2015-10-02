@@ -82,6 +82,8 @@ typedef struct {
 	const width_map	width;		// memory model size 16, 24, 32, 64
 	const bool_t	has_bcd;
 	const bool_t	has_illegal;
+	const bool_t	has_check_width;
+	const bool_t	has_prefixes;
 	const char 	*desc;		// description of CPU model
 } cpu_t;
 

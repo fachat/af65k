@@ -52,7 +52,7 @@ void segment_module_init() {
 }
 
 // create a new segment or find an existing, matching one
-segment_t *segment_new(const position_t *loc, const char *name, seg_type type, cpu_type cpu, bool_t readonly) {
+const segment_t *segment_new(const position_t *loc, const char *name, seg_type type, cpu_type cpu, bool_t readonly) {
 
 	segment_t *existing = hash_get(segments, name);
 
