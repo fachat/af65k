@@ -45,10 +45,22 @@ public class Generator {
 	public static void main(String argv[]) {
 		
 		String cpuname = "af65002";
-		
+
 		String filename = cpuname + ".xml";
 		
 		File file = new File(filename);
+
+		File dir = new File(cpuname);
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		
+		generateCpu(file, dir, cpuname);
+		
+
+	}
+
+	private static void generateCpu(File file, File dir, String cpuname) {
 		
 		CPU cpu = JAXB.unmarshal(file, CPU.class);
 		cpu.postProcess();
@@ -78,7 +90,7 @@ public class Generator {
 //		});
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("admodes-table-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "admodes-table-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			AdModeDocGenerator docgen = new AdModeDocGenerator(val);
@@ -93,7 +105,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("opcodes-table-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-table-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -108,7 +120,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("opcodes-longtable-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-longtable-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -123,7 +135,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("ext-longtable-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-longtable-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -138,7 +150,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("ext-table-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-table-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -153,7 +165,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("opcodes-desc-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-desc-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -168,7 +180,7 @@ public class Generator {
 		}
 		
 		try {
-			FileOutputStream fos = new FileOutputStream("ext-desc-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-desc-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
@@ -183,7 +195,7 @@ public class Generator {
 		}
 
 		try {
-			FileOutputStream fos = new FileOutputStream("opdoc-" + cpuname + ".html");
+			FileOutputStream fos = new FileOutputStream(new File(dir, "opdoc-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OpdescDocGenerator docgen = new OpdescDocGenerator(val);
@@ -196,9 +208,5 @@ public class Generator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-		//JAXB.marshal(cpu, System.out);
-		
 	}
 }
