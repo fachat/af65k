@@ -60,8 +60,8 @@ public class AddressingMode {
 	String altMode;
 
 	// class of the addressing mode (e.g. CMOS, 65k, ...)
-	@XmlElement(name="class")
-	String clazz;
+	@XmlElement(name="feature")
+	String feature;
 	
 	public String getIdentifier() {
 		return identifier;
@@ -95,12 +95,12 @@ public class AddressingMode {
 		this.altMode = altMode;
 	}
 
-	public String getClazz() {
-		return clazz;
+	public String getFeature() {
+		return feature;
 	}
 
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
+	public void setFeature(String clazz) {
+		this.feature = clazz;
 	}
 
 	public int getPos() {

@@ -3,7 +3,7 @@ package de.fachat.af65k.model.test;
 /*
 Tests for the model parser for the af65k set of VHDL cores
 
-Copyright (C) 2012  André Fachat
+Copyright (C) 2012  Andr�� Fachat
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,10 +22,18 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.ValidationEvent;
+import javax.xml.bind.ValidationEventHandler;
+import javax.xml.bind.Validator;
 
 import org.junit.Test;
 
@@ -39,6 +47,38 @@ import de.fachat.af65k.model.objs.PrefixBit;
 
 public class ModelTest {
 
+	@Test
+	public void testRead() throws JAXBException {
+		
+		File file = new File("../de.fachat.65k/af65002.xml");
+		
+		System.err.println("File: " + file.getAbsolutePath());
+		
+		JAXBContext ctx = JAXBContext.newInstance(CPU.class);
+		Unmarshaller umx = ctx.createUnmarshaller();
+		
+		umx.setEventHandler(new ValidationEventHandler() {
+			
+			@Override
+			public boolean handleEvent(ValidationEvent event) {
+		        System.out.println("\nEVENT");
+		        System.out.println("SEVERITY:  " + event.getSeverity());
+		        System.out.println("MESSAGE:  " + event.getMessage());
+		        System.out.println("LINKED EXCEPTION:  " + event.getLinkedException());
+		        System.out.println("LOCATOR");
+		        System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
+		        System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
+		        System.out.println("    OFFSET:  " + event.getLocator().getOffset());
+		        System.out.println("    OBJECT:  " + event.getLocator().getObject());
+		        System.out.println("    NODE:  " + event.getLocator().getNode());
+		        System.out.println("    URL:  " + event.getLocator().getURL());
+		        return true;
+			}
+		});
+		CPU cpu = (CPU) umx.unmarshal(file);
+		
+		//JAXB.marshal(cpu, System.out);
+	}
 	
 	@Test
 	public void testSerial() {

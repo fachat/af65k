@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,11 +33,12 @@ import java.util.TreeMap;
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.Doc;
-import de.fachat.af65k.model.objs.FeatureClass;
+import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
+
 
 /**
  * this class provides methods to generate various types of (HTML) docs from the CPU definition.
@@ -61,16 +63,10 @@ public class OpdescDocGenerator {
 		for (CodeMapEntry page[]: opcodes.values()) {
 			prepareOperationTable(ops, page, true);			
 		}
+
+		FeatureSet fset = cpu.getFClass(fclass);
+		Collection<String> fclasses = fset.getFeature();
 		
-		Collection<String> fclasses = new HashSet<String>();
-		fclasses.add(fclass);
-		while (cpu.getFClass(fclass) != null) {
-			FeatureClass fc = cpu.getFClass(fclass);
-			fclass = fc.getXtends();
-			if (fclass != null) {
-				fclasses.add(fclass);
-			}
-		}
 		createToc(wr, ops, fclasses);
 		
 		createTable(wr, ops, fclasses);		
@@ -84,6 +80,7 @@ public class OpdescDocGenerator {
 			CodeMapEntry en = page[i];
 			if (en != null) {
 				Operation op = en.getOperation();
+				
 				if (includeOrig || op.getClazz() != null) {
 					ops.put(op.getName(), op);
 				}
@@ -159,7 +156,7 @@ public class OpdescDocGenerator {
 				
 				for (Opcode opcode: op.getOpcodes()) {
 					
-					if (opcode.getClazz() == null || fclasses.contains(opcode.getClazz())) {
+					if (opcode.getFeature() == null || fclasses.contains(opcode.getFeature())) {
 						String admode = opcode.getAddressingMode();
 						AddressingMode am = cpu.getAddressingMode(admode);
 						
@@ -170,11 +167,11 @@ public class OpdescDocGenerator {
 						wr.print(opcode.getOpcode());
 						wr.startTableCell();
 						
-						String clss = opcode.getClazz();
+						String clss = opcode.getFeature();
 						if (clss == null || clss.length() == 0) {
 							clss = op.getClazz();
 						}
-						wr.print(opcode.getClazz());
+						wr.print(opcode.getFeature());
 						wr.startTableCell();
 						Collection<String> prefs = prefixes;
 						if (prefs != null) {

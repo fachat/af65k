@@ -1,67 +1,283 @@
 <table class="optable"><tr><th>Name</th><th>Alternative Name</th><th>Prefix</th><th>Operand Length</th><th>Syntax</th><th>Origin</th><th>Description</th></tr>
 <tr><td>Implied</td><td></td><td></td><td>0</td><td></td><td></td><td>Implied by the operation</td></tr>
 <tr><td>Accumulator</td><td></td><td></td><td>0</td><td></td><td></td><td>Accumulator operation</td></tr>
-<tr><td>Address</td><td></td><td></td><td>2</td><td>abs</td><td></td><td>The parameter following the opcode is an address (16 bit; for JMP, JSR, JPU)</td></tr>
-<tr><td>Address Long</td><td></td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</td></tr>
-<tr><td>Address Quad</td><td></td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for JMP, JSR, JPU)</td></tr>
-<tr><td>Immediate</td><td></td><td></td><td>1</td><td>#byte</td><td></td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a byte parameter</td></tr>
-<tr><td>Immediate 16bit</td><td>Wide immediate</td><td>RS=01</td><td>2</td><td>#word</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a word (16bit) parameter</td></tr>
-<tr><td>Immediate 32bit</td><td>Long immediate</td><td>RS=10</td><td>4</td><td>#long</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a long (32bit) parameter</td></tr>
-<tr><td>Immediate 64bit</td><td></td><td>RS=11</td><td>8</td><td>#quad</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter directly, without further lookup. Here it is a quad (64bit) parameter</td></tr>
-<tr><td>E indirect</td><td></td><td></td><td>0</td><td>(E)</td><td>65k</td><td>E-register indirect: the effective address is taken from the E register.</td></tr>
-<tr><td>Zeropage</td><td></td><td></td><td>1</td><td>zp</td><td></td><td>Zeropage address; The effective address of the operand is a zeropage address (i.e. 8bit)</td></tr>
-<tr><td>Zeropage indexed with X</td><td>Zeropage X-indexed</td><td></td><td>1</td><td>zp,X</td><td></td><td>Zeropage address, plus content of XR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the X register</td></tr>
-<tr><td>Zeropage indexed with Y</td><td>Zeropage Y-indexed</td><td></td><td>1</td><td>zp,Y</td><td></td><td>Zeropage address, plus content of YR; The effective address of the operand is the opcode parameter (zeropage address), plus the value of the Y register</td></tr>
-<tr><td>Absolute 16bit</td><td>Absolute</td><td></td><td>2</td><td>abs</td><td></td><td>16 bit address; The effective address of the operand is the word address (i.e. 16 bit) given as opcode parameter</td></tr>
-<tr><td>Absolute 16bit indexed with X</td><td>Absolute X-indexed</td><td></td><td>2</td><td>abs,X</td><td></td><td>16 bit address, plus content of XR; The effective address is the opcode parameter (word address), plus the value of the X register</td></tr>
-<tr><td>Absolute 16bit indexed with Y</td><td>Absolute Y-indexed</td><td></td><td>2</td><td>abs,Y</td><td></td><td>16 bit address, plus content of YR; The effective address is the opcode parameter (word address), plus the value of the Y register</td></tr>
-<tr><td>Absolute 32bit</td><td>Long absolute</td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>32 bit address; The effective address is the opcode parameter, which is a long address (i.e. 32 bit)</td></tr>
-<tr><td>Absolute 32bit indexed with X</td><td>Long absolute X-indexed</td><td>AM=1</td><td>4</td><td>long,X</td><td>65k</td><td>32 bit address, plus content of XR; The effective address is the opcode parameter (long address), plus the value of the X register</td></tr>
-<tr><td>Absolute 32bit indexed with Y</td><td>Long absolute Y-indexed</td><td>AM=1</td><td>4</td><td>long,Y</td><td>65k</td><td>32 bit address, plus content of YR; The effective address is the opcode parameter (long address), plus the value of the Y register</td></tr>
-<tr><td>Absolute 64bit</td><td>Quad absolute</td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>64 bit address; The effective address is the opcode parameter, which is a quad address (i.e. 64 bit)</td></tr>
-<tr><td>Absolute 64bit indexed with X</td><td>Quad absolute X-indexed</td><td>AM=1</td><td>8</td><td>quad,X</td><td>65k</td><td>64 bit address, plus content of XR; The effective address is the opcode parameter (quad address), plus the value of the X register</td></tr>
-<tr><td>Absolute 64bit indexed with Y</td><td>Quad absolute Y-indexed</td><td>AM=1</td><td>8</td><td>quad,Y</td><td>65k</td><td>64 bit address, plus content of YR; The effective address is the opcode parameter (quad address), plus the value of the Y register</td></tr>
-<tr><td>Zeropage indirect 16bit</td><td>Zeropage indirect</td><td></td><td>1</td><td>(zp)</td><td>cmos</td><td>Load effective 16 bit address from zeropage location given; Load effective word (16bit) address from zeropage location given as parameter.</td></tr>
-<tr><td>Zeropage indirect 16bit indexed with Y</td><td>Zeropage indirect Y-indexed</td><td></td><td>1</td><td>(zp),Y</td><td></td><td>Load effective 16 bit address from zeropage location given, then add content of YR; 
-        	The effective address is computed as the word (16bit) address read from the zeropage location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</td></tr>
-<tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus content of XR; 
-        	The effective word (16bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
-<tr><td>Absolute indirect 16bit</td><td>Absolute indirect</td><td></td><td>2</td><td>(abs)</td><td></td><td>Load effective 16 bit address from absolute location given; 
-        	The effective word (16bit) address is read from word location given as parameter.</td></tr>
-<tr><td>Absolute indirect 16bit indexed with Y</td><td>Absolute indirect Y-indexed</td><td></td><td>2</td><td>(abs),Y</td><td>65k</td><td>Load effective 16 bit address from absolute location given, then add content of YR; 
-        	The effective address is computed as the word (16bit) address read from the word location given as parameter plus the value of the Y register. The resulting address may be larger than 16bit due to overflow when Y is added.</td></tr>
-<tr><td>Absolute indexed with X indirect 16bit</td><td>Absolute X-indexed indirect</td><td></td><td>2</td><td>(abs,X)</td><td>cmos</td><td>Load effective 16 bit address from absolute location given plus content of XR;
-        	The effective word address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
-<tr><td>Zeropage indirect 32bit</td><td>Long Zeropage indirect</td><td>AM=1</td><td>1</td><td>[zp]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given; 
-        	The effective long (32bit) address is read from zeropage location given as parameter.</td></tr>
-<tr><td>Zeropage indirect 32bit indexed with Y</td><td>Zeropage long indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[zp],Y</td><td>65k</td><td>Load effective 32 bit address from zeropage location given, then add content of YR;
-        	The effective address is computed as the long (32bit) address read from the zeropage location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</td></tr>
-<tr><td>Zeropage indexed with X indirect 32bit</td><td>Zeropage X-indexed long indirect</td><td>AM=1</td><td>1</td><td>[zp,X]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given plus content of XR;
-        	The effective long (32bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
+<tr><td>Address</td><td></td><td></td><td>2</td><td>abs</td><td></td><td>The parameter following the opcode is an address (16 bit; for
+				JMP, JSR, JPU)
+			</td></tr>
+<tr><td>Address Long</td><td></td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for
+				JMP, JSR, JPU)
+			</td></tr>
+<tr><td>Address Quad</td><td></td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>The parameter following the opcode is an address (32 bit; for
+				JMP, JSR, JPU)
+			</td></tr>
+<tr><td>Immediate</td><td></td><td></td><td>1</td><td>#byte</td><td></td><td>The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a byte parameter
+			</td></tr>
+<tr><td>Immediate 16bit</td><td>Wide immediate</td><td>RS=01</td><td>2</td><td>#word</td><td></td><td>The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a word (16bit)
+				parameter
+			</td></tr>
+<tr><td>Immediate 32bit</td><td>Long immediate</td><td>RS=10</td><td>4</td><td>#long</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a long (32bit)
+				parameter
+			</td></tr>
+<tr><td>Immediate 64bit</td><td></td><td>RS=11</td><td>8</td><td>#quad</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a quad (64bit)
+				parameter
+			</td></tr>
+<tr><td>E indirect</td><td></td><td></td><td>0</td><td>(E)</td><td>65k</td><td>E-register indirect: the effective address is taken from the E
+				register.
+			</td></tr>
+<tr><td>Zeropage</td><td></td><td></td><td>1</td><td>zp</td><td></td><td>Zeropage address; The effective address of the operand is a
+				zeropage address (i.e. 8bit)
+			</td></tr>
+<tr><td>Zeropage indexed with X</td><td>Zeropage X-indexed</td><td></td><td>1</td><td>zp,X</td><td></td><td>Zeropage address, plus content of XR; The effective address of
+				the operand is the opcode parameter (zeropage address), plus the
+				value of the X register
+			</td></tr>
+<tr><td>Zeropage indexed with Y</td><td>Zeropage Y-indexed</td><td></td><td>1</td><td>zp,Y</td><td></td><td>Zeropage address, plus content of YR; The effective address of
+				the operand is the opcode parameter (zeropage address), plus the
+				value of the Y register
+			</td></tr>
+<tr><td>Absolute 16bit</td><td>Absolute</td><td></td><td>2</td><td>abs</td><td></td><td>16 bit address; The effective address of the operand is the
+				word
+				address (i.e. 16 bit) given as opcode parameter
+			</td></tr>
+<tr><td>Absolute 16bit indexed with X</td><td>Absolute X-indexed</td><td></td><td>2</td><td>abs,X</td><td></td><td>16 bit address, plus content of XR; The effective address is
+				the
+				opcode parameter (word address), plus the value of the X register
+			</td></tr>
+<tr><td>Absolute 16bit indexed with Y</td><td>Absolute Y-indexed</td><td></td><td>2</td><td>abs,Y</td><td></td><td>16 bit address, plus content of YR; The effective address is
+				the
+				opcode parameter (word address), plus the value of the Y register
+			</td></tr>
+<tr><td>Absolute 32bit</td><td>Long absolute</td><td>AM=1</td><td>4</td><td>long</td><td>65k</td><td>32 bit address; The effective address is the opcode parameter,
+				which is a long address (i.e. 32 bit)
+			</td></tr>
+<tr><td>Absolute 32bit indexed with X</td><td>Long absolute X-indexed</td><td>AM=1</td><td>4</td><td>long,X</td><td>65k</td><td>32 bit address, plus content of XR; The effective address is
+				the
+				opcode parameter (long address), plus the value of the X register
+			</td></tr>
+<tr><td>Absolute 32bit indexed with Y</td><td>Long absolute Y-indexed</td><td>AM=1</td><td>4</td><td>long,Y</td><td>65k</td><td>32 bit address, plus content of YR; The effective address is
+				the
+				opcode parameter (long address), plus the value of the Y register
+			</td></tr>
+<tr><td>Absolute 64bit</td><td>Quad absolute</td><td>AM=1</td><td>8</td><td>quad</td><td>65k</td><td>64 bit address; The effective address is the opcode parameter,
+				which is a quad address (i.e. 64 bit)
+			</td></tr>
+<tr><td>Absolute 64bit indexed with X</td><td>Quad absolute X-indexed</td><td>AM=1</td><td>8</td><td>quad,X</td><td>65k</td><td>64 bit address, plus content of XR; The effective address is
+				the
+				opcode parameter (quad address), plus the value of the X register
+			</td></tr>
+<tr><td>Absolute 64bit indexed with Y</td><td>Quad absolute Y-indexed</td><td>AM=1</td><td>8</td><td>quad,Y</td><td>65k</td><td>64 bit address, plus content of YR; The effective address is
+				the
+				opcode parameter (quad address), plus the value of the Y register
+			</td></tr>
+<tr><td>Zeropage indirect 16bit</td><td>Zeropage indirect</td><td></td><td>1</td><td>(zp)</td><td>cmos</td><td>Load effective 16 bit address from zeropage location given;
+				Load
+				effective word (16bit) address from zeropage location given as
+				parameter.
+			</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with Y</td><td>Zeropage indirect Y-indexed</td><td></td><td>1</td><td>(zp),Y</td><td></td><td>Load effective 16 bit address from zeropage location given,
+				then
+				add content of YR;
+				The effective address is computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Y
+				register. The resulting address may be larger
+				than 16bit due to
+				overflow when Y is added.
+			</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with Z</td><td>Zeropage indirect Z-indexed</td><td></td><td>1</td><td>(zp),Z</td><td>cmos_indz</td><td>Load effective 16 bit address from zeropage location given,
+				then
+				add content of ZR;
+				The effective address is computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Z
+				register. The resulting address may be larger
+				than 16bit due to
+				overflow when Z is added.
+			</td></tr>
+<tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus
+				content of XR;
+				The effective word (16bit) address is read from the
+				location that is
+				computed as the zeropage location given as parameter
+				plus the value
+				of the X register
+			</td></tr>
+<tr><td>Absolute indirect 16bit</td><td>Absolute indirect</td><td></td><td>2</td><td>(abs)</td><td></td><td>Load effective 16 bit address from absolute location given;
+				The
+				effective word (16bit) address is read from word location given as
+				parameter.
+			</td></tr>
+<tr><td>Absolute indirect 16bit indexed with Y</td><td>Absolute indirect Y-indexed</td><td></td><td>2</td><td>(abs),Y</td><td>65k</td><td>Load effective 16 bit address from absolute location given,
+				then
+				add content of YR;
+				The effective address is computed as the word
+				(16bit) address read from
+				the word location given as parameter plus
+				the value of the Y
+				register. The resulting address may be larger than
+				16bit due to
+				overflow when Y is added.
+			</td></tr>
+<tr><td>Absolute indexed with X indirect 16bit</td><td>Absolute X-indexed indirect</td><td></td><td>2</td><td>(abs,X)</td><td>cmos</td><td>Load effective 16 bit address from absolute location given plus
+				content of XR;
+				The effective word address is read from the location
+				that is computed as
+				the word location given as parameter plus the
+				value of the X register
+			</td></tr>
+<tr><td>Zeropage indirect 32bit</td><td>Long Zeropage indirect</td><td>AM=1</td><td>1</td><td>[zp]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given;
+				The
+				effective long (32bit) address is read from zeropage location given
+				as parameter.
+			</td></tr>
+<tr><td>Zeropage indirect 32bit indexed with Y</td><td>Zeropage long indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[zp],Y</td><td>65k</td><td>Load effective 32 bit address from zeropage location given,
+				then
+				add content of YR;
+				The effective address is computed as the long
+				(32bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Y
+				register. The resulting address may be larger
+				than 32bit due to
+				overflow when Y is added.
+			</td></tr>
+<tr><td>Zeropage indirect 32bit indexed with Z</td><td>Zeropage long indirect Z-indexed</td><td>AM=1</td><td>1</td><td>[zp],Z</td><td>ce02</td><td>Load effective 32 bit address from zeropage location given,
+				then
+				add content of ZR;
+				The effective address is computed as the long
+				(32bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Z
+				register. The resulting address may be larger
+				than 32bit due to
+				overflow when Z is added.
+			</td></tr>
+<tr><td>Zeropage indexed with X indirect 32bit</td><td>Zeropage X-indexed long indirect</td><td>AM=1</td><td>1</td><td>[zp,X]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given plus
+				content of XR;
+				The effective long (32bit) address is read from the
+				location that is
+				computed as the zeropage location given as parameter
+				plus the value
+				of the X register
+			</td></tr>
 <tr><td>Absolute indirect 32bit</td><td>Absolute long indirect</td><td>AM=1</td><td>2</td><td>[abs]</td><td>65k</td><td>Load effective 32 bit address from absolute location given;
-        	The effective long (32bit) address is read from word location given as parameter.</td></tr>
-<tr><td>Absolute indirect 32bit indexed with Y</td><td>Absolute long indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[abs],Y</td><td>65k</td><td>Load effective 32 bit address from absolute location given, then add content of YR;
-        	The effective address is computed as the long address read from the word location given as parameter plus the value of the Y register.  The resulting address may be larger than 32bit due to overflow when Y is added.</td></tr>
-<tr><td>Absolute indexed with X indirect 32bit</td><td>Absolute X-indexed long indirect</td><td>AM=1</td><td>2</td><td>[abs,X]</td><td>65k</td><td>Load effective 32 bit address from absolute location given plus content of XR;
-        	The effective long (32bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
+				The
+				effective long (32bit) address is read from word location given as
+				parameter.
+			</td></tr>
+<tr><td>Absolute indirect 32bit indexed with Y</td><td>Absolute long indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[abs],Y</td><td>65k</td><td>Load effective 32 bit address from absolute location given,
+				then
+				add content of YR;
+				The effective address is computed as the long
+				address read from the word
+				location given as parameter plus the value
+				of the Y register. The
+				resulting address may be larger than 32bit due
+				to overflow when Y is
+				added.
+			</td></tr>
+<tr><td>Absolute indirect 32bit indexed with Z</td><td>Absolute long indirect Z-indexed</td><td>AM=1</td><td>2</td><td>[abs],Z</td><td>ce02</td><td>Load effective 32 bit address from absolute location given,
+				then
+				add content of ZR;
+				The effective address is computed as the long
+				address read from the word
+				location given as parameter plus the value
+				of the Z register. The
+				resulting address may be larger than 32bit due
+				to overflow when Z is
+				added.
+			</td></tr>
+<tr><td>Absolute indexed with X indirect 32bit</td><td>Absolute X-indexed long indirect</td><td>AM=1</td><td>2</td><td>[abs,X]</td><td>65k</td><td>Load effective 32 bit address from absolute location given plus
+				content of XR;
+				The effective long (32bit) address is read from the
+				location that is
+				computed as the word location given as parameter plus
+				the value of
+				the X register
+			</td></tr>
 <tr><td>Zeropage indirect 64bit</td><td>Zeropage quad indirect</td><td>AM=1</td><td>1</td><td>[[zp]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given;
-        	The effective quad (64bit) address is read from zeropage location given as parameter.</td></tr>
-<tr><td>Zeropage indirect 64bit indexed with Y</td><td>Zeropage quad indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[[zp]],Y</td><td>65k</td><td>Load effective 64 bit address from zeropage location given, then add content of YR;
-        	The effective address is computed as the quad (64bit) address read from the zeropage location given as parameter plus the value of the Y register</td></tr>
-<tr><td>Zeropage indexed with X indirect 64bit</td><td>Zeropage X-indexed quad indirect</td><td>AM=1</td><td>1</td><td>[[zp,X]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given plus content of XR;
-        	The effective quad (64bit) address is read from the location that is computed as the zeropage location given as parameter plus the value of the X register</td></tr>
+				The
+				effective quad (64bit) address is read from zeropage location given
+				as parameter.
+			</td></tr>
+<tr><td>Zeropage indirect 64bit indexed with Y</td><td>Zeropage quad indirect Y-indexed</td><td>AM=1</td><td>1</td><td>[[zp]],Y</td><td>65k</td><td>Load effective 64 bit address from zeropage location given,
+				then
+				add content of YR;
+				The effective address is computed as the quad
+				(64bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Y
+				register
+			</td></tr>
+<tr><td>Zeropage indirect 64bit indexed with Z</td><td>Zeropage quad indirect Z-indexed</td><td>AM=1</td><td>1</td><td>[[zp]],Z</td><td>65k</td><td>Load effective 64 bit address from zeropage location given,
+				then
+				add content of ZR;
+				The effective address is computed as the quad
+				(64bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Z
+				register
+			</td></tr>
+<tr><td>Zeropage indexed with X indirect 64bit</td><td>Zeropage X-indexed quad indirect</td><td>AM=1</td><td>1</td><td>[[zp,X]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given plus
+				content of XR;
+				The effective quad (64bit) address is read from the
+				location that is
+				computed as the zeropage location given as parameter
+				plus the value
+				of the X register
+			</td></tr>
 <tr><td>Absolute indirect 64bit</td><td>Absolute quad indirect</td><td>AM=1</td><td>2</td><td>[[abs]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given;
-        	The effective quad (64bit) address is read from word location given as parameter.</td></tr>
-<tr><td>Absolute indirect 64bit indexed with Y</td><td>Absolute quad indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[[abs]],Y</td><td>65k</td><td>Load effective 64 bit address from absolute location given, then add content of YR;
-        	The effective address is computed as the quad address read from the word location given as parameter plus the value of the Y register</td></tr>
-<tr><td>Absolute indexed with X indirect 64bit</td><td>Absolute X-indexed quad indirect</td><td>AM=1</td><td>2</td><td>[[abs,X]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given plus content of XR;
-        	The effective quad (64bit) address is read from the location that is computed as the word location given as parameter plus the value of the X register</td></tr>
-<tr><td>Relative</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in branches; from -128 to +127</td></tr>
-<tr><td>Relative 16bit</td><td>Wide relative</td><td>RS=01</td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in branches; from -32768 to +32767</td></tr>
-<tr><td>Relative 32bit</td><td>Long relative</td><td>RS=10</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in branches; from -2^32 to +2^32-1</td></tr>
-<tr><td>Relative 64bit</td><td>Quad relative</td><td>RS=11</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in branches; from -2^64 to +2^64-1</td></tr>
-<tr><td>Relative (BSR)</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in BSR; from -128 to +127</td></tr>
-<tr><td>Relative 16bit (BSR)</td><td>Wide relative</td><td></td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in BSR; from -32768 to +32767</td></tr>
-<tr><td>Relative 32bit (BSR)</td><td>Long relative</td><td>AM=1</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^32 to +2^32-1</td></tr>
-<tr><td>Relative 64bit (BSR)</td><td>Quad relative</td><td>AM=1</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^64 to +2^64-1</td></tr>
+				The
+				effective quad (64bit) address is read from word location given as
+				parameter.
+			</td></tr>
+<tr><td>Absolute indirect 64bit indexed with Y</td><td>Absolute quad indirect Y-indexed</td><td>AM=1</td><td>2</td><td>[[abs]],Y</td><td>65k</td><td>Load effective 64 bit address from absolute location given,
+				then
+				add content of YR;
+				The effective address is computed as the quad
+				address read from the word
+				location given as parameter plus the value
+				of the Y register
+			</td></tr>
+<tr><td>Absolute indirect 64bit indexed with Z</td><td>Absolute quad indirect Z-indexed</td><td>AM=1</td><td>2</td><td>[[abs]],Z</td><td>65k</td><td>Load effective 64 bit address from absolute location given,
+				then
+				add content of ZR;
+				The effective address is computed as the quad
+				address read from the word
+				location given as parameter plus the value
+				of the Z register
+			</td></tr>
+<tr><td>Absolute indexed with X indirect 64bit</td><td>Absolute X-indexed quad indirect</td><td>AM=1</td><td>2</td><td>[[abs,X]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given plus
+				content of XR;
+				The effective quad (64bit) address is read from the
+				location that is
+				computed as the word location given as parameter plus
+				the value of
+				the X register
+			</td></tr>
+<tr><td>Relative</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in branches; from -128 to +127
+			</td></tr>
+<tr><td>Relative 16bit</td><td>Wide relative</td><td>RS=01</td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in branches; from -32768 to
+				+32767
+			</td></tr>
+<tr><td>Relative 32bit</td><td>Long relative</td><td>RS=10</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in branches; from -2^32 to
+				+2^32-1
+			</td></tr>
+<tr><td>Relative 64bit</td><td>Quad relative</td><td>RS=11</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in branches; from -2^64 to
+				+2^64-1
+			</td></tr>
+<tr><td>Relative (BSR)</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in BSR; from -128 to +127
+			</td></tr>
+<tr><td>Relative 16bit (BSR)</td><td>Wide relative</td><td></td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in BSR; from -32768 to +32767
+			</td></tr>
+<tr><td>Relative 32bit (BSR)</td><td>Long relative</td><td>AM=1</td><td>4</td><td>rellong</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^32 to +2^32-1
+			</td></tr>
+<tr><td>Relative 64bit (BSR)</td><td>Quad relative</td><td>AM=1</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in BSR; from -2^64 to +2^64-1
+			</td></tr>
 </table>

@@ -42,6 +42,10 @@ public class Syntax {
 	// description
 	String desc;
 	
+	// whether it is original (empty), CMOS ("cmos"), or 65k ("65k")
+	@XmlElement(name="class")
+	String clazz;
+
 	// simple syntax - kind of formal
 	@XmlElement(name="simplesyntax")
 	String simpleSyntax;

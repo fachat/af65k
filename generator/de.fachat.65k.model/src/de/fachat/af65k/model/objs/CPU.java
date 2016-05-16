@@ -3,7 +3,7 @@ package de.fachat.af65k.model.objs;
 /*
 The model parser for the af65k set of VHDL cores
 
-Copyright (C) 2012  André Fachat
+Copyright (C) 2012  Andr�� Fachat
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,11 +21,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -34,33 +37,77 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author fachat
  *
  */
-@XmlRootElement(name="cpu")
+@XmlRootElement(name = "cpu")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CPU {
 
 	String creator;
 	Date creationDate;
 	String identifier;
-	
+
 	// list of available addressing modes (String identifier)
-	@XmlElement(name="addrmode")
+	@XmlElement(name = "addrmode")
+	@XmlElementWrapper(name = "addrmodes")
 	List<AddressingMode> addressingModes;
-	
+
 	// list of available prefix bits
+	@XmlElement(name = "prefix")
+	@XmlElementWrapper(name = "prefixes")
 	List<Prefix> prefix;
-	
+
 	// list of opcodes
-	@XmlElement(name="operation")
+	@XmlElement(name = "operation")
+	@XmlElementWrapper(name = "operations")
 	List<Operation> operations;
 
 	// list of opcode classes (cmos, 65k, ...)
-	@XmlElement(name="class")
-	List<FeatureClass> classes;
+	@XmlElement(name = "class")
+	@XmlElementWrapper(name = "classes")
+	List<FeatureSet> featureSet;
+
+	// list of feature sets (cmos, 65k, ...)
+	@XmlElement(name = "feature")
+	@XmlElementWrapper(name = "features")
+	List<Feature> feature;
 
 	// list of syntax descriptions
-	@XmlElement(name="syntax")
+	@XmlElement(name = "syntax")
+	@XmlElementWrapper(name = "syntaxes")
 	List<Syntax> syntaxlist;
-	
+
+	public void postProcess() {
+
+		Map<String, FeatureSet> features = new HashMap<>();
+
+		for (FeatureSet fset : featureSet) {
+
+			System.out.println("Checking FeatureSet " + fset.getName() + ", with includes " + fset.getXtends()
+					+ " and features " + fset.getFeature());
+
+
+			if (fset.getXtends() != null && fset.getXtends().size() > 0) {
+
+				for (String inc : fset.getXtends()) {
+
+					FeatureSet finc = features.get(inc);
+
+					if (finc == null) {
+						throw new IllegalStateException("FeatureSet " + fset.getName() + " includes FeatureSet " + inc
+								+ " that is not (yet) dedfined");
+					}
+
+					System.out.println("Including FeatureSet " + finc.getName() + " into " + fset.getName());
+
+					fset.getFeature().addAll(finc.getFeature());
+				}
+			}
+
+			features.put(fset.getName(), fset);
+			
+			System.err.println("Defining feature set " + fset.getName() + " as feature list: " + fset.getFeature());
+		}
+	}
+
 	public String getCreator() {
 		return creator;
 	}
@@ -109,12 +156,12 @@ public class CPU {
 		this.operations = operations;
 	}
 
-	public List<FeatureClass> getClasses() {
-		return classes;
+	public List<FeatureSet> getFeatureSet() {
+		return featureSet;
 	}
 
-	public void setClasses(List<FeatureClass> classes) {
-		this.classes = classes;
+	public void setFeatureSet(List<FeatureSet> classes) {
+		this.featureSet = classes;
 	}
 
 	public List<Syntax> getSyntaxlist() {
@@ -131,5 +178,13 @@ public class CPU {
 
 	public void setPrefix(List<Prefix> prefix) {
 		this.prefix = prefix;
+	}
+
+	public List<Feature> getFeature() {
+		return feature;
+	}
+
+	public void setFeature(List<Feature> feature) {
+		this.feature = feature;
 	}
 }

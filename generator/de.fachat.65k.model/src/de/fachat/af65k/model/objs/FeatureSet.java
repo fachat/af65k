@@ -1,5 +1,7 @@
 package de.fachat.af65k.model.objs;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -35,14 +37,19 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class FeatureClass {
+public class FeatureSet {
 
 	String name;
 	int prio;
 	
-	@XmlElement(name="extends")
-	String xtends;
+	List<Doc> doc;
 	
+	@XmlElement(name="includes")
+	List<String> xtends;
+
+	@XmlElement(name="feature")
+	List<String> feature;
+
 	public String getName() {
 		return name;
 	}
@@ -55,11 +62,17 @@ public class FeatureClass {
 	public void setPrio(int prio) {
 		this.prio = prio;
 	}
-	public String getXtends() {
+	public List<String> getXtends() {
 		return xtends;
 	}
-	public void setXtends(String xtends) {
+	public void setXtends(List<String> xtends) {
 		this.xtends = xtends;
+	}
+	public List<String> getFeature() {
+		return feature;
+	}
+	public void setFeature(List<String> feature) {
+		this.feature = feature;
 	}
 	
 }

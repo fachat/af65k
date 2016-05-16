@@ -51,11 +51,13 @@ public class Generator {
 		File file = new File(filename);
 		
 		CPU cpu = JAXB.unmarshal(file, CPU.class);
+		cpu.postProcess();
 		
 		Logger logger = new Logger() {
 			
 			@Override
 			public void error(String msg) {
+				System.err.println("Validation error:" + msg);
 				// TODO Auto-generated method stub				
 			}
 		};

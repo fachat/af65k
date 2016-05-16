@@ -33,7 +33,8 @@ import org.w3c.dom.CDATASection;
 import de.fachat.af65k.logging.Logger;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.CPU;
-import de.fachat.af65k.model.objs.FeatureClass;
+import de.fachat.af65k.model.objs.Feature;
+import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.objs.Prefix;
@@ -56,7 +57,8 @@ public class Validator {
 	
 	protected Map<String, AddressingMode> admodes = new HashMap<String, AddressingMode>();
 	protected Map<String, PrefixBit> pbits = new HashMap<String, PrefixBit>();
-	protected Map<String, FeatureClass> fclass = new HashMap<String, FeatureClass>();
+	protected Map<String, FeatureSet> fclass = new HashMap<String, FeatureSet>();
+	protected Map<String, Feature> feature = new HashMap<String, Feature>();
 	protected Map<String, Syntax> syntaxMap = new HashMap<String, Syntax>();
 	protected Map<String, Set<SyntaxMode>> syntaxModesPerAM = new HashMap<String, Set<SyntaxMode>>();
 	protected Map<SyntaxMode, Syntax> syntaxPerSM = new HashMap<SyntaxMode, Syntax>();
@@ -70,14 +72,33 @@ public class Validator {
 			throw new IllegalArgumentException("CPU is null");
 		}
 		
-		for (FeatureClass fc : cpu.getClasses()) {
+		for (Feature f : cpu.getFeature()) {
+			String id = f.getName();
+			if (feature.containsKey(id)) {
+				LOG.error("Feature '" + id + "' is duplicate!");
+			} else {
+				System.err.println("Registering feature " + id);
+				feature.put(id, f);
+			}
+		}
+		
+		for (FeatureSet fc : cpu.getFeatureSet()) {
 			String id = fc.getName();
 			if (fclass.containsKey(id)) {
 				LOG.error("Feature class '" + id + "' is duplicate!");
 			} else {
+				System.err.println("Registering feature set " + id);
 				fclass.put(id, fc);
 			}
+			
+			List<String> featureList = fc.getFeature();
+			for (String fn : featureList) {
+				if (!feature.containsKey(fn)) {
+					LOG.error("Feature " + fn + " for FeatureSet " + id + " is not defined!");
+				}
+			}
 		}
+		
 		for (Prefix pref : cpu.getPrefix()) {
 			if (pref.getBits() != null) {
 				for (PrefixBit pb : pref.getBits()) {
@@ -92,15 +113,17 @@ public class Validator {
 		}
 		int i = 0;
 		for (AddressingMode am : cpu.getAddressingModes()) {
+		
 			am.setPos(i);
 			i++;
 			String id = am.getIdentifier();
+			
 			if (admodes.containsKey(id)) {
 				LOG.error("Addressing mode '" + id + "' is duplicate!");
 			} else {
 				admodes.put(id, am);
-				String fclassStr = am.getClazz();
-				if (fclassStr != null && !fclass.containsKey(fclassStr)) {
+				String fclassStr = am.getFeature();
+				if (fclassStr != null && !feature.containsKey(fclassStr)) {
 					LOG.error("Feature class '" + fclassStr + "' for addressing mode '" + id + "' is not defined!");
 				}
 				List<String> ignoredPrefixes = am.getIgnoredPrefixes();
@@ -174,14 +197,14 @@ public class Validator {
 		}
 	}
 	
-	public FeatureClass getFClass(String fc) {
+	public FeatureSet getFClass(String fc) {
 		return fclass.get(fc);
 	}
 	
 	public static class CodeMapEntry {
 		public CodeMapEntry(Operation operation, Opcode opcode,
 				AddressingMode addrmode, Collection<PrefixBit> prefixbits,
-				FeatureClass fclass, Set<SyntaxMode> synmodes) {
+				Feature fclass, Set<SyntaxMode> synmodes) {
 			super();
 			this.operation = operation;
 			this.opcode = opcode;
@@ -195,7 +218,7 @@ public class Validator {
 		Opcode opcode;
 		AddressingMode addrmode;
 		Collection<PrefixBit> prefixbits;
-		FeatureClass fclass;
+		Feature fclass;
 		Set<SyntaxMode> synmodes;
 		
 		public Operation getOperation() {
@@ -210,7 +233,7 @@ public class Validator {
 		public Collection<PrefixBit> getPrefixbits() {
 			return prefixbits;
 		}
-		public FeatureClass getFclass() {
+		public Feature getFclass() {
 			return fclass;
 		}
 		public Set<SyntaxMode> getSynmodes() {
@@ -275,12 +298,16 @@ public class Validator {
 		
 		for (Operation op : cpu.getOpcodes()) {
 
-			FeatureClass opFClass = null;
+			if ("ROR".equals(op.getName())) {
+				System.err.println("found ROR");
+			}
+
+			Feature opFClass = null;
 			String fclassStr = op.getClazz();
-			if (fclassStr != null && !fclass.containsKey(fclassStr)) {
+			if (fclassStr != null && !feature.containsKey(fclassStr)) {
 				LOG.error("Feature class '" + fclassStr + "'  for operation '" + op.getName() + "' is not defined!");
 			} else {
-				opFClass = fclass.get(fclassStr);
+				opFClass = feature.get(fclassStr);
 			}
 
 			// find valid prefix bits
@@ -304,34 +331,38 @@ public class Validator {
 				
 				int code = parseCode(codeStr);
 
-				String codeFClassStr = opcode.getClazz();
-				FeatureClass codeFClass = fclass.get(codeFClassStr);
+				String codeFClassStr = opcode.getFeature();
+				FeatureSet codeFClass = fclass.get(codeFClassStr);
 //				if (codeFClass == null) {
 //					LOG.error("Feature class '" + codeFClassStr + "' for opcode '" + page + "/" + codeStr + "' is not defined");
 //				}
 				
 				// addressing mode
-				FeatureClass admodeclass = null;
+				Feature admodeclass = null;
 				AddressingMode admode = admodes.get(opcode.getAddressingMode());
 				if (admode == null) {
 					LOG.error("Addressing mode '" + opcode.getAddressingMode() + "' for operation '" + op.getName() + "' is not defined!");
 				} else {
-					String admodeclassStr = admode.getClazz();
-					admodeclass = fclass.get(admodeclassStr);
+					String admodefeatureStr = admode.getFeature();
+					admodeclass = feature.get(admodefeatureStr);
 					// find class (derive from addressing mode and operation if necessary)
+
+
 					if (codeFClass == null) {
 						if (admodeclass != null) {
-							codeFClass = admodeclass;
-						}
+							opcode.setFeature(admodeclass.getName());
+						} else 
 						if (opFClass != null) {
-							if (codeFClass == null || opFClass.getPrio() > codeFClass.getPrio()) {
-								codeFClass = opFClass;
-							}
+							opcode.setFeature(opFClass.getName());
+//							if (codeFClass == null || opFClass.getPrio() > codeFClass.getPrio()) {
+//								codeFClass = opFClass;
+//							}
 						}
+					} else {
+						opcode.setFeature(codeFClass.getName());
 					}
-					if (codeFClass != null) {
-						opcode.setClazz(codeFClass.getName());
-					}
+
+					LOG.error("Addressing mode '" + admode.getName() + "(" +admode.getIdentifier() + ":"+ admode.getFeature() + ")' for operation '" + op.getName() + "' (" + op.getClazz() + ") -> feature: " + opcode.getFeature() + "!");
 
 					Set<SyntaxMode> synmodes = syntaxModesPerAM.get(admode.getIdentifier());
 					
@@ -353,7 +384,7 @@ public class Validator {
 					if (pageEntries[code] != null) {
 						LOG.error("Opcode '" + page + "/" + code + "' is duplicate entry in operations '" + op.getName() + "' and '" + pageEntries[code].getOperation().getName() + "'!");
 					} else {
-						pageEntries[code] = new CodeMapEntry(op, opcode, admode, pbitset.values(), codeFClass, synmodes);
+						pageEntries[code] = new CodeMapEntry(op, opcode, admode, pbitset.values(), feature.get(opcode.getFeature()), synmodes);
 					}
 				}								
 			}
@@ -374,7 +405,7 @@ public class Validator {
 	
 	public static class AModeEntry {
 		public AModeEntry(AddressingMode addrmode, Syntax syntax, SyntaxMode sm,
-				FeatureClass fclass) {
+				Feature fclass) {
 			super();
 			this.addrmode = addrmode;
 			this.syntax = syntax;
@@ -383,7 +414,7 @@ public class Validator {
 		}
 		AddressingMode addrmode;
 		Syntax syntax;
-		FeatureClass fclass;
+		Feature fclass;
 		SyntaxMode syntaxmode;
 		public AddressingMode getAddrmode() {
 			return addrmode;
@@ -394,7 +425,7 @@ public class Validator {
 		public int getLen() {
 			return addrmode.getWidthInByte();
 		}
-		public FeatureClass getFclass() {
+		public Feature getFclass() {
 			return fclass;
 		}
 		public String getSimplesyntax() {
@@ -417,17 +448,18 @@ public class Validator {
 				
 				AddressingMode amode = admodes.get(amid);
 				
-				String amfcid = amode.getClazz();
-				FeatureClass amfc = fclass.get(amfcid);
+				if (amode == null) {
+					throw new IllegalStateException("Did not find definition for addressing mode " + amid);
+				}
 				
-				String modefcid = sm.getClazz();
-				FeatureClass modefc = fclass.get(modefcid);
+				String amfcid = amode.getFeature();
+				Feature amfc = feature.get(amfcid);
 				
-				FeatureClass fc = amfc;
+				String modefcid = sm.getFeature();
+				Feature modefc = feature.get(modefcid);
+				
+				Feature fc = amfc;
 				if (fc == null) {
-					fc = modefc;
-				} else
-				if (modefc != null && fc.getPrio() > modefc.getPrio()) {
 					fc = modefc;
 				}
 				

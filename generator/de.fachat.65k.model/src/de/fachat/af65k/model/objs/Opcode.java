@@ -42,9 +42,9 @@ public class Opcode {
 	String addressingMode;
 	String oppage;
 	String opcode;
+
 	// whether it is original (empty), CMOS ("cmos"), or 65k ("65k")
-	@XmlElement(name="class")
-	String clazz;
+	String feature;
 	
 	List<PrefixSetting> fixed;
 	
@@ -72,10 +72,10 @@ public class Opcode {
 	public void setFixed(List<PrefixSetting> fixed) {
 		this.fixed = fixed;
 	}
-	public String getClazz() {
-		return clazz;
+	public String getFeature() {
+		return feature;
 	}
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
+	public void setFeature(String feature) {
+		this.feature = feature;
 	}
 }

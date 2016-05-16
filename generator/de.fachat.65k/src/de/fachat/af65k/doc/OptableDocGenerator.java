@@ -22,6 +22,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,7 +32,8 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import de.fachat.af65k.doc.html.HtmlWriter;
-import de.fachat.af65k.model.objs.FeatureClass;
+import de.fachat.af65k.model.objs.Feature;
+import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.objs.PrefixBit;
 import de.fachat.af65k.model.objs.PrefixSetting;
@@ -98,16 +100,23 @@ public class OptableDocGenerator {
 
 	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong, String fclass) {
 		final String hex = "0123456789ABCDEF";
-		
-		Collection<String> fclasses = new HashSet<String>();
-		fclasses.add(fclass);
-		while (cpu.getFClass(fclass) != null) {
-			FeatureClass fc = cpu.getFClass(fclass);
-			fclass = fc.getXtends();
-			if (fclass != null) {
-				fclasses.add(fclass);
-			}
-		}
+
+		FeatureSet fset = cpu.getFClass(fclass);
+		Collection<String> fclasses = fset.getFeature();
+
+//		final Collection<String> fclasses = new HashSet<String>();
+//		new Object() {
+//			void add(Collection<String> fcls) {
+//				fclasses.addAll(fcls);
+//				for (String fc : fcls) {
+//					FeatureSet fcl = cpu.getFClass(fc);
+//					List<String> fci = fcl.getXtends();
+//					if (fci != null) {
+//						this.add(fci);
+//					}
+//				}
+//			}
+//		}.add(Collections.singletonList(fclass));
 
 		Map<String, String> unusedatts = new HashMap<String, String>();
 		unusedatts.put("class", "unused");
@@ -120,6 +129,9 @@ public class OptableDocGenerator {
 		
 		Map<String, Map<String, String>> classatts = new HashMap<String, Map<String,String>>();
 		Map<String, String> tmp = new HashMap<String, String>();
+		tmp.put("class", "ce02");
+		classatts.put("ce02", tmp);
+		tmp = new HashMap<String, String>();
 		tmp.put("class", "c65k");
 		classatts.put("65k", tmp);
 		tmp = new HashMap<String, String>();
@@ -128,6 +140,8 @@ public class OptableDocGenerator {
 		tmp = new HashMap<String, String>();
 		tmp.put("class", "cmos");
 		classatts.put("cmos", tmp);
+		classatts.put("cmos_ind", tmp);
+		classatts.put("rcmos", tmp);
 				
 		Map<String, String> tabatts = new HashMap<String, String>();
 		tabatts.put("class", "optable");
@@ -162,11 +176,14 @@ public class OptableDocGenerator {
 					if (prefixes != null && prefixes[i] != null) {
 						atts.put("class", "prefix");
 					} else {
-						FeatureClass fc = entry.getFclass();
+						Feature fc = entry.getFclass();
 						
 						if (fc != null) {
 							if (fclasses.contains(fc.getName())) {
-								atts.putAll(classatts.get(fc.getName()));
+								Map<String,String> ca = classatts.get(fc.getName());
+								if (ca != null) {
+									atts.putAll(ca);
+								}
 							} else {
 								atts.putAll(unusedatts);								
 							}

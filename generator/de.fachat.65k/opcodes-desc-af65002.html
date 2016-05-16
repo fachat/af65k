@@ -7,10 +7,13 @@ Add content of memory location to accumulator</li>
 Bitwise AND accumulator with content of memory location</li>
 <li>
 <a href="af65002opdesc.html#ASL">ASL: </a>
-Arithmetic Shift Left - shift accumulator one bit to the left, shifting in zero in bit 0</li>
+Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			</li>
 <li>
 <a href="af65002opdesc.html#BCC">BCC: </a>
-Branch on carry clear - take branch when C flag is cleared</li>
+Branch on carry clear - take branch when C flag is cleared
+			</li>
 <li>
 <a href="af65002opdesc.html#BCS">BCS: </a>
 Branch on carry set - take branch when C flag is set</li>
@@ -19,8 +22,13 @@ Branch on carry set - take branch when C flag is set</li>
 Branch on equal - take branch when Z flag is set</li>
 <li>
 <a href="af65002opdesc.html#BIT">BIT: </a>
-Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
-				zero) flags from the result. In case of the accumulator addressing, simply set the flags from the accumulator</li>
+Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the accumulator
+			</li>
 <li>
 <a href="af65002opdesc.html#BMI">BMI: </a>
 Branch on minus - take branch when N flag is set</li>
@@ -38,10 +46,13 @@ Branch always - branch independent from any flags</li>
 Starts the break routine.</li>
 <li>
 <a href="af65002opdesc.html#BSR">BSR: </a>
-Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</li>
+Branch subroutine - similar to JSR, but use relative addressing
+				similar to branch opcodes
+			</li>
 <li>
 <a href="af65002opdesc.html#BVC">BVC: </a>
-Branch on overflow clear - take branch when V flag is cleared</li>
+Branch on overflow clear - take branch when V flag is cleared
+			</li>
 <li>
 <a href="af65002opdesc.html#BVS">BVS: </a>
 Branch on overflow set - take branch when V flag is set</li>
@@ -77,7 +88,9 @@ Decrement the content of the X register by one</li>
 Decrement the Y register by one</li>
 <li>
 <a href="af65002opdesc.html#EOR">EOR: </a>
-Bitwise Exclusive-OR accumulator with content of memory location</li>
+Bitwise Exclusive-OR accumulator with content of memory
+				location
+			</li>
 <li>
 <a href="af65002opdesc.html#INC">INC: </a>
 Increment the content of a memory location by one</li>
@@ -92,7 +105,9 @@ Increment the content of the Y register by one</li>
 Jump to new code address</li>
 <li>
 <a href="af65002opdesc.html#JSR">JSR: </a>
-Jump subroutine - jump to a new code location, save return address on stack for RTS</li>
+Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</li>
 <li>
 <a href="af65002opdesc.html#LDA">LDA: </a>
 Load accumulator</li>
@@ -104,7 +119,9 @@ Load X register</li>
 Load Y register</li>
 <li>
 <a href="af65002opdesc.html#LSR">LSR: </a>
-Logical Shift Right - shift accumulator one bit to the right, shifting in zero in the highest bit</li>
+Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			</li>
 <li>
 <a href="af65002opdesc.html#NOP">NOP: </a>
 No operation</li>
@@ -137,12 +154,19 @@ Pull the contents of the X register from the stack</li>
 Pull the contents of the Y register from the stack</li>
 <li>
 <a href="af65002opdesc.html#ROL">ROL: </a>
-Rotate Left - shift accumulator one bit to the left, shifting in the carry flag in bit 0, and shifting the 
-        	highest bit into the carry flag instead.</li>
+Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</li>
 <li>
 <a href="af65002opdesc.html#ROR">ROR: </a>
-Rotate Right - shift accumulator one bit to the right, shifting in the carry flag in the highest bit, and shifting 
-        	bit 0 into the carry flag instead.</li>
+Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and shifting
+				bit 0 into the
+				carry flag instead.
+			</li>
 <li>
 <a href="af65002opdesc.html#RTI">RTI: </a>
 Return from interrupt</li>
@@ -163,7 +187,8 @@ Set the decimal (D) flag</li>
 Set the interrupt (I) flag</li>
 <li>
 <a href="af65002opdesc.html#STA">STA: </a>
-Store the content of the accumulator into a memory location</li>
+Store the content of the accumulator into a memory location
+			</li>
 <li>
 <a href="af65002opdesc.html#STX">STX: </a>
 Store the content of the X register to memory.</li>
@@ -181,25 +206,38 @@ Transfer the contents of accumulator into the X register</li>
 Transfer the contents of accumulator into the Y register</li>
 <li>
 <a href="af65002opdesc.html#TRB">TRB: </a>
-Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Reset Bit - AND the memory location with the
+				accumulator, and set the Z flag from the result, then CLEAR all bits
+				in the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TRP">TRP: </a>
 Trap into 65k supervisor mode</li>
 <li>
 <a href="af65002opdesc.html#TSB">TSB: </a>
-Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Set Bit - AND the memory location with the
+				accumulator,
+				and set the Z flag from the result, then SET all bits in
+				the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TSX">TSX: </a>
-Transfer the contents of the stack pointer into the X register (Note: needs RS to keep compatibility with 6502)</li>
+Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			</li>
 <li>
 <a href="af65002opdesc.html#TXA">TXA: </a>
-Transfer the contents of the X register into the accumulator</li>
+Transfer the contents of the X register into the accumulator
+			</li>
 <li>
 <a href="af65002opdesc.html#TXS">TXS: </a>
-Transfer the contents of X register into the stack pointer (Note: needs RS to keep compatibility with 6502)</li>
+Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			</li>
 <li>
 <a href="af65002opdesc.html#TYA">TYA: </a>
-Transfer the contents of the Y register into the accumulator</li>
+Transfer the contents of the Y register into the accumulator
+			</li>
 </ul>

@@ -40,7 +40,7 @@ public class Operation {
 	String name;
 	String desc;
 	// operation class
-	@XmlElement(name="class")
+	@XmlElement(name="feature")
 	String clazz;
 	
 	@XmlElement(name="default-le")

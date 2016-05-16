@@ -47,8 +47,8 @@ public class SyntaxMode {
 	String simplesyntax;
 	
 	// feature class for a syntax mode
-	@XmlElement(name="class")
-	String clazz;
+	@XmlElement(name="feature")
+	String feature;
 	
 //	public int getWidthInByte() {
 //		return widthInByte;
@@ -82,11 +82,11 @@ public class SyntaxMode {
 		this.simplesyntax = simplesyntax;
 	}
 
-	public String getClazz() {
-		return clazz;
+	public String getFeature() {
+		return feature;
 	}
 
-	public void setClazz(String clazz) {
-		this.clazz = clazz;
+	public void setFeature(String clazz) {
+		this.feature = clazz;
 	}
 }
