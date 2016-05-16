@@ -18,6 +18,9 @@
 			<name>ror</name>
 		</feature>
 		<feature>
+			<name>undoc</name>
+		</feature>
+		<feature>
 			<name>cmos</name>
 		</feature>
 		<feature>
@@ -50,7 +53,7 @@
 			<feature>bcd</feature>
 			<doc>
 				<p>
-				The original 6502 with the ROR-bug.
+				The original 6502 with the ROR-bug, and with BCD codes.
 				</p>
 			</doc>
 		</class>
@@ -71,13 +74,25 @@
 			<feature>bcd</feature>
 			<doc>
 				<p>
-				The original 6502 with the ROR-bug, but with BCD routines
+				The original 6502 with the ROR-bug fixed, and with BCD opcodes
+				</p>
+			</doc>
+		</class>
+		<class>
+			<name>nmosext</name>
+			<include>nmos</include>
+			<feature>undoc</feature>
+			<doc>
+				<p>
+				The original 6502 with ROR and BCD opcodes, and also with the &quot;undocumented&quot; opcodes. 
 				</p>
 			</doc>
 		</class>
 		<class>
 			<name>cmos</name>
-			<includes>nmos</includes>
+			<feature>base</feature>
+			<feature>ror</feature>
+			<feature>bcd</feature>
 			<feature>cmos</feature>
 			<feature>cmos_ind</feature>
 			<!-- prio>1</prio-->
@@ -4663,6 +4678,36 @@
 				<addressingMode>implied</addressingMode>
 				<opcode>0xea</opcode>
 			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x1a</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x3a</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x5a</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x7a</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xda</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xfa</opcode>
+				<feature>undoc</feature>				
+			</opcodes>
 			<doc>
 				<p>
 					No Operation.
@@ -5120,7 +5165,7 @@
 			</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>NF</prefixBits>
-			<feature>65k10</feature>
+			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>A</addressingMode>
 				<opcode>0xf4</opcode>
@@ -5857,7 +5902,402 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+
+		<operation>
+			<name>ASO</name>
+			<synonym>SLO</synonym>
+			<desc>ASL operand and OR with AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x0f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x1f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x1b</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x07</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x17</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0x03</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0x13</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>RLA</name>
+			<desc>ROL operand and AND with AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x2f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x3f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x3b</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x27</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x37</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0x23</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0x33</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>LSE</name>
+			<synonym>SRE</synonym>
+			<desc>LSR operand and EOR with AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x4f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x5f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x5b</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x47</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x57</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0x43</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0x53</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>RRA</name>
+			<desc>ROR operand and ADC with AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x6f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x7f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x7b</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x67</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x77</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0x63</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0x73</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>SAX</name>
+			<desc>Store the result of X AND A in the given address, without changing flags; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x8f</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x87</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpy</addressingMode>
+				<opcode>0x97</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0x83</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>LAX</name>
+			<desc>Load both AC and XR with the contents loaded from memory; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0xaf</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0xbb</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xa7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpy</addressingMode>
+				<opcode>0xb7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0xa3</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0xb3</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>DCM</name>
+			<synonym>DCP</synonym>
+			<desc>DEC the content of a memory location, then CMP the result with AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0xcf</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xdf</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0xdb</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xc7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0xd7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0xc3</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0xd3</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>INS</name>
+			<synonym>ISC</synonym>
+			<desc>INC the content of a memory location, then SBC the result from AC; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0xef</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xff</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0xfb</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xe7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0xf7</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpxind</addressingMode>
+				<opcode>0xe3</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0xf3</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>ALR</name>
+			<desc>AND the content of AC with an immediate value, then LSR the result; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0x4b</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>XAA</name>
+			<desc>Transfer the value of XR to AC, then AND AC with an immediate value; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0x8b</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>OAL</name>
+			<desc>OR the AC with #$EE, AND the result with an immediate value and store the result in AC and XR; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xab</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>SAX</name>
+			<desc>AND the AC and XR registers, substract an immediate value from that and store the result in XR. The substraction works similar to CMP; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xcb</opcode>
+			</opcodes>
+		</operation>
+		
+		<operation>
+			<name>SKB</name>
+			<desc>Skip next byte; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x80</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x82</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xc2</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xe2</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x04</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x14</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x34</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x44</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x54</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x64</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x74</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xd4</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xf4</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>SKW</name>
+			<desc>Skip next word; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x0c</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x1c</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x3c</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x5c</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x7c</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xdc</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xfc</opcode>
+			</opcodes>
+		</operation>
+		
+		
 	</operations>
+
 
 
 	<!-- ################################# -->
@@ -5889,7 +6329,7 @@
 			<mode>
 				<!--width>2</width -->
 				<addrMode>imm2</addrMode>
-				<class>65k</class>
+				<feature>65k</feature>
 				<prefix>
 					<name>RS</name>
 					<value>01</value>
@@ -7080,6 +7520,7 @@
 			<desc>relative addressing modes, used in BSR; from -128 to +127
 			</desc>
 			<identifier>relj</identifier>
+			<feature>65k</feature>
 			<altMode>reljlong</altMode>
 			<width>1</width>
 		</addrmode>

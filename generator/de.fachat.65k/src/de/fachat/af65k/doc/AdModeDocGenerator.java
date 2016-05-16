@@ -1,5 +1,7 @@
 package de.fachat.af65k.doc;
 
+import java.util.Collection;
+
 /*
 Documentation table generator for the af65k set of VHDL cores
 
@@ -26,11 +28,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.AModeEntry;
 
 /**
- * this class provides methods to generate various types of (HTML) docs from the CPU definition.
+ * this class provides methods to generate various types of (HTML) docs from the
+ * CPU definition.
  * 
  * @author fachat
  *
@@ -38,25 +42,32 @@ import de.fachat.af65k.model.validation.Validator.AModeEntry;
 public class AdModeDocGenerator {
 
 	final Validator cpu;
-	
-	public AdModeDocGenerator(Validator mycpu) {
+	final String featureSetName;
+
+	public AdModeDocGenerator(Validator mycpu, String pFeatureSetName) {
 		cpu = mycpu;
+		featureSetName = pFeatureSetName;
 	}
-	
-	public void generateAddressingModeTable(DocWriter wr) {
-		
+
+	public void generateAddressingModeTable(DocWriter wr, boolean hasPrefix) {
+
+		FeatureSet fset = cpu.getFClass(featureSetName);
+		Collection<String> features = fset.getFeature();
+
 		Map<String, String> tabatts = new HashMap<String, String>();
 		tabatts.put("class", "optable");
 		wr.startTable(tabatts);
-		
+
 		wr.startTableRow();
-		
+
 		wr.startTableHeaderCell();
 		wr.print("Name");
 		wr.startTableHeaderCell();
 		wr.print("Alternative Name");
-		wr.startTableHeaderCell();
-		wr.print("Prefix");
+		if (hasPrefix) {
+			wr.startTableHeaderCell();
+			wr.print("Prefix");
+		}
 		wr.startTableHeaderCell();
 		wr.print("Operand Length");
 		wr.startTableHeaderCell();
@@ -65,47 +76,55 @@ public class AdModeDocGenerator {
 		wr.print("Origin");
 		wr.startTableHeaderCell();
 		wr.print("Description");
-		
+
 		List<AModeEntry> amodes = cpu.getAddressingModeList();
 		if (amodes != null) {
-			
+
 			TreeSet<AModeEntry> sortedAmodes = new TreeSet<Validator.AModeEntry>(new Comparator<AModeEntry>() {
 
 				@Override
 				public int compare(AModeEntry o1, AModeEntry o2) {
 					int d = o1.getAddrmode().getPos() - o2.getAddrmode().getPos();
-					if (d != 0) return d;
+					if (d != 0)
+						return d;
 					return o1.getLen() - o2.getLen();
 				}
 			});
 			sortedAmodes.addAll(amodes);
-			
+
 			for (AModeEntry am : sortedAmodes) {
+
+				if (am.getFclass() != null && !features.contains(am.getFclass().getName())) {
+					continue;
+				}
+
 				wr.startTableRow();
-				
+
 				wr.startTableCell();
 				wr.print(am.getAddrmode().getName());
-				
+
 				wr.startTableCell();
 				wr.print(am.getAddrmode().getAltname());
-			
-				wr.startTableCell();
-				if (am.getPrefix() != null) {
-					wr.print(am.getPrefix().getName() + "=" + am.getPrefix().getValue());
+
+				if (hasPrefix) {
+					wr.startTableCell();
+					if (am.getPrefix() != null) {
+						wr.print(am.getPrefix().getName() + "=" + am.getPrefix().getValue());
+					}
 				}
-				
+
 				wr.startTableCell();
 				wr.print(String.valueOf(am.getLen()));
-				
+
 				wr.startTableCell();
-				//wr.print(am.getSyntax().getSimpleSyntax());
+				// wr.print(am.getSyntax().getSimpleSyntax());
 				wr.print(am.getSimplesyntax());
-				
+
 				wr.startTableCell();
 				if (am.getFclass() != null) {
 					wr.print(am.getFclass().getName());
 				}
-				
+
 				wr.startTableCell();
 				wr.print(am.getAddrmode().getDesc());
 			}

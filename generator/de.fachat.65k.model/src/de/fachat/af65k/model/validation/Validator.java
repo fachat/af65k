@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.hamcrest.FeatureMatcher;
 import org.w3c.dom.CDATASection;
 
 import de.fachat.af65k.logging.Logger;
@@ -87,7 +88,7 @@ public class Validator {
 			if (fclass.containsKey(id)) {
 				LOG.error("Feature class '" + id + "' is duplicate!");
 			} else {
-				System.err.println("Registering feature set " + id);
+				LOG.info("Registering feature set " + id);
 				fclass.put(id, fc);
 			}
 			
@@ -292,16 +293,19 @@ public class Validator {
 	 * return a map from opcode page, to opcode row (high nibble) to opcode col (low nibble) to Opcode object
 	 * @return
 	 */
-	public Map<String, CodeMapEntry[]> getOpcodeMap() {
+	public Map<String, CodeMapEntry[]> getOpcodeMap(String fsetStr) {
 		
+		FeatureSet fset = fclass.get(fsetStr);
+		Collection<String> features = fset.getFeature();
+
 		Map<String, CodeMapEntry[]> rv = new HashMap<String, Validator.CodeMapEntry[]>();
 		
 		for (Operation op : cpu.getOpcodes()) {
 
-			if ("ROR".equals(op.getName())) {
-				System.err.println("found ROR");
+			if (op.getClazz() != null && !features.contains(op.getClazz())) {
+				continue;
 			}
-
+			
 			Feature opFClass = null;
 			String fclassStr = op.getClazz();
 			if (fclassStr != null && !feature.containsKey(fclassStr)) {
@@ -332,10 +336,13 @@ public class Validator {
 				int code = parseCode(codeStr);
 
 				String codeFClassStr = opcode.getFeature();
-				FeatureSet codeFClass = fclass.get(codeFClassStr);
+				Feature codeFClass = feature.get(codeFClassStr);
 //				if (codeFClass == null) {
 //					LOG.error("Feature class '" + codeFClassStr + "' for opcode '" + page + "/" + codeStr + "' is not defined");
 //				}
+				if (codeFClass != null && !features.contains(codeFClassStr)) {
+					continue;
+				}
 				
 				// addressing mode
 				Feature admodeclass = null;
@@ -362,7 +369,10 @@ public class Validator {
 						opcode.setFeature(codeFClass.getName());
 					}
 
-					LOG.error("Addressing mode '" + admode.getName() + "(" +admode.getIdentifier() + ":"+ admode.getFeature() + ")' for operation '" + op.getName() + "' (" + op.getClazz() + ") -> feature: " + opcode.getFeature() + "!");
+					if (opcode.getFeature() != null && !features.contains(opcode.getFeature())) { 
+						continue;
+					}
+					LOG.info("Op " + opcode.getOpcode() + " with Addressing mode '" + admode.getName() + "(" +admode.getIdentifier() + ":"+ admode.getFeature() + ")' for operation '" + op.getName() + "' (" + op.getClazz() + ") -> feature: " + opcode.getFeature() + "!");
 
 					Set<SyntaxMode> synmodes = syntaxModesPerAM.get(admode.getIdentifier());
 					

@@ -39,9 +39,9 @@ import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 
-
 /**
- * this class provides methods to generate various types of (HTML) docs from the CPU definition.
+ * this class provides methods to generate various types of (HTML) docs from the
+ * CPU definition.
  * 
  * @author fachat
  *
@@ -49,52 +49,50 @@ import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 public class OpdescDocGenerator {
 
 	final Validator cpu;
-	
+
 	public OpdescDocGenerator(Validator mycpu) {
 		cpu = mycpu;
 	}
-	
-	public void generateOperationtable(HtmlWriter wr, String fclass) {
-		
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
+
+	public void generateOperationtable(HtmlWriter wr, String fclass, boolean hasPrefix) {
+
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
 
 		Map<String, Operation> ops = new TreeMap<String, Operation>();
-		
-		for (CodeMapEntry page[]: opcodes.values()) {
-			prepareOperationTable(ops, page, true);			
+
+		for (CodeMapEntry page[] : opcodes.values()) {
+			prepareOperationTable(ops, page, true);
 		}
 
 		FeatureSet fset = cpu.getFClass(fclass);
 		Collection<String> fclasses = fset.getFeature();
-		
+
 		createToc(wr, ops, fclasses);
-		
-		createTable(wr, ops, fclasses);		
+
+		createTable(wr, ops, fclasses, hasPrefix);
 	}
 
+	private void prepareOperationTable(Map<String, Operation> ops, CodeMapEntry[] page, boolean includeOrig) {
 
-	private void prepareOperationTable(Map<String, Operation> ops, CodeMapEntry[] page,
-			boolean includeOrig) {
-		
 		for (int i = 0; i < 256; i++) {
 			CodeMapEntry en = page[i];
 			if (en != null) {
 				Operation op = en.getOperation();
-				
+
 				if (includeOrig || op.getClazz() != null) {
 					ops.put(op.getName(), op);
 				}
 			}
 		}
-		
+
 	}
 
 	private void createToc(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
 
 		wr.startSubsection("List of operations");
 		wr.startUnsortedList();
-		
-		for (Map.Entry<String, Operation> en: ops.entrySet()) {
+
+		for (Map.Entry<String, Operation> en : ops.entrySet()) {
 			Operation op = en.getValue();
 
 			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
@@ -105,22 +103,22 @@ public class OpdescDocGenerator {
 				wr.endLink();
 				wr.print(" - ");
 				wr.print(op.getDesc());
-			}				
+			}
 		}
 		wr.endUnsortedList();
 	}
 
-	private void createTable(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
+	private void createTable(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses, boolean hasPrefix) {
 
 		Map<String, String> optable = new HashMap<String, String>();
 		optable.put("class", "optable");
-		
-		for (Map.Entry<String, Operation> en: ops.entrySet()) {
+
+		for (Map.Entry<String, Operation> en : ops.entrySet()) {
 			Operation op = en.getValue();
 
 			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
-				
-				wr.startSubsection(op.getName());			
+
+				wr.startSubsection(op.getName());
 				wr.createAnchor(op.getName());
 				if (op.getSynonyms() != null && op.getSynonyms().size() > 0) {
 					wr.startParagraph();
@@ -131,7 +129,7 @@ public class OpdescDocGenerator {
 				}
 				wr.startParagraph();
 				wr.print(op.getDesc());
-				
+
 				wr.startTable(optable);
 				wr.startTableRow();
 				Map<String, String> atts = new HashMap<String, String>();
@@ -145,70 +143,80 @@ public class OpdescDocGenerator {
 				wr.print("Opcode");
 				wr.startTableHeaderCell();
 				wr.print("Class");
-				wr.startTableHeaderCell();
-				wr.print("Prefixes");
+				if (hasPrefix) {
+					wr.startTableHeaderCell();
+					wr.print("Prefixes");
+				}
 				wr.startTableHeaderCell();
 				wr.print("Addressing Mode");
 				wr.startTableHeaderCell();
 				wr.print("Syntax");
 
 				Collection<String> prefixes = op.getPrefixBits();
-				
-				for (Opcode opcode: op.getOpcodes()) {
-					
+
+				for (Opcode opcode : op.getOpcodes()) {
+
 					if (opcode.getFeature() == null || fclasses.contains(opcode.getFeature())) {
 						String admode = opcode.getAddressingMode();
 						AddressingMode am = cpu.getAddressingMode(admode);
-						
+
 						wr.startTableRow();
 						wr.startTableCell();
 						wr.print(opcode.getOppage());
 						wr.startTableCell();
 						wr.print(opcode.getOpcode());
 						wr.startTableCell();
-						
+
 						String clss = opcode.getFeature();
 						if (clss == null || clss.length() == 0) {
 							clss = op.getClazz();
 						}
 						wr.print(opcode.getFeature());
-						wr.startTableCell();
-						Collection<String> prefs = prefixes;
-						if (prefs != null) {
-							if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
-								prefs = new ArrayList<String>(prefs.size());
-								prefs.addAll(prefixes);
-								prefs.removeAll(am.getIgnoredPrefixes());
-							}
-							Iterator<String> pref = prefs.iterator(); 
-							while (pref.hasNext()) {
-								wr.print(pref.next());
-								if (pref.hasNext()) wr.print(", ");
+						if (hasPrefix) {
+
+							wr.startTableCell();
+							Collection<String> prefs = prefixes;
+							if (prefs != null) {
+								if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
+									prefs = new ArrayList<String>(prefs.size());
+									prefs.addAll(prefixes);
+									prefs.removeAll(am.getIgnoredPrefixes());
+								}
+								Iterator<String> pref = prefs.iterator();
+								while (pref.hasNext()) {
+									wr.print(pref.next());
+									if (pref.hasNext())
+										wr.print(", ");
+								}
 							}
 						}
 						wr.startTableCell();
 						wr.print(am.getName());
 						wr.startTableCell();
-						
+
 					}
 				}
 				wr.endTable();
 
 				List<Doc> docs = op.getDoc();
-				
+
 				if (docs != null) {
 					for (Doc doc : docs) {
 						String name = doc.getMode();
 						if (name == null || name.length() == 0) {
 							name = "Description";
+						} else
+						if (!fclasses.contains(name)) {
+							continue;
 						}
 						wr.startSubsubsection(name);
 						
+
 						wr.print(doc.getText());
 					}
 				}
 			}
-				
+
 		}
 	}
 

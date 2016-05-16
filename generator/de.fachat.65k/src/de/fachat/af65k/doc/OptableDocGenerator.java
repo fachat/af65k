@@ -42,7 +42,8 @@ import de.fachat.af65k.model.validation.Validator;
 import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 
 /**
- * this class provides methods to generate various types of (HTML) docs from the CPU definition.
+ * this class provides methods to generate various types of (HTML) docs from the
+ * CPU definition.
  * 
  * @author fachat
  *
@@ -50,22 +51,20 @@ import de.fachat.af65k.model.validation.Validator.CodeMapEntry;
 public class OptableDocGenerator {
 
 	final Validator cpu;
-	
+
 	public OptableDocGenerator(Validator mycpu) {
 		cpu = mycpu;
 	}
-	
-	public void generateOperationtable(HtmlWriter wr, String pagename, boolean includeOrig) {
-		
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
-		CodeMapEntry page[] = opcodes.get(pagename);	// get standard map
+
+	public void generateOperationtable(HtmlWriter wr, String pagename, String fclass, boolean includeOrig) {
+
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
+		CodeMapEntry page[] = opcodes.get(pagename); // get standard map
 		writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, includeOrig);
 	}
 
+	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page, String[] strings, boolean includeOrig) {
 
-	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page,
-			String[] strings, boolean includeOrig) {
-		
 		Map<String, Operation> ops = new TreeMap<String, Operation>();
 		for (int i = 0; i < 256; i++) {
 			CodeMapEntry en = page[i];
@@ -76,12 +75,12 @@ public class OptableDocGenerator {
 				}
 			}
 		}
-		
+
 		wr.startUnsortedList();
-		
-		for (Map.Entry<String, Operation> en: ops.entrySet()) {
+
+		for (Map.Entry<String, Operation> en : ops.entrySet()) {
 			Operation op = en.getValue();
-			
+
 			wr.startListItem();
 			wr.startLink(cpu.id() + "opdesc.html#" + op.getName());
 			wr.print(op.getName() + ": ");
@@ -91,32 +90,33 @@ public class OptableDocGenerator {
 		wr.endUnsortedList();
 	}
 
-	public void generateOpcodetable(DocWriter wr, String pagename, boolean doLong, String fclass) {
-		
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap();
-		CodeMapEntry page[] = opcodes.get(pagename);	// get standard map
-		writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong, fclass);
+	public void generateOpcodetable(DocWriter wr, String pagename, boolean doLong, String fclass, boolean hasPrefix) {
+
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
+		CodeMapEntry page[] = opcodes.get(pagename); // get standard map
+		writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong, fclass, hasPrefix);
 	}
 
-	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong, String fclass) {
+	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong, String fclass,
+			boolean hasPrefix) {
 		final String hex = "0123456789ABCDEF";
 
 		FeatureSet fset = cpu.getFClass(fclass);
 		Collection<String> fclasses = fset.getFeature();
 
-//		final Collection<String> fclasses = new HashSet<String>();
-//		new Object() {
-//			void add(Collection<String> fcls) {
-//				fclasses.addAll(fcls);
-//				for (String fc : fcls) {
-//					FeatureSet fcl = cpu.getFClass(fc);
-//					List<String> fci = fcl.getXtends();
-//					if (fci != null) {
-//						this.add(fci);
-//					}
-//				}
-//			}
-//		}.add(Collections.singletonList(fclass));
+		// final Collection<String> fclasses = new HashSet<String>();
+		// new Object() {
+		// void add(Collection<String> fcls) {
+		// fclasses.addAll(fcls);
+		// for (String fc : fcls) {
+		// FeatureSet fcl = cpu.getFClass(fc);
+		// List<String> fci = fcl.getXtends();
+		// if (fci != null) {
+		// this.add(fci);
+		// }
+		// }
+		// }
+		// }.add(Collections.singletonList(fclass));
 
 		Map<String, String> unusedatts = new HashMap<String, String>();
 		unusedatts.put("class", "unused");
@@ -126,8 +126,8 @@ public class OptableDocGenerator {
 		prefixdivatts.put("class", "prefixes");
 		Map<String, String> opcodedivatts = new HashMap<String, String>();
 		opcodedivatts.put("class", "opc");
-		
-		Map<String, Map<String, String>> classatts = new HashMap<String, Map<String,String>>();
+
+		Map<String, Map<String, String>> classatts = new HashMap<String, Map<String, String>>();
 		Map<String, String> tmp = new HashMap<String, String>();
 		tmp.put("class", "ce02");
 		classatts.put("ce02", tmp);
@@ -142,23 +142,23 @@ public class OptableDocGenerator {
 		classatts.put("cmos", tmp);
 		classatts.put("cmos_ind", tmp);
 		classatts.put("rcmos", tmp);
-				
+
 		Map<String, String> tabatts = new HashMap<String, String>();
 		tabatts.put("class", "optable");
 		wr.startTable(tabatts);
-		
+
 		wr.startTableRow();
-		
+
 		wr.startTableHeaderCell();
 		wr.print("LSB->");
 		wr.printline();
 		wr.print("MSB");
-		
+
 		for (int i = 0; i < 16; i++) {
 			wr.startTableHeaderCell();
 			wr.print(hex.charAt(i));
 		}
-		
+
 		for (int m = 0; m < 16; m++) {
 			wr.startTableRow();
 			wr.startTableHeaderCell();
@@ -167,25 +167,24 @@ public class OptableDocGenerator {
 				int i = m * 16 + l;
 				CodeMapEntry entry = page[i];
 				String prefix = (prefixes == null) ? "" : prefixes[i];
-				if ((!doLong) && (prefix != null && prefix.length() > 0)) {
+				if ((!doLong) && hasPrefix && (prefix != null && prefix.length() > 0)) {
 					wr.startTableCell(prefixatts);
 					wr.print(prefix);
-				} else
-				if (entry != null) {
+				} else if (entry != null) {
 					Map<String, String> atts = new HashMap<String, String>();
 					if (prefixes != null && prefixes[i] != null) {
 						atts.put("class", "prefix");
 					} else {
 						Feature fc = entry.getFclass();
-						
+
 						if (fc != null) {
 							if (fclasses.contains(fc.getName())) {
-								Map<String,String> ca = classatts.get(fc.getName());
+								Map<String, String> ca = classatts.get(fc.getName());
 								if (ca != null) {
 									atts.putAll(ca);
 								}
 							} else {
-								atts.putAll(unusedatts);								
+								atts.putAll(unusedatts);
 							}
 						}
 						if (prefixes == null && atts.containsKey("class")) {
@@ -200,42 +199,43 @@ public class OptableDocGenerator {
 					Set<SyntaxMode> synmodes = entry.getSynmodes();
 					if (synmodes != null) {
 						for (SyntaxMode sm : synmodes) {
-							//wr.printline();
+							// wr.printline();
 							wr.print(' ');
 							wr.print(sm.getSimplesyntax());
 						}
 					}
 					wr.endDiv();
 					if (doLong) {
-						wr.startDiv(prefixdivatts);
-						List<PrefixSetting> fixed = entry.getOpcode().getFixed();
-						if (!entry.getPrefixbits().isEmpty()) {
-							wr.printline();
-							Collection<String> pbits = new ArrayList<String>();
-							for (PrefixBit pb : entry.getPrefixbits()) {
-								pbits.add(pb.getId());
-							}
-							pbits.removeAll(entry.getPrefixbits());
-							Iterator<String> it = pbits.iterator();
-							while (it.hasNext()) {
-								String pb = it.next();
-								wr.print(pb);
-								if (fixed != null) {
-									for (PrefixSetting ps : fixed) {
-										if (pb.equals(ps.getName())) {
-											wr.print("=" + ps.getValue());
+						if (hasPrefix) {
+							wr.startDiv(prefixdivatts);
+							List<PrefixSetting> fixed = entry.getOpcode().getFixed();
+							if (!entry.getPrefixbits().isEmpty()) {
+								wr.printline();
+								Collection<String> pbits = new ArrayList<String>();
+								for (PrefixBit pb : entry.getPrefixbits()) {
+									pbits.add(pb.getId());
+								}
+								pbits.removeAll(entry.getPrefixbits());
+								Iterator<String> it = pbits.iterator();
+								while (it.hasNext()) {
+									String pb = it.next();
+									wr.print(pb);
+									if (fixed != null) {
+										for (PrefixSetting ps : fixed) {
+											if (pb.equals(ps.getName())) {
+												wr.print("=" + ps.getValue());
+											}
 										}
 									}
-								}
-								if (it.hasNext()) {
-									wr.print(", ");
+									if (it.hasNext()) {
+										wr.print(", ");
+									}
 								}
 							}
-						}						
-						wr.endDiv();
+							wr.endDiv();
+						}
 					}
-				} else
-				if (prefix != null && prefix.length() > 0) {
+				} else if (hasPrefix && prefix != null && prefix.length() > 0) {
 					wr.startTableCell(prefixatts);
 					wr.print(prefix);
 				} else {

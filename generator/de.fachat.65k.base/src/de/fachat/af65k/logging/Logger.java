@@ -23,4 +23,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 public interface Logger {
 
 	void error(String msg);
+	
+	void info(String msg);
 }

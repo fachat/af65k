@@ -41,60 +41,76 @@ import de.fachat.af65k.model.validation.Validator;
 
 public class Generator {
 
-	
 	public static void main(String argv[]) {
-		
-		String cpuname = "af65002";
 
-		String filename = cpuname + ".xml";
-		
+		String filename = "af65002.xml";
+
 		File file = new File(filename);
+
+		generateCpu(file, "af65002", true);
+
+		generateCpu(file, "6502", false);
+
+		generateCpu(file, "6502_undoc", false);
+
+		generateCpu(file, "65ce02", false);
+
+		generateCpu(file, "65c02", false);
+
+		generateCpu(file, "r65c02", false);
+	}
+	
+
+	private static void generateCpu(File file, String cpuname, boolean hasPrefix) {
 
 		File dir = new File(cpuname);
 		if (!dir.exists()) {
 			dir.mkdir();
 		}
-		
-		generateCpu(file, dir, cpuname);
-		
 
-	}
-
-	private static void generateCpu(File file, File dir, String cpuname) {
-		
 		CPU cpu = JAXB.unmarshal(file, CPU.class);
 		cpu.postProcess();
-		
+
 		Logger logger = new Logger() {
-			
+
 			@Override
 			public void error(String msg) {
-				System.err.println("Validation error:" + msg);
-				// TODO Auto-generated method stub				
+				System.err.println("ERR:" + msg);
+			}
+
+			@Override
+			public void info(String msg) {
+				System.out.println("INFO:" + msg);
 			}
 		};
-		
+
 		Validator val = new Validator(logger, cpu);
-				
+
 		Map<String, String> cpu2fclass = new HashMap<String, String>();
 		cpu2fclass.put("af65002", "65k");
 		cpu2fclass.put("af65010", "65k10");
-				
-//				() {
-//			
-//			@Override
-//			public void error(String msg) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
-		
+		cpu2fclass.put("6502", "nmos");
+		cpu2fclass.put("6502_undoc", "nmosext");
+		cpu2fclass.put("65c02", "cmos");
+		cpu2fclass.put("r65c02", "rcmos");
+		cpu2fclass.put("65ce02", "65ce02");
+		cpu2fclass.put("65816", "65816");
+
+		// () {
+		//
+		// @Override
+		// public void error(String msg) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
+
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(dir, "admodes-table-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
-			AdModeDocGenerator docgen = new AdModeDocGenerator(val);
-			docgen.generateAddressingModeTable(new HtmlWriter(pwr));
+			AdModeDocGenerator docgen = new AdModeDocGenerator(val, cpu2fclass.get(cpuname));
+			docgen.generateAddressingModeTable(new HtmlWriter(pwr), hasPrefix);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -103,13 +119,13 @@ public class Generator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-table-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), null, false, cpu2fclass.get(cpuname));
+			docgen.generateOpcodetable(new HtmlWriter(pwr), null, false, cpu2fclass.get(cpuname), hasPrefix);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -118,13 +134,13 @@ public class Generator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-longtable-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), null, true, cpu2fclass.get(cpuname));
+			docgen.generateOpcodetable(new HtmlWriter(pwr), null, true, cpu2fclass.get(cpuname), hasPrefix);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -133,58 +149,13 @@ public class Generator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-longtable-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", true, cpu2fclass.get(cpuname));
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-table-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", false, cpu2fclass.get(cpuname));
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
 		try {
 			FileOutputStream fos = new FileOutputStream(new File(dir, "opcodes-desc-" + cpuname + ".html"));
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), null, true);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, "ext-desc-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), "EXT", false);
+			docgen.generateOperationtable(new HtmlWriter(pwr), null, cpu2fclass.get(cpuname), true);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -199,7 +170,7 @@ public class Generator {
 			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 			PrintWriter pwr = new PrintWriter(osw);
 			OpdescDocGenerator docgen = new OpdescDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), cpu2fclass.get(cpuname));
+			docgen.generateOperationtable(new HtmlWriter(pwr), cpu2fclass.get(cpuname), hasPrefix);
 			pwr.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -208,5 +179,55 @@ public class Generator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		if (hasPrefix) {
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(dir, "ext-longtable-" + cpuname + ".html"));
+				OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+				PrintWriter pwr = new PrintWriter(osw);
+				OptableDocGenerator docgen = new OptableDocGenerator(val);
+				docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", true, cpu2fclass.get(cpuname), hasPrefix);
+				pwr.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(dir, "ext-table-" + cpuname + ".html"));
+				OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+				PrintWriter pwr = new PrintWriter(osw);
+				OptableDocGenerator docgen = new OptableDocGenerator(val);
+				docgen.generateOpcodetable(new HtmlWriter(pwr), "EXT", false, cpu2fclass.get(cpuname), hasPrefix);
+				pwr.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(dir, "ext-desc-" + cpuname + ".html"));
+				OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+				PrintWriter pwr = new PrintWriter(osw);
+				OptableDocGenerator docgen = new OptableDocGenerator(val);
+				docgen.generateOperationtable(new HtmlWriter(pwr), "EXT", cpu2fclass.get(cpuname), false);
+				pwr.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 	}
 }
+

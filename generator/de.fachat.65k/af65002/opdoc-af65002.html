@@ -108,6 +108,11 @@
 				similar to branch opcodes
 			</li>
 <li>
+<a href="#BSW">BSW</a>
+ - Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
+				so on.
+			</li>
+<li>
 <a href="#BVC">BVC</a>
  - Branch on overflow clear - take branch when V flag is cleared
 			</li>
@@ -451,7 +456,7 @@
 <tr><td></td><td>0x69</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x6d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x71</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x72</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x72</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x73</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x75</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x77</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -548,7 +553,7 @@
 <tr><td></td><td>0x29</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x2d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x31</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x32</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x32</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x33</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x35</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x37</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -1228,7 +1233,15 @@
 					default.
 				</p><p>
 					The stack pointer used is the stack pointer of the current mode.
-				</p><h2>BVC</h2>
+				</p><h2>BSW</h2>
+<a name="BSW"> </a><p>Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
+				so on.
+			</p>
+<table class="optable"><tr><th colspan="10">BSW</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xf4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>BVC</h2>
 <a name="BVC"> </a><p>Branch on overflow clear - take branch when V flag is cleared
 			</p>
 <table class="optable"><tr><th colspan="10">BVC</th></tr>
@@ -1340,7 +1353,7 @@
 <tr><td></td><td>0xc9</td><td></td><td>RS, LE</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xcd</td><td></td><td>AM, OF, RS, UM, LE</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xd1</td><td></td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xd2</td><td>cmos</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xd2</td><td>cmos_ind</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0xd3</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xd7</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 64bit</td><td></td></tr>
 <tr><td></td><td>0xd5</td><td></td><td>AM, OF, RS, UM, LE</td><td>Zeropage indexed with X</td><td></td></tr>
@@ -1571,7 +1584,7 @@
 <tr><td></td><td>0x49</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x4d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x51</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x52</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x52</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x53</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x55</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x57</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -1776,7 +1789,7 @@
 <tr><td></td><td>0xa9</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xad</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xb1</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xb2</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xb2</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0xb3</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xb5</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0xb7</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -2035,7 +2048,7 @@
 <tr><td></td><td>0x09</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x0d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x11</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x12</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x12</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x13</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x15</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x17</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -2992,7 +3005,7 @@
 <tr><td></td><td>0x85</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage</td><td></td></tr>
 <tr><td></td><td>0x8d</td><td></td><td>AM, OF, RS, UM</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x91</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x92</td><td>cmos</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x92</td><td>cmos_ind</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x93</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x95</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x97</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -3090,9 +3103,7 @@
 					Store zero into the address given by the operand.
 				</p><pre>
 					Operand &lt;= 0
-				</pre><h3>ce02</h3>
-<p>Instead of zero, write the value of the Z register.
-				</p><h3>65k</h3>
+				</pre><h3>65k</h3>
 <p>
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM

@@ -73,22 +73,6 @@ Extend a value in AC from RS to the full size. Setting LE
 				defines the type of extension.
 			</li>
 <li>
-<a href="af65002opdesc.html#FIL">FIL: </a>
-Fill a memory area of size AC at address XR with a value from
-				YR
-			</li>
-<li>
-<a href="af65002opdesc.html#HBC">HBC: </a>
-Highest Bit Clear: Determines the number of the highest bit
-				that
-				is set to zero.
-			</li>
-<li>
-<a href="af65002opdesc.html#HBS">HBS: </a>
-Highest Bit Set: Determines the number of the highest bit that
-				is set to one.
-			</li>
-<li>
 <a href="af65002opdesc.html#INV">INV: </a>
 invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
@@ -101,21 +85,6 @@ Load E with an immediate value</li>
 <a href="af65002opdesc.html#LEA">LEA: </a>
 Load Effective Address: compute the effective address and store
 				it in the E (effective Address) register (always full width)
-			</li>
-<li>
-<a href="af65002opdesc.html#LLA">LLA: </a>
-Load linked AC - load the content from a memory location into
-				accumulator, optimistic-locking the address for SCA
-			</li>
-<li>
-<a href="af65002opdesc.html#MVN">MVN: </a>
-Move block of data of size AC from XR to YR, count addresses
-				down. All registers full size, interruptable
-			</li>
-<li>
-<a href="af65002opdesc.html#MVP">MVP: </a>
-Move block of data of size AC from XR to YR, count addresses
-				down. All registers full size, interruptable
 			</li>
 <li>
 <a href="af65002opdesc.html#PEA">PEA: </a>
@@ -135,17 +104,10 @@ Pull E from stack (full width)</li>
 <a href="af65002opdesc.html#PLE">PLE: </a>
 Pull E from stack (full width)</li>
 <li>
-<a href="af65002opdesc.html#PLL">PLL: </a>
-Pull the contents of all registers from the stack</li>
-<li>
 <a href="af65002opdesc.html#PRB">PRB: </a>
 Push and Replace Base register: Push base offset register to
 				the
 				stack, then transfer accumulator to the base register
-			</li>
-<li>
-<a href="af65002opdesc.html#PSH">PSH: </a>
-Push contents of all registers (A, X, Y, B, E) onto the stack
 			</li>
 <li>
 <a href="af65002opdesc.html#RDL">RDL: </a>
@@ -157,12 +119,6 @@ Rotate Direct Left - similar to ROL, but do not shift in carry,
 Rotate Direct Right - similar to ROR, but do not shift in
 				carry,
 				but the lowest bit of the original value
-			</li>
-<li>
-<a href="af65002opdesc.html#RMB">RMB: </a>
-Read memory barrier: invalidates cache content (globally, or
-				for
-				a specific, given location)
 			</li>
 <li>
 <a href="af65002opdesc.html#ROR">ROR: </a>
@@ -197,13 +153,6 @@ Add value to E register</li>
 <li>
 <a href="af65002opdesc.html#SBS">SBS: </a>
 Substract value from stack pointer</li>
-<li>
-<a href="af65002opdesc.html#SCA">SCA: </a>
-Store conditional - store the contents of AC into a memory
-				location, if location has not been accessed since
-				LLA with same
-				address (and no other LLA in same thread)
-			</li>
 <li>
 <a href="af65002opdesc.html#SEB">SEB: </a>
 Swap E register with B register. Always done full width, no
@@ -269,9 +218,4 @@ Transfer stack pointer to Y</li>
 <li>
 <a href="af65002opdesc.html#TYS">TYS: </a>
 Transfer Y to stack pointer</li>
-<li>
-<a href="af65002opdesc.html#WMB">WMB: </a>
-Write memory barrier: flushes dirty caches (globally, or for a
-				specific, given location)
-			</li>
 </ul>

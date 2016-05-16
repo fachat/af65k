@@ -13,7 +13,7 @@
 <tr><td>Immediate</td><td></td><td></td><td>1</td><td>#byte</td><td></td><td>The immediate addressing mode uses the opcode parameter
 				directly, without further lookup. Here it is a byte parameter
 			</td></tr>
-<tr><td>Immediate 16bit</td><td>Wide immediate</td><td>RS=01</td><td>2</td><td>#word</td><td></td><td>The immediate addressing mode uses the opcode parameter
+<tr><td>Immediate 16bit</td><td>Wide immediate</td><td>RS=01</td><td>2</td><td>#word</td><td>65k</td><td>The immediate addressing mode uses the opcode parameter
 				directly, without further lookup. Here it is a word (16bit)
 				parameter
 			</td></tr>
@@ -89,17 +89,6 @@
 				than 16bit due to
 				overflow when Y is added.
 			</td></tr>
-<tr><td>Zeropage indirect 16bit indexed with Z</td><td>Zeropage indirect Z-indexed</td><td></td><td>1</td><td>(zp),Z</td><td>cmos_indz</td><td>Load effective 16 bit address from zeropage location given,
-				then
-				add content of ZR;
-				The effective address is computed as the word
-				(16bit) address read from
-				the zeropage location given as parameter
-				plus the value of the Z
-				register. The resulting address may be larger
-				than 16bit due to
-				overflow when Z is added.
-			</td></tr>
 <tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus
 				content of XR;
 				The effective word (16bit) address is read from the
@@ -147,17 +136,6 @@
 				than 32bit due to
 				overflow when Y is added.
 			</td></tr>
-<tr><td>Zeropage indirect 32bit indexed with Z</td><td>Zeropage long indirect Z-indexed</td><td>AM=1</td><td>1</td><td>[zp],Z</td><td>ce02</td><td>Load effective 32 bit address from zeropage location given,
-				then
-				add content of ZR;
-				The effective address is computed as the long
-				(32bit) address read from
-				the zeropage location given as parameter
-				plus the value of the Z
-				register. The resulting address may be larger
-				than 32bit due to
-				overflow when Z is added.
-			</td></tr>
 <tr><td>Zeropage indexed with X indirect 32bit</td><td>Zeropage X-indexed long indirect</td><td>AM=1</td><td>1</td><td>[zp,X]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given plus
 				content of XR;
 				The effective long (32bit) address is read from the
@@ -180,17 +158,6 @@
 				of the Y register. The
 				resulting address may be larger than 32bit due
 				to overflow when Y is
-				added.
-			</td></tr>
-<tr><td>Absolute indirect 32bit indexed with Z</td><td>Absolute long indirect Z-indexed</td><td>AM=1</td><td>2</td><td>[abs],Z</td><td>ce02</td><td>Load effective 32 bit address from absolute location given,
-				then
-				add content of ZR;
-				The effective address is computed as the long
-				address read from the word
-				location given as parameter plus the value
-				of the Z register. The
-				resulting address may be larger than 32bit due
-				to overflow when Z is
 				added.
 			</td></tr>
 <tr><td>Absolute indexed with X indirect 32bit</td><td>Absolute X-indexed long indirect</td><td>AM=1</td><td>2</td><td>[abs,X]</td><td>65k</td><td>Load effective 32 bit address from absolute location given plus
@@ -272,7 +239,7 @@
 <tr><td>Relative 64bit</td><td>Quad relative</td><td>RS=11</td><td>8</td><td>relquad</td><td>65k</td><td>relative addressing modes, used in branches; from -2^64 to
 				+2^64-1
 			</td></tr>
-<tr><td>Relative (BSR)</td><td></td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in BSR; from -128 to +127
+<tr><td>Relative (BSR)</td><td></td><td></td><td>1</td><td>rel</td><td>65k</td><td>relative addressing modes, used in BSR; from -128 to +127
 			</td></tr>
 <tr><td>Relative 16bit (BSR)</td><td>Wide relative</td><td></td><td>2</td><td>relwide</td><td>65k</td><td>relative addressing modes, used in BSR; from -32768 to +32767
 			</td></tr>
