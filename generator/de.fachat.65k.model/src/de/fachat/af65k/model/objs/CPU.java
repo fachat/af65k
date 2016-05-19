@@ -96,7 +96,7 @@ public class CPU {
 								+ " that is not (yet) dedfined");
 					}
 
-					System.out.println("Including FeatureSet " + finc.getName() + " into " + fset.getName());
+					System.out.println("Including FeatureSet " + finc.getName() + " with features " + finc.getFeature() + " into " + fset.getName());
 
 					fset.getFeature().addAll(finc.getFeature());
 				}

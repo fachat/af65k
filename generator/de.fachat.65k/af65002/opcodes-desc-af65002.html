@@ -24,10 +24,12 @@ Branch on equal - take branch when Z flag is set</li>
 <a href="af65002opdesc.html#BIT">BIT: </a>
 Bitwise test with accumulator - AND the memory location with
 				the
-				accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
 				zero) flags from the result. In case of the accumulator addressing,
 				simply
-				set the flags from the accumulator
+				set the flags from the
+				accumulator
 			</li>
 <li>
 <a href="af65002opdesc.html#BMI">BMI: </a>
@@ -163,7 +165,8 @@ Rotate Left - shift accumulator one bit to the left, shifting
 <li>
 <a href="af65002opdesc.html#ROR">ROR: </a>
 Rotate Right - shift accumulator one bit to the right, shifting
-				in the carry flag in the highest bit, and shifting
+				in the carry flag in the highest bit, and
+				shifting
 				bit 0 into the
 				carry flag instead.
 			</li>
@@ -207,7 +210,8 @@ Transfer the contents of accumulator into the Y register</li>
 <li>
 <a href="af65002opdesc.html#TRB">TRB: </a>
 Test and Reset Bit - AND the memory location with the
-				accumulator, and set the Z flag from the result, then CLEAR all bits
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
 				in the
 				memory location that are set in the accumulator.
 			</li>
@@ -218,7 +222,8 @@ Trap into 65k supervisor mode</li>
 <a href="af65002opdesc.html#TSB">TSB: </a>
 Test and Set Bit - AND the memory location with the
 				accumulator,
-				and set the Z flag from the result, then SET all bits in
+				and set the Z flag from the result, then SET all
+				bits in
 				the
 				memory location that are set in the accumulator.
 			</li>

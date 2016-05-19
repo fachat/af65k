@@ -66,10 +66,12 @@
 <a href="#BIT">BIT</a>
  - Bitwise test with accumulator - AND the memory location with
 				the
-				accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
 				zero) flags from the result. In case of the accumulator addressing,
 				simply
-				set the flags from the accumulator
+				set the flags from the
+				accumulator
 			</li>
 <li>
 <a href="#BLE">BLE</a>
@@ -203,7 +205,8 @@
 <li>
 <a href="#LEA">LEA</a>
  - Load Effective Address: compute the effective address and store
-				it in the E (effective Address) register (always full width)
+				it in the E (effective Address) register (always
+				full width)
 			</li>
 <li>
 <a href="#LSR">LSR</a>
@@ -261,7 +264,8 @@
 <a href="#PRB">PRB</a>
  - Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base register
+				stack, then transfer accumulator to the base
+				register
 			</li>
 <li>
 <a href="#RDL">RDL</a>
@@ -285,7 +289,8 @@
 <li>
 <a href="#ROR">ROR</a>
  - Rotate Right - shift accumulator one bit to the right, shifting
-				in the carry flag in the highest bit, and shifting
+				in the carry flag in the highest bit, and
+				shifting
 				bit 0 into the
 				carry flag instead.
 			</li>
@@ -361,8 +366,7 @@
 			</li>
 <li>
 <a href="#SWP">SWP</a>
- - swap upper and lower part nibble / byte / word / long word of a
-				byte / word / long / quad (longlong) operand in Accumulator
+ - swap upper and lower half of the operand
 			</li>
 <li>
 <a href="#SXY">SXY</a>
@@ -399,7 +403,8 @@
 <li>
 <a href="#TRB">TRB</a>
  - Test and Reset Bit - AND the memory location with the
-				accumulator, and set the Z flag from the result, then CLEAR all bits
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
 				in the
 				memory location that are set in the accumulator.
 			</li>
@@ -410,7 +415,8 @@
 <a href="#TSB">TSB</a>
  - Test and Set Bit - AND the memory location with the
 				accumulator,
-				and set the Z flag from the result, then SET all bits in
+				and set the Z flag from the result, then SET all
+				bits in
 				the
 				memory location that are set in the accumulator.
 			</li>
@@ -468,7 +474,8 @@
 <p>
 					Add the operand to the accumulator and store back in the
 					accumulator.
-					Set the flags from the result. Use Decimal or Binary
+					Set the flags from the result. Use Decimal or
+					Binary
 					add depending
 					on whether the
 					decimal mode status bis is set or not
@@ -487,11 +494,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>ADD</h2>
 <a name="ADD"> </a><p>Add content of memory location to accumulator without using
@@ -506,7 +515,8 @@
 <p>
 					Add the operand to the accumulator and store back in the
 					accumulator.
-					Set the flags from the result. Use Binary mode add
+					Set the flags from the result. Use Binary
+					mode add
 					only.
 					Do not use the Carry flag as input.
 				</p><pre>
@@ -523,11 +533,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>ADE</h2>
 <a name="ADE"> </a><p>Add value to E register</p>
@@ -577,11 +589,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>ASL</h2>
 <a name="ASL"> </a><p>Arithmetic Shift Left - shift accumulator one bit to the left,
@@ -603,11 +617,13 @@
 					2).
 					Shift
 					in a zero from the right.
-					The bit shifted out is moved into
+					The bit shifted
+					out is moved into
 					the carry flag.
 					Note this opcode is a read-modify-write opcode and
 					not only has
-					memory-oriented addressing modes but can work
+					memory-oriented
+					addressing modes but can work
 					on the
 					accumulator alone as well.
 				</p><pre>
@@ -622,14 +638,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>ASR</h2>
@@ -669,14 +687,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>BCC</h2>
@@ -691,13 +711,15 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					carry status flag is clear. After a CMP this is a
 					synonym for "less
 					than".
-					The parameter is a signed 8-bit value, i.e.
+					The parameter is
+					a signed 8-bit value, i.e.
 					jump distances can be from
 					-128 to +127.
 				</p><pre>
@@ -705,7 +727,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BCN</h2>
@@ -727,13 +750,15 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					carry status flag is set. After a CMP this is a
 					synonym for "greater or
 					equal".
-					The parameter is a signed 8-bit
+					The
+					parameter is a signed 8-bit
 					value, i.e. jump distances can be from
 					-128 to +127.
 				</p><pre>
@@ -741,7 +766,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BEQ</h2>
@@ -754,19 +780,22 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					zero status flag is set.
 					The parameter is a signed
-					8-bit value, i.e. jump distances can be from
+					8-bit value, i.e. jump distances can be
+					from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BEV</h2>
@@ -779,7 +808,8 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) if the odd
+					next operation (after the branch opcode)
+					if the odd
 					status flag is
 					set.
 					The parameter is a signed 8-bit value, i.e. jump
@@ -790,7 +820,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BGES</h2>
@@ -803,18 +834,21 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) if the
+					next operation (after the branch opcode)
+					if the
 					signed greater or
 					equal status flag G is set.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances can be
+					from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when G=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BGT</h2>
@@ -830,12 +864,14 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					carry status flag is set and the zero status flag
 					is not set.
-					The parameter is a signed 8-bit value, i.e. jump
+					The parameter is a signed
+					8-bit value, i.e. jump
 					distances can be from
 					-128 to +127.
 				</p><pre>
@@ -843,7 +879,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BGTS</h2>
@@ -858,12 +895,14 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					signed greater status flag is set and the zero
 					status flag is not set.
-					The parameter is a signed 8-bit value, i.e.
+					The parameter is a
+					signed 8-bit value, i.e.
 					jump distances can be
 					from
 					-128 to +127.
@@ -872,16 +911,19 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BIT</h2>
 <a name="BIT"> </a><p>Bitwise test with accumulator - AND the memory location with
 				the
-				accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
 				zero) flags from the result. In case of the accumulator addressing,
 				simply
-				set the flags from the accumulator
+				set the flags from the
+				accumulator
 			</p>
 <table class="optable"><tr><th colspan="10">BIT</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -912,7 +954,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					The UM prefix determines whether the
-					operand resides in user
+					operand
+					resides in user
 					space or not.
 				</p><p>
 					The NF prefix allows to implement a read-modify-write AND of a
@@ -932,12 +975,14 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					carry status flag is clear or the zero status flag
 					is set.
-					The parameter is a signed 8-bit value, i.e. jump distances
+					The parameter is a signed 8-bit
+					value, i.e. jump distances
 					can be from
 					-128 to +127.
 				</p><pre>
@@ -945,7 +990,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BLES</h2>
@@ -960,12 +1006,14 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					signed greater status flag is clear or the zero
 					status flag is set.
-					The parameter is a signed 8-bit value, i.e. jump
+					The parameter is a
+					signed 8-bit value, i.e. jump
 					distances can be from
 					-128 to +127.
 				</p><pre>
@@ -973,7 +1021,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BLTS</h2>
@@ -986,18 +1035,21 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) if the
+					next operation (after the branch opcode)
+					if the
 					signed greater
 					status or equal flag is not set.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances can
+					be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when G=0 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BMI</h2>
@@ -1010,19 +1062,22 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					negative status flag is set.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances can
+					be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BNE</h2>
@@ -1035,19 +1090,22 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					zero status flag is clear.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances can
+					be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BOD</h2>
@@ -1060,7 +1118,8 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) if the odd
+					next operation (after the branch opcode)
+					if the odd
 					status flag is
 					set.
 					The parameter is a signed 8-bit value, i.e. jump
@@ -1071,7 +1130,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BPL</h2>
@@ -1084,23 +1144,27 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					negative status flag is clear.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances
+					can be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BRA</h2>
-<a name="BRA"> </a><p>Branch always - branch independent from any flags</p>
+<a name="BRA"> </a><p>Synonyms: BRU</p>
+<p>Branch always - branch independent from any flags</p>
 <table class="optable"><tr><th colspan="10">BRA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x80</td><td>cmos</td><td>RS</td><td>Relative</td><td></td></tr>
@@ -1110,7 +1174,8 @@
 					Branch (always) to the address given by adding the parameter to
 					the
 					address of the
-					next operation (after the branch opcode).
+					next operation (after the branch
+					opcode).
 					The
 					parameter is a signed 8-bit value, i.e. jump distances can be from
 					-128 to +127.
@@ -1119,7 +1184,8 @@
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BRK</h2>
@@ -1131,39 +1197,46 @@
 <h3>Description</h3>
 <p>
 					The BRK opcode is used to jump to the BRK vector. It pushes the
-					return address and the status on the stack, then reads the BRK
+					return address and the status on the stack, then
+					reads the BRK
 					vector
 					(doubling as IRQ vector) and jumps there.
 				</p><p>
 					Please note that the address put on the stack is the address of
 					the next
-					instruction. And the BRK opcode is using the immediate
+					instruction. And the BRK opcode is using
+					the immediate
 					addressing
 					mode
 					(although the MOS manual does not state it). Thus the
 					address put on the
-					stack is two bytes behind the address of the BRK!
+					stack is two
+					bytes behind the address of the BRK!
 				</p><p>
 					Before storing the status on the stack, the opcode sets the
 					I-flag to
-					avoid recursive calling of the interrupt routine.
+					avoid recursive calling of the interrupt
+					routine.
 				</p><p>
 					When storing the status on the stack, the B-flag is set to
 					indicate
 					that
-					the shared IRQ/BRK vector has been called from a BRK
+					the shared IRQ/BRK vector has been called
+					from a BRK
 					and not an IRQ.
 				</p><pre>
 					Stack(SP--) &lt;= > NextPC
 					Stack(SP--) &lt;= &lt;
 					NextPC
 					Stack(SP--) &lt;= Status | B | I
-					PC &lt;= ($FFFE)
+					PC
+					&lt;= ($FFFE)
 				</pre><h3>65k</h3>
 <p>
 					On the 65k, the RS prefix determines the size of the immediate
 					operand,
-					so that the return address that is pushed onto the stack
+					so that the return address that is pushed
+					onto the stack
 					depends on
 					it.
 				</p><p>
@@ -1173,7 +1246,8 @@
 				</p><p>
 					In hypervisor mode, once the processor configuration register for
 					abort vector table is set,
-					the BRK vector is taken from the abort
+					the BRK vector is
+					taken from the abort
 					vector table. For details see
 					the interrupt handling
 					description.
@@ -1195,7 +1269,8 @@
 					Branch to the address given by the operand as computed similar to
 					the
 					branch opcodes.
-					Store the return address (-1) on the stack to
+					Store the return address (-1)
+					on the stack to
 					prepare for the RTS
 					opcode.
 				</p><pre>
@@ -1208,11 +1283,13 @@
 					The AM prefix is evaluated by the relative addressing modes. Note
 					that
 					the RS prefix is
-					used to determine the return address size on
+					used to determine the return
+					address size on
 					the stack, so it cannot be
 					used as parameter width
 					selector. Thus
-					there are two opcodes to define 8-bit or 16-bit parameter
+					there are two opcodes to define 8-bit
+					or 16-bit parameter
 					width,
 					using the AM
 					prefix to make that 32- or 64-bit respectively.
@@ -1226,7 +1303,8 @@
 					The RS prefix determines the width of the return address put on
 					the
 					stack. Note that the
-					BYTE width prefix denotes the natural width
+					BYTE width prefix denotes
+					the natural width
 					of the processor
 					(respectively its current mode). This
 					is the
@@ -1252,19 +1330,22 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					overflow status flag is clear.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances
+					can be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>BVS</h2>
@@ -1277,19 +1358,22 @@
 <p>
 					Branch to the address given by adding the parameter to the
 					address of the
-					next operation (after the branch opcode) given the
+					next operation (after the branch opcode)
+					given the
 					condition that
 					the
 					overflow status flag is set.
 					The parameter is a
-					signed 8-bit value, i.e. jump distances can be from
+					signed 8-bit value, i.e. jump distances can
+					be from
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h3>65k</h3>
 <p>The RS prefix determines the width of the parameter, the default
 					is 8-bit.
-					With a 16-bit parameter the jump distances can be from
+					With a 16-bit parameter the jump
+					distances can be from
 					-32768 to +32767
 					and so on.
 				</p><h2>CLC</h2>
@@ -1323,15 +1407,18 @@
 <p>
 					Note that the interrupt handling is much more sophisticated in
 					the 65k.
-					In hypervisor mode setting the interrupt status flag
+					In hypervisor mode setting the interrupt
+					status flag
 					disables all
 					interrupts except the non-maskable interrupt.
 					In user
-					mode setting the interrupt status flag disables all "user
+					mode setting the interrupt status flag
+					disables all "user
 					level
 					interrupts", but hypervisor interrupts
 					are served. The interrupt
-					level for user level interrupts can be
+					level for user level
+					interrupts can be
 					configured in a configuration
 					register.
 				</p><h2>CLV</h2>
@@ -1365,7 +1452,8 @@
 <p>
 					Compare the operand with the accumulator and set the flags
 					appropriately.
-					I.e. substract the operand from AC with an
+					I.e. substract the operand from AC with
+					an
 					implicitely set carry in
 					binary mode (even if
 					decimal mode status bit
@@ -1380,7 +1468,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					Note that the default is to use BYTE-wide operation without load
 					extension.
@@ -1397,7 +1486,8 @@
 <p>
 					Compare the operand with the X register and set the flags
 					appropriately.
-					I.e. substract the operand from X with an implicitely
+					I.e. substract the operand from X with an
+					implicitly
 					set carry in
 					binary mode (even if
 					decimal mode status bit is set),
@@ -1412,7 +1502,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					Note that the default is to use BYTE-wide operation without load
 					extension.
@@ -1429,7 +1520,8 @@
 <p>
 					Compare the operand with the Y register and set the flags
 					appropriately.
-					I.e. substract the operand from Y with an implicitely
+					I.e. substract the operand from Y with an
+					implicitly
 					set carry in
 					binary mode (even if
 					decimal mode status bit is set),
@@ -1444,7 +1536,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					Note that the default is to use BYTE-wide operation without load
 					extension.
@@ -1456,15 +1549,18 @@
 </table>
 <h3>Description</h3>
 <p>Adjust the result of an ADC operation to BCD format. For example
-					adding $14 and $08 with ADC (and C=0) gives $1c in normal mode.
+					adding $14 and $08 with ADC (and C=0) gives $1c
+					in normal mode.
 					As
 					an addition of two BCD numbers this should be $22 instead. DAD
-					adjusts the non-BCD result back into a BCD result.
+					adjusts the non-BCD result back into
+					a BCD result.
 					DAD only works on
 					the accumulator, i.e. takes the value from there and
 					stores the
 					result there.
-					Set the flags from the result. The decimal flag is
+					Set the
+					flags from the result. The decimal flag is
 					ignored. C is set
 					when the decimal adjust overflows. V is not
 					affected.
@@ -1481,17 +1577,21 @@
 </table>
 <h3>Description</h3>
 <p>Adjust the result of an SBC operation to BCD format. For example
-					substracting $08 from $24 with SBC (and C=1) gives $1c in normal
+					substracting $08 from $24 with SBC (and C=1)
+					gives $1c in normal
 					mode.
 					As a substraction of two BCD numbers this should be $16
 					instead. DAD
-					adjusts the non-BCD result back into a BCD result.
+					adjusts the non-BCD
+					result back into a BCD result.
 					DAD
 					only works on the accumulator, i.e. takes the value from there and
-					stores the result there.
+					stores the
+					result there.
 					Set the flags from the result. The decimal
 					flag is ignored. C is set
-					when the decimal adjust overflows. V is
+					when the decimal adjust overflows.
+					V is
 					not affected.
 				</p><pre>
 					AC, C &lt;= DecimalAdjustSub(AC)
@@ -1514,7 +1614,8 @@
 <p>
 					Decrement the operand by one, i.e. binary substract one.
 					Note this
-					opcode is a read-modify-write opcode and not only has
+					opcode is a read-modify-write opcode and not
+					only has
 					memory-oriented addressing modes but can work
 					on the accumulator
 					alone as well.
@@ -1528,14 +1629,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>DEX</h2>
@@ -1554,7 +1657,8 @@
 					The RS prefix determines the width of the operation. The NF flag
 					allows
 					to perform the operation
-					without setting flags.
+					without setting
+					flags.
 				</p><h2>DEY</h2>
 <a name="DEY"> </a><p>Decrement the Y register by one</p>
 <table class="optable"><tr><th colspan="10">DEY</th></tr>
@@ -1571,7 +1675,8 @@
 					The RS prefix determines the width of the operation. The NF flag
 					allows
 					to perform the operation
-					without setting flags.
+					without setting
+					flags.
 				</p><h2>EOR</h2>
 <a name="EOR"> </a><p>Bitwise Exclusive-OR accumulator with content of memory
 				location
@@ -1598,7 +1703,8 @@
 					back in
 					the
 					accumulator.
-					Set the flags from the result.
+					Set the flags from the
+					result.
 				</p><pre>
 					AC &lt;= AC ^ Operand
 					N &lt;= Tmp(7)
@@ -1608,11 +1714,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>EXT</h2>
 <a name="EXT"> </a><p>Extend a value in AC from RS to the full size. Setting LE
@@ -1652,18 +1760,21 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>INV</h2>
-<a name="INV"> </a><p>invert AC, i.e. set AC to the 2s-complement of AC</p>
+<a name="INV"> </a><p>Synonyms: NEG</p>
+<p>invert AC, i.e. set AC to the 2s-complement of AC</p>
 <table class="optable"><tr><th colspan="10">INV</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0xa4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
@@ -1684,7 +1795,8 @@
 					The RS prefix determines the width of the operation. The NF flag
 					allows
 					to perform the operation
-					without setting flags.
+					without setting
+					flags.
 				</p><h2>INY</h2>
 <a name="INY"> </a><p>Increment the content of the Y register by one</p>
 <table class="optable"><tr><th colspan="10">INY</th></tr>
@@ -1701,7 +1813,8 @@
 					The RS prefix determines the width of the operation. The NF flag
 					allows
 					to perform the operation
-					without setting flags.
+					without setting
+					flags.
 				</p><h2>JMP</h2>
 <a name="JMP"> </a><p>Jump to new code address</p>
 <table class="optable"><tr><th colspan="10">JMP</th></tr>
@@ -1725,7 +1838,8 @@
 				</pre><h3>65k</h3>
 <p>The AM, OF, LE and UM prefixes are evaluated by the addressing
 					modes.
-					Note that if UM is set, then the processor jumps into user
+					Note that if UM is set, then the processor
+					jumps into user
 					mode.
 				</p><p>
 					If the operand is not as wide as required for an address, it is
@@ -1749,7 +1863,8 @@
 					Jump to the address given by the operand (as computed depending
 					on the
 					respective addressing mode) and
-					store the return address (-1)
+					store the
+					return address (-1)
 					on the stack to prepare for the RTS opcode
 				</p><pre>
 					Stack(SP--) &lt;= > NextPC-1
@@ -1769,7 +1884,8 @@
 					The RS prefix determines the width of the return address put on
 					the
 					stack. Note that the
-					BYTE width prefix denotes the natural width
+					BYTE width prefix denotes
+					the natural width
 					of the processor
 					(respectively its current mode).
 				</p><p>
@@ -1810,7 +1926,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					The UM prefix determines whether the
-					operand resides in user
+					operand
+					resides in user
 					space or not.
 				</p><p>
 					Note that the default load extension is "zero-extended", to "not
@@ -1883,7 +2000,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					The UM prefix determines whether the
-					operand resides in user
+					operand
+					resides in user
 					space or not.
 				</p><p>
 					Note that the default load extension is "zero-extended", to "not
@@ -1914,7 +2032,8 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					The UM prefix determines whether the
-					operand resides in user
+					operand
+					resides in user
 					space or not.
 				</p><p>
 					Note that the default load extension is "zero-extended", to "not
@@ -1923,7 +2042,8 @@
 					The NF prefix lets the flags unmodified.
 				</p><h2>LEA</h2>
 <a name="LEA"> </a><p>Load Effective Address: compute the effective address and store
-				it in the E (effective Address) register (always full width)
+				it in the E (effective Address) register (always
+				full width)
 			</p>
 <table class="optable"><tr><th colspan="10">LEA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -1953,7 +2073,8 @@
 					Load the effective address given by the addressing mode into the
 					E
 					register (without accessing
-					the memory pointed to by the
+					the memory pointed to
+					by the
 					parameter).
 				</p><pre>
 					E &lt;= EffectiveAddress
@@ -1970,17 +2091,20 @@
 					The memory and stack pointers used are the current ones when the
 					user
 					mode prefix is not set.
-					When the user mode prefix is set in
+					When the user mode
+					prefix is set in
 					hypervisor mode, the memory and
 					stack pointer is that of the
 					user
-					mode. When set in user mode an ABORT is triggered.
+					mode. When set in user mode an ABORT
+					is triggered.
 				</p><p>
 					With this approach you can use this in trap handling:
 				</p><pre>
 					LEA.U S,$08 ; load user space address of offset 8 on the user
 					mode stack
-					LDA.U (E) ; load the value from user space
+					LDA.U (E) ; load the value from user
+					space
 				</pre><h2>LSR</h2>
 <a name="LSR"> </a><p>Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
@@ -2000,11 +2124,13 @@
 					Shift the operand or accumulator right one bit (i.e. divide by
 					2). Shift
 					in a zero from the left.
-					The bit shifted out is moved into
+					The bit shifted
+					out is moved into
 					the carry flag.
 					Note this opcode is a read-modify-write opcode and
 					not only has
-					memory-oriented addressing modes but can work
+					memory-oriented
+					addressing modes but can work
 					on the
 					accumulator alone as well.
 				</p><pre>
@@ -2019,14 +2145,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>NOP</h2>
@@ -2070,11 +2198,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>PEA</h2>
 <a name="PEA"> </a><p>Push Effective Address: compute the effective address and push
@@ -2108,7 +2238,8 @@
 					Push the effective address given by the addressing mode onto the
 					stack
 					(without accessing
-					the memory pointed to by the parameter).
+					the memory pointed to by
+					the parameter).
 				</p><pre>
 					Stack(SP--) &lt;= >EffectiveAddress
 					Stack(SP--) &lt;=
@@ -2125,11 +2256,13 @@
 					The memory and stack pointers used are the current ones when the
 					user
 					mode prefix is not set.
-					When the user mode prefix is set in
+					When the user mode
+					prefix is set in
 					hypervisor mode, the memory and
 					stack pointer is that of the
 					user
-					mode. When set in user mode an ABORT is triggered.
+					mode. When set in user mode an ABORT
+					is triggered.
 				</p><p>
 					Note that the stack used to actually store the address is always
 					(no
@@ -2155,11 +2288,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PHB</h2>
@@ -2181,11 +2316,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PHE</h2>
@@ -2207,11 +2344,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PHP</h2>
@@ -2230,28 +2369,33 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><p>
 					The not-extended bit is set (so the status is compatible with the
 					6502
 					and would denote a
-					standard stack frame) as long as RS is 00.
+					standard stack frame) as
+					long as RS is 00.
 				</p><p>
 					If RS indicates a word-wide push, the G and OE flags of the
 					extended
 					status registers are
-					pushed (with all other bits zero)
+					pushed (with all other
+					bits zero)
 					before the standard status register.
 					The
 					standard status
 					register has
-					the not-extended bit cleared in this case.
+					the not-extended bit cleared in this
+					case.
 				</p><p>
 					RS set to long or quad lengths are illegal and trap into an
 					ABORT.
@@ -2275,11 +2419,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PHY</h2>
@@ -2302,11 +2448,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PLA</h2>
@@ -2329,11 +2477,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PLB</h2>
@@ -2356,11 +2506,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PLE</h2>
@@ -2383,11 +2535,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PLP</h2>
@@ -2406,11 +2560,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><p>
@@ -2422,7 +2578,8 @@
 					When the status register has bit 5 cleared, it reads a second
 					byte from
 					the stack and
-					restores the G and OE flags from that byte
+					restores the G and OE flags
+					from that byte
 					into the extended status
 					register.
 					(Note that this introduces a
@@ -2449,11 +2606,13 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PLY</h2>
@@ -2476,17 +2635,20 @@
 					The stack pointer used is the one of the current stack if the UM
 					prefix
 					is not set.
-					If UM is set and the opcode is executed in
+					If UM is set and the opcode is
+					executed in
 					hypervisor mode, the stack
 					pointer used is the
 					user mode stack
-					pointer and the value is stored in user mode memory. If
+					pointer and the value is stored in user mode
+					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PRB</h2>
 <a name="PRB"> </a><p>Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base register
+				stack, then transfer accumulator to the base
+				register
 			</p>
 <table class="optable"><tr><th colspan="10">PRB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -2512,11 +2674,13 @@
 					2).
 					Shift
 					in the sign (uppermost bit) of
-					the original value from the
+					the original
+					value from the
 					right.
 					The bit shifted is also moved into the carry flag.
 					Note this
-					opcode is a read-modify-write opcode and not only has
+					opcode is a read-modify-write opcode
+					and not only has
 					memory-oriented addressing modes but can work
 					on the accumulator
 					alone as well.
@@ -2532,7 +2696,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE prefix,
@@ -2559,11 +2724,13 @@
 					Shift the operand or accumulator right one bit (i.e. divide by
 					2). Shift
 					in bit 0 (lowermost bit) of
-					the original value from the
+					the original
+					value from the
 					left.
 					The bit shifted is also moved into the carry flag.
 					Note this
-					opcode is a read-modify-write opcode and not only has
+					opcode is a read-modify-write opcode
+					and not only has
 					memory-oriented addressing modes but can work
 					on the accumulator
 					alone as well.
@@ -2579,14 +2746,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>ROL</h2>
@@ -2612,7 +2781,8 @@
 					2).
 					Shift
 					in the carry flag from the right.
-					The bit shifted out is
+					The bit
+					shifted out is
 					moved into the carry flag.
 					Note this opcode is a read-modify-write
 					opcode and not only has
@@ -2632,19 +2802,22 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>ROR</h2>
 <a name="ROR"> </a><p>Rotate Right - shift accumulator one bit to the right, shifting
-				in the carry flag in the highest bit, and shifting
+				in the carry flag in the highest bit, and
+				shifting
 				bit 0 into the
 				carry flag instead.
 			</p>
@@ -2663,7 +2836,8 @@
 					Shift the operand or accumulator right one bit (i.e. divide by
 					2). Shift
 					in the carry flag from the left.
-					The bit shifted out is
+					The bit
+					shifted out is
 					moved into the carry flag.
 					Note this opcode is a read-modify-write
 					opcode and not only has
@@ -2683,14 +2857,16 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space. NF allows to not
+					whether the operand is in user
+					space. NF allows to not
 					set the flags.
 				</p><p>
 					RS also determine the width of the operation. There is no LE
 					prefix,
 					as the read and write
 					widths are the same.
-					Note that the
+					Note
+					that the
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>RTI</h2>
@@ -2704,7 +2880,8 @@
 					Returns from an interrupt or a BRK opcode handling. It first
 					pulls the
 					status register from the stack, then
-					takes the return
+					takes
+					the return
 					address from the stack, increment it by one, and
 					continue at the new
 					address.
@@ -2713,17 +2890,20 @@
 					Tmp(0-7) &lt;=
 					Stack(++SP)
 					Tmp(8-15) &lt;= Stack(++SP)
-					PC &lt;= Tmp;
+					PC &lt;=
+					Tmp;
 				</pre><h3>65k</h3>
 <p>
 					The RTI prefix first reads the status from the current stack. If
 					the
 					"Not extended" flag is set
-					(bit 5 is always 1 in the 6502 status
+					(bit 5 is always 1
+					in the 6502 status
 					register, so here it is used as
 					"not extended" flag), then
 					the normal
-					handling as described above takes place.
+					handling as described above
+					takes place.
 				</p><p>
 					If the "not extended" flag is clear, i.e. an extended stack frame
 					is
@@ -2733,35 +2913,42 @@
 					ExtStatus &lt;=
 					Stack(++SP)
 					Tmp(0-7) &lt;= Stack(++SP)
-					Tmp(8-15) &lt;=
+					Tmp(8-15)
+					&lt;=
 					Stack(++SP)
 					...
 					PC &lt;= Tmp;
 				</pre><p>
 					Here the extended status byte is pulled from the stack after the
 					standard status. In this extended status
-					there are two bit that
+					there are
+					two bit that
 					determine the size of the return address
 					following
 					on the stack.
 					So
-					the return address can be 16-, 32- or 64-bit. Note that the "00"
+					the return address can be 16-, 32- or
+					64-bit. Note that the "00"
 					designation (otherwise used for BYTE width)
 					maps to the natural
-					address width of the processor executing the code.
+					address width of the
+					processor executing the code.
 				</p><p>
 					Also the user mode bit is stored in the extended stack frame. If
 					the
 					user mode bit is the same as the
-					current mode, the execution
+					current mode,
+					the execution
 					continues in that mode.
 					If the RTI code is executed in the
 					supervisor mode, and the user mode
-					bit is set, then the
+					bit is set,
+					then the
 					return
 					address is interpreted as user mode address, and the execution
 					continues in the
-					user mode. If RTI is executed in user mode, and the
+					user mode. If RTI is
+					executed in user mode, and the
 					user mode bit is
 					clear (i.e. hypervisor mode),
 					and ABORT sequence is
@@ -2769,7 +2956,8 @@
 				</p><p>
 					Note that the "natural" address width is taken from the target
 					environment in case the process jumps
-					from hypervisor to user mode.
+					from
+					hypervisor to user mode.
 				</p><p>
 					If the operand is not wide enough as required for an address, it
 					is
@@ -2793,7 +2981,8 @@
 					The RS prefix determines the width of the return address read
 					from the
 					stack. Note that the
-					BYTE width prefix denotes the natural
+					BYTE width prefix
+					denotes the natural
 					width of the processor
 					(respectively its current mode). This
 					is the
@@ -2802,7 +2991,8 @@
 					If the operand is not wide enough as required for an address, it
 					is
 					extended with the
-					rest of the current PC. This is to support
+					rest of the current PC. This
+					is to support
 					running "narrow" code within
 					a e.g. a 64k window
 					in a wide system.
@@ -2819,20 +3009,23 @@
 					Return from trap handling. Reads the extended status byte and the
 					return
 					address from hypervisor stack,
-					then jumps to the return
+					then jumps
+					to the return
 					address.
 				</p><pre>
 					&lt;Tmp &lt;= Stack(++SP)
 					>Tmp &lt;= Stack(++SP)
 					Tmp &lt;= Tmp+1
 					PC &lt;= Tmp;
-					ExtStatus &lt;= Stack(++SP)
+					ExtStatus
+					&lt;= Stack(++SP)
 				</pre><h3>65k</h3>
 <p>
 					The extended status byte contains the width bits for the return
 					address
 					as well as the user mode bit
-					from where the trap came. In RTU
+					from where the
+					trap came. In RTU
 					the user mode bit is restored, so the
 					RTU opcode can return to
 					user
@@ -2892,7 +3085,7 @@
 <tr><td></td><td>0xe9</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xed</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xf1</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xf2</td><td>cmos</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xf2</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0xf3</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xf5</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0xf7</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -2904,11 +3097,13 @@
 <p>
 					Substract the operand from the accumulator and store back in the
 					accumulator.
-					Set the flags from the result. Use Decimal or Binary
+					Set the flags from the result. Use
+					Decimal or Binary
 					add depending
 					on whether the
 					decimal mode status bis is set or not
-					respectively. C status flag is used
+					respectively. C status flag is
+					used
 					as borrow.
 				</p><pre>
 					AC, C, V &lt;= AC - Operand, C
@@ -2924,11 +3119,13 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>SBE</h2>
 <a name="SBE"> </a><p>Add value to E register</p>
@@ -2983,15 +3180,18 @@
 <p>
 					Note that the interrupt handling is much more sophisticated in
 					the 65k.
-					In hypervisor mode setting the interrupt status flag
+					In hypervisor mode setting the interrupt
+					status flag
 					disables all
 					interrupts except the non-maskable interrupt.
 					In user
-					mode setting the interrupt status flag disables all "user
+					mode setting the interrupt status flag
+					disables all "user
 					level
 					interrupts", but hypervisor interrupts
 					are served. The interrupt
-					level for user level interrupts can be
+					level for user level
+					interrupts can be
 					configured in a configuration
 					register.
 				</p><h2>STA</h2>
@@ -3027,7 +3227,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					RS also determine the width of the operation.
 					Note that the
@@ -3054,7 +3255,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					RS also determine the width of the operation.
 					Note that the
@@ -3081,7 +3283,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					RS also determine the width of the operation.
 					Note that the
@@ -3108,7 +3311,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
 					determines
-					whether the operand is in user space.
+					whether the operand is in user
+					space.
 				</p><p>
 					RS also determine the width of the operation.
 					Note that the
@@ -3127,7 +3331,8 @@
 <p>
 					Substract the operand from the accumulator and store back in the
 					accumulator.
-					Set the flags from the result. Use Binary mode add
+					Set the flags from the result. Use
+					Binary mode add
 					only. C status
 					flag is not used as
 					input, but set as borrow from the
@@ -3146,21 +3351,26 @@
 					The AM, OF, LE and RS prefixes are evaluated by the addressing
 					modes.
 					UM determines
-					whether the operand is in user space. NF allows
+					whether the operand is in user
+					space. NF allows
 					to not set the flags.
 				</p><p>
 					RS and LE together also determine the width of the operation.
-					Note that the default is to use BYTE-wide operation without load
+					Note that the default is to use BYTE-wide operation
+					without load
 					extension.
 				</p><h2>SWP</h2>
-<a name="SWP"> </a><p>swap upper and lower part nibble / byte / word / long word of a
-				byte / word / long / quad (longlong) operand in Accumulator
+<a name="SWP"> </a><p>swap upper and lower half of the operand
 			</p>
 <table class="optable"><tr><th colspan="10">SWP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0xd4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
-<h2>SXY</h2>
+<h3>Description</h3>
+<p>
+					Swap upper and lower part nibble / byte / word / long word of a
+					byte / word / long / quad (longlong) operand in Accumulator
+				</p><h2>SXY</h2>
 <a name="SXY"> </a><p>Swap X with Y register. Always done full width, no flags set.
 			</p>
 <table class="optable"><tr><th colspan="10">SXY</th></tr>
@@ -3194,7 +3404,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting
@@ -3214,7 +3425,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting
@@ -3252,7 +3464,8 @@
 </table>
 <h2>TRB</h2>
 <a name="TRB"> </a><p>Test and Reset Bit - AND the memory location with the
-				accumulator, and set the Z flag from the result, then CLEAR all bits
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
 				in the
 				memory location that are set in the accumulator.
 			</p>
@@ -3267,7 +3480,8 @@
 					Take the operand, and AND it with the accumulator and evaluate
 					the
 					Z-flag. Then clear all bits in the operand
-					that are set in the
+					that
+					are set in the
 					accumulator (basically AND with the inverse of the
 					accumulator),
 					and
@@ -3275,10 +3489,12 @@
 				</p><p>
 					The use case for this opcode is the synchronization between
 					processes
-					and implements a variant of the "test-and-clear"
+					and implements a variant of the
+					"test-and-clear"
 					primitive. Thus this is a Read-Modify-Write operation and will
 					trigger a
-					Memory-Lock between the read and write
+					Memory-Lock between the read
+					and write
 					to make that
 					operation atomic.
 				</p><pre>
@@ -3291,7 +3507,8 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					The
 					UM prefix determines whether the
-					operand resides in user space or
+					operand
+					resides in user space or
 					not.
 				</p><p>
 					The NF prefix allows to implement a read-modify-write AND of a
@@ -3310,12 +3527,14 @@
 					Trap into supervisor mode. Pushes the return address and the
 					extended
 					status byte
-					on the hypervisor stack and jumps into
+					on the hypervisor stack and jumps
+					into
 					hypervisor mode,
 					using the appropriate trap vector. To return from
 					the trap, the RTU
 					operations is used.
-					For compatibility with RTS, the
+					For
+					compatibility with RTS, the
 					return address minus one is stored on
 					the stack.
 				</p><pre>
@@ -3323,20 +3542,23 @@
 					Stack(SP--) &lt;=
 					&lt; NextPC-1
 					Stack(SP--) &lt;= ExtStatus
-					PC &lt;=
+					PC
+					&lt;=
 					TrapVector(Operand)
 				</pre><h3>65k</h3>
 <p>
 					The address put on the stack always has the natural width of the
 					processor.
-					Currently no further prefix is supported.
+					Currently no further prefix is
+					supported.
 					The stack
 					pointer used is that of the hypervisor stack.
 				</p><p>
 					This opcode can be used in user mode as well as in hypervisor
 					mode. The
 					extended status byte
-					contains the user mode bit, so that
+					contains the user mode
+					bit, so that
 					the RTU opcode knows whether to return
 					to user mode or
 					hypervisor
@@ -3345,7 +3567,8 @@
 					The extendend status byte also contains width bits that store the
 					width
 					of the return
-					address on stack. BYTE is not used, but the real
+					address on stack. BYTE is not
+					used, but the real
 					width is stored with the
 					width bits.
 				</p><p>
@@ -3353,11 +3576,13 @@
 					number
 					(the
 					immediate operand)
-					to word, or even wider widths.
+					to word, or even wider
+					widths.
 				</p><h2>TSB</h2>
 <a name="TSB"> </a><p>Test and Set Bit - AND the memory location with the
 				accumulator,
-				and set the Z flag from the result, then SET all bits in
+				and set the Z flag from the result, then SET all
+				bits in
 				the
 				memory location that are set in the accumulator.
 			</p>
@@ -3377,10 +3602,12 @@
 				</p><p>
 					The use case for this opcode is the synchronization between
 					processes
-					and implements a variant of the "test-and-set"
+					and implements a variant of the
+					"test-and-set"
 					primitive.
 					Thus this is a Read-Modify-Write operation and will trigger a
-					Memory-Lock between the read and write
+					Memory-Lock between the read
+					and write
 					to make that operation
 					atomic.
 				</p><pre>
@@ -3393,13 +3620,15 @@
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					The
 					UM prefix determines whether the
-					operand resides in user space or
+					operand
+					resides in user space or
 					not.
 				</p><p>
 					The NF prefix allows to implement a read-modify-write OR of a
 					memory
 					location (without the usual or/store
-					sequence) - without
+					sequence)
+					- without
 					setting a flag though.
 				</p><h2>TSX</h2>
 <a name="TSX"> </a><p>Transfer the contents of the stack pointer into the X register
@@ -3418,7 +3647,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting
@@ -3427,7 +3657,8 @@
 					The stack pointer used is the current stack pointer. If the user
 					mode
 					bit is set in hypervisor mode,
-					the stack pointer used is the
+					the stack
+					pointer used is the
 					user mode stack pointer. If the user
 					mode
 					bit is set in user mode,
@@ -3455,7 +3686,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting
@@ -3477,7 +3709,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting
@@ -3486,7 +3719,8 @@
 					The stack pointer used is the current stack pointer. If the user
 					mode
 					bit is set in hypervisor mode,
-					the stack pointer used is the
+					the stack
+					pointer used is the
 					user mode stack pointer. If the user
 					mode
 					bit is set in user mode,
@@ -3508,7 +3742,8 @@
 <p>
 					The RS and LE prefixes determines the width of the operation. LE
 					determines how to extend the value
-					loaded to the full (natural)
+					loaded to the
+					full (natural)
 					width. The NF flag allows to perform the
 					operation
 					without setting

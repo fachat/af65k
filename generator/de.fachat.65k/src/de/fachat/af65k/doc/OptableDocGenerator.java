@@ -34,6 +34,7 @@ import java.util.TreeMap;
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.Feature;
 import de.fachat.af65k.model.objs.FeatureSet;
+import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.objs.PrefixBit;
 import de.fachat.af65k.model.objs.PrefixSetting;
@@ -60,19 +61,40 @@ public class OptableDocGenerator {
 
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
 		CodeMapEntry page[] = opcodes.get(pagename); // get standard map
-		writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, includeOrig);
+		writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, fclass, includeOrig);
 	}
 
-	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page, String[] strings, boolean includeOrig) {
+	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page, String[] strings, String fclass, boolean includeOrig) {
+
+		FeatureSet fset = cpu.getFClass(fclass);
+		Collection<String> fclasses = fset.getFeature();
 
 		Map<String, Operation> ops = new TreeMap<String, Operation>();
 		for (int i = 0; i < 256; i++) {
 			CodeMapEntry en = page[i];
 			if (en != null) {
 				Operation op = en.getOperation();
-				if (includeOrig || op.getClazz() != null) {
+				if (fclasses.contains(op.getClazz())) {
 					ops.put(op.getName(), op);
+				} else {
+					// feature (clazz) is not set, so we need to check the ops
+					for (Opcode opc : op.getOpcodes()) {
+						if (fclasses.contains(opc.getFeature())) {
+							ops.put(op.getName(), op);
+							break;
+						}
+						if (fclasses.contains(cpu.getAddressingMode(opc.getAddressingMode()).getFeature())) {
+							ops.put(op.getName(), op);
+							break;
+						}
+					}
+					if (!ops.containsKey(op.getName())) {
+						if (includeOrig) {
+							ops.put(op.getName(), op);
+						}
+					}
 				}
+				
 			}
 		}
 

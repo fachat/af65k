@@ -3,6 +3,9 @@
 <a href="af65002opdesc.html#ADB">ADB: </a>
 Add value to B register</li>
 <li>
+<a href="af65002opdesc.html#ADC">ADC: </a>
+Add content of memory location to accumulator</li>
+<li>
 <a href="af65002opdesc.html#ADD">ADD: </a>
 Add content of memory location to accumulator without using
 				carry as input
@@ -13,6 +16,14 @@ Add value to E register</li>
 <li>
 <a href="af65002opdesc.html#ADS">ADS: </a>
 Add value to stack pointer</li>
+<li>
+<a href="af65002opdesc.html#AND">AND: </a>
+Bitwise AND accumulator with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#ASL">ASL: </a>
+Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			</li>
 <li>
 <a href="af65002opdesc.html#ASR">ASR: </a>
 Arithmetic Shift Right - Similar to LSR, but shifts in the sign
@@ -41,6 +52,17 @@ Branch if greater - take branch when signed greater or equal G
 				flag is set but Z flag is clear
 			</li>
 <li>
+<a href="af65002opdesc.html#BIT">BIT: </a>
+Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			</li>
+<li>
 <a href="af65002opdesc.html#BLE">BLE: </a>
 Branch if less or equal - take branch when C flag is clear or Z
 				flag is set
@@ -62,19 +84,50 @@ Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
 				so on.
 			</li>
 <li>
+<a href="af65002opdesc.html#CMP">CMP: </a>
+Compare accumulator with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CPX">CPX: </a>
+Compare X register with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CPY">CPY: </a>
+Compare Y register with content of memory location</li>
+<li>
 <a href="af65002opdesc.html#DAD">DAD: </a>
 Decimal adjust of a normal ADC of two BCD numbers.</li>
 <li>
 <a href="af65002opdesc.html#DAS">DAS: </a>
 Decimal adjust of a normal SBC of two BCD numbers.</li>
 <li>
+<a href="af65002opdesc.html#DEC">DEC: </a>
+Decrement the content of a memory location by one</li>
+<li>
+<a href="af65002opdesc.html#EOR">EOR: </a>
+Bitwise Exclusive-OR accumulator with content of memory
+				location
+			</li>
+<li>
 <a href="af65002opdesc.html#EXT">EXT: </a>
 Extend a value in AC from RS to the full size. Setting LE
 				defines the type of extension.
 			</li>
 <li>
+<a href="af65002opdesc.html#INC">INC: </a>
+Increment the content of a memory location by one</li>
+<li>
 <a href="af65002opdesc.html#INV">INV: </a>
 invert AC, i.e. set AC to the 2s-complement of AC</li>
+<li>
+<a href="af65002opdesc.html#JMP">JMP: </a>
+Jump to new code address</li>
+<li>
+<a href="af65002opdesc.html#JSR">JSR: </a>
+Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</li>
+<li>
+<a href="af65002opdesc.html#LDA">LDA: </a>
+Load accumulator</li>
 <li>
 <a href="af65002opdesc.html#LDB">LDB: </a>
 Load B with an immediate value</li>
@@ -82,10 +135,25 @@ Load B with an immediate value</li>
 <a href="af65002opdesc.html#LDE">LDE: </a>
 Load E with an immediate value</li>
 <li>
+<a href="af65002opdesc.html#LDX">LDX: </a>
+Load X register</li>
+<li>
+<a href="af65002opdesc.html#LDY">LDY: </a>
+Load Y register</li>
+<li>
 <a href="af65002opdesc.html#LEA">LEA: </a>
 Load Effective Address: compute the effective address and store
-				it in the E (effective Address) register (always full width)
+				it in the E (effective Address) register (always
+				full width)
 			</li>
+<li>
+<a href="af65002opdesc.html#LSR">LSR: </a>
+Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			</li>
+<li>
+<a href="af65002opdesc.html#ORA">ORA: </a>
+Bitwise OR accumulator with content of memory location</li>
 <li>
 <a href="af65002opdesc.html#PEA">PEA: </a>
 Push Effective Address: compute the effective address and push
@@ -107,7 +175,8 @@ Pull E from stack (full width)</li>
 <a href="af65002opdesc.html#PRB">PRB: </a>
 Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base register
+				stack, then transfer accumulator to the base
+				register
 			</li>
 <li>
 <a href="af65002opdesc.html#RDL">RDL: </a>
@@ -121,9 +190,18 @@ Rotate Direct Right - similar to ROR, but do not shift in
 				but the lowest bit of the original value
 			</li>
 <li>
+<a href="af65002opdesc.html#ROL">ROL: </a>
+Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</li>
+<li>
 <a href="af65002opdesc.html#ROR">ROR: </a>
 Rotate Right - shift accumulator one bit to the right, shifting
-				in the carry flag in the highest bit, and shifting
+				in the carry flag in the highest bit, and
+				shifting
 				bit 0 into the
 				carry flag instead.
 			</li>
@@ -148,6 +226,9 @@ Swap AC with Y register. Always done full width, no flags set.
 <a href="af65002opdesc.html#SBB">SBB: </a>
 Substract value from B register</li>
 <li>
+<a href="af65002opdesc.html#SBC">SBC: </a>
+Substract content of memory location from accumulator</li>
+<li>
 <a href="af65002opdesc.html#SBE">SBE: </a>
 Add value to E register</li>
 <li>
@@ -159,6 +240,16 @@ Swap E register with B register. Always done full width, no
 				flags set.
 			</li>
 <li>
+<a href="af65002opdesc.html#STA">STA: </a>
+Store the content of the accumulator into a memory location
+			</li>
+<li>
+<a href="af65002opdesc.html#STX">STX: </a>
+Store the content of the X register to memory.</li>
+<li>
+<a href="af65002opdesc.html#STY">STY: </a>
+Store the content of the Y register to memory.</li>
+<li>
 <a href="af65002opdesc.html#STZ">STZ: </a>
 Store zero into a memory location</li>
 <li>
@@ -168,8 +259,7 @@ Substract content of memory location from accumulator without
 			</li>
 <li>
 <a href="af65002opdesc.html#SWP">SWP: </a>
-swap upper and lower part nibble / byte / word / long word of a
-				byte / word / long / quad (longlong) operand in Accumulator
+swap upper and lower half of the operand
 			</li>
 <li>
 <a href="af65002opdesc.html#SXY">SXY: </a>
@@ -200,7 +290,8 @@ Transfer Program counter to Accumulator</li>
 <li>
 <a href="af65002opdesc.html#TRB">TRB: </a>
 Test and Reset Bit - AND the memory location with the
-				accumulator, and set the Z flag from the result, then CLEAR all bits
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
 				in the
 				memory location that are set in the accumulator.
 			</li>
@@ -208,7 +299,8 @@ Test and Reset Bit - AND the memory location with the
 <a href="af65002opdesc.html#TSB">TSB: </a>
 Test and Set Bit - AND the memory location with the
 				accumulator,
-				and set the Z flag from the result, then SET all bits in
+				and set the Z flag from the result, then SET all
+				bits in
 				the
 				memory location that are set in the accumulator.
 			</li>
