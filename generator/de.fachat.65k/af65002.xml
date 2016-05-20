@@ -6743,6 +6743,74 @@
 			</opcodes>
 		</operation>
 
+		<!-- ################################# -->
+		<!-- Rockwell CMOS Bit test/set/branch operations -->
+
+		<operation>
+			<name>RMB</name>
+			<desc>Reset memory bit</desc>
+			<feature>rcmos</feature>
+			<!-- repeatedly expand with opcode bits defined in the order given here -->
+			<expand>0x70</expand>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x07</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Examine the operand value, and clear the given bit in it.
+				</p>
+			</doc>
+		</operation>
+		
+		<operation>
+			<name>SMB</name>
+			<desc>Set memory bit</desc>
+			<feature>rcmos</feature>
+			<!-- repeatedly expand with opcode bits defined in the order given here -->
+			<expand>0x70</expand>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x87</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Examine the operand value, and set the given bit in it.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>BBR</name>
+			<desc>Branch on bit reset</desc>
+			<feature>rcmos</feature>
+			<expand>0x70</expand>
+			<opcodes>
+				<addressingMode>zprel</addressingMode>
+				<opcode>0x0f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Examine the operand value, and check the given bit. If the bit is cleared, branch to the given (relative) address.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>BBS</name>
+			<desc>Branch on bit set</desc>
+			<feature>rcmos</feature>
+			<expand>0x70</expand>
+			<opcodes>
+				<addressingMode>zprel</addressingMode>
+				<opcode>0x8f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Examine the operand value, and check the given bit. If the bit is set, branch to the given (relative) address.
+				</p>
+			</doc>
+		</operation>
 
 		<!-- ################################# -->
 		<!-- 65ce02 opcodes -->
@@ -7417,6 +7485,20 @@
 				<addrMode>zpsindy</addrMode>
 			</mode>
 		</syntax>
+		
+		<syntax>
+			<id>zprel</id>
+			<desc>Addressing mode with one memory address, and a relative jump location.
+				Introduced in the Rockwell bit operations BBS/BBR, it allows specifying a zeropage
+				location to look at, and on some condition jump to a relative jump location.
+			</desc>
+			<simplesyntax>zp,rel</simplesyntax>
+			<feature>rcmos</feature>
+			<mode>
+				<addrMode>zprel</addrMode>
+			</mode>
+		</syntax>
+		
 	</syntaxes>
 
 
@@ -8198,6 +8280,20 @@
 			<feature>65k</feature>
 			<width>0</width>
 		</addrmode>
+		
+		<!-- ################################# -->
+		
+		<addrmode>
+			<name>ZP with Branch</name>
+			<desc>Zeropage addressing, combined with relative addressing modes, used in branches; from -128 to +127
+			</desc>
+			<identifier>zprel</identifier>
+			<feature>rcmos</feature>
+			<width>2</width>
+		</addrmode>
+
+
+		
 	</addrmodes>
 
 	<!-- ################################# -->

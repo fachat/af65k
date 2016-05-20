@@ -39,6 +39,15 @@ public class Operation {
 
 	String name;
 	String desc;
+	String expand;
+	public String getExpand() {
+		return expand;
+	}
+
+	public void setExpand(String expand) {
+		this.expand = expand;
+	}
+
 	// operation class
 	@XmlElement(name="feature")
 	String clazz;

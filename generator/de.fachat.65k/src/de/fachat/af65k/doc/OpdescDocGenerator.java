@@ -80,7 +80,7 @@ public class OpdescDocGenerator {
 				Operation op = en.getOperation();
 
 				if (includeOrig || op.getClazz() != null) {
-					ops.put(op.getName(), op);
+					ops.put(en.getName(), op);
 				}
 			}
 		}

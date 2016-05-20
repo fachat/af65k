@@ -75,22 +75,22 @@ public class OptableDocGenerator {
 			if (en != null) {
 				Operation op = en.getOperation();
 				if (fclasses.contains(op.getClazz())) {
-					ops.put(op.getName(), op);
+					ops.put(en.getName(), op);
 				} else {
 					// feature (clazz) is not set, so we need to check the ops
 					for (Opcode opc : op.getOpcodes()) {
 						if (fclasses.contains(opc.getFeature())) {
-							ops.put(op.getName(), op);
+							ops.put(en.getName(), op);
 							break;
 						}
 						if (fclasses.contains(cpu.getAddressingMode(opc.getAddressingMode()).getFeature())) {
-							ops.put(op.getName(), op);
+							ops.put(en.getName(), op);
 							break;
 						}
 					}
-					if (!ops.containsKey(op.getName())) {
+					if (!ops.containsKey(en.getName())) {
 						if (includeOrig) {
-							ops.put(op.getName(), op);
+							ops.put(en.getName(), op);
 						}
 					}
 				}
@@ -217,7 +217,7 @@ public class OptableDocGenerator {
 					}
 					wr.startTableCell(atts);
 					wr.startDiv(opcodedivatts);
-					wr.print(entry.getOperation().getName());
+					wr.print(entry.getName());
 					Set<SyntaxMode> synmodes = entry.getSynmodes();
 					if (synmodes != null) {
 						for (SyntaxMode sm : synmodes) {
