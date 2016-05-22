@@ -80,7 +80,7 @@
 		</class>
 		<class>
 			<name>nmosext</name>
-			<include>nmos</include>
+			<includes>nmos</includes>
 			<feature>undoc</feature>
 			<doc>
 				<p>
@@ -154,7 +154,8 @@
 			<doc>
 				<p>
 					The 65ce02 opcodes, which are an extension to the Rockwell CMOS opcodes.
-					But also the "(zp)" indirect addressing mode has been replaced with the
+					But also the "(zp)" indirect addressing
+					mode has been replaced with the
 					"(zp),z" adressing mode.
 				</p>
 			</doc>
@@ -2799,6 +2800,11 @@
 				<opcode>0xe9</opcode>
 			</opcodes>
 			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xeb</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
 				<addressingMode>abs</addressingMode>
 				<opcode>0xed</opcode>
 			</opcodes>
@@ -5099,6 +5105,96 @@
 				<opcode>0xfa</opcode>
 				<feature>undoc</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x80</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x04</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x14</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x34</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x44</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x54</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x64</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x74</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0xd4</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0xf4</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x0c</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x1c</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x3c</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x5c</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x7c</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xdc</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xfc</opcode>
+				<feature>undoc</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0x89</opcode>
+				<feature>undoc</feature>
+			</opcodes>
 			<doc>
 				<p>
 					No Operation.
@@ -5733,7 +5829,8 @@
 			<doc>
 				<p>
 					Swap upper and lower part nibble / byte / word / long word of a
-					byte / word / long / quad (longlong) operand in Accumulator
+					byte / word / long / quad (longlong) operand in
+					Accumulator
 				</p>
 			</doc>
 		</operation>
@@ -6124,7 +6221,7 @@
 				<opcode>0x5b</opcode>
 				<feature>ce02</feature>
 			</opcodes>
-			
+
 		</operation>
 
 		<operation>
@@ -6519,7 +6616,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>absy</addressingMode>
-				<opcode>0xbb</opcode>
+				<opcode>0xbf</opcode>
 			</opcodes>
 			<opcodes>
 				<addressingMode>zp</addressingMode>
@@ -6620,44 +6717,95 @@
 		</operation>
 
 		<operation>
-			<name>XAA</name>
-			<desc>Transfer the value of XR to AC, then AND AC with an immediate value; this opcode is undocumented.</desc>
+			<name>ANE</name>
+			<desc>Mostly transfer the value of XR to AC, then AND AC with an immediate value; this opcode is undocumented.</desc>
 			<feature>undoc</feature>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
 				<opcode>0x8b</opcode>
 			</opcodes>
+			<doc>
+				<pre>
+					A = (A | #$EE) &amp; X &amp; #byte
+					same as
+					A = ((A &amp; #$11 &amp; X) | (#$EE &amp; X)) &amp; #byte
+				</pre>
+				<p>
+					The internal parameter $11 may occasionally be $10, $01, or even $00 in real systems. This may depend
+					on the state
+					of the data left on the external data bus. See "64doc.txt"
+				</p>
+			</doc>
 		</operation>
 
 		<operation>
-			<name>OAL</name>
+			<name>LXA</name>
 			<desc>OR the AC with #$EE, AND the result with an immediate value and store the result in AC and XR; this opcode is
-				undocumented.</desc>
+				undocumented.
+			</desc>
 			<feature>undoc</feature>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
 				<opcode>0xab</opcode>
 			</opcodes>
+			<doc>
+				<p>This operation looks similar to ANE, just that it stores the result in AC and XR instead of AC only.</p>
+			</doc>
 		</operation>
 
 		<operation>
-			<name>SAX</name>
-			<desc>AND the AC and XR registers, substract an immediate value from that and store the result in XR. The
-				substraction works similar to CMP; this opcode is undocumented.</desc>
+			<name>SBX</name>
+			<desc>AND the AC and XR registers, substract an immediate value from that and store the result in XR. ; this opcode
+				is undocumented.
+			</desc>
 			<feature>undoc</feature>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
 				<opcode>0xcb</opcode>
 			</opcodes>
+			<doc>
+				<p>The substraction works similar to CMP in that no flags are set. It also has no decimal mode, as it
+					is a combination of CMP and DEX (the latter to store the result). For details see 64doc.txt.
+				</p>
+			</doc>
 		</operation>
 
+
 		<operation>
-			<name>SKB</name>
-			<desc>Skip next byte; this opcode is undocumented.</desc>
+			<name>HLT</name>
+			<desc>Crash the processor.</desc>
 			<feature>undoc</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x80</opcode>
+				<opcode>0x02</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x12</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x22</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x32</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x42</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x52</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x62</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x72</opcode>
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
@@ -6665,7 +6813,19 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
+				<opcode>0x92</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xb2</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
 				<opcode>0xc2</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xd2</opcode>
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
@@ -6673,75 +6833,133 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x04</opcode>
+				<opcode>0xf2</opcode>
+			</opcodes>
+			<doc>
+				<p>When this opcode is executed, the NMOS processor stops execution. No hardware interrupts will be
+					executed also.
+					This is due to the fact that the internal state engine looses its "running bit" and
+					just stops running.
+				</p>
+				<p>Opcodes 0x82, 0xc2 and 0xe2 are sometimes listed as "NOP, Jams rarely"</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SHS</name>
+			<desc>AND the AC and XR registers, transfer the result to the stack pointer; this opcode is undocumented.</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x9b</opcode>
+			</opcodes>
+			<doc>
+				<p>SHA and TXS where, X is replaced by (A &amp; X).</p>
+				<p>Note: the value to be stored is also copied to ADDR_HI if page boundary is crossed.</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SHY</name>
+			<desc>AND the content of the YR registers with the high address byte plus one and store in memory; this opcode is
+				undocumented.
+			</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x9c</opcode>
+			</opcodes>
+			<doc>
+				<pre>
+					Store (Y &amp; (ADDR_HI + 1))
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SHX</name>
+			<desc>AND the content of the XR registers with the high address byte plus one and store in memory; this opcode is
+				undocumented.
+			</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x9e</opcode>
+			</opcodes>
+			<doc>
+				<pre>
+					Store (X &amp; (ADDR_HI + 1))
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SHA</name>
+			<synonym>AXA</synonym>
+			<desc>AND the content of the AC, XR registers with the high address byte plus one and store in memory; this opcode is
+				undocumented.
+			</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x9f</opcode>
 			</opcodes>
 			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x14</opcode>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0x93</opcode>
+			</opcodes>
+			<doc>
+				<pre>
+					Store (A &amp; X &amp; (ADDR_HI + 1))
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>ANC</name>
+			<desc>AND the content of the AC with an immediate value and move bit 7 into the carry flag; this opcode is
+				undocumented.
+			</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x0b</opcode>
 			</opcodes>
 			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x34</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x44</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x54</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x64</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x74</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0xd4</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0xf4</opcode>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x2b</opcode>
 			</opcodes>
 		</operation>
 
 		<operation>
-			<name>SKW</name>
-			<desc>Skip next word; this opcode is undocumented.</desc>
+			<name>LAS</name>
+			<desc>AND the content of the memory location with the stack pointer and store in AC, XR, and the stack pointer; this
+				opcode is undocumented.
+			</desc>
 			<feature>undoc</feature>
 			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x0c</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x1c</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x3c</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x5c</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0x7c</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0xdc</opcode>
-			</opcodes>
-			<opcodes>
-				<addressingMode>implied</addressingMode>
-				<opcode>0xfc</opcode>
+				<addressingMode>absy</addressingMode>
+				<opcode>0xbb</opcode>
 			</opcodes>
 		</operation>
+
+		<operation>
+			<name>ARR</name>
+			<desc>Weird combination of AND and ROR; this
+				opcode is undocumented.
+			</desc>
+			<feature>undoc</feature>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x6b</opcode>
+			</opcodes>
+			<doc>
+				<p>This operation is not the harmless combination of AND and ROR: it affects the V-flag and has
+					a specific decimal mode. See 64doc.txt for more details.
+				</p>
+			</doc>
+		</operation>
+
 
 		<!-- ################################# -->
 		<!-- Rockwell CMOS Bit test/set/branch operations -->
@@ -6762,7 +6980,7 @@
 				</p>
 			</doc>
 		</operation>
-		
+
 		<operation>
 			<name>SMB</name>
 			<desc>Set memory bit</desc>
@@ -6791,7 +7009,8 @@
 			</opcodes>
 			<doc>
 				<p>
-					Examine the operand value, and check the given bit. If the bit is cleared, branch to the given (relative) address.
+					Examine the operand value, and check the given bit. If the bit is cleared, branch to the given (relative)
+					address.
 				</p>
 			</doc>
 		</operation>
@@ -7228,11 +7447,13 @@
 			<id>indirectz</id>
 			<desc>The opcode is followed by an address, from which the effective
 				address of the operand is read.
-				The effective address is taken as a
+				The effective
+				address is taken as a
 				wide address (16 bit). The Z register
 				is added to the address, the result
 				is taken as
-				the effective address
+				the
+				effective address
 				of the operand.
 			</desc>
 			<simplesyntax>(&lt;address&gt;),Z</simplesyntax>
@@ -7353,11 +7574,32 @@
 				</prefix>
 			</mode>
 		</syntax>
-		<!-- <syntax> <id>indirectzlong</id> <desc>The opcode is followed by an address, from which an address read. This address 
-			is taken as a long address (32 bit). The Z register is added to the address, the result is taken as the effective address 
-			of the operand. </desc> <feature>65k</feature> <simplesyntax>[&lt;address&gt;],Z</simplesyntax> <mode> <addrMode>zpindzlong</addrMode> 
-			<prefix> <name>AM</name> <value>1</value> </prefix> </mode> <mode> <addrMode>absindzlong</addrMode> <prefix> <name>AM</name> 
-			<value>1</value> </prefix> </mode> </syntax> -->
+			<!-- 
+		<syntax>
+			<id>indirectzlong</id>
+			<desc>The opcode is followed by an address, from which an address read. This address
+				is taken as a long address (32 bit). The Z register is added to the address, the result is taken as the effective
+				address
+				of the operand.
+			</desc>
+			<feature>65k</feature>
+			<simplesyntax>[&lt;address&gt;],Z</simplesyntax>
+			<mode>
+				<addrMode>zpindzlong</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+			<mode>
+				<addrMode>absindzlong</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+		</syntax>
+			 -->
 
 		<syntax>
 			<id>indirectyquad</id>
@@ -7388,11 +7630,33 @@
 				</prefix>
 			</mode>
 		</syntax>
-		<!-- <syntax> <id>indirectzquad</id> <desc>The opcode is followed by an address, from which an address read. This address 
-			is taken as a quad address (64 bit). The Z register is added to the address, the result is taken as the effective address 
-			of the operand. </desc> <feature>65k</feature> <simplesyntax>[[&lt;address&gt;]],Z</simplesyntax> <mode> <addrMode>zpindzquad</addrMode> 
-			<prefix> <name>AM</name> <value>1</value> </prefix> </mode> <mode> <addrMode>absindzquad</addrMode> <prefix> <name>AM</name> 
-			<value>1</value> </prefix> </mode> </syntax> -->
+		<!-- 
+		<syntax>
+			<id>indirectzquad</id>
+			<desc>The opcode is followed by an address, from which an address read. This address
+				is taken as a quad address (64
+				bit). The Z register is added to the address, the result is taken as the effective
+				address
+				of the operand.
+			</desc>
+			<feature>65k</feature>
+			<simplesyntax>[[&lt;address&gt;]],Z</simplesyntax>
+			<mode>
+				<addrMode>zpindzquad</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+			<mode>
+				<addrMode>absindzquad</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+		</syntax>
+		 -->
 
 
 		<syntax>
@@ -7473,7 +7737,8 @@
 		<syntax>
 			<id>stackindirectindexed</id>
 			<desc>This mode is similar to indirect indexed addressing, only that the
-				stack pointer replaces the base page (or address zero in standard CMOS) as
+				stack pointer replaces the base page (or
+				address zero in standard CMOS) as
 				base address.
 				The single byte parameter is added to the stack pointer, the result is
 				the location of the pointer address in memory, to that y is added to
@@ -7485,11 +7750,12 @@
 				<addrMode>zpsindy</addrMode>
 			</mode>
 		</syntax>
-		
+
 		<syntax>
 			<id>zprel</id>
 			<desc>Addressing mode with one memory address, and a relative jump location.
-				Introduced in the Rockwell bit operations BBS/BBR, it allows specifying a zeropage
+				Introduced in the Rockwell bit operations
+				BBS/BBR, it allows specifying a zeropage
 				location to look at, and on some condition jump to a relative jump location.
 			</desc>
 			<simplesyntax>zp,rel</simplesyntax>
@@ -7498,7 +7764,7 @@
 				<addrMode>zprel</addrMode>
 			</mode>
 		</syntax>
-		
+
 	</syntaxes>
 
 
@@ -7819,10 +8085,12 @@
 			<desc>
 				Add the parameter to the stack register, then
 				load effective 16 bit address from this location,
-				then add content of YR;
+				then add content
+				of YR;
 				The effective address is computed as the word
 				(16bit) address read from
-				the stack pointer location offset by the given parameter
+				the stack pointer location offset by the
+				given parameter
 				plus the value of the Y
 				register.
 			</desc>
@@ -7847,7 +8115,9 @@
 				overflow when Z is added.
 			</desc>
 			<feature>cmos_indz</feature>
+			<!-- 
 			<altMode>zpindzlong</altMode>
+			 -->
 			<width>1</width>
 		</addrmode>
 
@@ -8012,12 +8282,22 @@
 			<feature>65k</feature>
 			<width>2</width>
 		</addrmode>
-
-		<!-- <addrmode> <name>Absolute indirect 32bit indexed with Z</name> <altname>Absolute long indirect Z-indexed</altname> 
-			<identifier>absindzlong</identifier> <desc>Load effective 32 bit address from absolute location given, then add content of 
-			ZR; The effective address is computed as the long address read from the word location given as parameter plus the value of 
-			the Z register. The resulting address may be larger than 32bit due to overflow when Z is added. </desc> <feature>ce02</feature> 
-			<width>2</width> </addrmode> -->
+<!-- 
+		<addrmode>
+			<name>Absolute indirect 32bit indexed with Z</name>
+			<altname>Absolute long indirect Z-indexed</altname>
+			<identifier>absindzlong</identifier>
+			<desc>Load effective 32 bit address from absolute location given, then add content of
+				ZR; The effective address is
+				computed as the long address read from the word location given as parameter plus the value
+				of
+				the Z register. The
+				resulting address may be larger than 32bit due to overflow when Z is added.
+			</desc>
+			<feature>ce02</feature>
+			<width>2</width>
+		</addrmode>
+ -->
 
 		<addrmode>
 			<name>Absolute indexed with X indirect 32bit</name>
@@ -8069,7 +8349,7 @@
 			<feature>65k</feature>
 			<width>1</width>
 		</addrmode>
-
+<!-- 
 		<addrmode>
 			<name>Zeropage indirect 64bit indexed with Z</name>
 			<altname>Zeropage quad indirect Z-indexed</altname>
@@ -8087,6 +8367,7 @@
 			<feature>65k</feature>
 			<width>1</width>
 		</addrmode>
+ -->
 
 
 		<addrmode>
@@ -8136,7 +8417,7 @@
 			<feature>65k</feature>
 			<width>2</width>
 		</addrmode>
-
+<!-- 
 		<addrmode>
 			<name>Absolute indirect 64bit indexed with Z</name>
 			<altname>Absolute quad indirect Z-indexed</altname>
@@ -8153,6 +8434,7 @@
 			<feature>65k</feature>
 			<width>2</width>
 		</addrmode>
+ -->
 
 
 		<addrmode>
@@ -8280,9 +8562,9 @@
 			<feature>65k</feature>
 			<width>0</width>
 		</addrmode>
-		
+
 		<!-- ################################# -->
-		
+
 		<addrmode>
 			<name>ZP with Branch</name>
 			<desc>Zeropage addressing, combined with relative addressing modes, used in branches; from -128 to +127
@@ -8293,7 +8575,7 @@
 		</addrmode>
 
 
-		
+
 	</addrmodes>
 
 	<!-- ################################# -->

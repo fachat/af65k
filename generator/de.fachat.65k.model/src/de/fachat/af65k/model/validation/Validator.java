@@ -313,6 +313,10 @@ public class Validator {
 		return rv;
 	}
 
+	public Collection<Operation> getOperations() {
+		return cpu.getOperations();
+	}
+	
 	/**
 	 * return a map from opcode page, to opcode row (high nibble) to opcode col
 	 * (low nibble) to Opcode object
@@ -326,7 +330,7 @@ public class Validator {
 
 		Map<String, CodeMapEntry[]> rv = new HashMap<String, Validator.CodeMapEntry[]>();
 
-		for (Operation op : cpu.getOpcodes()) {
+		for (Operation op : cpu.getOperations()) {
 
 			if (op.getClazz() != null && !features.contains(op.getClazz())) {
 				continue;

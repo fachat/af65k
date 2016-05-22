@@ -140,13 +140,6 @@ public class CPU {
 		this.addressingModes = addressingModes;
 	}
 
-	public List<Operation> getOpcodes() {
-		return operations;
-	}
-
-	public void setOpcodes(List<Operation> opcodes) {
-		this.operations = opcodes;
-	}
 
 	public List<Operation> getOperations() {
 		return operations;

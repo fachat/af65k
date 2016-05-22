@@ -104,7 +104,7 @@ public class ModelTest {
 		cpu.setIdentifier("af65002");
 		cpu.setAddressingModes(new ArrayList<AddressingMode>());
 		cpu.setPrefix(new ArrayList<Prefix>());
-		cpu.setOpcodes(new ArrayList<Operation>());		
+		cpu.setOperations(new ArrayList<Operation>());		
 		
 		//---------------------------------------------------------
 		
@@ -151,7 +151,7 @@ public class ModelTest {
 		op.setName("LDA");
 		op.setPrefixBits(new ArrayList<String>());
 		op.setOpcodes(new ArrayList<Opcode>());
-		cpu.getOpcodes().add(op);
+		cpu.getOperations().add(op);
 		
 		op.getPrefixBits().add("AM");
 		op.getPrefixBits().add("UM");
