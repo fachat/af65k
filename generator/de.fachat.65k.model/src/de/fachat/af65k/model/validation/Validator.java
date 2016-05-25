@@ -141,10 +141,12 @@ public class Validator {
 		Map<String, String> lengthsyntaxes = new HashMap<String, String>();
 		lengthsyntaxes.put("a1", "zp");
 		lengthsyntaxes.put("a2", "abs");
+		lengthsyntaxes.put("a3", "bank");
 		lengthsyntaxes.put("a4", "long");
 		lengthsyntaxes.put("a8", "quad");
 		lengthsyntaxes.put("o1", "byte");
 		lengthsyntaxes.put("o2", "word");
+		lengthsyntaxes.put("o3", "bank");
 		lengthsyntaxes.put("o4", "long");
 		lengthsyntaxes.put("o8", "quad");
 

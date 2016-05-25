@@ -33,6 +33,9 @@
 			<name>rcmos</name>
 		</feature>
 		<feature>
+			<name>816ce02</name>
+		</feature>
+		<feature>
 			<name>816</name>
 		</feature>
 		<feature>
@@ -122,10 +125,15 @@
 			<name>65816</name>
 			<includes>cmos</includes>
 			<feature>816</feature>
+			<feature>816ce02</feature>
 			<doc>
 				<p>
 					This class contains the new opcodes and opcode extensions of the
-					WDC65816.
+					WDC65816. 
+				</p>
+				<p>
+					For more details on the 65816 see the <a href="http://6502.org/tutorials/65c816opcodes.html">65816 tutorial</a>
+					on 6502.org.
 				</p>
 			</doc>
 		</class>
@@ -151,6 +159,7 @@
 			<feature>cmos_indz</feature>
 			<feature>rcmos</feature>
 			<feature>ce02</feature>
+			<feature>816ce02</feature>
 			<doc>
 				<p>
 					The 65ce02 opcodes, which are an extension to the Rockwell CMOS opcodes.
@@ -721,6 +730,16 @@
 		</operation>
 
 		<operation>
+			<name>BRL</name>
+			<desc>Branch always - branch independent from any flags</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>relw</addressingMode>
+				<opcode>0x82</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
 			<name>BEV</name>
 			<desc>Branch on even</desc>
 			<prefixBits>RS</prefixBits>
@@ -986,6 +1005,11 @@
 				<opcode>0x4c</opcode>
 			</opcodes>
 			<opcodes>
+				<addressingMode>addrbank</addressingMode>
+				<opcode>0x5c</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
 				<addressingMode>absind</addressingMode>
 				<opcode>0x6c</opcode>
 			</opcodes>
@@ -1011,7 +1035,6 @@
 				</p>
 				<pre>
 					PC &amp;lt;= Operand
-					Status |= U when UM is set
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -1020,11 +1043,34 @@
 					Note that if UM is set, then the processor
 					jumps into user
 					mode.
+				<pre>
+					Status |= U when UM is set
+				</pre>
 				</p>
 				<p>
 					If the operand is not as wide as required for an address, it is
 					sign-extended.
 				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>JML</name>
+			<desc>Jump to new code address (24 bit)</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0xdc</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Jump to the address given by the operand (as computed depending
+					on the
+					respective addressing mode).
+				</p>
+				<pre>
+					PC &amp;lt;= Operand
+				</pre>
 			</doc>
 		</operation>
 
@@ -1061,6 +1107,11 @@
 				<addressingMode>absxind</addressingMode>
 				<opcode>0xfc</opcode>
 				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absxind</addressingMode>
+				<opcode>0xfc</opcode>
+				<feature>816</feature>
 			</opcodes>
 			<opcodes>
 				<addressingMode>absxind</addressingMode>
@@ -1129,6 +1180,35 @@
 				<p>
 					The stack pointer used is the stack pointer of the current mode.
 				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>JSL</name>
+			<desc>Jump subroutine long - jump to a new code location, save return
+				address on stack for RTS (24 bit)
+			</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>addrbank</addressingMode>
+				<opcode>0x22</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Jump to the address given by the operand (as computed depending
+					on the
+					respective addressing mode) and
+					store first the program bank register, then the
+					return address (-1)
+					on the stack to prepare for the RTL opcode
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= &gt; PBR
+					Stack(SP--) &amp;lt;= &gt; NextPC-1
+					Stack(SP--) &amp;lt;=
+					&amp;lt; NextPC-1
+					PC &amp;lt;= Operand
+				</pre>
 			</doc>
 		</operation>
 
@@ -1865,6 +1945,26 @@
 				<opcode>0xe2</opcode>
 				<feature>ce02</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0xa3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0xb3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0xaf</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0xbf</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Read the operand and store it in the Accumulator. Set the flags
@@ -2145,6 +2245,26 @@
 				<opcode>0xc9</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0xc3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0xd3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0xcf</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0xdf</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Compare the operand with the accumulator and set the flags
@@ -2259,6 +2379,26 @@
 				<opcode>0x09</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0x03</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0x13</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0x0f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0x1f</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Bitwise OR the accumulator with the operand and store back in the
@@ -2366,6 +2506,26 @@
 				<addressingMode>eind</addressingMode>
 				<opcode>0x29</opcode>
 				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0x23</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0x33</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0x2f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0x3f</opcode>
+				<feature>816</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -2479,6 +2639,26 @@
 				<opcode>0x49</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0x43</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0x53</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0x4f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0x5f</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Bitwise Exclusive-OR the accumulator with the operand and store
@@ -2589,6 +2769,26 @@
 				<addressingMode>eind</addressingMode>
 				<opcode>0x69</opcode>
 				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0x63</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0x73</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0x6f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0x7f</opcode>
+				<feature>816</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -2854,6 +3054,26 @@
 				<addressingMode>eind</addressingMode>
 				<opcode>0xe9</opcode>
 				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0xe3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0xf3</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0xef</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0xff</opcode>
+				<feature>816</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -3887,6 +4107,26 @@
 				<addressingMode>zpsindy</addressingMode>
 				<opcode>0x82</opcode>
 				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zps</addressingMode>
+				<opcode>0x83</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpsindy</addressingMode>
+				<opcode>0x93</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bank</addressingMode>
+				<opcode>0x8f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bankx</addressingMode>
+				<opcode>0x9f</opcode>
+				<feature>816</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -4940,6 +5180,7 @@
 				</p>
 			</doc>
 		</operation>
+
 
 		<operation>
 			<name>CLV</name>
@@ -6070,7 +6311,7 @@
 
 		<operation>
 			<name>PLB</name>
-			<desc>Pull E from stack (full width)</desc>
+			<desc>Pull B from stack (full width)</desc>
 			<prefixBits>UM</prefixBits>
 			<prefixBits>NF</prefixBits>
 			<feature>65k</feature>
@@ -6109,6 +6350,8 @@
 				</p>
 			</doc>
 		</operation>
+
+
 
 		<operation>
 			<name>TPA</name>
@@ -7198,7 +7441,416 @@
 		</operation>
 
 
+		<!-- ################################## -->
+		<!-- 65816 opcodes -->
 
+		<operation>
+			<name>REP</name>
+			<desc>Reset processor status bits</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xc2</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Reset the processor status bits that are set in the immediate operand (all flags but the B-flag)
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SEP</name>
+			<desc>Set processor status bits</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xe2</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Set the processor status bits that are set in the immediate operand (all flags but the B-flag)
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>STP</name>
+			<desc>Stop processor</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xdb</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Stop the processor.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>WAI</name>
+			<desc>Wait for interrupt</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xcb</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Stop the processor and wait for an interrupt, where execution resumes.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>XCE</name>
+			<desc>Exchange Carry and Emulation Flags</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xfb</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>XBA</name>
+			<desc>Exchange A and B 8-bit accumulators (i.e. both halfs of the 16 bit AC)</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xeb</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>WDM</name>
+			<desc>Reserved for future expansion</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x42</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>TDC</name>
+			<desc>Transfer the contents of direct page register into the 16-bit AC</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x7b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the DPR to the A register (16 bit)
+				</p>
+				<pre>
+					A &amp;lt;= DPR
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>TCD</name>
+			<desc>Transfer the contents of the 16-bit AC into the 16-bit direct page register</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x5b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the A to the DPR register (16 bit)
+				</p>
+				<pre>
+					DPR &amp;lt;= A
+				</pre>
+			</doc>
+		</operation>
+
+
+		<operation>
+			<name>TSC</name>
+			<desc>Transfer the contents of 16-bit stack pointer into the 16-bit AC</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x3b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the S to the A register (16 bit)
+				</p>
+				<pre>
+					A &amp;lt;= S
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>TCS</name>
+			<desc>Transfer the contents of 16-bit AC into the 16-bit stack pointer</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x1b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the A to the S register (16 bit)
+				</p>
+				<pre>
+					S &amp;lt;= A
+				</pre>
+			</doc>
+		</operation>
+
+
+		<operation>
+			<name>TXY</name>
+			<desc>Transfer the contents of X into the Y register</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x9b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the X to the Y register
+				</p>
+				<pre>
+					Y &amp;lt;= X
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>TYX</name>
+			<desc>Transfer the contents of Y into the X register</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xbb</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Transfer the value of the Y to the X register
+				</p>
+				<pre>
+					X &amp;lt;= Y
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PEI</name>
+			<desc>Push effective indirect address (16 bit)</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xd4</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Push the address to the stack that would result as effective operand address if the operand were used in an indirect
+					addressing mode. I.e. read the value at the given direct page operand, and push it onto the stack (as 16 bit value).
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= (operand)
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PEA</name>
+			<desc>Push effective address (16 bit)</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>imm2</addressingMode>
+				<opcode>0xf4</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Push the immediate value from the operand onto the stack (as 16 bit value).
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= operand
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PER</name>
+			<desc>Push effective relative address (16 bit)</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>relw</addressingMode>
+				<opcode>0x62</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Take the address given as parameter, add the current program counter, and push the resulting
+					address onto the stack (as 16 bit value). This is similar to pushing the offset of a branch instruction.
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= operand - PC + 1
+				</pre>
+			</doc>
+		</operation>
+
+
+		<operation>
+			<name>PLB</name>
+			<desc>Pull data bank register DBR from stack</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xab</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Pull the value of the data bank register register from the stack.
+				</p>
+				<pre>
+					DBR &amp;lt;= Stack(++SP)
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PHB</name>
+			<desc>Push data bank register DBR to stack</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x8b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Push the value of the data bank register register to the stack.
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= DBR
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PLD</name>
+			<desc>Pull direct page register from stack</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x2b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Pull the value of the direct page register register from the stack.
+				</p>
+				<pre>
+					DPR &amp;lt;= Stack(++SP)
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PHD</name>
+			<desc>Push direct page register to stack</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x0b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Push the value of the direct page register register to the stack.
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= DPR
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PHK</name>
+			<desc>Push program bank register to stack</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x4b</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Push the value of the program bank register register to the stack.
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= PBR
+				</pre>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>RTL</name>
+			<desc>Return from subroutine long</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x6b</opcode>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>COP</name>
+			<desc>Coprocessor call</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0x02</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					The COP instruction pushes the K register (i.e. the program bank register) onto the stack (in native mode only),
+					then the 16 bit address of the COP instruction plus 2, then the status register. The COP instruction is very 
+					similar to the BRK instruction.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>MVN</name>
+			<desc>Move block of data (count index down) 
+			</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>dimm</addressingMode>
+				<opcode>0x54</opcode>
+			</opcodes>
+			<doc>
+				<p>
+				 x=source address, y=destination address, ac=number of bytes; the two immediate parameters
+				 are the destination and source data bank numbers respectively.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>MVP</name>
+			<desc>Move block of data (count index up)
+			</desc>
+			<feature>816</feature>
+			<opcodes>
+				<addressingMode>dimm</addressingMode>
+				<opcode>0x44</opcode>
+			</opcodes>
+			<doc>
+				<p>
+				 x=source address, y=destination address, ac=number of bytes; the two immediate parameters
+				 are the destination and source data bank numbers respectively.
+				</p>
+			</doc>
+		</operation>
 
 	</operations>
 
@@ -7258,6 +7910,18 @@
 		</syntax>
 
 		<syntax>
+			<id>doubleimmediate</id>
+			<desc>Double immediate addressing: two operands directly follow the opcode.
+			</desc>
+			<simplesyntax>#&lt;op1&gt;, #&lt;op2&gt;</simplesyntax>
+			<feature>816</feature>
+			<mode>
+				<!--width>1</width -->
+				<addrMode>dimm</addrMode>
+			</mode>
+		</syntax>
+
+		<syntax>
 			<id>absolute</id>
 			<desc>Opcode is followed by an address for the operand</desc>
 			<simplesyntax>&lt;address&gt;</simplesyntax>
@@ -7266,6 +7930,10 @@
 			</mode>
 			<mode>
 				<addrMode>abs</addrMode>
+			</mode>
+			<mode>
+				<addrMode>bank</addrMode>
+				<feature>816</feature>
 			</mode>
 			<mode>
 				<addrMode>long</addrMode>
@@ -7285,6 +7953,10 @@
 			</mode>
 			<mode>
 				<addrMode>addr</addrMode>
+			</mode>
+			<mode>
+				<addrMode>addrbank</addrMode>
+				<feature>816</feature>
 			</mode>
 			<mode>
 				<addrMode>addrlong</addrMode>
@@ -7318,7 +7990,7 @@
 			<mode>
 				<addrMode>relw</addrMode>
 				<simplesyntax>relwide</simplesyntax>
-				<feature>ce02</feature>
+				<feature>816ce02</feature>
 			</mode>
 			<mode>
 				<addrMode>rellong</addrMode>
@@ -7379,6 +8051,10 @@
 				<addrMode>absx</addrMode>
 			</mode>
 			<mode>
+				<addrMode>bankx</addrMode>
+				<feature>816</feature>
+			</mode>
+			<mode>
 				<addrMode>longx</addrMode>
 				<prefix>
 					<name>AM</name>
@@ -7422,6 +8098,17 @@
 					<value>1</value>
 				</prefix>
 				<feature>65k</feature>
+			</mode>
+		</syntax>
+
+		<syntax>
+			<id>absolutes</id>
+			<desc>The S register is added to the operand following the opcode
+			</desc>
+			<feature>816</feature>
+			<simplesyntax>&lt;address&gt;,S</simplesyntax>
+			<mode>
+				<addrMode>zps</addrMode>
 			</mode>
 		</syntax>
 
@@ -7497,6 +8184,21 @@
 					<name>AM</name>
 					<value>1</value>
 				</prefix>
+			</mode>
+		</syntax>
+
+		<syntax>
+			<id>indirectbank</id>
+			<desc>The opcode is followed by an address, from which the effective
+				address of the operand is read.
+				The effective
+				address is taken as a
+				bank address (24 bit)
+			</desc>
+			<feature>816</feature>
+			<simplesyntax>[&lt;address&gt;]</simplesyntax>
+			<mode>
+				<addrMode>absindbank</addrMode>
 			</mode>
 		</syntax>
 
@@ -7745,7 +8447,7 @@
 				give the effective address.
 			</desc>
 			<simplesyntax>(zp,S),Y</simplesyntax>
-			<feature>ce02</feature>
+			<feature>816ce02</feature>
 			<mode>
 				<addrMode>zpsindy</addrMode>
 			</mode>
@@ -7804,6 +8506,14 @@
 		</addrmode>
 
 		<addrmode>
+			<name>Address</name>
+			<desc>The parameter following the opcode is an address (24 bit)
+			</desc>
+			<identifier>addrbank</identifier>
+			<width>3</width>
+		</addrmode>
+
+		<addrmode>
 			<name>Address Long</name>
 			<desc>The parameter following the opcode is an address (32 bit; for
 				JMP, JSR, JPU)
@@ -7834,6 +8544,17 @@
 			<ignoredPrefixes>UM</ignoredPrefixes>
 			<ignoredPrefixes>OF</ignoredPrefixes>
 			<width>1</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Double Immediate</name>
+			<desc>The double immediate addressing mode uses two opcode parameters
+				directly, without further lookup. Here it is two byte-wide
+				parameters
+			</desc>
+			<feature>816</feature>
+			<identifier>dimm</identifier>
+			<width>2</width>
 		</addrmode>
 
 		<addrmode>
@@ -7917,6 +8638,18 @@
 		</addrmode>
 
 		<addrmode>
+			<name>Stack-relative with offset</name>
+			<altname>Zeropage S-indexed</altname>
+			<identifier>zps</identifier>
+			<desc>Stack address, plus a byte offset; The effective address of
+				the operand is the opcode parameter (byte value), plus the
+				value of the S register
+			</desc>
+			<feature>816</feature>
+			<width>1</width>
+		</addrmode>
+
+		<addrmode>
 			<name>Zeropage indexed with Y</name>
 			<altname>Zeropage Y-indexed</altname>
 			<identifier>zpy</identifier>
@@ -7965,6 +8698,30 @@
 			</desc>
 			<altMode>quady</altMode>
 			<width>2</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Absolute 24bit</name>
+			<altname>Banked Absolute</altname>
+			<feature>816</feature>
+			<identifier>bank</identifier>
+			<desc>24 bit address; The effective address of the operand is the
+				bank plus 16 bit
+				address given as opcode parameter
+			</desc>
+			<width>3</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Absolute 24bit indexed with X</name>
+			<altname>Banked Absolute X-indexed</altname>
+			<feature>816</feature>
+			<identifier>bankx</identifier>
+			<desc>24 bit address; The effective address of the operand is the
+				bank plus 16 bit
+				address given as opcode parameter, plus the content of the X register.
+			</desc>
+			<width>3</width>
 		</addrmode>
 
 		<addrmode>
@@ -8094,7 +8851,7 @@
 				plus the value of the Y
 				register.
 			</desc>
-			<feature>ce02</feature>
+			<feature>816ce02</feature>
 			<width>1</width>
 		</addrmode>
 
@@ -8190,6 +8947,22 @@
 			<feature>cmos</feature>
 			<width>2</width>
 		</addrmode>
+
+		<!-- ################################# -->
+
+		<addrmode>
+			<name>Absolute indirect 24bit</name>
+			<identifier>absindbank</identifier>
+			<feature>816</feature>
+			<desc>Load effective 24 bit address from absolute location given;
+				The
+				effective (24bit) address is read from the
+				location given as
+				parameter.
+			</desc>
+			<width>2</width>
+		</addrmode>
+
 
 		<!-- ################################# -->
 
@@ -8484,7 +9257,7 @@
 				+32767
 			</desc>
 			<identifier>relw</identifier>
-			<feature>ce02</feature>
+			<feature>816ce02</feature>
 			<width>2</width>
 		</addrmode>
 

@@ -58,6 +58,8 @@ public class Generator {
 		generateCpu(file, "65c02", false);
 
 		generateCpu(file, "r65c02", false);
+		
+		generateCpu(file, "65816", false);
 	}
 	
 

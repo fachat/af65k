@@ -1834,13 +1834,15 @@
 					respective addressing mode).
 				</p><pre>
 					PC &lt;= Operand
-					Status |= U when UM is set
 				</pre><h3>65k</h3>
 <p>The AM, OF, LE and UM prefixes are evaluated by the addressing
 					modes.
 					Note that if UM is set, then the processor
 					jumps into user
 					mode.
+				<pre>
+					Status |= U when UM is set
+				</pre>
 				</p><p>
 					If the operand is not as wide as required for an address, it is
 					sign-extended.
