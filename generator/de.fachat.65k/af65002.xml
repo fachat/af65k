@@ -1026,6 +1026,7 @@
 				<addressingMode>addrlong</addressingMode>
 				<opcode>0x6c</opcode>
 				<oppage>EXT</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -8509,6 +8510,7 @@
 			<name>Address</name>
 			<desc>The parameter following the opcode is an address (24 bit)
 			</desc>
+			<feature>816</feature>
 			<identifier>addrbank</identifier>
 			<width>3</width>
 		</addrmode>
@@ -8518,6 +8520,7 @@
 			<desc>The parameter following the opcode is an address (32 bit; for
 				JMP, JSR, JPU)
 			</desc>
+			<feature>65k</feature>
 			<identifier>addrlong</identifier>
 			<width>4</width>
 		</addrmode>
@@ -8527,6 +8530,7 @@
 			<desc>The parameter following the opcode is an address (32 bit; for
 				JMP, JSR, JPU)
 			</desc>
+			<feature>65k</feature>
 			<identifier>addrquad</identifier>
 			<width>8</width>
 		</addrmode>
