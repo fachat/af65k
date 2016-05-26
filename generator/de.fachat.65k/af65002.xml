@@ -1966,6 +1966,16 @@
 				<opcode>0xbf</opcode>
 				<feature>816</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0xa7</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0xb7</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Read the operand and store it in the Accumulator. Set the flags
@@ -2266,6 +2276,16 @@
 				<opcode>0xdf</opcode>
 				<feature>816</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0xc7</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0xd7</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Compare the operand with the accumulator and set the flags
@@ -2400,6 +2420,16 @@
 				<opcode>0x1f</opcode>
 				<feature>816</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0x07</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0x17</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Bitwise OR the accumulator with the operand and store back in the
@@ -2526,6 +2556,16 @@
 			<opcodes>
 				<addressingMode>bankx</addressingMode>
 				<opcode>0x3f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0x27</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0x37</opcode>
 				<feature>816</feature>
 			</opcodes>
 			<doc>
@@ -2660,6 +2700,16 @@
 				<opcode>0x5f</opcode>
 				<feature>816</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0x47</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0x57</opcode>
+				<feature>816</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Bitwise Exclusive-OR the accumulator with the operand and store
@@ -2789,6 +2839,16 @@
 			<opcodes>
 				<addressingMode>bankx</addressingMode>
 				<opcode>0x7f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0x67</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0x77</opcode>
 				<feature>816</feature>
 			</opcodes>
 			<doc>
@@ -3074,6 +3134,16 @@
 			<opcodes>
 				<addressingMode>bankx</addressingMode>
 				<opcode>0xff</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0xe7</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0xf7</opcode>
 				<feature>816</feature>
 			</opcodes>
 			<doc>
@@ -4127,6 +4197,16 @@
 			<opcodes>
 				<addressingMode>bankx</addressingMode>
 				<opcode>0x9f</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbank</addressingMode>
+				<opcode>0x87</opcode>
+				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindybank</addressingMode>
+				<opcode>0x97</opcode>
 				<feature>816</feature>
 			</opcodes>
 			<doc>
@@ -8269,6 +8349,9 @@
 				</prefix>
 			</mode>
 			<mode>
+				<addrMode>absindybank</addrMode>
+			</mode>
+			<mode>
 				<!--width>2</width -->
 				<addrMode>absindylong</addrMode>
 				<prefix>
@@ -8963,6 +9046,16 @@
 				effective (24bit) address is read from the
 				location given as
 				parameter.
+			</desc>
+			<width>2</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Absolute indirect 24bit indexed with Y</name>
+			<identifier>absindybank</identifier>
+			<feature>816</feature>
+			<desc>Load 24 bit address from absolute location given, then add content of Y register to
+			compute effective 24 bit operand address.
 			</desc>
 			<width>2</width>
 		</addrmode>
