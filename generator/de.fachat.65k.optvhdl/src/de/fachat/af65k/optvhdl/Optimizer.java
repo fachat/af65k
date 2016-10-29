@@ -43,7 +43,7 @@ import javax.xml.bind.JAXB;
 import de.fachat.af65k.logging.Logger;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.CPU;
-import de.fachat.af65k.model.objs.FeatureClass;
+import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
 import de.fachat.af65k.model.objs.Operation;
 import de.fachat.af65k.model.validation.Validator;
@@ -316,7 +316,7 @@ public class Optimizer {
 				Opcode opc = codeen.getOpcode();
 				String opname = opc.getAddressingMode();
 				
-				FeatureClass fclass = codeen.getFclass();
+				FeatureSet fclass = codeen.getFclass();
 				
 				if (clazz == null
 					|| fclass == null
@@ -343,7 +343,7 @@ public class Optimizer {
 				Opcode opc = codeen.getOpcode();
 				Operation op = codeen.getOperation();
 				String opname = op.getName();
-				FeatureClass fclass = codeen.getFclass();
+				FeatureSet fclass = codeen.getFclass();
 				
 				if (clazz == null
 					|| fclass == null

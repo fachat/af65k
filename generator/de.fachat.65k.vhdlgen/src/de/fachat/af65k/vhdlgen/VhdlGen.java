@@ -292,7 +292,7 @@ public class VhdlGen {
 				pwr.println("$"
 						+ fmt.toString()
 						+ ", "
-						+ en.getOperation().getName()
+						+ en.getName()
 						+ " "
 						+ en.getAddrmode().getName()
 						+ ": "

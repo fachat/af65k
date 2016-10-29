@@ -42,22 +42,29 @@ typedef enum {
 #define W_QUAD          (W_8 + W_16 + W_32 + W_64)
 
 
-
+// note: the ISA Map corresponds to the feature name in the af65002.xml definition file
 typedef enum {
-        ISA_NMOS                = 1,    // standard NMOS without SED
-        ISA_NMOS_ILLEGAL        = 2,    // NMOS illegal opcodes
-        ISA_NMOS_BCD            = 4,    // NMOS SED opcode
-        ISA_CMOS                = 8,    // CMOS extensions
-        ISA_CMOS_ROCKWELL       = 16,   // RMB/SMB/BBS/BBR opcodes
-        ISA_816                 = 32,   // 65816 extensions to CMOS 6502
-        ISA_65K                 = 64,   // 65K extensions to CMOS 6502
+        ISA_BASE                = 1,     // standard NMOS without SED
+        ISA_UNDOC	        = 2,     // NMOS "undocumented" opcodes
+        ISA_BCD	 	        = 4,     // NMOS SED opcode
+        ISA_ROR	 	        = 8,     // NMOS ROR opcode
+        ISA_CMOS                = 16,    // CMOS extensions
+        ISA_CMOS_IND            = 32,    // CMOS zeropage indirect addressing mode ops
+        ISA_CMOS_INDZ           = 64,    // CMOS zeropage indirect addressing mode ops indexed with Z, for ce02
+        ISA_RCMOS	        = 128,   // RMB/SMB/BBS/BBR opcodes
+        ISA_816                 = 256,   // 65816 extensions to CMOS 6502
+        ISA_816CE02             = 512,   // 65816 extensions to CMOS 6502
+        ISA_65K                 = 1024,  // 65K extensions to CMOS 6502
+        ISA_65K10               = 2048,  // 65K10 system extensions 65k
+        ISA_CE02                = 4096,  // 65ce02 extensions to the Rockwell CMOS
 } isa_map;
 
-#define ISA_NMOS_ALL    (ISA_NMOS + ISA_NMOS_ILLEGAL + ISA_NMOS_BCD)
-#define ISA_CMOS_ALL    (ISA_NMOS + ISA_CMOS + ISA_CMOS_ROCKWELL)
-#define ISA_816_ALL     (ISA_NMOS + ISA_CMOS + ISA_816)
-#define ISA_65K_ALL     (ISA_NMOS + ISA_CMOS + ISA_65K)
-#define ISA_ALL         (ISA_NMOS + ISA_NMOS_ILLEGAL + ISA_NMOS_BCD + ISA_CMOS + ISA_CMOS_ROCKWELL + ISA_816 + ISA_65K)
+// may at some time correspond to the feature combinations from the class definitions in af65002.xml definition 
+#define ISA_NMOS_ALL   	(ISA_BASE + ISA_UNDOC + ISA_BCD)
+#define ISA_CMOS_ALL    (ISA_BASE + ISA_CMOS + ISA_RCMOS)
+#define ISA_816_ALL     (ISA_BASE + ISA_CMOS + ISA_816)
+#define ISA_65K_ALL     (ISA_BASE + ISA_CMOS + ISA_65K)
+#define ISA_ALL         (ISA_BASE + ISA_UNDOC + ISA_BCD + ISA_CMOS + ISA_RCMOS + ISA_816 + ISA_65K)
 
 
 typedef enum {
@@ -80,8 +87,8 @@ typedef struct {
 	const char 	*name;
 	const isa_map	isa;
 	const width_map	width;		// memory model size 16, 24, 32, 64
-	const bool_t	has_bcd;
-	const bool_t	has_illegal;
+	//const bool_t	has_bcd;
+	//const bool_t	has_illegal;
 	const bool_t	has_check_width;
 	const bool_t	has_prefixes;
 	const char 	*desc;		// description of CPU model

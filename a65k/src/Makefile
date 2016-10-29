@@ -30,7 +30,7 @@ PKG_CONFIG=$(CROSS)pkg-config
 AUTODEP=-MMD -MP -MF $(DEPDIR)$(@F).d
 
 # Sorting include paths and defines simplifies checking them
-INCPATHS=. util base
+INCPATHS=. util base tables
 INCLUDE=$(sort $(addprefix -I,$(INCPATHS)))
 
 

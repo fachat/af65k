@@ -121,9 +121,11 @@ typedef enum {
 
 
 typedef struct {
-	bool_t		is_valid;
+	//bool_t		is_valid;
 	unsigned char	code;
 	pg_type 	page_prefix;
+	const char 	*amodename;
+	isa_map		isa;
 } opcode_t;
 
 // operation - equivalent to the mnemonic, like "lda", "adc", "inx", ...

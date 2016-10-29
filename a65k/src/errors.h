@@ -87,7 +87,9 @@ static inline void error_wide_operand_narrow_idx(const position_t *loc, const ch
 			op_name, am_name, cpu_name);
 }
 
-
+static inline void warn_operation_not_for_cpu(const position_t *loc, const char *op_name, const char *cpu_name) {
+	loclog_warn(loc, "Operation name %s is not available for CPU %s, assuming label!", op_name, cpu_name);
+}
 
 #endif
 

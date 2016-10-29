@@ -1,0 +1,274 @@
+<table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td><div class="opc">BRK #byte</div>
+</td><td><div class="opc">ORA (zp,X)</div>
+</td><td><div class="opc">COP #byte</div>
+</td><td class="prefix"><div class="opc">ORA zp,S</div>
+</td><td class="cmos"><div class="opc">TSB zp</div>
+</td><td><div class="opc">ORA zp</div>
+</td><td><div class="opc">ASL zp</div>
+</td><td class="prefix"><div class="opc">ORA [abs]</div>
+</td><td><div class="opc">PHP </div>
+</td><td><div class="opc">ORA #byte</div>
+</td><td><div class="opc">ASL </div>
+</td><td class="prefix"><div class="opc">PHD </div>
+</td><td class="cmos"><div class="opc">TSB abs</div>
+</td><td><div class="opc">ORA abs</div>
+</td><td><div class="opc">ASL abs</div>
+</td><td class="prefix"><div class="opc">ORA bank</div>
+</td></tr>
+<tr><th>1</th><td><div class="opc">BPL rel</div>
+</td><td><div class="opc">ORA (zp),Y</div>
+</td><td class="cmos"><div class="opc">ORA (zp)</div>
+</td><td class="prefix"><div class="opc">ORA (zp,S),Y</div>
+</td><td class="cmos"><div class="opc">TRB zp</div>
+</td><td><div class="opc">ORA zp,X</div>
+</td><td><div class="opc">ASL zp,X</div>
+</td><td class="prefix"><div class="opc">ORA [abs],Y</div>
+</td><td><div class="opc">CLC </div>
+</td><td><div class="opc">ORA abs,Y</div>
+</td><td class="cmos"><div class="opc">INC </div>
+</td><td class="prefix"><div class="opc">TCS </div>
+</td><td class="cmos"><div class="opc">TRB abs</div>
+</td><td><div class="opc">ORA abs,X</div>
+</td><td><div class="opc">ASL abs,X</div>
+</td><td><div class="opc">ORA bank,X</div>
+</td></tr>
+<tr><th>2</th><td><div class="opc">JSR abs</div>
+</td><td><div class="opc">AND (zp,X)</div>
+</td><td><div class="opc">JSL bank</div>
+</td><td class="prefix"><div class="opc">AND zp,S</div>
+</td><td><div class="opc">BIT zp</div>
+</td><td><div class="opc">AND zp</div>
+</td><td><div class="opc">ROL zp</div>
+</td><td class="prefix"><div class="opc">AND [abs]</div>
+</td><td><div class="opc">PLP </div>
+</td><td><div class="opc">AND #byte</div>
+</td><td><div class="opc">ROL </div>
+</td><td class="prefix"><div class="opc">PLD </div>
+</td><td><div class="opc">BIT abs</div>
+</td><td><div class="opc">AND abs</div>
+</td><td><div class="opc">ROL abs</div>
+</td><td class="prefix"><div class="opc">AND bank</div>
+</td></tr>
+<tr><th>3</th><td><div class="opc">BMI rel</div>
+</td><td><div class="opc">AND (zp),Y</div>
+</td><td class="cmos"><div class="opc">AND (zp)</div>
+</td><td class="prefix"><div class="opc">AND (zp,S),Y</div>
+</td><td class="cmos"><div class="opc">BIT zp,X</div>
+</td><td><div class="opc">AND zp,X</div>
+</td><td><div class="opc">ROL zp,X</div>
+</td><td class="prefix"><div class="opc">AND [abs],Y</div>
+</td><td><div class="opc">SEC </div>
+</td><td><div class="opc">AND abs,Y</div>
+</td><td class="cmos"><div class="opc">DEC </div>
+</td><td class="prefix"><div class="opc">TSC </div>
+</td><td class="cmos"><div class="opc">BIT abs,X</div>
+</td><td><div class="opc">AND abs,X</div>
+</td><td><div class="opc">ROL abs,X</div>
+</td><td><div class="opc">AND bank,X</div>
+</td></tr>
+<tr><th>4</th><td><div class="opc">RTI </div>
+</td><td><div class="opc">EOR (zp,X)</div>
+</td><td><div class="opc">WDM </div>
+</td><td class="prefix"><div class="opc">EOR zp,S</div>
+</td><td><div class="opc">MVP #&lt;op1&gt;, #&lt;op2&gt;</div>
+</td><td><div class="opc">EOR zp</div>
+</td><td><div class="opc">LSR zp</div>
+</td><td class="prefix"><div class="opc">EOR [abs]</div>
+</td><td><div class="opc">PHA </div>
+</td><td><div class="opc">EOR #byte</div>
+</td><td><div class="opc">LSR </div>
+</td><td class="prefix"><div class="opc">PHK </div>
+</td><td><div class="opc">JMP abs</div>
+</td><td><div class="opc">EOR abs</div>
+</td><td><div class="opc">LSR abs</div>
+</td><td class="prefix"><div class="opc">EOR bank</div>
+</td></tr>
+<tr><th>5</th><td><div class="opc">BVC rel</div>
+</td><td><div class="opc">EOR (zp),Y</div>
+</td><td class="cmos"><div class="opc">EOR (zp)</div>
+</td><td class="prefix"><div class="opc">EOR (zp,S),Y</div>
+</td><td><div class="opc">MVN #&lt;op1&gt;, #&lt;op2&gt;</div>
+</td><td><div class="opc">EOR zp,X</div>
+</td><td><div class="opc">LSR zp,X</div>
+</td><td class="prefix"><div class="opc">EOR [abs],Y</div>
+</td><td><div class="opc">CLI </div>
+</td><td><div class="opc">EOR abs,Y</div>
+</td><td class="cmos"><div class="opc">PHY </div>
+</td><td class="prefix"><div class="opc">TCD </div>
+</td><td><div class="opc">JMP bank</div>
+</td><td><div class="opc">EOR abs,X</div>
+</td><td><div class="opc">LSR abs,X</div>
+</td><td><div class="opc">EOR bank,X</div>
+</td></tr>
+<tr><th>6</th><td><div class="opc">RTS </div>
+</td><td><div class="opc">ADC (zp,X)</div>
+</td><td><div class="opc">PER relwide</div>
+</td><td class="prefix"><div class="opc">ADC zp,S</div>
+</td><td class="cmos"><div class="opc">STZ zp</div>
+</td><td><div class="opc">ADC zp</div>
+</td><td><div class="opc">ROR zp</div>
+</td><td class="prefix"><div class="opc">ADC [abs]</div>
+</td><td><div class="opc">PLA </div>
+</td><td><div class="opc">ADC #byte</div>
+</td><td><div class="opc">ROR </div>
+</td><td class="prefix"><div class="opc">RTL </div>
+</td><td><div class="opc">JMP (abs)</div>
+</td><td><div class="opc">ADC abs</div>
+</td><td><div class="opc">ROR abs</div>
+</td><td class="prefix"><div class="opc">ADC bank</div>
+</td></tr>
+<tr><th>7</th><td><div class="opc">BVS rel</div>
+</td><td><div class="opc">ADC (zp),Y</div>
+</td><td class="cmos"><div class="opc">ADC (zp)</div>
+</td><td class="prefix"><div class="opc">ADC (zp,S),Y</div>
+</td><td class="cmos"><div class="opc">STZ zp,X</div>
+</td><td><div class="opc">ADC zp,X</div>
+</td><td><div class="opc">ROR zp,X</div>
+</td><td class="prefix"><div class="opc">ADC [abs],Y</div>
+</td><td><div class="opc">SEI </div>
+</td><td><div class="opc">ADC abs,Y</div>
+</td><td class="cmos"><div class="opc">PLY </div>
+</td><td class="prefix"><div class="opc">TDC </div>
+</td><td class="cmos"><div class="opc">JMP (abs,X)</div>
+</td><td><div class="opc">ADC abs,X</div>
+</td><td><div class="opc">ROR abs,X</div>
+</td><td><div class="opc">ADC bank,X</div>
+</td></tr>
+<tr><th>8</th><td class="cmos"><div class="opc">BRA rel</div>
+</td><td><div class="opc">STA (zp,X)</div>
+</td><td><div class="opc">BRL relwide</div>
+</td><td class="prefix"><div class="opc">STA zp,S</div>
+</td><td><div class="opc">STY zp</div>
+</td><td><div class="opc">STA zp</div>
+</td><td><div class="opc">STX zp</div>
+</td><td class="prefix"><div class="opc">STA [abs]</div>
+</td><td><div class="opc">DEY </div>
+</td><td class="cmos"><div class="opc">BIT #byte</div>
+</td><td><div class="opc">TXA </div>
+</td><td class="prefix"><div class="opc">PHB </div>
+</td><td><div class="opc">STY abs</div>
+</td><td><div class="opc">STA abs</div>
+</td><td><div class="opc">STX abs</div>
+</td><td class="prefix"><div class="opc">STA bank</div>
+</td></tr>
+<tr><th>9</th><td><div class="opc">BCC rel</div>
+</td><td><div class="opc">STA (zp),Y</div>
+</td><td class="cmos"><div class="opc">STA (zp)</div>
+</td><td class="prefix"><div class="opc">STA (zp,S),Y</div>
+</td><td><div class="opc">STY zp,X</div>
+</td><td><div class="opc">STA zp,X</div>
+</td><td><div class="opc">STX zp,Y</div>
+</td><td class="prefix"><div class="opc">STA [abs],Y</div>
+</td><td><div class="opc">TYA </div>
+</td><td><div class="opc">STA abs,Y</div>
+</td><td><div class="opc">TXS </div>
+</td><td class="prefix"><div class="opc">TXY </div>
+</td><td class="cmos"><div class="opc">STZ abs</div>
+</td><td><div class="opc">STA abs,X</div>
+</td><td class="cmos"><div class="opc">STZ abs,X</div>
+</td><td class="prefix"><div class="opc">STA bank,X</div>
+</td></tr>
+<tr><th>A</th><td><div class="opc">LDY #byte</div>
+</td><td><div class="opc">LDA (zp,X)</div>
+</td><td><div class="opc">LDX #byte</div>
+</td><td class="prefix"><div class="opc">LDA zp,S</div>
+</td><td><div class="opc">LDY zp</div>
+</td><td><div class="opc">LDA zp</div>
+</td><td><div class="opc">LDX zp</div>
+</td><td class="prefix"><div class="opc">LDA [abs]</div>
+</td><td><div class="opc">TAY </div>
+</td><td><div class="opc">LDA #byte</div>
+</td><td><div class="opc">TAX </div>
+</td><td class="prefix"><div class="opc">PLB </div>
+</td><td><div class="opc">LDY abs</div>
+</td><td><div class="opc">LDA abs</div>
+</td><td><div class="opc">LDX abs</div>
+</td><td class="prefix"><div class="opc">LDA bank</div>
+</td></tr>
+<tr><th>B</th><td><div class="opc">BCS rel</div>
+</td><td><div class="opc">LDA (zp),Y</div>
+</td><td class="cmos"><div class="opc">LDA (zp)</div>
+</td><td class="prefix"><div class="opc">LDA (zp,S),Y</div>
+</td><td><div class="opc">LDY zp,X</div>
+</td><td><div class="opc">LDA zp,X</div>
+</td><td><div class="opc">LDX zp,Y</div>
+</td><td class="prefix"><div class="opc">LDA [abs],Y</div>
+</td><td><div class="opc">CLV </div>
+</td><td><div class="opc">LDA abs,Y</div>
+</td><td><div class="opc">TSX </div>
+</td><td class="prefix"><div class="opc">TYX </div>
+</td><td><div class="opc">LDY abs,X</div>
+</td><td><div class="opc">LDA abs,X</div>
+</td><td><div class="opc">LDX abs,Y</div>
+</td><td class="prefix"><div class="opc">LDA bank,X</div>
+</td></tr>
+<tr><th>C</th><td><div class="opc">CPY #byte</div>
+</td><td><div class="opc">CMP (zp,X)</div>
+</td><td><div class="opc">REP #byte</div>
+</td><td class="prefix"><div class="opc">CMP zp,S</div>
+</td><td><div class="opc">CPY zp</div>
+</td><td><div class="opc">CMP zp</div>
+</td><td><div class="opc">DEC zp</div>
+</td><td class="prefix"><div class="opc">CMP [abs]</div>
+</td><td><div class="opc">INY </div>
+</td><td><div class="opc">CMP #byte</div>
+</td><td><div class="opc">DEX </div>
+</td><td class="prefix"><div class="opc">WAI </div>
+</td><td><div class="opc">CPY abs</div>
+</td><td><div class="opc">CMP abs</div>
+</td><td><div class="opc">DEC abs</div>
+</td><td class="prefix"><div class="opc">CMP bank</div>
+</td></tr>
+<tr><th>D</th><td><div class="opc">BNE rel</div>
+</td><td><div class="opc">CMP (zp),Y</div>
+</td><td class="cmos"><div class="opc">CMP (zp)</div>
+</td><td class="prefix"><div class="opc">CMP (zp,S),Y</div>
+</td><td><div class="opc">PEI zp</div>
+</td><td><div class="opc">CMP zp,X</div>
+</td><td><div class="opc">DEC zp,X</div>
+</td><td class="prefix"><div class="opc">CMP [abs],Y</div>
+</td><td><div class="opc">CLD </div>
+</td><td><div class="opc">CMP abs,Y</div>
+</td><td class="cmos"><div class="opc">PHX </div>
+</td><td class="prefix"><div class="opc">STP </div>
+</td><td><div class="opc">JML [abs]</div>
+</td><td><div class="opc">CMP abs,X</div>
+</td><td><div class="opc">DEC abs,X</div>
+</td><td class="prefix"><div class="opc">CMP bank,X</div>
+</td></tr>
+<tr><th>E</th><td><div class="opc">CPX #byte</div>
+</td><td><div class="opc">SBC (zp,X)</div>
+</td><td><div class="opc">SEP #byte</div>
+</td><td class="prefix"><div class="opc">SBC zp,S</div>
+</td><td><div class="opc">CPX zp</div>
+</td><td><div class="opc">SBC zp</div>
+</td><td><div class="opc">INC zp</div>
+</td><td class="prefix"><div class="opc">SBC [abs]</div>
+</td><td><div class="opc">INX </div>
+</td><td><div class="opc">SBC #byte</div>
+</td><td><div class="opc">NOP </div>
+</td><td class="prefix"><div class="opc">XBA </div>
+</td><td><div class="opc">CPX abs</div>
+</td><td><div class="opc">SBC abs</div>
+</td><td><div class="opc">INC abs</div>
+</td><td class="prefix"><div class="opc">SBC bank</div>
+</td></tr>
+<tr><th>F</th><td><div class="opc">BEQ rel</div>
+</td><td><div class="opc">SBC (zp),Y</div>
+</td><td class="cmos"><div class="opc">SBC (zp)</div>
+</td><td class="prefix"><div class="opc">SBC (zp,S),Y</div>
+</td><td><div class="opc">PEA #word</div>
+</td><td><div class="opc">SBC zp,X</div>
+</td><td><div class="opc">INC zp,X</div>
+</td><td class="prefix"><div class="opc">SBC [abs],Y</div>
+</td><td><div class="opc">SED </div>
+</td><td><div class="opc">SBC abs,Y</div>
+</td><td class="cmos"><div class="opc">PLX </div>
+</td><td class="prefix"><div class="opc">XCE </div>
+</td><td><div class="opc">JSR (abs,X)</div>
+</td><td><div class="opc">SBC abs,X</div>
+</td><td><div class="opc">INC abs,X</div>
+</td><td class="prefix"><div class="opc">SBC bank,X</div>
+</td></tr>
+</table>

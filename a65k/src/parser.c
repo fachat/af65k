@@ -37,6 +37,7 @@
 #include "block.h"
 #include "tokenizer.h"
 #include "operation.h"
+#include "errors.h"
 
 typedef struct {
 	block_t			*blk;
@@ -73,6 +74,15 @@ void parser_module_init(void) {
 	p->blk = NULL;
 }
 
+static statement_t *new_statement(const context_t *ctx) {
+	statement_t *stmt = mem_alloc(&statement_memtype);
+	stmt->blk = p->blk;
+	stmt->ctx = ctx;
+	stmt->op = NULL;
+	stmt->label = NULL;
+	return stmt;
+}
+
 void parser_push(const context_t *ctx, const line_t *line) {
 
 	position_t *pos = line->position;
@@ -82,11 +92,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 		p->blk = block_init(NULL, pos);
 	}
 
-	statement_t *stmt = mem_alloc(&statement_memtype);
-	stmt->blk = p->blk;
-	stmt->ctx = ctx;
-	stmt->op = NULL;
-	stmt->label = NULL;
+	statement_t *stmt = new_statement(ctx);
 
 	const operation_t *op = NULL;
 	const char *name = NULL;
@@ -102,10 +108,19 @@ void parser_push(const context_t *ctx, const line_t *line) {
 			case T_NAME:
 				name = mem_alloc_strn(tok->line + tok->ptr, tok->len);
 				op = operation_find(name);
+				if (op != NULL) {
+					// check if the operation is compatible with the current CPU
+					if (0 == (ctx->cpu->isa & op->isa)) {
+						// TODO: config for either no message or error
+						warn_operation_not_for_cpu(pos, name, ctx->cpu->name);
+						op = NULL;
+					}
+				}
 				if (op == NULL) {
 					// label
 					label = label_init(ctx, name, pos);
 					stmt->label = label;
+					// type stays at T_NAME
 				} else {
 					// operation
 					stmt->op = op;

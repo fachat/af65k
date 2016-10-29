@@ -44,9 +44,14 @@ void config_freeze();
 // get the current configuration
 const config_t *config();
 
+// set the configuration, e.g. via command line params
 void conf_initial_cpu_name(const char *initial_cpu_name);
-void conf_is_cpu_change_allowed(bool_t);
+void conf_cpu_change_allowed(bool_t);
 
+// convenience methods
+inline static bool_t conf_is_cpu_change_allowed(void) {
+	return config()->is_cpu_change_allowed;
+}
 
 #endif
 

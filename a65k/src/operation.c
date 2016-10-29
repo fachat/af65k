@@ -84,10 +84,10 @@ static struct {
 	bool_t check_width;	// only relevant for CPU with AC/index width mode (65816)
 } amodes[] = {
 	{ "implied",		// AM_IMP 		
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 
 	{ "immediate byte",	// AM_IMM8 	
-		ISA_ALL,			false,	true },
+		ISA_BASE,			false,	true },
 	{ "immediate word",	// AM_IMM16 	
 		ISA_816 | ISA_65K,		false,	true },
 	{ "immediate long",	// AM_IMM32 		
@@ -96,9 +96,9 @@ static struct {
 		ISA_65K, 			false,	true },
 
 	{ "absolute zeropage",	// AM_ABS8
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "absolute 16bit",	// AM_ABS16
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "absolute 24bit",	// AM_ABS24
 		ISA_816,			false,	false },
 	{ "absolute 32bit",	// AM_ABS32
@@ -107,17 +107,17 @@ static struct {
 		ISA_65K,			true,	false },
 
 	{ "zeropage x-indexed",	// AM_ABS8X
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "16bit x-indexed",	// AM_ABS16X
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "32bit x-indexed",	// AM_ABS32X
 		ISA_65K,			true,	false },
 	{ "64bit x-indexed",	// AM_ABS64X
 		ISA_65K,			true,	false },
 	{ "zeropage y-indexed",	// AM_ABS8Y
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "16bit y-indexed",	// AM_ABS16Y
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "32bit y-indexed",	// AM_ABS32Y
 		ISA_65K,			true,	false },
 	{ "64bit y-indexed",	// AM_ABS64Y
@@ -126,13 +126,13 @@ static struct {
 	{ "zeropage indirect word address", // AM_IND8
 		ISA_CMOS,			false,	false },
 	{ "16bit indirect word address", // AM_IND16
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "zeropage indirect y-indexed word address", // AM_IND8Y
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "16bit indirect y-indexed word address", // AM_IND16Y
 		ISA_65K,			false,	false },
 	{ "zeropage x-indexed indirect word address", // AM_XIND8
-		ISA_ALL,			false,	false },
+		ISA_BASE,			false,	false },
 	{ "16bit x-indexed indirect word address", // AM_XIND16
 		ISA_65K,			false,	false },
 
@@ -165,7 +165,7 @@ static struct {
 	{ "MVN/MVP double byte", // AM_MV
 		ISA_816,			false,	false },
 	{ "BBREL",		// AM_BBREL
-		ISA_CMOS_ROCKWELL,		false,	false },
+		ISA_RCMOS,			false,	false },
 };
 
 // the map entry contains all the opcode widths that can handle the given parameter width;
@@ -191,26 +191,28 @@ static width_map widths_map[] = {
 		W_64,
 };
 
-static operation_t opcodes[] = {
-	{ 	"adc",	ISA_ALL, false,	true, false, NULL, {
-		// AM_IMP
-		{  false  },	
-		// AM_IMM8
-		{ true,	0x69, PG_BASE },
-		// AM_IMM16
-		{  true, 0x69, PG_BASE },	
-	} },
-	{	"adc", 	ISA_816, false,	true, false, NULL, {
-		// AM_IMP
-		{  false  },
-		// AM_IMM8
-		{  true, 0x69, PG_BASE  },
-		// AM_IMM16
-		{  true, 0x69, PG_BASE  },
+#include "table.h"
 
-	} },
-};
-
+//static operation_t opcodes[] = {
+//	{ 	"adc",	ISA_ALL, false,	true, false, NULL, {
+//		// AM_IMP
+//		{  false  },	
+//		// AM_IMM8
+//		{ true,	0x69, PG_BASE },
+//		// AM_IMM16
+//		{  true, 0x69, PG_BASE },	
+//	} },
+//	{	"adc", 	ISA_816, false,	true, false, NULL, {
+//		// AM_IMP
+//		{  false  },
+//		// AM_IMM8
+//		{  true, 0x69, PG_BASE  },
+//		// AM_IMM16
+//		{  true, 0x69, PG_BASE  },
+//
+//	} },
+//};
+//
 
 static hash_t *opcode_map = NULL;
 
@@ -223,11 +225,11 @@ void operation_module_init() {
 
 	opcode_map = hash_init_stringkey(400, 64, &key_from_operation);
 
-	int n = sizeof(opcodes)/sizeof(operation_t);
+	int n = sizeof(cpu_operations)/sizeof(operation_t);
 	for (int i = 0; i < n; i++) {
-		operation_t *orig = hash_put(opcode_map, &opcodes[i]);
+		operation_t *orig = hash_put(opcode_map, &cpu_operations[i]);
 		if (orig != NULL) {
-			opcodes[i].next = orig;
+			cpu_operations[i].next = orig;
 		}
 	}
 }
@@ -348,10 +350,10 @@ bool_t opcode_find(const position_t *loc,
 			// check adressing mode in current operation
 			const opcode_t *opc = &op->opcodes[am];
 
-			if (!opc->is_valid) { 
-				trace_no_opcode_for(loc, op->name, amodes[am].name, cpu->name);
-				continue;
-			}
+			//if (!opc->is_valid) { 
+			//	trace_no_opcode_for(loc, op->name, amodes[am].name, cpu->name);
+			//	continue;
+			//}
 
 			// ok, found my opcode
 

@@ -47,7 +47,7 @@ void config_module_init() {
 	// init config fields if necessary
 	frozen = false;
 	conf_initial_cpu_name("nmos");
-	conf_is_cpu_change_allowed(false);
+	conf_cpu_change_allowed(false);
 }
 
 // freeze config; any change after that results in exit
@@ -70,7 +70,7 @@ void conf_initial_cpu_name(const char *initial_cpu_name) {
 	
 }
 
-void conf_is_cpu_change_allowed(bool_t p) {
+void conf_cpu_change_allowed(bool_t p) {
 	if (frozen) {
 		log_fatal("conf_is_cpu_change_allowed (%d) while frozen", p);
 	}
