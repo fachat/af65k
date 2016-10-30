@@ -35,13 +35,14 @@
 #include "infiles.h"
 #include "parser.h"
 #include "operation.h"
+#include "cmdline.h"
 
 
 /**
  * pass1 pulls in lines from the infiles component,
  * and pushes them through the next steps
  */
-static void pass1() {
+static void parse() {
 
 	const cpu_t *cpu = cpu_by_name(config()->initial_cpu_name);
 	const segment_t *segment = segment_new(NULL, NULL, SEG_ANY, cpu->type, false);
@@ -63,18 +64,21 @@ static void main_parse_args(int argc, char *argv[]) {
 	int i = 1;
 	while (i < argc) {
 		if (argv[i][0] == '-') {
+			cmdline_parse(argv[i]);
 		} else {
 			infiles_register(argv[i]);
 		}
 	}
 }
 
-static void main_init() {
+static void main_init(const char *prgname) {
 
 	// memory handling
 	mem_module_init();
 	// configuration
 	config_module_init();
+	// cmdline
+	cmdline_module_init(prgname);
 	// input files
 	infiles_module_init();
 	// operation
@@ -90,16 +94,17 @@ int main(int argc, char *argv[]) {
 
 	// initialize modules
 
-	main_init();
+	main_init(argv[0]);
 
 	// parse command line parameters
 	// TODO: need two functions, one legacy xa, one new a65k
 	main_parse_args(argc, argv);
 
+	// parse files into AST
+	parse();
+
 	// first pass
-	pass1();
 
 	// second pass
-	// pass2();
 }
 
