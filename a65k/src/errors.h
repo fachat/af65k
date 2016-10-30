@@ -91,5 +91,9 @@ static inline void warn_operation_not_for_cpu(const position_t *loc, const char 
 	loclog_warn(loc, "Operation name %s is not available for CPU %s, assuming label!", op_name, cpu_name);
 }
 
+static inline void error_syntax(const position_t *loc) {
+	loclog_error(loc, "%s error!", "Syntax");
+}
+
 #endif
 

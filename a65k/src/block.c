@@ -100,4 +100,20 @@ label_t *block_add_label(block_t *blk, label_t *label) {
 	return NULL;
 }
 
+// find an existing label in the block hierarchy
+// return label ptr when found, NULL otherwise
+label_t *block_find_label(const block_t *blk, const char *name) {
+
+        while (blk != NULL) {
+                
+                label_t *label = hash_get(blk->labels, name);
+
+                if (label != NULL) {
+                        return label;
+                }
+        
+                blk = blk->parent;
+        }
+        return NULL;
+}
 

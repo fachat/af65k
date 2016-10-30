@@ -26,6 +26,7 @@
 #include "log.h"
 #include "mem.h"
 #include "list.h"
+#include "array_list.h"
 #include "hashmap.h"
 #include "position.h"
 
@@ -41,18 +42,28 @@
 
 typedef struct {
 	block_t			*blk;
+
+	list_t			*statements;
 } parser_t;
+
+typedef enum {
+	S_LABEQPC,		// set label to PC
+	S_LABDEF,		// set label from parameter
+} stype_t;
 
 typedef struct {
 	const block_t		*blk;
 	const context_t		*ctx;
+	stype_t			type;
 	// optional
 	const label_t		*label;
 	const operation_t	*op;
 } statement_t;
 
 typedef enum {
-	P_INIT,
+	P_INIT,		// start of line, accept label definitions, operations and pseudos
+	P_OP,		// has parsed label, accept "=" or operation
+	P_PARAM,	// after operation, parse parameters to the operation
 } pstate_t;
 
 
@@ -72,6 +83,7 @@ void parser_module_init(void) {
 
 	p = mem_alloc(&parser_memtype);
 	p->blk = NULL;
+	p->statements = array_list_init(10000);
 }
 
 static statement_t *new_statement(const context_t *ctx) {
@@ -81,6 +93,10 @@ static statement_t *new_statement(const context_t *ctx) {
 	stmt->op = NULL;
 	stmt->label = NULL;
 	return stmt;
+}
+
+static void statement_push(statement_t *stmt) {
+	list_add(p->statements, stmt);
 }
 
 void parser_push(const context_t *ctx, const line_t *line) {
@@ -103,6 +119,23 @@ void parser_push(const context_t *ctx, const line_t *line) {
 	tokenizer_t *tok = tokenizer_init(line->line);
 	while (tokenizer_next(tok)) {
 		switch(state) {
+		case P_OP:
+			if (tok->type == ':') {
+				// accept after label
+				// continue to next 
+				stmt->type = S_LABEQPC;
+				statement_push(stmt);
+				stmt = new_statement(ctx);
+				state = P_INIT;
+				break;
+			}
+			if (tok->type == '=') {
+				// after label, that's a label value definition
+				stmt->type = S_LABDEF;
+				// next define the label from param
+				state = P_PARAM;
+				break;
+			}
 		case P_INIT:
 			switch(tok->type) {
 			case T_NAME:
@@ -118,23 +151,37 @@ void parser_push(const context_t *ctx, const line_t *line) {
 				}
 				if (op == NULL) {
 					// label
+					// TODO: redefinition?
 					label = label_init(ctx, name, pos);
+					if (state == P_OP) {
+						// we already had a label
+						stmt->type = S_LABEQPC;
+						statement_push(stmt);
+						stmt = new_statement(ctx);
+					}
 					stmt->label = label;
-					// type stays at T_NAME
+					// expect operation next (but accept labels too)
+					state = P_OP;
 				} else {
 					// operation
 					stmt->op = op;
+					state = P_PARAM;
 				}
 				break;
 			default:
 				// syntax error
+				error_syntax(pos);
+				goto end;
 				break;
 			}
 			break;
 		default:
+			error_syntax(pos);
+			goto end;
 			break;
 		};
 	}
+end:
 	tokenizer_free(tok);
 }
 

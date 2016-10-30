@@ -52,6 +52,5 @@ static inline label_t *label_init(const context_t *ctx, const char *name, const 
 }
 
 
-
 #endif
 

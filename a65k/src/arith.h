@@ -1,7 +1,7 @@
 
 /****************************************************************************
 
-    block management
+    arithmetic operations and expressions
     Copyright (C) 2015 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
@@ -21,36 +21,53 @@
 ****************************************************************************/
 
 
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef ARITH_H
+#define ARITH_H
 
 
-typedef struct block_s block_t;
+typedef signed long maxval_t;
 
-struct block_s {
-	// parent block
-	block_t 	*parent;
-	// line where block starts and end
-	position_t	*blk_start;
-	position_t	*blk_end;
-	// child contexts
-	list_t		*children;
-	// labels
-	hash_t		*labels;
+typedef enum {
+	A_INIT,		// first nodee
+	A_BRACKET,	// open bracket
+} a_type;
+
+/*
+ The anode struct allows building the AST for an arithmetic expression.
+*/
+typedef struct anode_s anode_t;
+
+struct anode_s {
+	// type, incl. brackets, arithm. ops etc
+	a_type		type;
+	// parent node
+	anode_t		*parent;	
+	// child nodes in case of brackets
+	anode_t		*child;
+	// next in case of comma
+	anode_t		*next;
+	// the actual expression if any
+	anode_t		*expr;
+	// actual value
+	
 };
 
-// create a new block, links it with parent (both ways)
-// when parent is given. parent can be NULL
-block_t *block_init(block_t *parent, position_t *start_position);
 
-// returns NULL when successful. Returns a conflicting label when there is a conflict
-label_t *block_add_label(block_t *blk, label_t *label);
+static type_t anode_memtype = {
+	"label",
+	sizeof(anode_t)
+};
 
-// find a label in the block hierarchy
-label_t *block_find_label(const block_t *blk, const char *name);
+static inline anode_t *anode_init(a_type type, anode_t *parent) {
+	anode_t *anode = mem_alloc(&anode_memtype);
+	
+	anode->type = type;
+	anode->parent = parent;
 
-// closes a block, and returns its parent (when available, NULL otherwise)
-block_t *block_close(block_t *blk, position_t *end_position);
+	return anode;
+}
+
+
 
 #endif
 

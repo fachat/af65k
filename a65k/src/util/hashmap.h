@@ -45,12 +45,14 @@ hash_t *hash_init(int approx_size, int nbuckets,
 
 // convenience - key is a string (char *), so we can use our internal functions for 
 // hash_from_key and equals_key
+// TODO: ignore case flag
 hash_t *hash_init_stringkey(int approx_size, int nbuckets, 
 		const void* (*key_from_entry)(const void *entry));
 
 // adds a new entry; returns any entry that has been removed (if match_equals is set)
 void *hash_put(hash_t *, void *value);
 
+// get the value for the given hash key, NULL if none found
 void *hash_get(hash_t *hash, const void *key);
 
 static inline bool_t hash_contains(hash_t *hash, void *key) {
