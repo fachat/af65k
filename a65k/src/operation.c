@@ -217,13 +217,13 @@ static width_map widths_map[] = {
 static hash_t *opcode_map = NULL;
 
 
-static const void *key_from_operation(const void *entry) {
+static const char *key_from_operation(const void *entry) {
 	return ((operation_t*)entry)->name;
 }
 
 void operation_module_init() {
 
-	opcode_map = hash_init_stringkey(400, 64, &key_from_operation);
+	opcode_map = hash_init_stringkey_nocase(400, 64, &key_from_operation);
 
 	int n = sizeof(cpu_operations)/sizeof(operation_t);
 	for (int i = 0; i < n; i++) {

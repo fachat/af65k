@@ -42,7 +42,7 @@ static type_t segment_memtype = {
 	sizeof(segment_t)
 };
 
-static const void *segment_key_from_entry(const void *entry) {
+static const char *segment_key_from_entry(const void *entry) {
 	return ((const segment_t*)entry)->name;
 }
 

@@ -24,6 +24,9 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
+#include "block.h"
+#include "list.h"
+#include "hashmap.h"
 
 typedef struct block_s block_t;
 

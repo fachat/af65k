@@ -39,6 +39,7 @@
 #include "tokenizer.h"
 #include "operation.h"
 #include "errors.h"
+#include "arith.h"
 
 typedef struct {
 	block_t			*blk;
@@ -46,19 +47,6 @@ typedef struct {
 	list_t			*statements;
 } parser_t;
 
-typedef enum {
-	S_LABEQPC,		// set label to PC
-	S_LABDEF,		// set label from parameter
-} stype_t;
-
-typedef struct {
-	const block_t		*blk;
-	const context_t		*ctx;
-	stype_t			type;
-	// optional
-	const label_t		*label;
-	const operation_t	*op;
-} statement_t;
 
 typedef enum {
 	P_INIT,		// start of line, accept label definitions, operations and pseudos
@@ -175,6 +163,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 				break;
 			}
 			break;
+		case P_PARAM:
 		default:
 			error_syntax(pos);
 			goto end;
@@ -185,4 +174,8 @@ end:
 	tokenizer_free(tok);
 }
 
+list_iterator_t *parser_get_statements(void) {
+
+	return list_iterator(p->statements);
+}
 

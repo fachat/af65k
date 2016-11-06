@@ -28,6 +28,8 @@
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
+#include "segment.h"
+#include "cpu.h"
 
 typedef struct context_s context_t;
 

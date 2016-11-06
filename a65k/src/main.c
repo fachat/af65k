@@ -36,7 +36,22 @@
 #include "parser.h"
 #include "operation.h"
 #include "cmdline.h"
+#include "print.h"
 
+
+/**
+ * print prints out the structures 
+ */
+static void debug_output() {
+
+	list_iterator_t *stmts = parser_get_statements();
+	while (list_iterator_has_next(stmts)) {
+
+		statement_t *stmt = list_iterator_next(stmts);	
+
+		print_debug(stmt);
+	}
+}
 
 /**
  * pass1 pulls in lines from the infiles component,
@@ -106,5 +121,8 @@ int main(int argc, char *argv[]) {
 	// first pass
 
 	// second pass
+
+	// print output
+	debug_output();
 }
 

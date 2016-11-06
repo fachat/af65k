@@ -47,7 +47,10 @@ hash_t *hash_init(int approx_size, int nbuckets,
 // hash_from_key and equals_key
 // TODO: ignore case flag
 hash_t *hash_init_stringkey(int approx_size, int nbuckets, 
-		const void* (*key_from_entry)(const void *entry));
+		const char* (*key_from_entry)(const void *entry));
+// same but ignore case when computing hash and comparing keys
+hash_t *hash_init_stringkey_nocase(int approx_size, int nbuckets, 
+		const char* (*key_from_entry)(const void *entry));
 
 // adds a new entry; returns any entry that has been removed (if match_equals is set)
 void *hash_put(hash_t *, void *value);

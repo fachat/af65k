@@ -26,15 +26,16 @@ int main(int argc, char *argv[]) {
 
 	if (op == NULL) {
 		printf("Opcode 'adc' not found!\n");
-	}
+	} else {
 
-	codepoint_t cp;
+		codepoint_t cp;
+	
+		bool_t rc = opcode_find(NULL, ctx, op, SY_IMM, 1, &cp);
 
-	bool_t rc = opcode_find(NULL, ctx, op, SY_IMM, 1, &cp);
-
-	if (rc) {
-		printf("Opcode 'adc' with addressing mode am=%d, rs_is_width=%d, prefix=%d, found: %02x\n",
-			cp.set_am_prefix, cp.rs_is_width, cp.page_prefix, cp.code);
+		if (rc) {
+			printf("Opcode 'adc' with addressing mode am=%d, rs_is_width=%d, prefix=%d, found: %02x\n",
+				cp.set_am_prefix, cp.rs_is_width, cp.page_prefix, cp.code);
+		}
 	}
 }
 

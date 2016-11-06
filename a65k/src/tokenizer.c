@@ -181,28 +181,96 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 	tok->len = 1;
 
 	switch(c) {
-	case '!':
 	case '@':
 	case '`':
+	case '\'':
 	case '(':
 	case ')':
 	case '#':
-	case '[':
-	case ']':
-	case '*':
-	case ',':
-	case '+':
-	case '-':
-	case '/':
 	case ':':
 	case '.':
 	case ';':
 		return true;
+	case ',':
+		// TODO: check OP_*IND
+		return true;
+	case '%':
+		if (line[ptr+1] == '=') {
+			tok->value = OP_ASSIGNMOD;
+			tok->len++;
+			return true;
+		}
+		return true;
+	case '-':
+		if (line[ptr+1] == '=') {
+			tok->value = OP_ASSIGNSUB;
+			tok->len++;
+			return true;
+		}
+		return true;
+	case '+':
+		if (line[ptr+1] == '=') {
+			tok->value = OP_ASSIGNADD;
+			tok->len++;
+			return true;
+		}
+		return true;
+	case '*':
+		if (line[ptr+1] == '=') {
+			tok->value = OP_ASSIGNMULT;
+			tok->len++;
+			return true;
+		}
+		return true;
+	case '/':
+		if (line[ptr+1] == '=') {
+			tok->value = OP_ASSIGNDIV;
+			tok->len++;
+			return true;
+		}
+		return true;
+	case ']':
+		if (line[ptr+1] == ']') {
+			tok->value = OP_BBCLOSE;
+			tok->len++;
+			return true;
+		}
+		// OP_BOPEN
+		return true;
+	case '[':
+		if (line[ptr+1] == '[') {
+			tok->value = OP_BBOPEN;
+			tok->len++;
+			return true;
+		}
+		// OP_BOPEN
+		return true;
+	case '!':
+		if (can_have_operator) {
+			switch (line[ptr+1]) {
+			case '=':
+				tok->value = OP_NOTEQUAL;
+				tok->len++;
+				return true;
+			default:
+				// default
+				// OP_EXCL
+				return true;
+			}
+		} else {
+			// OP_EXCL
+			return true;
+		}
 	case '>':
 		if (can_have_operator) {
 			// check ">>", ">=", "><"
 			switch (line[ptr+1]) {
 			case '>':
+				if (line[ptr+2] == '=') {
+					tok->value = OP_ASSIGNSHIFTRIGHT;
+					tok->len += 2;
+					return true;
+				}
 				tok->value = OP_SHIFTRIGHT;
 				tok->len++;
 				return true;
@@ -227,6 +295,11 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 			// check "<<", "<=", "<>"
 			switch (line[ptr+1]) {
 			case '<':
+				if (line[ptr+2] == '=') {
+					tok->value = OP_ASSIGNSHIFTLEFT;
+					tok->len += 2;
+					return true;
+				}
 				tok->value = OP_SHIFTLEFT;
 				tok->len++;
 				return true;
@@ -250,16 +323,8 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		if (can_have_operator) {
 			// check "==", "=>", "=<"
 			switch (line[ptr+1]) {
-			case '<':
-				tok->value = OP_LESSOREQUAL;
-				tok->len++;
-				return true;
 			case '=':
 				tok->value = OP_EQUAL;
-				tok->len++;
-				return true;
-			case '>':
-				tok->value = OP_LARGEROREQUAL;
 				tok->len++;
 				return true;
 			default:
@@ -271,24 +336,42 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 			return true;
 		}
 	case '&':
-		// check "&", "&&"
-		if (line[ptr+1] == '&') {
+		// check "&", "&&", "&="
+		switch (line[ptr+1]) {
+		case '&':
 			tok->value = OP_LOGICAND;
 			tok->len++;
+			return true;
+		case '=':
+			tok->value = OP_ASSIGNBITAND;
+			tok->len++;
+			return true;
 		} 
 		return true;
 	case '|':
-		// check "|", "||"
-		if (line[ptr+1] == '|') {
+		// check "|", "||", "|="
+		switch (line[ptr+1]) {
+		case '|':
 			tok->value = OP_LOGICOR;
 			tok->len++;
+			return true;
+		case '=':
+			tok->value = OP_ASSIGNBITOR;
+			tok->len++;
+			return true;
 		} 
 		return true;
 	case '^':
-		// check "^", "^^"
-		if (line[ptr+1] == '^') {
+		// check "^", "^^", "^="
+		switch (line[ptr+1]) {
+		case '^':
 			tok->value = OP_LOGICXOR;
 			tok->len++;
+			return true;
+		case '=':
+			tok->value = OP_ASSIGNBITXOR;
+			tok->len++;
+			return true;
 		} 
 		return true;
 	default:

@@ -29,6 +29,7 @@
  */
 
 #include <string.h>
+#include <strings.h>
 
 #include "mem.h"
 #include "array_list.h"
@@ -80,11 +81,12 @@ static type_t hash_bucket_memtype = {
 	sizeof(hash_bucket_t)
 };
 
-static int hash_from_stringkey(const void *data) {
-	return string_hash((const char *)data);
-}
 static bool_t equals_stringkey(const void *fromhash, const void *tobeadded) {
 	return !strcmp((const char*)fromhash, (const char*)tobeadded);
+}
+
+static bool_t equals_stringkey_nocase(const void *fromhash, const void *tobeadded) {
+	return !strcasecmp((const char*)fromhash, (const char*)tobeadded);
 }
 
 static inline int bucket_from_hash(hash_t *hash, int hashval) {
@@ -98,12 +100,21 @@ static inline int bucket_from_hash(hash_t *hash, int hashval) {
 }
 
 hash_t *hash_init_stringkey(int approx_size, int nbuckets, 
-		const void* (*key_from_entry)(const void *entry)) {
+		const char* (*key_from_entry)(const void *entry)) {
 
 	return hash_init(approx_size, nbuckets, 
-		hash_from_stringkey,
-		key_from_entry,
+		(int (*)(const void *data))string_hash,
+		(const void *(*)(const void*))key_from_entry,
 		equals_stringkey);
+}
+
+hash_t *hash_init_stringkey_nocase(int approx_size, int nbuckets, 
+		const char* (*key_from_entry)(const void *entry)) {
+
+	return hash_init(approx_size, nbuckets, 
+		(int (*)(const void *data))string_hash_nocase,
+		(const void *(*)(const void*))key_from_entry,
+		equals_stringkey_nocase);
 }
 
 hash_t *hash_init(int approx_size, int nbuckets, 

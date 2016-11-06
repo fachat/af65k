@@ -41,35 +41,66 @@ typedef enum {
 } tok_t;
 
 typedef enum {
+	OP_NONE			= 0,
 	OP_EXCL 		= '!',	
 	OP_AT			= '@',
 	OP_XQUOTE		= '`',
+	OP_SQUOTE		= '\'',
 	OP_OPEN			= '(',
 	OP_CLOSE		= ')',
 	OP_HASH			= '#',
 	OP_BOPEN		= '[',
+	OP_BBOPEN		= 136,	// "[["
 	OP_BCLOSE		= ']',
+	OP_BBCLOSE		= 137,	// "]]"
 	OP_STAR			= '*',
 	OP_COMMA		= ',',
-	OP_PLUS			= '+',
+	OP_PLUS			= '+',	// binary as usual, as unary modified label scope
 	OP_MINUS		= '-',
 	OP_DIV			= '/',
 	OP_COLON		= ':',
 	OP_SEMICOLON		= ';',
 	OP_DOT			= '.',
 	OP_LARGER		= '>',
-	OP_LARGEROREQUAL	= 128,
+	OP_LARGEROREQUAL	= 128,	// ">="
 	OP_LESS			= '<',
-	OP_LESSOREQUAL		= 129,
-	OP_EQUAL		= '=',
-	OP_NOTEQUAL		= 130,
-	OP_SHIFTLEFT		= 131,
-	OP_SHIFTRIGHT		= 132,
-	OP_LOGICAND		= 133,
-	OP_LOGICOR		= 134,
-	OP_LOGICXOR		= 135
+	OP_LESSOREQUAL		= 129,	// "<="
+	OP_ASSIGN		= '=',
+	OP_ASSIGNADD		= 138,	// "+="
+	OP_ASSIGNSUB		= 139,	// "-="
+	OP_ASSIGNMULT		= 140,	// "*="
+	OP_ASSIGNDIV		= 141,	// "/="
+	OP_ASSIGNMOD		= 142,	// "%="
+	OP_ASSIGNBITOR		= 143,	// "|="
+	OP_ASSIGNBITAND		= 144,	// "&="
+	OP_ASSIGNBITXOR		= 145,	// "^="
+	OP_ASSIGNSHIFTLEFT	= 146,	// "<<="
+	OP_ASSIGNSHIFTRIGHT	= 147,	// ">>="
+	OP_BITXOR		= '^',
+	OP_BITOR		= '|',
+	OP_BITAND		= '&',	// binary as usual, as unary modifies label scope
+	OP_EQUAL		= 138,	// "=="
+	OP_NOTEQUAL		= 130,	// "!=", "<>", "><"
+	OP_SHIFTLEFT		= 131,	// "<<"
+	OP_SHIFTRIGHT		= 132,	// ">>"
+	OP_LOGICAND		= 133,	// "&&"
+	OP_LOGICOR		= 134,	// "||"
+	OP_LOGICXOR		= 135,	// "^^"
+	OP_BITINV		= '~',
+	OP_MOD			= '%',
+	// register indexing
+	OP_XIND			= 148, 	// ",x"
+	OP_YIND			= 149,	// ",y"
+	OP_ZIND			= 150,	// ",z"
+	OP_SIND			= 151,	// ",s"
+	OP_BIND			= 152, 	// ",b"
 } op_t;
 
+extern int prio_of_operator_table[];
+
+static inline int prio_of_operator(const op_t op) {
+	return prio_of_operator_table[op];
+}
 
 typedef struct {
 	const char 	*line;		// line to tokenize

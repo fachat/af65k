@@ -22,6 +22,7 @@
 
 #include "types.h"
 #include "mem.h"
+#include "tokenizer.h"
 #include "arith.h"
 
 

@@ -23,11 +23,35 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#include "context.h"
+#include "label.h"
+#include "block.h"
+#include "operation.h"
+#include "tokenizer.h"
+#include "arith.h"
+#include "list.h"
+
+typedef enum {
+        S_LABEQPC,              // set label to PC
+        S_LABDEF,               // set label from parameter
+} stype_t;
+
+typedef struct {
+        const block_t           *blk;
+        const context_t         *ctx;
+        stype_t                 type;
+        // optional
+        const label_t           *label;
+        const operation_t       *op;
+        const anode_t           *param;
+} statement_t;
+
 
 void parser_module_init(void);
 
 void parser_push(const context_t *context, const line_t *line);
 
+list_iterator_t *parser_get_statements(void);
 
 #endif
 

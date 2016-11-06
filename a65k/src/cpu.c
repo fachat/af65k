@@ -85,7 +85,7 @@ static const cpu_t cpus[] = {
 
 static hash_t *cpu_typemap = NULL;
 
-static const void *cpu_key_from_entry(const void *entry) {
+static const char *cpu_key_from_entry(const void *entry) {
 	cpu_t *cpu = (cpu_t*) entry;
 	return cpu->name;
 }

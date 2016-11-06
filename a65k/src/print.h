@@ -1,8 +1,7 @@
-
 /****************************************************************************
 
-    label management
-    Copyright (C) 2015 Andre Fachat
+    print output
+    Copyright (C) 2012 Andre Fachat
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,39 +20,12 @@
 ****************************************************************************/
 
 
-#ifndef LABEL_H
-#define LABEL_H
+#ifndef PRINT_H
+#define PRINT_H
 
-#include "context.h"
-#include "position.h"
-#include "mem.h"
+#include "parser.h"
 
-
-typedef struct {
-	// context
-	const context_t		*ctx;
-	// position in file where defined
-	const position_t	*position;
-	// name
-	const char 		*name;
-	// TODO value, state etc
-} label_t;
-
-
-static type_t label_memtype = {
-	"label",
-	sizeof(label_t)
-};
-
-static inline label_t *label_init(const context_t *ctx, const char *name, const position_t *pos) {
-	label_t *label = mem_alloc(&label_memtype);
-
-	label->ctx = ctx;
-	label->name = name;
-	label->position = pos;
-
-	return label;
-}
+void print_debug(statement_t *stmt);
 
 
 #endif

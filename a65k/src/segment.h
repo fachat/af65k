@@ -24,6 +24,10 @@
 #ifndef SEGMENT_H
 #define SEGMENT_H
 
+#include "types.h"
+#include "position.h"
+#include "cpu.h"
+
 // default names for the xa65 default segments
 // can the compiler optimize that into a single text?
 // otherwise still use the preprocessor...

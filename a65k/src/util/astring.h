@@ -24,6 +24,9 @@
 #ifndef STRING_H
 #define STRING_H
 
+#include <ctype.h>
+
+
 // simple hash algorithm. As we use string, we only use the lower 7 bits;
 // we also use max the first 8 characters
 static inline int string_hash(const char *str) {
@@ -33,6 +36,21 @@ static inline int string_hash(const char *str) {
 	char c = 0;
 	while ( (c = str[p]) ) {
 		h = 13 * h + (c & 0x7f);
+		p++;
+	}
+	return h;
+}
+
+// simple hash algorithm. As we use string, we only use the lower 7 bits;
+// we also use max the first 8 characters
+// ignore case by converting tolower() 
+static inline int string_hash_nocase(const char *str) {
+	int h = 0;
+
+	int p = 0;
+	char c = 0;
+	while ( (c = str[p]) ) {
+		h = 13 * h + (tolower(c) & 0x7f);
 		p++;
 	}
 	return h;
