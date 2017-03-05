@@ -102,13 +102,16 @@ void parser_push(const context_t *ctx, const line_t *line) {
 	const char *name = NULL;
 	label_t *label = NULL;
 
+	// allow the tokenizer to fold comma into ",x" etc addressing mode tokens
+	int allow_index = 0;
+
 	// tokenize the line
 	pstate_t state = P_INIT;
 	tokenizer_t *tok = tokenizer_init(line->line);
-	while (tokenizer_next(tok)) {
+	while (tokenizer_next(tok, allow_index)) {
 		switch(state) {
 		case P_OP:
-			if (tok->type == ':') {
+			if (tok->type == T_TOKEN && tok->value == OP_COLON) {
 				// accept after label
 				// continue to next 
 				stmt->type = S_LABEQPC;
@@ -117,13 +120,14 @@ void parser_push(const context_t *ctx, const line_t *line) {
 				state = P_INIT;
 				break;
 			}
-			if (tok->type == '=') {
+			if (tok->type == T_TOKEN && tok->value == OP_ASSIGN) {
 				// after label, that's a label value definition
 				stmt->type = S_LABDEF;
 				// next define the label from param
 				state = P_PARAM;
 				break;
 			}
+			// fall-through!
 		case P_INIT:
 			switch(tok->type) {
 			case T_NAME:
@@ -164,6 +168,9 @@ void parser_push(const context_t *ctx, const line_t *line) {
 			}
 			break;
 		case P_PARAM:
+			// parse parameters
+			arith_parse(tok, allow_index, &stmt->param);
+			break;
 		default:
 			error_syntax(pos);
 			goto end;

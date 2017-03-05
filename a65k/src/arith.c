@@ -26,4 +26,19 @@
 #include "arith.h"
 
 
+void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **anode) {
+
+	*anode = NULL;
+
+	// when true, last token was a value
+	int expect_op = 0;
+
+	while (tokenizer_next(tok, allow_index)) {
+		
+		switch(tok->type) {
+		}		
+	}
+}
+
+
 

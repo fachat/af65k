@@ -116,7 +116,8 @@ typedef struct {
 tokenizer_t *tokenizer_init(const char *line);
 
 // set to next token; return true when there is a valid token
-bool_t tokenizer_next(tokenizer_t *tok);
+// if allow_index is true, comma is folded into ",x" etc addressig mode tokens
+bool_t tokenizer_next(tokenizer_t *tok, int allow_index);
 
 void tokenizer_free(tokenizer_t *tok);
 

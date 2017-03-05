@@ -31,20 +31,22 @@ typedef signed long maxval_t;
 The anode_t struct is a node in an arithmetic expression
 It is linked together in a tree-structure like such:
 
-	(foo + 3), "foo", -1
+	(foo + 3) << 2, "foo", -1
 
-	node0(A_BRACKET, AB_RND) 
+	node0(A_BRACKET, AB_RND)
+          |  |    |
+          |  |    +-(expr)->node3(OP_SHFTLEFT, A_VALUE)
 	  |  |
-	  |  +-(expr)->node1(A_LABEL)
+	  |  +-(child)->node1(A_LABEL)
 	  |              |
           |              +-(expr)->node2(OP_ADD, A_VALUE)
 	(next)
 	  v
-	node3(A_VALUE, AB_STRD)
+	node4(A_VALUE, AB_STRD)
 	  |
 	(next)
 	  v
-	node4(OP_NEG, A_VALUE, AV_DEC)
+	node5(OP_NEG, A_VALUE, AV_DEC)
 
 */
 
@@ -126,7 +128,7 @@ static inline anode_t *anode_init(a_type type, anode_t *parent) {
 	return anode;
 }
 
-
+void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **anode);
 
 #endif
 

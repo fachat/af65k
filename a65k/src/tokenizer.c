@@ -60,6 +60,7 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 		if (isdigit(c = tok->line[ptr])) {
 			c &= 0x0f;
 			if (c > (base-1)) {
+				// TODO: continue till end of number, so simple typo still allows detect further errors
 				tok->value = E_TOK_DIGITRANGE;
 				tok->type = T_ERROR;
 				return false;
@@ -169,7 +170,7 @@ static inline bool_t parse_name(tokenizer_t *tok, int ptr) {
 	return true;
 }
 
-static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operator) {
+static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operator, int allow_index) {
 
 	const char *line = tok->line;
 
@@ -193,6 +194,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		return true;
 	case ',':
 		// TODO: check OP_*IND
+		// using allow_index
 		return true;
 	case '%':
 		if (line[ptr+1] == '=') {
@@ -384,7 +386,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 }
 
 // set to next token; return true when there is a valid token
-bool_t tokenizer_next(tokenizer_t *tok) {
+bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 
 	tok->value = 0;
 
@@ -401,7 +403,7 @@ bool_t tokenizer_next(tokenizer_t *tok) {
 			|| (tok->type == T_HEX_LITERAL)
 			|| (tok->type == T_TOKEN && line[ptr] == ')');
 
-	// skip whilespace
+	// skip whitespace
 	while (line[ptr] != 0 && isspace(line[ptr])) {
 		ptr++;
 	}
@@ -464,7 +466,7 @@ bool_t tokenizer_next(tokenizer_t *tok) {
 	} else
 	if (ispunct(c)) {
 		// any other token
-		return parse_token(tok, ptr, can_have_operator);
+		return parse_token(tok, ptr, can_have_operator, allow_index);
 	} else {
 		// non-printable - error
 		tok->value = E_TOK_UNKNOWN;
