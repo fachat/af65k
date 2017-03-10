@@ -111,7 +111,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 	while (tokenizer_next(tok, allow_index)) {
 		switch(state) {
 		case P_OP:
-			if (tok->type == T_TOKEN && tok->value == OP_COLON) {
+			if (tok->type == T_TOKEN && tok->vals.op == OP_COLON) {
 				// accept after label
 				// continue to next 
 				stmt->type = S_LABEQPC;
@@ -120,7 +120,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 				state = P_INIT;
 				break;
 			}
-			if (tok->type == T_TOKEN && tok->value == OP_ASSIGN) {
+			if (tok->type == T_TOKEN && tok->vals.op == OP_ASSIGN) {
 				// after label, that's a label value definition
 				stmt->type = S_LABDEF;
 				// next define the label from param

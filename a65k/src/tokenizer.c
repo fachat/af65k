@@ -43,7 +43,6 @@ tokenizer_t *tokenizer_init(const char *line) {
 	tok->line = line;
 	tok->ptr = 0;
 	tok->len = 0;
-	tok->value = 0;
 	tok->type = T_INIT;
 
 	return tok;
@@ -61,7 +60,7 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 			c &= 0x0f;
 			if (c > (base-1)) {
 				// TODO: continue till end of number, so simple typo still allows detect further errors
-				tok->value = E_TOK_DIGITRANGE;
+				tok->errno = E_TOK_DIGITRANGE;
 				tok->type = T_ERROR;
 				return false;
 			}
@@ -81,12 +80,12 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 		}
 		ptr++;
 	}
-	tok->value = value;
+	tok->vals.literal.value = value;
 	tok->len = ptr - tok->ptr;
 
 	if (tok->len == 0) {
 		// syntax error
-		tok->value = E_TOK_EMPTY;
+		tok->errno = E_TOK_EMPTY;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -95,25 +94,29 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 
 static inline bool_t parse_decimal(tokenizer_t *tok, int ptr) {
 
-	tok->type = T_DECIMAL_LITERAL;
+	tok->type = T_LITERAL;
+	tok->vals.literal.type = LIT_DECIMAL;
 	return parse_base(tok, ptr, 10);
 }
 
 static inline bool_t parse_octal(tokenizer_t *tok, int ptr) {
 
-	tok->type = T_OCTAL_LITERAL;
+	tok->type = T_LITERAL;
+	tok->vals.literal.type = LIT_OCTAL;
 	return parse_base(tok, ptr, 8);
 }
 
 static inline bool_t parse_binary(tokenizer_t *tok, int ptr) {
 
-	tok->type = T_BINARY_LITERAL;
+	tok->type = T_LITERAL;
+	tok->vals.literal.type = LIT_BINARY;
 	return parse_base(tok, ptr, 2);
 }
 
 static inline bool_t parse_hex(tokenizer_t *tok, int ptr) {
 
-	tok->type = T_HEX_LITERAL;
+	tok->type = T_LITERAL;
+	tok->vals.literal.type = LIT_HEX;
 	return parse_base(tok, ptr, 16);
 }
 
@@ -122,10 +125,11 @@ static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 	const char *line = tok->line;
 
 	char delim = line[ptr];
-	tok->type = T_STRING_LITERAL;
+	tok->type = T_STRING;
 
 	ptr++;
-	tok->strptr = ptr;
+	tok->vals.string.ptr = ptr;
+	tok->vals.string.len = 0;
 
 	while (isPrint(line[ptr])) {
 		if (line[ptr] == delim) {
@@ -133,23 +137,23 @@ static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 		}
 		ptr++;
 	}
-	tok->strlen = ptr - tok->strptr;
+	tok->vals.string.len = ptr - tok->vals.string.ptr;
 	
 	if (line[ptr] == delim) {
 		ptr++;
 	} else 
 	if (line[ptr] != 0) {
 		// non-printable char ends string
-		tok->value = E_TOK_NONPRINT;
+		tok->errno = E_TOK_NONPRINT;
 		tok->type = T_ERROR;
 		return false;
 	}
 
 	tok->len = ptr - tok->ptr;
 
-	if (tok->strlen == 0) {
+	if (tok->vals.string.len == 0) {
 		// empty string
-		tok->value = E_TOK_EMPTY;
+		tok->errno = E_TOK_EMPTY;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -177,7 +181,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 	char c = line[ptr];
 
 	// default outcome
-	tok->value = c;
+	tok->vals.op = c;
 	tok->type = T_TOKEN;
 	tok->len = 1;
 
@@ -198,42 +202,42 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		return true;
 	case '%':
 		if (line[ptr+1] == '=') {
-			tok->value = OP_ASSIGNMOD;
+			tok->vals.op = OP_ASSIGNMOD;
 			tok->len++;
 			return true;
 		}
 		return true;
 	case '-':
 		if (line[ptr+1] == '=') {
-			tok->value = OP_ASSIGNSUB;
+			tok->vals.op = OP_ASSIGNSUB;
 			tok->len++;
 			return true;
 		}
 		return true;
 	case '+':
 		if (line[ptr+1] == '=') {
-			tok->value = OP_ASSIGNADD;
+			tok->vals.op = OP_ASSIGNADD;
 			tok->len++;
 			return true;
 		}
 		return true;
 	case '*':
 		if (line[ptr+1] == '=') {
-			tok->value = OP_ASSIGNMULT;
+			tok->vals.op = OP_ASSIGNMULT;
 			tok->len++;
 			return true;
 		}
 		return true;
 	case '/':
 		if (line[ptr+1] == '=') {
-			tok->value = OP_ASSIGNDIV;
+			tok->vals.op = OP_ASSIGNDIV;
 			tok->len++;
 			return true;
 		}
 		return true;
 	case ']':
 		if (line[ptr+1] == ']') {
-			tok->value = OP_BBCLOSE;
+			tok->vals.op = OP_BBCLOSE;
 			tok->len++;
 			return true;
 		}
@@ -241,7 +245,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		return true;
 	case '[':
 		if (line[ptr+1] == '[') {
-			tok->value = OP_BBOPEN;
+			tok->vals.op = OP_BBOPEN;
 			tok->len++;
 			return true;
 		}
@@ -251,7 +255,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		if (can_have_operator) {
 			switch (line[ptr+1]) {
 			case '=':
-				tok->value = OP_NOTEQUAL;
+				tok->vals.op = OP_NOTEQUAL;
 				tok->len++;
 				return true;
 			default:
@@ -269,19 +273,19 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 			switch (line[ptr+1]) {
 			case '>':
 				if (line[ptr+2] == '=') {
-					tok->value = OP_ASSIGNSHIFTRIGHT;
+					tok->vals.op = OP_ASSIGNSHIFTRIGHT;
 					tok->len += 2;
 					return true;
 				}
-				tok->value = OP_SHIFTRIGHT;
+				tok->vals.op = OP_SHIFTRIGHT;
 				tok->len++;
 				return true;
 			case '=':
-				tok->value = OP_LARGEROREQUAL;
+				tok->vals.op = OP_LARGEROREQUAL;
 				tok->len++;
 				return true;
 			case '<':
-				tok->value = OP_NOTEQUAL;
+				tok->vals.op = OP_NOTEQUAL;
 				tok->len++;
 				return true;
 			default:
@@ -298,19 +302,19 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 			switch (line[ptr+1]) {
 			case '<':
 				if (line[ptr+2] == '=') {
-					tok->value = OP_ASSIGNSHIFTLEFT;
+					tok->vals.op = OP_ASSIGNSHIFTLEFT;
 					tok->len += 2;
 					return true;
 				}
-				tok->value = OP_SHIFTLEFT;
+				tok->vals.op = OP_SHIFTLEFT;
 				tok->len++;
 				return true;
 			case '=':
-				tok->value = OP_LESSOREQUAL;
+				tok->vals.op = OP_LESSOREQUAL;
 				tok->len++;
 				return true;
 			case '>':
-				tok->value = OP_NOTEQUAL;
+				tok->vals.op = OP_NOTEQUAL;
 				tok->len++;
 				return true;
 			default:
@@ -326,7 +330,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 			// check "==", "=>", "=<"
 			switch (line[ptr+1]) {
 			case '=':
-				tok->value = OP_EQUAL;
+				tok->vals.op = OP_EQUAL;
 				tok->len++;
 				return true;
 			default:
@@ -341,11 +345,11 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		// check "&", "&&", "&="
 		switch (line[ptr+1]) {
 		case '&':
-			tok->value = OP_LOGICAND;
+			tok->vals.op = OP_LOGICAND;
 			tok->len++;
 			return true;
 		case '=':
-			tok->value = OP_ASSIGNBITAND;
+			tok->vals.op = OP_ASSIGNBITAND;
 			tok->len++;
 			return true;
 		} 
@@ -354,11 +358,11 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		// check "|", "||", "|="
 		switch (line[ptr+1]) {
 		case '|':
-			tok->value = OP_LOGICOR;
+			tok->vals.op = OP_LOGICOR;
 			tok->len++;
 			return true;
 		case '=':
-			tok->value = OP_ASSIGNBITOR;
+			tok->vals.op = OP_ASSIGNBITOR;
 			tok->len++;
 			return true;
 		} 
@@ -367,17 +371,17 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		// check "^", "^^", "^="
 		switch (line[ptr+1]) {
 		case '^':
-			tok->value = OP_LOGICXOR;
+			tok->vals.op = OP_LOGICXOR;
 			tok->len++;
 			return true;
 		case '=':
-			tok->value = OP_ASSIGNBITXOR;
+			tok->vals.op = OP_ASSIGNBITXOR;
 			tok->len++;
 			return true;
 		} 
 		return true;
 	default:
-		tok->value = E_TOK_UNKNOWN;
+		tok->errno = E_TOK_UNKNOWN;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -388,8 +392,6 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 // set to next token; return true when there is a valid token
 bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 
-	tok->value = 0;
-
 	// move behind last token
 	int ptr = tok->ptr + tok->len;
 
@@ -397,10 +399,7 @@ bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 
 	// attempt to not have to store an extra operand/operator flag in the tokenizer	
 	// or even have to pass it to this function as parameter...
-	bool_t can_have_operator = (tok->type == T_DECIMAL_LITERAL) 
-			|| (tok->type == T_OCTAL_LITERAL)
-			|| (tok->type == T_BINARY_LITERAL)
-			|| (tok->type == T_HEX_LITERAL)
+	bool_t can_have_operator = (tok->type == T_LITERAL) 
 			|| (tok->type == T_TOKEN && line[ptr] == ')');
 
 	// skip whitespace
@@ -469,7 +468,7 @@ bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 		return parse_token(tok, ptr, can_have_operator, allow_index);
 	} else {
 		// non-printable - error
-		tok->value = E_TOK_UNKNOWN;
+		tok->errno = E_TOK_UNKNOWN;
 		tok->type = T_ERROR;
 		return false;
 	}

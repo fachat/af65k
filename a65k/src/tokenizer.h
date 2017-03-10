@@ -27,18 +27,24 @@
 
 #include "types.h"
 
+// token type
 typedef enum {
-	T_INIT			=  0,	// initial state
-	T_NAME			=  1,	// a name, like label1 do_this
-	T_TOKEN			=  2,	// a token, like ( ) . ++ == <> & 
-	T_STRING_LITERAL	= 10,	// a quoted string, like 'abc' "cde"
-	T_DECIMAL_LITERAL	= 20,	// a decimal number, like 1 2 3
-	T_OCTAL_LITERAL		= 28,	// an octal number, like &127 0127
-	T_BINARY_LITERAL	= 22,	// a binary number, like %110101
-	T_HEX_LITERAL		= 26,	// a hex number, like $12dA 0x12Ad
-	T_ERROR			=254,	// an error has happened
-	T_END			=255,	// end of string reached
+	T_INIT,				// initial state
+	T_NAME,				// a name, like label1 do_this
+	T_TOKEN,			// a token, like ( ) . ++ == <> & 
+	T_STRING,			// string
+	T_LITERAL,			// a numerical literal value (decimal, hex, ...)
+	T_ERROR,			// an error has happened
+	T_END,				// end of string reached
 } tok_t;
+
+// literal type
+typedef enum {
+	LIT_DECIMAL,			// a decimal number, like 1 2 3
+	LIT_OCTAL,			// an octal number, like &127 0127
+	LIT_BINARY,			// a binary number, like %110101
+	LIT_HEX				// a hex number, like $12dA 0x12Ad
+} littype_t;
 
 typedef enum {
 	OP_NONE			= 0,
@@ -107,9 +113,18 @@ typedef struct {
 	tok_t		type;		// type of token
 	int 		ptr;		// current pointer to token in line
 	int		len;		// length of current token (total, i.e. incl. quotes for a string)
-	int		strptr;		// pointer to start of string for T_STRING_LITERAL
-	int		strlen;		// length of string for T_STRING_LITERAL
-	long		value;		// value for decimal, octal, binary, or hex literal
+	union {
+		struct {
+			int		ptr;		// pointer to start of string for T_STRING_LITERAL
+			int		len;		// length of string for T_STRING_LITERAL
+		} string;
+		struct {
+			long		value;		// value for decimal, octal, binary, or hex literal
+			littype_t	type;		// type of literal, for T_LITERAL
+		} literal;
+		op_t op;
+	} vals;
+	int errno;
 } tokenizer_t;
 
 // initialize a tokenizer 
