@@ -29,16 +29,31 @@
 void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **anode) {
 
 	*anode = NULL;
+	anode_t *new_anode = NULL;
 
 	// when true, last token was a value
 	int expect_op = 0;
 
 	while (tokenizer_next(tok, allow_index)) {
 	
-		if (expect_op) {
+		if (!expect_op) {
 			switch(tok->type) {
+			case T_INIT:
+			case T_BRACKET:
+			case T_NAME:
 			case T_TOKEN:
 				// identify arithmetic tokens
+				break;
+			case T_STRING:
+				new_anode = anode_init(A_VALUE, *anode);
+			case T_LITERAL:
+				// new node for literal value
+				new_anode = anode_init(A_VALUE, *anode);
+				new_anode->val.intv.type = tok->vals.literal.type;
+				new_anode->val.intv.value = tok->vals.literal.value;
+				break;
+			case T_ERROR:
+			case T_END:
 				break;
 			}		
 		} else {

@@ -60,7 +60,7 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 			c &= 0x0f;
 			if (c > (base-1)) {
 				// TODO: continue till end of number, so simple typo still allows detect further errors
-				tok->errno = E_TOK_DIGITRANGE;
+				tok->vals.errno = E_TOK_DIGITRANGE;
 				tok->type = T_ERROR;
 				return false;
 			}
@@ -85,7 +85,7 @@ static bool_t parse_base(tokenizer_t *tok, int ptr, int base) {
 
 	if (tok->len == 0) {
 		// syntax error
-		tok->errno = E_TOK_EMPTY;
+		tok->vals.errno = E_TOK_EMPTY;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -126,6 +126,7 @@ static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 
 	char delim = line[ptr];
 	tok->type = T_STRING;
+	tok->vals.string.type = delim;
 
 	ptr++;
 	tok->vals.string.ptr = ptr;
@@ -144,7 +145,7 @@ static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 	} else 
 	if (line[ptr] != 0) {
 		// non-printable char ends string
-		tok->errno = E_TOK_NONPRINT;
+		tok->vals.errno = E_TOK_NONPRINT;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -153,7 +154,7 @@ static inline bool_t parse_string(tokenizer_t *tok, int ptr) {
 
 	if (tok->vals.string.len == 0) {
 		// empty string
-		tok->errno = E_TOK_EMPTY;
+		tok->vals.errno = E_TOK_EMPTY;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -189,12 +190,14 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 	case '@':
 	case '`':
 	case '\'':
-	case '(':
-	case ')':
 	case '#':
 	case ':':
 	case '.':
 	case ';':
+		return true;
+	case '(':
+	case ')':
+		tok->type = T_BRACKET;
 		return true;
 	case ',':
 		// TODO: check OP_*IND
@@ -236,6 +239,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		}
 		return true;
 	case ']':
+		tok->type = T_BRACKET;
 		if (line[ptr+1] == ']') {
 			tok->vals.op = OP_BBCLOSE;
 			tok->len++;
@@ -244,6 +248,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		// OP_BOPEN
 		return true;
 	case '[':
+		tok->type = T_BRACKET;
 		if (line[ptr+1] == '[') {
 			tok->vals.op = OP_BBOPEN;
 			tok->len++;
@@ -381,7 +386,7 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		} 
 		return true;
 	default:
-		tok->errno = E_TOK_UNKNOWN;
+		tok->vals.errno = E_TOK_UNKNOWN;
 		tok->type = T_ERROR;
 		return false;
 	}
@@ -455,8 +460,9 @@ bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 		tok->ptr = ptr;
 		return parse_octal(tok, ptr);
 	} else
-	if (c == '\'' || c == '"') {
+	if (is_string_delim(c)) {
 		// string literal
+		// c must be of one of quotetype_t enum!
 		return parse_string(tok, ptr);
 	} else
 	if (isalpha(c) || c == '_') {
@@ -468,7 +474,7 @@ bool_t tokenizer_next(tokenizer_t *tok, int allow_index) {
 		return parse_token(tok, ptr, can_have_operator, allow_index);
 	} else {
 		// non-printable - error
-		tok->errno = E_TOK_UNKNOWN;
+		tok->vals.errno = E_TOK_UNKNOWN;
 		tok->type = T_ERROR;
 		return false;
 	}

@@ -30,6 +30,7 @@
 // token type
 typedef enum {
 	T_INIT,				// initial state
+	T_BRACKET,			// any type of bracket
 	T_NAME,				// a name, like label1 do_this
 	T_TOKEN,			// a token, like ( ) . ++ == <> & 
 	T_STRING,			// string
@@ -45,6 +46,16 @@ typedef enum {
 	LIT_BINARY,			// a binary number, like %110101
 	LIT_HEX				// a hex number, like $12dA 0x12Ad
 } littype_t;
+
+// quote type for strings
+typedef enum {
+	Q_SINGLE		= '\'',
+	Q_DOUBLE		= '"'
+} quotetype_t;
+
+static inline bool is_string_delim(char c) {
+	return (c == Q_SINGLE || c == Q_DOUBLE);
+} 
 
 typedef enum {
 	OP_NONE			= 0,
@@ -102,6 +113,15 @@ typedef enum {
 	OP_BIND			= 152, 	// ",b"
 } op_t;
 
+static inline op_t closing_op(op_t opening_bracket) {
+	switch (opening_bracket) {
+	case OP_OPEN: 	return OP_CLOSE;
+	case OP_BOPEN:	return OP_BCLOSE;
+	case OP_BBOPEN:	return OP_BBCLOSE;
+	default:	return OP_NONE;
+	}
+}
+
 extern int prio_of_operator_table[];
 
 static inline int prio_of_operator(const op_t op) {
@@ -117,14 +137,15 @@ typedef struct {
 		struct {
 			int		ptr;		// pointer to start of string for T_STRING_LITERAL
 			int		len;		// length of string for T_STRING_LITERAL
+			quotetype_t	type;		// what quote was used?
 		} string;
 		struct {
 			long		value;		// value for decimal, octal, binary, or hex literal
 			littype_t	type;		// type of literal, for T_LITERAL
 		} literal;
 		op_t op;
+		int errno;
 	} vals;
-	int errno;
 } tokenizer_t;
 
 // initialize a tokenizer 

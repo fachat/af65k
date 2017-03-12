@@ -51,7 +51,6 @@ It is linked together in a tree-structure like such:
 */
 
 typedef enum {
-	A_INIT,		// first nodee
 	A_BRACKET,	// open bracket
 	A_VALUE,	// value
 	A_LABEL,	// label reference
@@ -84,25 +83,28 @@ typedef struct anode_s anode_t;
 struct anode_s {
 	// type, incl. brackets, arithm. ops etc
 	a_type		type;
-	// sub type, depending on the type
-	asub_type	subtype;
+	// parent node
+	const anode_t	*parent;	
+	// next in case of comma
+	const anode_t	*next;
+
 	// operation
 	op_t		op;
-	// parent node
-	anode_t		*parent;	
 	// child nodes in case of brackets
 	anode_t		*child;
-	// next in case of comma
-	anode_t		*next;
 	// the actual expression if any
 	anode_t		*expr;
 	// actual value
 	union {
-	  maxval_t 	intval;
+	  struct {
+	    maxval_t 	value;
+	    littype_t	type;
+	  } intv;
 	  struct {
 	    const char 	*str;
 	    int		len;
-	  } strval;
+	    quotetype_t type;
+	  } strv;
 	  // TODO: label etc
 	} val;
 };
@@ -113,11 +115,10 @@ static type_t anode_memtype = {
 	sizeof(anode_t)
 };
 
-static inline anode_t *anode_init(a_type type, anode_t *parent) {
+static inline anode_t *anode_init(a_type type, const anode_t *parent) {
 	anode_t *anode = mem_alloc(&anode_memtype);
 	
 	anode->type = type;
-	anode->subtype = AV_NONE;
 	anode->op = OP_NONE;
 
 	anode->parent = parent;
