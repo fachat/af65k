@@ -87,14 +87,23 @@ struct anode_s {
 	const anode_t	*parent;	
 	// next in case of comma
 	const anode_t	*next;
-
 	// operation
 	op_t		op;
+	// value (depending on a_type)
+	union {
+	  // A_VALUE
+	  struct {
+	    maxval_t 	value;
+	    littype_t	type;	// note: maybe LIT_NONE in case of stacked unaries
+	  } intv;
+	} val;
+
 	// child nodes in case of brackets
 	anode_t		*child;
 	// the actual expression if any
 	anode_t		*expr;
 	// actual value
+/*
 	union {
 	  struct {
 	    maxval_t 	value;
@@ -107,6 +116,7 @@ struct anode_s {
 	  } strv;
 	  // TODO: label etc
 	} val;
+*/
 };
 
 

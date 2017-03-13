@@ -41,6 +41,7 @@ typedef enum {
 
 // literal type
 typedef enum {
+	LIT_NONE,
 	LIT_DECIMAL,			// a decimal number, like 1 2 3
 	LIT_OCTAL,			// an octal number, like &127 0127
 	LIT_BINARY,			// a binary number, like %110101
