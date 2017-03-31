@@ -25,7 +25,7 @@
 
 #include "parser.h"
 
-void print_debug(statement_t *stmt);
+void print_debug_stmt(statement_t *stmt);
 
 
 #endif

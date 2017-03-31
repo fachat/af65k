@@ -177,6 +177,7 @@ void parser_push(const context_t *ctx, const line_t *line) {
 			break;
 		};
 	}
+	statement_push(stmt);
 end:
 	tokenizer_free(tok);
 }

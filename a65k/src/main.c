@@ -49,7 +49,7 @@ static void debug_output() {
 
 		statement_t *stmt = list_iterator_next(stmts);	
 
-		print_debug(stmt);
+		print_debug_stmt(stmt);
 	}
 }
 

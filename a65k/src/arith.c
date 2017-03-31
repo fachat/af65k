@@ -32,13 +32,14 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 	anode_t *new_anode = NULL;
 
 	// when true, last token was a value
-	int expect_op = 0;
+	int expect_val = 1;
 
 	op_t unary = OP_NONE;
 
-	while (tokenizer_next(tok, allow_index)) {
+	//while (tokenizer_next(tok, allow_index)) {
+	do {
 	
-		if (!expect_op) {
+		if (expect_val) {
 			switch(tok->type) {
 			case T_INIT:
 				break;
@@ -53,9 +54,11 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 				}
 				unary = OP_NONE;
 				anode = new_anode;
-				new_anode == NULL;
+				new_anode = NULL;
+				expect_val = 1;
 				break;
 			case T_NAME:
+				// TODO
 			case T_LITERAL:
 				// new node for literal value
 				new_anode = anode_init(A_VALUE, anode);
@@ -64,8 +67,8 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 				new_anode->op = unary;
 				unary = OP_NONE;
 				anode = new_anode;
-				new_anode == NULL;
-				expect_op = 1;
+				new_anode = NULL;
+				expect_val = 0;
 				break;
 			case T_TOKEN:
 				// unary operator, like inversion, negative
@@ -75,7 +78,7 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 					new_anode->op = unary;
 					unary = OP_NONE;
 					anode = new_anode;
-					new_anode == NULL;
+					new_anode = NULL;
 				}
 				unary = tok->vals.op;
 				break;
@@ -94,6 +97,8 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 			case T_TOKEN:
 				anode->op = tok->vals.op;
 				// identify arithmetic tokens
+				// TODO check for comment tokens etc
+				expect_val = 1;
 				break;
 			case T_STRING:
 			case T_LITERAL:
@@ -103,6 +108,13 @@ void arith_parse(tokenizer_t *tok, int allow_index, const anode_t **ext_anode) {
 			}
 		}	
 	}
+	while (tokenizer_next(tok, allow_index));
+
+	const anode_t *c_anode = anode;
+	while (c_anode && c_anode->parent) {
+		c_anode = c_anode->parent;
+	}
+	*ext_anode = c_anode;
 }
 
 

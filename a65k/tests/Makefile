@@ -1,7 +1,7 @@
 
 .PHONY: clean
 
-TESTS=hash1 list1 tokenizer1 infiles1 block1 cpu1 context1 stringhash operation1
+TESTS=hash1 list1 tokenizer1 infiles1 block1 cpu1 context1 stringhash operation1 parser1
 
 TESTBINS=$(addprefix bin/,$(TESTS))
 
@@ -14,7 +14,7 @@ INCPATHS=. util base
 INCLUDES=$(addprefix -I$(SRCDIR)/,$(INCPATHS))
 DEPS=$(addprefix $(SRCDIR)/,$(addsuffix /*.h,$(INCPATHS)))
 
-OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o cpu.o context.o errors.o segment.o operation.o
+OBJFILES=log.o linked_list.o array_list.o mem.o hashmap.o tokenizer.o infiles.o block.o cpu.o context.o errors.o segment.o operation.o parser.o arith.o print.o
 OBJ=$(addprefix $(SRCDIR)/obj/,$(OBJFILES))
 
 all: $(TESTBINS)

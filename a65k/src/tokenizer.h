@@ -58,6 +58,8 @@ static inline bool is_string_delim(char c) {
 	return (c == Q_SINGLE || c == Q_DOUBLE);
 } 
 
+
+
 typedef enum {
 	OP_NONE			= 0,
 	OP_EXCL 		= '!',	
@@ -106,6 +108,7 @@ typedef enum {
 	OP_LOGICXOR		= 135,	// "^^"
 	OP_BITINV		= '~',
 	OP_MOD			= '%',
+	OP_DOUBLESLASH		= 153,	// "//"
 	// register indexing
 	OP_XIND			= 148, 	// ",x"
 	OP_YIND			= 149,	// ",y"
@@ -113,6 +116,14 @@ typedef enum {
 	OP_SIND			= 151,	// ",s"
 	OP_BIND			= 152, 	// ",b"
 } op_t;
+
+static inline bool is_stmt_delim(op_t t) {
+	return (t == OP_COLON);
+}
+
+static inline bool is_comment_delim(op_t t) {
+	return (t == OP_SEMICOLON) || (t == OP_DOUBLESLASH);
+}
 
 static inline op_t closing_op(op_t opening_bracket) {
 	switch (opening_bracket) {

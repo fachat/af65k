@@ -232,8 +232,13 @@ static inline bool_t parse_token(tokenizer_t *tok, int ptr, int can_have_operato
 		}
 		return true;
 	case '/':
-		if (line[ptr+1] == '=') {
+		switch (line[ptr+1]) {
+		case '=':
 			tok->vals.op = OP_ASSIGNDIV;
+			tok->len++;
+			return true;
+		case '/':
+			tok->vals.op = OP_DOUBLESLASH;
 			tok->len++;
 			return true;
 		}

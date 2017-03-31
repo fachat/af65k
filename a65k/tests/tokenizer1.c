@@ -44,12 +44,12 @@ void do_test(const char *teststr) {
 
 	tokenizer_t *tok = tokenizer_init(teststr);
 
-	while (tokenizer_next(tok)) {
+	while (tokenizer_next(tok, false)) {
 
-		printf("TOK -> type=%d, len=%d, val=%ld, ptr=%s\n", tok->type, tok->len, tok->value, tok->line+tok->ptr);
+		printf("TOK -> type=%d, len=%d, ptr=%s\n", tok->type, tok->len, tok->line+tok->ptr);
 	}
 	
-	printf("END -> type=%d, value=%ld\n", tok->type, tok->value);
+	printf("END -> type=%d\n", tok->type);
 
 	tokenizer_free(tok);
 }
