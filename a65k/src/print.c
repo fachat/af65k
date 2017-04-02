@@ -19,62 +19,49 @@
 
 ****************************************************************************/
 
+#include <stdarg.h>
 
 #include "print.h"
 
 #define	BUF_LEN		2048
 
-void print_debug_stmt(statement_t *stmt) {
+static void do_print(const char *pattern, ...) {
+	va_list ap;
+	va_start(ap, pattern);
 
 	char buf[BUF_LEN];
-	int p = 0;
 
-	int r = snprintf(buf + p, BUF_LEN - p, "B:%p lab:%p op:%p par:%p", 
-		(void*)stmt, (void*)stmt->label, (void*)stmt->op, (void*)stmt->param);
-	if (r < 0 || (p + r) > BUF_LEN) {
+	int r = vsnprintf(buf, BUF_LEN, pattern, ap);
+	if (r < 0 || r > BUF_LEN) {
 		// error
 		log_error("Error printing %d\n", r);
 		return;
 	}
 	log_warn("%s", buf);
+}
+
+
+void print_debug_stmt(statement_t *stmt) {
+
+	do_print("B:%p lab:%p op:%p par:%p", 
+		(void*)stmt, (void*)stmt->label, (void*)stmt->op, (void*)stmt->param);
 
 	if (stmt->label != NULL) {
-		p = 0;
 		const label_t *l = stmt->label;
-		int r = snprintf(buf + p, BUF_LEN - p, "L:%p name:%s ctx:%p pos:%s:%d", 
+		do_print("L:%p name:%s ctx:%p pos:%s:%d", 
 			(void*)l, l->name, (void*)l->ctx, l->position->filename, l->position->lineno);
-		if (r < 0 || (p + r) > BUF_LEN) {
-			// error
-			log_error("Error printing %d\n", r);
-			return;
-		}
-		log_warn("%s", buf);
 	}
 
 	if (stmt->op != NULL) {
-		p = 0;
 		const operation_t *o = stmt->op;
-		int r = snprintf(buf + p, BUF_LEN - p, "O:%p name:%s isa:$%x isrel:%d acw:%d idxw:%d", 
+		do_print("O:%p name:%s isa:$%x isrel:%d acw:%d idxw:%d", 
 			(void*)o, o->name, o->isa, o->abs_is_rel, o->check_ac_w, o->check_idx_w);
-		if (r < 0 || (p + r) > BUF_LEN) {
-			// error
-			log_error("Error printing %d\n", r);
-			return;
-		}
-		log_warn("%s", buf);
 	}
 
 	if (stmt->param != NULL) {
-		p = 0;
 		const anode_t *a = stmt->param;
-		int r = snprintf(buf + p, BUF_LEN - p, "A:%p type:%d op:%d val:$%lx/%ld", 
+		do_print("A:%p type:%d op:%d val:$%lx/%ld", 
 			(void*)a, a->type, a->op, a->val.intv.value, a->val.intv.value);
-		if (r < 0 || (p + r) > BUF_LEN) {
-			// error
-			log_error("Error printing %d\n", r);
-			return;
-		}
-		log_warn("%s", buf);
 	}
 	
 }
