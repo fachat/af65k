@@ -1,9 +1,6 @@
 <h2>List of operations</h2>
 <ul>
 <li>
-<a href="#ADB">ADB</a>
- - Add value to B register</li>
-<li>
 <a href="#ADC">ADC</a>
  - Add content of memory location to accumulator</li>
 <li>
@@ -14,9 +11,6 @@
 <li>
 <a href="#ADE">ADE</a>
  - Add value to E register</li>
-<li>
-<a href="#ADS">ADS</a>
- - Add value to stack pointer</li>
 <li>
 <a href="#AND">AND</a>
  - Bitwise AND accumulator with content of memory location</li>
@@ -220,11 +214,6 @@
 <a href="#ORA">ORA</a>
  - Bitwise OR accumulator with content of memory location</li>
 <li>
-<a href="#PEA">PEA</a>
- - Push Effective Address: compute the effective address and push
-				it onto the stack (always full width)
-			</li>
-<li>
 <a href="#PHA">PHA</a>
  - Push contents of the accumulator onto the stack</li>
 <li>
@@ -321,17 +310,11 @@
  - Swap AC with Y register. Always done full width, no flags set.
 			</li>
 <li>
-<a href="#SBB">SBB</a>
- - Substract value from B register</li>
-<li>
 <a href="#SBC">SBC</a>
  - Substract content of memory location from accumulator</li>
 <li>
 <a href="#SBE">SBE</a>
- - Add value to E register</li>
-<li>
-<a href="#SBS">SBS</a>
- - Substract value from stack pointer</li>
+ - Subtract value from E register</li>
 <li>
 <a href="#SCC">SCC</a>
  - Skip on carry clear - skip next opcode when C flag is cleared</li>
@@ -469,13 +452,6 @@
 <a href="#TYS">TYS</a>
  - Transfer Y to stack pointer</li>
 </ul>
-<h2>ADB</h2>
-<a name="ADB"> </a><p>Add value to B register</p>
-<table class="optable"><tr><th colspan="10">ADB</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x65</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
-<tr><td>EXT</td><td>0x75</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
-</table>
 <h2>ADC</h2>
 <a name="ADC"> </a><p>Add content of memory location to accumulator</p>
 <table class="optable"><tr><th colspan="10">ADC</th></tr>
@@ -571,13 +547,6 @@
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0x25</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td>EXT</td><td>0x35</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
-</table>
-<h2>ADS</h2>
-<a name="ADS"> </a><p>Add value to stack pointer</p>
-<table class="optable"><tr><th colspan="10">ADS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x45</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
-<tr><td>EXT</td><td>0x55</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
 <h2>AND</h2>
 <a name="AND"> </a><p>Bitwise AND accumulator with content of memory location</p>
@@ -2193,68 +2162,6 @@
 					Note that the default is to use BYTE-wide operation
 					without load
 					extension.
-				</p><h2>PEA</h2>
-<a name="PEA"> </a><p>Push Effective Address: compute the effective address and push
-				it onto the stack (always full width)
-			</p>
-<table class="optable"><tr><th colspan="10">PEA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x41</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 64bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x51</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 64bit</td><td></td></tr>
-<tr><td>EXT</td><td>0xd6</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x01</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x11</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x82</td><td>65k</td><td>AM, OF, UM</td><td>Relative</td><td></td></tr>
-<tr><td>EXT</td><td>0x81</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x86</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage</td><td></td></tr>
-<tr><td>EXT</td><td>0xce</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x91</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0x92</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x12</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0xd2</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 64bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x52</td><td>65k</td><td>AM, OF, UM</td><td>Absolute indirect 64bit</td><td></td></tr>
-<tr><td>EXT</td><td>0x96</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0xdf</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0xde</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td>EXT</td><td>0x02</td><td>65k</td><td>AM, OF, UM</td><td>Relative 16bit</td><td></td></tr>
-<tr><td>EXT</td><td>0xc1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
-<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X indirect 64bit</td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Push the effective address given by the addressing mode onto the
-					stack
-					(without accessing
-					the memory pointed to by
-					the parameter).
-				</p><pre>
-					Stack(SP--) &lt;= >EffectiveAddress
-					Stack(SP--) &lt;=
-					&lt;EffectiveAddress
-				</pre><h3>65k</h3>
-<p>
-					The value pushed is always in the natural (full) width of the
-					processor.
-				</p><p>
-					The AM and OF prefixes are interpreted as usually when computing
-					the
-					address.
-				</p><p>
-					The memory and stack pointers used are the current ones when the
-					user
-					mode prefix is not set.
-					When the user mode
-					prefix is set in
-					hypervisor mode, the memory and
-					stack pointer is that of the
-					user
-					mode. When set in user mode an ABORT
-					is triggered.
-				</p><p>
-					Note that the stack used to actually store the address is always
-					(no
-					matter the user mode bit)
-					the current stack!
 				</p><h2>PHA</h2>
 <a name="PHA"> </a><p>Push contents of the accumulator onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHA</th></tr>
@@ -3055,13 +2962,6 @@
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0xda</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
 </table>
-<h2>SBB</h2>
-<a name="SBB"> </a><p>Substract value from B register</p>
-<table class="optable"><tr><th colspan="10">SBB</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xe5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
-<tr><td>EXT</td><td>0xf5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
-</table>
 <h2>SBC</h2>
 <a name="SBC"> </a><p>Substract content of memory location from accumulator</p>
 <table class="optable"><tr><th colspan="10">SBC</th></tr>
@@ -3115,18 +3015,11 @@
 					without load
 					extension.
 				</p><h2>SBE</h2>
-<a name="SBE"> </a><p>Add value to E register</p>
+<a name="SBE"> </a><p>Subtract value from E register</p>
 <table class="optable"><tr><th colspan="10">SBE</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0xa5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td>EXT</td><td>0xb5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
-</table>
-<h2>SBS</h2>
-<a name="SBS"> </a><p>Substract value from stack pointer</p>
-<table class="optable"><tr><th colspan="10">SBS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xc5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
-<tr><td>EXT</td><td>0xd5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
 <h2>SCC</h2>
 <a name="SCC"> </a><p>Skip on carry clear - skip next opcode when C flag is cleared</p>

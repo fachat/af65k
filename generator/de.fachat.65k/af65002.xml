@@ -5804,6 +5804,7 @@
 			</doc>
 		</operation>
 
+<!-- replaced by simply using LEA and PHE 
 		<operation>
 			<name>PEA</name>
 			<desc>Push Effective Address: compute the effective address and push
@@ -5924,8 +5925,8 @@
 					the parameter).
 				</p>
 				<pre>
-					Stack(SP--) &amp;lt;= &gt;EffectiveAddress
-					Stack(SP--) &amp;lt;=
+					Stack(SP- -) &amp;lt;= &gt;EffectiveAddress
+					Stack(SP- -) &amp;lt;=
 					&amp;lt;EffectiveAddress
 				</pre>
 			</doc>
@@ -5959,6 +5960,7 @@
 				</p>
 			</doc>
 		</operation>
+-->
 
 		<!-- ################################# -->
 
@@ -6790,6 +6792,7 @@
 			</opcodes>
 		</operation>
 
+<!-- replace with LEA / TES 
 		<operation>
 			<name>ADS</name>
 			<desc>Add value to stack pointer</desc>
@@ -6809,7 +6812,9 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+-->
 
+<!-- replace with LEA / TEB 
 		<operation>
 			<name>ADB</name>
 			<desc>Add value to B register</desc>
@@ -6828,10 +6833,11 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+-->
 
 		<operation>
 			<name>SBE</name>
-			<desc>Add value to E register</desc>
+			<desc>Subtract value from E register</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
 			<prefixBits>NF</prefixBits>
@@ -6848,9 +6854,10 @@
 			</opcodes>
 		</operation>
 
+<!-- replace with LEA / TES 
 		<operation>
 			<name>SBS</name>
-			<desc>Substract value from stack pointer</desc>
+			<desc>Subtract value from stack pointer</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
 			<prefixBits>NF</prefixBits>
@@ -6867,7 +6874,9 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+ -->
 
+<!-- replace with LEA / TEB 
 		<operation>
 			<name>SBB</name>
 			<desc>Substract value from B register</desc>
@@ -6886,6 +6895,7 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+-->
 
 		<operation>
 			<name>ASO</name>
