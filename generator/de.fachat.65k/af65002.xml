@@ -140,7 +140,9 @@
 		<class>
 			<name>65k</name>
 			<!-- prio>2</prio -->
-			<includes>cmos</includes>
+			<includes>nmos</includes>
+			<feature>cmos</feature>
+			<feature>cmos_ind</feature>
 			<feature>65k</feature>
 			<doc>
 				<p>
@@ -521,43 +523,19 @@
 
 		<operation>
 			<name>BGT</name>
+			<synonym>(SEQ BCS)</synonym>
 			<desc>Branch if greater - take branch when C flag is set but Z flag
 				is
 				clear
 			</desc>
-			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
-			<opcodes>
-				<addressingMode>rel</addressingMode>
-				<opcode>0xB0</opcode>
-				<oppage>EXT</oppage>
-			</opcodes>
 			<doc>
 				<p>
-					Branch to the address given by adding the parameter to the
-					address of the
-					next operation (after the branch opcode)
-					given the
-					condition that
-					the
+					Execute a branch given the
+					condition that the
 					carry status flag is set and the zero status flag
 					is not set.
-					The parameter is a signed
-					8-bit value, i.e. jump
-					distances can be from
-					-128 to +127.
-				</p>
-				<pre>
-					PC &amp;lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
-				</pre>
-			</doc>
-			<doc mode="65k">
-				<p>The RS prefix determines the width of the parameter, the default
-					is 8-bit.
-					With a 16-bit parameter the jump
-					distances can be from
-					-32768 to +32767
-					and so on.
+					Synonym to "SEQ BCS", i.e. branch on carry set, skipped if zero is set. 
 				</p>
 			</doc>
 		</operation>
@@ -933,46 +911,185 @@
 
 		<operation>
 			<name>BGTS</name>
+			<synonym>(SEQ BGES)</synonym>
 			<desc>Branch if greater - take branch when signed greater or equal G
 				flag is set but Z flag is clear
 			</desc>
-			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
-			<opcodes>
-				<addressingMode>rel</addressingMode>
-				<opcode>0xF0</opcode>
-				<oppage>EXT</oppage>
-			</opcodes>
 			<doc>
 				<p>
-					Branch to the address given by adding the parameter to the
-					address of the
-					next operation (after the branch opcode)
-					given the
-					condition that
-					the
+					Execute a branch given the
+					condition that the
 					signed greater status flag is set and the zero
 					status flag is not set.
-					The parameter is a
-					signed 8-bit value, i.e.
-					jump distances can be
-					from
-					-128 to +127.
-				</p>
-				<pre>
-					PC &amp;lt;= NextPC + Operand when (G=1 and Z=0) else NextPC
-				</pre>
-			</doc>
-			<doc mode="65k">
-				<p>The RS prefix determines the width of the parameter, the default
-					is 8-bit.
-					With a 16-bit parameter the jump
-					distances can be from
-					-32768 to +32767
-					and so on.
+					Synonym to "SEQ BGES", i.e. branch on signed greater set, skipped if zero is set. 
 				</p>
 			</doc>
 		</operation>
+
+		<!-- ################################# -->
+
+		<operation>
+			<name>SPL</name>
+			<desc>Skip on plus - skip next opcode when N flag is cleared</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x1f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					negative status flag is clear.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SMI</name>
+			<desc>Skip on minus - skip next opcode when N flag is set</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x3f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					negative status flag is set.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SVC</name>
+			<desc>Skip on overflow clear - skip next opcode when V flag is cleared</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x5f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					overflow status flag is cleared.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SVS</name>
+			<desc>Skip on overflow set - skip next opcode when V flag is set</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x7f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					overflow status flag is set.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SCC</name>
+			<desc>Skip on carry clear - skip next opcode when C flag is cleared</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x9f</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					carry status flag is cleared.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SCS</name>
+			<synonym>SGE</synonym>
+			<desc>Skip on carry set - skip next opcode when C flag is set</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xbf</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					carry status flag is set.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SNE</name>
+			<desc>Skip on not equal - skip next opcode when Z flag is cleared</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xdf</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					zero status flag is cleared.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SEQ</name>
+			<desc>Skip on equal - skip next opcode when Z flag is set</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xff</opcode>
+			</opcodes>
+			<doc>
+				<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					zero status flag is set.
+				</p>
+			</doc>
+		</operation>
+
 
 		<!-- ################################# -->
 
@@ -9481,17 +9598,7 @@
 
 		<prefix>
 			<name>reserved prefix</name>
-			<value>0x9f</value>
-		</prefix>
-
-		<prefix>
-			<name>reserved prefix</name>
 			<value>0xaf</value>
-		</prefix>
-
-		<prefix>
-			<name>reserved prefix</name>
-			<value>0xbf</value>
 		</prefix>
 
 		<prefix>
@@ -9501,17 +9608,7 @@
 
 		<prefix>
 			<name>reserved prefix</name>
-			<value>0xdf</value>
-		</prefix>
-
-		<prefix>
-			<name>reserved prefix</name>
 			<value>0xef</value>
-		</prefix>
-
-		<prefix>
-			<name>reserved prefix</name>
-			<value>0xff</value>
 		</prefix>
 
 		<prefix>

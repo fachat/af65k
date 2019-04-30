@@ -56,6 +56,7 @@ public class Validator {
 	protected CPU cpu;
 	protected Logger LOG;
 
+	protected List<Operation> synonyms = new ArrayList<Operation>();
 	protected Map<String, AddressingMode> admodes = new HashMap<String, AddressingMode>();
 	protected Map<String, PrefixBit> pbits = new HashMap<String, PrefixBit>();
 	protected Map<String, FeatureSet> fclass = new HashMap<String, FeatureSet>();
@@ -360,6 +361,9 @@ public class Validator {
 				}
 			}
 
+			if (op.getOpcodes() == null) {
+				synonyms.add(op);
+			} else
 			for (Opcode opcode : op.getOpcodes()) {
 
 				String page = opcode.getOppage();
@@ -575,5 +579,13 @@ public class Validator {
 
 	public String id() {
 		return cpu.getIdentifier();
+	}
+
+	public List<Operation> getSynonyms() {
+		return synonyms;
+	}
+
+	public void setSynonyms(List<Operation> synonyms) {
+		this.synonyms = synonyms;
 	}
 }

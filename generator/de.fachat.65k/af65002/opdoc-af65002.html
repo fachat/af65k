@@ -333,6 +333,12 @@
 <a href="#SBS">SBS</a>
  - Substract value from stack pointer</li>
 <li>
+<a href="#SCC">SCC</a>
+ - Skip on carry clear - skip next opcode when C flag is cleared</li>
+<li>
+<a href="#SCS">SCS</a>
+ - Skip on carry set - skip next opcode when C flag is set</li>
+<li>
 <a href="#SEB">SEB</a>
  - Swap E register with B register. Always done full width, no
 				flags set.
@@ -346,6 +352,18 @@
 <li>
 <a href="#SEI">SEI</a>
  - Set the interrupt (I) flag</li>
+<li>
+<a href="#SEQ">SEQ</a>
+ - Skip on equal - skip next opcode when Z flag is set</li>
+<li>
+<a href="#SMI">SMI</a>
+ - Skip on minus - skip next opcode when N flag is set</li>
+<li>
+<a href="#SNE">SNE</a>
+ - Skip on not equal - skip next opcode when Z flag is cleared</li>
+<li>
+<a href="#SPL">SPL</a>
+ - Skip on plus - skip next opcode when N flag is cleared</li>
 <li>
 <a href="#STA">STA</a>
  - Store the content of the accumulator into a memory location
@@ -364,6 +382,12 @@
  - Substract content of memory location from accumulator without
 				using the carry flag as input
 			</li>
+<li>
+<a href="#SVC">SVC</a>
+ - Skip on overflow clear - skip next opcode when V flag is cleared</li>
+<li>
+<a href="#SVS">SVS</a>
+ - Skip on overflow set - skip next opcode when V flag is set</li>
 <li>
 <a href="#SWP">SWP</a>
  - swap upper and lower half of the operand
@@ -852,69 +876,30 @@
 					-32768 to +32767
 					and so on.
 				</p><h2>BGT</h2>
-<a name="BGT"> </a><p>Branch if greater - take branch when C flag is set but Z flag
+<a name="BGT"> </a><p>Synonyms: (SEQ BCS)</p>
+<p>Branch if greater - take branch when C flag is set but Z flag
 				is
 				clear
 			</p>
-<table class="optable"><tr><th colspan="10">BGT</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xB0</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
-</table>
 <h3>Description</h3>
 <p>
-					Branch to the address given by adding the parameter to the
-					address of the
-					next operation (after the branch opcode)
-					given the
-					condition that
-					the
+					Execute a branch given the
+					condition that the
 					carry status flag is set and the zero status flag
 					is not set.
-					The parameter is a signed
-					8-bit value, i.e. jump
-					distances can be from
-					-128 to +127.
-				</p><pre>
-					PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC
-				</pre><h3>65k</h3>
-<p>The RS prefix determines the width of the parameter, the default
-					is 8-bit.
-					With a 16-bit parameter the jump
-					distances can be from
-					-32768 to +32767
-					and so on.
+					Synonym to "SEQ BCS", i.e. branch on carry set, skipped if zero is set. 
 				</p><h2>BGTS</h2>
-<a name="BGTS"> </a><p>Branch if greater - take branch when signed greater or equal G
+<a name="BGTS"> </a><p>Synonyms: (SEQ BGES)</p>
+<p>Branch if greater - take branch when signed greater or equal G
 				flag is set but Z flag is clear
 			</p>
-<table class="optable"><tr><th colspan="10">BGTS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xF0</td><td>65k</td><td>RS</td><td>Relative</td><td></td></tr>
-</table>
 <h3>Description</h3>
 <p>
-					Branch to the address given by adding the parameter to the
-					address of the
-					next operation (after the branch opcode)
-					given the
-					condition that
-					the
+					Execute a branch given the
+					condition that the
 					signed greater status flag is set and the zero
 					status flag is not set.
-					The parameter is a
-					signed 8-bit value, i.e.
-					jump distances can be
-					from
-					-128 to +127.
-				</p><pre>
-					PC &lt;= NextPC + Operand when (G=1 and Z=0) else NextPC
-				</pre><h3>65k</h3>
-<p>The RS prefix determines the width of the parameter, the default
-					is 8-bit.
-					With a 16-bit parameter the jump
-					distances can be from
-					-32768 to +32767
-					and so on.
+					Synonym to "SEQ BGES", i.e. branch on signed greater set, skipped if zero is set. 
 				</p><h2>BIT</h2>
 <a name="BIT"> </a><p>Bitwise test with accumulator - AND the memory location with
 				the
@@ -3143,7 +3128,36 @@
 <tr><td>EXT</td><td>0xc5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td>EXT</td><td>0xd5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
-<h2>SEB</h2>
+<h2>SCC</h2>
+<a name="SCC"> </a><p>Skip on carry clear - skip next opcode when C flag is cleared</p>
+<table class="optable"><tr><th colspan="10">SCC</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x9f</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					carry status flag is cleared.
+				</p><h2>SCS</h2>
+<a name="SCS"> </a><p>Synonyms: SGE</p>
+<p>Skip on carry set - skip next opcode when C flag is set</p>
+<table class="optable"><tr><th colspan="10">SCS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0xbf</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					carry status flag is set.
+				</p><h2>SEB</h2>
 <a name="SEB"> </a><p>Swap E register with B register. Always done full width, no
 				flags set.
 			</p>
@@ -3196,6 +3210,62 @@
 					interrupts can be
 					configured in a configuration
 					register.
+				</p><h2>SEQ</h2>
+<a name="SEQ"> </a><p>Skip on equal - skip next opcode when Z flag is set</p>
+<table class="optable"><tr><th colspan="10">SEQ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0xff</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					zero status flag is set.
+				</p><h2>SMI</h2>
+<a name="SMI"> </a><p>Skip on minus - skip next opcode when N flag is set</p>
+<table class="optable"><tr><th colspan="10">SMI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x3f</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					negative status flag is set.
+				</p><h2>SNE</h2>
+<a name="SNE"> </a><p>Skip on not equal - skip next opcode when Z flag is cleared</p>
+<table class="optable"><tr><th colspan="10">SNE</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0xdf</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					zero status flag is cleared.
+				</p><h2>SPL</h2>
+<a name="SPL"> </a><p>Skip on plus - skip next opcode when N flag is cleared</p>
+<table class="optable"><tr><th colspan="10">SPL</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x1f</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					negative status flag is clear.
 				</p><h2>STA</h2>
 <a name="STA"> </a><p>Store the content of the accumulator into a memory location
 			</p>
@@ -3361,6 +3431,34 @@
 					Note that the default is to use BYTE-wide operation
 					without load
 					extension.
+				</p><h2>SVC</h2>
+<a name="SVC"> </a><p>Skip on overflow clear - skip next opcode when V flag is cleared</p>
+<table class="optable"><tr><th colspan="10">SVC</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x5f</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					overflow status flag is cleared.
+				</p><h2>SVS</h2>
+<a name="SVS"> </a><p>Skip on overflow set - skip next opcode when V flag is set</p>
+<table class="optable"><tr><th colspan="10">SVS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x7f</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Skip the
+					next operation (after the skip opcode)
+					given the
+					condition that
+					the
+					overflow status flag is set.
 				</p><h2>SWP</h2>
 <a name="SWP"> </a><p>swap upper and lower half of the operand
 			</p>
