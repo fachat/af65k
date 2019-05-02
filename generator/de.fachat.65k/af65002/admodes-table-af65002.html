@@ -189,7 +189,7 @@
 				ZR; The effective address is computed as the long (32bit) address read from the zeropage location given as parameter plus 
 				the value of the Z register. The resulting address may be larger than 32bit due to overflow when Z is added.
 			</td></tr>
-<tr><td>Zeropage indirect 32bit indexed with byte offset</td><td></td><td>AM=1</td><td>1</td><td>[zp],byte</td><td>65k</td><td>Load effective 32 bit address from zeropage location given,
+<tr><td>Zeropage indirect 32bit indexed with byte offset</td><td></td><td>AM=1</td><td>2</td><td>[zp],byte</td><td>65k</td><td>Load effective 32 bit address from zeropage location given,
 				then
 				add offset from opcode;
 				The effective address is
@@ -262,6 +262,17 @@
 				plus the value of the Z
 				register
 			</td></tr>
+<tr><td>Zeropage indirect 64bit indexed with byte offset</td><td></td><td>AM=1</td><td>2</td><td>[[zp]],byte</td><td>65k</td><td>Load effective 64 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the quad
+				(64bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 64bit due to
+				overflow when the offset is added.
+			</td></tr>
 <tr><td>Zeropage indexed with X indirect 64bit</td><td>Zeropage X-indexed quad indirect</td><td>AM=1</td><td>1</td><td>[[zp,X]]</td><td>65k</td><td>Load effective 64 bit address from zeropage location given plus
 				content of XR;
 				The effective quad (64bit) address
@@ -294,6 +305,17 @@
 				address read from the word
 				location given as parameter plus the value
 				of the Z register
+			</td></tr>
+<tr><td>Absolute indirect 64bit indexed with byte offset</td><td></td><td></td><td>3</td><td>[[abs]],byte</td><td>65k</td><td>Load effective 64 bit address from absolute location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the quad
+				(64bit) address read from
+				the absolute location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 64bit due to
+				overflow when the offset is added.
 			</td></tr>
 <tr><td>Absolute indexed with X indirect 64bit</td><td>Absolute X-indexed quad indirect</td><td>AM=1</td><td>2</td><td>[[abs,X]]</td><td>65k</td><td>Load effective 64 bit address from absolute location given plus
 				content of XR;

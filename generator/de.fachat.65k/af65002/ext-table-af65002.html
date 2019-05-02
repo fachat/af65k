@@ -11,7 +11,9 @@
 </td><td><div class="opc">ASL abs,Y</div>
 </td></tr>
 <tr><th>1</th><td><div class="opc">BEV rel</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
+</td><td><div class="opc">LEA rel</div>
+</td><td><div class="opc">LEA relwide</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
 </td><td class="unused"></td><td><div class="opc">INZ </div>
 </td><td class="unused"></td><td><div class="opc">DAD </div>
 </td><td class="unused"></td><td><div class="opc">TRB (E)</div>
@@ -21,7 +23,7 @@
 </td></tr>
 <tr><th>2</th><td><div class="opc">JSR (E)</div>
 </td><td><div class="opc">LEA (abs),Y</div>
-</td><td><div class="opc">LEA relwide</div>
+</td><td><div class="opc">LEA (abs),byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADE #byte</div>
 </td><td><div class="opc">RDL zp</div>
 </td><td class="unused"></td><td><div class="opc">PLE </div>
@@ -59,7 +61,7 @@
 </td><td class="unused"></td><td><div class="opc">JSR long</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>6</th><td class="unused"></td><td><div class="opc">LEA [[abs]],Y</div>
-</td><td><div class="opc">LEA (abs),byte</div>
+</td><td><div class="opc">LEA [[abs]],byte</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp</div>
 </td><td class="unused"></td><td><div class="opc">PLB </div>
 </td><td><div class="opc">ADC (E)</div>
@@ -99,7 +101,7 @@
 </td><td class="unused"></td></tr>
 <tr><th>A</th><td><div class="opc">LDY (E)</div>
 </td><td><div class="opc">LEA (zp,X)</div>
-</td><td><div class="opc">LEA rel</div>
+</td><td><div class="opc">LEA (zp),byte</div>
 </td><td class="unused"></td><td><div class="opc">NEG </div>
 </td><td><div class="opc">SBE #byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAB </div>
@@ -141,7 +143,7 @@
 </td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
 </td><td><div class="opc">LEA [[zp]],Y</div>
-</td><td><div class="opc">LEA (zp),byte</div>
+</td><td><div class="opc">LEA [[zp]],byte</div>
 </td><td class="unused"></td><td><div class="opc">SWP </div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
 </td><td><div class="opc">SBC (E)</div>

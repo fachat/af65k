@@ -5786,7 +5786,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>rel</addressingMode>
-				<opcode>0xa2</opcode>
+				<opcode>0x11</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
@@ -5847,7 +5847,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>relwide</addressingMode>
-				<opcode>0x22</opcode>
+				<opcode>0x12</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
@@ -5862,11 +5862,21 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>zpindbyte</addressingMode>
+				<opcode>0xa2</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbytequad</addressingMode>
 				<opcode>0xe2</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
 				<addressingMode>absindbyte</addressingMode>
+				<opcode>0x22</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbytequad</addressingMode>
 				<opcode>0x62</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
@@ -8805,7 +8815,6 @@
  -->
 		</syntax>
 
-<!-- 
 		<syntax>
 			<id>indirectoffsetquad</id>
 			<desc>The opcode is followed by an address, from which an address
@@ -8828,7 +8837,6 @@
 				<addrMode>absindbytequad</addrMode>
 			</mode>
 		</syntax>
- -->
 
 
 		<syntax>
@@ -9673,6 +9681,7 @@
 			</desc>
 			<feature>65k</feature>
 			<width>1</width>
+			<offset>1</offset>
 		</addrmode>
 
 
@@ -9812,6 +9821,26 @@
 		</addrmode>
 
 		<addrmode>
+			<name>Zeropage indirect 64bit indexed with byte offset</name>
+			<identifier>zpindbytequad</identifier>
+			<desc>Load effective 64 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the quad
+				(64bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 64bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<width>1</width>
+			<offset>1</offset>
+		</addrmode>
+
+
+		<addrmode>
 			<name>Zeropage indexed with X indirect 64bit</name>
 			<altname>Zeropage X-indexed quad indirect</altname>
 			<identifier>zpxindquad</identifier>
@@ -9875,6 +9904,26 @@
 			<feature>65k</feature>
 			<width>2</width>
 		</addrmode>
+
+		<addrmode>
+			<name>Absolute indirect 64bit indexed with byte offset</name>
+			<identifier>absindbytequad</identifier>
+			<desc>Load effective 64 bit address from absolute location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the quad
+				(64bit) address read from
+				the absolute location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 64bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<width>2</width>
+			<offset>1</offset>
+		</addrmode>
+
 
 		<addrmode>
 			<name>Absolute indexed with X indirect 64bit</name>
