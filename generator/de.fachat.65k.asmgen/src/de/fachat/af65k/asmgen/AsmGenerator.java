@@ -36,6 +36,7 @@ import de.fachat.af65k.doc.OpdescDocGenerator;
 import de.fachat.af65k.doc.OptableDocGenerator;
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.logging.Logger;
+import de.fachat.af65k.logging.LoggerFactory;
 import de.fachat.af65k.model.objs.CPU;
 import de.fachat.af65k.model.validation.Validator;
 
@@ -71,18 +72,7 @@ public class AsmGenerator {
 		CPU cpu = JAXB.unmarshal(file, CPU.class);
 		cpu.postProcess();
 
-		Logger logger = new Logger() {
-
-			@Override
-			public void error(String msg) {
-				System.err.println("ERR:" + msg);
-			}
-
-			@Override
-			public void info(String msg) {
-				System.out.println("INFO:" + msg);
-			}
-		};
+		Logger logger = LoggerFactory.getLogger(AsmGenerator.class);
 
 		Validator val = new Validator(logger, cpu);
 

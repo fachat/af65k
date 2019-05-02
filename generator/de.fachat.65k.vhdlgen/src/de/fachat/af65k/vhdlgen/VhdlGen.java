@@ -34,6 +34,7 @@ import java.util.Map;
 import javax.xml.bind.JAXB;
 
 import de.fachat.af65k.logging.Logger;
+import de.fachat.af65k.logging.LoggerFactory;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.CPU;
 import de.fachat.af65k.model.objs.Operation;
@@ -95,13 +96,7 @@ public class VhdlGen {
 
 		CPU cpu = JAXB.unmarshal(file, CPU.class);
 
-		Validator val = new Validator(new Logger() {
-
-			@Override
-			public void error(String msg) {
-				System.err.println(msg);
-			}
-		}, cpu);
+		Validator val = new Validator(LoggerFactory.getLogger(VhdlGen.class), cpu);
 
 		// runOperations(cpuname, cpu, val);
 

@@ -78,6 +78,7 @@ public class Validator {
 			String id = f.getName();
 			if (feature.containsKey(id)) {
 				LOG.error("Feature '" + id + "' is duplicate!");
+				throw new RuntimeException();
 			} else {
 				System.err.println("Registering feature " + id);
 				feature.put(id, f);
@@ -88,6 +89,7 @@ public class Validator {
 			String id = fc.getName();
 			if (fclass.containsKey(id)) {
 				LOG.error("Feature class '" + id + "' is duplicate!");
+				throw new RuntimeException();
 			} else {
 				LOG.info("Registering feature set " + id);
 				fclass.put(id, fc);
@@ -107,6 +109,7 @@ public class Validator {
 					String id = pb.getId();
 					if (pbits.containsKey(id)) {
 						LOG.error("Prefix bit '" + id + "' is duplicate!");
+						throw new RuntimeException();
 					} else {
 						pbits.put(id, pb);
 					}
@@ -122,6 +125,7 @@ public class Validator {
 
 			if (admodes.containsKey(id)) {
 				LOG.error("Addressing mode '" + id + "' is duplicate!");
+				throw new RuntimeException();
 			} else {
 				admodes.put(id, am);
 				String fclassStr = am.getFeature();
@@ -474,8 +478,9 @@ public class Validator {
 	private void addToPage(String name, String page, int code, 
 			CodeMapEntry[] pageEntries, CodeMapEntry entry) {
 		if (pageEntries[code] != null) {
-			LOG.error("Opcode '" + page + "/" + code + "' is duplicate entry in operations '"
+			LOG.error("Opcode '" + page + "/$" + Integer.toHexString(code) + "' is duplicate entry in operations '"
 					+ name + "' and '" + pageEntries[code].getOperation().getName() + "'!");
+			throw new RuntimeException();
 		} else {
 			pageEntries[code] = entry;
 		}
