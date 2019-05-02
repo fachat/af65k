@@ -120,16 +120,21 @@
 </td><td><div class="opc">LEA abs,Y</div>
 </td></tr>
 <tr><th>C</th><td><div class="opc">CPY (E)</div>
-</td><td class="unused"></td><td><div class="opc">CPZ #byte</div>
+</td><td><div class="opc">CSW (zp),Y</div>
+</td><td><div class="opc">CPZ #byte</div>
 </td><td class="unused"></td><td><div class="opc">EXT </div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TPA </div>
+</td><td class="unused"></td><td><div class="opc">CSW zp</div>
+</td><td class="unused"></td><td><div class="opc">TPA </div>
 </td><td><div class="opc">CMP (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CSW (E)</div>
+</td><td><div class="opc">DEC (E)</div>
 </td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAE </div>
+</td><td><div class="opc">CSW abs,X</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
+</td><td class="unused"></td><td><div class="opc">CSW zp,X</div>
+</td><td class="unused"></td><td><div class="opc">SAE </div>
 </td><td class="unused"></td><td><div class="opc">SAY </div>
 </td><td class="unused"></td><td><div class="opc">CPZ abs</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>

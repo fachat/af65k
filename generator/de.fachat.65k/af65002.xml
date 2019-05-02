@@ -6108,9 +6108,47 @@
 			</opcodes>
 		</operation>
 
+		<!-- ################################# -->
+
 		<operation>
-			<name>WMB</name>
-			<desc>Write memory barrier: flushes dirty caches (globally, or for a
+			<name>CSW</name>
+			<desc>Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
+			</desc>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>AM</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0xcc</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xc6</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0xd6</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindy</addressingMode>
+				<opcode>0xc1</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xde</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+		</operation>
+
+
+		<operation>
+			<name>WBR</name>
+			<desc>Write memory BaRrier: flushes dirty caches (globally, or for a
 				specific, given location)
 			</desc>
 			<prefixBits>UM</prefixBits>
@@ -6128,8 +6166,8 @@
 		</operation>
 
 		<operation>
-			<name>RMB</name>
-			<desc>Read memory barrier: invalidates cache content (globally, or
+			<name>RBR</name>
+			<desc>Read memory BaRrier: invalidates cache content (globally, or
 				for
 				a specific, given location)
 			</desc>
@@ -6600,7 +6638,7 @@
 			<name>PRB</name>
 			<desc>Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base
+				stack, then transfer E-register to the base
 				register
 			</desc>
 			<prefixBits>UM</prefixBits>
@@ -8319,6 +8357,7 @@
 
 		
 	</operations>
+
 
 	<!-- ################################# -->
 

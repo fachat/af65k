@@ -146,6 +146,10 @@
 <a href="#CPZ">CPZ</a>
  - Compare Z register with content of memory location</li>
 <li>
+<a href="#CSW">CSW</a>
+ - Compare and SWap - compare memory with AC, and if matches, set to value from XR.
+			</li>
+<li>
 <a href="#DAD">DAD</a>
  - Decimal adjust of a normal ADC of two BCD numbers.</li>
 <li>
@@ -768,14 +772,14 @@
 <a name="BBR#"> </a><p>Branch on bit reset</p>
 <table class="optable"><tr><th colspan="10">BBR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>QUICK</td><td>0xf</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#0</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#7</td><td></td></tr>
+<tr><td>QUICK</td><td>0xf</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#0</td><td></td></tr>
+<tr><td>QUICK</td><td>0x1f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#1</td><td></td></tr>
+<tr><td>QUICK</td><td>0x2f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#2</td><td></td></tr>
+<tr><td>QUICK</td><td>0x3f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#3</td><td></td></tr>
+<tr><td>QUICK</td><td>0x4f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#4</td><td></td></tr>
+<tr><td>QUICK</td><td>0x5f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#5</td><td></td></tr>
+<tr><td>QUICK</td><td>0x6f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#6</td><td></td></tr>
+<tr><td>QUICK</td><td>0x7f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#7</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -785,14 +789,14 @@
 <a name="BBS#"> </a><p>Branch on bit set</p>
 <table class="optable"><tr><th colspan="10">BBS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>QUICK</td><td>0x8f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#0</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0xaf</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbf</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xcf</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xdf</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xef</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xff</td><td>65k</td><td>AM, OF, UM</td><td>ZP with branch</td><td>#7</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#0</td><td></td></tr>
+<tr><td>QUICK</td><td>0x9f</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#1</td><td></td></tr>
+<tr><td>QUICK</td><td>0xaf</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#2</td><td></td></tr>
+<tr><td>QUICK</td><td>0xbf</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#3</td><td></td></tr>
+<tr><td>QUICK</td><td>0xcf</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#4</td><td></td></tr>
+<tr><td>QUICK</td><td>0xdf</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#5</td><td></td></tr>
+<tr><td>QUICK</td><td>0xef</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#6</td><td></td></tr>
+<tr><td>QUICK</td><td>0xff</td><td>65k</td><td>AM, OF, UM, RS</td><td>ZP with branch</td><td>#7</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1633,7 +1637,18 @@
 				</p><p>
 					Note that the default is to use BYTE-wide operation without load
 					extension.
-				</p><h2>DAD</h2>
+				</p><h2>CSW</h2>
+<a name="CSW"> </a><p>Compare and SWap - compare memory with AC, and if matches, set to value from XR.
+			</p>
+<table class="optable"><tr><th colspan="10">CSW</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xcc</td><td>65k</td><td>UM, RS</td><td>E indirect</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xc6</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xd6</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xc1</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>UM, RS, AM</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+</table>
+<h2>DAD</h2>
 <a name="DAD"> </a><p>Decimal adjust of a normal ADC of two BCD numbers.</p>
 <table class="optable"><tr><th colspan="10">DAD</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
