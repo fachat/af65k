@@ -94,11 +94,18 @@
 				the word location given as parameter plus the
 				value of the X register
 			</td></tr>
+<tr><td>Absolute indirect 32bit indexed with Z</td><td>Absolute long indirect Z-indexed</td><td>2</td><td>[abs],Z</td><td>ce02</td><td>Load effective 32 bit address from absolute location given, then add content of
+				ZR; The effective address is
+				computed as the long address read from the word location given as parameter plus the value
+				of
+				the Z register. The
+				resulting address may be larger than 32bit due to overflow when Z is added.
+			</td></tr>
 <tr><td>Relative</td><td></td><td>1</td><td>rel</td><td></td><td>relative addressing modes, used in branches; from -128 to +127
 			</td></tr>
 <tr><td>Relative 16bit</td><td>Wide relative</td><td>2</td><td>relwide</td><td>816ce02</td><td>relative addressing modes, used in branches; from -32768 to
 				+32767
 			</td></tr>
-<tr><td>ZP with Branch</td><td></td><td>2</td><td>zp,rel</td><td>rcmos</td><td>Zeropage addressing, combined with relative addressing modes, used in branches; from -128 to +127
+<tr><td>ZP with branch</td><td></td><td>2</td><td>zp,rel</td><td>rcmos</td><td>Zeropage addressing, combined with relative addressing modes, used in branches; from -128 to +127
 			</td></tr>
 </table>
