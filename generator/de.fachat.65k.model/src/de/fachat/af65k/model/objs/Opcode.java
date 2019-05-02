@@ -42,6 +42,16 @@ public class Opcode {
 	String addressingMode;
 	String oppage;
 	String opcode;
+	String expand;
+	String expand8;
+	
+	public String getExpand8() {
+		return expand8;
+	}
+
+	public void setExpand8(String expand8) {
+		this.expand8 = expand8;
+	}
 
 	// whether it is original (empty), CMOS ("cmos"), or 65k ("65k")
 	String feature;
@@ -77,5 +87,15 @@ public class Opcode {
 	}
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+	public String getExpand() {
+		return expand;
+	}
+	public void setExpand(String expand) {
+		this.expand = expand;
+	}
+	
+	public String toString() {
+		return "Opc[" + oppage + "/" + opcode + ": " + feature + "]";
 	}
 }

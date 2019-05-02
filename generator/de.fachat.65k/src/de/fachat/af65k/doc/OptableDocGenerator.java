@@ -59,9 +59,11 @@ public class OptableDocGenerator {
 
 	public void generateOperationtable(HtmlWriter wr, String pagename, String fclass, boolean includeOrig) {
 
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, false);
 		CodeMapEntry page[] = opcodes.get(pagename); // get standard map
-		writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, fclass, includeOrig);
+		if (page != null) {
+			writeOperationTable(wr, page, pagename == null ? cpu.getPrefixes() : null, fclass, includeOrig);
+		}
 	}
 
 	private void writeOperationTable(DocWriter wr, CodeMapEntry[] page, String[] strings, String fclass, boolean includeOrig) {
@@ -114,9 +116,11 @@ public class OptableDocGenerator {
 
 	public void generateOpcodetable(DocWriter wr, String pagename, boolean doLong, String fclass, boolean hasPrefix) {
 
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, true);
 		CodeMapEntry page[] = opcodes.get(pagename); // get standard map
-		writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong, fclass, hasPrefix);
+		if (page != null) {
+			writeOpcodeTable(wr, page, pagename == null ? cpu.getPrefixes() : null, doLong, fclass, hasPrefix);
+		}
 	}
 
 	private void writeOpcodeTable(DocWriter wr, CodeMapEntry[] page, String prefixes[], boolean doLong, String fclass,
@@ -164,6 +168,7 @@ public class OptableDocGenerator {
 		classatts.put("cmos", tmp);
 		classatts.put("cmos_ind", tmp);
 		classatts.put("rcmos", tmp);
+		classatts.put("rcmos_bbx", tmp);
 
 		Map<String, String> tabatts = new HashMap<String, String>();
 		tabatts.put("class", "optable");

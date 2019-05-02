@@ -40,6 +40,16 @@ public class Operation {
 	String name;
 	String desc;
 	String expand;
+	String expand8;
+	
+	public String getExpand8() {
+		return expand8;
+	}
+
+	public void setExpand8(String expand8) {
+		this.expand8 = expand8;
+	}
+
 	public String getExpand() {
 		return expand;
 	}
@@ -47,6 +57,7 @@ public class Operation {
 	public void setExpand(String expand) {
 		this.expand = expand;
 	}
+
 
 	// operation class
 	@XmlElement(name="feature")
@@ -131,4 +142,7 @@ public class Operation {
 		this.synonyms = synonyms;
 	}
 	
+	public String toString() {
+		return "Op[" + name +  (synonyms == null ? "" : synonyms.toString()) + "]";
+	}
 }

@@ -25,6 +25,12 @@
 				of the value, not zero
 			</li>
 <li>
+<a href="#BBR#">BBR#</a>
+ - Branch on bit reset</li>
+<li>
+<a href="#BBS#">BBS#</a>
+ - Branch on bit set</li>
+<li>
 <a href="#BCC">BCC</a>
  - Branch on carry clear - take branch when C flag is cleared
 			</li>
@@ -149,6 +155,9 @@
 <a href="#DEC">DEC</a>
  - Decrement the content of a memory location by one</li>
 <li>
+<a href="#DEC#">DEC#</a>
+ - Decrement the content of a memory location by one</li>
+<li>
 <a href="#DEX">DEX</a>
  - Decrement the content of the X register by one</li>
 <li>
@@ -169,6 +178,9 @@
 			</li>
 <li>
 <a href="#INC">INC</a>
+ - Increment the content of a memory location by one</li>
+<li>
+<a href="#INC#">INC#</a>
  - Increment the content of a memory location by one</li>
 <li>
 <a href="#INX">INX</a>
@@ -280,11 +292,25 @@
 				but the highest bit of the original value
 			</li>
 <li>
+<a href="#RDL#">RDL#</a>
+ - Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			</li>
+<li>
 <a href="#RDR">RDR</a>
  - Rotate Direct Right - similar to ROR, but do not shift in
 				carry,
 				but the lowest bit of the original value
 			</li>
+<li>
+<a href="#RDR#">RDR#</a>
+ - Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			</li>
+<li>
+<a href="#RMB#">RMB#</a>
+ - Reset memory bit</li>
 <li>
 <a href="#ROL">ROL</a>
  - Rotate Left - shift accumulator one bit to the left, shifting
@@ -294,7 +320,23 @@
 				carry flag instead.
 			</li>
 <li>
+<a href="#ROL#">ROL#</a>
+ - Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</li>
+<li>
 <a href="#ROR">ROR</a>
+ - Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			</li>
+<li>
+<a href="#ROR#">ROR#</a>
  - Rotate Right - shift accumulator one bit to the right, shifting
 				in the carry flag in the highest bit, and
 				shifting
@@ -356,6 +398,9 @@
 <li>
 <a href="#SEQ">SEQ</a>
  - Skip on equal - skip next opcode when Z flag is set</li>
+<li>
+<a href="#SMB#">SMB#</a>
+ - Set memory bit</li>
 <li>
 <a href="#SMI">SMI</a>
  - Skip on minus - skip next opcode when N flag is set</li>
@@ -425,6 +470,9 @@
 <li>
 <a href="#TEB">TEB</a>
  - Transfer E to B register (full width)</li>
+<li>
+<a href="#TMB#">TMB#</a>
+ - Test memory bit</li>
 <li>
 <a href="#TPA">TPA</a>
  - Transfer Program counter to Accumulator</li>
@@ -716,6 +764,25 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
+				</p><h2>BBR#</h2>
+<a name="BBR#"> </a><p>Branch on bit reset</p>
+<table class="optable"><tr><th colspan="10">BBR</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>QUICK</td><td>0x0f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with Branch</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Examine the operand value, and check the given bit. If the bit is cleared, branch to the given (relative)
+					address.
+				</p><h2>BBS#</h2>
+<a name="BBS#"> </a><p>Branch on bit set</p>
+<table class="optable"><tr><th colspan="10">BBS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>QUICK</td><td>0x8f</td><td>65k</td><td>AM, OF, UM</td><td>ZP with Branch</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Examine the operand value, and check the given bit. If the bit is set, branch to the given (relative) address.
 				</p><h2>BCC</h2>
 <a name="BCC"> </a><p>Synonyms: BLT</p>
 <p>Branch on carry clear - take branch when C flag is cleared
@@ -1620,6 +1687,55 @@
 <tr><td></td><td>0xde</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0xcf</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0xcd</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Decrement the operand by one, i.e. binary substract one.
+					Note this
+					opcode is a read-modify-write opcode and not
+					only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p><pre>
+					Operand &lt;= Operand - 1
+					N &lt;= OperandC7)
+					Z &lt;=
+					Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>DEC#</h2>
+<a name="DEC#"> </a><p>Decrement the content of a memory location by one</p>
+<table class="optable"><tr><th colspan="10">DEC</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0xc6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x3a</td><td>cmos</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0xce</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xd6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xde</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xcf</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xcd</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x8c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1758,6 +1874,54 @@
 <tr><td></td><td>0xfe</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0xef</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0xed</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Increment the operand by one, i.e. binary add one.
+					Note this
+					opcode is a read-modify-write opcode and not only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p><pre>
+					Operand &lt;= Operand + 1
+					N &lt;= OperandC7)
+					Z &lt;=
+					Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>INC#</h2>
+<a name="INC#"> </a><p>Increment the content of a memory location by one</p>
+<table class="optable"><tr><th colspan="10">INC</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0xe6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x1a</td><td>cmos</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0xee</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xf6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xfe</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xef</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0xed</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x0c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2650,6 +2814,58 @@
 <tr><td>EXT</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0x3f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0x3d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x08</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Shift the operand or accumulator left one bit (i.e. multiply by
+					2).
+					Shift
+					in the sign (uppermost bit) of
+					the original
+					value from the
+					right.
+					The bit shifted is also moved into the carry flag.
+					Note this
+					opcode is a read-modify-write opcode
+					and not only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p><pre>
+					C &lt;= AC(7)
+					AC(7-1) &lt;= AC(6-0)
+					AC(0) &lt;= C
+					N
+					&lt;= AC7)
+					Z &lt;= Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE prefix,
+					as the read and write widths are the same.
+					Note that the default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>RDL#</h2>
+<a name="RDL#"> </a><p>Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			</p>
+<table class="optable"><tr><th colspan="10">RDL</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x26</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0x2a</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td>EXT</td><td>0x2e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x36</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x3f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x3d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x08</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2701,6 +2917,7 @@
 <tr><td>EXT</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0x7f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0x7d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x88</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2741,6 +2958,73 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
+				</p><h2>RDR#</h2>
+<a name="RDR#"> </a><p>Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			</p>
+<table class="optable"><tr><th colspan="10">RDR</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x66</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0x6a</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td>EXT</td><td>0x6e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x76</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x7f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x7d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x88</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Shift the operand or accumulator right one bit (i.e. divide by
+					2). Shift
+					in bit 0 (lowermost bit) of
+					the original
+					value from the
+					left.
+					The bit shifted is also moved into the carry flag.
+					Note this
+					opcode is a read-modify-write opcode
+					and not only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p><pre>
+					C &lt;= AC(0)
+					AC(6-0) &lt;= AC(7-1)
+					AC(7) &lt;= C
+					N
+					&lt;= AC7)
+					Z &lt;= Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>RMB#</h2>
+<a name="RMB#"> </a><p>Reset memory bit</p>
+<table class="optable"><tr><th colspan="10">RMB</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>QUICK</td><td>0x07</td><td>65k</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x06</td><td>65k</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x05</td><td>65k</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Examine the operand value, and clear the given bit in it.
+					The Z status register bit is set to the previous value of the memory bit.
 				</p><h2>ROL</h2>
 <a name="ROL"> </a><p>Rotate Left - shift accumulator one bit to the left, shifting
 				in
@@ -2757,6 +3041,64 @@
 <tr><td></td><td>0x3e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0x2f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0x2d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x09</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Shift the operand or accumulator left one bit (i.e. multiply by
+					2).
+					Shift
+					in the carry flag from the right.
+					The bit
+					shifted out is
+					moved into the carry flag.
+					Note this opcode is a read-modify-write
+					opcode and not only has
+					memory-oriented addressing modes but can
+					work
+					on the accumulator alone as well.
+				</p><pre>
+					Tmp &lt;= AC(7)
+					AC(7-1) &lt;= AC(6-0)
+					AC(0) &lt;= C
+					C
+					&lt;= Tmp
+					N &lt;= AC7)
+					Z &lt;= Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>ROL#</h2>
+<a name="ROL#"> </a><p>Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</p>
+<table class="optable"><tr><th colspan="10">ROL</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x26</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x2a</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x2e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x36</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x3e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x2f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x2d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x09</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2813,6 +3155,63 @@
 <tr><td></td><td>0x7e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td>EXT</td><td>0x6f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 <tr><td>EXT</td><td>0x6d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x89</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Shift the operand or accumulator right one bit (i.e. divide by
+					2). Shift
+					in the carry flag from the left.
+					The bit
+					shifted out is
+					moved into the carry flag.
+					Note this opcode is a read-modify-write
+					opcode and not only has
+					memory-oriented addressing modes but can
+					work
+					on the accumulator alone as well.
+				</p><pre>
+					Tmp &lt;= AC(0)
+					AC(6-0) &lt;= AC(7-1)
+					AC(7) &lt;= C
+					C
+					&lt;= Tmp
+					N &lt;= AC7)
+					Z &lt;= Z(AC)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p><p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>ROR#</h2>
+<a name="ROR#"> </a><p>Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			</p>
+<table class="optable"><tr><th colspan="10">ROR</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x66</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x6a</td><td>ror</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x6e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x76</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x7e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0x6f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td>EXT</td><td>0x6d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td></tr>
+<tr><td>QUICK</td><td>0x89</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -3206,6 +3605,18 @@
 					condition that
 					the
 					zero status flag is set.
+				</p><h2>SMB#</h2>
+<a name="SMB#"> </a><p>Set memory bit</p>
+<table class="optable"><tr><th colspan="10">SMB</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>QUICK</td><td>0x87</td><td>65k</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x86</td><td>65k</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x85</td><td>65k</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Examine the operand value, and set the given bit in it.
+					The Z status register bit is set to the previous value of the memory bit.
 				</p><h2>SMI</h2>
 <a name="SMI"> </a><p>Skip on minus - skip next opcode when N flag is set</p>
 <table class="optable"><tr><th colspan="10">SMI</th></tr>
@@ -3545,7 +3956,18 @@
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td>EXT</td><td>0xea</td><td>65k</td><td>NF</td><td>Implied</td><td></td></tr>
 </table>
-<h2>TPA</h2>
+<h2>TMB#</h2>
+<a name="TMB#"> </a><p>Test memory bit</p>
+<table class="optable"><tr><th colspan="10">TMB</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>QUICK</td><td>0x03</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage</td><td></td></tr>
+<tr><td>QUICK</td><td>0x02</td><td>65k</td><td>AM, OF, UM</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>QUICK</td><td>0x01</td><td>65k</td><td>AM, OF, UM</td><td>Zeropage indexed with X</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Examine the operand value, and set the Z status register bit from the memory value.
+				</p><h2>TPA</h2>
 <a name="TPA"> </a><p>Transfer Program counter to Accumulator</p>
 <table class="optable"><tr><th colspan="10">TPA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>

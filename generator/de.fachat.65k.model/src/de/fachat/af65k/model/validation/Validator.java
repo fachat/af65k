@@ -324,13 +324,21 @@ public class Validator {
 		return cpu.getOperations();
 	}
 	
+	private int parseExpand(String opExpand, String opcodeExpand) {
+		
+		if (opcodeExpand != null) {
+			return parseCode(opcodeExpand);
+		}
+		return parseCode(opExpand);
+	}
+	
 	/**
 	 * return a map from opcode page, to opcode row (high nibble) to opcode col
 	 * (low nibble) to Opcode object
 	 * 
 	 * @return
 	 */
-	public Map<String, CodeMapEntry[]> getOpcodeMap(String fsetStr) {
+	public Map<String, CodeMapEntry[]> getOpcodeMap(String fsetStr, boolean doExpand) {
 
 		FeatureSet fset = fclass.get(fsetStr);
 		Collection<String> features = fset.getFeature();
@@ -366,7 +374,9 @@ public class Validator {
 			}
 
 			if (op.getOpcodes() == null) {
-				synonyms.add(op);
+				if (op.getSynonyms() != null && op.getSynonyms().size() > 0) {
+					synonyms.add(op);
+				}
 			} else
 			for (Opcode opcode : op.getOpcodes()) {
 
@@ -413,7 +423,7 @@ public class Validator {
 
 					if (!(opcode.getFeature() != null && !features.contains(opcode.getFeature()))) {
 
-						LOG.info("Op " + opcode.getOpcode() + " with Addressing mode '" + admode.getName() + "("
+						LOG.info("Op " + page + "/" + opcode.getOpcode() + " with Addressing mode '" + admode.getName() + "("
 								+ admode.getIdentifier() + ":" + admode.getFeature() + ")' for operation '"
 								+ op.getName() + "' (" + op.getClazz() + ") -> feature: " + opcode.getFeature() + "!");
 
@@ -435,13 +445,23 @@ public class Validator {
 							pageEntries = new CodeMapEntry[256];
 							rv.put(page, pageEntries);
 						}
-						if (op.getExpand() == null) { 	
+						if (!doExpand) {
+							CodeMapEntry pageEntry = new CodeMapEntry(op, opcode, admode, pbitset.values(),
+									feature.get(opcode.getFeature()), synmodes);
+							
+							if (op.getExpand() == null && opcode.getExpand() == null) {
+							} else {
+								pageEntry.name = pageEntry.name + "#";
+							}
+							addToPage(op.getName(), page, code, pageEntries, pageEntry);								
+						} else 
+						if (op.getExpand() == null && opcode.getExpand() == null) { 	
 							CodeMapEntry pageEntry = new CodeMapEntry(op, opcode, admode, pbitset.values(),
 									feature.get(opcode.getFeature()), synmodes);
 							
 							addToPage(op.getName(), page, code, pageEntries, pageEntry);
 						} else {
-							int expand = parseCode(op.getExpand());
+							int expand = parseExpand(op.getExpand(), opcode.getExpand());
 							// compute the expand steps as lowest 1-bit
 							int w = 0;
 							int e = expand;
@@ -460,7 +480,9 @@ public class Validator {
 							// loop over all
 							w = 0;
 							for (Integer ex : expList) {
-								CodeMapEntry pageEntry = new CodeMapEntry(op.getName() + w, op, opcode, admode, pbitset.values(),
+								boolean isExpand8 = (op.getExpand8() != null || opcode.getExpand8() != null);
+								String name = op.getName() + (isExpand8 ? (1+w) : w);
+								CodeMapEntry pageEntry = new CodeMapEntry(name, op, opcode, admode, pbitset.values(),
 										feature.get(opcode.getFeature()), synmodes);
 								
 								addToPage(op.getName(), page, code + ex, pageEntries, pageEntry);

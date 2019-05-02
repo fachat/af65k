@@ -33,6 +33,9 @@
 			<name>rcmos</name>
 		</feature>
 		<feature>
+			<name>rcmos_bbx</name>
+		</feature>
+		<feature>
 			<name>816ce02</name>
 		</feature>
 		<feature>
@@ -114,6 +117,7 @@
 			<name>rcmos</name>
 			<includes>cmos</includes>
 			<feature>rcmos</feature>
+			<feature>rcmos_bbx</feature>
 			<doc>
 				<p>
 					This class is for the extended bit set and clear opcodes of
@@ -142,6 +146,7 @@
 			<!-- prio>2</prio -->
 			<includes>nmos</includes>
 			<feature>cmos</feature>
+			<feature>rcmos</feature>
 			<feature>cmos_indz</feature>
 			<feature>65k</feature>
 			<doc>
@@ -160,6 +165,7 @@
 			<feature>cmos</feature>
 			<feature>cmos_indz</feature>
 			<feature>rcmos</feature>
+			<feature>rcmos_bbx</feature>
 			<feature>ce02</feature>
 			<feature>816ce02</feature>
 			<doc>
@@ -3547,6 +3553,14 @@
 				<opcode>0x3d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x08</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
 			<doc>
 				<p>
 					Shift the operand or accumulator left one bit (i.e. multiply by
@@ -3638,6 +3652,14 @@
 				<addressingMode>eind</addressingMode>
 				<opcode>0x7d</opcode>
 				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x88</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
 			</opcodes>
 			<doc>
 				<p>
@@ -3908,6 +3930,14 @@
 				<opcode>0x2d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x09</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
 			<doc>
 				<p>
 					Shift the operand or accumulator left one bit (i.e. multiply by
@@ -4001,6 +4031,14 @@
 				<opcode>0x6d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x89</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
 			<doc>
 				<p>
 					Shift the operand or accumulator right one bit (i.e. divide by
@@ -4087,6 +4125,30 @@
 				<opcode>0xed</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x0e</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x0d</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x0c</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
 			<doc>
 				<p>
 					Increment the operand by one, i.e. binary add one.
@@ -4164,6 +4226,30 @@
 				<addressingMode>eind</addressingMode>
 				<opcode>0xcd</opcode>
 				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x8e</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x8d</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x8c</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
 			</opcodes>
 			<doc>
 				<p>
@@ -7445,10 +7531,30 @@
 			<opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x07</opcode>
+				<feature>rcmos_bbx</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x07</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x06</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x05</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
 					Examine the operand value, and clear the given bit in it.
+					The Z status register bit is set to the previous value of the memory bit.
 				</p>
 			</doc>
 		</operation>
@@ -7462,10 +7568,30 @@
 			<opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x87</opcode>
+				<feature>rcmos_bbx</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x87</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x86</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x85</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
 					Examine the operand value, and set the given bit in it.
+					The Z status register bit is set to the previous value of the memory bit.
 				</p>
 			</doc>
 		</operation>
@@ -7475,9 +7601,19 @@
 			<desc>Branch on bit reset</desc>
 			<feature>rcmos</feature>
 			<expand>0x70</expand>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>UM</prefixBits>
 			<opcodes>
 				<addressingMode>zprel</addressingMode>
 				<opcode>0x0f</opcode>
+				<feature>rcmos_bbx</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zprel</addressingMode>
+				<opcode>0x0f</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -7492,9 +7628,19 @@
 			<desc>Branch on bit set</desc>
 			<feature>rcmos</feature>
 			<expand>0x70</expand>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>UM</prefixBits>
 			<opcodes>
 				<addressingMode>zprel</addressingMode>
 				<opcode>0x8f</opcode>
+				<feature>rcmos_bbx</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zprel</addressingMode>
+				<opcode>0x8f</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -8135,6 +8281,43 @@
 			</doc>
 		</operation>
 
+		<!-- QUICK opcode page, mostly with a 3-bit param encoded in the opcode -->
+		
+		<operation>
+			<name>TMB</name>
+			<desc>Test memory bit</desc>
+			<feature>65k</feature>
+			<!-- repeatedly expand with opcode bits defined in the order given here -->
+			<expand>0x70</expand>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x03</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x02</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x01</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<doc>
+				<p>
+					Examine the operand value, and set the Z status register bit from the memory value.
+				</p>
+			</doc>
+		</operation>
+
+		
 	</operations>
 
 	<!-- ################################# -->
@@ -9662,13 +9845,13 @@
 		<prefix>
 			<name>SYS</name>
 			<value>0x2f</value>
-			<!-- page>SYS</page -->
+			<page>SYS</page>
 		</prefix>
 
 		<prefix>
 			<name>QUICK</name>
 			<value>0x4f</value>
-			<!-- page>QUICK</page -->
+			<page>QUICK</page>
 		</prefix>
 
 		<prefix>

@@ -56,7 +56,7 @@ public class OpdescDocGenerator {
 
 	public void generateOperationtable(HtmlWriter wr, String fclass, boolean hasPrefix) {
 
-		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass);
+		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, false);
 
 		Map<String, Operation> ops = new TreeMap<String, Operation>();
 
@@ -102,8 +102,8 @@ public class OpdescDocGenerator {
 			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
 
 				wr.startListItem();
-				wr.startLink("#" + op.getName());
-				wr.print(op.getName());
+				wr.startLink("#" + en.getKey());
+				wr.print(en.getKey());
 				wr.endLink();
 				wr.print(" - ");
 				wr.print(op.getDesc());
@@ -119,11 +119,12 @@ public class OpdescDocGenerator {
 
 		for (Map.Entry<String, Operation> en : ops.entrySet()) {
 			Operation op = en.getValue();
-
+			String name = en.getKey();
+			
 			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
 
-				wr.startSubsection(op.getName());
-				wr.createAnchor(op.getName());
+				wr.startSubsection(name);
+				wr.createAnchor(name);
 				if (op.getSynonyms() != null && op.getSynonyms().size() > 0) {
 					wr.startParagraph();
 					wr.print("Synonyms:");
@@ -134,6 +135,7 @@ public class OpdescDocGenerator {
 				wr.startParagraph();
 				wr.print(op.getDesc());
 
+				// TODO expand
 				if (op.getOpcodes() != null) {
 					wr.startTable(optable);
 					wr.startTableRow();
@@ -208,13 +210,13 @@ public class OpdescDocGenerator {
 
 				if (docs != null) {
 					for (Doc doc : docs) {
-						String name = doc.getMode();
-						if (name == null || name.length() == 0) {
-							name = "Description";
-						} else if (!fclasses.contains(name)) {
+						String dname = doc.getMode();
+						if (dname == null || dname.length() == 0) {
+							dname = "Description";
+						} else if (!fclasses.contains(dname)) {
 							continue;
 						}
-						wr.startSubsubsection(name);
+						wr.startSubsubsection(dname);
 
 						wr.print(doc.getText());
 					}
