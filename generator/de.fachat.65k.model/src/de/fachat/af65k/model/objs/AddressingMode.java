@@ -43,6 +43,7 @@ public class AddressingMode {
 	String name;
 	
 	int width;
+	int offset = 0;
 	
 	// alternative name
 	String altname;
@@ -133,6 +134,14 @@ public class AddressingMode {
 	
 	public void setWidthInByte(int w) {
 		width = w;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
 
 }

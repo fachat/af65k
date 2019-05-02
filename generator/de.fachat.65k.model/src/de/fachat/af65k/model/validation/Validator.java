@@ -100,6 +100,7 @@ public class Validator {
 			for (String fn : featureList) {
 				if (!feature.containsKey(fn)) {
 					LOG.error("Feature " + fn + " for FeatureSet " + id + " is not defined!");
+					throw new RuntimeException();
 				}
 			}
 		}
@@ -132,12 +133,14 @@ public class Validator {
 				String fclassStr = am.getFeature();
 				if (fclassStr != null && !feature.containsKey(fclassStr)) {
 					LOG.error("Feature class '" + fclassStr + "' for addressing mode '" + id + "' is not defined!");
+					throw new RuntimeException();
 				}
 				List<String> ignoredPrefixes = am.getIgnoredPrefixes();
 				if (ignoredPrefixes != null) {
 					for (String pbit : am.getIgnoredPrefixes()) {
 						if (!pbits.containsKey(pbit)) {
 							LOG.error("Ignored prefix '" + pbit + "' for addressing mode '" + id + "' is not defined!");
+							throw new RuntimeException();
 						}
 					}
 				}
@@ -162,6 +165,7 @@ public class Validator {
 			String id = syn.getId();
 			if (syntaxMap.containsKey(id)) {
 				LOG.error("Syntax '" + id + "' is defined more than once!");
+				throw new RuntimeException();
 			} else {
 				for (SyntaxMode synmode : syn.getAddrModes()) {
 					String addrMode = synmode.getAddrMode();
@@ -169,6 +173,7 @@ public class Validator {
 					if (!admodes.containsKey(addrMode)) {
 						LOG.error("Addressing mode '" + addrMode + "' for syntax definition '" + id
 								+ "' is not defined!");
+						throw new RuntimeException();
 					} else {
 						AddressingMode am = admodes.get(addrMode);
 
@@ -179,6 +184,7 @@ public class Validator {
 						}
 						if (modes.size() > 0) {
 							LOG.error("More than one syntax mode for addressing mode " + addrMode);
+							throw new RuntimeException();
 						}
 						modes.add(synmode);
 
@@ -291,6 +297,7 @@ public class Validator {
 				if (rv[v] != null) {
 					LOG.error("Prefix " + v + " is already set to '" + rv[v] + "' when trying to set to '" + p.getName()
 							+ "'");
+					throw new RuntimeException();
 				}
 				rv[v] = p.getName();
 			} else {
@@ -311,6 +318,7 @@ public class Validator {
 						if (rv[v] != null) {
 							LOG.error("Prefix " + v + " is already set to '" + rv[v] + "' when trying to set to '"
 									+ p.getName() + "'");
+							throw new RuntimeException();
 						}
 						rv[v] = p.getName();
 					}
@@ -356,6 +364,7 @@ public class Validator {
 			String fclassStr = op.getClazz();
 			if (fclassStr != null && !feature.containsKey(fclassStr)) {
 				LOG.error("Feature class '" + fclassStr + "'  for operation '" + op.getName() + "' is not defined!");
+				throw new RuntimeException();
 			} else {
 				opFClass = feature.get(fclassStr);
 			}
@@ -368,6 +377,7 @@ public class Validator {
 					PrefixBit pbit = pbits.get(pbname);
 					if (pbits == null) {
 						LOG.error("Prefix bit '" + pbname + "' for operation '" + op.getName() + "' is not defined!");
+						throw new RuntimeException();
 					} else {
 						pbs.put(pbit.getId(), pbit);
 					}
@@ -402,6 +412,7 @@ public class Validator {
 				if (admode == null) {
 					LOG.error("Addressing mode '" + opcode.getAddressingMode() + "' for operation '" + op.getName()
 							+ "' is not defined!");
+					throw new RuntimeException();
 				} else {
 					String admodefeatureStr = admode.getFeature();
 					admodeclass = feature.get(admodefeatureStr);
@@ -550,7 +561,7 @@ public class Validator {
 		}
 
 		public int getLen() {
-			return addrmode.getWidthInByte();
+			return addrmode.getWidthInByte() + addrmode.getOffset();
 		}
 
 		public Feature getFclass() {

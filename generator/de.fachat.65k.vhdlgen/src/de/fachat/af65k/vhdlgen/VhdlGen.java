@@ -212,6 +212,7 @@ public class VhdlGen {
 	public void fillStdOpcode(byte[] data, int opcode, AddressingMode admode,
 			String admodename) {
 		// parameter width
+		// TODO: offset
 		int w = admode.getWidthInByte();
 		w = w - 1;
 		if (w < 0) w = 4;
@@ -330,6 +331,8 @@ public class VhdlGen {
 					pwr.println("  parwidth <= pw_rs;");
 				} else {
 					int width = en.getAddrmode().getWidthInByte();
+					// TODO: offset
+					int offset = en.getAddrmode().getOffset();
 					if (width != 0) {
 						String w1 = parWidth(width);
 						

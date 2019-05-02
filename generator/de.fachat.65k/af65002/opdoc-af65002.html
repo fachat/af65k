@@ -147,7 +147,7 @@
  - Compare Z register with content of memory location</li>
 <li>
 <a href="#CSW">CSW</a>
- - Compare and SWap - compare memory with AC, and if matches, set to value from XR.
+ - Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
 			</li>
 <li>
 <a href="#DAD">DAD</a>
@@ -287,7 +287,7 @@
 <a href="#PRB">PRB</a>
  - Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base
+				stack, then transfer E-register to the base
 				register
 			</li>
 <li>
@@ -1638,7 +1638,7 @@
 					Note that the default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>CSW</h2>
-<a name="CSW"> </a><p>Compare and SWap - compare memory with AC, and if matches, set to value from XR.
+<a name="CSW"> </a><p>Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
 			</p>
 <table class="optable"><tr><th colspan="10">CSW</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
@@ -1646,7 +1646,7 @@
 <tr><td>EXT</td><td>0xc6</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xd6</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xc1</td><td>65k</td><td>UM, RS, AM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>UM, RS, AM</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xde</td><td>65k</td><td>UM, RS, AM</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h2>DAD</h2>
 <a name="DAD"> </a><p>Decimal adjust of a normal ADC of two BCD numbers.</p>
@@ -2368,6 +2368,8 @@
 <tr><td>EXT</td><td>0x22</td><td>65k</td><td>AM, OF, UM, NF</td><td>Relative 16bit</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xe1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xf1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X indirect 64bit</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xe2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x62</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2905,7 +2907,7 @@
 <h2>PRB</h2>
 <a name="PRB"> </a><p>Push and Replace Base register: Push base offset register to
 				the
-				stack, then transfer accumulator to the base
+				stack, then transfer E-register to the base
 				register
 			</p>
 <table class="optable"><tr><th colspan="10">PRB</th></tr>

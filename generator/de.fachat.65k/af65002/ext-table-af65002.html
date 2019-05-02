@@ -59,7 +59,8 @@
 </td><td class="unused"></td><td><div class="opc">JSR long</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>6</th><td class="unused"></td><td><div class="opc">LEA [[abs]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp</div>
+</td><td><div class="opc">LEA (abs),byte</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp</div>
 </td><td class="unused"></td><td><div class="opc">PLB </div>
 </td><td><div class="opc">ADC (E)</div>
 </td><td><div class="opc">RDR </div>
@@ -131,16 +132,17 @@
 </td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
-</td><td><div class="opc">CSW abs,X</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
 </td><td class="unused"></td><td><div class="opc">CSW zp,X</div>
 </td><td class="unused"></td><td><div class="opc">SAE </div>
 </td><td class="unused"></td><td><div class="opc">SAY </div>
 </td><td class="unused"></td><td><div class="opc">CPZ abs</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</td><td class="unused"></td><td><div class="opc">CSW abs,X</div>
+</td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
 </td><td><div class="opc">LEA [[zp]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SWP </div>
+</td><td><div class="opc">LEA (zp),byte</div>
+</td><td class="unused"></td><td><div class="opc">SWP </div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
 </td><td><div class="opc">SBC (E)</div>
 </td><td><div class="opc">TEB </div>

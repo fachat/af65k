@@ -109,6 +109,17 @@
 				than 16bit due to
 				overflow when Z is added.
 			</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td><td>2</td><td>(zp),byte</td><td>65k</td><td>Load effective 16 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 16bit due to
+				overflow when the offset is added.
+			</td></tr>
 <tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus
 				content of XR;
 				The effective word (16bit) address
@@ -136,6 +147,17 @@
 				The resulting address may be larger than
 				16bit due to
 				overflow when Y is added.
+			</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td><td>3</td><td>(abs),byte</td><td>65k</td><td>Load effective 16 bit address from absolute location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 16bit due to
+				overflow when the offset is added.
 			</td></tr>
 <tr><td>Absolute indexed with X indirect 16bit</td><td>Absolute X-indexed indirect</td><td></td><td>2</td><td>(abs,X)</td><td>cmos</td><td>Load effective 16 bit address from absolute location given plus
 				content of XR;
@@ -166,6 +188,17 @@
 <tr><td>Zeropage indirect 32bit indexed with Z</td><td>Zeropage long indirect Z-indexed</td><td>AM=1</td><td>1</td><td>[zp],Z</td><td>65k</td><td>Load effective 32 bit address from zeropage location given, then add content of 
 				ZR; The effective address is computed as the long (32bit) address read from the zeropage location given as parameter plus 
 				the value of the Z register. The resulting address may be larger than 32bit due to overflow when Z is added.
+			</td></tr>
+<tr><td>Zeropage indirect 32bit indexed with byte offset</td><td></td><td>AM=1</td><td>1</td><td>[zp],byte</td><td>65k</td><td>Load effective 32 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the long
+				(32bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 32bit due to
+				overflow when the offset is added.
 			</td></tr>
 <tr><td>Zeropage indexed with X indirect 32bit</td><td>Zeropage X-indexed long indirect</td><td>AM=1</td><td>1</td><td>[zp,X]</td><td>65k</td><td>Load effective 32 bit address from zeropage location given plus
 				content of XR;

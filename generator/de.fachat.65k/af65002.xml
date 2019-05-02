@@ -5860,6 +5860,16 @@
 				<opcode>0xf1</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbyte</addressingMode>
+				<opcode>0xe2</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbyte</addressingMode>
+				<opcode>0x62</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
 			<doc>
 				<p>
 					Load the effective address given by the addressing mode into the
@@ -8751,6 +8761,75 @@
 			</mode>
 		</syntax>
 
+		<syntax>
+			<id>indirectoffset</id>
+			<desc>The opcode is followed by an address, from which an address
+				read.
+				This address is taken as a wide address (16
+				bit). The offset from the opcode
+				is added to the address, the result
+				is taken as the effective address
+				of the operand.
+			</desc>
+			<simplesyntax>(&lt;address&gt;),byte</simplesyntax>
+			<mode>
+				<addrMode>zpindbyte</addrMode>
+			</mode>
+			<mode>
+				<addrMode>absindbyte</addrMode>
+			</mode>
+		</syntax>
+
+		<syntax>
+			<id>indirectoffsetlong</id>
+			<desc>The opcode is followed by an address, from which an address
+				read.
+				This address is taken as a long address (32
+				bit). The offset from the opcode
+				is added to the address, the result
+				is taken as the effective address
+				of the operand.
+			</desc>
+			<simplesyntax>[&lt;address&gt;],byte</simplesyntax>
+			<mode>
+				<addrMode>zpindbytelong</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+<!-- 
+			<mode>
+				<addrMode>absindbytelong</addrMode>
+			</mode>
+ -->
+		</syntax>
+
+<!-- 
+		<syntax>
+			<id>indirectoffsetquad</id>
+			<desc>The opcode is followed by an address, from which an address
+				read.
+				This address is taken as a quad address (64
+				bit). The offset from the opcode
+				is added to the address, the result
+				is taken as the effective address
+				of the operand.
+			</desc>
+			<simplesyntax>[[&lt;address&gt;]],byte</simplesyntax>
+			<mode>
+				<addrMode>zpindbytequad</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
+			</mode>
+			<mode>
+				<addrMode>absindbytequad</addrMode>
+			</mode>
+		</syntax>
+ -->
+
 
 		<syntax>
 			<id>indirectylong</id>
@@ -9395,6 +9474,27 @@
 		</addrmode>
 
 		<addrmode>
+			<name>Zeropage indirect 16bit indexed with byte offset</name>
+			<identifier>zpindbyte</identifier>
+			<desc>Load effective 16 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 16bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<altMode>zpindbytelong</altMode>
+			<width>1</width>
+			<offset>1</offset>
+		</addrmode>
+
+
+		<addrmode>
 			<name>Zeropage indexed with X indirect 16bit</name>
 			<altname>Zeropage X-indexed indirect</altname>
 			<identifier>zpxind</identifier>
@@ -9445,6 +9545,25 @@
 			<altMode>absindylong</altMode>
 			<feature>65k</feature>
 			<width>2</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Zeropage indirect 16bit indexed with byte offset</name>
+			<identifier>absindbyte</identifier>
+			<desc>Load effective 16 bit address from absolute location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 16bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<width>2</width>
+			<offset>1</offset>
 		</addrmode>
 
 		<addrmode>
@@ -9537,6 +9656,25 @@
 			<feature>65k</feature> 
 			<width>1</width> 
 		</addrmode>
+
+		<addrmode>
+			<name>Zeropage indirect 32bit indexed with byte offset</name>
+			<identifier>zpindbytelong</identifier>
+			<desc>Load effective 32 bit address from zeropage location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the long
+				(32bit) address read from
+				the zeropage location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 32bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<width>1</width>
+		</addrmode>
+
 
 		<addrmode>
 			<name>Zeropage indexed with X indirect 32bit</name>
