@@ -157,50 +157,25 @@ public class OpdescDocGenerator {
 					wr.startTableHeaderCell();
 					wr.print("Addressing Mode");
 					wr.startTableHeaderCell();
-					wr.print("Syntax");
+					wr.print("Bit/Offset/Num");
 
 					Collection<String> prefixes = op.getPrefixBits();
 
 					for (Opcode opcode : op.getOpcodes()) {
 
 						if (opcode.getFeature() == null || fclasses.contains(opcode.getFeature())) {
-							String admode = opcode.getAddressingMode();
-							AddressingMode am = cpu.getAddressingMode(admode);
-
-							wr.startTableRow();
-							wr.startTableCell();
-							wr.print(opcode.getOppage());
-							wr.startTableCell();
-							wr.print(opcode.getOpcode());
-							wr.startTableCell();
-
-							String clss = opcode.getFeature();
-							if (clss == null || clss.length() == 0) {
-								clss = op.getClazz();
-							}
-							wr.print(opcode.getFeature());
-							if (hasPrefix) {
-
-								wr.startTableCell();
-								Collection<String> prefs = prefixes;
-								if (prefs != null) {
-									if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
-										prefs = new ArrayList<String>(prefs.size());
-										prefs.addAll(prefixes);
-										prefs.removeAll(am.getIgnoredPrefixes());
-									}
-									Iterator<String> pref = prefs.iterator();
-									while (pref.hasNext()) {
-										wr.print(pref.next());
-										if (pref.hasNext())
-											wr.print(", ");
-									}
+							int code = Validator.parseCode(opcode.getOpcode());
+							if (op.getExpand() == null && opcode.getExpand() == null) {
+								writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, 0, opcode.getOpcode(), "");
+							} else {
+								List<Integer> ints = Validator.getExpandList(op, opcode);
+								int w = (op.getExpand8() != null || opcode.getExpand8() != null) ? 1 : 0;
+								for (Integer c : ints) {
+									String opc = "0x" + Integer.toHexString(code + c).toLowerCase();
+									writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, w, opc, "#" + w);
+									w++;
 								}
 							}
-							wr.startTableCell();
-							wr.print(am.getName());
-							wr.startTableCell();
-
 						}
 					}
 					wr.endTable();
@@ -224,6 +199,48 @@ public class OpdescDocGenerator {
 			}
 
 		}
+	}
+
+	private void writeOpdocRow(DocWriter wr, boolean hasPrefix, Operation op, Collection<String> prefixes,
+			Opcode opcode, int num, String opc, String comment) {
+		String admode = opcode.getAddressingMode();
+		AddressingMode am = cpu.getAddressingMode(admode);
+
+		wr.startTableRow();
+		wr.startTableCell();
+		wr.print(opcode.getOppage());
+		wr.startTableCell();
+		wr.print(opc); //"0x" + Integer.toHexString(opc).toLowerCase());
+		wr.startTableCell();
+
+		String clss = opcode.getFeature();
+		if (clss == null || clss.length() == 0) {
+			clss = op.getClazz();
+		}
+		wr.print(opcode.getFeature());
+		if (hasPrefix) {
+
+			wr.startTableCell();
+			Collection<String> prefs = prefixes;
+			if (prefs != null) {
+				if (am.getIgnoredPrefixes() != null && am.getIgnoredPrefixes().size() > 0) {
+					prefs = new ArrayList<String>(prefs.size());
+					prefs.addAll(prefixes);
+					prefs.removeAll(am.getIgnoredPrefixes());
+				}
+				Iterator<String> pref = prefs.iterator();
+				while (pref.hasNext()) {
+					wr.print(pref.next());
+					if (pref.hasNext())
+						wr.print(", ");
+				}
+			}
+		}
+		wr.startTableCell();
+		wr.print(am.getName());
+		wr.startTableCell();
+		wr.print(comment);
+		wr.startTableCell();
 	}
 
 }

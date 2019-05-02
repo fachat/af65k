@@ -3067,8 +3067,7 @@
 				<pre>
 					AC, C &amp;lt;= DecimalAdjustAdd(AC)
 					N &amp;lt;= Tmp(7)
-					Z
-					&amp;lt;= Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
 		</operation>
@@ -3106,8 +3105,7 @@
 				<pre>
 					AC, C &amp;lt;= DecimalAdjustSub(AC)
 					N &amp;lt;= Tmp(7)
-					Z
-					&amp;lt;= Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
 		</operation>

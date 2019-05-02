@@ -283,15 +283,15 @@
 <h2>ADC</h2>
 <a name="ADC"> </a><p>Add content of memory location to accumulator</p>
 <table class="optable"><tr><th colspan="10">ADC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x61</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x65</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x69</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0x6d</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x71</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x75</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x79</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x7d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x61</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x65</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x69</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x6d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x71</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x75</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x79</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x7d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -315,30 +315,30 @@
 				</p><h2>ALR</h2>
 <a name="ALR"> </a><p>AND the content of AC with an immediate value, then LSR the result; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">ALR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x4b</td><td>undoc</td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x4b</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h2>ANC</h2>
 <a name="ANC"> </a><p>AND the content of the AC with an immediate value and move bit 7 into the carry flag; this opcode is
 				undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">ANC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x0b</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x2b</td><td>undoc</td><td>Zeropage</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x0b</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x2b</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
 </table>
 <h2>AND</h2>
 <a name="AND"> </a><p>Bitwise AND accumulator with content of memory location</p>
 <table class="optable"><tr><th colspan="10">AND</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x21</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x25</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x29</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0x2d</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x31</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x35</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x39</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x3d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x21</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x25</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x29</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x2d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x31</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x35</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x39</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x3d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -354,8 +354,8 @@
 				</pre><h2>ANE</h2>
 <a name="ANE"> </a><p>Mostly transfer the value of XR to AC, then AND AC with an immediate value; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">ANE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x8b</td><td>undoc</td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x8b</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <pre>
@@ -371,8 +371,8 @@
 				opcode is undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">ARR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x6b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x6b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>This operation is not the harmless combination of AND and ROR: it affects the V-flag and has
@@ -382,12 +382,12 @@
 				shifting in zero in bit 0
 			</p>
 <table class="optable"><tr><th colspan="10">ASL</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x06</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x0a</td><td></td><td>Accumulator</td><td></td></tr>
-<tr><td></td><td>0x0e</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x16</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x1e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x06</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x0a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td></td><td>0x0e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x16</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x1e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -415,22 +415,22 @@
 <a name="ASO"> </a><p>Synonyms: SLO</p>
 <p>ASL operand and OR with AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">ASO</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x0f</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x1f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x1b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x07</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x17</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x03</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x13</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x0f</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x1f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x1b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x07</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x17</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x03</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x13</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>BCC</h2>
 <a name="BCC"> </a><p>Synonyms: BLT</p>
 <p>Branch on carry clear - take branch when C flag is cleared
 			</p>
 <table class="optable"><tr><th colspan="10">BCC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x90</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x90</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -453,8 +453,8 @@
 <a name="BCS"> </a><p>Synonyms: BGE</p>
 <p>Branch on carry set - take branch when C flag is set</p>
 <table class="optable"><tr><th colspan="10">BCS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xB0</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xB0</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -476,8 +476,8 @@
 				</pre><h2>BEQ</h2>
 <a name="BEQ"> </a><p>Branch on equal - take branch when Z flag is set</p>
 <table class="optable"><tr><th colspan="10">BEQ</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xf0</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xf0</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -505,9 +505,9 @@
 				accumulator
 			</p>
 <table class="optable"><tr><th colspan="10">BIT</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -526,8 +526,8 @@
 				</pre><h2>BMI</h2>
 <a name="BMI"> </a><p>Branch on minus - take branch when N flag is set</p>
 <table class="optable"><tr><th colspan="10">BMI</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x30</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x30</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -547,8 +547,8 @@
 				</pre><h2>BNE</h2>
 <a name="BNE"> </a><p>Branch on not equal - take branch when Z flag is cleared</p>
 <table class="optable"><tr><th colspan="10">BNE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xD0</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xD0</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -568,8 +568,8 @@
 				</pre><h2>BPL</h2>
 <a name="BPL"> </a><p>Branch on plus - take branch when N flag is cleared</p>
 <table class="optable"><tr><th colspan="10">BPL</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x10</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x10</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -589,8 +589,8 @@
 				</pre><h2>BRK</h2>
 <a name="BRK"> </a><p>Starts the break routine.</p>
 <table class="optable"><tr><th colspan="10">BRK</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -633,8 +633,8 @@
 <a name="BVC"> </a><p>Branch on overflow clear - take branch when V flag is cleared
 			</p>
 <table class="optable"><tr><th colspan="10">BVC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x50</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x50</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -654,8 +654,8 @@
 				</pre><h2>BVS</h2>
 <a name="BVS"> </a><p>Branch on overflow set - take branch when V flag is set</p>
 <table class="optable"><tr><th colspan="10">BVS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x70</td><td></td><td>Relative</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x70</td><td></td><td>Relative</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -675,8 +675,8 @@
 				</pre><h2>CLC</h2>
 <a name="CLC"> </a><p>Clear the C flag</p>
 <table class="optable"><tr><th colspan="10">CLC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x18</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x18</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -684,8 +684,8 @@
 				</p><h2>CLD</h2>
 <a name="CLD"> </a><p>Clear the decimal (D) flag</p>
 <table class="optable"><tr><th colspan="10">CLD</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xd8</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xd8</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -693,8 +693,8 @@
 				</p><h2>CLI</h2>
 <a name="CLI"> </a><p>Clear the interrupt (I) flag</p>
 <table class="optable"><tr><th colspan="10">CLI</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x58</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x58</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -702,8 +702,8 @@
 				</p><h2>CLV</h2>
 <a name="CLV"> </a><p>Clear the overflow (V) flag</p>
 <table class="optable"><tr><th colspan="10">CLV</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xb8</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xb8</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -711,15 +711,15 @@
 				</p><h2>CMP</h2>
 <a name="CMP"> </a><p>Compare accumulator with content of memory location</p>
 <table class="optable"><tr><th colspan="10">CMP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xc1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xc5</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xc9</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xcd</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xd1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xd5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xd9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xdd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xc1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xc5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xc9</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xcd</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xd1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xd5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xd9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xdd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -739,10 +739,10 @@
 				</pre><h2>CPX</h2>
 <a name="CPX"> </a><p>Compare X register with content of memory location</p>
 <table class="optable"><tr><th colspan="10">CPX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xe0</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xe4</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xec</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xe0</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xe4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xec</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -762,10 +762,10 @@
 				</pre><h2>CPY</h2>
 <a name="CPY"> </a><p>Compare Y register with content of memory location</p>
 <table class="optable"><tr><th colspan="10">CPY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xc0</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xc4</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xcc</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xc0</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xc4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xcc</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -786,23 +786,23 @@
 <a name="DCM"> </a><p>Synonyms: DCP</p>
 <p>DEC the content of a memory location, then CMP the result with AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">DCM</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xcf</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xdf</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0xdb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xc7</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xd7</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xc3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xd3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xcf</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xdf</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xdb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xc7</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xd7</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xc3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xd3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>DEC</h2>
 <a name="DEC"> </a><p>Decrement the content of a memory location by one</p>
 <table class="optable"><tr><th colspan="10">DEC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xc6</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xce</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xd6</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xde</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xc6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xce</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xd6</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xde</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -821,8 +821,8 @@
 				</pre><h2>DEX</h2>
 <a name="DEX"> </a><p>Decrement the content of the X register by one</p>
 <table class="optable"><tr><th colspan="10">DEX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xca</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xca</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -832,8 +832,8 @@
 				</pre><h2>DEY</h2>
 <a name="DEY"> </a><p>Decrement the Y register by one</p>
 <table class="optable"><tr><th colspan="10">DEY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x88</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x88</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -845,15 +845,15 @@
 				location
 			</p>
 <table class="optable"><tr><th colspan="10">EOR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x41</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x45</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x49</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0x4d</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x51</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x55</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x59</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x5d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x41</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x45</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x49</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x4d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x51</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x55</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x59</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x5d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -870,22 +870,22 @@
 				</pre><h2>HLT</h2>
 <a name="HLT"> </a><p>Crash the processor.</p>
 <table class="optable"><tr><th colspan="10">HLT</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x02</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x12</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x22</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x32</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x42</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x52</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x62</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x72</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x82</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x92</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xb2</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xc2</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xd2</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xe2</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xf2</td><td>undoc</td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x02</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x12</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x22</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x32</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x42</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x52</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x62</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x72</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x82</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x92</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xb2</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xc2</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xd2</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xe2</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xf2</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>When this opcode is executed, the NMOS processor stops execution. No hardware interrupts will be
@@ -895,11 +895,11 @@
 				</p><p>Opcodes 0x82, 0xc2 and 0xe2 are sometimes listed as "NOP, Jams rarely"</p><h2>INC</h2>
 <a name="INC"> </a><p>Increment the content of a memory location by one</p>
 <table class="optable"><tr><th colspan="10">INC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xe6</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xee</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xf6</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xfe</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xe6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xee</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xf6</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xfe</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -918,20 +918,20 @@
 <a name="INS"> </a><p>Synonyms: ISC</p>
 <p>INC the content of a memory location, then SBC the result from AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">INS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xef</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xff</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0xfb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xe7</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xf7</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xe3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xf3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xef</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xff</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xfb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xe7</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xf7</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xe3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xf3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>INX</h2>
 <a name="INX"> </a><p>Increment the content of the X register by one</p>
 <table class="optable"><tr><th colspan="10">INX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xe8</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xe8</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -941,8 +941,8 @@
 				</pre><h2>INY</h2>
 <a name="INY"> </a><p>Increment the content of the Y register by one</p>
 <table class="optable"><tr><th colspan="10">INY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xc8</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xc8</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -952,9 +952,9 @@
 				</pre><h2>JMP</h2>
 <a name="JMP"> </a><p>Jump to new code address</p>
 <table class="optable"><tr><th colspan="10">JMP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td></tr>
-<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td><td></td></tr>
+<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -968,8 +968,8 @@
 				address on stack for RTS
 			</p>
 <table class="optable"><tr><th colspan="10">JSR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -989,32 +989,32 @@
 				opcode is undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">LAS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xbb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xbb</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>LAX</h2>
 <a name="LAX"> </a><p>Load both AC and XR with the contents loaded from memory; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">LAX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xaf</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xbf</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xa7</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xb7</td><td>undoc</td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xa3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xb3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xaf</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xbf</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xa7</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xb7</td><td>undoc</td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xa3</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xb3</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>LDA</h2>
 <a name="LDA"> </a><p>Load accumulator</p>
 <table class="optable"><tr><th colspan="10">LDA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xa1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xa5</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xa9</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xad</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xb1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xb5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xb9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xbd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xa1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xa5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xa9</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xad</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xb1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xb5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xb9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xbd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1027,12 +1027,12 @@
 				</pre><h2>LDX</h2>
 <a name="LDX"> </a><p>Load X register</p>
 <table class="optable"><tr><th colspan="10">LDX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xa2</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xa6</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xae</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xb6</td><td></td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xbe</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xa2</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xa6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xae</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xb6</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xbe</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1045,12 +1045,12 @@
 				</pre><h2>LDY</h2>
 <a name="LDY"> </a><p>Load Y register</p>
 <table class="optable"><tr><th colspan="10">LDY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xa0</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xa4</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xac</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xb4</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xbc</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xa0</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xa4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xac</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xb4</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xbc</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1064,26 +1064,26 @@
 <a name="LSE"> </a><p>Synonyms: SRE</p>
 <p>LSR operand and EOR with AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">LSE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x4f</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x5f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x5b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x47</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x57</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x43</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x53</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x4f</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x5f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x5b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x47</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x57</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x43</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x53</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>LSR</h2>
 <a name="LSR"> </a><p>Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
 			</p>
 <table class="optable"><tr><th colspan="10">LSR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x46</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x4a</td><td></td><td>Accumulator</td><td></td></tr>
-<tr><td></td><td>0x4e</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x56</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x5e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x46</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x4a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td></td><td>0x4e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x56</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x5e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1111,39 +1111,39 @@
 				undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">LXA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xab</td><td>undoc</td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xab</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>This operation looks similar to ANE, just that it stores the result in AC and XR instead of AC only.</p><h2>NOP</h2>
 <a name="NOP"> </a><p>No operation</p>
 <table class="optable"><tr><th colspan="10">NOP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xea</td><td></td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x1a</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x3a</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x5a</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x7a</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xda</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0xfa</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x80</td><td>undoc</td><td>Implied</td><td></td></tr>
-<tr><td></td><td>0x04</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x14</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x34</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x44</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x54</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x64</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x74</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xd4</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xf4</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x0c</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x1c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x3c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x5c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x7c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0xdc</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0xfc</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x89</td><td>undoc</td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xea</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x1a</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x3a</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x5a</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x7a</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xda</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xfa</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x80</td><td>undoc</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x04</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x14</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x34</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x44</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x54</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x64</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x74</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xd4</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xf4</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x0c</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x1c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x3c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x5c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x7c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xdc</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xfc</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x89</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1151,15 +1151,15 @@
 				</p><h2>ORA</h2>
 <a name="ORA"> </a><p>Bitwise OR accumulator with content of memory location</p>
 <table class="optable"><tr><th colspan="10">ORA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x01</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x05</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x09</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0x0d</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x11</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x15</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x19</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x1d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x01</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x05</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x09</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x0d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x11</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x15</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x19</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x1d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1173,8 +1173,8 @@
 				</pre><h2>PHA</h2>
 <a name="PHA"> </a><p>Push contents of the accumulator onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x48</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x48</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1184,8 +1184,8 @@
 				</pre><h2>PHP</h2>
 <a name="PHP"> </a><p>Push processor status register onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x08</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x08</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1195,8 +1195,8 @@
 				</pre><h2>PLA</h2>
 <a name="PLA"> </a><p>Pull the contents of the accumulator from the stack</p>
 <table class="optable"><tr><th colspan="10">PLA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x68</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x68</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1206,8 +1206,8 @@
 				</pre><h2>PLP</h2>
 <a name="PLP"> </a><p>Pull processor status register from the stack</p>
 <table class="optable"><tr><th colspan="10">PLP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x28</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x28</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1217,14 +1217,14 @@
 				</pre><h2>RLA</h2>
 <a name="RLA"> </a><p>ROL operand and AND with AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">RLA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x2f</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x3f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x3b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x27</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x37</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x23</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x33</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x2f</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x3f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x3b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x27</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x37</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x23</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x33</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>ROL</h2>
 <a name="ROL"> </a><p>Rotate Left - shift accumulator one bit to the left, shifting
@@ -1234,12 +1234,12 @@
 				carry flag instead.
 			</p>
 <table class="optable"><tr><th colspan="10">ROL</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x26</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x2a</td><td></td><td>Accumulator</td><td></td></tr>
-<tr><td></td><td>0x2e</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x36</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x3e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x26</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x2a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td></td><td>0x2e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x36</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x3e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1271,12 +1271,12 @@
 				carry flag instead.
 			</p>
 <table class="optable"><tr><th colspan="10">ROR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x66</td><td>ror</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x6a</td><td>ror</td><td>Accumulator</td><td></td></tr>
-<tr><td></td><td>0x6e</td><td>ror</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x76</td><td>ror</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x7e</td><td>ror</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x66</td><td>ror</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x6a</td><td>ror</td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td></td><td>0x6e</td><td>ror</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x76</td><td>ror</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x7e</td><td>ror</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1302,20 +1302,20 @@
 				</pre><h2>RRA</h2>
 <a name="RRA"> </a><p>ROR operand and ADC with AC; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">RRA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x6f</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x7f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
-<tr><td></td><td>0x7b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x67</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x77</td><td>undoc</td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x63</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x73</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x6f</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x7f</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x7b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x67</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x77</td><td>undoc</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x63</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x73</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h2>RTI</h2>
 <a name="RTI"> </a><p>Return from interrupt</p>
 <table class="optable"><tr><th colspan="10">RTI</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1337,8 +1337,8 @@
 				</pre><h2>RTS</h2>
 <a name="RTS"> </a><p>Return from subroutine - read return address from stack</p>
 <table class="optable"><tr><th colspan="10">RTS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1351,25 +1351,25 @@
 				</pre><h2>SAX</h2>
 <a name="SAX"> </a><p>Store the result of X AND A in the given address, without changing flags; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">SAX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x8f</td><td>undoc</td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x87</td><td>undoc</td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x97</td><td>undoc</td><td>Zeropage indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x83</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x8f</td><td>undoc</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x87</td><td>undoc</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x97</td><td>undoc</td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x83</td><td>undoc</td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
 </table>
 <h2>SBC</h2>
 <a name="SBC"> </a><p>Substract content of memory location from accumulator</p>
 <table class="optable"><tr><th colspan="10">SBC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xe1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0xe5</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0xe9</td><td></td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xeb</td><td>undoc</td><td>Immediate</td><td></td></tr>
-<tr><td></td><td>0xed</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0xf1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xf5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0xf9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xfd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xe1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xe5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0xe9</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xeb</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0xed</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xf1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xf5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xf9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xfd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1397,8 +1397,8 @@
 				is undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">SBX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xcb</td><td>undoc</td><td>Immediate</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xcb</td><td>undoc</td><td>Immediate</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>The substraction works similar to CMP in that no flags are set. It also has no decimal mode, as it
@@ -1406,8 +1406,8 @@
 				</p><h2>SEC</h2>
 <a name="SEC"> </a><p>Set the C flag</p>
 <table class="optable"><tr><th colspan="10">SEC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x38</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x38</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1415,8 +1415,8 @@
 				</p><h2>SED</h2>
 <a name="SED"> </a><p>Set the decimal (D) flag</p>
 <table class="optable"><tr><th colspan="10">SED</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xf8</td><td>bcd</td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xf8</td><td>bcd</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1424,8 +1424,8 @@
 				</p><h2>SEI</h2>
 <a name="SEI"> </a><p>Set the interrupt (I) flag</p>
 <table class="optable"><tr><th colspan="10">SEI</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x78</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x78</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1436,9 +1436,9 @@
 				undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">SHA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x9f</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x93</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x9f</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x93</td><td>undoc</td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <pre>
@@ -1446,8 +1446,8 @@
 				</pre><h2>SHS</h2>
 <a name="SHS"> </a><p>AND the AC and XR registers, transfer the result to the stack pointer; this opcode is undocumented.</p>
 <table class="optable"><tr><th colspan="10">SHS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x9b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x9b</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>SHA and TXS where, X is replaced by (A & X).</p><p>Note: the value to be stored is also copied to ADDR_HI if page boundary is crossed.</p><h2>SHX</h2>
@@ -1455,8 +1455,8 @@
 				undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">SHX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x9e</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x9e</td><td>undoc</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <pre>
@@ -1466,8 +1466,8 @@
 				undocumented.
 			</p>
 <table class="optable"><tr><th colspan="10">SHY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x9c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x9c</td><td>undoc</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <pre>
@@ -1476,14 +1476,14 @@
 <a name="STA"> </a><p>Store the content of the accumulator into a memory location
 			</p>
 <table class="optable"><tr><th colspan="10">STA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
-<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
-<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1493,10 +1493,10 @@
 				</pre><h2>STX</h2>
 <a name="STX"> </a><p>Store the content of the X register to memory.</p>
 <table class="optable"><tr><th colspan="10">STX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1507,10 +1507,10 @@
 				</pre><h2>STY</h2>
 <a name="STY"> </a><p>Store the content of the Y register to memory.</p>
 <table class="optable"><tr><th colspan="10">STY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td></tr>
-<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td></tr>
-<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1521,8 +1521,8 @@
 				</pre><h2>TAX</h2>
 <a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
 <table class="optable"><tr><th colspan="10">TAX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xaa</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xaa</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1532,8 +1532,8 @@
 				</pre><h2>TAY</h2>
 <a name="TAY"> </a><p>Transfer the contents of accumulator into the Y register</p>
 <table class="optable"><tr><th colspan="10">TAY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xa8</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xa8</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1545,8 +1545,8 @@
 				(Note: needs RS to keep compatibility with 6502)
 			</p>
 <table class="optable"><tr><th colspan="10">TSX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0xba</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xba</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1557,8 +1557,8 @@
 <a name="TXA"> </a><p>Transfer the contents of the X register into the accumulator
 			</p>
 <table class="optable"><tr><th colspan="10">TXA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x8a</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x8a</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1570,8 +1570,8 @@
 				(Note: needs RS to keep compatibility with 6502)
 			</p>
 <table class="optable"><tr><th colspan="10">TXS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x9a</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x9a</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1582,8 +1582,8 @@
 <a name="TYA"> </a><p>Transfer the contents of the Y register into the accumulator
 			</p>
 <table class="optable"><tr><th colspan="10">TYA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x98</td><td></td><td>Implied</td><td></td></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x98</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>

@@ -27,6 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hamcrest.FeatureMatcher;
 import org.w3c.dom.CDATASection;
@@ -324,7 +325,7 @@ public class Validator {
 		return cpu.getOperations();
 	}
 	
-	private int parseExpand(String opExpand, String opcodeExpand) {
+	private static int parseExpand(String opExpand, String opcodeExpand) {
 		
 		if (opcodeExpand != null) {
 			return parseCode(opcodeExpand);
@@ -461,22 +462,8 @@ public class Validator {
 							
 							addToPage(op.getName(), page, code, pageEntries, pageEntry);
 						} else {
-							int expand = parseExpand(op.getExpand(), opcode.getExpand());
-							// compute the expand steps as lowest 1-bit
-							int w = 0;
-							int e = expand;
-							while ((e & 1) == 0) {
-								w++;
-								e /= 2;
-							}
-							e = 1 << w;
-							// list of expands
-							Set<Integer> expList = new HashSet<>();
-							w = 0;
-							while (w <= expand) {
-								expList.add(w & expand);
-								w += e;
-							}
+							int w;
+							List<Integer> expList = getExpandList(op, opcode);
 							// loop over all
 							w = 0;
 							for (Integer ex : expList) {
@@ -494,6 +481,28 @@ public class Validator {
 			}
 		}
 
+		return rv;
+	}
+
+	public static List<Integer> getExpandList(Operation op, Opcode opcode) {
+		int expand = parseExpand(op.getExpand(), opcode.getExpand());
+		// compute the expand steps as lowest 1-bit
+		int w = 0;
+		int e = expand;
+		while ((e & 1) == 0) {
+			w++;
+			e /= 2;
+		}
+		e = 1 << w;
+		// list of expands
+		Set<Integer> expList = new TreeSet<>();
+		w = 0;
+		while (w <= expand) {
+			expList.add(w & expand);
+			w += e;
+		}
+		List<Integer> rv = new ArrayList<>();
+		rv.addAll(expList);
 		return rv;
 	}
 
