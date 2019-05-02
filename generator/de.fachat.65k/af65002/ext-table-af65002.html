@@ -12,7 +12,8 @@
 </td></tr>
 <tr><th>1</th><td><div class="opc">BEV rel</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">DAD </div>
+</td><td class="unused"></td><td><div class="opc">INZ </div>
+</td><td class="unused"></td><td><div class="opc">DAD </div>
 </td><td class="unused"></td><td><div class="opc">TRB (E)</div>
 </td><td><div class="opc">ASR (E)</div>
 </td><td><div class="opc">ASR abs,X</div>
@@ -36,7 +37,8 @@
 </td><td class="unused"></td><td><div class="opc">BIT </div>
 </td><td><div class="opc">ADE </div>
 </td><td><div class="opc">RDL zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDE #byte</div>
+</td><td class="unused"></td><td><div class="opc">DEZ </div>
+</td><td><div class="opc">LDE #byte</div>
 </td><td><div class="opc">DAS </div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDL (E)</div>
 </td><td><div class="opc">RDL abs,X</div>
@@ -53,7 +55,9 @@
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LEA zp,X</div>
 </td><td class="unused"></td><td><div class="opc">PRB </div>
 </td><td><div class="opc">LDB #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</td><td><div class="opc">PHZ </div>
+</td><td class="unused"></td><td><div class="opc">JSR long</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>6</th><td class="unused"></td><td><div class="opc">LEA [[abs]],Y</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp</div>
 </td><td class="unused"></td><td><div class="opc">PLB </div>
@@ -68,22 +72,26 @@
 </td><td><div class="opc">LEA [[abs,X]]</div>
 </td><td><div class="opc">LEA [[abs]]</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">PLZ </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
 </td><td><div class="opc">RDR abs,X</div>
 </td><td><div class="opc">RDR abs,Y</div>
 </td></tr>
 <tr><th>8</th><td><div class="opc">SUB (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SUB #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAX </div>
+</td><td><div class="opc">SUB #byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAE </div>
 </td><td><div class="opc">BIT (E)</div>
-</td><td><div class="opc">TYS </div>
+</td><td><div class="opc">TZA </div>
 </td><td class="unused"></td><td><div class="opc">STY (E)</div>
 </td><td><div class="opc">STA (E)</div>
 </td><td class="unused"></td><td><div class="opc">STY abs,X</div>
 </td></tr>
 <tr><th>9</th><td><div class="opc">BLE rel</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TEA </div>
+</td><td class="unused"></td><td><div class="opc">LDZ #byte</div>
 </td><td class="unused"></td><td><div class="opc">SXY </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TEA </div>
+</td><td class="unused"></td><td><div class="opc">TYS </div>
 </td><td class="unused"></td><td><div class="opc">STZ (E)</div>
 </td><td><div class="opc">STX (E)</div>
 </td><td><div class="opc">STZ abs,Y</div>
@@ -91,11 +99,13 @@
 <tr><th>A</th><td><div class="opc">LDY (E)</div>
 </td><td><div class="opc">LEA (zp,X)</div>
 </td><td><div class="opc">LEA rel</div>
-</td><td class="unused"></td><td><div class="opc">INV </div>
+</td><td class="unused"></td><td><div class="opc">NEG </div>
 </td><td><div class="opc">SBE #byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAB </div>
 </td><td><div class="opc">LDA (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDX (E)</div>
+</td><td><div class="opc">TAZ </div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs</div>
+</td><td><div class="opc">LDX (E)</div>
 </td><td><div class="opc">LEA abs</div>
 </td><td><div class="opc">STX abs,Y</div>
 </td></tr>
@@ -104,27 +114,29 @@
 </td><td class="unused"></td><td><div class="opc">BCN </div>
 </td><td><div class="opc">SBE </div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SEB </div>
-</td><td class="unused"></td><td><div class="opc">SAX </div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
+</td><td class="unused"></td><td><div class="opc">TSY </div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs,X</div>
+</td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
 </td><td><div class="opc">LEA abs,Y</div>
 </td></tr>
 <tr><th>C</th><td><div class="opc">CPY (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">EXT </div>
+</td><td class="unused"></td><td><div class="opc">CPZ #byte</div>
+</td><td class="unused"></td><td><div class="opc">EXT </div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TPA </div>
 </td><td><div class="opc">CMP (E)</div>
-</td><td><div class="opc">TSY </div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
 </td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SWP </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAE </div>
 </td><td class="unused"></td><td><div class="opc">SAY </div>
-</td><td class="unused"></td><td><div class="opc">JSR long</div>
+</td><td class="unused"></td><td><div class="opc">CPZ abs</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
 </td><td><div class="opc">LEA [[zp]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SWP </div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
 </td><td><div class="opc">SBC (E)</div>
 </td><td><div class="opc">TEB </div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">INC (E)</div>

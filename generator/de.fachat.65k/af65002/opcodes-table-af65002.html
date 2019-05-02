@@ -14,7 +14,7 @@
 </td><td class="prefix">EXT</td></tr>
 <tr><th>1</th><td><div class="opc">BPL rel</div>
 </td><td><div class="opc">ORA (zp),Y</div>
-</td><td class="cmos"><div class="opc">ORA (zp)</div>
+</td><td><div class="opc">ORA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">TRB zp</div>
 </td><td><div class="opc">ORA zp,X</div>
 </td><td><div class="opc">ASL zp,X</div>
@@ -41,7 +41,7 @@
 </td><td class="prefix">SYS</td></tr>
 <tr><th>3</th><td><div class="opc">BMI rel</div>
 </td><td><div class="opc">AND (zp),Y</div>
-</td><td class="cmos"><div class="opc">AND (zp)</div>
+</td><td><div class="opc">AND (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">BIT zp,X</div>
 </td><td><div class="opc">AND zp,X</div>
 </td><td><div class="opc">ROL zp,X</div>
@@ -68,7 +68,7 @@
 </td><td class="prefix">QUICK</td></tr>
 <tr><th>5</th><td><div class="opc">BVC rel</div>
 </td><td><div class="opc">EOR (zp),Y</div>
-</td><td class="cmos"><div class="opc">EOR (zp)</div>
+</td><td><div class="opc">EOR (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="unused"></td><td><div class="opc">EOR zp,X</div>
 </td><td><div class="opc">LSR zp,X</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">CLI </div>
@@ -93,7 +93,7 @@
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>7</th><td><div class="opc">BVS rel</div>
 </td><td><div class="opc">ADC (zp),Y</div>
-</td><td class="cmos"><div class="opc">ADC (zp)</div>
+</td><td><div class="opc">ADC (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">STZ zp,X</div>
 </td><td><div class="opc">ADC zp,X</div>
 </td><td><div class="opc">ROR zp,X</div>
@@ -120,7 +120,7 @@
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>9</th><td><div class="opc">BCC rel</div>
 </td><td><div class="opc">STA (zp),Y</div>
-</td><td class="cmos"><div class="opc">STA (zp)</div>
+</td><td><div class="opc">STA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">STY zp,X</div>
 </td><td><div class="opc">STA zp,X</div>
 </td><td><div class="opc">STX zp,Y</div>
@@ -147,7 +147,7 @@
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>B</th><td><div class="opc">BCS rel</div>
 </td><td><div class="opc">LDA (zp),Y</div>
-</td><td class="cmos"><div class="opc">LDA (zp)</div>
+</td><td><div class="opc">LDA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">LDY zp,X</div>
 </td><td><div class="opc">LDA zp,X</div>
 </td><td><div class="opc">LDX zp,Y</div>
@@ -174,7 +174,7 @@
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>D</th><td><div class="opc">BNE rel</div>
 </td><td><div class="opc">CMP (zp),Y</div>
-</td><td class="cmos"><div class="opc">CMP (zp)</div>
+</td><td><div class="opc">CMP (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="unused"></td><td><div class="opc">CMP zp,X</div>
 </td><td><div class="opc">DEC zp,X</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">CLD </div>
@@ -200,7 +200,7 @@
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>F</th><td><div class="opc">BEQ rel</div>
 </td><td><div class="opc">SBC (zp),Y</div>
-</td><td class="cmos"><div class="opc">SBC (zp)</div>
+</td><td><div class="opc">SBC (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="c65k"><div class="opc">TRP #byte</div>
 </td><td><div class="opc">SBC zp,X</div>
 </td><td><div class="opc">INC zp,X</div>

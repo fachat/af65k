@@ -76,6 +76,9 @@ Compare X register with content of memory location</li>
 <a href="af65002opdesc.html#CPY">CPY: </a>
 Compare Y register with content of memory location</li>
 <li>
+<a href="af65002opdesc.html#CPZ">CPZ: </a>
+Compare Z register with content of memory location</li>
+<li>
 <a href="af65002opdesc.html#DAD">DAD: </a>
 Decimal adjust of a normal ADC of two BCD numbers.</li>
 <li>
@@ -84,6 +87,9 @@ Decimal adjust of a normal SBC of two BCD numbers.</li>
 <li>
 <a href="af65002opdesc.html#DEC">DEC: </a>
 Decrement the content of a memory location by one</li>
+<li>
+<a href="af65002opdesc.html#DEZ">DEZ: </a>
+Decrement Z register</li>
 <li>
 <a href="af65002opdesc.html#EOR">EOR: </a>
 Bitwise Exclusive-OR accumulator with content of memory
@@ -98,8 +104,8 @@ Extend a value in AC from RS to the full size. Setting LE
 <a href="af65002opdesc.html#INC">INC: </a>
 Increment the content of a memory location by one</li>
 <li>
-<a href="af65002opdesc.html#INV">INV: </a>
-invert AC, i.e. set AC to the 2s-complement of AC</li>
+<a href="af65002opdesc.html#INZ">INZ: </a>
+Increment Z register</li>
 <li>
 <a href="af65002opdesc.html#JMP">JMP: </a>
 Jump to new code address</li>
@@ -124,6 +130,9 @@ Load X register</li>
 <a href="af65002opdesc.html#LDY">LDY: </a>
 Load Y register</li>
 <li>
+<a href="af65002opdesc.html#LDZ">LDZ: </a>
+Load Z register with a value</li>
+<li>
 <a href="af65002opdesc.html#LEA">LEA: </a>
 Load Effective Address: compute the effective address and store
 				it in the E (effective Address) register (always
@@ -135,6 +144,9 @@ Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
 			</li>
 <li>
+<a href="af65002opdesc.html#NEG">NEG: </a>
+negate / invert AC, i.e. set AC to the 2s-complement of AC</li>
+<li>
 <a href="af65002opdesc.html#ORA">ORA: </a>
 Bitwise OR accumulator with content of memory location</li>
 <li>
@@ -144,11 +156,17 @@ Push B onto stack (full width)</li>
 <a href="af65002opdesc.html#PHE">PHE: </a>
 Push E onto stack (always full width)</li>
 <li>
+<a href="af65002opdesc.html#PHZ">PHZ: </a>
+Push Z Register onto stack</li>
+<li>
 <a href="af65002opdesc.html#PLB">PLB: </a>
 Pull B from stack (full width)</li>
 <li>
 <a href="af65002opdesc.html#PLE">PLE: </a>
 Pull E from stack (full width)</li>
+<li>
+<a href="af65002opdesc.html#PLZ">PLZ: </a>
+Pull Z Register from stack</li>
 <li>
 <a href="af65002opdesc.html#PRB">PRB: </a>
 Push and Replace Base register: Push base offset register to
@@ -244,6 +262,9 @@ Transfer AC to B register</li>
 <a href="af65002opdesc.html#TAE">TAE: </a>
 Transfer AC to E register</li>
 <li>
+<a href="af65002opdesc.html#TAZ">TAZ: </a>
+Transfer AC to Z Register</li>
+<li>
 <a href="af65002opdesc.html#TBA">TBA: </a>
 Transfer base register B to Accumulator</li>
 <li>
@@ -282,4 +303,7 @@ Transfer stack pointer to Y</li>
 <li>
 <a href="af65002opdesc.html#TYS">TYS: </a>
 Transfer Y to stack pointer</li>
+<li>
+<a href="af65002opdesc.html#TZA">TZA: </a>
+Transfer Z Register to AC</li>
 </ul>

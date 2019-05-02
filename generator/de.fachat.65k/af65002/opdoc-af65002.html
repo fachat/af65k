@@ -137,6 +137,9 @@
 <a href="#CPY">CPY</a>
  - Compare Y register with content of memory location</li>
 <li>
+<a href="#CPZ">CPZ</a>
+ - Compare Z register with content of memory location</li>
+<li>
 <a href="#DAD">DAD</a>
  - Decimal adjust of a normal ADC of two BCD numbers.</li>
 <li>
@@ -152,6 +155,9 @@
 <a href="#DEY">DEY</a>
  - Decrement the Y register by one</li>
 <li>
+<a href="#DEZ">DEZ</a>
+ - Decrement Z register</li>
+<li>
 <a href="#EOR">EOR</a>
  - Bitwise Exclusive-OR accumulator with content of memory
 				location
@@ -165,14 +171,14 @@
 <a href="#INC">INC</a>
  - Increment the content of a memory location by one</li>
 <li>
-<a href="#INV">INV</a>
- - invert AC, i.e. set AC to the 2s-complement of AC</li>
-<li>
 <a href="#INX">INX</a>
  - Increment the content of the X register by one</li>
 <li>
 <a href="#INY">INY</a>
  - Increment the content of the Y register by one</li>
+<li>
+<a href="#INZ">INZ</a>
+ - Increment Z register</li>
 <li>
 <a href="#JMP">JMP</a>
  - Jump to new code address</li>
@@ -197,6 +203,9 @@
 <a href="#LDY">LDY</a>
  - Load Y register</li>
 <li>
+<a href="#LDZ">LDZ</a>
+ - Load Z register with a value</li>
+<li>
 <a href="#LEA">LEA</a>
  - Load Effective Address: compute the effective address and store
 				it in the E (effective Address) register (always
@@ -207,6 +216,9 @@
  - Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
 			</li>
+<li>
+<a href="#NEG">NEG</a>
+ - negate / invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
 <a href="#NOP">NOP</a>
  - No operation</li>
@@ -232,6 +244,9 @@
 <a href="#PHY">PHY</a>
  - Push contents of the Y register onto the stack</li>
 <li>
+<a href="#PHZ">PHZ</a>
+ - Push Z Register onto stack</li>
+<li>
 <a href="#PLA">PLA</a>
  - Pull the contents of the accumulator from the stack</li>
 <li>
@@ -249,6 +264,9 @@
 <li>
 <a href="#PLY">PLY</a>
  - Pull the contents of the Y register from the stack</li>
+<li>
+<a href="#PLZ">PLZ</a>
+ - Pull Z Register from stack</li>
 <li>
 <a href="#PRB">PRB</a>
  - Push and Replace Base register: Push base offset register to
@@ -392,6 +410,9 @@
 <a href="#TAY">TAY</a>
  - Transfer the contents of accumulator into the Y register</li>
 <li>
+<a href="#TAZ">TAZ</a>
+ - Transfer AC to Z Register</li>
+<li>
 <a href="#TBA">TBA</a>
  - Transfer base register B to Accumulator</li>
 <li>
@@ -451,6 +472,9 @@
 <li>
 <a href="#TYS">TYS</a>
  - Transfer Y to stack pointer</li>
+<li>
+<a href="#TZA">TZA</a>
+ - Transfer Z Register to AC</li>
 </ul>
 <h2>ADC</h2>
 <a name="ADC"> </a><p>Add content of memory location to accumulator</p>
@@ -462,7 +486,7 @@
 <tr><td></td><td>0x69</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x6d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x71</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x72</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x72</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0x73</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x75</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x77</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -558,7 +582,7 @@
 <tr><td></td><td>0x29</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x2d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x31</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x32</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x32</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0x33</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x35</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x37</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -1394,7 +1418,7 @@
 <tr><td></td><td>0xc9</td><td></td><td>RS, LE</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xcd</td><td></td><td>AM, OF, RS, UM, LE</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xd1</td><td></td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xd2</td><td>cmos_ind</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xd2</td><td>cmos_indz</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0xd3</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xd7</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage indirect 64bit</td><td></td></tr>
 <tr><td></td><td>0xd5</td><td></td><td>AM, OF, RS, UM, LE</td><td>Zeropage indexed with X</td><td></td></tr>
@@ -1482,6 +1506,39 @@
 					and set the flags from the result.
 				</p><pre>
 					Tmp, C &lt;= Y - Operand, C=1
+					N &lt;= Tmp(7)
+					Z &lt;=
+					Z(Tmp)
+				</pre><h3>65k</h3>
+<p>
+					The AM, OF, LE and RS prefixes are evaluated by the addressing
+					modes.
+					UM determines
+					whether the operand is in user
+					space.
+				</p><p>
+					Note that the default is to use BYTE-wide operation without load
+					extension.
+				</p><h2>CPZ</h2>
+<a name="CPZ"> </a><p>Compare Z register with content of memory location</p>
+<table class="optable"><tr><th colspan="10">CPZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xc2</td><td>65k</td><td>RS, LE</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xd4</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage</td><td></td></tr>
+<tr><td>EXT</td><td>0xdc</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Absolute 16bit</td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Compare the operand with the Z register and set the flags
+					appropriately.
+					I.e. substract the operand from Z with an
+					implicitly
+					set carry in
+					binary mode (even if
+					decimal mode status bit is set),
+					and set the flags from the result.
+				</p><pre>
+					Tmp, C &lt;= Z - Operand, C=1
 					N &lt;= Tmp(7)
 					Z &lt;=
 					Z(Tmp)
@@ -1631,7 +1688,13 @@
 					to perform the operation
 					without setting
 					flags.
-				</p><h2>EOR</h2>
+				</p><h2>DEZ</h2>
+<a name="DEZ"> </a><p>Decrement Z register</p>
+<table class="optable"><tr><th colspan="10">DEZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x38</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>EOR</h2>
 <a name="EOR"> </a><p>Bitwise Exclusive-OR accumulator with content of memory
 				location
 			</p>
@@ -1643,7 +1706,7 @@
 <tr><td></td><td>0x49</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x4d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x51</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x52</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x52</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0x53</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x55</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x57</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -1726,14 +1789,7 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
-				</p><h2>INV</h2>
-<a name="INV"> </a><p>Synonyms: NEG</p>
-<p>invert AC, i.e. set AC to the 2s-complement of AC</p>
-<table class="optable"><tr><th colspan="10">INV</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xa4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
-</table>
-<h2>INX</h2>
+				</p><h2>INX</h2>
 <a name="INX"> </a><p>Increment the content of the X register by one</p>
 <table class="optable"><tr><th colspan="10">INX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -1769,7 +1825,13 @@
 					to perform the operation
 					without setting
 					flags.
-				</p><h2>JMP</h2>
+				</p><h2>INZ</h2>
+<a name="INZ"> </a><p>Increment Z register</p>
+<table class="optable"><tr><th colspan="10">INZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x18</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>JMP</h2>
 <a name="JMP"> </a><p>Jump to new code address</p>
 <table class="optable"><tr><th colspan="10">JMP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -1807,7 +1869,7 @@
 <table class="optable"><tr><th colspan="10">JSR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x20</td><td></td><td>AM, OF, RS, LE</td><td>Address</td><td></td></tr>
-<tr><td>EXT</td><td>0xdc</td><td>65k</td><td>AM, OF, RS, LE</td><td>Address Long</td><td></td></tr>
+<tr><td>EXT</td><td>0x5c</td><td>65k</td><td>AM, OF, RS, LE</td><td>Address Long</td><td></td></tr>
 <tr><td></td><td>0xdc</td><td>65k</td><td>AM, OF, RS, LE</td><td>Absolute indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0xfc</td><td>65k</td><td>AM, OF, RS, LE</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
 <tr><td></td><td>0x87</td><td>65k</td><td>AM, OF, RS, LE</td><td>Absolute indirect 64bit</td><td></td></tr>
@@ -1861,7 +1923,7 @@
 <tr><td></td><td>0xa9</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xad</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xb1</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xb2</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xb2</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0xb3</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xb5</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0xb7</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -1996,7 +2058,15 @@
 					surprise" programmers.
 				</p><p>
 					The NF prefix lets the flags unmodified.
-				</p><h2>LEA</h2>
+				</p><h2>LDZ</h2>
+<a name="LDZ"> </a><p>Load Z register with a value</p>
+<table class="optable"><tr><th colspan="10">LDZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x92</td><td>cmos_indz</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xbc</td><td>cmos_indz</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xac</td><td>cmos_indz</td><td></td><td>Absolute 16bit</td><td></td></tr>
+</table>
+<h2>LEA</h2>
 <a name="LEA"> </a><p>Load Effective Address: compute the effective address and store
 				it in the E (effective Address) register (always
 				full width)
@@ -2113,7 +2183,14 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
-				</p><h2>NOP</h2>
+				</p><h2>NEG</h2>
+<a name="NEG"> </a><p>Synonyms: INV</p>
+<p>negate / invert AC, i.e. set AC to the 2s-complement of AC</p>
+<table class="optable"><tr><th colspan="10">NEG</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xa4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>NOP</h2>
 <a name="NOP"> </a><p>No operation</p>
 <table class="optable"><tr><th colspan="10">NOP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -2132,7 +2209,7 @@
 <tr><td></td><td>0x09</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0x0d</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x11</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x12</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x12</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0x13</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x15</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x17</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -2351,7 +2428,13 @@
 					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
-				</p><h2>PLA</h2>
+				</p><h2>PHZ</h2>
+<a name="PHZ"> </a><p>Push Z Register onto stack</p>
+<table class="optable"><tr><th colspan="10">PHZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x5a</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>PLA</h2>
 <a name="PLA"> </a><p>Pull the contents of the accumulator from the stack</p>
 <table class="optable"><tr><th colspan="10">PLA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -2538,7 +2621,13 @@
 					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
-				</p><h2>PRB</h2>
+				</p><h2>PLZ</h2>
+<a name="PLZ"> </a><p>Pull Z Register from stack</p>
+<table class="optable"><tr><th colspan="10">PLZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x7a</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>PRB</h2>
 <a name="PRB"> </a><p>Push and Replace Base register: Push base offset register to
 				the
 				stack, then transfer accumulator to the base
@@ -2953,7 +3042,7 @@
 			</p>
 <table class="optable"><tr><th colspan="10">SAX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xba</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x84</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h2>SAY</h2>
 <a name="SAY"> </a><p>Swap AC with Y register. Always done full width, no flags set.
@@ -2972,7 +3061,7 @@
 <tr><td></td><td>0xe9</td><td></td><td>RS, LE, NF</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xed</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0xf1</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0xf2</td><td>cmos_ind</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xf2</td><td>cmos_indz</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0xf3</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0xf5</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0xf7</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -3170,7 +3259,7 @@
 <tr><td></td><td>0x85</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage</td><td></td></tr>
 <tr><td></td><td>0x8d</td><td></td><td>AM, OF, RS, UM</td><td>Absolute 16bit</td><td></td></tr>
 <tr><td></td><td>0x91</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
-<tr><td></td><td>0x92</td><td>cmos_ind</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x92</td><td>cmos_indz</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit indexed with Z</td><td></td></tr>
 <tr><td></td><td>0x93</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 64bit indexed with Y</td><td></td></tr>
 <tr><td></td><td>0x95</td><td></td><td>AM, OF, RS, UM</td><td>Zeropage indexed with X</td><td></td></tr>
 <tr><td></td><td>0x97</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 64bit</td><td></td></tr>
@@ -3357,7 +3446,7 @@
 			</p>
 <table class="optable"><tr><th colspan="10">SWP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xd4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
+<tr><td>EXT</td><td>0xe4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -3369,7 +3458,7 @@
 			</p>
 <table class="optable"><tr><th colspan="10">SXY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x9a</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x94</td><td>65k</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h2>TAB</h2>
 <a name="TAB"> </a><p>Transfer AC to B register</p>
@@ -3425,7 +3514,13 @@
 					operation
 					without setting
 					flags.
-				</p><h2>TBA</h2>
+				</p><h2>TAZ</h2>
+<a name="TAZ"> </a><p>Transfer AC to Z Register</p>
+<table class="optable"><tr><th colspan="10">TAZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0xaa</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
+</table>
+<h2>TBA</h2>
 <a name="TBA"> </a><p>Transfer base register B to Accumulator</p>
 <table class="optable"><tr><th colspan="10">TBA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -3662,7 +3757,7 @@
 <a name="TSY"> </a><p>Transfer stack pointer to Y</p>
 <table class="optable"><tr><th colspan="10">TSY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0xca</td><td>65k</td><td>NF, UM, RS, LE</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0xba</td><td>65k</td><td>NF, UM, RS, LE</td><td>Implied</td><td></td></tr>
 </table>
 <h2>TXA</h2>
 <a name="TXA"> </a><p>Transfer the contents of the X register into the accumulator
@@ -3746,5 +3841,11 @@
 <a name="TYS"> </a><p>Transfer Y to stack pointer</p>
 <table class="optable"><tr><th colspan="10">TYS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td>EXT</td><td>0x8a</td><td>65k</td><td>LE, RS, UM</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x9a</td><td>65k</td><td>LE, RS, UM</td><td>Implied</td><td></td></tr>
+</table>
+<h2>TZA</h2>
+<a name="TZA"> </a><p>Transfer Z Register to AC</p>
+<table class="optable"><tr><th colspan="10">TZA</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td>EXT</td><td>0x8a</td><td>cmos_indz</td><td></td><td>Implied</td><td></td></tr>
 </table>

@@ -142,7 +142,7 @@
 			<!-- prio>2</prio -->
 			<includes>nmos</includes>
 			<feature>cmos</feature>
-			<feature>cmos_ind</feature>
+			<feature>cmos_indz</feature>
 			<feature>65k</feature>
 			<doc>
 				<p>
@@ -1208,7 +1208,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>addrlong</addressingMode>
-				<opcode>0xdc</opcode>
+				<opcode>0x5c</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
@@ -2250,18 +2250,38 @@
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
 			<prefixBits>LE</prefixBits>
-			<feature>ce02</feature>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
 				<opcode>0xc2</opcode>
+				<feature>ce02</feature>
 			</opcodes>
 			<opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0xd4</opcode>
+				<feature>ce02</feature>
 			</opcodes>
 			<opcodes>
 				<addressingMode>abs</addressingMode>
 				<opcode>0xdc</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xc2</opcode>
+				<feature>65k</feature>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0xd4</opcode>
+				<feature>65k</feature>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0xdc</opcode>
+				<feature>65k</feature>
+				<oppage>EXT</oppage>
 			</opcodes>
 			<doc>
 				<p>
@@ -6236,9 +6256,9 @@
 		<!-- ################################# -->
 
 		<operation>
-			<name>INV</name>
-			<synonym>NEG</synonym>
-			<desc>invert AC, i.e. set AC to the 2s-complement of AC</desc>
+			<name>NEG</name>
+			<synonym>INV</synonym>
+			<desc>negate / invert AC, i.e. set AC to the 2s-complement of AC</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
 			<prefixBits>NF</prefixBits>
@@ -6264,7 +6284,7 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>A</addressingMode>
-				<opcode>0xd4</opcode>
+				<opcode>0xe4</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<doc>
@@ -6616,7 +6636,7 @@
 			<prefixBits>UM</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x8a</opcode>
+				<opcode>0x9a</opcode>
 				<oppage>EXT</oppage>
 				<feature>65k</feature>
 			</opcodes>
@@ -6636,7 +6656,7 @@
 			<prefixBits>LE</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xca</opcode>
+				<opcode>0xba</opcode>
 				<oppage>EXT</oppage>
 				<feature>65k</feature>
 			</opcodes>
@@ -6679,6 +6699,7 @@
 			</opcodes>
 		</operation>
 
+<!-- replace with LEA 0,B ? -->
 		<operation>
 			<name>TBE</name>
 			<desc>Transfer content of B register into E register (full width)
@@ -6739,7 +6760,7 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xba</opcode>
+				<opcode>0x84</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -6764,7 +6785,7 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x9a</opcode>
+				<opcode>0x94</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -7539,20 +7560,32 @@
 		<operation>
 			<name>INZ</name>
 			<desc>Increment Z register</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0x1b</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x18</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
 		<operation>
 			<name>DEZ</name>
 			<desc>Decrement Z register</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0x3b</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x38</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
@@ -7579,18 +7612,36 @@
 		<operation>
 			<name>LDZ</name>
 			<desc>Load Z register with a value</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
 				<opcode>0xa3</opcode>
+				<feature>ce02</feature>
 			</opcodes>
 			<opcodes>
 				<addressingMode>absx</addressingMode>
 				<opcode>0xbb</opcode>
+				<feature>ce02</feature>
 			</opcodes>
 			<opcodes>
 				<addressingMode>abs</addressingMode>
 				<opcode>0xab</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0x92</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0xbc</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0xac</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
@@ -7611,40 +7662,64 @@
 		<operation>
 			<name>TAZ</name>
 			<desc>Transfer AC to Z Register</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0x4b</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xaa</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
 		<operation>
 			<name>TZA</name>
 			<desc>Transfer Z Register to AC</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0x6b</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x8a</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
 		<operation>
 			<name>PHZ</name>
 			<desc>Push Z Register onto stack</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0xdb</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x5a</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 
 		<operation>
 			<name>PLZ</name>
 			<desc>Pull Z Register from stack</desc>
-			<feature>ce02</feature>
+			<feature>cmos_indz</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0xfb</opcode>
+				<feature>ce02</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x7a</opcode>
+				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
 

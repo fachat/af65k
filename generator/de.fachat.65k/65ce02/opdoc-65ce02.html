@@ -169,9 +169,6 @@
 <a href="#INC">INC</a>
  - Increment the content of a memory location by one</li>
 <li>
-<a href="#INV">INV</a>
- - invert AC, i.e. set AC to the 2s-complement of AC</li>
-<li>
 <a href="#INW">INW</a>
  - Increment a word value</li>
 <li>
@@ -208,6 +205,9 @@
  - Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
 			</li>
+<li>
+<a href="#NEG">NEG</a>
+ - negate / invert AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
 <a href="#NOP">NOP</a>
  - No operation</li>
@@ -1190,6 +1190,7 @@
 <table class="optable"><tr><th colspan="10">DEZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x3b</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x38</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>
 <h2>EOR</h2>
 <a name="EOR"> </a><p>Bitwise Exclusive-OR accumulator with content of memory
@@ -1242,14 +1243,7 @@
 					N &lt;= OperandC7)
 					Z &lt;=
 					Z(AC)
-				</pre><h2>INV</h2>
-<a name="INV"> </a><p>Synonyms: NEG</p>
-<p>invert AC, i.e. set AC to the 2s-complement of AC</p>
-<table class="optable"><tr><th colspan="10">INV</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
-<tr><td></td><td>0x42</td><td>ce02</td><td>Accumulator</td><td></td></tr>
-</table>
-<h2>INW</h2>
+				</pre><h2>INW</h2>
 <a name="INW"> </a><p>Increment a word value</p>
 <table class="optable"><tr><th colspan="10">INW</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -1282,6 +1276,7 @@
 <table class="optable"><tr><th colspan="10">INZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x1b</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x18</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>
 <h2>JMP</h2>
 <a name="JMP"> </a><p>Jump to new code address</p>
@@ -1387,6 +1382,9 @@
 <tr><td></td><td>0xa3</td><td>ce02</td><td>Immediate</td><td></td></tr>
 <tr><td></td><td>0xbb</td><td>ce02</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 <tr><td></td><td>0xab</td><td>ce02</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td>EXT</td><td>0x92</td><td>cmos_indz</td><td>Immediate</td><td></td></tr>
+<tr><td>EXT</td><td>0xbc</td><td>cmos_indz</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td>EXT</td><td>0xac</td><td>cmos_indz</td><td>Absolute 16bit</td><td></td></tr>
 </table>
 <h2>LSR</h2>
 <a name="LSR"> </a><p>Logical Shift Right - shift accumulator one bit to the right,
@@ -1421,7 +1419,14 @@
 					N
 					&lt;= AC7)
 					Z &lt;= Z(AC)
-				</pre><h2>NOP</h2>
+				</pre><h2>NEG</h2>
+<a name="NEG"> </a><p>Synonyms: INV</p>
+<p>negate / invert AC, i.e. set AC to the 2s-complement of AC</p>
+<table class="optable"><tr><th colspan="10">NEG</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
+<tr><td></td><td>0x42</td><td>ce02</td><td>Accumulator</td><td></td></tr>
+</table>
+<h2>NOP</h2>
 <a name="NOP"> </a><p>No operation</p>
 <table class="optable"><tr><th colspan="10">NOP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
@@ -1509,6 +1514,7 @@
 <table class="optable"><tr><th colspan="10">PHZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0xdb</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x5a</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>
 <h2>PLA</h2>
 <a name="PLA"> </a><p>Pull the contents of the accumulator from the stack</p>
@@ -1559,6 +1565,7 @@
 <table class="optable"><tr><th colspan="10">PLZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0xfb</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x7a</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>
 <h2>RMB</h2>
 <a name="RMB"> </a><p>Reset memory bit</p>
@@ -1989,6 +1996,7 @@
 <table class="optable"><tr><th colspan="10">TAZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x4b</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0xaa</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>
 <h2>TBA</h2>
 <a name="TBA"> </a><p>Transfer base register B to Accumulator</p>
@@ -2138,4 +2146,5 @@
 <table class="optable"><tr><th colspan="10">TZA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Syntax</th></tr>
 <tr><td></td><td>0x6b</td><td>ce02</td><td>Implied</td><td></td></tr>
+<tr><td>EXT</td><td>0x8a</td><td>cmos_indz</td><td>Implied</td><td></td></tr>
 </table>

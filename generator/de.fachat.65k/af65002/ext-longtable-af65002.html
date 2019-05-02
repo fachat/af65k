@@ -24,7 +24,9 @@
 <div class="prefixes"><br/>RS</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">DAD </div>
+</td><td class="unused"></td><td><div class="opc">INZ </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td><div class="opc">DAD </div>
 <div class="prefixes"><br/>NF, RS</div>
 </td><td class="unused"></td><td><div class="opc">TRB (E)</div>
 <div class="prefixes"><br/>UM, NF, RS</div>
@@ -70,7 +72,9 @@
 <div class="prefixes"><br/>NF, RS</div>
 </td><td><div class="opc">RDL zp,X</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDE #byte</div>
+</td><td class="unused"></td><td><div class="opc">DEZ </div>
+<div class="prefixes"></div>
+</td><td><div class="opc">LDE #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
 </td><td><div class="opc">DAS </div>
 <div class="prefixes"><br/>NF, RS</div>
@@ -102,7 +106,11 @@
 <div class="prefixes"><br/>UM, NF</div>
 </td><td><div class="opc">LDB #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</td><td><div class="opc">PHZ </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td><div class="opc">JSR long</div>
+<div class="prefixes"><br/>RS, LE, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>6</th><td class="unused"></td><td><div class="opc">LEA [[abs]],Y</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp</div>
@@ -130,7 +138,9 @@
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR zp,X</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">PLZ </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
 <div class="prefixes"><br/>UM, NF, RS</div>
 </td><td><div class="opc">RDR abs,X</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
@@ -139,14 +149,16 @@
 </td></tr>
 <tr><th>8</th><td><div class="opc">SUB (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SUB #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAX </div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SUB #byte</div>
 <div class="prefixes"><br/>RS, NF, LE</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAE </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
 </td><td><div class="opc">BIT (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>
-</td><td><div class="opc">TYS </div>
-<div class="prefixes"><br/>UM, RS, LE</div>
+</td><td><div class="opc">TZA </div>
+<div class="prefixes"></div>
 </td><td class="unused"></td><td><div class="opc">STY (E)</div>
 <div class="prefixes"><br/>UM, RS</div>
 </td><td><div class="opc">STA (E)</div>
@@ -156,10 +168,14 @@
 </td></tr>
 <tr><th>9</th><td><div class="opc">BLE rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TEA </div>
-<div class="prefixes"><br/>NF</div>
+</td><td class="unused"></td><td><div class="opc">LDZ #byte</div>
+<div class="prefixes"></div>
 </td><td class="unused"></td><td><div class="opc">SXY </div>
 <div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TEA </div>
+<div class="prefixes"><br/>NF</div>
+</td><td class="unused"></td><td><div class="opc">TYS </div>
+<div class="prefixes"><br/>UM, RS, LE</div>
 </td><td class="unused"></td><td><div class="opc">STZ (E)</div>
 <div class="prefixes"><br/>UM, RS</div>
 </td><td><div class="opc">STX (E)</div>
@@ -173,7 +189,7 @@
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td><td><div class="opc">LEA rel</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
-</td><td class="unused"></td><td><div class="opc">INV </div>
+</td><td class="unused"></td><td><div class="opc">NEG </div>
 <div class="prefixes"><br/>NF, RS</div>
 </td><td><div class="opc">SBE #byte</div>
 <div class="prefixes"><br/>NF, RS, LE</div>
@@ -181,7 +197,11 @@
 <div class="prefixes"></div>
 </td><td><div class="opc">LDA (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDX (E)</div>
+</td><td><div class="opc">TAZ </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">LDX (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>
 </td><td><div class="opc">LEA abs</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
@@ -198,44 +218,48 @@
 <div class="prefixes"><br/>NF, RS</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SEB </div>
 <div class="prefixes"></div>
-</td><td class="unused"></td><td><div class="opc">SAX </div>
+</td><td class="unused"></td><td><div class="opc">TSY </div>
+<div class="prefixes"><br/>NF, UM, RS, LE</div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs,X</div>
 <div class="prefixes"></div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
+</td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td><td><div class="opc">LEA abs,Y</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td></tr>
 <tr><th>C</th><td><div class="opc">CPY (E)</div>
 <div class="prefixes"><br/>UM, RS, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">EXT </div>
+</td><td class="unused"></td><td><div class="opc">CPZ #byte</div>
+<div class="prefixes"><br/>RS, LE</div>
+</td><td class="unused"></td><td><div class="opc">EXT </div>
 <div class="prefixes"><br/>NF, RS</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TPA </div>
 <div class="prefixes"><br/>NF</div>
 </td><td><div class="opc">CMP (E)</div>
 <div class="prefixes"><br/>UM, RS, LE</div>
-</td><td><div class="opc">TSY </div>
-<div class="prefixes"><br/>NF, UM, RS, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
 <div class="prefixes"><br/>UM, NF, RS</div>
 </td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SWP </div>
-<div class="prefixes"><br/>NF, RS</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ zp</div>
+<div class="prefixes"><br/>UM, RS, LE, AM, OF</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAE </div>
 <div class="prefixes"></div>
 </td><td class="unused"></td><td><div class="opc">SAY </div>
 <div class="prefixes"></div>
-</td><td class="unused"></td><td><div class="opc">JSR long</div>
-<div class="prefixes"><br/>RS, LE, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">CPZ abs</div>
+<div class="prefixes"><br/>UM, RS, LE, AM, OF</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
 <div class="prefixes"><br/>UM, RS, LE</div>
 </td><td><div class="opc">LEA [[zp]],Y</div>
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SWP </div>
+<div class="prefixes"><br/>NF, RS</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
 <div class="prefixes"><br/>NF, RS, LE</div>
 </td><td><div class="opc">SBC (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>

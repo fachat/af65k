@@ -85,12 +85,6 @@
 				opcode parameter (quad address), plus the value
 				of the Y register
 			</td></tr>
-<tr><td>Zeropage indirect 16bit</td><td>Zeropage indirect</td><td></td><td>1</td><td>(zp)</td><td>cmos_ind</td><td>Load effective 16 bit address from zeropage location given;
-				Load
-				effective word (16bit) address from zeropage
-				location given as
-				parameter.
-			</td></tr>
 <tr><td>Zeropage indirect 16bit indexed with Y</td><td>Zeropage indirect Y-indexed</td><td></td><td>1</td><td>(zp),Y</td><td></td><td>Load effective 16 bit address from zeropage location given,
 				then
 				add content of YR;
@@ -102,6 +96,18 @@
 				register. The resulting address may be larger
 				than 16bit due to
 				overflow when Y is added.
+			</td></tr>
+<tr><td>Zeropage indirect 16bit indexed with Z</td><td>Zeropage indirect Z-indexed</td><td></td><td>1</td><td>(zp),Z</td><td>cmos_indz</td><td>Load effective 16 bit address from zeropage location given,
+				then
+				add content of ZR;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Z
+				register. The resulting address may be larger
+				than 16bit due to
+				overflow when Z is added.
 			</td></tr>
 <tr><td>Zeropage indexed with X indirect 16bit</td><td>Zeropage X-indexed indirect</td><td></td><td>1</td><td>(zp,X)</td><td></td><td>Load effective 16 bit address from zeropage location given plus
 				content of XR;
