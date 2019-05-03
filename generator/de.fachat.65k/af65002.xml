@@ -8829,7 +8829,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>(&lt;address&gt;),byte</simplesyntax>
+			<simplesyntax>(&lt;address&gt;),#byte</simplesyntax>
 			<mode>
 				<addrMode>zpindbyte</addrMode>
 			</mode>
@@ -8848,7 +8848,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>[&lt;address&gt;],byte</simplesyntax>
+			<simplesyntax>[&lt;address&gt;],#byte</simplesyntax>
 			<mode>
 				<addrMode>zpindbytelong</addrMode>
 				<prefix>
@@ -8856,11 +8856,13 @@
 					<value>1</value>
 				</prefix>
 			</mode>
-<!-- 
 			<mode>
 				<addrMode>absindbytelong</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
 			</mode>
- -->
 		</syntax>
 
 		<syntax>
@@ -8873,7 +8875,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>[[&lt;address&gt;]],byte</simplesyntax>
+			<simplesyntax>[[&lt;address&gt;]],#byte</simplesyntax>
 			<mode>
 				<addrMode>zpindbytequad</addrMode>
 				<prefix>
@@ -8883,6 +8885,10 @@
 			</mode>
 			<mode>
 				<addrMode>absindbytequad</addrMode>
+				<prefix>
+					<name>AM</name>
+					<value>1</value>
+				</prefix>
 			</mode>
 		</syntax>
 
@@ -9797,6 +9803,25 @@
 			</desc>
 			<feature>ce02</feature>
 			<width>2</width>
+		</addrmode>
+
+		<addrmode>
+			<name>Absolute indirect 32bit indexed with byte offset</name>
+			<identifier>absindbytelong</identifier>
+			<desc>Load effective 32 bit address from absolute location given,
+				then
+				add offset from opcode;
+				The effective address is
+				computed as the quad
+				(32bit) address read from
+				the absolute location given as parameter
+				plus the value of the offset. The resulting address may be larger
+				than 32bit due to
+				overflow when the offset is added.
+			</desc>
+			<feature>65k</feature>
+			<width>2</width>
+			<offset>1</offset>
 		</addrmode>
 
 		<addrmode>
