@@ -1608,8 +1608,8 @@
 <a name="CPZ"> </a><p>Compare Z register with content of memory location</p>
 <table class="optable"><tr><th colspan="10">CPZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xc2</td><td>65k</td><td>RS, LE</td><td>Immediate</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xd4</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xd9</td><td>65k</td><td>RS, LE</td><td>Immediate</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xe6</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Zeropage</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xdc</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Absolute 16bit</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
@@ -1714,30 +1714,6 @@
 <tr><td></td><td>0xde</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xcf</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xcd</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0x8e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xae</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xce</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xde</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xee</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0x8d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xad</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xcd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xdd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xed</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0x8c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xac</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xcc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xdc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xec</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1774,13 +1750,6 @@
 <a name="DEC#"> </a><p>Decrement the content of a memory location by one</p>
 <table class="optable"><tr><th colspan="10">DEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xc6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x3a</td><td>cmos</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0xce</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xd6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xde</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xcf</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xcd</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0x8e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x9e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0xae</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -1943,30 +1912,6 @@
 <tr><td></td><td>0xfe</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xef</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xed</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0xe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0xd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0xc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2002,13 +1947,6 @@
 <a name="INC#"> </a><p>Increment the content of a memory location by one</p>
 <table class="optable"><tr><th colspan="10">INC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xe6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x1a</td><td>cmos</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0xee</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xf6</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xfe</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xef</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xed</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0xe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x1e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0x2e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -2205,6 +2143,10 @@
 <tr><td></td><td>0xb9</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td></td><td>0xbd</td><td></td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xa9</td><td>65k</td><td>RS, LE, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x81</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x41</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x82</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Zeropage indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x42</td><td>65k</td><td>AM, OF, RS, LE, UM, NF</td><td>Absolute indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2337,7 +2279,7 @@
 <a name="LDZ"> </a><p>Load Z register with a value</p>
 <table class="optable"><tr><th colspan="10">LDZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x92</td><td>cmos_indz</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x99</td><td>cmos_indz</td><td></td><td>Immediate</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xbc</td><td>cmos_indz</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xac</td><td>cmos_indz</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
 </table>
@@ -2370,7 +2312,7 @@
 <tr><td>EXT</td><td>0xf1</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indexed with X indirect 64bit</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xa2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xe2</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x22</td><td>65k</td><td>AM, OF, UM, NF</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x22</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x62</td><td>65k</td><td>AM, OF, UM, NF</td><td>Absolute indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
@@ -2929,14 +2871,6 @@
 <tr><td>EXT</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x3f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x3d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0x8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x18</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x28</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x38</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x48</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x58</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x68</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x78</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -2980,13 +2914,6 @@
 			</p>
 <table class="optable"><tr><th colspan="10">RDL</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x26</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x2a</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x2e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x36</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x3f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x3d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0x8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x18</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0x28</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -3046,14 +2973,6 @@
 <tr><td>EXT</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x7f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x7d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0x88</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x98</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xa8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xb8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xc8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xd8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xe8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xf8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -3101,13 +3020,6 @@
 			</p>
 <table class="optable"><tr><th colspan="10">RDR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x66</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x6a</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x6e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x76</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x7f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x7d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0x88</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x98</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0xa8</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -3205,14 +3117,6 @@
 <tr><td></td><td>0x3e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x2f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x2d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0x9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x19</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x29</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x39</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x49</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x59</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x69</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x79</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -3262,13 +3166,6 @@
 			</p>
 <table class="optable"><tr><th colspan="10">ROL</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x26</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x2a</td><td></td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x2e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x36</td><td></td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x3e</td><td></td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x2f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x2d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0x9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x19</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0x29</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -3333,14 +3230,6 @@
 <tr><td></td><td>0x7e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x6f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x6d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
-<tr><td>QUICK</td><td>0x89</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x99</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xa9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xb9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xc9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xd9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xe9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xf9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -3389,13 +3278,6 @@
 			</p>
 <table class="optable"><tr><th colspan="10">ROR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x66</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x6a</td><td>ror</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x6e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x76</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x7e</td><td>ror</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x6f</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x6d</td><td>65k</td><td>RS, UM, NF</td><td>E indirect</td><td></td><td></td></tr>
 <tr><td>QUICK</td><td>0x89</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
 <tr><td>QUICK</td><td>0x99</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
 <tr><td>QUICK</td><td>0xa9</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
@@ -3894,6 +3776,10 @@
 <tr><td></td><td>0xe2</td><td>65k</td><td>AM, OF, RS, UM</td><td>Absolute indexed with X indirect 16bit</td><td></td><td></td></tr>
 <tr><td></td><td>0xe7</td><td>65k</td><td>AM, OF, RS, UM</td><td>Absolute indexed with X indirect 64bit</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x8d</td><td>65k</td><td>RS, UM</td><td>E indirect</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x91</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x51</td><td>65k</td><td>AM, OF, RS, UM</td><td>Absolute indirect 16bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x92</td><td>65k</td><td>AM, OF, RS, UM</td><td>Zeropage indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x52</td><td>65k</td><td>AM, OF, RS, UM</td><td>Absolute indirect 64bit indexed with byte offset</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>

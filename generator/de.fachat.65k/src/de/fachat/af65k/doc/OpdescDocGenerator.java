@@ -135,7 +135,6 @@ public class OpdescDocGenerator {
 				wr.startParagraph();
 				wr.print(op.getDesc());
 
-				// TODO expand
 				if (op.getOpcodes() != null) {
 					wr.startTable(optable);
 					wr.startTableRow();
@@ -166,14 +165,18 @@ public class OpdescDocGenerator {
 						if (opcode.getFeature() == null || fclasses.contains(opcode.getFeature())) {
 							int code = Validator.parseCode(opcode.getOpcode());
 							if (op.getExpand() == null && opcode.getExpand() == null) {
-								writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, 0, opcode.getOpcode(), "");
+								if (!name.contains("#")) {
+									writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, 0, opcode.getOpcode(), "");
+								}
 							} else {
-								List<Integer> ints = Validator.getExpandList(op, opcode);
-								int w = (op.getExpand8() != null || opcode.getExpand8() != null) ? 1 : 0;
-								for (Integer c : ints) {
-									String opc = "0x" + Integer.toHexString(code + c).toLowerCase();
-									writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, w, opc, "#" + w);
-									w++;
+								if (name.contains("#")) {
+									List<Integer> ints = Validator.getExpandList(op, opcode);
+									int w = (op.getExpand8() != null || opcode.getExpand8() != null) ? 1 : 0;
+									for (Integer c : ints) {
+										String opc = "0x" + Integer.toHexString(code + c).toLowerCase();
+										writeOpdocRow(wr, hasPrefix, op, prefixes, opcode, w, opc, "#" + w);
+										w++;
+									}
 								}
 							}
 						}

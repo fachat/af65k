@@ -2099,6 +2099,30 @@
 				<opcode>0xb7</opcode>
 				<feature>816</feature>
 			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbyte</addressingMode>
+				<opcode>0x81</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbyte</addressingMode>
+				<opcode>0x41</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbytequad</addressingMode>
+				<opcode>0x82</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbytequad</addressingMode>
+				<opcode>0x42</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
 			<doc>
 				<p>
 					Read the operand and store it in the Accumulator. Set the flags
@@ -2273,13 +2297,13 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
-				<opcode>0xc2</opcode>
+				<opcode>0xd9</opcode>
 				<feature>65k</feature>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
 				<addressingMode>zp</addressingMode>
-				<opcode>0xd4</opcode>
+				<opcode>0xe6</opcode>
 				<feature>65k</feature>
 				<oppage>EXT</oppage>
 			</opcodes>
@@ -4429,6 +4453,30 @@
 				<addressingMode>absindybank</addressingMode>
 				<opcode>0x97</opcode>
 				<feature>816</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbyte</addressingMode>
+				<opcode>0x91</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbyte</addressingMode>
+				<opcode>0x51</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpindbytequad</addressingMode>
+				<opcode>0x92</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absindbytequad</addressingMode>
+				<opcode>0x52</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
 			</opcodes>
 			<doc>
 				<p>
@@ -7834,7 +7882,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>imm</addressingMode>
-				<opcode>0x92</opcode>
+				<opcode>0x99</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
@@ -9556,7 +9604,7 @@
 		</addrmode>
 
 		<addrmode>
-			<name>Zeropage indirect 16bit indexed with byte offset</name>
+			<name>Absolute indirect 16bit indexed with byte offset</name>
 			<identifier>absindbyte</identifier>
 			<desc>Load effective 16 bit address from absolute location given,
 				then
