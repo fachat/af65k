@@ -6818,6 +6818,7 @@
 			</opcodes>
 		</operation>
 
+<!-- 
 		<operation>
 			<name>TBA</name>
 			<desc>Transfer base register B to Accumulator</desc>
@@ -6834,6 +6835,7 @@
 				<feature>ce02</feature>
 			</opcodes>
 		</operation>
+ -->
 
 		<operation>
 			<name>TEA</name>
@@ -6847,6 +6849,7 @@
 			</opcodes>
 		</operation>
 
+<!-- 
 		<operation>
 			<name>TAE</name>
 			<desc>Transfer AC to E register</desc>
@@ -6860,6 +6863,7 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+ -->
 
 		<operation>
 			<name>TYS</name>
@@ -6932,7 +6936,7 @@
 			</opcodes>
 		</operation>
 
-<!-- replace with LEA 0,B ? -->
+<!-- replace with LEA 0,B ? 
 		<operation>
 			<name>TBE</name>
 			<desc>Transfer content of B register into E register (full width)
@@ -6945,9 +6949,11 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+-->
 
 		<!-- ################################# -->
 
+<!-- 
 		<operation>
 			<name>SEB</name>
 			<desc>Swap E register with B register. Always done full width, no
@@ -6960,6 +6966,7 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+ -->
 
 		<operation>
 			<name>SAB</name>
@@ -6974,6 +6981,7 @@
 			</opcodes>
 		</operation>
 
+<!-- 
 		<operation>
 			<name>SAE</name>
 			<desc>Swap AC with E register. Always done full width, no flags set.
@@ -6985,6 +6993,7 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
+ -->
 
 		<operation>
 			<name>SAX</name>

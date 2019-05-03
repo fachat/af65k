@@ -362,10 +362,6 @@
 				flags set.
 			</li>
 <li>
-<a href="#SAE">SAE</a>
- - Swap AC with E register. Always done full width, no flags set.
-			</li>
-<li>
 <a href="#SAX">SAX</a>
  - Swap AC with X register. Always done full width, no flags set.
 			</li>
@@ -385,11 +381,6 @@
 <li>
 <a href="#SCS">SCS</a>
  - Skip on carry set - skip next opcode when C flag is set</li>
-<li>
-<a href="#SEB">SEB</a>
- - Swap E register with B register. Always done full width, no
-				flags set.
-			</li>
 <li>
 <a href="#SEC">SEC</a>
  - Set the C flag</li>
@@ -453,9 +444,6 @@
 <a href="#TAB">TAB</a>
  - Transfer AC to B register</li>
 <li>
-<a href="#TAE">TAE</a>
- - Transfer AC to E register</li>
-<li>
 <a href="#TAX">TAX</a>
  - Transfer the contents of accumulator into the X register</li>
 <li>
@@ -464,13 +452,6 @@
 <li>
 <a href="#TAZ">TAZ</a>
  - Transfer AC to Z Register</li>
-<li>
-<a href="#TBA">TBA</a>
- - Transfer base register B to Accumulator</li>
-<li>
-<a href="#TBE">TBE</a>
- - Transfer content of B register into E register (full width)
-			</li>
 <li>
 <a href="#TEA">TEA</a>
  - Transfer E register to Accumulator</li>
@@ -3506,13 +3487,6 @@
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xa8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
-<h2>SAE</h2>
-<a name="SAE"> </a><p>Swap AC with E register. Always done full width, no flags set.
-			</p>
-<table class="optable"><tr><th colspan="10">SAE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xd8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
 <h2>SAX</h2>
 <a name="SAX"> </a><p>Swap AC with X register. Always done full width, no flags set.
 			</p>
@@ -3615,15 +3589,7 @@
 					condition that
 					the
 					carry status flag is set.
-				</p><h2>SEB</h2>
-<a name="SEB"> </a><p>Swap E register with B register. Always done full width, no
-				flags set.
-			</p>
-<table class="optable"><tr><th colspan="10">SEB</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xb8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h2>SEC</h2>
+				</p><h2>SEC</h2>
 <a name="SEC"> </a><p>Set the C flag</p>
 <table class="optable"><tr><th colspan="10">SEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
@@ -4003,12 +3969,6 @@
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xe8</td><td>65k</td><td>NF, LE, RS</td><td>Implied</td><td></td><td></td></tr>
 </table>
-<h2>TAE</h2>
-<a name="TAE"> </a><p>Transfer AC to E register</p>
-<table class="optable"><tr><th colspan="10">TAE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x88</td><td>65k</td><td>NF, LE, RS</td><td>Implied</td><td></td><td></td></tr>
-</table>
 <h2>TAX</h2>
 <a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
 <table class="optable"><tr><th colspan="10">TAX</th></tr>
@@ -4056,19 +4016,6 @@
 <table class="optable"><tr><th colspan="10">TAZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xaa</td><td>cmos_indz</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h2>TBA</h2>
-<a name="TBA"> </a><p>Transfer base register B to Accumulator</p>
-<table class="optable"><tr><th colspan="10">TBA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xf8</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h2>TBE</h2>
-<a name="TBE"> </a><p>Transfer content of B register into E register (full width)
-			</p>
-<table class="optable"><tr><th colspan="10">TBE</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xfa</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TEA</h2>
 <a name="TEA"> </a><p>Transfer E register to Accumulator</p>
