@@ -1,7 +1,9 @@
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
 <tr><th>0</th><td><div class="opc">ADD (E)</div>
 <div class="prefixes"><br/>RS, UM, NF, LE</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADD #byte</div>
+</td><td><div class="opc">STI #byte, abs</div>
+<div class="prefixes"><br/>UM, RS, LE, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADD #byte</div>
 <div class="prefixes"><br/>RS, NF, LE</div>
 </td><td><div class="opc">ASR zp</div>
 <div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
@@ -270,7 +272,9 @@
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
 <div class="prefixes"><br/>RS</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CSW zp,X</div>
+</td><td><div class="opc">STI #byte, zp</div>
+<div class="prefixes"><br/>UM, RS, LE, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">CSW zp,X</div>
 <div class="prefixes"><br/>UM, RS, AM</div>
 </td><td class="unused"></td><td><div class="opc">SAE </div>
 <div class="prefixes"></div>

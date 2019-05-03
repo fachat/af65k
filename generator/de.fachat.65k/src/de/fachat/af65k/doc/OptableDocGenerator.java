@@ -130,20 +130,6 @@ public class OptableDocGenerator {
 		FeatureSet fset = cpu.getFClass(fclass);
 		Collection<String> fclasses = fset.getFeature();
 
-		// final Collection<String> fclasses = new HashSet<String>();
-		// new Object() {
-		// void add(Collection<String> fcls) {
-		// fclasses.addAll(fcls);
-		// for (String fc : fcls) {
-		// FeatureSet fcl = cpu.getFClass(fc);
-		// List<String> fci = fcl.getXtends();
-		// if (fci != null) {
-		// this.add(fci);
-		// }
-		// }
-		// }
-		// }.add(Collections.singletonList(fclass));
-
 		Map<String, String> unusedatts = new HashMap<String, String>();
 		unusedatts.put("class", "unused");
 		Map<String, String> prefixatts = new HashMap<String, String>();

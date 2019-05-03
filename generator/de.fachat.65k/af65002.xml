@@ -4689,6 +4689,49 @@
 			</doc>
 		</operation>
 
+		<operation>
+			<name>STI</name>
+			<desc>Store immediate value into a memory location</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>immtozp</addressingMode>
+				<opcode>0xd1</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>immtoabs</addressingMode>
+				<opcode>0x01</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Store the immediate value following the opcode into the address given by the second operand.
+				</p>
+				<pre>
+					Operand &amp;lt;= #immediate
+				</pre>
+				<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
+				</p>
+				<p>
+					RS also determine the width of the operation.
+					Note that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p>
+				<p>
+					The LE prefix, if set, determines whether the then fixed width single-byte immediate value 
+					is expanded to the size given by RS.
+				</p>
+			</doc>
+		</operation>
 
 		<!-- ################################# -->
 
@@ -8829,7 +8872,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>(&lt;address&gt;),#byte</simplesyntax>
+			<simplesyntax>(&lt;address&gt;),#&lt;immediate&gt;</simplesyntax>
 			<mode>
 				<addrMode>zpindbyte</addrMode>
 			</mode>
@@ -8848,7 +8891,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>[&lt;address&gt;],#byte</simplesyntax>
+			<simplesyntax>[&lt;address&gt;],#&lt;immediate&gt;</simplesyntax>
 			<mode>
 				<addrMode>zpindbytelong</addrMode>
 				<prefix>
@@ -8875,7 +8918,7 @@
 				is taken as the effective address
 				of the operand.
 			</desc>
-			<simplesyntax>[[&lt;address&gt;]],#byte</simplesyntax>
+			<simplesyntax>[[&lt;address&gt;]],#&lt;immediate&gt;</simplesyntax>
 			<mode>
 				<addrMode>zpindbytequad</addrMode>
 				<prefix>
@@ -9120,6 +9163,22 @@
 					<name>RS</name>
 					<value>01</value>
 				</prefix>
+			</mode>
+		</syntax>
+
+		<syntax>
+			<id>immtoaddress</id>
+			<desc>Immediate value that is stored to an address
+			</desc>
+			<simplesyntax>#&lt;immediate&gt;, &lt;address&gt;</simplesyntax>
+			<feature>65k</feature>
+			<mode>
+				<addrMode>immtozp</addrMode>
+				<feature>65k</feature>
+			</mode>
+			<mode>
+				<addrMode>immtoabs</addrMode>
+				<feature>65k</feature>
 			</mode>
 		</syntax>
 
@@ -10144,7 +10203,32 @@
 			<width>3</width>
 		</addrmode>
 
+		<!-- ################################# -->
+
+		<addrmode>
+			<name>Immediate to Zeropage Address</name>
+			<desc>Take an immediate value, and an address to store the value to
+			</desc>
+			<identifier>immtozp</identifier>
+			<feature>65k</feature>
+			<width>1</width>
+			<!-- size of immediate value -->
+			<offset>1</offset>
+		</addrmode>
+
+		<addrmode>
+			<name>Immediate to Absolute Address</name>
+			<desc>Take an immediate value, and an address to store the value to
+			</desc>
+			<identifier>immtoabs</identifier>
+			<feature>65k</feature>
+			<width>2</width>
+			<!-- size of immediate value -->
+			<offset>1</offset>
+		</addrmode>
+
 	</addrmodes>
+
 
 	<!-- ################################# -->
 

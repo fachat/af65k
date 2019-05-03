@@ -419,6 +419,9 @@
  - Store the content of the accumulator into a memory location
 			</li>
 <li>
+<a href="#STI">STI</a>
+ - Store immediate value into a memory location</li>
+<li>
 <a href="#STX">STX</a>
  - Store the content of the X register to memory.</li>
 <li>
@@ -3798,6 +3801,30 @@
 					Note that the
 					default is to use BYTE-wide operation without load
 					extension.
+				</p><h2>STI</h2>
+<a name="STI"> </a><p>Store immediate value into a memory location</p>
+<table class="optable"><tr><th colspan="10">STI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xd1</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x01</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Immediate to Absolute Address</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Store the immediate value following the opcode into the address given by the second operand.
+				</p><pre>
+					Operand &lt;= #immediate
+				</pre><p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
+				</p><p>
+					RS also determine the width of the operation.
+					Note that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p><p>
+					The LE prefix, if set, determines whether the then fixed width single-byte immediate value 
+					is expanded to the size given by RS.
 				</p><h2>STX</h2>
 <a name="STX"> </a><p>Store the content of the X register to memory.</p>
 <table class="optable"><tr><th colspan="10">STX</th></tr>

@@ -194,6 +194,9 @@ public class Validator {
 								String amsyn = sisyn.replace("<address>",
 										lengthsyntaxes.get("a" + am.getWidthInByte()));
 								amsyn = amsyn.replace("<operand>", lengthsyntaxes.get("o" + am.getWidthInByte()));
+								if (am.getOffset() > 0) {
+									amsyn = amsyn.replace("<immediate>", lengthsyntaxes.get("o" + am.getOffset()));
+								}
 								synmode.setSimplesyntax(amsyn);
 							} else {
 								synmode.setSimplesyntax(sisyn);
@@ -211,6 +214,7 @@ public class Validator {
 		allAdModes.remove("prefix");
 		if (!allAdModes.isEmpty()) {
 			LOG.error("Not all addressing modes have syntax defined. Missing modes are: " + allAdModes);
+			throw new RuntimeException();
 		}
 	}
 
