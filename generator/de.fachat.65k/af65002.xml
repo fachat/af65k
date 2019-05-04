@@ -4699,12 +4699,12 @@
 			<prefixBits>LE</prefixBits>
 			<feature>65k</feature>
 			<opcodes>
-				<addressingMode>immtozp</addressingMode>
+				<addressingMode>bytetozp</addressingMode>
 				<opcode>0xd1</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
-				<addressingMode>immtoabs</addressingMode>
+				<addressingMode>bytetoabs</addressingMode>
 				<opcode>0x01</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
@@ -8882,11 +8882,20 @@
 				of the operand.
 			</desc>
 			<simplesyntax>(&lt;address&gt;),#&lt;immediate&gt;</simplesyntax>
+			<!--  so far only byte-wide offsets are supported -->
 			<mode>
 				<addrMode>zpindbyte</addrMode>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 			<mode>
 				<addrMode>absindbyte</addrMode>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 		</syntax>
 
@@ -8907,12 +8916,20 @@
 					<name>AM</name>
 					<value>1</value>
 				</prefix>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 			<mode>
 				<addrMode>absindbytelong</addrMode>
 				<prefix>
 					<name>AM</name>
 					<value>1</value>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 				</prefix>
 			</mode>
 		</syntax>
@@ -8934,12 +8951,20 @@
 					<name>AM</name>
 					<value>1</value>
 				</prefix>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 			<mode>
 				<addrMode>absindbytequad</addrMode>
 				<prefix>
 					<name>AM</name>
 					<value>1</value>
+				</prefix>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
 				</prefix>
 			</mode>
 		</syntax>
@@ -9182,12 +9207,20 @@
 			<simplesyntax>#&lt;immediate&gt;, &lt;address&gt;</simplesyntax>
 			<feature>65k</feature>
 			<mode>
-				<addrMode>immtozp</addrMode>
+				<addrMode>bytetozp</addrMode>
 				<feature>65k</feature>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 			<mode>
-				<addrMode>immtoabs</addrMode>
+				<addrMode>bytetoabs</addrMode>
 				<feature>65k</feature>
+				<prefix>
+					<name>RS</name>
+					<value>00</value>
+				</prefix>
 			</mode>
 		</syntax>
 
@@ -10218,7 +10251,7 @@
 			<name>Immediate to Zeropage Address</name>
 			<desc>Take an immediate value, and an address to store the value to
 			</desc>
-			<identifier>immtozp</identifier>
+			<identifier>bytetozp</identifier>
 			<feature>65k</feature>
 			<width>1</width>
 			<!-- size of immediate value -->
@@ -10229,7 +10262,7 @@
 			<name>Immediate to Absolute Address</name>
 			<desc>Take an immediate value, and an address to store the value to
 			</desc>
-			<identifier>immtoabs</identifier>
+			<identifier>bytetoabs</identifier>
 			<feature>65k</feature>
 			<width>2</width>
 			<!-- size of immediate value -->
