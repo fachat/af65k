@@ -12,6 +12,12 @@
 <a href="#ADE">ADE</a>
  - Add value to E register</li>
 <li>
+<a href="#ADI">ADI</a>
+ - Add immediate value to a memory location</li>
+<li>
+<a href="#ADQ">ADQ</a>
+ - Add immediate value to a register</li>
+<li>
 <a href="#AND">AND</a>
  - Bitwise AND accumulator with content of memory location</li>
 <li>
@@ -376,6 +382,12 @@
 <a href="#SBE">SBE</a>
  - Subtract value from E register</li>
 <li>
+<a href="#SBI">SBI</a>
+ - Subtract immediate value from a memory location</li>
+<li>
+<a href="#SBQ">SBQ</a>
+ - Subtract immediate value from a register</li>
+<li>
 <a href="#SCC">SCC</a>
  - Skip on carry clear - skip next opcode when C flag is cleared</li>
 <li>
@@ -411,7 +423,7 @@
 			</li>
 <li>
 <a href="#STI">STI</a>
- - Store immediate value into a memory location</li>
+ - Store immediate byte value into a memory location</li>
 <li>
 <a href="#STX">STX</a>
  - Store the content of the X register to memory.</li>
@@ -608,7 +620,46 @@
 <tr><td>EXT</td><td>0x25</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x35</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
-<h2>AND</h2>
+<h2>ADI</h2>
+<a name="ADI"> </a><p>Add immediate value to a memory location</p>
+<table class="optable"><tr><th colspan="10">ADI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0x45</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x65</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Absolute Address</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Add the immediate value following the opcode to the address given by the second operand. Carry is assumed cleared
+				</p><pre>
+					Operand &lt;= Operand + #immediate
+				</pre><p>
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
+				</p><p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p><h2>ADQ</h2>
+<a name="ADQ"> </a><p>Add immediate value to a register</p>
+<table class="optable"><tr><th colspan="10">ADQ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0x55</td><td>65k</td><td>RS, LE, NF</td><td>Immediate to register</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x75</td><td>65k</td><td>RS, LE, NF</td><td>Immediate to register</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Add the immediate value following the opcode to the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.
+				</p><p>
+					The following table details the register selection from the uppermost three bits of the immediate value:
+				</p><table><tr><th>Value</th><td>Register</td></tr><tr><td>000</td><td>A</td></tr><tr><td>001</td><td>B</td></tr><tr><td>010</td><td>E</td></tr><tr><td>011</td><td>reserved</td></tr><tr><td>100</td><td>X</td></tr><tr><td>101</td><td>Y</td></tr><tr><td>110</td><td>Z</td></tr><tr><td>111</td><td>reserved</td></tr>
+				</table><pre>
+					Register &lt;= Register + #immediate
+				</pre><p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p><h2>AND</h2>
 <a name="AND"> </a><p>Bitwise AND accumulator with content of memory location</p>
 <table class="optable"><tr><th colspan="10">AND</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
@@ -3560,7 +3611,46 @@
 <tr><td>EXT</td><td>0xa5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xb5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
-<h2>SCC</h2>
+<h2>SBI</h2>
+<a name="SBI"> </a><p>Subtract immediate value from a memory location</p>
+<table class="optable"><tr><th colspan="10">SBI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xc5</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xe5</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Absolute Address</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Subtract the immediate value following the opcode to the address given by the second operand. Carry is assumed set.
+				</p><pre>
+					Operand &lt;= Operand - #immediate
+				</pre><p>
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
+				</p><p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p><h2>SBQ</h2>
+<a name="SBQ"> </a><p>Subtract immediate value from a register</p>
+<table class="optable"><tr><th colspan="10">SBQ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xd5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate to register</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xf5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate to register</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Subtract the immediate value following the opcode from the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.
+				</p><p>
+					The following table details the register selection from the uppermost three bits of the immediate value:
+				</p><table><tr><th>Value</th><td>Register</td></tr><tr><td>000</td><td>A</td></tr><tr><td>001</td><td>B</td></tr><tr><td>010</td><td>E</td></tr><tr><td>011</td><td>reserved</td></tr><tr><td>100</td><td>X</td></tr><tr><td>101</td><td>Y</td></tr><tr><td>110</td><td>Z</td></tr><tr><td>111</td><td>reserved</td></tr>
+				</table><pre>
+					Register &lt;= Register - #immediate
+				</pre><p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p><h2>SCC</h2>
 <a name="SCC"> </a><p>Skip on carry clear - skip next opcode when C flag is cleared</p>
 <table class="optable"><tr><th colspan="10">SCC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
@@ -3768,7 +3858,7 @@
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>STI</h2>
-<a name="STI"> </a><p>Store immediate value into a memory location</p>
+<a name="STI"> </a><p>Store immediate byte value into a memory location</p>
 <table class="optable"><tr><th colspan="10">STI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xd1</td><td>65k</td><td>AM, OF, RS, UM, LE</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
@@ -3776,21 +3866,17 @@
 </table>
 <h3>Description</h3>
 <p>
-					Store the immediate value following the opcode into the address given by the second operand.
+					Store the immediate byte value following the opcode into the address given by the second operand.
 				</p><pre>
 					Operand &lt;= #immediate
 				</pre><p>
-					The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
 					whether the operand is in user
 					space.
 				</p><p>
-					RS also determine the width of the operation.
-					Note that the
-					default is to use BYTE-wide operation without load
-					extension.
-				</p><p>
-					The LE prefix, if set, determines whether the then fixed width single-byte immediate value 
-					is expanded to the size given by RS.
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
 				</p><h2>STX</h2>
 <a name="STX"> </a><p>Store the content of the X register to memory.</p>
 <table class="optable"><tr><th colspan="10">STX</th></tr>

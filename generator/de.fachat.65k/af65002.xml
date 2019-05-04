@@ -4691,7 +4691,7 @@
 
 		<operation>
 			<name>STI</name>
-			<desc>Store immediate value into a memory location</desc>
+			<desc>Store immediate byte value into a memory location</desc>
 			<prefixBits>AM</prefixBits>
 			<prefixBits>OF</prefixBits>
 			<prefixBits>RS</prefixBits>
@@ -4710,25 +4710,188 @@
 			</opcodes>
 			<doc>
 				<p>
-					Store the immediate value following the opcode into the address given by the second operand.
+					Store the immediate byte value following the opcode into the address given by the second operand.
 				</p>
 				<pre>
 					Operand &amp;lt;= #immediate
 				</pre>
 				<p>
-					The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
 					whether the operand is in user
 					space.
 				</p>
 				<p>
-					RS also determine the width of the operation.
-					Note that the
-					default is to use BYTE-wide operation without load
-					extension.
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>ADI</name>
+			<desc>Add immediate value to a memory location</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>bytetozp</addressingMode>
+				<opcode>0x45</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bytetoabs</addressingMode>
+				<opcode>0x65</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Add the immediate value following the opcode to the address given by the second operand. Carry is assumed cleared
+				</p>
+				<pre>
+					Operand &amp;lt;= Operand + #immediate
+				</pre>
+				<p>
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
 				</p>
 				<p>
-					The LE prefix, if set, determines whether the then fixed width single-byte immediate value 
-					is expanded to the size given by RS.
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SBI</name>
+			<desc>Subtract immediate value from a memory location</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>bytetozp</addressingMode>
+				<opcode>0xc5</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bytetoabs</addressingMode>
+				<opcode>0xe5</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Subtract the immediate value following the opcode to the address given by the second operand. Carry is assumed set.
+				</p>
+				<pre>
+					Operand &amp;lt;= Operand - #immediate
+				</pre>
+				<p>
+					The AM and OF prefixes are evaluated by the addressing modes. UM determines
+					whether the operand is in user
+					space.
+				</p>
+				<p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>ADQ</name>
+			<desc>Add immediate value to a register</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>regbyte</addressingMode>
+				<opcode>0x55</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>regword</addressingMode>
+				<opcode>0x75</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Add the immediate value following the opcode to the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.
+				</p><p>
+					The following table details the register selection from the uppermost three bits of the immediate value:
+				</p>
+				<table><tr><th>Value</th><td>Register</td></tr>
+				<tr><td>000</td><td>A</td></tr>
+				<tr><td>001</td><td>B</td></tr>
+				<tr><td>010</td><td>E</td></tr>
+				<tr><td>011</td><td>reserved</td></tr>
+				<tr><td>100</td><td>X</td></tr>
+				<tr><td>101</td><td>Y</td></tr>
+				<tr><td>110</td><td>Z</td></tr>
+				<tr><td>111</td><td>reserved</td></tr>
+				</table>
+				<pre>
+					Register &amp;lt;= Register + #immediate
+				</pre>
+				<p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>SBQ</name>
+			<desc>Subtract immediate value from a register</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>regbyte</addressingMode>
+				<opcode>0xd5</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>regword</addressingMode>
+				<opcode>0xf5</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Subtract the immediate value following the opcode from the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.
+				</p><p>
+					The following table details the register selection from the uppermost three bits of the immediate value:
+				</p>
+				<table><tr><th>Value</th><td>Register</td></tr>
+				<tr><td>000</td><td>A</td></tr>
+				<tr><td>001</td><td>B</td></tr>
+				<tr><td>010</td><td>E</td></tr>
+				<tr><td>011</td><td>reserved</td></tr>
+				<tr><td>100</td><td>X</td></tr>
+				<tr><td>101</td><td>Y</td></tr>
+				<tr><td>110</td><td>Z</td></tr>
+				<tr><td>111</td><td>reserved</td></tr>
+				</table>
+				<pre>
+					Register &amp;lt;= Register - #immediate
+				</pre>
+				<p>
+					RS determines the width of the operation. 
+					If a width larger than the immediate value is used, LE must be set to determine the extension type.
+					Note that the default is RS=00, i.e. byte wide operation.
 				</p>
 			</doc>
 		</operation>
@@ -9209,18 +9372,28 @@
 			<mode>
 				<addrMode>bytetozp</addrMode>
 				<feature>65k</feature>
-				<prefix>
-					<name>RS</name>
-					<value>00</value>
-				</prefix>
 			</mode>
 			<mode>
 				<addrMode>bytetoabs</addrMode>
 				<feature>65k</feature>
-				<prefix>
-					<name>RS</name>
-					<value>00</value>
-				</prefix>
+			</mode>
+		</syntax>
+
+		<syntax>
+			<id>regimm</id>
+			<desc>register to use and immediate value that is added to or subtracted from the register.
+				Note that the register number occupies the uppermost three bits of the in-memory operand value, that can then only use three less bits.
+				For example a byte operand can select one of eight registers, and a 5-bit value of 0-32.
+			</desc>
+			<simplesyntax>.&lt;reg&gt;, #&lt;operand&gt;</simplesyntax>
+			<feature>65k</feature>
+			<mode>
+				<addrMode>regbyte</addrMode>
+				<feature>65k</feature>
+			</mode>
+			<mode>
+				<addrMode>regword</addrMode>
+				<feature>65k</feature>
 			</mode>
 		</syntax>
 
@@ -10267,6 +10440,30 @@
 			<width>2</width>
 			<!-- size of immediate value -->
 			<offset>1</offset>
+		</addrmode>
+
+		<!-- ################################# -->
+
+		<addrmode>
+			<name>Immediate to register</name>
+			<desc>Take an immediate byte value, and add it to or subtract it from a register
+			</desc>
+			<identifier>regbyte</identifier>
+			<feature>65k</feature>
+			<width>1</width>
+			<ignoredPrefixes>AM</ignoredPrefixes>
+			<ignoredPrefixes>UM</ignoredPrefixes>
+		</addrmode>
+
+		<addrmode>
+			<name>Immediate to register</name>
+			<desc>Take an immediate word value, and add it to or subtract it from a register
+			</desc>
+			<identifier>regword</identifier>
+			<feature>65k</feature>
+			<width>2</width>
+			<ignoredPrefixes>AM</ignoredPrefixes>
+			<ignoredPrefixes>UM</ignoredPrefixes>
 		</addrmode>
 
 	</addrmodes>
