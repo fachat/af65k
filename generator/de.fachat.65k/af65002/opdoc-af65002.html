@@ -165,9 +165,6 @@
 <a href="#DEC">DEC</a>
  - Decrement the content of a memory location by one</li>
 <li>
-<a href="#DEC#">DEC#</a>
- - Decrement the content of a memory location by one</li>
-<li>
 <a href="#DEX">DEX</a>
  - Decrement the content of the X register by one</li>
 <li>
@@ -190,8 +187,8 @@
 <a href="#INC">INC</a>
  - Increment the content of a memory location by one</li>
 <li>
-<a href="#INC#">INC#</a>
- - Increment the content of a memory location by one</li>
+<a href="#INV">INV</a>
+ - Invert AC, i.e. set AC to the 1s-complement of AC</li>
 <li>
 <a href="#INX">INX</a>
  - Increment the content of the X register by one</li>
@@ -240,7 +237,7 @@
 			</li>
 <li>
 <a href="#NEG">NEG</a>
- - negate / invert AC, i.e. set AC to the 2s-complement of AC</li>
+ - negate AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
 <a href="#NOP">NOP</a>
  - No operation</li>
@@ -453,6 +450,10 @@
  - Swap X with Y register. Always done full width, no flags set.
 			</li>
 <li>
+<a href="#SXZ">SXZ</a>
+ - Swap X with Z register. Always done full width, no flags set.
+			</li>
+<li>
 <a href="#TAB">TAB</a>
  - Transfer AC to B register</li>
 <li>
@@ -618,13 +619,15 @@
 <table class="optable"><tr><th colspan="10">ADE</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0x25</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0x35</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x24</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
 <h2>ADI</h2>
 <a name="ADI"> </a><p>Add immediate value to a memory location</p>
 <table class="optable"><tr><th colspan="10">ADI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0x45</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x15</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address X-indexed</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x35</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage indirect Y-indexed address</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0x65</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Absolute Address</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
@@ -1781,66 +1784,6 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
-				</p><h2>DEC#</h2>
-<a name="DEC#"> </a><p>Decrement the content of a memory location by one</p>
-<table class="optable"><tr><th colspan="10">DEC</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>QUICK</td><td>0x8e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xae</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xce</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xde</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xee</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0x8d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xad</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xcd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xdd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xed</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0x8c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x9c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0xac</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0xbc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0xcc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0xdc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0xec</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0xfc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#8</td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Decrement the operand by one, i.e. binary substract one.
-					Note this
-					opcode is a read-modify-write opcode and not
-					only has
-					memory-oriented addressing modes but can work
-					on the accumulator
-					alone as well.
-				</p><pre>
-					Operand &lt;= Operand - 1
-					N &lt;= OperandC7)
-					Z &lt;=
-					Z(AC)
-				</pre><h3>65k</h3>
-<p>
-					The AM, OF and RS prefixes are evaluated by the addressing modes.
-					UM
-					determines
-					whether the operand is in user
-					space. NF allows to not
-					set the flags.
-				</p><p>
-					RS also determine the width of the operation. There is no LE
-					prefix,
-					as the read and write
-					widths are the same.
-					Note
-					that the
-					default is to use BYTE-wide operation without load
-					extension.
 				</p><h2>DEX</h2>
 <a name="DEX"> </a><p>Decrement the content of the X register by one</p>
 <table class="optable"><tr><th colspan="10">DEX</th></tr>
@@ -1978,66 +1921,13 @@
 					that the
 					default is to use BYTE-wide operation without load
 					extension.
-				</p><h2>INC#</h2>
-<a name="INC#"> </a><p>Increment the content of a memory location by one</p>
-<table class="optable"><tr><th colspan="10">INC</th></tr>
+				</p><h2>INV</h2>
+<a name="INV"> </a><p>Invert AC, i.e. set AC to the 1s-complement of AC</p>
+<table class="optable"><tr><th colspan="10">INV</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>QUICK</td><td>0xe</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7e</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0xd</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7d</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Absolute 16bit</td><td>#8</td><td></td></tr>
-<tr><td>QUICK</td><td>0xc</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#1</td><td></td></tr>
-<tr><td>QUICK</td><td>0x1c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#2</td><td></td></tr>
-<tr><td>QUICK</td><td>0x2c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#3</td><td></td></tr>
-<tr><td>QUICK</td><td>0x3c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#4</td><td></td></tr>
-<tr><td>QUICK</td><td>0x4c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#5</td><td></td></tr>
-<tr><td>QUICK</td><td>0x5c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#6</td><td></td></tr>
-<tr><td>QUICK</td><td>0x6c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#7</td><td></td></tr>
-<tr><td>QUICK</td><td>0x7c</td><td>65k</td><td>AM, OF, RS, UM, NF</td><td>Zeropage indexed with X</td><td>#8</td><td></td></tr>
+<tr><td>EXT</td><td>0x54</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
-<h3>Description</h3>
-<p>
-					Increment the operand by one, i.e. binary add one.
-					Note this
-					opcode is a read-modify-write opcode and not only has
-					memory-oriented addressing modes but can work
-					on the accumulator
-					alone as well.
-				</p><pre>
-					Operand &lt;= Operand + 1
-					N &lt;= OperandC7)
-					Z &lt;=
-					Z(AC)
-				</pre><h3>65k</h3>
-<p>
-					The AM, OF and RS prefixes are evaluated by the addressing modes.
-					UM
-					determines
-					whether the operand is in user
-					space. NF allows to not
-					set the flags.
-				</p><p>
-					RS also determine the width of the operation. There is no LE
-					prefix,
-					as the read and write
-					widths are the same.
-					Note
-					that the
-					default is to use BYTE-wide operation without load
-					extension.
-				</p><h2>INX</h2>
+<h2>INX</h2>
 <a name="INX"> </a><p>Increment the content of the X register by one</p>
 <table class="optable"><tr><th colspan="10">INX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
@@ -2440,11 +2330,10 @@
 					default is to use BYTE-wide operation without load
 					extension.
 				</p><h2>NEG</h2>
-<a name="NEG"> </a><p>Synonyms: INV</p>
-<p>negate / invert AC, i.e. set AC to the 2s-complement of AC</p>
+<a name="NEG"> </a><p>negate AC, i.e. set AC to the 2s-complement of AC</p>
 <table class="optable"><tr><th colspan="10">NEG</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xa4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xd4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
 <h2>NOP</h2>
 <a name="NOP"> </a><p>No operation</p>
@@ -3543,7 +3432,7 @@
 			</p>
 <table class="optable"><tr><th colspan="10">SAX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x84</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x88</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>SAY</h2>
 <a name="SAY"> </a><p>Swap AC with Y register. Always done full width, no flags set.
@@ -3609,13 +3498,15 @@
 <table class="optable"><tr><th colspan="10">SBE</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xa5</td><td>65k</td><td>RS, LE, NF</td><td>Immediate</td><td></td><td></td></tr>
-<tr><td>EXT</td><td>0xb5</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xa4</td><td>65k</td><td>RS, NF</td><td>Accumulator</td><td></td><td></td></tr>
 </table>
 <h2>SBI</h2>
 <a name="SBI"> </a><p>Subtract immediate value from a memory location</p>
 <table class="optable"><tr><th colspan="10">SBI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td>EXT</td><td>0xc5</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x95</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage Address X-indexed</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xb5</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Zeropage indirect Y-indexed address</td><td></td><td></td></tr>
 <tr><td>EXT</td><td>0xe5</td><td>65k</td><td>AM, OF, RS, UM, LE, NF</td><td>Immediate to Absolute Address</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
@@ -4047,7 +3938,14 @@
 			</p>
 <table class="optable"><tr><th colspan="10">SXY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x94</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0x98</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h2>SXZ</h2>
+<a name="SXZ"> </a><p>Swap X with Z register. Always done full width, no flags set.
+			</p>
+<table class="optable"><tr><th colspan="10">SXZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xb8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TAB</h2>
 <a name="TAB"> </a><p>Transfer AC to B register</p>
@@ -4107,7 +4005,7 @@
 <a name="TEA"> </a><p>Transfer E register to Accumulator</p>
 <table class="optable"><tr><th colspan="10">TEA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x98</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>EXT</td><td>0xd8</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TEB</h2>
 <a name="TEB"> </a><p>Transfer E to B register (full width)</p>

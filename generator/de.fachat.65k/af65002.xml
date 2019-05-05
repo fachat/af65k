@@ -4147,6 +4147,7 @@
 				<opcode>0xed</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+<!-- 
 			<opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x0e</opcode>
@@ -4171,6 +4172,7 @@
 				<expand>0x70</expand>
 				<expand8>true</expand8>
 			</opcodes>
+ -->
 			<doc>
 				<p>
 					Increment the operand by one, i.e. binary add one.
@@ -4249,6 +4251,7 @@
 				<opcode>0xcd</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
+<!-- 
 			<opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x8e</opcode>
@@ -4273,6 +4276,7 @@
 				<expand>0x70</expand>
 				<expand8>true</expand8>
 			</opcodes>
+ -->
 			<doc>
 				<p>
 					Decrement the operand by one, i.e. binary substract one.
@@ -4744,6 +4748,16 @@
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
+				<addressingMode>bytetozpx</addressingMode>
+				<opcode>0x15</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bytetozpindy</addressingMode>
+				<opcode>0x35</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
 				<addressingMode>bytetoabs</addressingMode>
 				<opcode>0x65</opcode>
 				<oppage>EXT</oppage>
@@ -4781,6 +4795,16 @@
 			<opcodes>
 				<addressingMode>bytetozp</addressingMode>
 				<opcode>0xc5</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bytetozpx</addressingMode>
+				<opcode>0x95</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>bytetozpindy</addressingMode>
+				<opcode>0xb5</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 			<opcodes>
@@ -6653,14 +6677,13 @@
 
 		<operation>
 			<name>NEG</name>
-			<synonym>INV</synonym>
-			<desc>negate / invert AC, i.e. set AC to the 2s-complement of AC</desc>
+			<desc>negate AC, i.e. set AC to the 2s-complement of AC</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
 			<prefixBits>NF</prefixBits>
 			<opcodes>
 				<addressingMode>A</addressingMode>
-				<opcode>0xa4</opcode>
+				<opcode>0xd4</opcode>
 				<oppage>EXT</oppage>
 				<feature>65k</feature>
 			</opcodes>
@@ -6668,6 +6691,20 @@
 				<addressingMode>A</addressingMode>
 				<opcode>0x42</opcode>
 				<feature>ce02</feature>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>INV</name>
+			<desc>Invert AC, i.e. set AC to the 1s-complement of AC</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<opcodes>
+				<addressingMode>A</addressingMode>
+				<opcode>0x54</opcode>
+				<oppage>EXT</oppage>
+				<feature>65k</feature>
 			</opcodes>
 		</operation>
 
@@ -7007,7 +7044,7 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x98</opcode>
+				<opcode>0xd8</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -7165,7 +7202,7 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x84</opcode>
+				<opcode>0x88</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -7190,7 +7227,19 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x94</opcode>
+				<opcode>0x98</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+		</operation>
+
+		<operation>
+			<name>SXZ</name>
+			<desc>Swap X with Z register. Always done full width, no flags set.
+			</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xb8</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -7213,7 +7262,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>A</addressingMode>
-				<opcode>0x35</opcode>
+				<opcode>0x24</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -7275,7 +7324,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>A</addressingMode>
-				<opcode>0xb5</opcode>
+				<opcode>0xa4</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
 		</operation>
@@ -9380,6 +9429,42 @@
 		</syntax>
 
 		<syntax>
+			<id>immtoaddressx</id>
+			<desc>Immediate value that is stored to an address that is indexed with the X register
+			</desc>
+			<simplesyntax>#&lt;immediate&gt;, &lt;address&gt;,X</simplesyntax>
+			<feature>65k</feature>
+			<mode>
+				<addrMode>bytetozpx</addrMode>
+				<feature>65k</feature>
+			</mode>
+<!-- 
+			<mode>
+				<addrMode>bytetoabs</addrMode>
+				<feature>65k</feature>
+			</mode>
+ -->
+		</syntax>
+
+		<syntax>
+			<id>immtoaddressindy</id>
+			<desc>Immediate value that is stored to an address
+			</desc>
+			<simplesyntax>#&lt;immediate&gt;, (&lt;address&gt;),Y</simplesyntax>
+			<feature>65k</feature>
+			<mode>
+				<addrMode>bytetozpindy</addrMode>
+				<feature>65k</feature>
+			</mode>
+<!-- 
+			<mode>
+				<addrMode>bytetoabs</addrMode>
+				<feature>65k</feature>
+			</mode>
+ -->
+		</syntax>
+
+		<syntax>
 			<id>regimm</id>
 			<desc>register to use and immediate value that is added to or subtracted from the register.
 				Note that the register number occupies the uppermost three bits of the in-memory operand value, that can then only use three less bits.
@@ -10438,6 +10523,28 @@
 			<identifier>bytetoabs</identifier>
 			<feature>65k</feature>
 			<width>2</width>
+			<!-- size of immediate value -->
+			<offset>1</offset>
+		</addrmode>
+
+		<addrmode>
+			<name>Immediate to Zeropage Address X-indexed</name>
+			<desc>Take an immediate value, and an X-indexed zeropage address to store the value to
+			</desc>
+			<identifier>bytetozpx</identifier>
+			<feature>65k</feature>
+			<width>1</width>
+			<!-- size of immediate value -->
+			<offset>1</offset>
+		</addrmode>
+
+		<addrmode>
+			<name>Immediate to Zeropage indirect Y-indexed address</name>
+			<desc>Take an immediate value, and an indirect zeropage address indexed with Y to store the value to
+			</desc>
+			<identifier>bytetozpindy</identifier>
+			<feature>65k</feature>
+			<width>1</width>
 			<!-- size of immediate value -->
 			<offset>1</offset>
 		</addrmode>

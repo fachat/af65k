@@ -114,6 +114,9 @@ Extend a value in AC from RS to the full size. Setting LE
 <a href="af65002opdesc.html#INC">INC: </a>
 Increment the content of a memory location by one</li>
 <li>
+<a href="af65002opdesc.html#INV">INV: </a>
+Invert AC, i.e. set AC to the 1s-complement of AC</li>
+<li>
 <a href="af65002opdesc.html#INZ">INZ: </a>
 Increment Z register</li>
 <li>
@@ -155,7 +158,7 @@ Logical Shift Right - shift accumulator one bit to the right,
 			</li>
 <li>
 <a href="af65002opdesc.html#NEG">NEG: </a>
-negate / invert AC, i.e. set AC to the 2s-complement of AC</li>
+negate AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
 <a href="af65002opdesc.html#ORA">ORA: </a>
 Bitwise OR accumulator with content of memory location</li>
@@ -264,6 +267,10 @@ swap upper and lower half of the operand
 <li>
 <a href="af65002opdesc.html#SXY">SXY: </a>
 Swap X with Y register. Always done full width, no flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#SXZ">SXZ: </a>
+Swap X with Z register. Always done full width, no flags set.
 			</li>
 <li>
 <a href="af65002opdesc.html#TAB">TAB: </a>
