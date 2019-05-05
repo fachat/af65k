@@ -257,6 +257,9 @@
 <a href="#PHI">PHI</a>
  - Push immediate value onto the stack</li>
 <li>
+<a href="#PHM">PHM</a>
+ - Push contents of multiple registers onto the stack</li>
+<li>
 <a href="#PHP">PHP</a>
  - Push processor status register onto the stack</li>
 <li>
@@ -277,6 +280,9 @@
 <li>
 <a href="#PLE">PLE</a>
  - Pull E from stack (full width)</li>
+<li>
+<a href="#PLM">PLM</a>
+ - Pull contents of multiple registers from the stack</li>
 <li>
 <a href="#PLP">PLP</a>
  - Pull processor status register from the stack</li>
@@ -2501,6 +2507,39 @@
 					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.
+				</p><h2>PHM</h2>
+<a name="PHM"> </a><p>Push contents of multiple registers onto the stack</p>
+<table class="optable"><tr><th colspan="10">PHM</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0x44</td><td>65k</td><td>RS, UM</td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Push the content of multiple registers on the stack.  
+				</p><pre>
+					Stack(SP--) &lt;= A
+					Stack(SP--) &lt;= B
+					Stack(SP--) &lt;= E
+					Stack(SP--) &lt;= X
+					Stack(SP--) &lt;= Y
+					Stack(SP--) &lt;= Z
+				</pre><p>
+					The RS prefix determines the width of the accumulator value as
+					written
+					on the stack.
+				</p><p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is stored in user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
 				</p><h2>PHP</h2>
 <a name="PHP"> </a><p>Push processor status register onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHP</th></tr>
@@ -2695,6 +2734,39 @@
 					pointer used is the
 					user mode stack
 					pointer and the value is stored in user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
+				</p><h2>PLM</h2>
+<a name="PLM"> </a><p>Pull contents of multiple registers from the stack</p>
+<table class="optable"><tr><th colspan="10">PLM</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0x64</td><td>65k</td><td>RS, UM</td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Push the content of multiple registers on the stack.  
+				</p><pre>
+					Z &lt;= Stack(++SP)
+					Y &lt;= Stack(++SP)
+					X &lt;= Stack(++SP)
+					E &lt;= Stack(++SP)
+					B &lt;= Stack(++SP)
+					A &lt;= Stack(++SP)
+				</pre><p>
+					The RS prefix determines the width of the accumulator value as
+					written
+					on the stack.
+				</p><p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is read from user mode
 					memory. If
 					executed in
 					user mode with UM set an ABORT exception is triggered.

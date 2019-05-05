@@ -5315,6 +5315,96 @@
 		</operation>
 
 		<operation>
+			<name>PHM</name>
+			<desc>Push contents of multiple registers onto the stack</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x44</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Push the content of multiple registers on the stack.  
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= A
+					Stack(SP--) &amp;lt;= B
+					Stack(SP--) &amp;lt;= E
+					Stack(SP--) &amp;lt;= X
+					Stack(SP--) &amp;lt;= Y
+					Stack(SP--) &amp;lt;= Z
+				</pre>
+				<p>
+					The RS prefix determines the width of the accumulator value as
+					written
+					on the stack.
+				</p>
+				<p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is stored in user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>PLM</name>
+			<desc>Pull contents of multiple registers from the stack</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x64</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Push the content of multiple registers on the stack.  
+				</p>
+				<pre>
+					Z &amp;lt;= Stack(++SP)
+					Y &amp;lt;= Stack(++SP)
+					X &amp;lt;= Stack(++SP)
+					E &amp;lt;= Stack(++SP)
+					B &amp;lt;= Stack(++SP)
+					A &amp;lt;= Stack(++SP)
+				</pre>
+				<p>
+					The RS prefix determines the width of the accumulator value as
+					written
+					on the stack.
+				</p>
+				<p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is read from user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
 			<name>PHI</name>
 			<desc>Push immediate value onto the stack</desc>
 			<prefixBits>RS</prefixBits>
