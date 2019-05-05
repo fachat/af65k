@@ -5315,6 +5315,48 @@
 		</operation>
 
 		<operation>
+			<name>PHI</name>
+			<desc>Push immediate value onto the stack</desc>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>LE</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>imm</addressingMode>
+				<opcode>0xd2</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Push the immediate value following the opcode on the stack.
+				</p>
+				<pre>
+					Stack(SP--) &amp;lt;= #operand
+				</pre>
+				<p>
+					The RS prefix determines the width of the value as
+					written on the stack.
+					If LE is set, then RS determines the width of the operand following the opcode, 
+					the value is then pushed in full register width after Load Expansion.
+				</p>
+				<p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is stored in user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
 			<name>CLI</name>
 			<desc>Clear the interrupt (I) flag</desc>
 			<opcodes>

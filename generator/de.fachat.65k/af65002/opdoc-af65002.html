@@ -254,6 +254,9 @@
 <a href="#PHE">PHE</a>
  - Push E onto stack (always full width)</li>
 <li>
+<a href="#PHI">PHI</a>
+ - Push immediate value onto the stack</li>
+<li>
 <a href="#PHP">PHP</a>
  - Push processor status register onto the stack</li>
 <li>
@@ -2456,6 +2459,35 @@
 <p>
 					The value stored is always in the natural width of the processor
 					(mode).
+				</p><p>
+					The stack pointer used is the one of the current stack if the UM
+					prefix
+					is not set.
+					If UM is set and the opcode is
+					executed in
+					hypervisor mode, the stack
+					pointer used is the
+					user mode stack
+					pointer and the value is stored in user mode
+					memory. If
+					executed in
+					user mode with UM set an ABORT exception is triggered.
+				</p><h2>PHI</h2>
+<a name="PHI"> </a><p>Push immediate value onto the stack</p>
+<table class="optable"><tr><th colspan="10">PHI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xd2</td><td>65k</td><td>RS, LE</td><td>Immediate</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Push the immediate value following the opcode on the stack.
+				</p><pre>
+					Stack(SP--) &lt;= #operand
+				</pre><p>
+					The RS prefix determines the width of the value as
+					written on the stack.
+					If LE is set, then RS determines the width of the operand following the opcode, 
+					the value is then pushed in full register width after Load Expansion.
 				</p><p>
 					The stack pointer used is the one of the current stack if the UM
 					prefix
