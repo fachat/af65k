@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="Andr&eacute;  Fachat">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Andr&#xE9;  Fachat" />
 
-<meta name="description" content="6502 16bit 32bit expansion">
-<meta name="keywords" content="6502 16bit 32bit expansion">
-<link rev="made" href="mailto:afachat@gmx.de">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
+<meta name="description" content="6502 16bit 32bit expansion" />
+<meta name="keywords" content="6502 16bit 32bit expansion" />
+<link rev="made" href="mailto:afachat@gmx.de" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
 <title>The 65k Project - Architecture Overview</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>Discuss this page's content on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?p=12180"> this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -41,25 +42,25 @@ more modern browser, like Internet Explorer 8 or later,
 <a target="_blank" class="extlink" href="http://www.google.com/chrome">Google Chrome</a>, or
 <a target="_blank" class="extlink" href="http://www.opera.com">Opera</a>.
 </div><div class="top" id="content"><div id="minmax"></div><h1>The 65k Project - Architecture Overview</h1><p class="copyright">(C)
-2010-2011 Andr&eacute;  Fachat</p> 
+2010-2011 André  Fachat</p> 
 <div class="overview">
 	<p>
 	This page describes an overview on the 65k architecture.
 	</p><p>
 	</p>
-  </div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="news">News:</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul class="news"><li><div>&nbsp;</div><small>2012-04-11</small>
+  </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="news" id="news">News:</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul class="news"><li><div> </div><small>2012-04-11</small>
 	Moved and updated to 65002R0
-    </li><li><div>&nbsp;</div><small>2010-10-23</small>
+    </li><li><div> </div><small>2010-10-23</small>
 	Published this page
-    </li><li><div>&nbsp;</div><small>2010-10-14</small>
+    </li><li><div> </div><small>2010-10-14</small>
 	Started this page
-    </li></ul></div></div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#preface">Preface</a></li><li style="list-style-type:none;"><ul><li><a href="#lic">License</a></li><li><a href="#disc">Disclaimer</a></li><li><a href="#cont">Contributors</a></li><li><a href="#chg">Changes</a></li></ul></li><li><a href="#top">Top Level Architecture</a></li><li style="list-style-type:none;"><ul><li><a href="#topcore">Core</a></li><li><a href="#rwseq">Read / Write Data Sequencer, Read Arbiter</a></li><li><a href="#shell">CPU Shell</a></li><li><a href="#irqarb">IRQ arbiter</a></li></ul></li><li><a href="#core">Core Architecture</a></li><li style="list-style-type:none;"><ul><li><a href="#regs">Registers</a></li><li><a href="#ext">Extenders</a></li><li><a href="#alu">ALU</a></li><li><a href="#fetch">Fetch</a></li><li><a href="#ctrl">Control (sequencer)</a></li></ul></li><li><a href="#discussion">Discussion</a></li><li style="list-style-type:none;"><ul><li><a href="#d_predec">Predecoding and register RAM</a></li><li><a href="#d_pathlen">Path length</a></li></ul></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="preface">Preface</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><h3><a name="lic">License</a></h3><p>
+    </li></ul></div></div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#preface">Preface</a></li><li style="list-style-type:none;"><ul><li><a href="#lic">License</a></li><li><a href="#disc">Disclaimer</a></li><li><a href="#cont">Contributors</a></li><li><a href="#chg">Changes</a></li></ul></li><li><a href="#top">Top Level Architecture</a></li><li style="list-style-type:none;"><ul><li><a href="#topcore">Core</a></li><li><a href="#rwseq">Read / Write Data Sequencer, Read Arbiter</a></li><li><a href="#shell">CPU Shell</a></li><li><a href="#irqarb">IRQ arbiter</a></li></ul></li><li><a href="#core">Core Architecture</a></li><li style="list-style-type:none;"><ul><li><a href="#regs">Registers</a></li><li><a href="#ext">Extenders</a></li><li><a href="#alu">ALU</a></li><li><a href="#fetch">Fetch</a></li><li><a href="#ctrl">Control (sequencer)</a></li></ul></li><li><a href="#discussion">Discussion</a></li><li style="list-style-type:none;"><ul><li><a href="#d_predec">Predecoding and register RAM</a></li><li><a href="#d_pathlen">Path length</a></li></ul></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="preface" id="preface">Preface</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><h3><a name="lic" id="lic">License</a></h3><p>
         This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
     </p><p>
         Note this "content" includes this web page, but does not include the 6502.org header
         and the left and right web page columns.  Click on the "Maximize" link to see
         the contents covered by this license.
-    </p><ul><li><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode" target="_blank" class="extlink">CC-BY-SA legal code</a> </li><li><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="extlink">CC-BY-SA license deed (short form)</a> </li></ul><h3><a name="disc">Disclaimer</a></h3><p>
+    </p><ul><li><a href="http://creativecommons.org/licenses/by-sa/3.0/legalcode" target="_blank" class="extlink">CC-BY-SA legal code</a> </li><li><a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" class="extlink">CC-BY-SA license deed (short form)</a> </li></ul><h3><a name="disc" id="disc">Disclaimer</a></h3><p>
         The content comes with no warranty at all!
         There is no guarantee and no promise that this specification is correct, consistent, will actually work,
         or will ever be implemented at all.
@@ -68,23 +69,23 @@ more modern browser, like Internet Explorer 8 or later,
         Still there is no guarantee that a processor according to this spec would not be covered by some patents.
     </p><p>
         Subject to change without notice!
-    </p><h3><a name="cont">Contributors</a></h3><ul>
-        <li>Andr&eacute;  Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
-    </ul><h3><a name="chg">Changes</a></h3><p>This section describes the changes to the document:</p>
+    </p><h3><a name="cont" id="cont">Contributors</a></h3><ul>
+        <li>André  Fachat - initial author: <a href="http://www.6502.org/users/andre">8bit Homepage</a></li>
+    </ul><h3><a name="chg" id="chg">Changes</a></h3><p>This section describes the changes to the document:</p>
       <table border="1">
         <tr><th>Date</th><th>Author</th><th>Changes</th></tr>
-        <tr><td>2010-10-25</td><td>Andr&eacute;  Fachat</td><td>Updated Core Architecture Diagram and Description</td></tr>
+        <tr><td>2010-10-25</td><td>André  Fachat</td><td>Updated Core Architecture Diagram and Description</td></tr>
       </table>
-    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="top">Top Level Architecture</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the top level architecture, i.e. the top level
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="top" id="top">Top Level Architecture</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the top level architecture, i.e. the top level
 	building blocks of the processor and their relations. Compared to the 6502
 	there are more such building blocks, the processor is more complex. The 6502
 	basically compares to the core - which is described in more detail below.</p>
-	<div class="rightimg"><a href="archtop.svg"><img width="300" src="archtop.png"></a>The top level
+	<div class="rightimg"><a href="archtop.svg"><img width="300" src="archtop.png" /></a>The top level
 	architecture</div>
 	<p>
 	The following sections describe the components.
 	</p>
-     <h3><a name="topcore">Core</a></h3>
+     <h3><a name="topcore" id="topcore">Core</a></h3>
 	<p>
 	The core is the actual processor. It contains registers, ALU, and so on. With the 
 	rest of the system it communicates using three bus interfaces:
@@ -96,7 +97,7 @@ more modern browser, like Internet Explorer 8 or later,
 	</ol>
 	<p>
 	</p>
-       	<h3><a name="rwseq">Read / Write Data Sequencer, Read Arbiter</a></h3>
+       	<h3><a name="rwseq" id="rwseq">Read / Write Data Sequencer, Read Arbiter</a></h3>
 	  <p>
 	  The read and write sequencers break down misaligned memory accesses
 	  into accesses that can be executed on the external bus.
@@ -159,7 +160,7 @@ more modern browser, like Internet Explorer 8 or later,
  	  always requests full width - but accepts chunks of data in all width, just as they
 	  come in.
 	  </p>
-       	<h3><a name="shell">CPU Shell</a></h3>
+       	<h3><a name="shell" id="shell">CPU Shell</a></h3>
 	  <p>
 		The CPU shell passes the memory accesses to and from the read/write sequencer.
 		If the system had mulitple cores, the shell would select from which core the
@@ -170,18 +171,18 @@ more modern browser, like Internet Explorer 8 or later,
 	  </p><p>
 		In the future it will also handle the processor configuration register handling.
 	  </p>
-       	<h3><a name="irqarb">IRQ arbiter</a></h3>
+       	<h3><a name="irqarb" id="irqarb">IRQ arbiter</a></h3>
 	  <p>
 		The IRQ arbiter receives the interrupt signals from the external interface
 		and can distribute the interrupt signals the different cores. 
 	  </p><p>
 		The current version just routes all interrupts to the first core.
 	  </p>
-       	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="core">Core Architecture</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+       	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="core" id="core">Core Architecture</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	This section describes the architecture of the processor core. A block diagram is on the right side, 
 	click it to enlarge.
 	</p>
-	<div class="rightimg"><a href="archcore.svg"><img width="300" src="archcore.png"></a>The core 
+	<div class="rightimg"><a href="archcore.svg"><img width="300" src="archcore.png" /></a>The core 
 	architecture</div>
 	<p>
 	The general principle of the core is that every action takes one cycle, from falling phi2 to falling phi2.
@@ -195,7 +196,7 @@ more modern browser, like Internet Explorer 8 or later,
 	opcodes I found that I had to provide many more connections to avoid moving data around or adding extra temporary registers,
 	so the three busses now have many more inputs than originally planned.
 	</p>
-     <h3><a name="regs">Registers</a></h3><p>
+     <h3><a name="regs" id="regs">Registers</a></h3><p>
 	The registers are implemented in different components: A temporary register, the register file, 
 	a constant register file, and the status register.
 	</p><p>
@@ -221,15 +222,15 @@ more modern browser, like Internet Explorer 8 or later,
 	</p><p>
 	Note that only status, USP and SSP require ABORT handling.
 	</p>
-     <h3><a name="ext">Extenders</a></h3><p>
+     <h3><a name="ext" id="ext">Extenders</a></h3><p>
 	The bus extenders for the inbus and outbus allow extending values to the full bus width using zero-, one-, or 
 	sign-extension (or pass through the value). This is not only used according to the prefix bits, but also to extend
 	the offset parameters for example.
-     </p><h3><a name="alu">ALU</a></h3><p>
+     </p><h3><a name="alu" id="alu">ALU</a></h3><p>
 	The ALU provides the aritmethical and logical operations. Note that besides the ADC and SBC operations it
 	also supports ADD and SUB that do not use the carry flag. Those are used for example in address computations.
 	The ALU is asynchronous.
-     </p><h3><a name="fetch">Fetch</a></h3><p>
+     </p><h3><a name="fetch" id="fetch">Fetch</a></h3><p>
 	The opcode fetch requests data from the read/write sequencer and stores it into the input buffer.
 	Once it has determined that the input buffer contains the full opcode, this opcode is presented
 	to the control sequencer until it is taken.
@@ -240,14 +241,14 @@ more modern browser, like Internet Explorer 8 or later,
 	In case of an interrupt the fetch logic injects an IRQ handling opcode into the opcode sequence.
 	The same basically happens on ABORT, only that an ABORT is signalled by the control sequencer when
 	a memory access problem ("seg fault") has been detected.
-     </p><h3><a name="ctrl">Control (sequencer)</a></h3><p>
+     </p><h3><a name="ctrl" id="ctrl">Control (sequencer)</a></h3><p>
 	The control sequencer takes the opcode from the fetch logic, and sequences it into control signals 
 	for all the other components. It stops counting when a memory access takes more than one cycle, so it
 	handles the RDY stuff.
-     </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="discussion">Discussion</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+     </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="discussion" id="discussion">Discussion</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	Now that the first revision has been made, there is need of some discussion.
 	</p>
-     <h3><a name="d_predec">Predecoding and register RAM</a></h3><p>
+     <h3><a name="d_predec" id="d_predec">Predecoding and register RAM</a></h3><p>
 	The control sequencer is implementing some prefetch logic for when the opcode is being taken from the
 	fetch logic. Before the opcode is actually stored, it is used to compute a read register number to send
 	to the register file, so that the register value can be used in the next cycle. 
@@ -259,10 +260,11 @@ more modern browser, like Internet Explorer 8 or later,
 	actually helps that much with the block RAM to justify this effort.
 	</p><p>
 	At one time this path was the critical path for the timing calculations.
-     </p><h3><a name="d_pathlen">Path length</a></h3><p>
+     </p><h3><a name="d_pathlen" id="d_pathlen">Path length</a></h3><p>
 	The current version (as of april 11, 2012) has a maximum of 32 levels of logic and a clock limit of about 12 MHz when implemented in a
 	4ns Spartan 3. This is the result of a long path length, that also seems to be routed all across
 	the CPU. I don't really understand those paths yet though. The paths that are shown in the tool's analysis should not exist...
-     </p></div></div><hr>
+     </p></div></div><hr />
 
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+

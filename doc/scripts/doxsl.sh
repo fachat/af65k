@@ -5,6 +5,6 @@
 # 3rd parameter is result file
 
 # if -in is not used, stdin is used
-xsl-c -xsl "$1" -html -in "$2" -out "$3"
-
+#xsl-c -xsl "$1" -html -in "$2" -out "$3"
+xsltproc -o "$3" "$1" "$2"
 

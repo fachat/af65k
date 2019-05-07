@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
 
-<meta name="description" content="65002 documentation">
-<meta name="keywords" content="8-bit,6502,65002">
-<link rev="made" href="mailto:">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
 <title>65002 Memory Management</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -44,15 +45,15 @@ more modern browser, like Internet Explorer 8 or later,
 	<p>
 	The 65k always has simple memory management capabilities.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#mem">Memory Management</a></li><li style="list-style-type:none;"><ul><li><a href="#match">Match code</a></li></ul></li><li><a href="#con">Container Management</a></li><li style="list-style-type:none;"><ul><li><a href="#cont">Container</a></li><li><a href="#regmem">Memory Management Register</a></li><li><a href="#ctrl">Control bits</a></li></ul></li><li><a href="#mmu">Paged Memory Management Unit (MMU)</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="mem">Memory Management</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#mem">Memory Management</a></li><li style="list-style-type:none;"><ul><li><a href="#match">Match code</a></li></ul></li><li><a href="#con">Container Management</a></li><li style="list-style-type:none;"><ul><li><a href="#cont">Container</a></li><li><a href="#regmem">Memory Management Register</a></li><li><a href="#ctrl">Control bits</a></li></ul></li><li><a href="#mmu">Paged Memory Management Unit (MMU)</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="mem" id="mem">Memory Management</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
         This section describes the memory management features of the 65k. Those features are
         optional. They are decoupled from the main core by the means of "match codes".
-    </p><h3><a name="match">Match code</a></h3><p>
-        The match code is an 8&nbsp; bit value set by the core, for every memory access.
+    </p><h3><a name="match" id="match">Match code</a></h3><p>
+        The match code is an 8  bit value set by the core, for every memory access.
         It is used by the MMU to select which translation should be used to translate from
         effective to physical address.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="con">Container Management</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the basic memory management containers</p>
-    <h3><a name="cont">Container</a></h3><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="con" id="con">Container Management</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>This section describes the basic memory management containers</p>
+    <h3><a name="cont" id="cont">Container</a></h3><p>
         A container confines the processor into a defined address area. This is done by ANDing the
         effective address of the opcode with a bit mask, then comparing it with an address value.
         When the masked address equals the address value, the container address matches.
@@ -62,8 +63,8 @@ more modern browser, like Internet Explorer 8 or later,
       </p><p>
         The processor has a number of such container definitions. Each definition is matched against
         the current effective address coming from the CPU. As the matchable memory area is
-        at least 256 byte, the lowest 8&nbsp; bit in the mask and address value are used to match the matchcode:
-        the 8&nbsp; bit matchcode is ANDed with the lowest 8 mask bits, then compared to the
+        at least 256 byte, the lowest 8  bit in the mask and address value are used to match the matchcode:
+        the 8  bit matchcode is ANDed with the lowest 8 mask bits, then compared to the
         lowest 8 offset bits. If they are equal, then the container definition matches.
       </p><p>
         If multiple containers are matching the address and match code, then the container
@@ -71,25 +72,25 @@ more modern browser, like Internet Explorer 8 or later,
         If no container matches (e.g. upon reset) then the effective address becomes the confined
         address without any translation.
       </p>
-     <h3><a name="regmem">Memory Management Register</a></h3><p>The container management has a number of register sets. Each set contains three full size (W bits)
+     <h3><a name="regmem" id="regmem">Memory Management Register</a></h3><p>The container management has a number of register sets. Each set contains three full size (W bits)
         registers:</p>
     <table border="1">
         <tr><th>Container-Register</th><th>Definition</th><th>Comment</th></tr>
-        <tr><td>Addr/matchcode mask</td><td>0-7: matchcode mask<br>
+        <tr><td>Addr/matchcode mask</td><td>0-7: matchcode mask<br />
                                         8-W: address mask</td><td></td></tr>
-        <tr><td>Addr/matchcode compare value</td><td>0-7: matchcode compare value<br>
+        <tr><td>Addr/matchcode compare value</td><td>0-7: matchcode compare value<br />
                                         8-W: address compare value</td><td></td></tr>
-        <tr><td>Addr offset/container control</td><td>0-7: Container control<br>
+        <tr><td>Addr offset/container control</td><td>0-7: Container control<br />
                                         8-W: address offset value</td><td></td></tr>
     </table><p>
         There can be any number of register sets. The number can be read from a configuration register.
         If there are register sets, there must be at least four sets.
         For a full explanation see below.
     </p>
-    <h3><a name="ctrl">Control bits</a></h3>
+    <h3><a name="ctrl" id="ctrl">Control bits</a></h3>
  	<p>
         In addition to mask and offset the container definition has an extra byte in the
-        low 8&nbsp; bit of the address offset that determines memory mapping metadata: </p>
+        low 8  bit of the address offset that determines memory mapping metadata: </p>
         <table border="1">
         <tr><th>Bit</th><th>Name</th><th>Function</th></tr>
         <tr><td>0</td><td>VALID</td><td>If set, the address mapping is valid. If the container
@@ -103,14 +104,14 @@ more modern browser, like Internet Explorer 8 or later,
         <tr><td>4</td><td>NOEXECUTE</td><td>If set, a bus error condition occurs when the processor
                                 tries to read an opcode from this mapping</td></tr>
         <tr><td>5</td><td>TRANSIENT</td><td>If set, the memory address cannot be cached</td></tr>
-        <tr><td>6/7</td><td>WIDTH</td><td>Memory access width. 00=8&nbsp; bit, 01=16&nbsp; bit, 10=32&nbsp; bit, 11=64&nbsp; bit.
+        <tr><td>6/7</td><td>WIDTH</td><td>Memory access width. 00=8  bit, 01=16  bit, 10=32  bit, 11=64  bit.
                         If the width selected here is wider than the physical width, the upper bits are ignored on writes
                         and zero on reads.</td></tr>
         </table>
       <p>
-        A memory management setup to emulate a Commodore PET would for example look like (in a 32&nbsp; bit option) the
+        A memory management setup to emulate a Commodore PET would for example look like (in a 32  bit option) the
         table below, where the matchcode $12 is assumed to be the PET's matchcode, the system's I/O is at $E0000000,
-        Video memory at $D0000000 and normal bus is 16&nbsp; bit. The "PET emulator" memory is at $100000000.
+        Video memory at $D0000000 and normal bus is 16  bit. The "PET emulator" memory is at $100000000.
         </p>
       <table border="1">
         <tr><th>Container#</th><th>Addr/Matchcode Mask</th><th>Addr/Matchcode value</th><th>Addr Offset/Container Control</th></tr>
@@ -133,16 +134,17 @@ more modern browser, like Internet Explorer 8 or later,
         Note: this section must be further worked over. There is no way to define a write-through cache (e.g. video memory
         could be written (slowly) to a video board, but mirrored and cached in fast memory. On the other hand is this
         situation very common? Writes to read-only memory could always trap, so TRAPWRITE would not be needed.
-        Are there two WIDTH bits required? Would not one bit be enough to indicate 8&nbsp; bit access. This would
+        Are there two WIDTH bits required? Would not one bit be enough to indicate 8  bit access. This would
         suffice for compatibility. Also it would allow to have the default to "native" width - in the current
         proposal above the processor must know which memory access width it actually uses to write the correct
         width value.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="mmu">Paged Memory Management Unit (MMU)</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="mmu" id="mmu">Paged Memory Management Unit (MMU)</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The 65002 does not have an MMU.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr>
+    </div></div><hr />
 Last updated 2012-04-29.
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+

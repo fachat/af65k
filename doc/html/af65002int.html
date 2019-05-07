@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
 
-<meta name="description" content="65002 documentation">
-<meta name="keywords" content="8-bit,6502,65002">
-<link rev="made" href="mailto:">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css"><link rel="stylesheet" type="text/css" href="optable.css">
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" /><link rel="stylesheet" type="text/css" href="optable.css" />
 <title>65002 Interrupts and Traps</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -44,9 +45,9 @@ more modern browser, like Internet Explorer 8 or later,
 	<p>
 	This page lists all the opcodes of the 65002 with appropriate explanations.
 	</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li><li><a href="#sei">SEI handling</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#reset">Reset</a></li><li><a href="#vectors">Jump Vectors</a></li><li><a href="#int">Interrupt Vectors</a></li><li><a href="#int">Abort Vectors</a></li><li><a href="#trap">Trap Vectors</a></li><li><a href="#intproc">Interrupt and Trap Procedure</a></li><li><a href="#brkproc">BRK Procedure</a></li><li><a href="#intret">Interrupt Return</a></li><li><a href="#brkret">BRK Return</a></li><li><a href="#trapret">Trap Return</a></li><li><a href="#jpu">Jump to User Mode</a></li><li><a href="#irqfw">Forward an interrupt to user mode</a></li><li><a href="#sei">SEI handling</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="reset" id="reset">Reset</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	Upon Reset the processor fetches a two-byte Reset vector from "-4".
-	In a 16&nbsp; bit processor option this translates to the original 6502's
+	In a 16  bit processor option this translates to the original 6502's
 	$FFFC reset vector.
 	</p><p>
 	In a system with a larger address bus, the address is sign-extended, i.e.
@@ -64,7 +65,7 @@ more modern browser, like Internet Explorer 8 or later,
 	The configuration registers (specifically interrupt, abort and trap base registers) are
 	reset as well (see <a href="af65002config.html">Configuration Registers</a>).
 	</p>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="vectors">Jump Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="vectors" id="vectors">Jump Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The CPU uses a number of jump vectors for different conditions. One vector is the RESET vector,
 	but there are vectors for interrupts (IRQ, NMI), error conditions (ABORT) or traps into hypervisor mode (TRAP).
         </p><p>
@@ -93,15 +94,15 @@ more modern browser, like Internet Explorer 8 or later,
 	When configured, each interrupt, abort condition or trap number has an own jump vector in the respective
 	interrupt, abort and trap jump vector table.
 	</p>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="int">Interrupt Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="int" id="int">Interrupt Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The processor can have a number of interrupt lines. For each of the
 	interrupt lines a separate interrupt vector can be used. I.e. interrupts
 	are numbered, and the number is used as index in a table of interrupt vectors.
 	The interrupt vectors are fetched from an address that is determined
 	by the interrupt base register, IBR.
 	</p><p>
-	The interrupt base register determines the address of a 256&nbsp; byte 
-	aligned block with interrupt vectors, i.e. the register's lowest 8&nbsp; bit are unused.
+	The interrupt base register determines the address of a 256  byte 
+	aligned block with interrupt vectors, i.e. the register's lowest 8  bit are unused.
 	The interrupt vectors are counted up from the bottom of the block.
 	</p><p>
 	The interrupt vectors are (currently) always two byte, i.e. define only 
@@ -129,7 +130,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<tr><td>$FFFFFFFFFFFFFF00/1</td><td>Interrupt 0 vector (NMI)</td></tr>
 	</table>
        <p>All addresses are interpreted as hypervisor memory addresses</p>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="int">Abort Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="int" id="int">Abort Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The abort vector table works the same way as the interrupt vector base register.
 	I.e. the vectors are two-byte wide and augmented with the upper bits of the
 	abort vector register content itself.
@@ -159,7 +160,7 @@ more modern browser, like Internet Explorer 8 or later,
 <tr><td>PRIVMEM</td><td>User mode access on memory available only on hypervisor mode</td></tr>
     </table>
        <p>All addresses are interpreted as hypervisor memory addresses</p>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="trap">Trap Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="trap" id="trap">Trap Vectors</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The 65k has a TRAP opcode that allows to trap from a program into supervisor mode
 	(if available), resp. into a system program via a given trap vector.
 	The current version allows for a maximum of 255 trap vectors, as the trap operand is byte-wide.
@@ -173,8 +174,8 @@ more modern browser, like Internet Explorer 8 or later,
 	trap vector base register are reserved and must be zero. Trap vectors are always
 	two byte, the address is in the same 64k bank as the vectors.
       </p><p>
-	As there are 256 trap vectors, with 2&nbsp; byte vectors the trap table is 
-	512 byte. For 2&nbsp; byte vectors all but the lowest 9&nbsp; bit from the register are
+	As there are 256 trap vectors, with 2  byte vectors the trap table is 
+	512 byte. For 2  byte vectors all but the lowest 9  bit from the register are
 	used. This way the used
 	part of the register can simply be ORd with the shifted trap number to compute
 	the effective vector address.
@@ -186,7 +187,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<tr><td>$FFFFFFFFFFFFFE00/1</td><td>TRAP #$00</td></tr>
 	</table>
        <p>All addresses are interpreted as hypervisor memory addresses</p>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="intproc">Interrupt and Trap Procedure</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="intproc" id="intproc">Interrupt and Trap Procedure</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	What happens when an interrupt occurs? The interrupt procedure is very similar to the
 	original 6502 interrupt.
       </p><p>
@@ -220,7 +221,7 @@ more modern browser, like Internet Explorer 8 or later,
       </p><p>
 	This procedure means that similar to the 6502 no other registers are stored on the stack, 
 	this must be done by the interrupt routine.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="brkproc">BRK Procedure</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="brkproc" id="brkproc">BRK Procedure</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The BRK procedure is different from the interrupt procedure in that it stays in the
 	current mode - either supervisor or user mode.
 	more 
@@ -238,7 +239,7 @@ more modern browser, like Internet Explorer 8 or later,
 	vector in the ABORT table. Those addresses are taken as hypervisor mode addresses.
 	In user mode the vector at $fffe is used and interpreted as a user mode address. In both
 	cases the address is sign-extended from a two-byte vector to the full address.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="intret">Interrupt Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="intret" id="intret">Interrupt Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	For the return from an interrupt, there is the RTI opcode. 
 	It first pulls the status byte from this stack and restores it. If bit 5 is zero, it pulls the extended stack frame,
 	i.e. the extended status byte and the return address in the width given by the extended status byte. Then it 
@@ -252,7 +253,7 @@ more modern browser, like Internet Explorer 8 or later,
 	current mode.
 	The address that has been read is then sign-extended to full address width.
 	It then jumps to the return address.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="brkret">BRK Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="brkret" id="brkret">BRK Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	For the return from a BRK routine the same RTI opcode as to return from an interrupt is used.
 	It first pulls the status byte from this stack and restores it. 
 	In case of a BRK bit 5 is one, indicating a standard stack frame.
@@ -261,7 +262,7 @@ more modern browser, like Internet Explorer 8 or later,
 	The address is read in the native width (of the current mode).
 	This address is then sign-extended to full address width.
 	It then jumps to the return address.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="trapret">Trap Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="trapret" id="trapret">Trap Return</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	For the return from a TRAP, there is the RTU opcode, Return to User space. RTU is a privileged operation
 	and results in an ABORT when executed in user mode.
 	It first pulls the extended status byte from the supervisor stack. 
@@ -269,7 +270,7 @@ more modern browser, like Internet Explorer 8 or later,
 	</p><p>
 	Note that RTU does not restore the standard status byte, as it is supposed to pass the status information from
 	hypervisor to user mode.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="jpu">Jump to User Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="jpu" id="jpu">Jump to User Mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	To go to a user space program - as set up by the user mode matchcode and user mode 
 	stack pointer - the JPU opcode is used. It reads the operand address (from hypervisor mode),
 	then clears the hypervisor bit. After that it either jumps to the operand address in
@@ -280,7 +281,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<pre>
 	JPU ($FFFC)
 	</pre>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="irqfw">Forward an interrupt to user mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="irqfw" id="irqfw">Forward an interrupt to user mode</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	When an interrupt occurs, the standard interrupt procedure is always initiated. To also forward this interrupt
 	the following sequence has to take place:
 	</p>
@@ -298,7 +299,7 @@ more modern browser, like Internet Explorer 8 or later,
 	<li>From the privilege exception, restore the hypervisor mode registers and execute an RTI
 		in hypervisor to end the standard interrupt procedure.</li>
 	</ol>
-      </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="sei">SEI handling</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+      </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="sei" id="sei">SEI handling</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
 	The original 6502 has the interrupt flag in the status register. When it is set, all
 	interrupts (except the NMI) are disabled. Due to the interrupt registers described above
 	the interrupt flag would not be necessary. For compatibility reasons the interrupt 
@@ -313,10 +314,11 @@ more modern browser, like Internet Explorer 8 or later,
 	When the interrupt flag is set in user mode, interrupts should in general not be blocked.
 	However, with the User mode Interrupt Mask UIM the interrupt priority levels that are 
 	blocked can be configured.
-      </p></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+      </p></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr>
+    </div></div><hr />
 Last updated 2012-04-23.
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+

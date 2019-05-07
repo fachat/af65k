@@ -62,12 +62,10 @@ table.optable td div.prefixes {
 }
 
 table.optable td div.opc {
-	font-size: smaller;
 	vertical-align: top;
 }
 
 table.optable td.prefix {
-	font-size: smaller;
 	background-color: #aaffaa;
 }
 

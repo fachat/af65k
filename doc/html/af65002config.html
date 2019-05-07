@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
 
-<meta name="description" content="65002 documentation">
-<meta name="keywords" content="8-bit,6502,65002">
-<link rev="made" href="mailto:">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css"><link rel="stylesheet" type="text/css" href="optable.css">
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" /><link rel="stylesheet" type="text/css" href="optable.css" />
 <title>65002 Configuration Registers</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -50,7 +51,7 @@ more modern browser, like Internet Explorer 8 or later,
 	processor configuration registers, LCR, SCR. Also there is BCR, a BIT
 	of AC with the value of the processor configuration register.
 	</p>
-  </div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="cr">Processor Configuration Registers</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
+  </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="cr" id="cr">Processor Configuration Registers</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>
         The configuration value registers are basically constant values that the program can query from the
         processor. These values can then be used by the program to identify the processor, resp. adapt
         itself to the processor features present. They also allow to peek into some of the runtime
@@ -59,7 +60,7 @@ more modern browser, like Internet Explorer 8 or later,
         The following processor configuration registers are defined (note narrow values are always zero-extended):</p>
 <table border="1">
 <tr><th>Register#</th><th>rw/ro</th><th>global/per core</th><th>Name</th><th>Width</th><th>Value</th></tr>
-<tr><td>$00</td><td>ro</td><td>global</td><td>VENDOR</td><td>16&nbsp; bit</td><td>Defines the vendor of the processor.
+<tr><td>$00</td><td>ro</td><td>global</td><td>VENDOR</td><td>16  bit</td><td>Defines the vendor of the processor.
                         Currently defined are:
                         <table><tr><td>$AF</td><td>A. Fachat</td></tr></table></td></tr>
 <tr><td>$01</td><td>ro</td><td>per core</td><td>MC_MYCORE</td><td>W bit</td><td>Number of the core executing the load</td></tr>
@@ -79,13 +80,14 @@ more modern browser, like Internet Explorer 8 or later,
 <tr><td>$21</td><td>rw</td><td>global</td><td>ST_AV</td><td>W bit</td><td>Abort vector base register</td></tr>
 <tr><td>$22</td><td>rw</td><td>global</td><td>ST_TV</td><td>W bit</td><td>Trap vector base register</td></tr>
 
-<tr><td>$30</td><td>ro</td><td>global</td><td>MM_CONT</td><td>8&nbsp; bit</td><td>Number of memory management containers</td></tr>
+<tr><td>$30</td><td>ro</td><td>global</td><td>MM_CONT</td><td>8  bit</td><td>Number of memory management containers</td></tr>
 </table>
 
-    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr>
+    </div></div><hr />
 Last updated 2012-04-23.
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+

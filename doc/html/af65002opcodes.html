@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
 
-<meta name="description" content="65002 documentation">
-<meta name="keywords" content="8-bit,6502,65002">
-<link rev="made" href="mailto:">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css"><link rel="stylesheet" type="text/css" href="optable.css">
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" /><link rel="stylesheet" type="text/css" href="optable.css" />
 <title>65002 Opcode Overview</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -46,7 +47,7 @@ more modern browser, like Internet Explorer 8 or later,
 	The default page is the standard, 6502 opcode page. The other pages require 
 	the corresponding prefix opcode.
 	</p>
-  </div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="std">Standard Opcode Table</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+  </div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="std" id="std">Standard Opcode Table</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
 <tr><th>0</th><td><div class="opc">BRK #byte</div>
 </td><td><div class="opc">ORA (zp,X)</div>
@@ -63,7 +64,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">EXT</td></tr>
 <tr><th>1</th><td><div class="opc">BPL rel</div>
 </td><td><div class="opc">ORA (zp),Y</div>
-</td><td class="cmos"><div class="opc">ORA (zp)</div>
+</td><td><div class="opc">ORA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">TRB zp</div>
 </td><td><div class="opc">ORA zp,X</div>
 </td><td><div class="opc">ASL zp,X</div>
@@ -73,7 +74,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">TRB abs</div>
 </td><td><div class="opc">ORA abs,X</div>
 </td><td><div class="opc">ASL abs,X</div>
-</td><td class="unused"></td></tr>
+</td><td class="c65k"><div class="opc">SPL </div>
+</td></tr>
 <tr><th>2</th><td><div class="opc">JSR abs</div>
 </td><td><div class="opc">AND (zp,X)</div>
 </td><td class="c65k"><div class="opc">STA zp,Y</div>
@@ -89,7 +91,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">SYS</td></tr>
 <tr><th>3</th><td><div class="opc">BMI rel</div>
 </td><td><div class="opc">AND (zp),Y</div>
-</td><td class="cmos"><div class="opc">AND (zp)</div>
+</td><td><div class="opc">AND (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">BIT zp,X</div>
 </td><td><div class="opc">AND zp,X</div>
 </td><td><div class="opc">ROL zp,X</div>
@@ -99,7 +101,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">BIT abs,X</div>
 </td><td><div class="opc">AND abs,X</div>
 </td><td><div class="opc">ROL abs,X</div>
-</td><td class="unused"></td></tr>
+</td><td class="c65k"><div class="opc">SMI </div>
+</td></tr>
 <tr><th>4</th><td><div class="opc">RTI </div>
 </td><td><div class="opc">EOR (zp,X)</div>
 </td><td class="c65k"><div class="opc">LDA (abs),Y</div>
@@ -115,7 +118,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">QUICK</td></tr>
 <tr><th>5</th><td><div class="opc">BVC rel</div>
 </td><td><div class="opc">EOR (zp),Y</div>
-</td><td class="cmos"><div class="opc">EOR (zp)</div>
+</td><td><div class="opc">EOR (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="unused"></td><td><div class="opc">EOR zp,X</div>
 </td><td><div class="opc">LSR zp,X</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">CLI </div>
@@ -123,7 +126,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="cmos"><div class="opc">PHY </div>
 </td><td class="prefix">prefix2</td><td class="unused"></td><td><div class="opc">EOR abs,X</div>
 </td><td><div class="opc">LSR abs,X</div>
-</td><td class="unused"></td></tr>
+</td><td class="c65k"><div class="opc">SVC </div>
+</td></tr>
 <tr><th>6</th><td><div class="opc">RTS </div>
 </td><td><div class="opc">ADC (zp,X)</div>
 </td><td class="c65k"><div class="opc">LDA (abs,X)</div>
@@ -139,7 +143,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>7</th><td><div class="opc">BVS rel</div>
 </td><td><div class="opc">ADC (zp),Y</div>
-</td><td class="cmos"><div class="opc">ADC (zp)</div>
+</td><td><div class="opc">ADC (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="cmos"><div class="opc">STZ zp,X</div>
 </td><td><div class="opc">ADC zp,X</div>
 </td><td><div class="opc">ROR zp,X</div>
@@ -149,7 +153,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">JMP (abs,X)</div>
 </td><td><div class="opc">ADC abs,X</div>
 </td><td><div class="opc">ROR abs,X</div>
-</td><td class="unused"></td></tr>
+</td><td class="c65k"><div class="opc">SVS </div>
+</td></tr>
 <tr><th>8</th><td class="cmos"><div class="opc">BRA rel</div>
 </td><td><div class="opc">STA (zp,X)</div>
 </td><td class="c65k"><div class="opc">BSR rel</div>
@@ -165,7 +170,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>9</th><td><div class="opc">BCC rel</div>
 </td><td><div class="opc">STA (zp),Y</div>
-</td><td class="cmos"><div class="opc">STA (zp)</div>
+</td><td><div class="opc">STA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">STY zp,X</div>
 </td><td><div class="opc">STA zp,X</div>
 </td><td><div class="opc">STX zp,Y</div>
@@ -175,7 +180,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="cmos"><div class="opc">STZ abs</div>
 </td><td><div class="opc">STA abs,X</div>
 </td><td class="cmos"><div class="opc">STZ abs,X</div>
-</td><td class="prefix">reserved prefix</td></tr>
+</td><td class="c65k"><div class="opc">SCC </div>
+</td></tr>
 <tr><th>A</th><td><div class="opc">LDY #byte</div>
 </td><td><div class="opc">LDA (zp,X)</div>
 </td><td><div class="opc">LDX #byte</div>
@@ -191,7 +197,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>B</th><td><div class="opc">BCS rel</div>
 </td><td><div class="opc">LDA (zp),Y</div>
-</td><td class="cmos"><div class="opc">LDA (zp)</div>
+</td><td><div class="opc">LDA (zp),Z</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">LDY zp,X</div>
 </td><td><div class="opc">LDA zp,X</div>
 </td><td><div class="opc">LDX zp,Y</div>
@@ -201,7 +207,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td><div class="opc">LDY abs,X</div>
 </td><td><div class="opc">LDA abs,X</div>
 </td><td><div class="opc">LDX abs,Y</div>
-</td><td class="prefix">reserved prefix</td></tr>
+</td><td class="c65k"><div class="opc">SCS </div>
+</td></tr>
 <tr><th>C</th><td><div class="opc">CPY #byte</div>
 </td><td><div class="opc">CMP (zp,X)</div>
 </td><td class="c65k"><div class="opc">STA (abs),Y</div>
@@ -217,7 +224,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>D</th><td><div class="opc">BNE rel</div>
 </td><td><div class="opc">CMP (zp),Y</div>
-</td><td class="cmos"><div class="opc">CMP (zp)</div>
+</td><td><div class="opc">CMP (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="unused"></td><td><div class="opc">CMP zp,X</div>
 </td><td><div class="opc">DEC zp,X</div>
 </td><td class="prefix">prefix1</td><td><div class="opc">CLD </div>
@@ -226,7 +233,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="c65k"><div class="opc">JSR (abs)</div>
 </td><td><div class="opc">CMP abs,X</div>
 </td><td><div class="opc">DEC abs,X</div>
-</td><td class="prefix">reserved prefix</td></tr>
+</td><td class="c65k"><div class="opc">SNE </div>
+</td></tr>
 <tr><th>E</th><td><div class="opc">CPX #byte</div>
 </td><td><div class="opc">SBC (zp,X)</div>
 </td><td class="c65k"><div class="opc">STA (abs,X)</div>
@@ -242,7 +250,7 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">reserved prefix</td></tr>
 <tr><th>F</th><td><div class="opc">BEQ rel</div>
 </td><td><div class="opc">SBC (zp),Y</div>
-</td><td class="cmos"><div class="opc">SBC (zp)</div>
+</td><td><div class="opc">SBC (zp),Z</div>
 </td><td class="prefix">prefix1</td><td class="c65k"><div class="opc">TRP #byte</div>
 </td><td><div class="opc">SBC zp,X</div>
 </td><td><div class="opc">INC zp,X</div>
@@ -252,7 +260,8 @@ more modern browser, like Internet Explorer 8 or later,
 </td><td class="prefix">prefix2</td><td class="c65k"><div class="opc">JSR (abs,X)</div>
 </td><td><div class="opc">SBC abs,X</div>
 </td><td><div class="opc">INC abs,X</div>
-</td><td class="prefix">reserved prefix</td></tr>
+</td><td class="c65k"><div class="opc">SEQ </div>
+</td></tr>
 </table>
 
 <p>Legend:</p>
@@ -269,10 +278,13 @@ Add content of memory location to accumulator</li>
 Bitwise AND accumulator with content of memory location</li>
 <li>
 <a href="af65002opdesc.html#ASL">ASL: </a>
-Arithmetic Shift Left - shift accumulator one bit to the left, shifting in zero in bit 0</li>
+Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			</li>
 <li>
 <a href="af65002opdesc.html#BCC">BCC: </a>
-Branch on carry clear - take branch when C flag is cleared</li>
+Branch on carry clear - take branch when C flag is cleared
+			</li>
 <li>
 <a href="af65002opdesc.html#BCS">BCS: </a>
 Branch on carry set - take branch when C flag is set</li>
@@ -281,8 +293,15 @@ Branch on carry set - take branch when C flag is set</li>
 Branch on equal - take branch when Z flag is set</li>
 <li>
 <a href="af65002opdesc.html#BIT">BIT: </a>
-Bitwise test with accumulator - AND the memory location with the accumulator, and set N (=bit 7), V (=bit 7), Z (iff all bits 
-				zero) flags from the result. In case of the accumulator addressing, simply set the flags from the accumulator</li>
+Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			</li>
 <li>
 <a href="af65002opdesc.html#BMI">BMI: </a>
 Branch on minus - take branch when N flag is set</li>
@@ -300,10 +319,13 @@ Branch always - branch independent from any flags</li>
 Starts the break routine.</li>
 <li>
 <a href="af65002opdesc.html#BSR">BSR: </a>
-Branch subroutine - similar to JSR, but use relative addressing similar to branch opcodes</li>
+Branch subroutine - similar to JSR, but use relative addressing
+				similar to branch opcodes
+			</li>
 <li>
 <a href="af65002opdesc.html#BVC">BVC: </a>
-Branch on overflow clear - take branch when V flag is cleared</li>
+Branch on overflow clear - take branch when V flag is cleared
+			</li>
 <li>
 <a href="af65002opdesc.html#BVS">BVS: </a>
 Branch on overflow set - take branch when V flag is set</li>
@@ -339,7 +361,9 @@ Decrement the content of the X register by one</li>
 Decrement the Y register by one</li>
 <li>
 <a href="af65002opdesc.html#EOR">EOR: </a>
-Bitwise Exclusive-OR accumulator with content of memory location</li>
+Bitwise Exclusive-OR accumulator with content of memory
+				location
+			</li>
 <li>
 <a href="af65002opdesc.html#INC">INC: </a>
 Increment the content of a memory location by one</li>
@@ -354,7 +378,9 @@ Increment the content of the Y register by one</li>
 Jump to new code address</li>
 <li>
 <a href="af65002opdesc.html#JSR">JSR: </a>
-Jump subroutine - jump to a new code location, save return address on stack for RTS</li>
+Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</li>
 <li>
 <a href="af65002opdesc.html#LDA">LDA: </a>
 Load accumulator</li>
@@ -366,7 +392,9 @@ Load X register</li>
 Load Y register</li>
 <li>
 <a href="af65002opdesc.html#LSR">LSR: </a>
-Logical Shift Right - shift accumulator one bit to the right, shifting in zero in the highest bit</li>
+Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			</li>
 <li>
 <a href="af65002opdesc.html#NOP">NOP: </a>
 No operation</li>
@@ -399,12 +427,20 @@ Pull the contents of the X register from the stack</li>
 Pull the contents of the Y register from the stack</li>
 <li>
 <a href="af65002opdesc.html#ROL">ROL: </a>
-Rotate Left - shift accumulator one bit to the left, shifting in the carry flag in bit 0, and shifting the 
-        	highest bit into the carry flag instead.</li>
+Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</li>
 <li>
 <a href="af65002opdesc.html#ROR">ROR: </a>
-Rotate Right - shift accumulator one bit to the right, shifting in the carry flag in the highest bit, and shifting 
-        	bit 0 into the carry flag instead.</li>
+Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			</li>
 <li>
 <a href="af65002opdesc.html#RTI">RTI: </a>
 Return from interrupt</li>
@@ -415,6 +451,12 @@ Return from subroutine - read return address from stack</li>
 <a href="af65002opdesc.html#SBC">SBC: </a>
 Substract content of memory location from accumulator</li>
 <li>
+<a href="af65002opdesc.html#SCC">SCC: </a>
+Skip on carry clear - skip next opcode when C flag is cleared</li>
+<li>
+<a href="af65002opdesc.html#SCS">SCS: </a>
+Skip on carry set - skip next opcode when C flag is set</li>
+<li>
 <a href="af65002opdesc.html#SEC">SEC: </a>
 Set the C flag</li>
 <li>
@@ -424,8 +466,21 @@ Set the decimal (D) flag</li>
 <a href="af65002opdesc.html#SEI">SEI: </a>
 Set the interrupt (I) flag</li>
 <li>
+<a href="af65002opdesc.html#SEQ">SEQ: </a>
+Skip on equal - skip next opcode when Z flag is set</li>
+<li>
+<a href="af65002opdesc.html#SMI">SMI: </a>
+Skip on minus - skip next opcode when N flag is set</li>
+<li>
+<a href="af65002opdesc.html#SNE">SNE: </a>
+Skip on not equal - skip next opcode when Z flag is cleared</li>
+<li>
+<a href="af65002opdesc.html#SPL">SPL: </a>
+Skip on plus - skip next opcode when N flag is cleared</li>
+<li>
 <a href="af65002opdesc.html#STA">STA: </a>
-Store the content of the accumulator into a memory location</li>
+Store the content of the accumulator into a memory location
+			</li>
 <li>
 <a href="af65002opdesc.html#STX">STX: </a>
 Store the content of the X register to memory.</li>
@@ -436,6 +491,12 @@ Store the content of the Y register to memory.</li>
 <a href="af65002opdesc.html#STZ">STZ: </a>
 Store zero into a memory location</li>
 <li>
+<a href="af65002opdesc.html#SVC">SVC: </a>
+Skip on overflow clear - skip next opcode when V flag is cleared</li>
+<li>
+<a href="af65002opdesc.html#SVS">SVS: </a>
+Skip on overflow set - skip next opcode when V flag is set</li>
+<li>
 <a href="af65002opdesc.html#TAX">TAX: </a>
 Transfer the contents of accumulator into the X register</li>
 <li>
@@ -443,35 +504,48 @@ Transfer the contents of accumulator into the X register</li>
 Transfer the contents of accumulator into the Y register</li>
 <li>
 <a href="af65002opdesc.html#TRB">TRB: </a>
-Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Reset Bit - AND the memory location with the
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
+				in the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TRP">TRP: </a>
 Trap into 65k supervisor mode</li>
 <li>
 <a href="af65002opdesc.html#TSB">TSB: </a>
-Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Set Bit - AND the memory location with the
+				accumulator,
+				and set the Z flag from the result, then SET all
+				bits in
+				the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TSX">TSX: </a>
-Transfer the contents of the stack pointer into the X register (Note: needs RS to keep compatibility with 6502)</li>
+Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			</li>
 <li>
 <a href="af65002opdesc.html#TXA">TXA: </a>
-Transfer the contents of the X register into the accumulator</li>
+Transfer the contents of the X register into the accumulator
+			</li>
 <li>
 <a href="af65002opdesc.html#TXS">TXS: </a>
-Transfer the contents of X register into the stack pointer (Note: needs RS to keep compatibility with 6502)</li>
+Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			</li>
 <li>
 <a href="af65002opdesc.html#TYA">TYA: </a>
-Transfer the contents of the Y register into the accumulator</li>
+Transfer the contents of the Y register into the accumulator
+			</li>
 </ul>
-	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="std">EXT Opcode Table</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="std" id="std">EXT Opcode Table</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
 <tr><th>0</th><td><div class="opc">ADD (E)</div>
-</td><td><div class="opc">PEA (abs),Y</div>
-</td><td><div class="opc">PEA relwide</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">MVN </div>
-</td><td><div class="opc">ADD #byte</div>
+</td><td><div class="opc">STI #byte, abs</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADD #byte</div>
 </td><td><div class="opc">ASR zp</div>
 </td><td class="unused"></td><td><div class="opc">PHE </div>
 </td><td><div class="opc">ORA (E)</div>
@@ -482,26 +556,27 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">ASL abs,Y</div>
 </td></tr>
 <tr><th>1</th><td><div class="opc">BEV rel</div>
-</td><td><div class="opc">PEA (abs,X)</div>
-</td><td><div class="opc">PEA (abs)</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">MVP </div>
-</td><td class="unused"></td><td><div class="opc">ASR zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TRB (E)</div>
+</td><td><div class="opc">LEA rel</div>
+</td><td><div class="opc">LEA relwide</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADI #byte, zp,X</div>
+</td><td><div class="opc">ASR zp,X</div>
+</td><td class="unused"></td><td><div class="opc">INZ </div>
+</td><td class="unused"></td><td><div class="opc">DAD </div>
+</td><td class="unused"></td><td><div class="opc">TRB (E)</div>
 </td><td><div class="opc">ASR (E)</div>
 </td><td><div class="opc">ASR abs,X</div>
 </td><td><div class="opc">ASR abs,Y</div>
 </td></tr>
 <tr><th>2</th><td><div class="opc">JSR (E)</div>
 </td><td><div class="opc">LEA (abs),Y</div>
-</td><td><div class="opc">LEA relwide</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">FIL </div>
+</td><td><div class="opc">LEA (abs),#byte</div>
+</td><td class="unused"></td><td><div class="opc">ADE </div>
 </td><td><div class="opc">ADE #byte</div>
 </td><td><div class="opc">RDL zp</div>
 </td><td class="unused"></td><td><div class="opc">PLE </div>
 </td><td><div class="opc">AND (E)</div>
 </td><td><div class="opc">RDL </div>
-</td><td class="unused"></td><td class="unused"><div class="opc">SCA (E)</div>
-</td><td><div class="opc">ROL (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">ROL (E)</div>
 </td><td><div class="opc">RDL abs</div>
 </td><td><div class="opc">ROL abs,Y</div>
 </td></tr>
@@ -509,17 +584,19 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td><div class="opc">LEA (abs,X)</div>
 </td><td><div class="opc">LEA (abs)</div>
 </td><td class="unused"></td><td><div class="opc">BIT </div>
-</td><td><div class="opc">ADE </div>
+</td><td><div class="opc">ADI #byte, (zp),Y</div>
 </td><td><div class="opc">RDL zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDE #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"><div class="opc">LLA (E)</div>
-</td><td><div class="opc">RDL (E)</div>
+</td><td class="unused"></td><td><div class="opc">DEZ </div>
+</td><td><div class="opc">LDE #byte</div>
+</td><td><div class="opc">DAS </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDL (E)</div>
 </td><td><div class="opc">RDL abs,X</div>
 </td><td><div class="opc">RDL abs,Y</div>
 </td></tr>
-<tr><th>4</th><td class="unused"></td><td><div class="opc">PEA [[abs]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"><div class="opc">PSH </div>
-</td><td><div class="opc">ADS #byte</div>
+<tr><th>4</th><td class="unused"></td><td><div class="opc">LDA (abs),#byte</div>
+</td><td><div class="opc">LDA [[abs]],#byte</div>
+</td><td class="unused"></td><td><div class="opc">PHM </div>
+</td><td><div class="opc">ADI #byte, zp</div>
 </td><td><div class="opc">LEA zp</div>
 </td><td class="unused"></td><td><div class="opc">PHB </div>
 </td><td><div class="opc">EOR (E)</div>
@@ -528,17 +605,20 @@ Transfer the contents of the Y register into the accumulator</li>
 </td><td class="unused"></td><td><div class="opc">LSR abs,Y</div>
 </td></tr>
 <tr><th>5</th><td><div class="opc">BLTS rel</div>
-</td><td><div class="opc">PEA [[abs,X]]</div>
-</td><td><div class="opc">PEA [[abs]]</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">PLL </div>
-</td><td><div class="opc">ADS </div>
+</td><td><div class="opc">STA (abs),#byte</div>
+</td><td><div class="opc">STA [[abs]],#byte</div>
+</td><td class="unused"></td><td><div class="opc">INV </div>
+</td><td><div class="opc">ADQ .&lt;reg&gt;, #byte</div>
 </td><td><div class="opc">LEA zp,X</div>
 </td><td class="unused"></td><td><div class="opc">PRB </div>
 </td><td><div class="opc">LDB #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</td><td><div class="opc">PHZ </div>
+</td><td class="unused"></td><td><div class="opc">JSR long</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>6</th><td class="unused"></td><td><div class="opc">LEA [[abs]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"><div class="opc">RMB </div>
-</td><td><div class="opc">ADB #byte</div>
+</td><td><div class="opc">LEA [[abs]],#byte</div>
+</td><td class="unused"></td><td><div class="opc">PLM </div>
+</td><td><div class="opc">ADI #byte, abs</div>
 </td><td><div class="opc">RDR zp</div>
 </td><td class="unused"></td><td><div class="opc">PLB </div>
 </td><td><div class="opc">ADC (E)</div>
@@ -551,118 +631,136 @@ Transfer the contents of the Y register into the accumulator</li>
 <tr><th>7</th><td><div class="opc">BGES rel</div>
 </td><td><div class="opc">LEA [[abs,X]]</div>
 </td><td><div class="opc">LEA [[abs]]</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">WMB </div>
-</td><td><div class="opc">ADB </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">ADQ .&lt;reg&gt;, #word</div>
 </td><td><div class="opc">RDR zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">PLZ </div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">RDR (E)</div>
 </td><td><div class="opc">RDR abs,X</div>
 </td><td><div class="opc">RDR abs,Y</div>
 </td></tr>
 <tr><th>8</th><td><div class="opc">SUB (E)</div>
-</td><td><div class="opc">PEA (zp,X)</div>
-</td><td><div class="opc">PEA rel</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">HBS </div>
-</td><td><div class="opc">SUB #byte</div>
-</td><td><div class="opc">PEA zp</div>
-</td><td class="unused"></td><td><div class="opc">TAE </div>
+</td><td><div class="opc">LDA (zp),#byte</div>
+</td><td><div class="opc">LDA [[zp]],#byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SUB #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAX </div>
 </td><td><div class="opc">BIT (E)</div>
-</td><td><div class="opc">TYS </div>
+</td><td><div class="opc">TZA </div>
 </td><td class="unused"></td><td><div class="opc">STY (E)</div>
 </td><td><div class="opc">STA (E)</div>
 </td><td class="unused"></td><td><div class="opc">STY abs,X</div>
 </td></tr>
 <tr><th>9</th><td><div class="opc">BLE rel</div>
-</td><td><div class="opc">PEA (zp),Y</div>
-</td><td><div class="opc">PEA (zp)</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">HBC </div>
-</td><td class="unused"></td><td><div class="opc">PEA zp,X</div>
-</td><td class="unused"></td><td><div class="opc">TEA </div>
-</td><td class="unused"></td><td><div class="opc">SXY </div>
+</td><td><div class="opc">STA (zp),#byte</div>
+</td><td><div class="opc">STA [[zp]],#byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SBI #byte, zp,X</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SXY </div>
+</td><td><div class="opc">LDZ #byte</div>
+</td><td><div class="opc">TYS </div>
 </td><td class="unused"></td><td><div class="opc">STZ (E)</div>
 </td><td><div class="opc">STX (E)</div>
 </td><td><div class="opc">STZ abs,Y</div>
 </td><td class="unused"></td></tr>
 <tr><th>A</th><td><div class="opc">LDY (E)</div>
 </td><td><div class="opc">LEA (zp,X)</div>
-</td><td><div class="opc">LEA rel</div>
-</td><td class="unused"></td><td><div class="opc">INV </div>
+</td><td><div class="opc">LEA (zp),#byte</div>
+</td><td class="unused"></td><td><div class="opc">SBE </div>
 </td><td><div class="opc">SBE #byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SAB </div>
 </td><td><div class="opc">LDA (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDX (E)</div>
+</td><td><div class="opc">TAZ </div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs</div>
+</td><td><div class="opc">LDX (E)</div>
 </td><td><div class="opc">LEA abs</div>
 </td><td><div class="opc">STX abs,Y</div>
 </td></tr>
-<tr><th>B</th><td><div class="opc">BGT rel</div>
-</td><td><div class="opc">LEA (zp),Y</div>
-</td><td><div class="opc">LEA (zp)</div>
+<tr><th>B</th><td class="unused"></td><td><div class="opc">LEA (zp),Y</div>
+</td><td><div class="opc">LEA (zp),Z</div>
 </td><td class="unused"></td><td><div class="opc">BCN </div>
-</td><td><div class="opc">SBE </div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SEB </div>
-</td><td class="unused"></td><td><div class="opc">SAX </div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
+</td><td><div class="opc">SBI #byte, (zp),Y</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SXZ </div>
+</td><td class="unused"></td><td><div class="opc">TSY </div>
+</td><td class="unused"></td><td><div class="opc">LDZ abs,X</div>
+</td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
 </td><td><div class="opc">LEA abs,Y</div>
 </td></tr>
 <tr><th>C</th><td><div class="opc">CPY (E)</div>
-</td><td><div class="opc">PEA [[zp]],Y</div>
+</td><td><div class="opc">CSW (zp),Y</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">EXT </div>
-</td><td><div class="opc">SBS #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">TPA </div>
+</td><td><div class="opc">SBI #byte, zp</div>
+</td><td><div class="opc">CSW zp</div>
+</td><td class="unused"></td><td><div class="opc">TPA </div>
 </td><td><div class="opc">CMP (E)</div>
-</td><td><div class="opc">TSY </div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">DEC (E)</div>
-</td><td><div class="opc">PEA abs</div>
-</td><td><div class="opc">DEC abs,Y</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CSW (E)</div>
+</td><td><div class="opc">DEC (E)</div>
+</td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
 </td></tr>
 <tr><th>D</th><td><div class="opc">BLES rel</div>
-</td><td><div class="opc">PEA [[zp,X]]</div>
-</td><td><div class="opc">PEA [[zp]]</div>
-</td><td class="unused"></td><td><div class="opc">SWP </div>
-</td><td><div class="opc">SBS </div>
-</td><td><div class="opc">PEA zp,Y</div>
-</td><td class="unused"></td><td><div class="opc">SAE </div>
-</td><td class="unused"></td><td><div class="opc">SAY </div>
-</td><td class="unused"></td><td><div class="opc">JSR long</div>
-</td><td class="unused"></td><td><div class="opc">PEA abs,X</div>
-</td><td><div class="opc">PEA abs,Y</div>
-</td></tr>
+</td><td><div class="opc">STI #byte, zp</div>
+</td><td><div class="opc">PHI #byte</div>
+</td><td class="unused"></td><td><div class="opc">NEG </div>
+</td><td><div class="opc">SBQ .&lt;reg&gt;, #byte</div>
+</td><td><div class="opc">CSW zp,X</div>
+</td><td class="unused"></td><td><div class="opc">TEA </div>
+</td><td><div class="opc">CPZ #byte</div>
+</td><td><div class="opc">SAY </div>
+</td><td class="unused"></td><td><div class="opc">CPZ abs</div>
+</td><td class="unused"></td><td><div class="opc">CSW abs,X</div>
+</td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
 </td><td><div class="opc">LEA [[zp]],Y</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SBB #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">TAB </div>
+</td><td><div class="opc">LEA [[zp]],#byte</div>
+</td><td class="unused"></td><td><div class="opc">SWP </div>
+</td><td><div class="opc">SBI #byte, abs</div>
+</td><td><div class="opc">CPZ zp</div>
+</td><td class="unused"></td><td><div class="opc">TAB </div>
 </td><td><div class="opc">SBC (E)</div>
 </td><td><div class="opc">TEB </div>
-</td><td class="unused"></td><td class="unused"><div class="opc">RMB (E)</div>
-</td><td><div class="opc">INC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">INC (E)</div>
 </td><td class="unused"></td><td><div class="opc">INC abs,Y</div>
 </td></tr>
-<tr><th>F</th><td><div class="opc">BGTS rel</div>
-</td><td><div class="opc">LEA [[zp,X]]</div>
-</td><td><div class="opc">LEA [[zp]]</div>
-</td><td class="unused"></td><td class="unused"><div class="opc">BSW </div>
-</td><td><div class="opc">SBB </div>
+<tr><th>F</th><td class="unused"></td><td><div class="opc">LEA [[zp,X]]</div>
+</td><td><div class="opc">LEA [[zp]],Z</div>
+</td><td class="unused"></td><td><div class="opc">BSW </div>
+</td><td><div class="opc">SBQ .&lt;reg&gt;, #word</div>
 </td><td><div class="opc">LEA zp,Y</div>
-</td><td class="unused"></td><td><div class="opc">TBA </div>
-</td><td class="unused"></td><td><div class="opc">TBE </div>
-</td><td class="unused"></td><td class="unused"><div class="opc">WMB (E)</div>
-</td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 </table>
 <ul>
 <li>
-<a href="af65002opdesc.html#ADB">ADB: </a>
-Add value to B register</li>
+<a href="af65002opdesc.html#ADC">ADC: </a>
+Add content of memory location to accumulator</li>
+<li>
+<a href="af65002opdesc.html#ADD">ADD: </a>
+Add content of memory location to accumulator without using
+				carry as input
+			</li>
 <li>
 <a href="af65002opdesc.html#ADE">ADE: </a>
 Add value to E register</li>
 <li>
-<a href="af65002opdesc.html#ADS">ADS: </a>
-Add value to stack pointer</li>
+<a href="af65002opdesc.html#ADI">ADI: </a>
+Add immediate value to a memory location</li>
+<li>
+<a href="af65002opdesc.html#ADQ">ADQ: </a>
+Add immediate value to a register</li>
+<li>
+<a href="af65002opdesc.html#AND">AND: </a>
+Bitwise AND accumulator with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#ASL">ASL: </a>
+Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			</li>
 <li>
 <a href="af65002opdesc.html#ASR">ASR: </a>
-Arithmetic Shift Right - Similar to LSR, but shifts in the sign of the value, not zero</li>
+Arithmetic Shift Right - Similar to LSR, but shifts in the sign
+				of the value, not zero
+			</li>
 <li>
 <a href="af65002opdesc.html#BCN">BCN: </a>
-Bit Count: counts 1-bits in AC or in given location, stores number of 1-bits back in AC</li>
+Bit Count: counts 1-bits in AC or in given location, stores
+				number of 1-bits back in AC
+			</li>
 <li>
 <a href="af65002opdesc.html#BEV">BEV: </a>
 Branch on even</li>
@@ -670,17 +768,26 @@ Branch on even</li>
 <a href="af65002opdesc.html#BGES">BGES: </a>
 Branch on signed greater or equal than</li>
 <li>
-<a href="af65002opdesc.html#BGT">BGT: </a>
-Branch if greater - take branch when C flag is set but Z flag is clear</li>
-<li>
-<a href="af65002opdesc.html#BGTS">BGTS: </a>
-Branch if greater - take branch when signed greater or equal G flag is set but Z flag is clear</li>
+<a href="af65002opdesc.html#BIT">BIT: </a>
+Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			</li>
 <li>
 <a href="af65002opdesc.html#BLE">BLE: </a>
-Branch if less or equal - take branch when C flag is clear or Z flag is set</li>
+Branch if less or equal - take branch when C flag is clear or Z
+				flag is set
+			</li>
 <li>
 <a href="af65002opdesc.html#BLES">BLES: </a>
-Branch if less or equal - take branch when signed greater or equal flag G is clear or Z flag is set</li>
+Branch if less or equal - take branch when signed greater or
+				equal flag G is clear or Z flag is set
+			</li>
 <li>
 <a href="af65002opdesc.html#BLTS">BLTS: </a>
 Branch on signed less than</li>
@@ -689,22 +796,67 @@ Branch on signed less than</li>
 Branch on odd</li>
 <li>
 <a href="af65002opdesc.html#BSW">BSW: </a>
-Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and so on.</li>
+Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
+				so on.
+			</li>
+<li>
+<a href="af65002opdesc.html#CMP">CMP: </a>
+Compare accumulator with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CPX">CPX: </a>
+Compare X register with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CPY">CPY: </a>
+Compare Y register with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CPZ">CPZ: </a>
+Compare Z register with content of memory location</li>
+<li>
+<a href="af65002opdesc.html#CSW">CSW: </a>
+Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
+			</li>
+<li>
+<a href="af65002opdesc.html#DAD">DAD: </a>
+Decimal adjust of a normal ADC of two BCD numbers.</li>
+<li>
+<a href="af65002opdesc.html#DAS">DAS: </a>
+Decimal adjust of a normal SBC of two BCD numbers.</li>
+<li>
+<a href="af65002opdesc.html#DEC">DEC: </a>
+Decrement the content of a memory location by one</li>
+<li>
+<a href="af65002opdesc.html#DEZ">DEZ: </a>
+Decrement Z register</li>
+<li>
+<a href="af65002opdesc.html#EOR">EOR: </a>
+Bitwise Exclusive-OR accumulator with content of memory
+				location
+			</li>
 <li>
 <a href="af65002opdesc.html#EXT">EXT: </a>
-Extend a value in AC from RS to the full size. Setting LE defines the type of extension.</li>
+Extend a value in AC from RS to the full size. Setting LE
+				defines the type of extension.
+			</li>
 <li>
-<a href="af65002opdesc.html#FIL">FIL: </a>
-Fill a memory area of size AC at address XR with a value from YR</li>
-<li>
-<a href="af65002opdesc.html#HBC">HBC: </a>
-Highest Bit Clear: Determines the number of the highest bit that is set to zero.</li>
-<li>
-<a href="af65002opdesc.html#HBS">HBS: </a>
-Highest Bit Set: Determines the number of the highest bit that is set to one.</li>
+<a href="af65002opdesc.html#INC">INC: </a>
+Increment the content of a memory location by one</li>
 <li>
 <a href="af65002opdesc.html#INV">INV: </a>
-invert AC, i.e. set AC to the 2s-complement of AC</li>
+Invert AC, i.e. set AC to the 1s-complement of AC</li>
+<li>
+<a href="af65002opdesc.html#INZ">INZ: </a>
+Increment Z register</li>
+<li>
+<a href="af65002opdesc.html#JMP">JMP: </a>
+Jump to new code address</li>
+<li>
+<a href="af65002opdesc.html#JSR">JSR: </a>
+Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</li>
+<li>
+<a href="af65002opdesc.html#LDA">LDA: </a>
+Load accumulator</li>
 <li>
 <a href="af65002opdesc.html#LDB">LDB: </a>
 Load B with an immediate value</li>
@@ -712,20 +864,31 @@ Load B with an immediate value</li>
 <a href="af65002opdesc.html#LDE">LDE: </a>
 Load E with an immediate value</li>
 <li>
+<a href="af65002opdesc.html#LDX">LDX: </a>
+Load X register</li>
+<li>
+<a href="af65002opdesc.html#LDY">LDY: </a>
+Load Y register</li>
+<li>
+<a href="af65002opdesc.html#LDZ">LDZ: </a>
+Load Z register with a value</li>
+<li>
 <a href="af65002opdesc.html#LEA">LEA: </a>
-Load Effective Address: compute the effective address and store it in the E (effective Address) register (always full width)</li>
+Load Effective Address: compute the effective address and store
+				it in the E (effective Address) register (always
+				full width)
+			</li>
 <li>
-<a href="af65002opdesc.html#LLA">LLA: </a>
-Load linked AC - load the content from a memory location into accumulator, optimistic-locking the address for SCA</li>
+<a href="af65002opdesc.html#LSR">LSR: </a>
+Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			</li>
 <li>
-<a href="af65002opdesc.html#MVN">MVN: </a>
-Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
+<a href="af65002opdesc.html#NEG">NEG: </a>
+negate AC, i.e. set AC to the 2s-complement of AC</li>
 <li>
-<a href="af65002opdesc.html#MVP">MVP: </a>
-Move block of data of size AC from XR to YR, count addresses down. All registers full size, interruptable</li>
-<li>
-<a href="af65002opdesc.html#PEA">PEA: </a>
-Push Effective Address: compute the effective address and push it onto the stack (always full width)</li>
+<a href="af65002opdesc.html#ORA">ORA: </a>
+Bitwise OR accumulator with content of memory location</li>
 <li>
 <a href="af65002opdesc.html#PHB">PHB: </a>
 Push B onto stack (full width)</li>
@@ -733,78 +896,124 @@ Push B onto stack (full width)</li>
 <a href="af65002opdesc.html#PHE">PHE: </a>
 Push E onto stack (always full width)</li>
 <li>
+<a href="af65002opdesc.html#PHI">PHI: </a>
+Push immediate value onto the stack</li>
+<li>
+<a href="af65002opdesc.html#PHM">PHM: </a>
+Push contents of multiple registers onto the stack</li>
+<li>
+<a href="af65002opdesc.html#PHZ">PHZ: </a>
+Push Z Register onto stack</li>
+<li>
 <a href="af65002opdesc.html#PLB">PLB: </a>
-Pull E from stack (full width)</li>
+Pull B from stack (full width)</li>
 <li>
 <a href="af65002opdesc.html#PLE">PLE: </a>
 Pull E from stack (full width)</li>
 <li>
-<a href="af65002opdesc.html#PLL">PLL: </a>
-Pull the contents of all registers from the stack</li>
+<a href="af65002opdesc.html#PLM">PLM: </a>
+Pull contents of multiple registers from the stack</li>
+<li>
+<a href="af65002opdesc.html#PLZ">PLZ: </a>
+Pull Z Register from stack</li>
 <li>
 <a href="af65002opdesc.html#PRB">PRB: </a>
-Push and Replace Base register: Push base offset register to the stack, then transfer accumulator to the base register</li>
-<li>
-<a href="af65002opdesc.html#PSH">PSH: </a>
-Push contents of all registers (A, X, Y, B, E) onto the stack</li>
+Push and Replace Base register: Push base offset register to
+				the
+				stack, then transfer E-register to the base
+				register
+			</li>
 <li>
 <a href="af65002opdesc.html#RDL">RDL: </a>
-Rotate Direct Left - similar to ROL, but do not shift in carry, but the highest bit of the original value</li>
+Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			</li>
 <li>
 <a href="af65002opdesc.html#RDR">RDR: </a>
-Rotate Direct Right - similar to ROR, but do not shift in carry, but the lowest bit of the original value</li>
+Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			</li>
 <li>
-<a href="af65002opdesc.html#RMB">RMB: </a>
-Read memory barrier: invalidates cache content (globally, or for a specific, given location)</li>
+<a href="af65002opdesc.html#ROL">ROL: </a>
+Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</li>
+<li>
+<a href="af65002opdesc.html#ROR">ROR: </a>
+Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			</li>
 <li>
 <a href="af65002opdesc.html#SAB">SAB: </a>
-Swap A register with B register. Always done full width, no flags set.</li>
-<li>
-<a href="af65002opdesc.html#SAE">SAE: </a>
-Swap AC with E register. Always done full width, no flags set.</li>
+Swap A register with B register. Always done full width, no
+				flags set.
+			</li>
 <li>
 <a href="af65002opdesc.html#SAX">SAX: </a>
-Swap AC with X register. Always done full width, no flags set.</li>
+Swap AC with X register. Always done full width, no flags set.
+			</li>
 <li>
 <a href="af65002opdesc.html#SAY">SAY: </a>
-Swap AC with Y register. Always done full width, no flags set.</li>
+Swap AC with Y register. Always done full width, no flags set.
+			</li>
 <li>
-<a href="af65002opdesc.html#SBB">SBB: </a>
-Substract value from B register</li>
+<a href="af65002opdesc.html#SBC">SBC: </a>
+Substract content of memory location from accumulator</li>
 <li>
 <a href="af65002opdesc.html#SBE">SBE: </a>
-Add value to E register</li>
+Subtract value from E register</li>
 <li>
-<a href="af65002opdesc.html#SBS">SBS: </a>
-Substract value from stack pointer</li>
+<a href="af65002opdesc.html#SBI">SBI: </a>
+Subtract immediate value from a memory location</li>
 <li>
-<a href="af65002opdesc.html#SCA">SCA: </a>
-Store conditional - store the contents of AC into a memory location, if location has not been accessed since 
-			LLA with same address (and no other LLA in same thread)</li>
+<a href="af65002opdesc.html#SBQ">SBQ: </a>
+Subtract immediate value from a register</li>
 <li>
-<a href="af65002opdesc.html#SEB">SEB: </a>
-Swap E register with B register. Always done full width, no flags set.</li>
+<a href="af65002opdesc.html#STA">STA: </a>
+Store the content of the accumulator into a memory location
+			</li>
+<li>
+<a href="af65002opdesc.html#STI">STI: </a>
+Store immediate byte value into a memory location</li>
+<li>
+<a href="af65002opdesc.html#STX">STX: </a>
+Store the content of the X register to memory.</li>
+<li>
+<a href="af65002opdesc.html#STY">STY: </a>
+Store the content of the Y register to memory.</li>
 <li>
 <a href="af65002opdesc.html#STZ">STZ: </a>
 Store zero into a memory location</li>
 <li>
+<a href="af65002opdesc.html#SUB">SUB: </a>
+Substract content of memory location from accumulator without
+				using the carry flag as input
+			</li>
+<li>
 <a href="af65002opdesc.html#SWP">SWP: </a>
-swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator</li>
+swap upper and lower half of the operand
+			</li>
 <li>
 <a href="af65002opdesc.html#SXY">SXY: </a>
-Swap X with Y register. Always done full width, no flags set.</li>
+Swap X with Y register. Always done full width, no flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#SXZ">SXZ: </a>
+Swap X with Z register. Always done full width, no flags set.
+			</li>
 <li>
 <a href="af65002opdesc.html#TAB">TAB: </a>
 Transfer AC to B register</li>
 <li>
-<a href="af65002opdesc.html#TAE">TAE: </a>
-Transfer AC to E register</li>
-<li>
-<a href="af65002opdesc.html#TBA">TBA: </a>
-Transfer base register B to Accumulator</li>
-<li>
-<a href="af65002opdesc.html#TBE">TBE: </a>
-Transfer content of B register into E register (full width)</li>
+<a href="af65002opdesc.html#TAZ">TAZ: </a>
+Transfer AC to Z Register</li>
 <li>
 <a href="af65002opdesc.html#TEA">TEA: </a>
 Transfer E register to Accumulator</li>
@@ -816,12 +1025,21 @@ Transfer E to B register (full width)</li>
 Transfer Program counter to Accumulator</li>
 <li>
 <a href="af65002opdesc.html#TRB">TRB: </a>
-Test and Reset Bit - AND the memory location with the accumulator, and set the Z flag from the result, then CLEAR all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Reset Bit - AND the memory location with the
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
+				in the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TSB">TSB: </a>
-Test and Set Bit - AND the memory location with the accumulator, and set the Z flag from the result, then SET all bits in the
-				memory location that are set in the accumulator.</li>
+Test and Set Bit - AND the memory location with the
+				accumulator,
+				and set the Z flag from the result, then SET all
+				bits in
+				the
+				memory location that are set in the accumulator.
+			</li>
 <li>
 <a href="af65002opdesc.html#TSY">TSY: </a>
 Transfer stack pointer to Y</li>
@@ -829,13 +1047,14 @@ Transfer stack pointer to Y</li>
 <a href="af65002opdesc.html#TYS">TYS: </a>
 Transfer Y to stack pointer</li>
 <li>
-<a href="af65002opdesc.html#WMB">WMB: </a>
-Write memory barrier: flushes dirty caches (globally, or for a specific, given location)</li>
+<a href="af65002opdesc.html#TZA">TZA: </a>
+Transfer Z Register to AC</li>
 </ul>
-	</div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+	</div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr>
+    </div></div><hr />
 Last updated 2012-04-23.
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+

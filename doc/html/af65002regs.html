@@ -1,14 +1,15 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="author" content="">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="" />
 
-<meta name="description" content="65002 documentation">
-<meta name="keywords" content="8-bit,6502,65002">
-<link rev="made" href="mailto:">
-<link rel="stylesheet" title="Default" type="text/css" href="doc.css">
+<meta name="description" content="65002 documentation" />
+<meta name="keywords" content="8-bit,6502,65002" />
+<link rev="made" href="mailto:" />
+<link rel="stylesheet" title="Default" type="text/css" href="doc.css" />
 <title>65002 Register Set</title></head>
-<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
+<body><div id="headerbox"><div id="lefthdr">The 65k Project</div><div id="righthdr"><div class="large">65002</div><div class="small">The 65k processor - a modern 6502 with 64 bit</div></div></div><div id="mainbox"><a name="top" id="top"></a><div id="leftcol"><div id="menu" class="top"><div class="tophead">navigate</div>
 <div id="mtree">
 <p>Specification</p>
 <ul>
@@ -33,7 +34,7 @@
 
 </div>
 		</div></div><div id="rightcol"><div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br> (In new window)
+		            Follow the 65k tweets on<br /><a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br /> (In new window)
 		</div></div><div class="top" id="forum"><div class="tophead">discuss</div><div><p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p><p>(Forum registration required to post)</p></div></div></div><div id="midcol"><div class="top" id="ie6warn">
 You are using an old MS Internet Explorer as browser. This version is not supported anymore. Please use a 
 more modern browser, like Internet Explorer 8 or later, 
@@ -48,13 +49,14 @@ more modern browser, like Internet Explorer 8 or later,
         As there are different options for register widths, "W" describes the width
         option, i.e. either 16, 32 or 64 bit.
         </p><p>In addition to the core registers there are registers for the memory management.</p>
-  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#core">Core Register Set</a></li><li><a href="#intregs">Interrupt Registers</a></li><li><a href="#mode">User- and Hypervisor Mode Control</a></li><li><a href="#regmem">Memory Management Register</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="core">Core Register Set</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+  </div><div id="toc" class="h2"><div class="h2h"><div class="h2t"> </div><h2>Table of content</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><ul><li><a href="#core">Core Register Set</a></li><li><a href="#intregs">Interrupt Registers</a></li><li><a href="#mode">User- and Hypervisor Mode Control</a></li><li><a href="#regmem">Memory Management Register</a></li></ul></div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="core" id="core">Core Register Set</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
     <table border="1">
         <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
         <tr><td>PC</td><td>Program Counter</td><td>16 bit</td><td>W bit</td><td></td></tr>
         <tr><td>A</td><td>Accumulator</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>X</td><td>X register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>Y</td><td>Y register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
+        <tr><td>Z</td><td>Z register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>E</td><td>Effective Address Register</td><td>-</td><td>W bit</td><td>Stores effective address for opcodes</td></tr>
         <tr><td>B</td><td>Base Offset Register</td><td>-</td><td>W bit</td><td>Address offset for addressing modes</td></tr>
         <tr><td>S(U)</td><td>User mode Stack pointer</td><td>-</td><td>W bit</td><td></td></tr>
@@ -62,7 +64,8 @@ more modern browser, like Internet Explorer 8 or later,
         <tr><td>SR</td><td>Status Register</td><td>8 bit, with bit 5 set to 1</td><td>8 bit</td><td>Same as 6502, bit5 set to 0, high 8 bit see below</td></tr>
         <tr><td>ESR</td><td>Extended Status Register</td><td>-</td><td>8 bit</td><td>See below</td></tr>
     </table>
-    <p>The A, X and Y registers are similar to the 6502 registers, only that they are at least 16&nbsp; bit wide.</p>
+    <p>The A, X and Y registers are similar to the 6502 registers, only that they are at least 16  bit wide.</p>
+    <p>The Z register is similar to the 65ce02 Z register, in that it replaces the "(zp)" addressing mode with "(zp),Z".</p>
     <p>The status register is divided into two bytes, the status and the extended status. The first mirrors the original 6502 status byte:</p>
     <table border="1">
 <tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
@@ -106,7 +109,7 @@ more modern browser, like Internet Explorer 8 or later,
         with a size according to SF.
         </p>
     </table>
-   </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="intregs">Interrupt Registers</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+   </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="intregs" id="intregs">Interrupt Registers</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
      <table>
         <tr><th colspan="5">Interrupt Management Registers</th></tr>
         <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
@@ -178,7 +181,7 @@ more modern browser, like Internet Explorer 8 or later,
 <tr><th>AV</th><td>Address of abort vectors table; lowest 8 bit are reserved and must be 0</td></tr>
     </table>
 	<p>For details see the <a href="af65002-int.html">Interrupts page</a>.</p>
-  </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="mode">User- and Hypervisor Mode Control</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+  </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="mode" id="mode">User- and Hypervisor Mode Control</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
      <table>
         <tr><th colspan="5">Mode Control Registers</th></tr>
         <tr><th>Register</th><th>Name</th><th>6502</th><th>65k</th><th>Comment</th></tr>
@@ -214,15 +217,15 @@ more modern browser, like Internet Explorer 8 or later,
 <tr><td>UIM2/UIM1/UIM0</td><td>User mode interrupt mask register</td><td>When the interrupt status bit is set in user mode (e.g. with SEI), 
 	interrupts can be masked with this setting.</td><td>Reset to the lowest priority interrupt ("110" - so that this is blocked).</td></tr>
     </table>
-    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2><a name="regmem">Memory Management Register</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>The container management has a number of register sets. Each set contains three full size (W bits)
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2><a name="regmem" id="regmem">Memory Management Register</a></h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c"><p>The container management has a number of register sets. Each set contains three full size (W bits)
         registers:</p>
     <table border="1">
         <tr><th>Container-Register</th><th>Definition</th><th>Comment</th></tr>
-        <tr><td>Addr/matchcode mask</td><td>0-7: matchcode mask<br>
+        <tr><td>Addr/matchcode mask</td><td>0-7: matchcode mask<br />
                                         8-W: address mask</td><td></td></tr>
-        <tr><td>Addr/matchcode compare value</td><td>0-7: matchcode compare value<br>
+        <tr><td>Addr/matchcode compare value</td><td>0-7: matchcode compare value<br />
                                         8-W: address compare value</td><td></td></tr>
-        <tr><td>Addr offset/container control</td><td>0-7: Container control<br>
+        <tr><td>Addr offset/container control</td><td>0-7: Container control<br />
                                         8-W: address offset value</td><td></td></tr>
     </table><p>
         There can be any number of register sets. The number can be read from a configuration register.
@@ -236,10 +239,11 @@ more modern browser, like Internet Explorer 8 or later,
 	</p><p>
 	For more details see the <a href="af65002mem.html">Memory Management page</a>.
 	</p>
-    </div></div><div class="h2"><div class="h2h"><div class="h2t">&nbsp;</div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
+    </div></div><div class="h2"><div class="h2h"><div class="h2t"> </div><h2>Disclaimer</h2><div class="toplink"><a href="#top">Top</a></div></div><div class="h2c">
 All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
-    </div></div><hr>
+    </div></div><hr />
 Last updated 2012-04-29.
-  </div></div><div id="footer">&nbsp;</div></div></body></html> 
+  </div></div><div id="footer"> </div></div></body></html> 
+
