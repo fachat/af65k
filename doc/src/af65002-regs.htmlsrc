@@ -36,6 +36,7 @@
         <tr><td>A</td><td>Accumulator</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>X</td><td>X register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>Y</td><td>Y register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
+        <tr><td>Z</td><td>Z register</td><td>8 bit</td><td>W bit</td><td>Operations can be done in 8, 16, 32, 64 bit (up to W)</td></tr>
         <tr><td>E</td><td>Effective Address Register</td><td>-</td><td>W bit</td><td>Stores effective address for opcodes</td></tr>
         <tr><td>B</td><td>Base Offset Register</td><td>-</td><td>W bit</td><td>Address offset for addressing modes</td></tr>
         <tr><td>S(U)</td><td>User mode Stack pointer</td><td>-</td><td>W bit</td><td></td></tr>
@@ -44,6 +45,7 @@
         <tr><td>ESR</td><td>Extended Status Register</td><td>-</td><td>8 bit</td><td>See below</td></tr>
     </table>
     <p>The A, X and Y registers are similar to the 6502 registers, only that they are at least 16&nbsp;bit wide.</p>
+    <p>The Z register is similar to the 65ce02 Z register, in that it replaces the "(zp)" addressing mode with "(zp),Z".</p>
     <p>The status register is divided into two bytes, the status and the extended status. The first mirrors the original 6502 status byte:</p>
     <table border="1">
 <tr><th>bit 7</th><th>bit 6</th><th>bit 5</th><th>bit 4</th><th>bit 3</th><th>bit 2</th><th>bit 1</th><th>bit 0</th></tr>
