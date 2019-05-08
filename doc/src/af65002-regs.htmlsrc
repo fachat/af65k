@@ -77,7 +77,7 @@
 <tr><td>H</td><td>Hypervisor mode</td><td>Set when the processor is in hypervisor mode</td><td>1</td></tr>
 <tr><td>SF1/SF0</td><td>Stack Frame Size</td><td>Determines the stack frame size for a TRAP or an interrupt
         (01=2 byte, 10=4 byte, 11=8 byte return address. 00 is the native size of the processor)
-        </td><td>01</td>
+        </td><td>00</td>
 <tr><td>G</td><td>Signed greater or equal</td><td>Set when the processor does an SBC or CMP, and detects that the result of the comparison is greater or equal. This should always be (N xor V) after SBC, but CMP does not set V, so there it is different, and enables signed compares.</td><td>0</td></tr>
 <tr><td>OE</td><td>Odd</td><td>Odd/Even flag. Set at the same time the Z-flag is set, directly from bit 0 of the value.</td><td>0</td></tr>
 	</tr>
