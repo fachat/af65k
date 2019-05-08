@@ -41,6 +41,7 @@ public class Operation {
 	String desc;
 	String expand;
 	String expand8;
+	String category;
 	
 	public String getExpand8() {
 		return expand8;
@@ -144,5 +145,13 @@ public class Operation {
 	
 	public String toString() {
 		return "Op[" + name +  (synonyms == null ? "" : synonyms.toString()) + "]";
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

@@ -35,6 +35,7 @@ import org.w3c.dom.CDATASection;
 import de.fachat.af65k.logging.Logger;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.CPU;
+import de.fachat.af65k.model.objs.Category;
 import de.fachat.af65k.model.objs.Feature;
 import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
@@ -65,7 +66,8 @@ public class Validator {
 	protected Map<String, Syntax> syntaxMap = new HashMap<String, Syntax>();
 	protected Map<String, Set<SyntaxMode>> syntaxModesPerAM = new HashMap<String, Set<SyntaxMode>>();
 	protected Map<SyntaxMode, Syntax> syntaxPerSM = new HashMap<SyntaxMode, Syntax>();
-
+	protected Map<String, Category> categories = new HashMap<String, Category>();
+	
 	public Validator(Logger log, CPU mycpu) {
 
 		LOG = log;
@@ -73,6 +75,17 @@ public class Validator {
 
 		if (cpu == null) {
 			throw new IllegalArgumentException("CPU is null");
+		}
+
+		for (Category f : cpu.getCategories()) {
+			String id = f.getName();
+			if (categories.containsKey(id)) {
+				LOG.error("Category '" + id + "' is duplicate!");
+				throw new RuntimeException();
+			} else {
+				System.err.println("Registering feature " + id);
+				categories.put(id, f);
+			}
 		}
 
 		for (Feature f : cpu.getFeature()) {
@@ -336,7 +349,11 @@ public class Validator {
 	public Collection<Operation> getOperations() {
 		return cpu.getOperations();
 	}
-	
+
+	public Collection<Category> getCategories() {
+		return cpu.getCategories();
+	}
+
 	private static int parseExpand(String opExpand, String opcodeExpand) {
 		
 		if (opcodeExpand != null) {

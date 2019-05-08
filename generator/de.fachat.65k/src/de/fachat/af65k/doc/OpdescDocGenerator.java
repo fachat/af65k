@@ -32,6 +32,7 @@ import java.util.TreeMap;
 
 import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.AddressingMode;
+import de.fachat.af65k.model.objs.Category;
 import de.fachat.af65k.model.objs.Doc;
 import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
@@ -58,14 +59,14 @@ public class OpdescDocGenerator {
 
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, false);
 
-		Map<String, Operation> ops = new TreeMap<String, Operation>();
+		Map<String, Map<String, Operation>> ops = new HashMap<String, Map<String,Operation>>(); //new TreeMap<String, Operation>();
 
 		for (CodeMapEntry page[] : opcodes.values()) {
 			prepareOperationTable(ops, page, true);
 		}
 		// synonym only
 		for (Operation op : cpu.getSynonyms()) {
-			ops.put(op.getName(), op);
+			ops.get(op.getCategory()).put(op.getName(), op);
 		}
 
 		FeatureSet fset = cpu.getFClass(fclass);
@@ -76,7 +77,7 @@ public class OpdescDocGenerator {
 		createTable(wr, ops, fclasses, hasPrefix);
 	}
 
-	private void prepareOperationTable(Map<String, Operation> ops, CodeMapEntry[] page, boolean includeOrig) {
+	private void prepareOperationTable(Map<String, Map<String, Operation>> ops, CodeMapEntry[] page, boolean includeOrig) {
 
 		for (int i = 0; i < 256; i++) {
 			CodeMapEntry en = page[i];
@@ -84,16 +85,36 @@ public class OpdescDocGenerator {
 				Operation op = en.getOperation();
 
 				if (includeOrig || op.getClazz() != null) {
-					ops.put(en.getName(), op);
+					
+					String cat = op.getCategory();
+					Map<String, Operation> opmap = ops.get(cat);
+					if (opmap == null) {
+						opmap = new TreeMap<String, Operation>();
+						ops.put(cat, opmap);
+					}
+					opmap.put(en.getName(), op);
 				}
 			}
 		}
 
 	}
 
-	private void createToc(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
+	private void createToc(DocWriter wr, Map<String, Map<String, Operation>> ops, Collection<String> fclasses) {
 
 		wr.startSubsection("List of operations");
+
+		for (Category cat : cpu.getCategories()) {
+			
+			if (ops.get(cat.getId()) != null) {
+				wr.startSubsubsection(cat.getName());
+				
+				createTocSection(wr, ops.get(cat.getId()), fclasses);
+				
+			}			
+		}
+	}
+
+	private void createTocSection(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses) {
 		wr.startUnsortedList();
 
 		for (Map.Entry<String, Operation> en : ops.entrySet()) {
@@ -112,7 +133,20 @@ public class OpdescDocGenerator {
 		wr.endUnsortedList();
 	}
 
-	private void createTable(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses, boolean hasPrefix) {
+	private void createTable(DocWriter wr, Map<String, Map<String, Operation>> ops, Collection<String> fclasses, boolean hasPrefix) {
+
+		wr.startSubsection("Operations");
+
+		for (Category cat : cpu.getCategories()) {
+			if (ops.get(cat.getId()) != null) {
+			
+				createTableSection(wr, ops.get(cat.getId()), fclasses, hasPrefix);
+			}
+			
+		}
+	}
+
+	private void createTableSection(DocWriter wr, Map<String, Operation> ops, Collection<String> fclasses, boolean hasPrefix) {
 
 		Map<String, String> optable = new HashMap<String, String>();
 		optable.put("class", "optable");

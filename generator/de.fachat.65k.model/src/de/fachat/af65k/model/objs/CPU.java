@@ -45,6 +45,11 @@ public class CPU {
 	Date creationDate;
 	String identifier;
 
+	// list of available opcode categories
+	@XmlElement(name = "category")
+	@XmlElementWrapper(name = "categories")
+	List<Category> categories;
+
 	// list of available addressing modes (String identifier)
 	@XmlElement(name = "addrmode")
 	@XmlElementWrapper(name = "addrmodes")
@@ -147,6 +152,14 @@ public class CPU {
 
 	public void setOperations(List<Operation> operations) {
 		this.operations = operations;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> cats) {
+		this.categories = cats;
 	}
 
 	public List<FeatureSet> getFeatureSet() {
