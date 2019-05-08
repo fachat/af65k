@@ -4533,7 +4533,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>absy</addressingMode>
-				<opcode>0x9e</opcode>
+				<opcode>0x9f</opcode>
 				<feature>65k</feature>
 				<oppage>EXT</oppage>
 			</opcodes>
@@ -4592,7 +4592,7 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>absx</addressingMode>
-				<opcode>0x8f</opcode>
+				<opcode>0x9e</opcode>
 				<feature>65k</feature>
 				<oppage>EXT</oppage>
 			</opcodes>
