@@ -1,0 +1,10 @@
+
+
+
+ORA # flags with SR
+AND # flags with SR
+XOR # flags with SR
+
+Generic Transfer (R1 -> R2) and eXchange (R1 <-> R2) in base page, replacing all the T?? and X?? opcodes?
+
+AM=1 addressing modes in opdesc table

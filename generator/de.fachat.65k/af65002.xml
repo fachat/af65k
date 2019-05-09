@@ -8,19 +8,31 @@
 	<categories>
 		<category>
 			<id>pc</id>
-			<name>Branches and Jumps</name>
+			<name>Jumps and Returns</name>
+		</category>
+		<category>
+			<id>branch</id>
+			<name>Branches</name>
 		</category>
 		<category>
 			<id>alu</id>
 			<name>Arithmetic &amp; logic</name>
 		</category>
 		<category>
+			<id>bit</id>
+			<name>Bit Operations and Tests</name>
+		</category>
+		<category>
 			<id>ldst</id>
 			<name>Load/Store</name>
 		</category>
 		<category>
-			<id>ldst</id>
-			<name>Load/Store/Pushes/Pulls/Transfer</name>
+			<id>stack</id>
+			<name>Pushes/Pulls</name>
+		</category>
+		<category>
+			<id>tr</id>
+			<name>Transfers</name>
 		</category>
 		<category>
 			<id>skip</id>
@@ -29,6 +41,14 @@
 		<category>
 			<id>flags</id>
 			<name>Flags</name>
+		</category>
+		<category>
+			<id>sys</id>
+			<name>System-oriented</name>
+		</category>
+		<category>
+			<id>blit</id>
+			<name>Multi-Transfers</name>
 		</category>
 		<category>
 			<id>others</id>
@@ -305,7 +325,7 @@
 
 		<operation>
 			<name>BPL</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on plus - take branch when N flag is cleared</desc>
 			<prefixBits>RS</prefixBits>
 			<opcodes>
@@ -348,7 +368,7 @@
 
 		<operation>
 			<name>BMI</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on minus - take branch when N flag is set</desc>
 			<prefixBits>RS</prefixBits>
 			<opcodes>
@@ -391,7 +411,7 @@
 
 		<operation>
 			<name>BVC</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on overflow clear - take branch when V flag is cleared
 			</desc>
 			<prefixBits>RS</prefixBits>
@@ -435,7 +455,7 @@
 
 		<operation>
 			<name>BVS</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on overflow set - take branch when V flag is set</desc>
 			<prefixBits>RS</prefixBits>
 			<opcodes>
@@ -478,7 +498,7 @@
 
 		<operation>
 			<name>BCC</name>
-			<category>pc</category>
+			<category>branch</category>
 			<synonym>BLT</synonym>
 			<desc>Branch on carry clear - take branch when C flag is cleared
 			</desc>
@@ -525,7 +545,7 @@
 
 		<operation>
 			<name>BCS</name>
-			<category>pc</category>
+			<category>branch</category>
 			<synonym>BGE</synonym>
 			<desc>Branch on carry set - take branch when C flag is set</desc>
 			<prefixBits>RS</prefixBits>
@@ -571,7 +591,7 @@
 
 		<operation>
 			<name>BGT</name>
-			<category>pc</category>
+			<category>branch</category>
 			<synonym>(SEQ BCS)</synonym>
 			<desc>Branch if greater - take branch when C flag is set but Z flag
 				is
@@ -591,7 +611,7 @@
 
 		<operation>
 			<name>BLE</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch if less or equal - take branch when C flag is clear or Z
 				flag is set
 			</desc>
@@ -634,7 +654,7 @@
 
 		<operation>
 			<name>BNE</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on not equal - take branch when Z flag is cleared</desc>
 			<prefixBits>RS</prefixBits>
 			<opcodes>
@@ -677,7 +697,7 @@
 
 		<operation>
 			<name>BEQ</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on equal - take branch when Z flag is set</desc>
 			<prefixBits>RS</prefixBits>
 			<opcodes>
@@ -720,7 +740,7 @@
 
 		<operation>
 			<name>BRA</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch always - branch independent from any flags</desc>
 			<prefixBits>RS</prefixBits>
 			<synonym>BRU</synonym>
@@ -762,7 +782,7 @@
 
 		<operation>
 			<name>BRL</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch always - branch independent from any flags</desc>
 			<feature>816</feature>
 			<opcodes>
@@ -773,7 +793,7 @@
 
 		<operation>
 			<name>BEV</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on even</desc>
 			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
@@ -811,7 +831,7 @@
 
 		<operation>
 			<name>BOD</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on odd</desc>
 			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
@@ -849,7 +869,7 @@
 
 		<operation>
 			<name>BLTS</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on signed less than</desc>
 			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
@@ -888,7 +908,7 @@
 
 		<operation>
 			<name>BGES</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch on signed greater or equal than</desc>
 			<prefixBits>RS</prefixBits>
 			<feature>65k</feature>
@@ -927,7 +947,7 @@
 
 		<operation>
 			<name>BLES</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch if less or equal - take branch when signed greater or
 				equal flag G is clear or Z flag is set
 			</desc>
@@ -970,7 +990,7 @@
 
 		<operation>
 			<name>BGTS</name>
-			<category>pc</category>
+			<category>branch</category>
 			<synonym>(SEQ BGES)</synonym>
 			<desc>Branch if greater - take branch when signed greater or equal G
 				flag is set but Z flag is clear
@@ -1404,7 +1424,7 @@
 
 		<operation>
 			<name>BSR</name>
-			<category>pc</category>
+			<category>branch</category>
 			<desc>Branch subroutine - similar to JSR, but use relative addressing
 				similar to branch opcodes
 			</desc>
@@ -1651,7 +1671,7 @@
 
 		<operation>
 			<name>TSB</name>
-			<category>alu</category>
+			<category>bit</category>
 			<desc>Test and Set Bit - AND the memory location with the
 				accumulator,
 				and set the Z flag from the result, then SET all
@@ -1727,7 +1747,7 @@
 
 		<operation>
 			<name>TRB</name>
-			<category>alu</category>
+			<category>bit</category>
 			<desc>Test and Reset Bit - AND the memory location with the
 				accumulator, and set the Z flag from the result, then
 				CLEAR all bits
@@ -1805,7 +1825,7 @@
 
 		<operation>
 			<name>BIT</name>
-			<category>alu</category>
+			<category>bit</category>
 			<desc>Bitwise test with accumulator - AND the memory location with
 				the
 				accumulator, and set N (=bit 7), V (=bit 7), Z
@@ -4608,7 +4628,7 @@
 		<operation>
 			<name>STZ</name>
 			<category>ldst</category>
-			<desc>Store zero into a memory location</desc>
+			<desc>Store zero (or Z-register) into a memory location</desc>
 			<prefixBits>AM</prefixBits>
 			<prefixBits>OF</prefixBits>
 			<prefixBits>RS</prefixBits>
@@ -4654,6 +4674,8 @@
 				</p>
 			</doc>
 			<doc mode="65k">
+				<p>Instead of zero, write the value of the Z register.
+				</p>
 				<p>
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
 					UM
@@ -4836,7 +4858,7 @@
 
 		<operation>
 			<name>ADI</name>
-			<category>ldst</category>
+			<category>alu</category>
 			<desc>Add immediate value to a memory location</desc>
 			<prefixBits>AM</prefixBits>
 			<prefixBits>OF</prefixBits>
@@ -4887,7 +4909,7 @@
 
 		<operation>
 			<name>SBI</name>
-			<category>ldst</category>
+			<category>alu</category>
 			<desc>Subtract immediate value from a memory location</desc>
 			<prefixBits>AM</prefixBits>
 			<prefixBits>OF</prefixBits>
@@ -5163,7 +5185,7 @@
 
 		<operation>
 			<name>PHP</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push processor status register onto the stack</desc>
 			<prefixBits>UM</prefixBits>
 			<prefixBits>RS</prefixBits>
@@ -5238,7 +5260,7 @@
 
 		<operation>
 			<name>PLP</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull processor status register from the stack</desc>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
@@ -5306,7 +5328,7 @@
 
 		<operation>
 			<name>PHA</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push contents of the accumulator onto the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -5347,7 +5369,7 @@
 
 		<operation>
 			<name>PHY</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push contents of the Y register onto the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -5389,7 +5411,7 @@
 
 		<operation>
 			<name>PHX</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push contents of the X register onto the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -5431,7 +5453,7 @@
 
 		<operation>
 			<name>PHM</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push contents of multiple registers onto the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -5477,7 +5499,7 @@
 
 		<operation>
 			<name>PLM</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull contents of multiple registers from the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -5523,7 +5545,7 @@
 
 		<operation>
 			<name>PHI</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push immediate value onto the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -5601,7 +5623,7 @@
 
 		<operation>
 			<name>PLA</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull the contents of the accumulator from the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -5644,7 +5666,7 @@
 
 		<operation>
 			<name>PLY</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull the contents of the Y register from the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -5688,7 +5710,7 @@
 
 		<operation>
 			<name>PLX</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull the contents of the X register from the stack</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -5796,7 +5818,7 @@
 
 		<operation>
 			<name>TYA</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of the Y register into the accumulator
 			</desc>
 			<prefixBits>RS</prefixBits>
@@ -5830,7 +5852,7 @@
 
 		<operation>
 			<name>TXA</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of the X register into the accumulator
 			</desc>
 			<prefixBits>RS</prefixBits>
@@ -5864,7 +5886,7 @@
 
 		<operation>
 			<name>TSX</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of the stack pointer into the X register
 				(Note: needs RS to keep compatibility with 6502)
 			</desc>
@@ -5912,7 +5934,7 @@
 
 		<operation>
 			<name>TXS</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of X register into the stack pointer
 				(Note: needs RS to keep compatibility with 6502)
 			</desc>
@@ -5959,7 +5981,7 @@
 
 		<operation>
 			<name>TAY</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of accumulator into the Y register</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -5992,7 +6014,7 @@
 
 		<operation>
 			<name>TAX</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer the contents of accumulator into the X register</desc>
 			<prefixBits>RS</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -6159,6 +6181,7 @@
 
 		<operation>
 			<name>NOP</name>
+			<category>others</category>
 			<desc>No operation</desc>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
@@ -6637,7 +6660,7 @@
 
 		<operation>
 			<name>MVN</name>
-			<category>ldst</category>
+			<category>blit</category>
 			<desc>Move block of data of size AC from XR to YR, count addresses
 				down. All registers full size, interruptable
 			</desc>
@@ -6651,7 +6674,7 @@
 
 		<operation>
 			<name>MVP</name>
-			<category>ldst</category>
+			<category>blit</category>
 			<desc>Move block of data of size AC from XR to YR, count addresses
 				down. All registers full size, interruptable
 			</desc>
@@ -6665,7 +6688,7 @@
 
 		<operation>
 			<name>FIL</name>
-			<category>ldst</category>
+			<category>blit</category>
 			<desc>Fill a memory area of size AC at address XR with a value from
 				YR
 			</desc>
@@ -6682,7 +6705,7 @@
 
 		<operation>
 			<name>CSW</name>
-			<category>ldst</category>
+			<category>sys</category>
 			<desc>Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
 			</desc>
 			<prefixBits>UM</prefixBits>
@@ -6719,7 +6742,7 @@
 
 		<operation>
 			<name>WBR</name>
-			<category>ldst</category>
+			<category>sys</category>
 			<desc>Write memory BaRrier: flushes dirty caches (globally, or for a
 				specific, given location)
 			</desc>
@@ -6739,7 +6762,7 @@
 
 		<operation>
 			<name>RBR</name>
-			<category>ldst</category>
+			<category>sys</category>
 			<desc>Read memory BaRrier: invalidates cache content (globally, or
 				for
 				a specific, given location)
@@ -6760,7 +6783,7 @@
 
 		<operation>
 			<name>SCA</name>
-			<category>ldst</category>
+			<category>sys</category>
 			<desc>Store conditional - store the contents of AC into a memory
 				location, if location has not been accessed since
 				LLA
@@ -6779,7 +6802,7 @@
 
 		<operation>
 			<name>LLA</name>
-			<category>ldst</category>
+			<category>sys</category>
 			<desc>Load linked AC - load the content from a memory location into
 				accumulator, optimistic-locking the address for
 				SCA
@@ -6831,7 +6854,7 @@
 
 		<operation>
 			<name>HBS</name>
-			<category>flags</category>
+			<category>alu</category>
 			<desc>Highest Bit Set: Determines the number of the highest bit that
 				is set to one.
 			</desc>
@@ -6847,6 +6870,7 @@
 
 		<operation>
 			<name>HBC</name>
+			<category>alu</category>
 			<desc>Highest Bit Clear: Determines the number of the highest bit
 				that
 				is set to zero.
@@ -7113,7 +7137,7 @@
 
 		<operation>
 			<name>PHE</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push E onto stack (always full width)</desc>
 			<prefixBits>UM</prefixBits>
 			<feature>65k</feature>
@@ -7154,7 +7178,7 @@
 
 		<operation>
 			<name>PLE</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull E from stack (full width)</desc>
 			<prefixBits>UM</prefixBits>
 			<prefixBits>NF</prefixBits>
@@ -7197,7 +7221,7 @@
 
 		<operation>
 			<name>PHB</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push B onto stack (full width)</desc>
 			<prefixBits>UM</prefixBits>
 			<feature>65k</feature>
@@ -7238,7 +7262,7 @@
 
 		<operation>
 			<name>PRB</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push and Replace Base register: Push base offset register to
 				the
 				stack, then transfer E-register to the base
@@ -7256,7 +7280,7 @@
 
 		<operation>
 			<name>PLB</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull B from stack (full width)</desc>
 			<prefixBits>UM</prefixBits>
 			<prefixBits>NF</prefixBits>
@@ -7301,7 +7325,7 @@
 
 		<operation>
 			<name>TPA</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer Program counter to Accumulator</desc>
 			<prefixBits>NF</prefixBits>
 			<feature>65k</feature>
@@ -7333,7 +7357,7 @@
 
 		<operation>
 			<name>TEA</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer E register to Accumulator</desc>
 			<prefixBits>NF</prefixBits>
 			<feature>65k</feature>
@@ -7362,7 +7386,7 @@
 
 		<operation>
 			<name>TYS</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer Y to stack pointer</desc>
 			<prefixBits>LE</prefixBits>
 			<prefixBits>RS</prefixBits>
@@ -7382,7 +7406,7 @@
 
 		<operation>
 			<name>TSY</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer stack pointer to Y</desc>
 			<prefixBits>NF</prefixBits>
 			<prefixBits>UM</prefixBits>
@@ -7403,7 +7427,7 @@
 
 		<operation>
 			<name>TAB</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer AC to B register</desc>
 			<prefixBits>NF</prefixBits>
 			<prefixBits>LE</prefixBits>
@@ -7424,7 +7448,7 @@
 
 		<operation>
 			<name>TEB</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer E to B register (full width)</desc>
 			<prefixBits>NF</prefixBits>
 			<feature>65k</feature>
@@ -7468,9 +7492,9 @@
  -->
 
 		<operation>
-			<name>SAB</name>
-			<category>ldst</category>
-			<desc>Swap A register with B register. Always done full width, no
+			<name>XAB</name>
+			<category>tr</category>
+			<desc>eXchange A register with B register. Always done full width, no
 				flags set.
 			</desc>
 			<feature>65k</feature>
@@ -7496,9 +7520,9 @@
  -->
 
 		<operation>
-			<name>SAX</name>
-			<category>ldst</category>
-			<desc>Swap AC with X register. Always done full width, no flags set.
+			<name>XAX</name>
+			<category>tr</category>
+			<desc>eXchange AC with X register. Always done full width, no flags set.
 			</desc>
 			<feature>65k</feature>
 			<opcodes>
@@ -7509,9 +7533,9 @@
 		</operation>
 
 		<operation>
-			<name>SAY</name>
-			<category>ldst</category>
-			<desc>Swap AC with Y register. Always done full width, no flags set.
+			<name>XAY</name>
+			<category>tr</category>
+			<desc>eXchange AC with Y register. Always done full width, no flags set.
 			</desc>
 			<feature>65k</feature>
 			<opcodes>
@@ -7523,9 +7547,9 @@
 
 
 		<operation>
-			<name>SXY</name>
-			<category>ldst</category>
-			<desc>Swap X with Y register. Always done full width, no flags set.
+			<name>XYX</name>
+			<category>tr</category>
+			<desc>eXchange X with Y register. Always done full width, no flags set.
 			</desc>
 			<feature>65k</feature>
 			<opcodes>
@@ -7536,9 +7560,9 @@
 		</operation>
 
 		<operation>
-			<name>SXZ</name>
-			<category>ldst</category>
-			<desc>Swap X with Z register. Always done full width, no flags set.
+			<name>XZX</name>
+			<category>tr</category>
+			<desc>eXchange X with Z register. Always done full width, no flags set.
 			</desc>
 			<feature>65k</feature>
 			<opcodes>
@@ -7550,7 +7574,6 @@
 
 
 		<!-- ################################# -->
-		<!-- NMOS 6502 undocumented opcodes -->
 
 		<operation>
 			<name>ADE</name>
@@ -7677,6 +7700,9 @@
 			</opcodes>
 		</operation>
 -->
+
+		<!-- ################################# -->
+		<!-- NMOS 6502 undocumented opcodes -->
 
 		<operation>
 			<name>ASO</name>
@@ -8218,7 +8244,7 @@
 
 		<operation>
 			<name>RMB</name>
-			<category>ldst</category>
+			<category>bit</category>
 			<desc>Reset memory bit</desc>
 			<feature>rcmos</feature>
 			<!-- repeatedly expand with opcode bits defined in the order given here -->
@@ -8256,7 +8282,7 @@
 
 		<operation>
 			<name>SMB</name>
-			<category>ldst</category>
+			<category>bit</category>
 			<desc>Set memory bit</desc>
 			<feature>rcmos</feature>
 			<!-- repeatedly expand with opcode bits defined in the order given here -->
@@ -8294,7 +8320,7 @@
 
 		<operation>
 			<name>BBR</name>
-			<category>ldst</category>
+			<category>bit</category>
 			<desc>Branch on bit reset</desc>
 			<feature>rcmos</feature>
 			<expand>0x70</expand>
@@ -8323,7 +8349,7 @@
 
 		<operation>
 			<name>BBS</name>
-			<category>ldst</category>
+			<category>bit</category>
 			<desc>Branch on bit set</desc>
 			<feature>rcmos</feature>
 			<expand>0x70</expand>
@@ -8518,7 +8544,7 @@
 
 		<operation>
 			<name>TAZ</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer AC to Z Register</desc>
 			<feature>cmos_indz</feature>
 			<opcodes>
@@ -8535,7 +8561,7 @@
 
 		<operation>
 			<name>TZA</name>
-			<category>ldst</category>
+			<category>tr</category>
 			<desc>Transfer Z Register to AC</desc>
 			<feature>cmos_indz</feature>
 			<opcodes>
@@ -8552,7 +8578,7 @@
 
 		<operation>
 			<name>PHZ</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Push Z Register onto stack</desc>
 			<feature>cmos_indz</feature>
 			<opcodes>
@@ -8569,7 +8595,7 @@
 
 		<operation>
 			<name>PLZ</name>
-			<category>ldst</category>
+			<category>stack</category>
 			<desc>Pull Z Register from stack</desc>
 			<feature>cmos_indz</feature>
 			<opcodes>
@@ -9025,7 +9051,7 @@
 		
 		<operation>
 			<name>TMB</name>
-			<category>ldst</category>
+			<category>bit</category>
 			<desc>Test memory bit</desc>
 			<feature>65k</feature>
 			<!-- repeatedly expand with opcode bits defined in the order given here -->

@@ -1,5 +1,25 @@
 <h2>List of operations</h2>
-<h3>Branches and Jumps</h3>
+<h3>Jumps and Returns</h3>
+<ul>
+<li>
+<a href="#BRK">BRK</a>
+ - Starts the break routine.</li>
+<li>
+<a href="#JMP">JMP</a>
+ - Jump to new code address</li>
+<li>
+<a href="#JSR">JSR</a>
+ - Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</li>
+<li>
+<a href="#RTI">RTI</a>
+ - Return from interrupt</li>
+<li>
+<a href="#RTS">RTS</a>
+ - Return from subroutine - read return address from stack</li>
+</ul>
+<h3>Branches</h3>
 <ul>
 <li>
 <a href="#BCC">BCC</a>
@@ -24,29 +44,12 @@
 <a href="#BRA">BRA</a>
  - Branch always - branch independent from any flags</li>
 <li>
-<a href="#BRK">BRK</a>
- - Starts the break routine.</li>
-<li>
 <a href="#BVC">BVC</a>
  - Branch on overflow clear - take branch when V flag is cleared
 			</li>
 <li>
 <a href="#BVS">BVS</a>
  - Branch on overflow set - take branch when V flag is set</li>
-<li>
-<a href="#JMP">JMP</a>
- - Jump to new code address</li>
-<li>
-<a href="#JSR">JSR</a>
- - Jump subroutine - jump to a new code location, save return
-				address on stack for RTS
-			</li>
-<li>
-<a href="#RTI">RTI</a>
- - Return from interrupt</li>
-<li>
-<a href="#RTS">RTS</a>
- - Return from subroutine - read return address from stack</li>
 </ul>
 <h3>Arithmetic & logic</h3>
 <ul>
@@ -60,17 +63,6 @@
 <a href="#ASL">ASL</a>
  - Arithmetic Shift Left - shift accumulator one bit to the left,
 				shifting in zero in bit 0
-			</li>
-<li>
-<a href="#BIT">BIT</a>
- - Bitwise test with accumulator - AND the memory location with
-				the
-				accumulator, and set N (=bit 7), V (=bit 7), Z
-				(iff all bits
-				zero) flags from the result. In case of the accumulator addressing,
-				simply
-				set the flags from the
-				accumulator
 			</li>
 <li>
 <a href="#CMP">CMP</a>
@@ -131,6 +123,20 @@
 <li>
 <a href="#SBC">SBC</a>
  - Substract content of memory location from accumulator</li>
+</ul>
+<h3>Bit Operations and Tests</h3>
+<ul>
+<li>
+<a href="#BIT">BIT</a>
+ - Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			</li>
 <li>
 <a href="#TRB">TRB</a>
  - Test and Reset Bit - AND the memory location with the
@@ -161,30 +167,6 @@
 <a href="#LDY">LDY</a>
  - Load Y register</li>
 <li>
-<a href="#PHA">PHA</a>
- - Push contents of the accumulator onto the stack</li>
-<li>
-<a href="#PHP">PHP</a>
- - Push processor status register onto the stack</li>
-<li>
-<a href="#PHX">PHX</a>
- - Push contents of the X register onto the stack</li>
-<li>
-<a href="#PHY">PHY</a>
- - Push contents of the Y register onto the stack</li>
-<li>
-<a href="#PLA">PLA</a>
- - Pull the contents of the accumulator from the stack</li>
-<li>
-<a href="#PLP">PLP</a>
- - Pull processor status register from the stack</li>
-<li>
-<a href="#PLX">PLX</a>
- - Pull the contents of the X register from the stack</li>
-<li>
-<a href="#PLY">PLY</a>
- - Pull the contents of the Y register from the stack</li>
-<li>
 <a href="#STA">STA</a>
  - Store the content of the accumulator into a memory location
 			</li>
@@ -196,44 +178,11 @@
  - Store the content of the Y register to memory.</li>
 <li>
 <a href="#STZ">STZ</a>
- - Store zero into a memory location</li>
-<li>
-<a href="#TAX">TAX</a>
- - Transfer the contents of accumulator into the X register</li>
-<li>
-<a href="#TAY">TAY</a>
- - Transfer the contents of accumulator into the Y register</li>
-<li>
-<a href="#TSX">TSX</a>
- - Transfer the contents of the stack pointer into the X register
-				(Note: needs RS to keep compatibility with 6502)
-			</li>
-<li>
-<a href="#TXA">TXA</a>
- - Transfer the contents of the X register into the accumulator
-			</li>
-<li>
-<a href="#TXS">TXS</a>
- - Transfer the contents of X register into the stack pointer
-				(Note: needs RS to keep compatibility with 6502)
-			</li>
-<li>
-<a href="#TYA">TYA</a>
- - Transfer the contents of the Y register into the accumulator
-			</li>
+ - Store zero (or Z-register) into a memory location</li>
 </ul>
-<h3>Load/Store/Pushes/Pulls/Transfer</h3>
+<h3>Pushes/Pulls</h3>
 <ul>
 <li>
-<a href="#LDA">LDA</a>
- - Load accumulator</li>
-<li>
-<a href="#LDX">LDX</a>
- - Load X register</li>
-<li>
-<a href="#LDY">LDY</a>
- - Load Y register</li>
-<li>
 <a href="#PHA">PHA</a>
  - Push contents of the accumulator onto the stack</li>
 <li>
@@ -257,19 +206,9 @@
 <li>
 <a href="#PLY">PLY</a>
  - Pull the contents of the Y register from the stack</li>
-<li>
-<a href="#STA">STA</a>
- - Store the content of the accumulator into a memory location
-			</li>
-<li>
-<a href="#STX">STX</a>
- - Store the content of the X register to memory.</li>
-<li>
-<a href="#STY">STY</a>
- - Store the content of the Y register to memory.</li>
-<li>
-<a href="#STZ">STZ</a>
- - Store zero into a memory location</li>
+</ul>
+<h3>Transfers</h3>
+<ul>
 <li>
 <a href="#TAX">TAX</a>
  - Transfer the contents of accumulator into the X register</li>
@@ -319,8 +258,130 @@
 <a href="#SEI">SEI</a>
  - Set the interrupt (I) flag</li>
 </ul>
+<h3>Others</h3>
+<ul>
+<li>
+<a href="#NOP">NOP</a>
+ - No operation</li>
+</ul>
 <h2>Operations</h2>
-<h2>BCC</h2>
+<h2>BRK</h2>
+<a name="BRK"> </a><p>Starts the break routine.</p>
+<table class="optable"><tr><th colspan="10">BRK</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					The BRK opcode is used to jump to the BRK vector. It pushes the
+					return address and the status on the stack, then
+					reads the BRK
+					vector
+					(doubling as IRQ vector) and jumps there.
+				</p><p>
+					Please note that the address put on the stack is the address of
+					the next
+					instruction. And the BRK opcode is using
+					the immediate
+					addressing
+					mode
+					(although the MOS manual does not state it). Thus the
+					address put on the
+					stack is two
+					bytes behind the address of the BRK!
+				</p><p>
+					Before storing the status on the stack, the opcode sets the
+					I-flag to
+					avoid recursive calling of the interrupt
+					routine.
+				</p><p>
+					When storing the status on the stack, the B-flag is set to
+					indicate
+					that
+					the shared IRQ/BRK vector has been called
+					from a BRK
+					and not an IRQ.
+				</p><pre>
+					Stack(SP--) &lt;= > NextPC
+					Stack(SP--) &lt;= &lt;
+					NextPC
+					Stack(SP--) &lt;= Status | B | I
+					PC
+					&lt;= ($FFFE)
+				</pre><h2>JMP</h2>
+<a name="JMP"> </a><p>Jump to new code address</p>
+<table class="optable"><tr><th colspan="10">JMP</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td><td></td></tr>
+<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x7c</td><td>cmos</td><td>Absolute indexed with X indirect 16bit</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Jump to the address given by the operand (as computed depending
+					on the
+					respective addressing mode).
+				</p><pre>
+					PC &lt;= Operand
+				</pre><h2>JSR</h2>
+<a name="JSR"> </a><p>Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			</p>
+<table class="optable"><tr><th colspan="10">JSR</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Jump to the address given by the operand (as computed depending
+					on the
+					respective addressing mode) and
+					store the
+					return address (-1)
+					on the stack to prepare for the RTS opcode
+				</p><pre>
+					Stack(SP--) &lt;= > NextPC-1
+					Stack(SP--) &lt;=
+					&lt; NextPC-1
+					PC &lt;= Operand
+				</pre><h2>RTI</h2>
+<a name="RTI"> </a><p>Return from interrupt</p>
+<table class="optable"><tr><th colspan="10">RTI</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Returns from an interrupt or a BRK opcode handling. It first
+					pulls the
+					status register from the stack, then
+					takes
+					the return
+					address from the stack, increment it by one, and
+					continue at the new
+					address.
+				</p><pre>
+					Status &lt;= Stack(++SP) -- bit 5=1
+					Tmp(0-7) &lt;=
+					Stack(++SP)
+					Tmp(8-15) &lt;= Stack(++SP)
+					PC &lt;=
+					Tmp;
+				</pre><h2>RTS</h2>
+<a name="RTS"> </a><p>Return from subroutine - read return address from stack</p>
+<table class="optable"><tr><th colspan="10">RTS</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Take the return address from the stack, increment it by one, and
+					continue at the new address.
+				</p><pre>
+					Tmp(0-7) &lt;= Stack(++SP)
+					Tmp(8-15) &lt;= Stack(++SP)
+					PC &lt;= Tmp + 1;
+				</pre><h2>BCC</h2>
 <a name="BCC"> </a><p>Synonyms: BLT</p>
 <p>Branch on carry clear - take branch when C flag is cleared
 			</p>
@@ -472,49 +533,6 @@
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand
-				</pre><h2>BRK</h2>
-<a name="BRK"> </a><p>Starts the break routine.</p>
-<table class="optable"><tr><th colspan="10">BRK</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					The BRK opcode is used to jump to the BRK vector. It pushes the
-					return address and the status on the stack, then
-					reads the BRK
-					vector
-					(doubling as IRQ vector) and jumps there.
-				</p><p>
-					Please note that the address put on the stack is the address of
-					the next
-					instruction. And the BRK opcode is using
-					the immediate
-					addressing
-					mode
-					(although the MOS manual does not state it). Thus the
-					address put on the
-					stack is two
-					bytes behind the address of the BRK!
-				</p><p>
-					Before storing the status on the stack, the opcode sets the
-					I-flag to
-					avoid recursive calling of the interrupt
-					routine.
-				</p><p>
-					When storing the status on the stack, the B-flag is set to
-					indicate
-					that
-					the shared IRQ/BRK vector has been called
-					from a BRK
-					and not an IRQ.
-				</p><pre>
-					Stack(SP--) &lt;= > NextPC
-					Stack(SP--) &lt;= &lt;
-					NextPC
-					Stack(SP--) &lt;= Status | B | I
-					PC
-					&lt;= ($FFFE)
 				</pre><h2>BVC</h2>
 <a name="BVC"> </a><p>Branch on overflow clear - take branch when V flag is cleared
 			</p>
@@ -558,79 +576,6 @@
 					-128 to +127.
 				</p><pre>
 					PC &lt;= NextPC + Operand when N=1 else NextPC
-				</pre><h2>JMP</h2>
-<a name="JMP"> </a><p>Jump to new code address</p>
-<table class="optable"><tr><th colspan="10">JMP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td><td></td></tr>
-<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x7c</td><td>cmos</td><td>Absolute indexed with X indirect 16bit</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Jump to the address given by the operand (as computed depending
-					on the
-					respective addressing mode).
-				</p><pre>
-					PC &lt;= Operand
-				</pre><h2>JSR</h2>
-<a name="JSR"> </a><p>Jump subroutine - jump to a new code location, save return
-				address on stack for RTS
-			</p>
-<table class="optable"><tr><th colspan="10">JSR</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Jump to the address given by the operand (as computed depending
-					on the
-					respective addressing mode) and
-					store the
-					return address (-1)
-					on the stack to prepare for the RTS opcode
-				</p><pre>
-					Stack(SP--) &lt;= > NextPC-1
-					Stack(SP--) &lt;=
-					&lt; NextPC-1
-					PC &lt;= Operand
-				</pre><h2>RTI</h2>
-<a name="RTI"> </a><p>Return from interrupt</p>
-<table class="optable"><tr><th colspan="10">RTI</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Returns from an interrupt or a BRK opcode handling. It first
-					pulls the
-					status register from the stack, then
-					takes
-					the return
-					address from the stack, increment it by one, and
-					continue at the new
-					address.
-				</p><pre>
-					Status &lt;= Stack(++SP) -- bit 5=1
-					Tmp(0-7) &lt;=
-					Stack(++SP)
-					Tmp(8-15) &lt;= Stack(++SP)
-					PC &lt;=
-					Tmp;
-				</pre><h2>RTS</h2>
-<a name="RTS"> </a><p>Return from subroutine - read return address from stack</p>
-<table class="optable"><tr><th colspan="10">RTS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Take the return address from the stack, increment it by one, and
-					continue at the new address.
-				</p><pre>
-					Tmp(0-7) &lt;= Stack(++SP)
-					Tmp(8-15) &lt;= Stack(++SP)
-					PC &lt;= Tmp + 1;
 				</pre><h2>ADC</h2>
 <a name="ADC"> </a><p>Add content of memory location to accumulator</p>
 <table class="optable"><tr><th colspan="10">ADC</th></tr>
@@ -723,38 +668,6 @@
 					N
 					&lt;= AC7)
 					Z &lt;= Z(AC)
-				</pre><h2>BIT</h2>
-<a name="BIT"> </a><p>Bitwise test with accumulator - AND the memory location with
-				the
-				accumulator, and set N (=bit 7), V (=bit 7), Z
-				(iff all bits
-				zero) flags from the result. In case of the accumulator addressing,
-				simply
-				set the flags from the
-				accumulator
-			</p>
-<table class="optable"><tr><th colspan="10">BIT</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x34</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x3c</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x89</td><td>cmos</td><td>Immediate</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Read the operand and set the N and V flags from the value (from
-					the
-					highest and next-to-highest bit respectively).
-					Then take the
-					operand, and AND it with the accumulator and evaluate the
-					Z-flag.
-				</p><pre>
-					N &lt;= Operand(7)
-					V &lt;= Operand(6)
-					Tmp &lt;=
-					Operand &amp; AC
-					Z &lt;= Z(Tmp)
 				</pre><h2>CMP</h2>
 <a name="CMP"> </a><p>Compare accumulator with content of memory location</p>
 <table class="optable"><tr><th colspan="10">CMP</th></tr>
@@ -1113,7 +1026,39 @@
 					For a handling of the V-flag please see
 					<a href="http://www.6502.org/tutorials/vflag.html">http://www.6502.org/tutorials/vflag.html</a>
 					.
-				</p><h2>TRB</h2>
+				</p><h2>BIT</h2>
+<a name="BIT"> </a><p>Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			</p>
+<table class="optable"><tr><th colspan="10">BIT</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x34</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x3c</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x89</td><td>cmos</td><td>Immediate</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Read the operand and set the N and V flags from the value (from
+					the
+					highest and next-to-highest bit respectively).
+					Then take the
+					operand, and AND it with the accumulator and evaluate the
+					Z-flag.
+				</p><pre>
+					N &lt;= Operand(7)
+					V &lt;= Operand(6)
+					Tmp &lt;=
+					Operand &amp; AC
+					Z &lt;= Z(Tmp)
+				</pre><h2>TRB</h2>
 <a name="TRB"> </a><p>Test and Reset Bit - AND the memory location with the
 				accumulator, and set the Z flag from the result, then
 				CLEAR all bits
@@ -1246,6 +1191,67 @@
 					N &lt;= Operand(7)
 					Z &lt;= Z(Operand)
 					Y &lt;= Operand
+				</pre><h2>STA</h2>
+<a name="STA"> </a><p>Store the content of the accumulator into a memory location
+			</p>
+<table class="optable"><tr><th colspan="10">STA</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x92</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Store the accumulator into the address given by the operand.
+				</p><pre>
+					Operand &lt;= A
+				</pre><h2>STX</h2>
+<a name="STX"> </a><p>Store the content of the X register to memory.</p>
+<table class="optable"><tr><th colspan="10">STX</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Store the content of the X register into the address given by the
+					operand.
+				</p><pre>
+					Operand &lt;= A
+				</pre><h2>STY</h2>
+<a name="STY"> </a><p>Store the content of the Y register to memory.</p>
+<table class="optable"><tr><th colspan="10">STY</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Store the content of the Y register into the address given by the
+					operand.
+				</p><pre>
+					Operand &lt;= A
+				</pre><h2>STZ</h2>
+<a name="STZ"> </a><p>Store zero (or Z-register) into a memory location</p>
+<table class="optable"><tr><th colspan="10">STZ</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0x64</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
+<tr><td></td><td>0x74</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x9c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x9e</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					Store zero into the address given by the operand.
+				</p><pre>
+					Operand &lt;= 0
 				</pre><h2>PHA</h2>
 <a name="PHA"> </a><p>Push contents of the accumulator onto the stack</p>
 <table class="optable"><tr><th colspan="10">PHA</th></tr>
@@ -1334,346 +1340,6 @@
 					Pull the value of the Y register from the stack.
 				</p><pre>
 					Y &lt;= Stack(++SP)
-				</pre><h2>STA</h2>
-<a name="STA"> </a><p>Store the content of the accumulator into a memory location
-			</p>
-<table class="optable"><tr><th colspan="10">STA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x92</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the accumulator into the address given by the operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STX</h2>
-<a name="STX"> </a><p>Store the content of the X register to memory.</p>
-<table class="optable"><tr><th colspan="10">STX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the content of the X register into the address given by the
-					operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STY</h2>
-<a name="STY"> </a><p>Store the content of the Y register to memory.</p>
-<table class="optable"><tr><th colspan="10">STY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the content of the Y register into the address given by the
-					operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STZ</h2>
-<a name="STZ"> </a><p>Store zero into a memory location</p>
-<table class="optable"><tr><th colspan="10">STZ</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x64</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x74</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x9c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x9e</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store zero into the address given by the operand.
-				</p><pre>
-					Operand &lt;= 0
-				</pre><h2>TAX</h2>
-<a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
-<table class="optable"><tr><th colspan="10">TAX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xaa</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the accumulator to the X register
-				</p><pre>
-					X &lt;= A
-				</pre><h2>TAY</h2>
-<a name="TAY"> </a><p>Transfer the contents of accumulator into the Y register</p>
-<table class="optable"><tr><th colspan="10">TAY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa8</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the accumulator to the Y register
-				</p><pre>
-					Y &lt;= A
-				</pre><h2>TSX</h2>
-<a name="TSX"> </a><p>Transfer the contents of the stack pointer into the X register
-				(Note: needs RS to keep compatibility with 6502)
-			</p>
-<table class="optable"><tr><th colspan="10">TSX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xba</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the stack pointer to the X register
-				</p><pre>
-					X &lt;= S
-				</pre><h2>TXA</h2>
-<a name="TXA"> </a><p>Transfer the contents of the X register into the accumulator
-			</p>
-<table class="optable"><tr><th colspan="10">TXA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x8a</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the X register to the accumulator
-				</p><pre>
-					A &lt;= X
-				</pre><h2>TXS</h2>
-<a name="TXS"> </a><p>Transfer the contents of X register into the stack pointer
-				(Note: needs RS to keep compatibility with 6502)
-			</p>
-<table class="optable"><tr><th colspan="10">TXS</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x9a</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the X register to the stack pointer.
-				</p><pre>
-					S &lt;= X
-				</pre><h2>TYA</h2>
-<a name="TYA"> </a><p>Transfer the contents of the Y register into the accumulator
-			</p>
-<table class="optable"><tr><th colspan="10">TYA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x98</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Transfer the value of the Y register to the accumulator
-				</p><pre>
-					A &lt;= Y
-				</pre><h2>LDA</h2>
-<a name="LDA"> </a><p>Load accumulator</p>
-<table class="optable"><tr><th colspan="10">LDA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xa5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xa9</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xad</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xb2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xb9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xbd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Read the operand and store it in the Accumulator. Set the flags
-					appropriately.
-				</p><pre>
-					N &lt;= Operand(7)
-					Z &lt;= Z(Operand)
-					Y &lt;= Operand
-				</pre><h2>LDX</h2>
-<a name="LDX"> </a><p>Load X register</p>
-<table class="optable"><tr><th colspan="10">LDX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa2</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xa6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xae</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb6</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xbe</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Read the operand and store it in the X register. Set the flags
-					appropriately.
-				</p><pre>
-					N &lt;= Operand(7)
-					Z &lt;= Z(Operand)
-					X &lt;= Operand
-				</pre><h2>LDY</h2>
-<a name="LDY"> </a><p>Load Y register</p>
-<table class="optable"><tr><th colspan="10">LDY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa0</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xa4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xac</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb4</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xbc</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Read the operand and store it in the Y register. Set the flags
-					appropriately.
-				</p><pre>
-					N &lt;= Operand(7)
-					Z &lt;= Z(Operand)
-					Y &lt;= Operand
-				</pre><h2>PHA</h2>
-<a name="PHA"> </a><p>Push contents of the accumulator onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x48</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Push the content of the accumulator on the stack.
-				</p><pre>
-					Stack(SP--) &lt;= A
-				</pre><h2>PHP</h2>
-<a name="PHP"> </a><p>Push processor status register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x08</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Push the standard status register on the stack.
-				</p><pre>
-					Stack(SP--) &lt;= Status
-				</pre><h2>PHX</h2>
-<a name="PHX"> </a><p>Push contents of the X register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xda</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Push the content of the X register on the stack.
-				</p><pre>
-					Stack(SP--) &lt;= X
-				</pre><h2>PHY</h2>
-<a name="PHY"> </a><p>Push contents of the Y register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x5a</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Push the content of the Y register on the stack.
-				</p><pre>
-					Stack(SP--) &lt;= Y
-				</pre><h2>PLA</h2>
-<a name="PLA"> </a><p>Pull the contents of the accumulator from the stack</p>
-<table class="optable"><tr><th colspan="10">PLA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x68</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Pull the value of the accumulator from the stack.
-				</p><pre>
-					A &lt;= Stack(++SP)
-				</pre><h2>PLP</h2>
-<a name="PLP"> </a><p>Pull processor status register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLP</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x28</td><td></td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Pull the standard status register on the stack.
-				</p><pre>
-					Status &lt;= Stack(++SP)
-				</pre><h2>PLX</h2>
-<a name="PLX"> </a><p>Pull the contents of the X register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xfa</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Pull the value of the X register from the stack.
-				</p><pre>
-					X &lt;= Stack(++SP)
-				</pre><h2>PLY</h2>
-<a name="PLY"> </a><p>Pull the contents of the Y register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x7a</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Pull the value of the Y register from the stack.
-				</p><pre>
-					Y &lt;= Stack(++SP)
-				</pre><h2>STA</h2>
-<a name="STA"> </a><p>Store the content of the accumulator into a memory location
-			</p>
-<table class="optable"><tr><th colspan="10">STA</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x92</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the accumulator into the address given by the operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STX</h2>
-<a name="STX"> </a><p>Store the content of the X register to memory.</p>
-<table class="optable"><tr><th colspan="10">STX</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the content of the X register into the address given by the
-					operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STY</h2>
-<a name="STY"> </a><p>Store the content of the Y register to memory.</p>
-<table class="optable"><tr><th colspan="10">STY</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store the content of the Y register into the address given by the
-					operand.
-				</p><pre>
-					Operand &lt;= A
-				</pre><h2>STZ</h2>
-<a name="STZ"> </a><p>Store zero into a memory location</p>
-<table class="optable"><tr><th colspan="10">STZ</th></tr>
-<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x64</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x74</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x9c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x9e</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-</table>
-<h3>Description</h3>
-<p>
-					Store zero into the address given by the operand.
-				</p><pre>
-					Operand &lt;= 0
 				</pre><h2>TAX</h2>
 <a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
 <table class="optable"><tr><th colspan="10">TAX</th></tr>
@@ -1809,4 +1475,13 @@
 <h3>Description</h3>
 <p>
 					Set the interrupt status flag.
+				</p><h2>NOP</h2>
+<a name="NOP"> </a><p>No operation</p>
+<table class="optable"><tr><th colspan="10">NOP</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td></td><td>0xea</td><td></td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h3>Description</h3>
+<p>
+					No Operation.
 				</p>

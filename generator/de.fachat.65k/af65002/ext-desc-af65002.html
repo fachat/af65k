@@ -224,19 +224,6 @@ Rotate Right - shift accumulator one bit to the right, shifting
 				carry flag instead.
 			</li>
 <li>
-<a href="af65002opdesc.html#SAB">SAB: </a>
-Swap A register with B register. Always done full width, no
-				flags set.
-			</li>
-<li>
-<a href="af65002opdesc.html#SAX">SAX: </a>
-Swap AC with X register. Always done full width, no flags set.
-			</li>
-<li>
-<a href="af65002opdesc.html#SAY">SAY: </a>
-Swap AC with Y register. Always done full width, no flags set.
-			</li>
-<li>
 <a href="af65002opdesc.html#SBC">SBC: </a>
 Substract content of memory location from accumulator</li>
 <li>
@@ -263,7 +250,7 @@ Store the content of the X register to memory.</li>
 Store the content of the Y register to memory.</li>
 <li>
 <a href="af65002opdesc.html#STZ">STZ: </a>
-Store zero into a memory location</li>
+Store zero (or Z-register) into a memory location</li>
 <li>
 <a href="af65002opdesc.html#SUB">SUB: </a>
 Subtract content of memory location from accumulator without
@@ -272,14 +259,6 @@ Subtract content of memory location from accumulator without
 <li>
 <a href="af65002opdesc.html#SWP">SWP: </a>
 swap upper and lower half of the operand
-			</li>
-<li>
-<a href="af65002opdesc.html#SXY">SXY: </a>
-Swap X with Y register. Always done full width, no flags set.
-			</li>
-<li>
-<a href="af65002opdesc.html#SXZ">SXZ: </a>
-Swap X with Z register. Always done full width, no flags set.
 			</li>
 <li>
 <a href="af65002opdesc.html#TAB">TAB: </a>
@@ -322,4 +301,25 @@ Transfer Y to stack pointer</li>
 <li>
 <a href="af65002opdesc.html#TZA">TZA: </a>
 Transfer Z Register to AC</li>
+<li>
+<a href="af65002opdesc.html#XAB">XAB: </a>
+eXchange A register with B register. Always done full width, no
+				flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#XAX">XAX: </a>
+eXchange AC with X register. Always done full width, no flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#XAY">XAY: </a>
+eXchange AC with Y register. Always done full width, no flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#XYX">XYX: </a>
+eXchange X with Y register. Always done full width, no flags set.
+			</li>
+<li>
+<a href="af65002opdesc.html#XZX">XZX: </a>
+eXchange X with Z register. Always done full width, no flags set.
+			</li>
 </ul>
