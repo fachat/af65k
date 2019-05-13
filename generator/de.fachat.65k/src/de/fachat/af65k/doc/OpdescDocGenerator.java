@@ -64,6 +64,7 @@ public class OpdescDocGenerator {
 		for (CodeMapEntry page[] : opcodes.values()) {
 			prepareOperationTable(ops, page, true);
 		}
+		
 		// synonym only
 		for (Operation op : cpu.getSynonyms()) {
 			ops.get(op.getCategory()).put(op.getName(), op);
@@ -196,6 +197,9 @@ public class OpdescDocGenerator {
 
 					for (Opcode opcode : op.getOpcodes()) {
 
+						if (opcode.getOppage() != null && opcode.getOppage().length() > 0 && !hasPrefix) 
+							continue;
+						
 						if (opcode.getFeature() == null || fclasses.contains(opcode.getFeature())) {
 							int code = Validator.parseCode(opcode.getOpcode());
 							if (op.getExpand() == null && opcode.getExpand() == null) {
