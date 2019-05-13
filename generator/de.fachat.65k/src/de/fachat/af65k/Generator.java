@@ -128,6 +128,8 @@ public class Generator {
 			generatePage(cpuname, "quick", hasPrefix, dir, val, cpu2fclass);
 
 			generatePage(cpuname, "sys", hasPrefix, dir, val, cpu2fclass);
+			
+			generatePage(cpuname, "txfer", hasPrefix, dir, val, cpu2fclass);
 		}
 	}
 

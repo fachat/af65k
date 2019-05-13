@@ -98,20 +98,16 @@
 </td><td><div class="opc">LDA (zp),#byte</div>
 </td><td><div class="opc">LDA [[zp]],#byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SUB #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">XAX </div>
-</td><td><div class="opc">BIT (E)</div>
-</td><td><div class="opc">TZA </div>
-</td><td class="unused"></td><td><div class="opc">STY (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BIT (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">STY (E)</div>
 </td><td><div class="opc">STA (E)</div>
 </td><td class="unused"></td><td class="unused"></td></tr>
 <tr><th>9</th><td><div class="opc">BLE rel</div>
 </td><td><div class="opc">STA (zp),#byte</div>
 </td><td><div class="opc">STA [[zp]],#byte</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">SBI #byte, zp,X</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">XYX </div>
-</td><td><div class="opc">LDZ #byte</div>
-</td><td><div class="opc">TYS </div>
-</td><td class="unused"></td><td><div class="opc">STZ (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDZ #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">STZ (E)</div>
 </td><td><div class="opc">STX (E)</div>
 </td><td><div class="opc">STY abs,X</div>
 </td><td><div class="opc">STZ abs,Y</div>
@@ -121,10 +117,8 @@
 </td><td><div class="opc">LEA (zp),#byte</div>
 </td><td class="unused"></td><td><div class="opc">SBE </div>
 </td><td><div class="opc">SBE #byte</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">XAB </div>
-</td><td><div class="opc">LDA (E)</div>
-</td><td><div class="opc">TAZ </div>
-</td><td class="unused"></td><td><div class="opc">LDZ abs</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDA (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDZ abs</div>
 </td><td><div class="opc">LDX (E)</div>
 </td><td><div class="opc">LEA abs</div>
 </td><td><div class="opc">STX abs,Y</div>
@@ -133,9 +127,7 @@
 </td><td><div class="opc">LEA (zp),Z</div>
 </td><td class="unused"></td><td><div class="opc">BCN </div>
 </td><td><div class="opc">SBI #byte, (zp),Y</div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">XZX </div>
-</td><td class="unused"></td><td><div class="opc">TSY </div>
-</td><td class="unused"></td><td><div class="opc">LDZ abs,X</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">LDZ abs,X</div>
 </td><td class="unused"></td><td><div class="opc">LEA abs,X</div>
 </td><td><div class="opc">LEA abs,Y</div>
 </td></tr>
@@ -144,8 +136,7 @@
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">EXT </div>
 </td><td><div class="opc">SBI #byte, zp</div>
 </td><td><div class="opc">CSW zp</div>
-</td><td class="unused"></td><td><div class="opc">TPA </div>
-</td><td><div class="opc">CMP (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CMP (E)</div>
 </td><td class="unused"></td><td class="unused"></td><td><div class="opc">CSW (E)</div>
 </td><td><div class="opc">DEC (E)</div>
 </td><td class="unused"></td><td><div class="opc">DEC abs,Y</div>
@@ -156,10 +147,8 @@
 </td><td class="unused"></td><td><div class="opc">NEG </div>
 </td><td><div class="opc">SBQ .&lt;reg&gt;, #byte</div>
 </td><td><div class="opc">CSW zp,X</div>
-</td><td class="unused"></td><td><div class="opc">TEA </div>
-</td><td><div class="opc">CPZ #byte</div>
-</td><td><div class="opc">XAY </div>
-</td><td class="unused"></td><td><div class="opc">CPZ abs</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ #byte</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">CPZ abs</div>
 </td><td class="unused"></td><td><div class="opc">CSW abs,X</div>
 </td><td class="unused"></td></tr>
 <tr><th>E</th><td><div class="opc">CPX (E)</div>
@@ -168,10 +157,8 @@
 </td><td class="unused"></td><td><div class="opc">SWP </div>
 </td><td><div class="opc">SBI #byte, abs</div>
 </td><td><div class="opc">CPZ zp</div>
-</td><td class="unused"></td><td><div class="opc">TAB </div>
-</td><td><div class="opc">SBC (E)</div>
-</td><td><div class="opc">TEB </div>
-</td><td class="unused"></td><td class="unused"></td><td><div class="opc">INC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">SBC (E)</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">INC (E)</div>
 </td><td class="unused"></td><td><div class="opc">INC abs,Y</div>
 </td></tr>
 <tr><th>F</th><td class="unused"></td><td><div class="opc">LEA [[zp,X]]</div>

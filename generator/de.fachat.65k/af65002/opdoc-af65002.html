@@ -4020,13 +4020,14 @@
 <a name="TAB"> </a><p>Transfer AC to B register</p>
 <table class="optable"><tr><th colspan="10">TAB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xe8</td><td>65k</td><td>NF, LE, RS</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x01</td><td>65k</td><td>NF, LE, RS</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TAX</h2>
 <a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
 <table class="optable"><tr><th colspan="10">TAX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0xaa</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x04</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4048,6 +4049,7 @@
 <table class="optable"><tr><th colspan="10">TAY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0xa8</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x05</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4068,25 +4070,25 @@
 <a name="TAZ"> </a><p>Transfer AC to Z Register</p>
 <table class="optable"><tr><th colspan="10">TAZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xaa</td><td>cmos_indz</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x06</td><td>cmos_indz</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TEA</h2>
 <a name="TEA"> </a><p>Transfer E register to Accumulator</p>
 <table class="optable"><tr><th colspan="10">TEA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xd8</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x20</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TEB</h2>
 <a name="TEB"> </a><p>Transfer E to B register (full width)</p>
 <table class="optable"><tr><th colspan="10">TEB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xea</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x21</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TPA</h2>
 <a name="TPA"> </a><p>Transfer Program counter to Accumulator</p>
 <table class="optable"><tr><th colspan="10">TPA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xc8</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0xd0</td><td>65k</td><td>NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TSX</h2>
 <a name="TSX"> </a><p>Transfer the contents of the stack pointer into the X register
@@ -4095,6 +4097,7 @@
 <table class="optable"><tr><th colspan="10">TSX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0xba</td><td></td><td>UM, NF, RS, LE</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x74</td><td></td><td>UM, NF, RS, LE</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4126,7 +4129,7 @@
 <a name="TSY"> </a><p>Transfer stack pointer to Y</p>
 <table class="optable"><tr><th colspan="10">TSY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xba</td><td>65k</td><td>NF, UM, RS, LE</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x75</td><td>65k</td><td>NF, UM, RS, LE</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TXA</h2>
 <a name="TXA"> </a><p>Transfer the contents of the X register into the accumulator
@@ -4134,6 +4137,7 @@
 <table class="optable"><tr><th colspan="10">TXA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x8a</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x40</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4157,6 +4161,7 @@
 <table class="optable"><tr><th colspan="10">TXS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x9a</td><td></td><td>RS, LE, UM</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x47</td><td></td><td>RS, LE, UM</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4190,6 +4195,7 @@
 <table class="optable"><tr><th colspan="10">TYA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x98</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x50</td><td></td><td>RS, LE, NF</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -4210,13 +4216,13 @@
 <a name="TYS"> </a><p>Transfer Y to stack pointer</p>
 <table class="optable"><tr><th colspan="10">TYS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x9a</td><td>65k</td><td>LE, RS, UM</td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x57</td><td>65k</td><td>LE, RS, UM</td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>TZA</h2>
 <a name="TZA"> </a><p>Transfer Z Register to AC</p>
 <table class="optable"><tr><th colspan="10">TZA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x8a</td><td>cmos_indz</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x60</td><td>cmos_indz</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>XAB</h2>
 <a name="XAB"> </a><p>eXchange A register with B register. Always done full width, no
@@ -4224,35 +4230,35 @@
 			</p>
 <table class="optable"><tr><th colspan="10">XAB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xa8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x81</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>XAX</h2>
 <a name="XAX"> </a><p>eXchange AC with X register. Always done full width, no flags set.
 			</p>
 <table class="optable"><tr><th colspan="10">XAX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x88</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x84</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>XAY</h2>
 <a name="XAY"> </a><p>eXchange AC with Y register. Always done full width, no flags set.
 			</p>
 <table class="optable"><tr><th colspan="10">XAY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xda</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0x85</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>XYX</h2>
 <a name="XYX"> </a><p>eXchange X with Y register. Always done full width, no flags set.
 			</p>
 <table class="optable"><tr><th colspan="10">XYX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0x98</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0xc5</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>XZX</h2>
 <a name="XZX"> </a><p>eXchange X with Z register. Always done full width, no flags set.
 			</p>
 <table class="optable"><tr><th colspan="10">XZX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td>EXT</td><td>0xb8</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td>TXFER</td><td>0xc6</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
 </table>
 <h2>SCC</h2>
 <a name="SCC"> </a><p>Skip on carry clear - skip next opcode when C flag is cleared</p>

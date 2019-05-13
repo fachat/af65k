@@ -5828,6 +5828,11 @@
 				<addressingMode>implied</addressingMode>
 				<opcode>0x98</opcode>
 			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x50</opcode>
+				<oppage>TXFER</oppage>
+			</opcodes>
 			<doc>
 				<p>
 					Transfer the value of the Y register to the accumulator
@@ -5861,6 +5866,11 @@
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0x8a</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x40</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 			<doc>
 				<p>
@@ -5897,6 +5907,11 @@
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0xba</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x74</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 			<doc>
 				<p>
@@ -5945,6 +5960,11 @@
 				<addressingMode>implied</addressingMode>
 				<opcode>0x9a</opcode>
 			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x47</opcode>
+				<oppage>TXFER</oppage>
+			</opcodes>
 			<doc>
 				<p>
 					Transfer the value of the X register to the stack pointer.
@@ -5990,6 +6010,11 @@
 				<addressingMode>implied</addressingMode>
 				<opcode>0xa8</opcode>
 			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x05</opcode>
+				<oppage>TXFER</oppage>
+			</opcodes>
 			<doc>
 				<p>
 					Transfer the value of the accumulator to the Y register
@@ -6022,6 +6047,11 @@
 			<opcodes>
 				<addressingMode>implied</addressingMode>
 				<opcode>0xaa</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0x04</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 			<doc>
 				<p>
@@ -7331,20 +7361,19 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xc8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0xd0</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
-<!-- 
 		<operation>
 			<name>TBA</name>
 			<desc>Transfer base register B to Accumulator</desc>
 			<prefixBits>NF</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xf8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x10</opcode>
+				<oppage>TXFER</oppage>
 				<feature>65k</feature>
 			</opcodes>
 			<opcodes>
@@ -7353,7 +7382,6 @@
 				<feature>ce02</feature>
 			</opcodes>
 		</operation>
- -->
 
 		<operation>
 			<name>TEA</name>
@@ -7363,12 +7391,11 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xd8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x20</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
-<!-- 
 		<operation>
 			<name>TAE</name>
 			<desc>Transfer AC to E register</desc>
@@ -7378,11 +7405,10 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x88</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x02</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
- -->
 
 		<operation>
 			<name>TYS</name>
@@ -7393,8 +7419,8 @@
 			<prefixBits>UM</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x9a</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x57</opcode>
+				<oppage>TXFER</oppage>
 				<feature>65k</feature>
 			</opcodes>
 			<opcodes>
@@ -7414,8 +7440,8 @@
 			<prefixBits>LE</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xba</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x75</opcode>
+				<oppage>TXFER</oppage>
 				<feature>65k</feature>
 			</opcodes>
 			<opcodes>
@@ -7434,8 +7460,8 @@
 			<prefixBits>RS</prefixBits>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xe8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x01</opcode>
+				<oppage>TXFER</oppage>
 				<feature>65k</feature>
 			</opcodes>
 			<opcodes>
@@ -7454,8 +7480,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xea</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x21</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -7500,8 +7526,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xa8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x81</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -7527,8 +7553,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x88</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x84</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -7540,8 +7566,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xda</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x85</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -7554,8 +7580,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x98</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0xc5</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -7567,8 +7593,8 @@
 			<feature>65k</feature>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xb8</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0xc6</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -8554,8 +8580,8 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0xaa</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x06</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -8571,8 +8597,8 @@
 			</opcodes>
 			<opcodes>
 				<addressingMode>implied</addressingMode>
-				<opcode>0x8a</opcode>
-				<oppage>EXT</oppage>
+				<opcode>0x60</opcode>
+				<oppage>TXFER</oppage>
 			</opcodes>
 		</operation>
 
@@ -10995,8 +11021,9 @@
 		</prefix>
 
 		<prefix>
-			<name>reserved prefix</name>
+			<name>TXFER</name>
 			<value>0x6f</value>
+			<page>TXFER</page>
 		</prefix>
 
 		<prefix>
