@@ -543,6 +543,10 @@
 <a href="#CLV">CLV</a>
  - Clear the overflow (V) flag</li>
 <li>
+<a href="#NEC">NEC</a>
+ - Negate the carry flag
+			</li>
+<li>
 <a href="#SEC">SEC</a>
  - Set the C flag</li>
 <li>
@@ -4427,7 +4431,14 @@
 <h3>Description</h3>
 <p>
 					Clear the overflow status flag.
-				</p><h2>SEC</h2>
+				</p><h2>NEC</h2>
+<a name="NEC"> </a><p>Negate the carry flag
+			</p>
+<table class="optable"><tr><th colspan="10">NEC</th></tr>
+<tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
+<tr><td>EXT</td><td>0xea</td><td>65k</td><td></td><td>Implied</td><td></td><td></td></tr>
+</table>
+<h2>SEC</h2>
 <a name="SEC"> </a><p>Set the C flag</p>
 <table class="optable"><tr><th colspan="10">SEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Prefixes</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>

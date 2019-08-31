@@ -6687,6 +6687,121 @@
 -->
 
 		<!-- ################################# -->
+		
+		<operation>
+			<name>NEC</name>
+			<category>flags</category>
+			<desc>Negate the carry flag
+			</desc>
+			<feature>65k</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xea</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+		</operation>
+		
+		<!-- ################################# -->
+<!-- 
+	coprocessor operations. 
+	For COL and COS the CPU generates the address lines, but ignores the data lines.
+	The coprocessor fetches/provides data line signals instead.
+-->
+		<operation>
+			<name>COL</name>
+			<category>blit</category>
+			<desc>Move block of data of size AC from memory to the co-processor channel XR
+			</desc>
+			<feature>65k10</feature>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0xda</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Load data from (E) into the coprocessor. AC contains the number of bytes to be transferred,
+					a zero denotes 256 bytes. X register contains the coprocessor resp. coprocessor channel to be used.
+					The available channels depend on the hardware configuration.
+					<!-- TODO: RS to make word/long/quad transfers? -->
+				</p><p>
+					The CPU generates the address lines, the coprocessor only needs to connecto
+					to the data and control lines. After each transfer the address is increased
+					appropriately. 
+				</p><p>
+					The V flag is set when the coprocessor signals that it has to abort the transfer
+					prematurely. The AC then contains the number of bytes that have not been tranferred.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>COS</name>
+			<category>blit</category>
+			<desc>Move block of data of at most size AC from the co-processor channel XR to memory
+			</desc>
+			<feature>65k10</feature>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0xca</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				<p>
+					Store data from the coprocessor to memory at (E). AC contains the number of bytes to be transferred,
+					a zero denotes 256 bytes. X register contains the coprocessor resp. coprocessor channel to be used.
+					The available channels depend on the hardware configuration.
+					<!-- TODO: RS to make word/long/quad transfers? -->
+				</p><p>
+					The CPU generates the address lines, the coprocessor only needs to connecto
+					to the data and control lines. After each transfer the address is increased
+					appropriately. 
+				</p><p>
+					The V flag is set when the coprocessor signals that it has to abort the transfer
+					prematurely. The AC then contains the number of bytes that have not been tranferred.
+				</p>
+			</doc>
+		</operation>
+		
+		<operation>
+			<name>COX</name>
+			<category>blit</category>
+			<desc>Execute command AC on co-processor channel XR
+			</desc>
+			<feature>65k10</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xba</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				Initiate a command AC on the coprocessor resp. coprocessor channel XR.
+				Depending on the hardware configuration and coprocessor command the processor waits until the 
+				command is complete.
+			</doc>
+		</operation>
+
+		<operation>
+			<name>COT</name>
+			<category>blit</category>
+			<desc>Test co-processor channel XR
+			</desc>
+			<feature>65k10</feature>
+			<opcodes>
+				<addressingMode>implied</addressingMode>
+				<opcode>0xaa</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<doc>
+				Test the status on the coprocessor resp. coprocessor channel XR.
+				Depending on the hardware configuration and coprocessor command the processor waits until the 
+				command is complete.
+			</doc><doc>
+				As a result V is set when the status gives and error condition. AC is set to the return value.
+			</doc>
+		</operation>
+		
+		<!-- ################################# -->
 
 		<operation>
 			<name>MVN</name>
