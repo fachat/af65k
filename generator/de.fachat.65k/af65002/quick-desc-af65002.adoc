@@ -1,0 +1,25 @@
+
+* link:af65002opdesc.html#BBR[BBR: ]Branch on bit reset
+* link:af65002opdesc.html#BBS[BBS: ]Branch on bit set
+* link:af65002opdesc.html#RDL[RDL: ]Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			
+* link:af65002opdesc.html#RDR[RDR: ]Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			
+* link:af65002opdesc.html#RMB[RMB: ]Reset memory bit
+* link:af65002opdesc.html#ROL[ROL: ]Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+* link:af65002opdesc.html#ROR[ROR: ]Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+* link:af65002opdesc.html#SMB[SMB: ]Set memory bit
+* link:af65002opdesc.html#TMB[TMB: ]Test memory bit

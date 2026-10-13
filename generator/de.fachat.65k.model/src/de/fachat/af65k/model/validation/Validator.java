@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.hamcrest.FeatureMatcher;
 import org.w3c.dom.CDATASection;
 
 import de.fachat.af65k.logging.Logger;

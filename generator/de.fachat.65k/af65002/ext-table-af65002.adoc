@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| ADD (E)
+| STI #byte, abs
+| 
+| 
+| 
+| ADD #byte
+| ASR zp
+| 
+| PHE
+| ORA (E)
+| ASR
+| 
+| TSB (E)
+| ASL (E)
+| ASR abs
+| ASL abs,Y
+
+h| 1
+| BEV rel
+| LEA rel
+| LEA relwide
+| 
+| 
+| ADI #byte, zp,X
+| ASR zp,X
+| 
+| INZ
+| 
+| DAD
+| 
+| TRB (E)
+| ASR (E)
+| ASR abs,X
+| ASR abs,Y
+
+h| 2
+| JSR (E)
+| LEA (abs),Y
+| LEA (abs),#byte
+| 
+| ADE
+| ADE #byte
+| RDL zp
+| 
+| PLE
+| AND (E)
+| RDL
+| 
+| 
+| ROL (E)
+| RDL abs
+| ROL abs,Y
+
+h| 3
+| BOD rel
+| LEA (abs,X)
+| LEA (abs)
+| 
+| BIT
+| ADI #byte, (zp),Y
+| RDL zp,X
+| 
+| DEZ
+| LDE #byte
+| DAS
+| 
+| 
+| RDL (E)
+| RDL abs,X
+| RDL abs,Y
+
+h| 4
+| 
+| LDA (abs),#byte
+| LDA [[abs]],#byte
+| 
+| PHM
+| ADI #byte, zp
+| LEA zp
+| 
+| PHB
+| EOR (E)
+| 
+| 
+| JMP (E)
+| LSR (E)
+| 
+| LSR abs,Y
+
+h| 5
+| BLTS rel
+| STA (abs),#byte
+| STA [[abs]],#byte
+| 
+| INV
+| ADQ .<reg>, #byte
+| LEA zp,X
+| 
+| PRB
+| LDB #byte
+| PHZ
+| 
+| JSR long
+| 
+| 
+| 
+
+h| 6
+| 
+| LEA [[abs]],Y
+| LEA [[abs]],#byte
+| 
+| PLM
+| ADI #byte, abs
+| RDR zp
+| 
+| PLB
+| ADC (E)
+| RDR
+| 
+| JMP long
+| ROR (E)
+| RDR abs
+| ROR abs,Y
+
+h| 7
+| BGES rel
+| LEA [[abs,X]]
+| LEA [[abs]]
+| 
+| 
+| ADQ .<reg>, #word
+| RDR zp,X
+| 
+| 
+| 
+| PLZ
+| 
+| 
+| RDR (E)
+| RDR abs,X
+| RDR abs,Y
+
+h| 8
+| SUB (E)
+| LDA (zp),#byte
+| LDA [[zp]],#byte
+| 
+| 
+| SUB #byte
+| 
+| 
+| 
+| BIT (E)
+| 
+| 
+| STY (E)
+| STA (E)
+| 
+| 
+
+h| 9
+| BLE rel
+| STA (zp),#byte
+| STA [[zp]],#byte
+| 
+| 
+| SBI #byte, zp,X
+| 
+| 
+| 
+| LDZ #byte
+| 
+| 
+| STZ (E)
+| STX (E)
+| STY abs,X
+| STZ abs,Y
+
+h| A
+| LDY (E)
+| LEA (zp,X)
+| LEA (zp),#byte
+| 
+| SBE
+| SBE #byte
+| 
+| 
+| 
+| LDA (E)
+| 
+| 
+| LDZ abs
+| LDX (E)
+| LEA abs
+| STX abs,Y
+
+h| B
+| 
+| LEA (zp),Y
+| LEA (zp),Z
+| 
+| BCN
+| SBI #byte, (zp),Y
+| 
+| 
+| 
+| 
+| 
+| 
+| LDZ abs,X
+| 
+| LEA abs,X
+| LEA abs,Y
+
+h| C
+| CPY (E)
+| CSW (zp),Y
+| 
+| 
+| EXT
+| SBI #byte, zp
+| CSW zp
+| 
+| 
+| CMP (E)
+| 
+| 
+| CSW (E)
+| DEC (E)
+| 
+| DEC abs,Y
+
+h| D
+| BLES rel
+| STI #byte, zp
+| PHI #byte
+| 
+| NEG
+| SBQ .<reg>, #byte
+| CSW zp,X
+| 
+| 
+| CPZ #byte
+| 
+| 
+| CPZ abs
+| 
+| CSW abs,X
+| 
+
+h| E
+| CPX (E)
+| LEA [[zp]],Y
+| LEA [[zp]],#byte
+| 
+| SWP
+| SBI #byte, abs
+| CPZ zp
+| 
+| 
+| SBC (E)
+| NEC
+| 
+| 
+| INC (E)
+| 
+| INC abs,Y
+
+h| F
+| 
+| LEA [[zp,X]]
+| LEA [[zp]],Z
+| 
+| BSW
+| SBQ .<reg>, #word
+| LEA zp,Y
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+

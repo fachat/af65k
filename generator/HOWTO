@@ -32,3 +32,11 @@ then be executed from within the IDE.
    input
 
    
+
+Command line
+------------
+
+The documentation tables (html and asciidoc, in the de.fachat.65k subfolders)
+can also be created without eclipse by running "make" in this directory.
+A Java 8 JDK is required (javax.xml.bind); select it e.g. with
+	make JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64

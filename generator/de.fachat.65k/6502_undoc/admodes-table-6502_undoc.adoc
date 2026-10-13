@@ -1,0 +1,149 @@
+
+[cols="6*"]
+|===
+h| Name
+h| Alternative Name
+h| Operand Length
+h| Syntax
+h| Origin
+h| Description
+
+| Implied
+| 
+| 0
+| 
+| 
+| Implied by the operation
+
+| Accumulator
+| 
+| 0
+| 
+| 
+| Accumulator operation
+
+| Address
+| 
+| 2
+| abs
+| 
+| The parameter following the opcode is an address (16 bit; for
+				JMP, JSR, JPU)
+
+| Immediate
+| 
+| 1
+| #byte
+| 
+| The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a byte
+				parameter
+
+| Zeropage
+| 
+| 1
+| zp
+| 
+| Zeropage address; The effective address of the operand is a
+				zeropage address (i.e. 8bit)
+
+| Zeropage indexed with X
+| Zeropage X-indexed
+| 1
+| zp,X
+| 
+| Zeropage address, plus content of XR; The effective address of
+				the operand is the opcode parameter (zeropage
+				address), plus the
+				value of the X register
+
+| Zeropage indexed with Y
+| Zeropage Y-indexed
+| 1
+| zp,Y
+| 
+| Zeropage address, plus content of YR; The effective address of
+				the operand is the opcode parameter (zeropage
+				address), plus the
+				value of the Y register
+
+| Absolute 16bit
+| Absolute
+| 2
+| abs
+| 
+| 16 bit address; The effective address of the operand is the
+				word
+				address (i.e. 16 bit) given as opcode parameter
+
+| Absolute 16bit indexed with X
+| Absolute X-indexed
+| 2
+| abs,X
+| 
+| 16 bit address, plus content of XR; The effective address is
+				the
+				opcode parameter (word address), plus the value
+				of the X register
+
+| Absolute 16bit indexed with Y
+| Absolute Y-indexed
+| 2
+| abs,Y
+| 
+| 16 bit address, plus content of YR; The effective address is
+				the
+				opcode parameter (word address), plus the value
+				of the Y register
+
+| Zeropage indirect 16bit indexed with Y
+| Zeropage indirect Y-indexed
+| 1
+| (zp),Y
+| 
+| Load effective 16 bit address from zeropage location given,
+				then
+				add content of YR;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Y
+				register. The resulting address may be larger
+				than 16bit due to
+				overflow when Y is added.
+
+| Zeropage indexed with X indirect 16bit
+| Zeropage X-indexed indirect
+| 1
+| (zp,X)
+| 
+| Load effective 16 bit address from zeropage location given plus
+				content of XR;
+				The effective word (16bit) address
+				is read from the
+				location that is
+				computed as the zeropage location given as parameter
+				plus the value
+				of the X register
+
+| Absolute indirect 16bit
+| Absolute indirect
+| 2
+| (abs)
+| 
+| Load effective 16 bit address from absolute location given;
+				The
+				effective word (16bit) address is read from word
+				location given as
+				parameter.
+
+| Relative
+| 
+| 1
+| rel
+| 
+| relative addressing modes, used in branches; from -128 to +127
+
+|===
+

@@ -1,0 +1,2406 @@
+
+== List of operations
+
+
+=== Jumps and Returns
+
+
+* <<BRK,BRK>> - Starts the break routine.
+* <<JMP,JMP>> - Jump to new code address
+* <<JSR,JSR>> - Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			
+* <<RTI,RTI>> - Return from interrupt
+* <<RTS,RTS>> - Return from subroutine - read return address from stack
+
+=== Branches
+
+
+* <<BCC,BCC>> - Branch on carry clear - take branch when C flag is cleared
+			
+* <<BCS,BCS>> - Branch on carry set - take branch when C flag is set
+* <<BEQ,BEQ>> - Branch on equal - take branch when Z flag is set
+* <<BMI,BMI>> - Branch on minus - take branch when N flag is set
+* <<BNE,BNE>> - Branch on not equal - take branch when Z flag is cleared
+* <<BPL,BPL>> - Branch on plus - take branch when N flag is cleared
+* <<BVC,BVC>> - Branch on overflow clear - take branch when V flag is cleared
+			
+* <<BVS,BVS>> - Branch on overflow set - take branch when V flag is set
+
+=== Arithmetic & logic
+
+
+* <<ADC,ADC>> - Add content of memory location to accumulator
+* <<AND,AND>> - Bitwise AND accumulator with content of memory location
+* <<ASL,ASL>> - Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			
+* <<CMP,CMP>> - Compare accumulator with content of memory location
+* <<CPX,CPX>> - Compare X register with content of memory location
+* <<CPY,CPY>> - Compare Y register with content of memory location
+* <<DEC,DEC>> - Decrement the content of a memory location by one
+* <<DEX,DEX>> - Decrement the content of the X register by one
+* <<DEY,DEY>> - Decrement the Y register by one
+* <<EOR,EOR>> - Bitwise Exclusive-OR accumulator with content of memory
+				location
+			
+* <<INC,INC>> - Increment the content of a memory location by one
+* <<INX,INX>> - Increment the content of the X register by one
+* <<INY,INY>> - Increment the content of the Y register by one
+* <<LSR,LSR>> - Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			
+* <<ORA,ORA>> - Bitwise OR accumulator with content of memory location
+* <<ROL,ROL>> - Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+* <<ROR,ROR>> - Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+* <<SBC,SBC>> - Substract content of memory location from accumulator
+
+=== Bit Operations and Tests
+
+
+* <<BIT,BIT>> - Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			
+
+=== Load/Store
+
+
+* <<LDA,LDA>> - Load accumulator
+* <<LDX,LDX>> - Load X register
+* <<LDY,LDY>> - Load Y register
+* <<STA,STA>> - Store the content of the accumulator into a memory location
+			
+* <<STX,STX>> - Store the content of the X register to memory.
+* <<STY,STY>> - Store the content of the Y register to memory.
+
+=== Pushes/Pulls
+
+
+* <<PHA,PHA>> - Push contents of the accumulator onto the stack
+* <<PHP,PHP>> - Push processor status register onto the stack
+* <<PLA,PLA>> - Pull the contents of the accumulator from the stack
+* <<PLP,PLP>> - Pull processor status register from the stack
+
+=== Transfers
+
+
+* <<TAX,TAX>> - Transfer the contents of accumulator into the X register
+* <<TAY,TAY>> - Transfer the contents of accumulator into the Y register
+* <<TSX,TSX>> - Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			
+* <<TXA,TXA>> - Transfer the contents of the X register into the accumulator
+			
+* <<TXS,TXS>> - Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			
+* <<TYA,TYA>> - Transfer the contents of the Y register into the accumulator
+			
+
+=== Flags
+
+
+* <<CLC,CLC>> - Clear the C flag
+* <<CLD,CLD>> - Clear the decimal (D) flag
+* <<CLI,CLI>> - Clear the interrupt (I) flag
+* <<CLV,CLV>> - Clear the overflow (V) flag
+* <<SEC,SEC>> - Set the C flag
+* <<SED,SED>> - Set the decimal (D) flag
+* <<SEI,SEI>> - Set the interrupt (I) flag
+
+=== Others
+
+
+* <<NOP,NOP>> - No operation
+
+== Operations
+
+
+== BRK
+
+[[BRK]]Starts the break routine.
+
+
+[cols="10*"]
+|===
+10+h| BRK
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x00
+| 
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ The BRK opcode is used to jump to the BRK vector. It pushes the return address and the status on the stack, then reads the BRK vector (doubling as IRQ vector) and jumps there.  Please note that the address put on the stack is the address of the next instruction. And the BRK opcode is using the immediate addressing mode (although the MOS manual does not state it). Thus the address put on the stack is two bytes behind the address of the BRK!  Before storing the status on the stack, the opcode sets the I-flag to avoid recursive calling of the interrupt routine.  When storing the status on the stack, the B-flag is set to indicate that the shared IRQ/BRK vector has been called from a BRK and not an IRQ.  Stack(SP--) &lt;= > NextPC Stack(SP--) &lt;= &lt; NextPC Stack(SP--) &lt;= Status \| B \| I PC &lt;= ($FFFE) 
+== JMP
+
+[[JMP]]Jump to new code address
+
+
+[cols="10*"]
+|===
+10+h| JMP
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x4c
+| 
+| Address
+| 
+| 
+
+| 
+| 0x6c
+| 
+| Absolute indirect 16bit
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Jump to the address given by the operand (as computed depending on the respective addressing mode).  PC &lt;= Operand 
+== JSR
+
+[[JSR]]Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			
+
+
+[cols="10*"]
+|===
+10+h| JSR
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x20
+| 
+| Address
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Jump to the address given by the operand (as computed depending on the respective addressing mode) and store the return address (-1) on the stack to prepare for the RTS opcode  Stack(SP--) &lt;= > NextPC-1 Stack(SP--) &lt;= &lt; NextPC-1 PC &lt;= Operand 
+== RTI
+
+[[RTI]]Return from interrupt
+
+
+[cols="10*"]
+|===
+10+h| RTI
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x40
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Returns from an interrupt or a BRK opcode handling. It first pulls the status register from the stack, then takes the return address from the stack, increment it by one, and continue at the new address.  Status &lt;= Stack(++SP) -- bit 5=1 Tmp(0-7) &lt;= Stack(++SP) Tmp(8-15) &lt;= Stack(++SP) PC &lt;= Tmp; 
+== RTS
+
+[[RTS]]Return from subroutine - read return address from stack
+
+
+[cols="10*"]
+|===
+10+h| RTS
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x60
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Take the return address from the stack, increment it by one, and continue at the new address.  Tmp(0-7) &lt;= Stack(++SP) Tmp(8-15) &lt;= Stack(++SP) PC &lt;= Tmp + 1; 
+== BCC
+
+[[BCC]]Synonyms: BLT
+
+Branch on carry clear - take branch when C flag is cleared
+			
+
+
+[cols="10*"]
+|===
+10+h| BCC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x90
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the carry status flag is clear. After a CMP this is a synonym for "less than". The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BCS
+
+[[BCS]]Synonyms: BGE
+
+Branch on carry set - take branch when C flag is set
+
+
+[cols="10*"]
+|===
+10+h| BCS
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xB0
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the carry status flag is set. After a CMP this is a synonym for "greater or equal". The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BEQ
+
+[[BEQ]]Branch on equal - take branch when Z flag is set
+
+
+[cols="10*"]
+|===
+10+h| BEQ
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xf0
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the zero status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BMI
+
+[[BMI]]Branch on minus - take branch when N flag is set
+
+
+[cols="10*"]
+|===
+10+h| BMI
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x30
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the negative status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BNE
+
+[[BNE]]Branch on not equal - take branch when Z flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| BNE
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xD0
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the zero status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BPL
+
+[[BPL]]Branch on plus - take branch when N flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| BPL
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x10
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the negative status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BVC
+
+[[BVC]]Branch on overflow clear - take branch when V flag is cleared
+			
+
+
+[cols="10*"]
+|===
+10+h| BVC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x50
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the overflow status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== BVS
+
+[[BVS]]Branch on overflow set - take branch when V flag is set
+
+
+[cols="10*"]
+|===
+10+h| BVS
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x70
+| 
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the overflow status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+== ADC
+
+[[ADC]]Add content of memory location to accumulator
+
+
+[cols="10*"]
+|===
+10+h| ADC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x61
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x65
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x69
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0x6d
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x71
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x75
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x79
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x7d
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Add the operand to the accumulator and store back in the accumulator. Set the flags from the result. Use Decimal or Binary add depending on whether the decimal mode status bis is set or not respectively.  AC, C, V &lt;= AC + Operand, C N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+== AND
+
+[[AND]]Bitwise AND accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| AND
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x21
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x25
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x29
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0x2d
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x31
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x35
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x39
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x3d
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise AND the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC &amp; Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== ASL
+
+[[ASL]]Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			
+
+
+[cols="10*"]
+|===
+10+h| ASL
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x06
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x0a
+| 
+| Accumulator
+| 
+| 
+
+| 
+| 0x0e
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x16
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x1e
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in a zero from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= 0 N &lt;= AC7) Z &lt;= Z(AC) 
+== CMP
+
+[[CMP]]Compare accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CMP
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc1
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xc5
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xc9
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xcd
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xd1
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xd5
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xd9
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xdd
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the accumulator and set the flags appropriately. I.e. substract the operand from AC with an implicitely set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= Y - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== CPX
+
+[[CPX]]Compare X register with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CPX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe0
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xe4
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xec
+| 
+| Absolute 16bit
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the X register and set the flags appropriately. I.e. substract the operand from X with an implicitly set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= X - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== CPY
+
+[[CPY]]Compare Y register with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CPY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc0
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xc4
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xcc
+| 
+| Absolute 16bit
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the Y register and set the flags appropriately. I.e. substract the operand from Y with an implicitly set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= Y - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== DEC
+
+[[DEC]]Decrement the content of a memory location by one
+
+
+[cols="10*"]
+|===
+10+h| DEC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc6
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xce
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xd6
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xde
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the operand by one, i.e. binary substract one. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Operand &lt;= Operand - 1 N &lt;= OperandC7) Z &lt;= Z(AC) 
+== DEX
+
+[[DEX]]Decrement the content of the X register by one
+
+
+[cols="10*"]
+|===
+10+h| DEX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xca
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the X register by one (binary).  X &lt;= X-1 
+== DEY
+
+[[DEY]]Decrement the Y register by one
+
+
+[cols="10*"]
+|===
+10+h| DEY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x88
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the Y register by one (binary).  Y &lt;= Y-1 
+== EOR
+
+[[EOR]]Bitwise Exclusive-OR accumulator with content of memory
+				location
+			
+
+
+[cols="10*"]
+|===
+10+h| EOR
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x41
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x45
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x49
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0x4d
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x51
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x55
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x59
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x5d
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise Exclusive-OR the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC ^ Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== INC
+
+[[INC]]Increment the content of a memory location by one
+
+
+[cols="10*"]
+|===
+10+h| INC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe6
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xee
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xf6
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xfe
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the operand by one, i.e. binary add one. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Operand &lt;= Operand + 1 N &lt;= OperandC7) Z &lt;= Z(AC) 
+== INX
+
+[[INX]]Increment the content of the X register by one
+
+
+[cols="10*"]
+|===
+10+h| INX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe8
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the X register by one (binary).  X &lt;= X+1 
+== INY
+
+[[INY]]Increment the content of the Y register by one
+
+
+[cols="10*"]
+|===
+10+h| INY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc8
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the Y register by one (binary).  Y &lt;= Y+1 
+== LSR
+
+[[LSR]]Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			
+
+
+[cols="10*"]
+|===
+10+h| LSR
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x46
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x4a
+| 
+| Accumulator
+| 
+| 
+
+| 
+| 0x4e
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x56
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x5e
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in a zero from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= 0 N &lt;= AC7) Z &lt;= Z(AC) 
+== ORA
+
+[[ORA]]Bitwise OR accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| ORA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x01
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x05
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x09
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0x0d
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x11
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x15
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x19
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x1d
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise OR the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC \| Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== ROL
+
+[[ROL]]Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROL
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x26
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x2a
+| 
+| Accumulator
+| 
+| 
+
+| 
+| 0x2e
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x36
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x3e
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+== ROR
+
+[[ROR]]Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROR
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x66
+| ror
+| Zeropage
+| 
+| 
+
+| 
+| 0x6a
+| ror
+| Accumulator
+| 
+| 
+
+| 
+| 0x6e
+| ror
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x76
+| ror
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x7e
+| ror
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the carry flag from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+== SBC
+
+[[SBC]]Substract content of memory location from accumulator
+
+
+[cols="10*"]
+|===
+10+h| SBC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe1
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xe5
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xe9
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xed
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xf1
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xf5
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xf9
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xfd
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Substract the operand from the accumulator and store back in the accumulator. Set the flags from the result. Use Decimal or Binary add depending on whether the decimal mode status bis is set or not respectively. C status flag is used as borrow.  AC, C, V &lt;= AC - Operand, C N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+== BIT
+
+[[BIT]]Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| BIT
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x24
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x2c
+| 
+| Absolute 16bit
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and set the N and V flags from the value (from the highest and next-to-highest bit respectively). Then take the operand, and AND it with the accumulator and evaluate the Z-flag.  N &lt;= Operand(7) V &lt;= Operand(6) Tmp &lt;= Operand &amp; AC Z &lt;= Z(Tmp) 
+== LDA
+
+[[LDA]]Load accumulator
+
+
+[cols="10*"]
+|===
+10+h| LDA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa1
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xa5
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xa9
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xad
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb1
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xb5
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xb9
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xbd
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the Accumulator. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) Y &lt;= Operand 
+== LDX
+
+[[LDX]]Load X register
+
+
+[cols="10*"]
+|===
+10+h| LDX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa2
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xa6
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xae
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb6
+| 
+| Zeropage indexed with Y
+| 
+| 
+
+| 
+| 0xbe
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the X register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) X &lt;= Operand 
+== LDY
+
+[[LDY]]Load Y register
+
+
+[cols="10*"]
+|===
+10+h| LDY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa0
+| 
+| Immediate
+| 
+| 
+
+| 
+| 0xa4
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0xac
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb4
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xbc
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the Y register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) Y &lt;= Operand 
+== STA
+
+[[STA]]Store the content of the accumulator into a memory location
+			
+
+
+[cols="10*"]
+|===
+10+h| STA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x81
+| 
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x85
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x8d
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x91
+| 
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x95
+| 
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x99
+| 
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x9d
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the accumulator into the address given by the operand.  Operand &lt;= A 
+== STX
+
+[[STX]]Store the content of the X register to memory.
+
+
+[cols="10*"]
+|===
+10+h| STX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x86
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x8e
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x96
+| 
+| Zeropage indexed with Y
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the content of the X register into the address given by the operand.  Operand &lt;= A 
+== STY
+
+[[STY]]Store the content of the Y register to memory.
+
+
+[cols="10*"]
+|===
+10+h| STY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x84
+| 
+| Zeropage
+| 
+| 
+
+| 
+| 0x8c
+| 
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x94
+| 
+| Zeropage indexed with X
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the content of the Y register into the address given by the operand.  Operand &lt;= A 
+== PHA
+
+[[PHA]]Push contents of the accumulator onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x48
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the accumulator on the stack.  Stack(SP--) &lt;= A 
+== PHP
+
+[[PHP]]Push processor status register onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHP
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x08
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the standard status register on the stack.  Stack(SP--) &lt;= Status 
+== PLA
+
+[[PLA]]Pull the contents of the accumulator from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x68
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the accumulator from the stack.  A &lt;= Stack(++SP) 
+== PLP
+
+[[PLP]]Pull processor status register from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLP
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x28
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the standard status register on the stack.  Status &lt;= Stack(++SP) 
+== TAX
+
+[[TAX]]Transfer the contents of accumulator into the X register
+
+
+[cols="10*"]
+|===
+10+h| TAX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xaa
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the accumulator to the X register  X &lt;= A 
+== TAY
+
+[[TAY]]Transfer the contents of accumulator into the Y register
+
+
+[cols="10*"]
+|===
+10+h| TAY
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa8
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the accumulator to the Y register  Y &lt;= A 
+== TSX
+
+[[TSX]]Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			
+
+
+[cols="10*"]
+|===
+10+h| TSX
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xba
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the stack pointer to the X register  X &lt;= S 
+== TXA
+
+[[TXA]]Transfer the contents of the X register into the accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| TXA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x8a
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the X register to the accumulator  A &lt;= X 
+== TXS
+
+[[TXS]]Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			
+
+
+[cols="10*"]
+|===
+10+h| TXS
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x9a
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the X register to the stack pointer.  S &lt;= X 
+== TYA
+
+[[TYA]]Transfer the contents of the Y register into the accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| TYA
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x98
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the Y register to the accumulator  A &lt;= Y 
+== CLC
+
+[[CLC]]Clear the C flag
+
+
+[cols="10*"]
+|===
+10+h| CLC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x18
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the carry status flag. 
+== CLD
+
+[[CLD]]Clear the decimal (D) flag
+
+
+[cols="10*"]
+|===
+10+h| CLD
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xd8
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the decimal mode status flag. 
+== CLI
+
+[[CLI]]Clear the interrupt (I) flag
+
+
+[cols="10*"]
+|===
+10+h| CLI
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x58
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the interrupt status flag. 
+== CLV
+
+[[CLV]]Clear the overflow (V) flag
+
+
+[cols="10*"]
+|===
+10+h| CLV
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xb8
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the overflow status flag. 
+== SEC
+
+[[SEC]]Set the C flag
+
+
+[cols="10*"]
+|===
+10+h| SEC
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x38
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the carry status flag. 
+== SED
+
+[[SED]]Set the decimal (D) flag
+
+
+[cols="10*"]
+|===
+10+h| SED
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xf8
+| bcd
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the decimal mode status flag. 
+== SEI
+
+[[SEI]]Set the interrupt (I) flag
+
+
+[cols="10*"]
+|===
+10+h| SEI
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x78
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the interrupt status flag. 
+== NOP
+
+[[NOP]]No operation
+
+
+[cols="10*"]
+|===
+10+h| NOP
+
+h| Page
+h| Opcode
+h| Class
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xea
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ No Operation. 

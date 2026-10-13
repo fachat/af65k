@@ -1,0 +1,457 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| ADD (E)   +
+RS, UM, NF, LE
+| STI #byte, abs   +
+UM, RS, LE, AM, OF
+| 
+| 
+| 
+| ADD #byte   +
+RS, NF, LE
+| ASR zp   +
+UM, NF, RS, AM, OF
+| 
+| PHE    +
+UM
+| ORA (E)   +
+RS, UM, NF, LE
+| ASR    +
+NF, RS
+| 
+| TSB (E)   +
+UM, NF, RS
+| ASL (E)   +
+UM, NF, RS
+| ASR abs   +
+UM, NF, RS, AM, OF
+| ASL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 1
+| BEV rel   +
+RS
+| LEA rel   +
+UM, NF, AM, OF
+| LEA relwide   +
+UM, NF, AM, OF
+| 
+| 
+| ADI #byte, zp,X   +
+RS, OF, UM, NF, LE, AM
+| ASR zp,X   +
+UM, NF, RS, AM, OF
+| 
+| INZ
+| 
+| DAD    +
+NF, RS
+| 
+| TRB (E)   +
+UM, NF, RS
+| ASR (E)   +
+UM, NF, RS
+| ASR abs,X   +
+UM, NF, RS, AM, OF
+| ASR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 2
+| JSR (E)   +
+RS, LE
+| LEA (abs),Y   +
+UM, NF, AM, OF
+| LEA (abs),#byte   +
+UM, NF, AM, OF
+| 
+| ADE    +
+NF, RS
+| ADE #byte   +
+NF, RS, LE
+| RDL zp   +
+UM, NF, RS, AM, OF
+| 
+| PLE    +
+UM, NF
+| AND (E)   +
+RS, UM, NF, LE
+| RDL    +
+NF, RS
+| 
+| 
+| ROL (E)   +
+UM, NF, RS
+| RDL abs   +
+UM, NF, RS, AM, OF
+| ROL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 3
+| BOD rel   +
+RS
+| LEA (abs,X)   +
+UM, NF, AM, OF
+| LEA (abs)   +
+UM, NF, AM, OF
+| 
+| BIT    +
+RS, NF
+| ADI #byte, (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| RDL zp,X   +
+UM, NF, RS, AM, OF
+| 
+| DEZ
+| LDE #byte   +
+NF, RS, LE
+| DAS    +
+NF, RS
+| 
+| 
+| RDL (E)   +
+UM, NF, RS
+| RDL abs,X   +
+UM, NF, RS, AM, OF
+| RDL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 4
+| 
+| LDA (abs),#byte   +
+RS, OF, UM, NF, LE, AM
+| LDA [[abs]],#byte   +
+RS, OF, UM, NF, LE, AM
+| 
+| PHM    +
+UM, RS
+| ADI #byte, zp   +
+RS, OF, UM, NF, LE, AM
+| LEA zp   +
+UM, NF, AM, OF
+| 
+| PHB    +
+UM
+| EOR (E)   +
+RS, UM, NF, LE
+| 
+| 
+| JMP (E)   +
+UM, LE
+| LSR (E)   +
+UM, NF, RS
+| 
+| LSR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 5
+| BLTS rel   +
+RS
+| STA (abs),#byte   +
+UM, RS, AM, OF
+| STA [[abs]],#byte   +
+UM, RS, AM, OF
+| 
+| INV    +
+NF, RS
+| ADQ .<reg>, #byte   +
+NF, RS, LE
+| LEA zp,X   +
+UM, NF, AM, OF
+| 
+| PRB    +
+UM, NF
+| LDB #byte   +
+NF, RS, LE
+| PHZ
+| 
+| JSR long   +
+RS, LE, AM, OF
+| 
+| 
+| 
+
+h| 6
+| 
+| LEA [[abs]],Y   +
+UM, NF, AM, OF
+| LEA [[abs]],#byte   +
+UM, NF, AM, OF
+| 
+| PLM    +
+UM, RS
+| ADI #byte, abs   +
+RS, OF, UM, NF, LE, AM
+| RDR zp   +
+UM, NF, RS, AM, OF
+| 
+| PLB    +
+UM, NF
+| ADC (E)   +
+RS, UM, NF, LE
+| RDR    +
+NF, RS
+| 
+| JMP long   +
+UM, LE, AM, OF
+| ROR (E)   +
+UM, NF, RS
+| RDR abs   +
+UM, NF, RS, AM, OF
+| ROR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 7
+| BGES rel   +
+RS
+| LEA [[abs,X]]   +
+UM, NF, AM, OF
+| LEA [[abs]]   +
+UM, NF, AM, OF
+| 
+| 
+| ADQ .<reg>, #word   +
+NF, RS, LE
+| RDR zp,X   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| PLZ
+| 
+| 
+| RDR (E)   +
+UM, NF, RS
+| RDR abs,X   +
+UM, NF, RS, AM, OF
+| RDR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 8
+| SUB (E)   +
+RS, UM, NF, LE
+| LDA (zp),#byte   +
+RS, OF, UM, NF, LE, AM
+| LDA [[zp]],#byte   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| SUB #byte   +
+RS, NF, LE
+| 
+| 
+| 
+| BIT (E)   +
+RS, UM, NF, LE
+| 
+| 
+| STY (E)   +
+UM, RS
+| STA (E)   +
+UM, RS
+| 
+| 
+
+h| 9
+| BLE rel   +
+RS
+| STA (zp),#byte   +
+UM, RS, AM, OF
+| STA [[zp]],#byte   +
+UM, RS, AM, OF
+| 
+| 
+| SBI #byte, zp,X   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| 
+| LDZ #byte
+| 
+| 
+| STZ (E)   +
+UM, RS
+| STX (E)   +
+UM, RS
+| STY abs,X   +
+UM, RS, AM, OF
+| STZ abs,Y   +
+UM, RS, AM, OF
+
+h| A
+| LDY (E)   +
+RS, UM, NF, LE
+| LEA (zp,X)   +
+UM, NF, AM, OF
+| LEA (zp),#byte   +
+UM, NF, AM, OF
+| 
+| SBE    +
+NF, RS
+| SBE #byte   +
+NF, RS, LE
+| 
+| 
+| 
+| LDA (E)   +
+RS, UM, NF, LE
+| 
+| 
+| LDZ abs
+| LDX (E)   +
+RS, UM, NF, LE
+| LEA abs   +
+UM, NF, AM, OF
+| STX abs,Y   +
+UM, RS, AM, OF
+
+h| B
+| 
+| LEA (zp),Y   +
+UM, NF, AM, OF
+| LEA (zp),Z   +
+UM, NF, AM, OF
+| 
+| BCN    +
+NF, RS
+| SBI #byte, (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| 
+| 
+| 
+| 
+| LDZ abs,X
+| 
+| LEA abs,X   +
+UM, NF, AM, OF
+| LEA abs,Y   +
+UM, NF, AM, OF
+
+h| C
+| CPY (E)   +
+UM, RS, LE
+| CSW (zp),Y   +
+UM, RS, AM
+| 
+| 
+| EXT    +
+NF, RS
+| SBI #byte, zp   +
+RS, OF, UM, NF, LE, AM
+| CSW zp   +
+UM, RS, AM
+| 
+| 
+| CMP (E)   +
+UM, RS, LE
+| 
+| 
+| CSW (E)   +
+UM, RS
+| DEC (E)   +
+UM, NF, RS
+| 
+| DEC abs,Y   +
+UM, NF, RS, AM, OF
+
+h| D
+| BLES rel   +
+RS
+| STI #byte, zp   +
+UM, RS, LE, AM, OF
+| PHI #byte   +
+RS, LE
+| 
+| NEG    +
+NF, RS
+| SBQ .<reg>, #byte   +
+NF, RS, LE
+| CSW zp,X   +
+UM, RS, AM
+| 
+| 
+| CPZ #byte   +
+RS, LE
+| 
+| 
+| CPZ abs   +
+UM, RS, LE, AM, OF
+| 
+| CSW abs,X   +
+UM, RS, AM
+| 
+
+h| E
+| CPX (E)   +
+UM, RS, LE
+| LEA [[zp]],Y   +
+UM, NF, AM, OF
+| LEA [[zp]],#byte   +
+UM, NF, AM, OF
+| 
+| SWP    +
+NF, RS
+| SBI #byte, abs   +
+RS, OF, UM, NF, LE, AM
+| CPZ zp   +
+UM, RS, LE, AM, OF
+| 
+| 
+| SBC (E)   +
+RS, UM, NF, LE
+| NEC
+| 
+| 
+| INC (E)   +
+UM, NF, RS
+| 
+| INC abs,Y   +
+UM, NF, RS, AM, OF
+
+h| F
+| 
+| LEA [[zp,X]]   +
+UM, NF, AM, OF
+| LEA [[zp]],Z   +
+UM, NF, AM, OF
+| 
+| BSW    +
+NF, RS
+| SBQ .<reg>, #word   +
+NF, RS, LE
+| LEA zp,Y   +
+UM, NF, AM, OF
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+

@@ -21,17 +21,18 @@ package de.fachat.af65k;
  */
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.JAXB;
 
 import de.fachat.af65k.doc.AdModeDocGenerator;
+import de.fachat.af65k.doc.DocWriter;
+import de.fachat.af65k.doc.adoc.AsciidocWriter;
 import de.fachat.af65k.doc.OpdescDocGenerator;
 import de.fachat.af65k.doc.OptableDocGenerator;
 import de.fachat.af65k.doc.html.HtmlWriter;
@@ -65,7 +66,7 @@ public class Generator {
 	}
 	
 
-	private static void generateCpu(File file, String cpuname, boolean hasPrefix) {
+	private static void generateCpu(File file, String cpuname, final boolean hasPrefix) {
 
 		File dir = new File(cpuname);
 		if (!dir.exists()) {
@@ -77,7 +78,7 @@ public class Generator {
 
 		Logger logger = LoggerFactory.getLogger(Generator.class);
 
-		Validator val = new Validator(logger, cpu);
+		final Validator val = new Validator(logger, cpu);
 
 		Map<String, String> cpu2fclass = new HashMap<String, String>();
 		cpu2fclass.put("af65002", "65k");
@@ -89,35 +90,15 @@ public class Generator {
 		cpu2fclass.put("65ce02", "65ce02");
 		cpu2fclass.put("65816", "65816");
 
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, "admodes-table-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
+		generate(dir, "admodes-table-" + cpuname, wr -> {
 			AdModeDocGenerator docgen = new AdModeDocGenerator(val, cpu2fclass.get(cpuname));
-			docgen.generateAddressingModeTable(new HtmlWriter(pwr), hasPrefix);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			docgen.generateAddressingModeTable(wr, hasPrefix);
+		});
 
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, "opdoc-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
+		generate(dir, "opdoc-" + cpuname, wr -> {
 			OpdescDocGenerator docgen = new OpdescDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), cpu2fclass.get(cpuname), hasPrefix);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			docgen.generateOperationtable(wr, cpu2fclass.get(cpuname), hasPrefix);
+		});
 
 		generatePage(cpuname, null, hasPrefix, dir, val, cpu2fclass);
 
@@ -141,51 +122,42 @@ public class Generator {
 		String pagename = page == null ? null : page.toUpperCase();
 		boolean includeOrig = page == null;
 		
-		if (hasPrefix)
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, fileprefix + "-longtable-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), pagename, true, cpu2fclass.get(cpuname), hasPrefix);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (hasPrefix) {
+			generate(dir, fileprefix + "-longtable-" + cpuname, wr -> {
+				new OptableDocGenerator(val).generateOpcodetable(wr, pagename, true, cpu2fclass.get(cpuname), hasPrefix);
+			});
 		}
 
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, fileprefix + "-table-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOpcodetable(new HtmlWriter(pwr), pagename, false, cpu2fclass.get(cpuname), hasPrefix);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+		generate(dir, fileprefix + "-table-" + cpuname, wr -> {
+			new OptableDocGenerator(val).generateOpcodetable(wr, pagename, false, cpu2fclass.get(cpuname), hasPrefix);
+		});
+
+		generate(dir, fileprefix + "-desc-" + cpuname, wr -> {
+			new OptableDocGenerator(val).generateOperationtable(wr, pagename, cpu2fclass.get(cpuname), includeOrig);
+		});
+	}
+
+	private static interface DocCreator {
+		void create(DocWriter wr);
+	}
+
+	/**
+	 * writes the document twice, as HTML and as AsciiDoc
+	 */
+	private static void generate(File dir, String basename, DocCreator creator) {
+		try (PrintWriter pwr = open(new File(dir, basename + ".html"))) {
+			creator.create(new HtmlWriter(pwr));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		try {
-			FileOutputStream fos = new FileOutputStream(new File(dir, fileprefix + "-desc-" + cpuname + ".html"));
-			OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
-			PrintWriter pwr = new PrintWriter(osw);
-			OptableDocGenerator docgen = new OptableDocGenerator(val);
-			docgen.generateOperationtable(new HtmlWriter(pwr), pagename, cpu2fclass.get(cpuname), includeOrig);
-			pwr.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+		try (PrintWriter pwr = open(new File(dir, basename + ".adoc"))) {
+			creator.create(new AsciidocWriter(pwr));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-}
 
+	private static PrintWriter open(File f) throws IOException {
+		return new PrintWriter(new OutputStreamWriter(new FileOutputStream(f), "UTF-8"));
+	}
+}

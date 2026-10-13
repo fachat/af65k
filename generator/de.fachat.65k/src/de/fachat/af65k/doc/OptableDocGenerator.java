@@ -31,7 +31,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.Feature;
 import de.fachat.af65k.model.objs.FeatureSet;
 import de.fachat.af65k.model.objs.Opcode;
@@ -57,7 +56,7 @@ public class OptableDocGenerator {
 		cpu = mycpu;
 	}
 
-	public void generateOperationtable(HtmlWriter wr, String pagename, String fclass, boolean includeOrig) {
+	public void generateOperationtable(DocWriter wr, String pagename, String fclass, boolean includeOrig) {
 
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, false);
 		CodeMapEntry page[] = opcodes.get(pagename); // get standard map

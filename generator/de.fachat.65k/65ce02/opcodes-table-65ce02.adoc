@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte
+| ORA (zp,X)
+| CLE
+| SEE
+| TSB zp
+| ORA zp
+| ASL zp
+| RMB0 zp
+| PHP
+| ORA #byte
+| ASL
+| TSY
+| TSB abs
+| ORA abs
+| ASL abs
+| BBR0 zp,rel
+
+h| 1
+| BPL rel
+| ORA (zp),Y
+| ORA (zp),Z
+| BPL relwide
+| TRB zp
+| ORA zp,X
+| ASL zp,X
+| RMB1 zp
+| CLC
+| ORA abs,Y
+| INC
+| INZ
+| TRB abs
+| ORA abs,X
+| ASL abs,X
+| BBR1 zp,rel
+
+h| 2
+| JSR abs
+| AND (zp,X)
+| JSR (abs)
+| JSR (abs,X)
+| BIT zp
+| AND zp
+| ROL zp
+| RMB2 zp
+| PLP
+| AND #byte
+| ROL
+| TYS
+| BIT abs
+| AND abs
+| ROL abs
+| BBR2 zp,rel
+
+h| 3
+| BMI rel
+| AND (zp),Y
+| AND (zp),Z
+| BMI relwide
+| BIT zp,X
+| AND zp,X
+| ROL zp,X
+| RMB3 zp
+| SEC
+| AND abs,Y
+| DEC
+| DEZ
+| BIT abs,X
+| AND abs,X
+| ROL abs,X
+| BBR3 zp,rel
+
+h| 4
+| RTI
+| EOR (zp,X)
+| NEG
+| ASR
+| ASR zp
+| EOR zp
+| LSR zp
+| RMB4 zp
+| PHA
+| EOR #byte
+| LSR
+| TAZ
+| JMP abs
+| EOR abs
+| LSR abs
+| BBR4 zp,rel
+
+h| 5
+| BVC rel
+| EOR (zp),Y
+| EOR (zp),Z
+| BVC relwide
+| ASR zp,X
+| EOR zp,X
+| LSR zp,X
+| RMB5 zp
+| CLI
+| EOR abs,Y
+| PHY
+| TAB
+| AUG
+| EOR abs,X
+| LSR abs,X
+| BBR5 zp,rel
+
+h| 6
+| RTS
+| ADC (zp,X)
+| RTS #byte
+| BSR relwide
+| STZ zp
+| ADC zp
+| ROR zp
+| RMB6 zp
+| PLA
+| ADC #byte
+| ROR
+| TZA
+| JMP (abs)
+| ADC abs
+| ROR abs
+| BBR6 zp,rel
+
+h| 7
+| BVS rel
+| ADC (zp),Y
+| ADC (zp),Z
+| BVS relwide
+| STZ zp,X
+| ADC zp,X
+| ROR zp,X
+| RMB7 zp
+| SEI
+| ADC abs,Y
+| PLY
+| TBA
+| JMP (abs,X)
+| ADC abs,X
+| ROR abs,X
+| BBR7 zp,rel
+
+h| 8
+| BRA rel
+| STA (zp,X)
+| STA (zp,S),Y
+| BRA relwide
+| STY zp
+| STA zp
+| STX zp
+| SMB0 zp
+| DEY
+| BIT #byte
+| TXA
+| STY abs,X
+| STY abs
+| STA abs
+| STX abs
+| BBS0 zp,rel
+
+h| 9
+| BCC rel
+| STA (zp),Y
+| STA (zp),Z
+| BCC relwide
+| STY zp,X
+| STA zp,X
+| STX zp,Y
+| SMB1 zp
+| TYA
+| STA abs,Y
+| TXS
+| STX abs,Y
+| STZ abs
+| STA abs,X
+| STZ abs,X
+| BBS1 zp,rel
+
+h| A
+| LDY #byte
+| LDA (zp,X)
+| LDX #byte
+| LDZ #byte
+| LDY zp
+| LDA zp
+| LDX zp
+| SMB2 zp
+| TAY
+| LDA #byte
+| TAX
+| LDZ abs
+| LDY abs
+| LDA abs
+| LDX abs
+| BBS2 zp,rel
+
+h| B
+| BCS rel
+| LDA (zp),Y
+| LDA (zp),Z
+| BCS relwide
+| LDY zp,X
+| LDA zp,X
+| LDX zp,Y
+| SMB3 zp
+| CLV
+| LDA abs,Y
+| TSX
+| LDZ abs,X
+| LDY abs,X
+| LDA abs,X
+| LDX abs,Y
+| BBS3 zp,rel
+
+h| C
+| CPY #byte
+| CMP (zp,X)
+| CPZ #byte
+| DEW zp
+| CPY zp
+| CMP zp
+| DEC zp
+| SMB4 zp
+| INY
+| CMP #byte
+| DEX
+| ASW abs
+| CPY abs
+| CMP abs
+| DEC abs
+| BBS4 zp,rel
+
+h| D
+| BNE rel
+| CMP (zp),Y
+| CMP (zp),Z
+| BNE relwide
+| CPZ zp
+| CMP zp,X
+| DEC zp,X
+| SMB5 zp
+| CLD
+| CMP abs,Y
+| PHX
+| PHZ
+| CPZ abs
+| CMP abs,X
+| DEC abs,X
+| BBS5 zp,rel
+
+h| E
+| CPX #byte
+| SBC (zp,X)
+| LDA (zp,S),Y
+| INW zp
+| CPX zp
+| SBC zp
+| INC zp
+| SMB6 zp
+| INX
+| SBC #byte
+| NOP
+| ROW abs
+| CPX abs
+| SBC abs
+| INC abs
+| BBS6 zp,rel
+
+h| F
+| BEQ rel
+| SBC (zp),Y
+| SBC (zp),Z
+| BEQ relwide
+| PHW #word
+| SBC zp,X
+| INC zp,X
+| SMB7 zp
+| SED
+| SBC abs,Y
+| PLX
+| PLZ
+| PHW abs
+| SBC abs,X
+| INC abs,X
+| BBS7 zp,rel
+
+|===
+
