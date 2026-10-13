@@ -1,8 +1,9 @@
 
 This directory contains the code to create the documentation,
-for only in HTML.
+in HTML and Asciidoc format.
 
-Type "make" in this directory to build the documentation.
+Type "make" in this directory to build the documentation (html/ and adoc/),
+or "make html" / "make adoc" for one format.
 
 The build process includes HTML fragments built by the generator.
 

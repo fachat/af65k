@@ -1,0 +1,1375 @@
+= 65002 Opcode Prefixes
+:toc:
+
+This page describes the opcode structure for the 65k line of processors.
+
+[[ovpref]]
+== Prefix Overview
+
+In the opcode map there are 32 codes designated as "prefix1" and 16 codes designated as "prefix2". These opcodes are no operations in themselves, but modify the following operation. The prefix has these values:
+
+[cols="8*"]
+|===
+8+h| prefix1
+
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+| OF1
+| OF0
+| RS1
+| RS0
+| 0
+| AM
+| 1
+| 1
+
+|===
+
+I.e. in prefix1 the lowest two bits are always one and bit 2 (value 4) is always zero, but all of the other five bits have a special meaning.
+
+[cols="8*"]
+|===
+8+h| prefix2
+
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+| UM
+| LE1
+| LE0
+| NF
+| 1
+| 0
+| 1
+| 1
+
+|===
+
+For prefix2 the low four bit are fixed, the other bits are used as prefix.
+
+The following table explains the prefix bits.
+
+[cols="2*"]
+|===
+h| AM
+h| Adressing Modes
+
+| 0
+| normal addressing modes (8 / 16 bit)
+
+| 1
+| extended addressing modes (32 / 64 bit)
+
+h| LE
+h| Load extension
+
+| 0/0
+| Do not extend values to full register width when loading a value with RS width; operations use RS width - default for all AC-related operations.
+
+| 0/1
+| Sign-extend values to full register width when loading a value with RS width; operations use full width
+
+| 1/0
+| Zero-extend values to full register width when loading a value with RS width; operations use full width - default for XR/YR-related operations.
+
+| 1/1
+| One-extend values to full register width when loading a value with RS width; operations use full width
+
+h| RS1/RS0
+h| Register Size
+
+| 0/0
+| 8 bit register
+
+| 0/1
+| 16 bit register
+
+| 1/0
+| 32 bit register
+
+| 1/1
+| 64 bit register
+
+h| OF1/OF0
+h| Offset Register
+
+| 0/0
+| No offset added to address
+
+| 0/1
+| Add Program Counter (PC) to address
+
+| 1/0
+| Add Stack Pointer (SP) to address
+
+| 1/1
+| Add Base Offset Register (BR) to address
+
+h| UM
+h| User mode selector
+
+| 0
+| Current mode environment (user space/hypervisor mode)
+
+| 1
+| User mode environment, privileged operation; Stack Pointer for OF=10 is also User Space stack pointer
+
+h| NF
+h| No Flags selector
+
+| 0
+| Flags are updated on each (relevant) operation according to standard 6502 rules
+
+| 1
+| Flags are not updated.
+
+|===
+
+These prefix opcodes modify the following opcodes in various aspects. The following opcodes are taken from the original 8 bit opcodes. I.e. there could be a new opcode
+
+----
+
+        LDA.L #$12345678
+        
+----
+
+to load the accumulator with a long (32 bit) value, that is implemented as
+
+----
+
+        23 A9 78 56 34 12
+        
+----
+
+Here 23 is the prefix with RS=%10, i.e. 32 bit registers, and A9 is the original LDA immediate opcode - only the parameter is now 4 byte (32 bit) not 1 byte anymore.
+
+Please note that when all variable prefix bits are zero, the original 6502 operation is executed - with the notable exception on LD* opcodes as described in the section about <<prefle,Load Extension>>.
+
+Please also note that the order of the prefix bytes is well defined. prefix1 must be before prefix2, which is before the actual opcode. This way the prefix1 codes can be reused in the actual prefixed opcode. This would not be the case if prefix2 was before prefix1, because then it would not be distinguishable of the byte following prefix2 is a prefix1 or a reused opcode. This is done to be able to reuse the prefix1 values for extended opcodes, when a prefix1 byte has already occured. With AM=1 a prefix1 byte must be set, so there can be additional opcodes in the prefix1 space that use extended link:af65002admodes.adoc[addressing modes].
+
+The table below gives an overview on which prefix applies to which opcode.
+
+The LE flags only apply to opcodes that read an operand from memory, but not to read-modify-write opcodes. It does not apply to store operations (which could have been done switching memory and register sides). However, as the processor is available in different native register widths, the store would happen in different widths depending on the processor - effectively binding the software to a fixed processor width.
+
+The NF flag does not apply to compare opcodes - their only purpose is to set the flags...
+
+Note that the Register size option for the RTS and JSR opcodes determine the size of the return address as put on the stack. The RS=00 (8 bit register size option) however is mapped to the natural address width of the processor (mode).
+
+The Register size option for the branch opcodes determines the size of the relative address offset. For the BSR opcode this is in conflict with the size options for the address on the stack. Therefore BSR is handled similar to JSR, in that RS determines the size of the return address on the stack, and AM modifies the relative offset from "rel" to "rellong" resp. from "relwide" to "relquad".
+
+Note that the TRAP opcode is marked as using no prefix bits, but still written down in that table. This is for future extensions, when RS may be used to allow more than 256 trap codes.
+
+The green cells are duplicate opcodes. These take the place of prefix1  and require at least one prefix bit set (AM in the current cases). These duplicate opcodes allow to extend an indirect opcode, more specifically to have more options for the size of the address stored at the indirect location.  
+
+Normally not all addressing modes would be supported with direct addressing mode replacements. The quad (longlong) indirect addressing modes are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect addressing modes. Row LSB 1 is mirrored thus to row LSB 3, as well as row LSB 2 is mirrored to LSB 7. These values are marked with a green background in the table. The LSB 3 and 7 rows then change from (normal = word) indirect addressing modes to quad (longlong) indirect addressing modes.
+
+Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address.
+
+[[prefam]]
+== Addressing Mode
+
+The AM prefix allows to select an alternative addressing mode compared to the original 6502 addressing mode. For example the "zeropage" addressing mode is converted to the "long" alternative addressing mode.
+
+For more details on this please see the link:af65002admodes.adoc[addressing modes] page.
+
+[[prefof]]
+== Offset prefix
+
+The offset prefix bits allows to add an address offset to the effective address of the operand. Four options are available:
+
+[cols="5*"]
+|===
+h| OF1/0
+h| Register
+h| Register Name
+h| Syntax
+h| Examples
+
+| 00
+| -
+| no register value added
+| -
+| LDA $1234
+
+| 01
+| PC
+| Program Counter
+| Address prefix P,
+| LDA P,$1234; LDA (P,$12),Y
+
+| 10
+| SR
+| Stack Pointer
+| Address prefix S,
+| LDA S,$1234; LDA [S,$23,X]
+
+| 11
+| BR
+| Base Register
+| Address prefix B,
+| LDA B,$1234; LDA B,$12,X
+
+|===
+
+For (non-indirect) zeropage/absolute and indexed addressing modes to compute the effective address the standard addressing mode effective address is computed, then the register value is added to get the final effective address.
+
+For the indirect addressing mode that situation is more complex. The offset register value is added to the zeropage or absolute address given in the opcode, to compute the indirect address. For indexed with XR addressing modes XR is added to this address to get the real indirect address. Then the effective address is read from the computed indirect address, for indexed with YR then the value of YR is added to the address read, to get the real effective address. Here the offset is not added again.
+
+Note that the size of the address read from the indirect address is defined by the addressing mode alone (which is also determined by the AM prefix bit).
+
+[[prefrs]]
+== Register Size prefix
+
+The maximum register size depends on the used processor option. Each operation has a possibly smaller width. The Register size prefix defines the operation width. I.e. this determines the number of bytes to read from memory (from the effective address), the number of bytes to store to memory, or the number bytes to use from resp. store in a register.
+
+The different width prefixes are written as postfixes to the opcode:
+
+[cols="4*"]
+|===
+h| RS1/0
+h| width
+h| Postfix
+h| Example
+
+| 00
+| 8
+| 
+| LDA #$12
+
+| 01
+| 16
+| .W
+| LDA.W #$1234
+
+| 10
+| 32
+| .L
+| LDA.L #$12345678
+
+| 11
+| 64
+| .Q
+| LDA.Q #$123456789ABCDEF0
+
+|===
+
+Please note that 8 bit width has no postfix.
+
+TODO: rename to "OS" = "Operation size" or "OW" = "Operation width"?
+
+[[prefle]]
+== Load Extensions prefix
+
+The registers have a defined width - depending on processor option - of 16, 32 or 64 bit. Operations can be from 8 to 64 bit. There are some use cases where some adaption of a value to the register size is practical. For example if an 8-bit value is used on a 32-bit operation - like adding `#8` to an address register.
+
+For this purpose the LE bits define how a value loaded from memory (or from another register in the case of the Txy opcodes) is extended to full register size. Four options are available:
+
+[cols="5*"]
+|===
+h| LE1/0
+h| Extension type
+h| Postfix
+h| Example
+h| Description
+
+| 00
+| no extension
+| 
+| ADC #$92
+| Adds $92 to AC in 8 bit operation, leaves upper bits untouched. Default for non-load/transfer operations.
+
+| .E
+| LDY.E #$92
+| Loads $92 into YR, leaves upper bits untouched.
+
+| 01
+| sign-extension
+| .S
+| ADC.S #$92
+| Because the sign of $92 is 1, this adds $ffffffffffffff92 to AC with a 64 bit operation, truncated to actual processor width.
+
+| 10
+| zero-extension
+| .0
+| ADC.0 #$92
+| Extends with zeros and adds $0000000000000092 to AC in a 64 bit operation, truncated to actual AC width.
+
+| 
+| LDY #$92
+| Extends with zeros and loads $0000000000000092 into a 64 bit YR, truncated to actual processor width. Default for loads and transfer operations
+
+| 11
+| ones-extension
+| .1
+| ADC.1 #$92
+| Extends with ones and adds $ffffffffffffff92 to AC in a 64 bit operation, truncated to actual processor width.
+
+|===
+
+When the result of an operation is written to a memory location or register, the data is written in the same width as the operation.
+
+Using this extension - i.e. having a value of not 00 - modifies the meaning of the RS prefix. RS then actually defines the width of the memory location to be read. The actual operation happens after loading the value, and it happens at full width. For operations other than loads, the flags are set appropriately from the full width operation result value. For loads (LDA, LDX, LDY) and transfers (TAX, ...), however, the flags are set from the RS-width value that is read from memory (note: if you need flags from the full width value, use BIT A, but in general you should know the outcome of the extension of a load opcode).
+
+There is another difference between loads/transfers and other operations. Loads and transfers do a zero-extension by default, while other opcodes do not extend. To change the load/transfer default behaviour, use an explicit LE prefix of 00. The assembler should take care to create the correct prefix when using another prefix bit in prefix2. For example doing a LDA.U should automatically be set to LDA.U0.
+
+This somewhat inconsistent behaviour between loads/stores and others implements a "least surprise" strategy for loads. X and Y are always used full-width in address calculation. Doing an LDY #0 would not clear all bits and depending what previously executed code left in those bits this leads to unexpected behaviour. Even with the extension, however, the flags need to be set from the width that has been read - in general 8 bits, to be compatible with 6502 code.
+
+So when loading a register, the upper bits are filled with zero by default - but flags are set from the original width (as defined by RS). To load AC with the lower bits only, explicitely set the prefix with LE0=LE1=0 (using the postfix .E). This would normally denote the original 6502 behaviour and could thus be left out, but not in this case as the default - for loads/transfers - is not the 6502 behaviour, yet compatible.
+
+[[prefum]]
+== User Mode selector
+
+Normally the opcode uses the current processor mode - user or hypervisor - to compute the correct address. For the supervisor mode there is an option, however, to use an address from user mode as operand. This is what the User Mode selector bit (UM) is for.
+
+When the User Mode selector is set, the operand following the opcode is read from the current (hypervisor mode) memory environment (as defined by the matchcode). Then the processor temporarily switches to user mode, using the user mode matchcode and usermode stack pointer. For non-indirect addressing modes then the operand is written to or read from the computed address. For indirect addressing modes the indirect address is read from user mode, then the actual operand is read from or written to user mode as well.
+
+The main purpose of this bit is to enable the following situation:
+
+. user mode prepares stack with trap parameters
+. user mode executes a TRP, jumping to hypervisor trap handler. Note that the return address is stored on the hypervisor stack, so the user mode stack pointer still points to the parameters.
+. hypervisor mode trap handler then does for example `LDA.U S,$00` to read the first parameter byte from the user mode stack
+
+Note that this bit is a privileged operation - unavailable if no hypervisor mode option is present, and trapping into an abort if executed in user mode.
+
+With the user mode selector such operations as PHA or PLX etc can be easily redirected to the user space stack.
+
+If it is needed to also compute the address in hypervisor mode - relevant only for the indirect addresses - use LEA with the indirect addressing mode. This computes the address in hypervisor mode and stores it in E. Then use the E-indirect addressing mode on the actual operation for example with `LDA.U (E)`.
+
+[[prefnf]]
+== No Flags prefix
+
+The NF bit, when set, prevents the status register bits from being changed. For example you can do index register increments for example without losing the contents of the Z and N status register flags.
+
+[[preftables]]
+== Opcode Tables
+
+The following tables describe which prefixes apply to which opcode.
+
+This table describes the standard opcode page:
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte   +
+RS
+| ORA (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| LDA zp,Y   +
+RS, OF, UM, NF, LE, AM
+| ORA [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| TSB zp   +
+UM, NF, RS, AM, OF
+| ORA zp   +
+RS, OF, UM, NF, LE, AM
+| ASL zp   +
+UM, NF, RS, AM, OF
+| JMP [[abs]]   +
+UM, LE, AM=1, OF
+| PHP    +
+UM, RS
+| ORA #byte   +
+RS, NF, LE
+| ASL    +
+NF, RS
+| prefix2
+| TSB abs   +
+UM, NF, RS, AM, OF
+| ORA abs   +
+RS, OF, UM, NF, LE, AM
+| ASL abs   +
+UM, NF, RS, AM, OF
+| EXT
+
+h| 1
+| BPL rel   +
+RS
+| ORA (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| ORA (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| ORA [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| TRB zp   +
+UM, NF, RS, AM, OF
+| ORA zp,X   +
+RS, OF, UM, NF, LE, AM
+| ASL zp,X   +
+UM, NF, RS, AM, OF
+| ORA [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| CLC
+| ORA abs,Y   +
+RS, OF, UM, NF, LE, AM
+| INC    +
+NF, RS
+| prefix2
+| TRB abs   +
+UM, NF, RS, AM, OF
+| ORA abs,X   +
+RS, OF, UM, NF, LE, AM
+| ASL abs,X   +
+UM, NF, RS, AM, OF
+| SPL
+
+h| 2
+| JSR abs   +
+RS, LE, AM, OF
+| AND (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| STA zp,Y   +
+UM, RS, AM, OF
+| AND [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| BIT zp   +
+RS, OF, UM, NF, LE, AM
+| AND zp   +
+RS, OF, UM, NF, LE, AM
+| ROL zp   +
+UM, NF, RS, AM, OF
+| JMP [[abs,X]]   +
+UM, LE, AM=1, OF
+| PLP
+| AND #byte   +
+RS, NF, LE
+| ROL    +
+NF, RS
+| prefix2
+| BIT abs   +
+RS, OF, UM, NF, LE, AM
+| AND abs   +
+RS, OF, UM, NF, LE, AM
+| ROL abs   +
+UM, NF, RS, AM, OF
+| SYS
+
+h| 3
+| BMI rel   +
+RS
+| AND (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| AND (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| AND [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| BIT zp,X   +
+RS, OF, UM, NF, LE, AM
+| AND zp,X   +
+RS, OF, UM, NF, LE, AM
+| ROL zp,X   +
+UM, NF, RS, AM, OF
+| AND [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| SEC
+| AND abs,Y   +
+RS, OF, UM, NF, LE, AM
+| DEC    +
+NF, RS
+| prefix2
+| BIT abs,X   +
+RS, OF, UM, NF, LE, AM
+| AND abs,X   +
+RS, OF, UM, NF, LE, AM
+| ROL abs,X   +
+UM, NF, RS, AM, OF
+| SMI
+
+h| 4
+| RTI
+| EOR (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| LDA (abs),Y   +
+RS, OF, UM, NF, LE, AM
+| EOR [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| BSR relwide   +
+AM, RS
+| EOR zp   +
+RS, OF, UM, NF, LE, AM
+| LSR zp   +
+UM, NF, RS, AM, OF
+| LDA [[abs]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| PHA    +
+UM, RS
+| EOR #byte   +
+RS, NF, LE
+| LSR    +
+NF, RS
+| prefix2
+| JMP abs   +
+UM, LE, AM, OF
+| EOR abs   +
+RS, OF, UM, NF, LE, AM
+| LSR abs   +
+UM, NF, RS, AM, OF
+| QUICK
+
+h| 5
+| BVC rel   +
+RS
+| EOR (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| EOR (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| EOR [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| 
+| EOR zp,X   +
+RS, OF, UM, NF, LE, AM
+| LSR zp,X   +
+UM, NF, RS, AM, OF
+| EOR [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| CLI
+| EOR abs,Y   +
+RS, OF, UM, NF, LE, AM
+| PHY    +
+UM, RS
+| prefix2
+| 
+| EOR abs,X   +
+RS, OF, UM, NF, LE, AM
+| LSR abs,X   +
+UM, NF, RS, AM, OF
+| SVC
+
+h| 6
+| RTS    +
+RS
+| ADC (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| LDA (abs,X)   +
+RS, OF, UM, NF, LE, AM
+| ADC [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| STZ zp   +
+UM, RS, AM, OF
+| ADC zp   +
+RS, OF, UM, NF, LE, AM
+| ROR zp   +
+UM, NF, RS, AM, OF
+| LDA [[abs,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| PLA    +
+UM, NF, RS, LE
+| ADC #byte   +
+RS, NF, LE
+| ROR    +
+NF, RS
+| prefix2
+| JMP (abs)   +
+UM, LE, AM, OF
+| ADC abs   +
+RS, OF, UM, NF, LE, AM
+| ROR abs   +
+UM, NF, RS, AM, OF
+| TXFER
+
+h| 7
+| BVS rel   +
+RS
+| ADC (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| ADC (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| ADC [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| STZ zp,X   +
+UM, RS, AM, OF
+| ADC zp,X   +
+RS, OF, UM, NF, LE, AM
+| ROR zp,X   +
+UM, NF, RS, AM, OF
+| ADC [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| SEI
+| ADC abs,Y   +
+RS, OF, UM, NF, LE, AM
+| PLY    +
+UM, NF, RS, LE
+| prefix2
+| JMP (abs,X)   +
+UM, LE, AM, OF
+| ADC abs,X   +
+RS, OF, UM, NF, LE, AM
+| ROR abs,X   +
+UM, NF, RS, AM, OF
+| SVS
+
+h| 8
+| BRA rel   +
+RS
+| STA (zp,X)   +
+UM, RS, AM, OF
+| BSR rel   +
+AM, RS
+| STA [[zp,X]]   +
+UM, RS, AM=1, OF
+| STY zp   +
+UM, RS, AM, OF
+| STA zp   +
+UM, RS, AM, OF
+| STX zp   +
+UM, RS, AM, OF
+| JSR [[abs]]   +
+RS, LE, AM=1, OF
+| DEY    +
+NF, RS
+| BIT #byte   +
+RS, NF, LE
+| TXA    +
+NF, RS, LE
+| prefix2
+| STY abs   +
+UM, RS, AM, OF
+| STA abs   +
+UM, RS, AM, OF
+| STX abs   +
+UM, RS, AM, OF
+| reserved prefix
+
+h| 9
+| BCC rel   +
+RS
+| STA (zp),Y   +
+UM, RS, AM, OF
+| STA (zp),Z   +
+UM, RS, AM, OF
+| STA [[zp]],Y   +
+UM, RS, AM=1, OF
+| STY zp,X   +
+UM, RS, AM, OF
+| STA zp,X   +
+UM, RS, AM, OF
+| STX zp,Y   +
+UM, RS, AM, OF
+| STA [[zp]],Z   +
+UM, RS, AM=1, OF
+| TYA    +
+NF, RS, LE
+| STA abs,Y   +
+UM, RS, AM, OF
+| TXS    +
+UM, RS, LE
+| prefix2
+| STZ abs   +
+UM, RS, AM, OF
+| STA abs,X   +
+UM, RS, AM, OF
+| STZ abs,X   +
+UM, RS, AM, OF
+| SCC
+
+h| A
+| LDY #byte   +
+RS, NF, LE
+| LDA (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| LDX #byte   +
+RS, NF, LE
+| LDA [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| LDY zp   +
+RS, OF, UM, NF, LE, AM
+| LDA zp   +
+RS, OF, UM, NF, LE, AM
+| LDX zp   +
+RS, OF, UM, NF, LE, AM
+| JSR [[abs,X]]   +
+RS, LE, AM=1, OF
+| TAY    +
+NF, RS, LE
+| LDA #byte   +
+RS, NF, LE
+| TAX    +
+NF, RS, LE
+| prefix2
+| LDY abs   +
+RS, OF, UM, NF, LE, AM
+| LDA abs   +
+RS, OF, UM, NF, LE, AM
+| LDX abs   +
+RS, OF, UM, NF, LE, AM
+| reserved prefix
+
+h| B
+| BCS rel   +
+RS
+| LDA (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| LDA (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| LDA [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| LDY zp,X   +
+RS, OF, UM, NF, LE, AM
+| LDA zp,X   +
+RS, OF, UM, NF, LE, AM
+| LDX zp,Y   +
+RS, OF, UM, NF, LE, AM
+| LDA [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| CLV
+| LDA abs,Y   +
+RS, OF, UM, NF, LE, AM
+| TSX    +
+UM, NF, RS, LE
+| prefix2
+| LDY abs,X   +
+RS, OF, UM, NF, LE, AM
+| LDA abs,X   +
+RS, OF, UM, NF, LE, AM
+| LDX abs,Y   +
+RS, OF, UM, NF, LE, AM
+| SCS
+
+h| C
+| CPY #byte   +
+RS, LE
+| CMP (zp,X)   +
+UM, RS, LE, AM, OF
+| STA (abs),Y   +
+UM, RS, AM, OF
+| CMP [[zp,X]]   +
+UM, RS, LE, AM=1, OF
+| CPY zp   +
+UM, RS, LE, AM, OF
+| CMP zp   +
+UM, RS, LE, AM, OF
+| DEC zp   +
+UM, NF, RS, AM, OF
+| STA [[abs]],Y   +
+UM, RS, AM=1, OF
+| INY    +
+NF, RS
+| CMP #byte   +
+RS, LE
+| DEX    +
+NF, RS
+| prefix2
+| CPY abs   +
+UM, RS, LE, AM, OF
+| CMP abs   +
+UM, RS, LE, AM, OF
+| DEC abs   +
+UM, NF, RS, AM, OF
+| reserved prefix
+
+h| D
+| BNE rel   +
+RS
+| CMP (zp),Y   +
+UM, RS, LE, AM, OF
+| CMP (zp),Z   +
+UM, RS, LE, AM, OF
+| CMP [[zp]],Y   +
+UM, RS, LE, AM=1, OF
+| 
+| CMP zp,X   +
+UM, RS, LE, AM, OF
+| DEC zp,X   +
+UM, NF, RS, AM, OF
+| CMP [[zp]],Z   +
+UM, RS, LE, AM=1, OF
+| CLD
+| CMP abs,Y   +
+UM, RS, LE, AM, OF
+| PHX    +
+UM, RS
+| prefix2
+| JSR (abs)   +
+RS, LE, AM, OF
+| CMP abs,X   +
+UM, RS, LE, AM, OF
+| DEC abs,X   +
+UM, NF, RS, AM, OF
+| SNE
+
+h| E
+| CPX #byte   +
+RS, LE
+| SBC (zp,X)   +
+RS, OF, UM, NF, LE, AM
+| STA (abs,X)   +
+UM, RS, AM, OF
+| SBC [[zp,X]]   +
+RS, OF, UM, NF, LE, AM=1
+| CPX zp   +
+UM, RS, LE, AM, OF
+| SBC zp   +
+RS, OF, UM, NF, LE, AM
+| INC zp   +
+UM, NF, RS, AM, OF
+| STA [[abs,X]]   +
+UM, RS, AM=1, OF
+| INX    +
+NF, RS
+| SBC #byte   +
+RS, NF, LE
+| NOP
+| prefix2
+| CPX abs   +
+UM, RS, LE, AM, OF
+| SBC abs   +
+RS, OF, UM, NF, LE, AM
+| INC abs   +
+UM, NF, RS, AM, OF
+| reserved prefix
+
+h| F
+| BEQ rel   +
+RS
+| SBC (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| SBC (zp),Z   +
+RS, OF, UM, NF, LE, AM
+| SBC [[zp]],Y   +
+RS, OF, UM, NF, LE, AM=1
+| TRP #byte
+| SBC zp,X   +
+RS, OF, UM, NF, LE, AM
+| INC zp,X   +
+UM, NF, RS, AM, OF
+| SBC [[zp]],Z   +
+RS, OF, UM, NF, LE, AM=1
+| SED
+| SBC abs,Y   +
+RS, OF, UM, NF, LE, AM
+| PLX    +
+UM, NF, RS, LE
+| prefix2
+| JSR (abs,X)   +
+RS, LE, AM, OF
+| SBC abs,X   +
+RS, OF, UM, NF, LE, AM
+| INC abs,X   +
+UM, NF, RS, AM, OF
+| SEQ
+
+|===
+
+
+This table describes the EXT opcode page:
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| ADD (E)   +
+RS, UM, NF, LE
+| STI #byte, abs   +
+UM, RS, LE, AM, OF
+| 
+| 
+| 
+| ADD #byte   +
+RS, NF, LE
+| ASR zp   +
+UM, NF, RS, AM, OF
+| 
+| PHE    +
+UM
+| ORA (E)   +
+RS, UM, NF, LE
+| ASR    +
+NF, RS
+| 
+| TSB (E)   +
+UM, NF, RS
+| ASL (E)   +
+UM, NF, RS
+| ASR abs   +
+UM, NF, RS, AM, OF
+| ASL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 1
+| BEV rel   +
+RS
+| LEA rel   +
+UM, NF, AM, OF
+| LEA relwide   +
+UM, NF, AM, OF
+| 
+| 
+| ADI #byte, zp,X   +
+RS, OF, UM, NF, LE, AM
+| ASR zp,X   +
+UM, NF, RS, AM, OF
+| 
+| INZ
+| 
+| DAD    +
+NF, RS
+| 
+| TRB (E)   +
+UM, NF, RS
+| ASR (E)   +
+UM, NF, RS
+| ASR abs,X   +
+UM, NF, RS, AM, OF
+| ASR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 2
+| JSR (E)   +
+RS, LE
+| LEA (abs),Y   +
+UM, NF, AM, OF
+| LEA (abs),#byte   +
+UM, NF, AM, OF
+| 
+| ADE    +
+NF, RS
+| ADE #byte   +
+NF, RS, LE
+| RDL zp   +
+UM, NF, RS, AM, OF
+| 
+| PLE    +
+UM, NF
+| AND (E)   +
+RS, UM, NF, LE
+| RDL    +
+NF, RS
+| 
+| 
+| ROL (E)   +
+UM, NF, RS
+| RDL abs   +
+UM, NF, RS, AM, OF
+| ROL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 3
+| BOD rel   +
+RS
+| LEA (abs,X)   +
+UM, NF, AM, OF
+| LEA (abs)   +
+UM, NF, AM, OF
+| 
+| BIT    +
+RS, NF
+| ADI #byte, (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| RDL zp,X   +
+UM, NF, RS, AM, OF
+| 
+| DEZ
+| LDE #byte   +
+NF, RS, LE
+| DAS    +
+NF, RS
+| 
+| 
+| RDL (E)   +
+UM, NF, RS
+| RDL abs,X   +
+UM, NF, RS, AM, OF
+| RDL abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 4
+| 
+| LDA (abs),#byte   +
+RS, OF, UM, NF, LE, AM
+| LDA [[abs]],#byte   +
+RS, OF, UM, NF, LE, AM
+| 
+| PHM    +
+UM, RS
+| ADI #byte, zp   +
+RS, OF, UM, NF, LE, AM
+| LEA zp   +
+UM, NF, AM, OF
+| 
+| PHB    +
+UM
+| EOR (E)   +
+RS, UM, NF, LE
+| 
+| 
+| JMP (E)   +
+UM, LE
+| LSR (E)   +
+UM, NF, RS
+| 
+| LSR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 5
+| BLTS rel   +
+RS
+| STA (abs),#byte   +
+UM, RS, AM, OF
+| STA [[abs]],#byte   +
+UM, RS, AM, OF
+| 
+| INV    +
+NF, RS
+| ADQ .<reg>, #byte   +
+NF, RS, LE
+| LEA zp,X   +
+UM, NF, AM, OF
+| 
+| PRB    +
+UM, NF
+| LDB #byte   +
+NF, RS, LE
+| PHZ
+| 
+| JSR long   +
+RS, LE, AM, OF
+| 
+| 
+| 
+
+h| 6
+| 
+| LEA [[abs]],Y   +
+UM, NF, AM, OF
+| LEA [[abs]],#byte   +
+UM, NF, AM, OF
+| 
+| PLM    +
+UM, RS
+| ADI #byte, abs   +
+RS, OF, UM, NF, LE, AM
+| RDR zp   +
+UM, NF, RS, AM, OF
+| 
+| PLB    +
+UM, NF
+| ADC (E)   +
+RS, UM, NF, LE
+| RDR    +
+NF, RS
+| 
+| JMP long   +
+UM, LE, AM, OF
+| ROR (E)   +
+UM, NF, RS
+| RDR abs   +
+UM, NF, RS, AM, OF
+| ROR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 7
+| BGES rel   +
+RS
+| LEA [[abs,X]]   +
+UM, NF, AM, OF
+| LEA [[abs]]   +
+UM, NF, AM, OF
+| 
+| 
+| ADQ .<reg>, #word   +
+NF, RS, LE
+| RDR zp,X   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| PLZ
+| 
+| 
+| RDR (E)   +
+UM, NF, RS
+| RDR abs,X   +
+UM, NF, RS, AM, OF
+| RDR abs,Y   +
+UM, NF, RS, AM, OF
+
+h| 8
+| SUB (E)   +
+RS, UM, NF, LE
+| LDA (zp),#byte   +
+RS, OF, UM, NF, LE, AM
+| LDA [[zp]],#byte   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| SUB #byte   +
+RS, NF, LE
+| 
+| 
+| 
+| BIT (E)   +
+RS, UM, NF, LE
+| 
+| 
+| STY (E)   +
+UM, RS
+| STA (E)   +
+UM, RS
+| 
+| 
+
+h| 9
+| BLE rel   +
+RS
+| STA (zp),#byte   +
+UM, RS, AM, OF
+| STA [[zp]],#byte   +
+UM, RS, AM, OF
+| 
+| 
+| SBI #byte, zp,X   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| 
+| LDZ #byte
+| 
+| 
+| STZ (E)   +
+UM, RS
+| STX (E)   +
+UM, RS
+| STY abs,X   +
+UM, RS, AM, OF
+| STZ abs,Y   +
+UM, RS, AM, OF
+
+h| A
+| LDY (E)   +
+RS, UM, NF, LE
+| LEA (zp,X)   +
+UM, NF, AM, OF
+| LEA (zp),#byte   +
+UM, NF, AM, OF
+| 
+| SBE    +
+NF, RS
+| SBE #byte   +
+NF, RS, LE
+| 
+| 
+| 
+| LDA (E)   +
+RS, UM, NF, LE
+| 
+| 
+| LDZ abs
+| LDX (E)   +
+RS, UM, NF, LE
+| LEA abs   +
+UM, NF, AM, OF
+| STX abs,Y   +
+UM, RS, AM, OF
+
+h| B
+| 
+| LEA (zp),Y   +
+UM, NF, AM, OF
+| LEA (zp),Z   +
+UM, NF, AM, OF
+| 
+| BCN    +
+NF, RS
+| SBI #byte, (zp),Y   +
+RS, OF, UM, NF, LE, AM
+| 
+| 
+| 
+| 
+| 
+| 
+| LDZ abs,X
+| 
+| LEA abs,X   +
+UM, NF, AM, OF
+| LEA abs,Y   +
+UM, NF, AM, OF
+
+h| C
+| CPY (E)   +
+UM, RS, LE
+| CSW (zp),Y   +
+UM, RS, AM
+| 
+| 
+| EXT    +
+NF, RS
+| SBI #byte, zp   +
+RS, OF, UM, NF, LE, AM
+| CSW zp   +
+UM, RS, AM
+| 
+| 
+| CMP (E)   +
+UM, RS, LE
+| 
+| 
+| CSW (E)   +
+UM, RS
+| DEC (E)   +
+UM, NF, RS
+| 
+| DEC abs,Y   +
+UM, NF, RS, AM, OF
+
+h| D
+| BLES rel   +
+RS
+| STI #byte, zp   +
+UM, RS, LE, AM, OF
+| PHI #byte   +
+RS, LE
+| 
+| NEG    +
+NF, RS
+| SBQ .<reg>, #byte   +
+NF, RS, LE
+| CSW zp,X   +
+UM, RS, AM
+| 
+| 
+| CPZ #byte   +
+RS, LE
+| 
+| 
+| CPZ abs   +
+UM, RS, LE, AM, OF
+| 
+| CSW abs,X   +
+UM, RS, AM
+| 
+
+h| E
+| CPX (E)   +
+UM, RS, LE
+| LEA [[zp]],Y   +
+UM, NF, AM, OF
+| LEA [[zp]],#byte   +
+UM, NF, AM, OF
+| 
+| SWP    +
+NF, RS
+| SBI #byte, abs   +
+RS, OF, UM, NF, LE, AM
+| CPZ zp   +
+UM, RS, LE, AM, OF
+| 
+| 
+| SBC (E)   +
+RS, UM, NF, LE
+| NEC
+| 
+| 
+| INC (E)   +
+UM, NF, RS
+| 
+| INC abs,Y   +
+UM, NF, RS, AM, OF
+
+h| F
+| 
+| LEA [[zp,X]]   +
+UM, NF, AM, OF
+| LEA [[zp]],Z   +
+UM, NF, AM, OF
+| 
+| BSW    +
+NF, RS
+| SBQ .<reg>, #word   +
+NF, RS, LE
+| LEA zp,Y   +
+UM, NF, AM, OF
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+
+
+The grey fields note opcodes that are not used in the 65002.
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-23.
+

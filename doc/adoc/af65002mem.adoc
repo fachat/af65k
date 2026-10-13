@@ -1,0 +1,154 @@
+= 65002 Memory Management
+:toc:
+
+The 65k always has simple memory management capabilities.
+
+[[mem]]
+== Memory Management
+
+This section describes the memory management features of the 65k. Those features are optional. They are decoupled from the main core by the means of "match codes".
+
+[[match]]
+=== Match code
+
+The match code is an 8 bit value set by the core, for every memory access. It is used by the MMU to select which translation should be used to translate from effective to physical address.
+
+[[con]]
+== Container Management
+
+This section describes the basic memory management containers
+
+[[cont]]
+=== Container
+
+A container confines the processor into a defined address area. This is done by ANDing the effective address of the opcode with a bit mask, then comparing it with an address value. When the masked address equals the address value, the container address matches. Then a fixed offset is ORd with the result, to get the "confined address". The smallest memory area that can be confined is 256 byte.
+
+The processor has a number of such container definitions. Each definition is matched against the current effective address coming from the CPU. As the matchable memory area is at least 256 byte, the lowest 8 bit in the mask and address value are used to match the matchcode: the 8 bit matchcode is ANDed with the lowest 8 mask bits, then compared to the lowest 8 offset bits. If they are equal, then the container definition matches.
+
+If multiple containers are matching the address and match code, then the container definition with the lowest number is effective. If no container matches (e.g. upon reset) then the effective address becomes the confined address without any translation.
+
+[[regmem]]
+=== Memory Management Register
+
+The container management has a number of register sets. Each set contains three full size (W bits) registers:
+
+[cols="3*"]
+|===
+h| Container-Register
+h| Definition
+h| Comment
+
+| Addr/matchcode mask
+| 0-7: matchcode mask +
+ 8-W: address mask
+| 
+
+| Addr/matchcode compare value
+| 0-7: matchcode compare value +
+ 8-W: address compare value
+| 
+
+| Addr offset/container control
+| 0-7: Container control +
+ 8-W: address offset value
+| 
+
+|===
+
+There can be any number of register sets. The number can be read from a configuration register. If there are register sets, there must be at least four sets. For a full explanation see below.
+
+[[ctrl]]
+=== Control bits
+
+In addition to mask and offset the container definition has an extra byte in the low 8 bit of the address offset that determines memory mapping metadata:
+
+[cols="3*"]
+|===
+h| Bit
+h| Name
+h| Function
+
+| 0
+| VALID
+| If set, the address mapping is valid. If the container becomes effective, but the valid bit is not set, a Bus error condition occurs
+
+| 1
+| HYPERVISOR
+| If set, the address mapping is only available in hypevisor mode. If hypervisor mode is off, this mapping never matches
+
+| 2
+| READONLY
+| If set, the memory area mapped here is read-only, writes are ignored if TRAPWRITE is not set
+
+| 3
+| TRAPWRITE
+| If set, and READONLY is set, then a bus error condition occurs on writes
+
+| 4
+| NOEXECUTE
+| If set, a bus error condition occurs when the processor tries to read an opcode from this mapping
+
+| 5
+| TRANSIENT
+| If set, the memory address cannot be cached
+
+| 6/7
+| WIDTH
+| Memory access width. 00=8 bit, 01=16 bit, 10=32 bit, 11=64 bit. If the width selected here is wider than the physical width, the upper bits are ignored on writes and zero on reads.
+
+|===
+
+A memory management setup to emulate a Commodore PET would for example look like (in a 32 bit option) the table below, where the matchcode $12 is assumed to be the PET's matchcode, the system's I/O is at $E0000000, Video memory at $D0000000 and normal bus is 16 bit. The "PET emulator" memory is at $100000000.
+
+[cols="4*"]
+|===
+h| Container#
+h| Addr/Matchcode Mask
+h| Addr/Matchcode value
+h| Addr Offset/Container Control
+
+| 0
+| $FFFFFF/$FF
+| $0000E8/$12 (256 byte at $0000E800)
+| $E00000/%00110001 (8 Bit, TRANSIENT, NOEXECUTE, VALID)
+
+| 1
+| $FFFFF0/$FF
+| $000080/$12 (4kB at $00008000)
+| $D00000/%01110001 (16 Bit, TRANSIENT, NOEXECUTE, VALID)
+
+| 2
+| $FFFF80/$FF
+| $000000/$12 (32kB at $00000000)
+| $100000/%01000001 (16 Bit, VALID)
+
+| 3
+| $FFFF80/$FF
+| $000080/$12 (32kB at $00008000)
+| $100000/%01000101 (16 Bit, READONLY, VALID)
+
+|===
+
+Using a matchcode mask of $FE instead of $FF in the first mapping would for example allow to share the mapping of container #0 between matchcode $12 and $13. This allows for shared memory segments.
+
+Also note that the matching memory areas overlap. Here the preference rule says the one with the lower container number is effective.
+
+The table shows that this type of mapping has some restrictions, it is not possible to arbitrarily map memory areas around, but it can still be used flexibly. The effective addresses for this approach are all starting at zero - you could for example emulate an 8k-only 6504 - but the address offset then translates the address to the correct physical address space.
+
+Note: this section must be further worked over. There is no way to define a write-through cache (e.g. video memory could be written (slowly) to a video board, but mirrored and cached in fast memory. On the other hand is this situation very common? Writes to read-only memory could always trap, so TRAPWRITE would not be needed. Are there two WIDTH bits required? Would not one bit be enough to indicate 8 bit access. This would suffice for compatibility. Also it would allow to have the default to "native" width - in the current proposal above the processor must know which memory access width it actually uses to write the correct width value.
+
+[[mmu]]
+== Paged Memory Management Unit (MMU)
+
+The 65002 does not have an MMU.
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-29.
+

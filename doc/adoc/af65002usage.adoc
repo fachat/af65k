@@ -1,0 +1,67 @@
+= 6502 Software Application and Usage Notes
+:toc:
+
+Here are some notes on how to implement certain functionalities or use cases with the new 65k features available.
+
+== News
+
+* 2013-11-17: Started this page to show how to efficiently use the new features.
+
+[[localglobalstatic]]
+== Accessing local, static and global variables
+
+The idea of the B register, together with the stack-/PC- and B-relative addressing modes comes from this use case: how do I access local, static and global variables? (static in the Java sense - local to a class, i.e. all instances at the same time)
+
+The idea behind is that:
+
+* The stack contains local variables, i.e. variables available to this thread only. The code would look about this: 
+----
+
+	.(		; start of subroutine
+	SBS #20		; make place for local variables
+	STA (S,0)	; use values on stack with stack-relative addressing
+	...
+	ADS #20		; clean up stack
+	RTS
+	.)
+----
+
+ 
+* The B-register would point to a parameter block. This would be the parameters for the method. Variables there would be accessed by 
+----
+
+	...
+	LDA (B,12)	; load parameter
+	...
+----
+
+ 
+* The code itself is compiled to a specific address, and "static" variables belonging to this code are compiled into a fixed offset (or one that is adjusted ad load time). So variables accessible to all threads running this code could use: 
+----
+
+	...
+	LDA (P,10)	; load shared variable
+	...
+----
+
+ 
+* Finally, global variables can be accessed via non-offset addresses as ususal: 
+----
+
+	...
+	LDA $1234
+	...
+----
+
+ 
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2013-11-17.
+

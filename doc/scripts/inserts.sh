@@ -5,11 +5,17 @@ src="$1"
 base="$2"
 target="$3"
 gendir="$4"
+# output format: html (default) or adoc
+ext="${5:-html}"
 
 print_disclaimer () {
 	echo "All Copyrights are acknowledged."
 	echo "The information here is provided under the terms as described"
-	echo "in <a href=\"af65002front.html#lic\">the license section</a>."
+	if [ "$ext" = "adoc" ]; then
+		echo "in link:af65002front.adoc#lic[the license section]."
+	else
+		echo "in <a href=\"af65002front.html#lic\">the license section</a>."
+	fi
 }
 
 # insert a text in the middle at the position of a keyword
@@ -66,10 +72,12 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@MENU@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "<div id=\"mtree\">" >> $t2
-			cat src/$base-menu.src \
-				>> $t2
-			echo "</div>" >> $t2
+			if [ "$ext" = "html" ]; then
+				echo "<div id=\"mtree\">" >> $t2
+				cat src/$base-menu.src \
+					>> $t2
+				echo "</div>" >> $t2
+			fi
 			doinsert2 $t1 $t2 "@MENU@"
 		fi
 		mv $t2 $t1
@@ -78,8 +86,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPCODES1@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/opcodes-table-$base.html"
-			cat $gendir/opcodes-table-$base.html \
+			echo "$gendir/opcodes-table-$base.$ext"
+			cat $gendir/opcodes-table-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPCODES1@"
 		fi
@@ -89,8 +97,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPCODES2@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/opcodes-table-$base.html"
-			cat $gendir/opcodes-desc-$base.html \
+			echo "$gendir/opcodes-table-$base.$ext"
+			cat $gendir/opcodes-desc-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPCODES2@"
 		fi
@@ -100,8 +108,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPCODES3@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/ext-table-$base.html"
-			cat $gendir/ext-table-$base.html \
+			echo "$gendir/ext-table-$base.$ext"
+			cat $gendir/ext-table-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPCODES3@"
 		fi
@@ -111,8 +119,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPCODES4@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/ext-table-$base.html"
-			cat $gendir/ext-desc-$base.html \
+			echo "$gendir/ext-table-$base.$ext"
+			cat $gendir/ext-desc-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPCODES4@"
 		fi
@@ -122,8 +130,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPCODES5@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/opcodes-longtable-$base.html"
-			cat $gendir/opcodes-longtable-$base.html \
+			echo "$gendir/opcodes-longtable-$base.$ext"
+			cat $gendir/opcodes-longtable-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPCODES5@"
 		fi
@@ -133,8 +141,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@EXTLONG@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/ext-longtable-$base.html"
-			cat $gendir/ext-longtable-$base.html \
+			echo "$gendir/ext-longtable-$base.$ext"
+			cat $gendir/ext-longtable-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@EXTLONG@"
 		fi
@@ -144,8 +152,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@OPDESC@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/opdoc-$base.html"
-			cat $gendir/opdoc-$base.html \
+			echo "$gendir/opdoc-$base.$ext"
+			cat $gendir/opdoc-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@OPDESC@"
 		fi
@@ -155,8 +163,8 @@ echo "Run: " $0 $src $target $base
 		doinsert1 $t1 $t2 "@ADMODES@"
 		v=$?
 		if [ $v -eq 1 ]; then
-			echo "$gendir/admodes-table-$base.html"
-			cat $gendir/admodes-table-$base.html \
+			echo "$gendir/admodes-table-$base.$ext"
+			cat $gendir/admodes-table-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@ADMODES@"
 		fi

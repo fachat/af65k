@@ -1,0 +1,299 @@
+= 65002 Interrupts and Traps
+:toc:
+
+This page lists all the opcodes of the 65002 with appropriate explanations.
+
+[[reset]]
+== Reset
+
+Upon Reset the processor fetches a two-byte Reset vector from "-4". In a 16 bit processor option this translates to the original 6502's $FFFC reset vector.
+
+In a system with a larger address bus, the address is sign-extended, i.e. the vector is either pulled from $FFFFFFFC or $FFFFFFFFFFFFFFFC.
+
+The two-byte vector read from that address is then again sign-extended to compute the effective address to jump to.
+
+Any address translation features if available are disabled on reset. I.e. the computed address(es) computed here are physical addresses.
+
+If a supervisor mode feature is available, the processor goes into supervisor mode.
+
+All registers are set to zero. The stack pointers are set to $0100. The configuration registers (specifically interrupt, abort and trap base registers) are reset as well (see link:af65002config.adoc[Configuration Registers]).
+
+[[vectors]]
+== Jump Vectors
+
+The CPU uses a number of jump vectors for different conditions. One vector is the RESET vector, but there are vectors for interrupts (IRQ, NMI), error conditions (ABORT) or traps into hypervisor mode (TRAP).
+
+Upon Reset the following vectors are used:
+
+[cols="2*"]
+|===
+h| Address:
+h| Vector
+
+| $FFFFFFFFFFFFFFFE/F
+| BRK/IRQ
+
+| $FFFFFFFFFFFFFFFC/D
+| RESET
+
+| $FFFFFFFFFFFFFFFA/B
+| NMI
+
+| $FFFFFFFFFFFFFFF8/9
+| ABORT
+
+| $FFFFFFFFFFFFFFF6/7
+| TRAP
+
+|===
+
+As described below an interrupt can have multiple levels. The IRQ vector here folds all interrupts into one vector, the interrupt condition can be read from the EIM (effective interrupt mask register - see link:af65002config.adoc[Configuration Registers].
+
+Note that there is also no way to determine the ABORT condition when not using the abort vector table. The trap condition could be determined by reading the program counter from the stack and reading the operand byte(s) from there - but this is much more complicated than using the trap vector table, and for future compatibility the RS prefix must be considered as well.
+
+For this reason, the interrupt, abort (including BRK) and trap vectors can be reconfigured using the respective base configuration registers (see link:af65002config.adoc[Configuration Registers] or below). When configured, each interrupt, abort condition or trap number has an own jump vector in the respective interrupt, abort and trap jump vector table.
+
+[[int]]
+== Interrupt Vectors
+
+The processor can have a number of interrupt lines. For each of the interrupt lines a separate interrupt vector can be used. I.e. interrupts are numbered, and the number is used as index in a table of interrupt vectors. The interrupt vectors are fetched from an address that is determined by the interrupt base register, IBR.
+
+The interrupt base register determines the address of a 256 byte aligned block with interrupt vectors, i.e. the register's lowest 8 bit are unused. The interrupt vectors are counted up from the bottom of the block.
+
+The interrupt vectors are (currently) always two byte, i.e. define only a 16 bit address. The vector addresses are thus augmented with the upper bytes of the interrupt vector register. I.e. the interrupt routines must be within the 64k space defined by the interrupt vector base register. If more space is needed, long jumps must be used.
+
+Note: the lowest 8 bit of the vector base register are reserved and must be zero. In later versions these could be used to configure the vector size.
+
+Upon reset the register is not used, instead the standard 6502 single interrupt vector is used at $FFFFFFFFFFFFFFFE. Only after the interrupt vector base register has been set for the first time, the base register becomes active.
+
+[cols="2*"]
+|===
+h| Interrupt base:
+h| $FFFFFFFFFFFFFF00
+
+| $FFFFFFFFFFFFFF0E/F
+| Interrupt 7 vector
+
+| $FFFFFFFFFFFFFF0C/D
+| Interrupt 6 vector
+
+| $FFFFFFFFFFFFFF0A/B
+| Interrupt 5 vector
+
+| $FFFFFFFFFFFFFF08/9
+| Interrupt 4 vector
+
+| $FFFFFFFFFFFFFF06/7
+| Interrupt 3 vector
+
+| $FFFFFFFFFFFFFF04/5
+| Interrupt 2 vector
+
+| $FFFFFFFFFFFFFF02/3
+| Interrupt 1 vector
+
+| $FFFFFFFFFFFFFF00/1
+| Interrupt 0 vector (NMI)
+
+|===
+
+All addresses are interpreted as hypervisor memory addresses
+
+[[int]]
+== Abort Vectors
+
+The abort vector table works the same way as the interrupt vector base register. I.e. the vectors are two-byte wide and augmented with the upper bits of the abort vector register content itself. The abort vectors are assigned from top down though:
+
+[cols="2*"]
+|===
+h| Abort base:
+h| $FFFFFFFFFFFFFF00
+
+| $FFFFFFFFFFFFFFFE/F
+| BRK vector
+
+| $FFFFFFFFFFFFFFFC/D
+| Reset vector
+
+| $FFFFFFFFFFFFFFFA/B
+| Abort NOMEM
+
+| $FFFFFFFFFFFFFFF8/9
+| Abort WPROT
+
+| $FFFFFFFFFFFFFFF6/7
+| Abort NOEXEC
+
+| $FFFFFFFFFFFFFFF4/5
+| Abort PRIVRTI
+
+| $FFFFFFFFFFFFFFF2/3
+| Abort PRIVOP
+
+| $FFFFFFFFFFFFFFF0/1
+| Abort MAXTRAP
+
+| $FFFFFFFFFFFFFFEE/F
+| Abort PRIMEM
+
+|===
+
+The following table describes the abort conditions:
+
+[cols="2*"]
+|===
+h| Name
+h| Explanation
+
+| NOMEM
+| No memory mapping available for address
+
+| WPROT
+| Write attempt into read-only memory
+
+| NOEXEC
+| Opcode fetch on a no-execute memory area
+
+| PRIVRTI
+| Attempt to set the hypervisor bit from stack via RTI
+
+| PRIVOP
+| Attempt to execute a privileged operation
+
+| MAXTRAP
+| Attempt to execute a TRAP opcode with a trap number above the allowed maximum value
+
+| PRIVMEM
+| User mode access on memory available only on hypervisor mode
+
+|===
+
+All addresses are interpreted as hypervisor memory addresses
+
+[[trap]]
+== Trap Vectors
+
+The 65k has a TRAP opcode that allows to trap from a program into supervisor mode (if available), resp. into a system program via a given trap vector. The current version allows for a maximum of 255 trap vectors, as the trap operand is byte-wide.
+
+The TMV configuration register determines the maximum number of trap vectors allowed. Default after reset is zero, which means no trap vectors allowed. If a trap vector number used is lower than the TMV register value, the trap is allowed. Otherwise a MAXTRAP abort is initiated.
+
+The trap handling is similar to the interrupt handling. There is a trap vector base register similar to the interrupt base register. Here the lowest nine bit of the trap vector base register are reserved and must be zero. Trap vectors are always two byte, the address is in the same 64k bank as the vectors.
+
+As there are 256 trap vectors, with 2 byte vectors the trap table is 512 byte. For 2 byte vectors all but the lowest 9 bit from the register are used. This way the used part of the register can simply be ORd with the shifted trap number to compute the effective vector address.
+
+[cols="2*"]
+|===
+h| Trap vector base:
+h| $FFFFFFFFFFFFFE00
+
+| $FFFFFFFFFFFFFFFE/F
+| TRAP #$FF
+
+| ...
+| ...
+
+| $FFFFFFFFFFFFFE00/1
+| TRAP #$00
+
+|===
+
+All addresses are interpreted as hypervisor memory addresses
+
+[[intproc]]
+== Interrupt and Trap Procedure
+
+What happens when an interrupt occurs? The interrupt procedure is very similar to the original 6502 interrupt.
+
+First the current program counter is written to the hypervisor stack. Note that no matter whether the interrupt happens while in user mode or hypervisor mode, the stack used to store the programm counter is the hypervisor mode stack. As the program counter can be wider than the original 6502's program counter, the value written on the stack can be variable width.
+
+After the address the extended status register is written to the stack. I.e. the high status byte. The high status byte contains two address width bits that allow the RTI opcode to determine the width of the stored return address. It also contains the user mode bit that determines whether the interrupt occured in user or hypervisor mode (so RTI knows where to jump back to).
+
+In case of an interrupt then the low status byte (that mirrors the original 6502 status register) is written to the stack. This is not done on TRAP, as the return from TRAP should not overwrite returned status values - TRAP always uses the extended stack frame. Bit5 of the status byte, however, is set to 0. When pulling this from the stack this indicates the extended stack frame (that includes the extended status). Note that this is a slight incompatibility with original 6502 code - although in an obscure edge case!
+
+After that the processor goes into hypervisor mode. Then the respective address vector is fetched and jumped to.
+
+This results in the situation that the TRAP exception stack frame as well as the interrupt exception stack frame are stored on the hypervisor mode stack even if the execution happens during user mode. Storing the user mode bit in the extended status and storing in the interrupt stack frame makes stacked interrupts work!
+
+This procedure means that similar to the 6502 no other registers are stored on the stack, this must be done by the interrupt routine.
+
+[[brkproc]]
+== BRK Procedure
+
+The BRK procedure is different from the interrupt procedure in that it stays in the current mode - either supervisor or user mode. more
+
+First the current program counter is written to the current stack. As the program counter can be wider than the original 6502's program counter, the value written on the stack can be variable width. As width of the return address the native width (of the current mode) is used.
+
+Then the standard status register is pushed on the stack. Here the Bit5 is set, to indicate that it is a standard stack frame - without the extended status byte.
+
+After that the BRK address vector is fetched and jumped to. In hypervisor mode this is either the vector at $fffe (if the interrupt base register has not been written to) or the BRK vector in the ABORT table. Those addresses are taken as hypervisor mode addresses. In user mode the vector at $fffe is used and interpreted as a user mode address. In both cases the address is sign-extended from a two-byte vector to the full address.
+
+[[intret]]
+== Interrupt Return
+
+For the return from an interrupt, there is the RTI opcode. It first pulls the status byte from this stack and restores it. If bit 5 is zero, it pulls the extended stack frame, i.e. the extended status byte and the return address in the width given by the extended status byte. Then it jumps into user mode if given by the extended status byte.
+
+Note that trying to go to hypervisor mode by clearing the user mode bit and executing an RTI with such an extended stack frame in user mode results in an ABORT.
+
+When restoring the status, if bit 5 is one, it goes into 6502 compatibility mode. That is the processor pulls a two byte return address from the stack. In this case the hypervisor flags are not modified and the processor stays in its current mode. The address that has been read is then sign-extended to full address width. It then jumps to the return address.
+
+[[brkret]]
+== BRK Return
+
+For the return from a BRK routine the same RTI opcode as to return from an interrupt is used. It first pulls the status byte from this stack and restores it. In case of a BRK bit 5 is one, indicating a standard stack frame. It thus just pulls the return address from the stack.
+
+The address is read in the native width (of the current mode). This address is then sign-extended to full address width. It then jumps to the return address.
+
+[[trapret]]
+== Trap Return
+
+For the return from a TRAP, there is the RTU opcode, Return to User space. RTU is a privileged operation and results in an ABORT when executed in user mode. It first pulls the extended status byte from the supervisor stack. It determines the stack frame size from the extended status byte, pulls the return address and jumps there.
+
+Note that RTU does not restore the standard status byte, as it is supposed to pass the status information from hypervisor to user mode.
+
+[[jpu]]
+== Jump to User Mode
+
+To go to a user space program - as set up by the user mode matchcode and user mode stack pointer - the JPU opcode is used. It reads the operand address (from hypervisor mode), then clears the hypervisor bit. After that it either jumps to the operand address in user mode (absolute jump), or it reads the effective address from user mode (indirect jump) and jumps there.
+
+To emulate the reset behaviour of the original 6502, you would do a
+
+----
+
+	JPU ($FFFC)
+	
+----
+
+[[irqfw]]
+== Forward an interrupt to user mode
+
+When an interrupt occurs, the standard interrupt procedure is always initiated. To also forward this interrupt the following sequence has to take place:
+
+. Save the registers from the hypervisor mode (in hypervisor mode, so user mode cannot modify them on the stack)
+. Change the environment to the one to forward the interrupt to
+. push an extended status byte with the hypervisor bit set onto user space stack
+. push a standard status byte with bit5 cleared - extended stack frame marker - onto user space stack
+. JMP.U ($FFFE)
+. When user space executes an RTI, it finds the hypervisor bit set. This triggers a privilege exception that goes to a defined entry point into the hypervisor mode
+. Check that the RTI comes from an actual interrupt forward
+. Clear user mode stack
+. From the privilege exception, restore the hypervisor mode registers and execute an RTI in hypervisor to end the standard interrupt procedure.
+
+[[sei]]
+== SEI handling
+
+The original 6502 has the interrupt flag in the status register. When it is set, all interrupts (except the NMI) are disabled. Due to the interrupt registers described above the interrupt flag would not be necessary. For compatibility reasons the interrupt flag is kept and handled similarly to the original 6502. When it is set in the supervisor mode, all interrupts except the NMI are blocked. However, the interrupt flag is not set when the processor jumps into supervisor mode when an interrupt occurs. It can still be set with SEI and cleared with CLI.
+
+CLI and RTI clear the interrupt flag, and with that clear the effective interrupt mask EIM to allow new interrupts to occur.
+
+When the interrupt flag is set in user mode, interrupts should in general not be blocked. However, with the User mode Interrupt Mask UIM the interrupt priority levels that are blocked can be configured.
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-23.
+
