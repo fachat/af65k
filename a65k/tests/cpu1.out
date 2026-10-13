@@ -1,4 +1,0 @@
-nmos -> nmos, type=0, width=3
-rcmos -> cmos_rockwell, type=3, width=3
-ERR:<>:0 illegal CPU type - requested type -123 (of 12)
-816 -> 65816, type=7, width=7

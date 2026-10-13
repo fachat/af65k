@@ -18,5 +18,5 @@ The subdirectories are as follows:
 
 - doc: will contain programming information and implementation docs
 
-- a65k: will contain the 65k cross-assembler
+Note: an assembler approach is now found in a separate repository: https://github.com/fachat/a65k
 
