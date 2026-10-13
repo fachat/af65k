@@ -49,8 +49,8 @@
 	</div> <!-- leftcol -->
 	<div id="rightcol">
 		<div class="top" id="twitter"><div class="tophead">follow</div><div>
-		            Follow the 65k tweets on<br/>
-		            <a class="extlink" target="_blank" href="https://twitter.com/#!/search/realtime/afachat%20%2365k">Twitter</a><br/> (In new window)
+		            Follow me on<br/>
+		            <a class="extlink" target="_blank" href="https://mastodon.online/@afachat">Mastodon</a><br/> (In new window)
 		</div></div>
 		<div class="top" id="forum"><div class="tophead">discuss</div><div>
 			<p>Discuss my site on <a class="extlink" target="_blank" href="http://forum.6502.org/viewtopic.php?t=956">this 6502.org forum thread</a></p>

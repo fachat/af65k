@@ -192,7 +192,7 @@ Note that the TRAP opcode is marked as using no prefix bits, but still written d
 
 The green cells are duplicate opcodes. These take the place of prefix1  and require at least one prefix bit set (AM in the current cases). These duplicate opcodes allow to extend an indirect opcode, more specifically to have more options for the size of the address stored at the indirect location.  
 
-Normally not all addressing modes would be supported with direct addressing mode replacements. The quad (longlong) indirect addressing modes are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect addressing modes. Row LSB 1 is mirrored thus to row LSB 3, as well as row LSB 2 is mirrored to LSB 7. These values are marked with a green background in the table. The LSB 3 and 7 rows then change from (normal = word) indirect addressing modes to quad (longlong) indirect addressing modes.
+Normally not all addressing modes would be supported with direct addressing mode replacements. The quad (longlong) indirect addressing modes are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect addressing modes. Column LSB 1 is mirrored thus to column LSB 3, as well as column LSB 2 is mirrored to LSB 7. These values are marked with a green background in the table. The LSB 3 and 7 columns then change from (normal = word) indirect addressing modes to quad (longlong) indirect addressing modes.
 
 Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address.
 

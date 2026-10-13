@@ -108,7 +108,7 @@ h| Comment
 
 |===
 
-With a simple translation not all new addressing modes would be supported. The indirect addressing modes normally (6502) read a word address, with the AM bit set they read a long address - but for using a quad address another solution is needed. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect addressing modes. Opcode Row LSB 1 is mirrored to row LSB 3, as well as row LSB 2 is mirrored to LSB 7. These values are marked with a green background in the table in link:af65002opstruct.adoc[the opcode structure page]. The LSB 3 and 7 rows need to have the AM prefix set to 1, and use the quad (longlong) indirect addressing modes.
+With a simple translation not all new addressing modes would be supported. The indirect addressing modes normally (6502) read a word address, with the AM bit set they read a long address - but for using a quad address another solution is needed. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect addressing modes. Opcode column LSB 1 is mirrored to column LSB 3, as well as column LSB 2 is mirrored to LSB 7. These values are marked with a green background in the table in link:af65002opstruct.adoc[the opcode structure page]. The LSB 3 and 7 rows need to have the AM prefix set to 1, and use the quad (longlong) indirect addressing modes.
 
 Also note that there a are no indirect addressing modes that take a long or quad (longlong) value as indirect address. This can be overcome with the offset prefix though.
 
