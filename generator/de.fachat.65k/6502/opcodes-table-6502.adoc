@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte
+| ORA (zp,X)
+| 
+| 
+| 
+| ORA zp
+| ASL zp
+| 
+| PHP
+| ORA #byte
+| ASL
+| 
+| 
+| ORA abs
+| ASL abs
+| 
+
+h| 1
+| BPL rel
+| ORA (zp),Y
+| 
+| 
+| 
+| ORA zp,X
+| ASL zp,X
+| 
+| CLC
+| ORA abs,Y
+| 
+| 
+| 
+| ORA abs,X
+| ASL abs,X
+| 
+
+h| 2
+| JSR abs
+| AND (zp,X)
+| 
+| 
+| BIT zp
+| AND zp
+| ROL zp
+| 
+| PLP
+| AND #byte
+| ROL
+| 
+| BIT abs
+| AND abs
+| ROL abs
+| 
+
+h| 3
+| BMI rel
+| AND (zp),Y
+| 
+| 
+| 
+| AND zp,X
+| ROL zp,X
+| 
+| SEC
+| AND abs,Y
+| 
+| 
+| 
+| AND abs,X
+| ROL abs,X
+| 
+
+h| 4
+| RTI
+| EOR (zp,X)
+| 
+| 
+| 
+| EOR zp
+| LSR zp
+| 
+| PHA
+| EOR #byte
+| LSR
+| 
+| JMP abs
+| EOR abs
+| LSR abs
+| 
+
+h| 5
+| BVC rel
+| EOR (zp),Y
+| 
+| 
+| 
+| EOR zp,X
+| LSR zp,X
+| 
+| CLI
+| EOR abs,Y
+| 
+| 
+| 
+| EOR abs,X
+| LSR abs,X
+| 
+
+h| 6
+| RTS
+| ADC (zp,X)
+| 
+| 
+| 
+| ADC zp
+| ROR zp
+| 
+| PLA
+| ADC #byte
+| ROR
+| 
+| JMP (abs)
+| ADC abs
+| ROR abs
+| 
+
+h| 7
+| BVS rel
+| ADC (zp),Y
+| 
+| 
+| 
+| ADC zp,X
+| ROR zp,X
+| 
+| SEI
+| ADC abs,Y
+| 
+| 
+| 
+| ADC abs,X
+| ROR abs,X
+| 
+
+h| 8
+| 
+| STA (zp,X)
+| 
+| 
+| STY zp
+| STA zp
+| STX zp
+| 
+| DEY
+| 
+| TXA
+| 
+| STY abs
+| STA abs
+| STX abs
+| 
+
+h| 9
+| BCC rel
+| STA (zp),Y
+| 
+| 
+| STY zp,X
+| STA zp,X
+| STX zp,Y
+| 
+| TYA
+| STA abs,Y
+| TXS
+| 
+| 
+| STA abs,X
+| 
+| 
+
+h| A
+| LDY #byte
+| LDA (zp,X)
+| LDX #byte
+| 
+| LDY zp
+| LDA zp
+| LDX zp
+| 
+| TAY
+| LDA #byte
+| TAX
+| 
+| LDY abs
+| LDA abs
+| LDX abs
+| 
+
+h| B
+| BCS rel
+| LDA (zp),Y
+| 
+| 
+| LDY zp,X
+| LDA zp,X
+| LDX zp,Y
+| 
+| CLV
+| LDA abs,Y
+| TSX
+| 
+| LDY abs,X
+| LDA abs,X
+| LDX abs,Y
+| 
+
+h| C
+| CPY #byte
+| CMP (zp,X)
+| 
+| 
+| CPY zp
+| CMP zp
+| DEC zp
+| 
+| INY
+| CMP #byte
+| DEX
+| 
+| CPY abs
+| CMP abs
+| DEC abs
+| 
+
+h| D
+| BNE rel
+| CMP (zp),Y
+| 
+| 
+| 
+| CMP zp,X
+| DEC zp,X
+| 
+| CLD
+| CMP abs,Y
+| 
+| 
+| 
+| CMP abs,X
+| DEC abs,X
+| 
+
+h| E
+| CPX #byte
+| SBC (zp,X)
+| 
+| 
+| CPX zp
+| SBC zp
+| INC zp
+| 
+| INX
+| SBC #byte
+| NOP
+| 
+| CPX abs
+| SBC abs
+| INC abs
+| 
+
+h| F
+| BEQ rel
+| SBC (zp),Y
+| 
+| 
+| 
+| SBC zp,X
+| INC zp,X
+| 
+| SED
+| SBC abs,Y
+| 
+| 
+| 
+| SBC abs,X
+| INC abs,X
+| 
+
+|===
+

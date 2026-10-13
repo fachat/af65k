@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte
+| ORA (zp,X)
+| COP #byte
+| ORA zp,S
+| TSB zp
+| ORA zp
+| ASL zp
+| ORA [abs]
+| PHP
+| ORA #byte
+| ASL
+| PHD
+| TSB abs
+| ORA abs
+| ASL abs
+| ORA bank
+
+h| 1
+| BPL rel
+| ORA (zp),Y
+| ORA (zp)
+| ORA (zp,S),Y
+| TRB zp
+| ORA zp,X
+| ASL zp,X
+| ORA [abs],Y
+| CLC
+| ORA abs,Y
+| INC
+| TCS
+| TRB abs
+| ORA abs,X
+| ASL abs,X
+| ORA bank,X
+
+h| 2
+| JSR abs
+| AND (zp,X)
+| JSL bank
+| AND zp,S
+| BIT zp
+| AND zp
+| ROL zp
+| AND [abs]
+| PLP
+| AND #byte
+| ROL
+| PLD
+| BIT abs
+| AND abs
+| ROL abs
+| AND bank
+
+h| 3
+| BMI rel
+| AND (zp),Y
+| AND (zp)
+| AND (zp,S),Y
+| BIT zp,X
+| AND zp,X
+| ROL zp,X
+| AND [abs],Y
+| SEC
+| AND abs,Y
+| DEC
+| TSC
+| BIT abs,X
+| AND abs,X
+| ROL abs,X
+| AND bank,X
+
+h| 4
+| RTI
+| EOR (zp,X)
+| WDM
+| EOR zp,S
+| MVP #<op1>, #<op2>
+| EOR zp
+| LSR zp
+| EOR [abs]
+| PHA
+| EOR #byte
+| LSR
+| PHK
+| JMP abs
+| EOR abs
+| LSR abs
+| EOR bank
+
+h| 5
+| BVC rel
+| EOR (zp),Y
+| EOR (zp)
+| EOR (zp,S),Y
+| MVN #<op1>, #<op2>
+| EOR zp,X
+| LSR zp,X
+| EOR [abs],Y
+| CLI
+| EOR abs,Y
+| PHY
+| TCD
+| JMP bank
+| EOR abs,X
+| LSR abs,X
+| EOR bank,X
+
+h| 6
+| RTS
+| ADC (zp,X)
+| PER relwide
+| ADC zp,S
+| STZ zp
+| ADC zp
+| ROR zp
+| ADC [abs]
+| PLA
+| ADC #byte
+| ROR
+| RTL
+| JMP (abs)
+| ADC abs
+| ROR abs
+| ADC bank
+
+h| 7
+| BVS rel
+| ADC (zp),Y
+| ADC (zp)
+| ADC (zp,S),Y
+| STZ zp,X
+| ADC zp,X
+| ROR zp,X
+| ADC [abs],Y
+| SEI
+| ADC abs,Y
+| PLY
+| TDC
+| JMP (abs,X)
+| ADC abs,X
+| ROR abs,X
+| ADC bank,X
+
+h| 8
+| BRA rel
+| STA (zp,X)
+| BRL relwide
+| STA zp,S
+| STY zp
+| STA zp
+| STX zp
+| STA [abs]
+| DEY
+| BIT #byte
+| TXA
+| PHB
+| STY abs
+| STA abs
+| STX abs
+| STA bank
+
+h| 9
+| BCC rel
+| STA (zp),Y
+| STA (zp)
+| STA (zp,S),Y
+| STY zp,X
+| STA zp,X
+| STX zp,Y
+| STA [abs],Y
+| TYA
+| STA abs,Y
+| TXS
+| TXY
+| STZ abs
+| STA abs,X
+| STZ abs,X
+| STA bank,X
+
+h| A
+| LDY #byte
+| LDA (zp,X)
+| LDX #byte
+| LDA zp,S
+| LDY zp
+| LDA zp
+| LDX zp
+| LDA [abs]
+| TAY
+| LDA #byte
+| TAX
+| PLB
+| LDY abs
+| LDA abs
+| LDX abs
+| LDA bank
+
+h| B
+| BCS rel
+| LDA (zp),Y
+| LDA (zp)
+| LDA (zp,S),Y
+| LDY zp,X
+| LDA zp,X
+| LDX zp,Y
+| LDA [abs],Y
+| CLV
+| LDA abs,Y
+| TSX
+| TYX
+| LDY abs,X
+| LDA abs,X
+| LDX abs,Y
+| LDA bank,X
+
+h| C
+| CPY #byte
+| CMP (zp,X)
+| REP #byte
+| CMP zp,S
+| CPY zp
+| CMP zp
+| DEC zp
+| CMP [abs]
+| INY
+| CMP #byte
+| DEX
+| WAI
+| CPY abs
+| CMP abs
+| DEC abs
+| CMP bank
+
+h| D
+| BNE rel
+| CMP (zp),Y
+| CMP (zp)
+| CMP (zp,S),Y
+| PEI zp
+| CMP zp,X
+| DEC zp,X
+| CMP [abs],Y
+| CLD
+| CMP abs,Y
+| PHX
+| STP
+| JML [abs]
+| CMP abs,X
+| DEC abs,X
+| CMP bank,X
+
+h| E
+| CPX #byte
+| SBC (zp,X)
+| SEP #byte
+| SBC zp,S
+| CPX zp
+| SBC zp
+| INC zp
+| SBC [abs]
+| INX
+| SBC #byte
+| NOP
+| XBA
+| CPX abs
+| SBC abs
+| INC abs
+| SBC bank
+
+h| F
+| BEQ rel
+| SBC (zp),Y
+| SBC (zp)
+| SBC (zp,S),Y
+| PEA #word
+| SBC zp,X
+| INC zp,X
+| SBC [abs],Y
+| SED
+| SBC abs,Y
+| PLX
+| XCE
+| JSR (abs,X)
+| SBC abs,X
+| INC abs,X
+| SBC bank,X
+
+|===
+

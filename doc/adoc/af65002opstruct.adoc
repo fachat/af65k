@@ -1,0 +1,487 @@
+= 65002 Opcode Structure
+:toc:
+
+This page describes the opcode structure for the 65k line of processors.
+
+[[opstruct]]
+== Opcode Structure
+
+The original 6502 opcode structure always consists of a single byte opcode and an operand. For the 65k opcodes extension the opcodes left in the 256 byte opcode page do not provide enough space. Therefore the opcode structure is being extended with prefix bytes.
+
+[cols="13*"]
+|===
+13+h| Bytes
+
+| -4
+| -3
+| -2
+| -1
+| 0
+| 1
+| 2
+| 3
+| 4
+| 5
+| 6
+| 7
+| 8
+
+13+h| 6502 opcodes
+
+| -
+| -
+| -
+| -
+| Opcode
+8+| -
+
+| -
+| -
+| -
+| -
+| Opcode
+| relative/ immediate/ zeropage operand
+7+| -
+
+| -
+| -
+| -
+| -
+| Opcode
+2+| address operand
+6+| -
+
+13+h| 65002 opcodes
+
+| -
+| (prefix1)
+| (prefix2)
+| (page)
+| Opcode
+8+| -
+
+| -
+| (prefix1)
+| (prefix2)
+| (page)
+| Opcode
+| byte relative/ immediate/ zeropage operand
+7+| -
+
+| -
+| (prefix1)
+| (prefix2)
+| (page)
+| Opcode
+2+| word relative/ immediate/ address operand
+6+| -
+
+| -
+| (prefix1)
+| (prefix2)
+| (page)
+| Opcode
+4+| long relative/ immediate/ address operand
+4+| -
+
+| -
+| (prefix1)
+| (prefix2)
+| (page)
+| Opcode
+8+| quad relative/ immediate/ address operand
+
+13+h| 65010 opcodes
+
+| (prefix1)
+| (prefix2)
+| (prefix3)
+| (page)
+| Opcode
+8+| -
+
+| (prefix1)
+| (prefix2)
+| (prefix3)
+| (page)
+| Opcode
+| byte relative/ immediate/ zeropage operand
+7+| -
+
+| (prefix1)
+| (prefix2)
+| (prefix3)
+| (page)
+| Opcode
+2+| word relative/ immediate/ address operand
+6+| -
+
+| (prefix1)
+| (prefix2)
+| (prefix3)
+| (page)
+| Opcode
+4+| long relative/ immediate/ address operand
+4+| -
+
+| (prefix1)
+| (prefix2)
+| (prefix3)
+| (page)
+| Opcode
+8+| quad relative/ immediate/ address operand
+
+|===
+
+As you can see in this table, each opcode can have up to two (resp. three for the 65010) prefix bytes, plus an opcode page selector before the actual opcode. Also the operands can now be byte, word, long and quad wide - 1, 2, 4 or 8 byte long.
+
+All of the prefix bytes, as well as the page selector are optional. I.e. any of those must be within the original 6502 opcode table to be distinguishable from an original opcode. The following table shows the distribution of the prefix bytes in the 6502 opcode space:
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte
+| ORA (zp,X)
+| LDA zp,Y
+| prefix1
+| TSB zp
+| ORA zp
+| ASL zp
+| prefix1
+| PHP
+| ORA #byte
+| ASL
+| prefix2
+| TSB abs
+| ORA abs
+| ASL abs
+| EXT
+
+h| 1
+| BPL rel
+| ORA (zp),Y
+| ORA (zp),Z
+| prefix1
+| TRB zp
+| ORA zp,X
+| ASL zp,X
+| prefix1
+| CLC
+| ORA abs,Y
+| INC
+| prefix2
+| TRB abs
+| ORA abs,X
+| ASL abs,X
+| SPL
+
+h| 2
+| JSR abs
+| AND (zp,X)
+| STA zp,Y
+| prefix1
+| BIT zp
+| AND zp
+| ROL zp
+| prefix1
+| PLP
+| AND #byte
+| ROL
+| prefix2
+| BIT abs
+| AND abs
+| ROL abs
+| SYS
+
+h| 3
+| BMI rel
+| AND (zp),Y
+| AND (zp),Z
+| prefix1
+| BIT zp,X
+| AND zp,X
+| ROL zp,X
+| prefix1
+| SEC
+| AND abs,Y
+| DEC
+| prefix2
+| BIT abs,X
+| AND abs,X
+| ROL abs,X
+| SMI
+
+h| 4
+| RTI
+| EOR (zp,X)
+| LDA (abs),Y
+| prefix1
+| BSR relwide
+| EOR zp
+| LSR zp
+| prefix1
+| PHA
+| EOR #byte
+| LSR
+| prefix2
+| JMP abs
+| EOR abs
+| LSR abs
+| QUICK
+
+h| 5
+| BVC rel
+| EOR (zp),Y
+| EOR (zp),Z
+| prefix1
+| 
+| EOR zp,X
+| LSR zp,X
+| prefix1
+| CLI
+| EOR abs,Y
+| PHY
+| prefix2
+| 
+| EOR abs,X
+| LSR abs,X
+| SVC
+
+h| 6
+| RTS
+| ADC (zp,X)
+| LDA (abs,X)
+| prefix1
+| STZ zp
+| ADC zp
+| ROR zp
+| prefix1
+| PLA
+| ADC #byte
+| ROR
+| prefix2
+| JMP (abs)
+| ADC abs
+| ROR abs
+| TXFER
+
+h| 7
+| BVS rel
+| ADC (zp),Y
+| ADC (zp),Z
+| prefix1
+| STZ zp,X
+| ADC zp,X
+| ROR zp,X
+| prefix1
+| SEI
+| ADC abs,Y
+| PLY
+| prefix2
+| JMP (abs,X)
+| ADC abs,X
+| ROR abs,X
+| SVS
+
+h| 8
+| BRA rel
+| STA (zp,X)
+| BSR rel
+| prefix1
+| STY zp
+| STA zp
+| STX zp
+| prefix1
+| DEY
+| BIT #byte
+| TXA
+| prefix2
+| STY abs
+| STA abs
+| STX abs
+| reserved prefix
+
+h| 9
+| BCC rel
+| STA (zp),Y
+| STA (zp),Z
+| prefix1
+| STY zp,X
+| STA zp,X
+| STX zp,Y
+| prefix1
+| TYA
+| STA abs,Y
+| TXS
+| prefix2
+| STZ abs
+| STA abs,X
+| STZ abs,X
+| SCC
+
+h| A
+| LDY #byte
+| LDA (zp,X)
+| LDX #byte
+| prefix1
+| LDY zp
+| LDA zp
+| LDX zp
+| prefix1
+| TAY
+| LDA #byte
+| TAX
+| prefix2
+| LDY abs
+| LDA abs
+| LDX abs
+| reserved prefix
+
+h| B
+| BCS rel
+| LDA (zp),Y
+| LDA (zp),Z
+| prefix1
+| LDY zp,X
+| LDA zp,X
+| LDX zp,Y
+| prefix1
+| CLV
+| LDA abs,Y
+| TSX
+| prefix2
+| LDY abs,X
+| LDA abs,X
+| LDX abs,Y
+| SCS
+
+h| C
+| CPY #byte
+| CMP (zp,X)
+| STA (abs),Y
+| prefix1
+| CPY zp
+| CMP zp
+| DEC zp
+| prefix1
+| INY
+| CMP #byte
+| DEX
+| prefix2
+| CPY abs
+| CMP abs
+| DEC abs
+| reserved prefix
+
+h| D
+| BNE rel
+| CMP (zp),Y
+| CMP (zp),Z
+| prefix1
+| 
+| CMP zp,X
+| DEC zp,X
+| prefix1
+| CLD
+| CMP abs,Y
+| PHX
+| prefix2
+| JSR (abs)
+| CMP abs,X
+| DEC abs,X
+| SNE
+
+h| E
+| CPX #byte
+| SBC (zp,X)
+| STA (abs,X)
+| prefix1
+| CPX zp
+| SBC zp
+| INC zp
+| prefix1
+| INX
+| SBC #byte
+| NOP
+| prefix2
+| CPX abs
+| SBC abs
+| INC abs
+| reserved prefix
+
+h| F
+| BEQ rel
+| SBC (zp),Y
+| SBC (zp),Z
+| prefix1
+| TRP #byte
+| SBC zp,X
+| INC zp,X
+| prefix1
+| SED
+| SBC abs,Y
+| PLX
+| prefix2
+| JSR (abs,X)
+| SBC abs,X
+| INC abs,X
+| SEQ
+
+|===
+
+
+Legend:
+
+[cols="5*"]
+|===
+| NMOS Opcodes
+| CMOS Opcodes
+| New 65k opcodes
+| 65k Prefix codes
+| Unused/Reserved
+
+|===
+
+Some of the opcode fields are named prefix1 and prefix2, these are the modifiers to other opcodes as described above. Others are named like "QUICK prefix" or "EXT prefix". Those are page table selectors. These opcodes provide a way to extend the opcode list by having a second opcode byte follow the prefix. Thus there could be 256 additional "QUICK" opcodes, and 256 additional "EXT opcodes" and so on. These opcode planes are described below.
+
+The prefix codes define a number of modifier bits. The prefix bits relevant for the opcode are shown in the respective table cell for each opcode as well. The meaning of the prefix bits is given below.
+
+Note that there is still "plenty" of room for extensions. There are nine reserved prefix bytes - 4 of them could be used to implement further modification bits (like going 128 bits ...yuck!) or they could be used as further opcode planes. Some plans exist for the 65010. The one prefix at $6F should be reserved for extensions like floating point or vector processors or other extensions that do not "just" modify existing opcodes.
+
+Note that the other features are explained in:
+
+* link:af65002prefixes.adoc[Prefixes page] describes the use of the prefix bits
+* link:af65002admodes.adoc[Addressing Modes page] describes the different addressing modes
+* link:af65002opcodes.adoc[Opcodes page] gives an overview on the opcodes
+* link:af65002hyper.adoc[Hypervisor mode page] describes the hypervisor mode and the use of the UM prefix
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-23.
+

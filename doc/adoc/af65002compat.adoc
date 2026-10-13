@@ -1,0 +1,81 @@
+= 6502 Software Compatibility Notes
+:toc:
+
+Here are some notes on compatibility with the 6502.
+
+The 65002 is binary compatible with the 65C02 - except for minor quirks required for the extension, as described on this page.
+
+[[compatstack]]
+== Stack Frame
+
+The 65k has, on purpose, an extended interrupt functionality. Thus it needs an extended stack frame to store the additional information, as described above. Yet there is 6502 compatibility included:
+
+[cols="3*"]
+|===
+3+h| Stack Frames
+
+h| Address
+h| 6502
+h| 65k
+
+h| S+10
+| 
+| ADDR byte 7
+
+h| S+5..9
+| ADDR byte 2..6
+
+h| S+4
+| ADDR byte 1
+
+h| S+3
+| ADDR byte 1
+| ADDR byte 0
+
+h| S+2
+| ADDR byte 0
+| Extended Status Byte
+
+h| S+1
+| Status register (bit5=1)
+| Status Register (bit5=0)
+
+|===
+
+As you can see it is the status register bit 5 that determines whether an extended stack frame is used or not. In a 6502 it is always 1. As a result, if some 6502 software creates an artificial stack frame with bit5 cleared, it will trigger the use of an extended stack frame and crash.
+
+A similar result will happen on a PLP, as PLP reads the extended status register if in the normal status register on the stack bit 5 is zero (The extended status register has the G and OE flags that are available from user mode. All other bits are set to zero)
+
+[[compatpointer]]
+== Interrupt Pointer
+
+As the 65k has an extended interrupt functionality, the number - and size - of the 6502 interrupt pointer does not suffice anymore for an efficient operation.
+
+For compatibility reasons the CPU starts with a restricted set of 6502-compatible interrupt vectors as described above. Only when the Interrupt Base Register is set, the extended, per interrupt jump vectors are used.
+
+When the processor starts, it starts in hypervisor mode and the compatible interrupt vectors. Interrupts stay in hypervisor mode and the only incompatibility is the extended stack frame.
+
+[[compatretaddr]]
+== Subroutine Return Address
+
+The 65k can be configured in 16, 32 or 64 bit width. Thus a return address for a subroutine is 16, 32, or 64 bit wide. Only a 16 bit wide return address is compatible though.
+
+The user mode configuration register however allows to restrict the effective processor address width to 16 (or 32) bit. In this mode the return address is restricted to 16 bit, and the real address is extended with the upper bits (16-31/63) of the program counter.
+
+[[compattiming]]
+== Timing
+
+The 65k will NOT be timing compatible with the 6502.
+
+Although one might think of using an 8-bit accumulator and the typical 6502 pipelining to extend the original 6502, this is not the goal of this design. The goal is to venture into wider address and data bus sizes, and also use wider accumulators, to effectively use the available features of today's programmable logic. So this makes it very unlikely, if not impossible, that a timing-compatible 65k will ever exist.
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2013-11-17.
+

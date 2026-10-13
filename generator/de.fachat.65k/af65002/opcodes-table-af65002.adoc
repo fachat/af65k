@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| BRK #byte
+| ORA (zp,X)
+| LDA zp,Y
+| prefix1
+| TSB zp
+| ORA zp
+| ASL zp
+| prefix1
+| PHP
+| ORA #byte
+| ASL
+| prefix2
+| TSB abs
+| ORA abs
+| ASL abs
+| EXT
+
+h| 1
+| BPL rel
+| ORA (zp),Y
+| ORA (zp),Z
+| prefix1
+| TRB zp
+| ORA zp,X
+| ASL zp,X
+| prefix1
+| CLC
+| ORA abs,Y
+| INC
+| prefix2
+| TRB abs
+| ORA abs,X
+| ASL abs,X
+| SPL
+
+h| 2
+| JSR abs
+| AND (zp,X)
+| STA zp,Y
+| prefix1
+| BIT zp
+| AND zp
+| ROL zp
+| prefix1
+| PLP
+| AND #byte
+| ROL
+| prefix2
+| BIT abs
+| AND abs
+| ROL abs
+| SYS
+
+h| 3
+| BMI rel
+| AND (zp),Y
+| AND (zp),Z
+| prefix1
+| BIT zp,X
+| AND zp,X
+| ROL zp,X
+| prefix1
+| SEC
+| AND abs,Y
+| DEC
+| prefix2
+| BIT abs,X
+| AND abs,X
+| ROL abs,X
+| SMI
+
+h| 4
+| RTI
+| EOR (zp,X)
+| LDA (abs),Y
+| prefix1
+| BSR relwide
+| EOR zp
+| LSR zp
+| prefix1
+| PHA
+| EOR #byte
+| LSR
+| prefix2
+| JMP abs
+| EOR abs
+| LSR abs
+| QUICK
+
+h| 5
+| BVC rel
+| EOR (zp),Y
+| EOR (zp),Z
+| prefix1
+| 
+| EOR zp,X
+| LSR zp,X
+| prefix1
+| CLI
+| EOR abs,Y
+| PHY
+| prefix2
+| 
+| EOR abs,X
+| LSR abs,X
+| SVC
+
+h| 6
+| RTS
+| ADC (zp,X)
+| LDA (abs,X)
+| prefix1
+| STZ zp
+| ADC zp
+| ROR zp
+| prefix1
+| PLA
+| ADC #byte
+| ROR
+| prefix2
+| JMP (abs)
+| ADC abs
+| ROR abs
+| TXFER
+
+h| 7
+| BVS rel
+| ADC (zp),Y
+| ADC (zp),Z
+| prefix1
+| STZ zp,X
+| ADC zp,X
+| ROR zp,X
+| prefix1
+| SEI
+| ADC abs,Y
+| PLY
+| prefix2
+| JMP (abs,X)
+| ADC abs,X
+| ROR abs,X
+| SVS
+
+h| 8
+| BRA rel
+| STA (zp,X)
+| BSR rel
+| prefix1
+| STY zp
+| STA zp
+| STX zp
+| prefix1
+| DEY
+| BIT #byte
+| TXA
+| prefix2
+| STY abs
+| STA abs
+| STX abs
+| reserved prefix
+
+h| 9
+| BCC rel
+| STA (zp),Y
+| STA (zp),Z
+| prefix1
+| STY zp,X
+| STA zp,X
+| STX zp,Y
+| prefix1
+| TYA
+| STA abs,Y
+| TXS
+| prefix2
+| STZ abs
+| STA abs,X
+| STZ abs,X
+| SCC
+
+h| A
+| LDY #byte
+| LDA (zp,X)
+| LDX #byte
+| prefix1
+| LDY zp
+| LDA zp
+| LDX zp
+| prefix1
+| TAY
+| LDA #byte
+| TAX
+| prefix2
+| LDY abs
+| LDA abs
+| LDX abs
+| reserved prefix
+
+h| B
+| BCS rel
+| LDA (zp),Y
+| LDA (zp),Z
+| prefix1
+| LDY zp,X
+| LDA zp,X
+| LDX zp,Y
+| prefix1
+| CLV
+| LDA abs,Y
+| TSX
+| prefix2
+| LDY abs,X
+| LDA abs,X
+| LDX abs,Y
+| SCS
+
+h| C
+| CPY #byte
+| CMP (zp,X)
+| STA (abs),Y
+| prefix1
+| CPY zp
+| CMP zp
+| DEC zp
+| prefix1
+| INY
+| CMP #byte
+| DEX
+| prefix2
+| CPY abs
+| CMP abs
+| DEC abs
+| reserved prefix
+
+h| D
+| BNE rel
+| CMP (zp),Y
+| CMP (zp),Z
+| prefix1
+| 
+| CMP zp,X
+| DEC zp,X
+| prefix1
+| CLD
+| CMP abs,Y
+| PHX
+| prefix2
+| JSR (abs)
+| CMP abs,X
+| DEC abs,X
+| SNE
+
+h| E
+| CPX #byte
+| SBC (zp,X)
+| STA (abs,X)
+| prefix1
+| CPX zp
+| SBC zp
+| INC zp
+| prefix1
+| INX
+| SBC #byte
+| NOP
+| prefix2
+| CPX abs
+| SBC abs
+| INC abs
+| reserved prefix
+
+h| F
+| BEQ rel
+| SBC (zp),Y
+| SBC (zp),Z
+| prefix1
+| TRP #byte
+| SBC zp,X
+| INC zp,X
+| prefix1
+| SED
+| SBC abs,Y
+| PLX
+| prefix2
+| JSR (abs,X)
+| SBC abs,X
+| INC abs,X
+| SEQ
+
+|===
+

@@ -1,0 +1,575 @@
+= 65002 Register Set
+:toc:
+
+This page describes the register set of the 65002.
+
+The register set is very similar to the 6502, with only a few extensions... As there are different options for register widths, "W" describes the width option, i.e. either 16, 32 or 64 bit.
+
+In addition to the core registers there are registers for the memory management.
+
+[[core]]
+== Core Register Set
+
+[cols="5*"]
+|===
+h| Register
+h| Name
+h| 6502
+h| 65k
+h| Comment
+
+| PC
+| Program Counter
+| 16 bit
+| W bit
+| 
+
+| A
+| Accumulator
+| 8 bit
+| W bit
+| Operations can be done in 8, 16, 32, 64 bit (up to W)
+
+| X
+| X register
+| 8 bit
+| W bit
+| Operations can be done in 8, 16, 32, 64 bit (up to W)
+
+| Y
+| Y register
+| 8 bit
+| W bit
+| Operations can be done in 8, 16, 32, 64 bit (up to W)
+
+| Z
+| Z register
+| 8 bit
+| W bit
+| Operations can be done in 8, 16, 32, 64 bit (up to W)
+
+| E
+| Effective Address Register
+| -
+| W bit
+| Stores effective address for opcodes
+
+| B
+| Base Offset Register
+| -
+| W bit
+| Address offset for addressing modes
+
+| S(U)
+| User mode Stack pointer
+| -
+| W bit
+| 
+
+| S(H)
+| Hypervisor mode Stack pointer
+| 8 bit, with high byte set to 1
+| W bit
+| 
+
+| SR
+| Status Register
+| 8 bit, with bit 5 set to 1
+| 8 bit
+| Same as 6502, bit5 set to 0, high 8 bit see below
+
+| ESR
+| Extended Status Register
+| -
+| 8 bit
+| See below
+
+|===
+
+The A, X and Y registers are similar to the 6502 registers, only that they are at least 16 bit wide.
+
+The Z register is similar to the 65ce02 Z register, in that it replaces the "(zp)" addressing mode with "(zp),Z".
+
+The status register is divided into two bytes, the status and the extended status. The first mirrors the original 6502 status byte:
+
+[cols="8*"]
+|===
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+| N
+| V
+| 0
+| B
+| D
+| I
+| Z
+| C
+
+|===
+
+Explanation of the status bits:
+
+[cols="3*"]
+|===
+h| Bit
+h| Name
+h| Explanation
+
+| N
+| Negative
+| Set when operation results in a negative value (bit 7 set)
+
+| V
+| Overflow
+| Set when arithmetic operation or compare results in an overflow value
+
+| B
+| Break
+| Set when a BRK opcode has been executed, is only written to the stack
+
+| D
+| Decimal
+| Decimal flag
+
+| I
+| Interrupt
+| Set to disable interrupts (deprecated)
+
+| Z
+| Zero
+| Set when operation results in a zero value
+
+| C
+| Carry
+| Carry for arithmetic operations and compares
+
+|===
+
+The second byte is an extended status byte. It is written on the stack frame on TRAP (user and hypervisor mode) and interrupts in hypervisor mode. It can also be written with a word-wide PHP and restored with a word-wide PLP. However, only the G and OE flags are written and restored, the others are written and read as zero on PHP.w/PLP
+
+[cols="8*"]
+|===
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+| G
+| OE
+| 0
+| 0
+| H
+| 0
+| SF1
+| SF0
+
+|===
+
+[cols="4*"]
+|===
+h| Bit
+h| Name
+h| Explanation
+h| State on Reset
+
+| H
+| Hypervisor mode
+| Set when the processor is in hypervisor mode
+| 1
+
+| SF1/SF0
+| Stack Frame Size
+| Determines the stack frame size for a TRAP or an interrupt (01=2 byte, 10=4 byte, 11=8 byte return address. 00 is the native size of the processor)
+| 00
+
+|===
+
+[[intregs]]
+== Interrupt Registers
+
+[cols="5*"]
+|===
+5+h| Interrupt Management Registers
+
+h| Register
+h| Name
+h| 6502
+h| 65k
+h| Comment
+
+| IMR
+| Interrupt Level Mask Register
+| -
+| 8 bit
+| Interrupt Mask - define which interrupt levels are accepted
+
+| EIM
+| Effective Interrupt Level Mask Register
+| -
+| 8 bit
+| Temporary Interrupt Mask. set from the ISR when an interrupt routine is initiated. Reset to IMR on RTI.
+
+| ISR
+| Interrupt Level Status Register
+| -
+| 8 bit
+| Interrupt line status - number of highest active interrupt line
+
+| IV
+| Interrupt base register
+| -
+| W bit
+| Base address for interrupt vectors
+
+| TV
+| Trap vector base register
+| -
+| W bit
+| Base address for trap vectors
+
+| AV
+| Abort vector base register
+| -
+| W bit
+| Base address for abort vectors
+
+| TMV
+| Trap maximum allowed vector number
+| -
+| W bit
+| set the maximum allowed trap vector number + 1 (i.e. zero means none allowed)
+
+|===
+
+The interrupt registers allow to query the current interrupt state and to control interrupt execution. They are not stored on the stack frame.
+
+[cols="9*"]
+|===
+h| Register
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| Value
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+h| IMR
+| 0
+| 0
+| 0
+| 0
+| 0
+| IMR2
+| IMR1
+| IMR0
+
+h| EIM
+| 0
+| 0
+| 0
+| 0
+| 0
+| EIM2
+| EIM1
+| EIM0
+
+h| ISR
+| 0
+| 0
+| 0
+| 0
+| 0
+| ISR2
+| ISR1
+| ISR0
+
+|===
+
+Description of the interrupt registers:
+
+[cols="4*"]
+|===
+h| Bit
+h| Name
+h| Explanation
+h| Default
+
+| IMR2/IMR1/IMR0
+| Interrupt Priority Mask
+| Defines a number from 0 to 3. Each interrupt that has a vector number above the value set here is disabled. Lower or equal interrupt numbers are enabled. I.e. value 0 disables all interrupts but NMI. Value 3 enables all interrupts.
+| 00 (all interrupts but NMI disabled)
+
+| ISR2/ISR1/ISR0
+| Interrupt Status Register
+| Defines a number from 0 to 3 that determines the current interrupt level, i.e. the highest priority of all current - maskable - active interrupts, even if the interrupt itself is masked. 00 means no interrupt. For example 01 means interrupt 1 is active, but none other, while 10 means interrupt 2 is active, no matter if interrupt 1 is active or not.
+
+| EIM2/EIM1/EIM0
+| Temporary Interrupt Priority Mask
+| This value is set from the interrupt mask register on RTI and CLEIM (both only on hypervisor mode), and set to the interrupt level when the interrupt occurs. An interrupt routine is initiated when EIM has a lower value than ISR - e.g. after an RTI or CLEIM when a lower priority interrupt is pending.
+
+|===
+
+Please note that in the following a higher value means a lower register value and vice versa.
+
+The three interrupt registers work as follows. The supervisor-writable IMR defines which interrupts initiate an interrupt routine. For example if the value is set to 2, interrupts with priority values 0 (NMI), 1 and 2 are enabled. Interrupt with priority 3 and more are disabled.
+
+The ISR presents the "highest" interrupt priority (lowest value(!)) that is currently active. For example if interrupt lines 2, 5, and 7 are active, the ISR presents "2" as current status.
+
+When the ISR has a priority that is higher or equal than the IMR value, an interrupt routine is initiated. To stop the processor from continously starting the interrupt routine, when an interrupt routine is initiated, the EIM is used. It is the effective interrupt mask and normally set to the IMR value. When an interrupt routine is initiated, the EIM is set to the ISR value. Then, as long as the ISR value is equal or larger than EIM, no further (stacked) interrupt routine is initiated. Only when a new interrupt with a higher priority (lower value) appears, the ISR value gets lower than EIM and a stacked interrupt routine is initiated.
+
+EIM is reset to the highest value on RTI or CLEIM when executed in supervisor mode.
+
+The vector base registers allow define the addresses where interrupt, trap and abort vectors are fetched from.
+
+[cols="2*"]
+|===
+h| Register
+h| Description
+
+h| IV
+| Address of interrupt vectors table; lowest 8 bit are reserved and must be 0
+
+h| TV
+| Address of trap vectors table; lowest 8 bit are reserved and must be 0
+
+h| AV
+| Address of abort vectors table; lowest 8 bit are reserved and must be 0
+
+|===
+
+For details see the link:af65002-int.adoc[Interrupts page].
+
+[[mode]]
+== User- and Hypervisor Mode Control
+
+[cols="5*"]
+|===
+5+h| Mode Control Registers
+
+h| Register
+h| Name
+h| 6502
+h| 65k
+h| Comment
+
+| UMM
+| User Mode Match register
+| -
+| 8 bit
+| Match register for user mode
+
+| HMM
+| Hypervisor Mode Match register
+| -
+| 8 bit
+| Match register for hypervisor mode
+
+| UMC
+| User Mode Configuration Register
+| -
+| 8 bit
+| Configuring user mode options
+
+| UIM
+| User Mode Interrupt Mask Register
+| -
+| 8 bit
+| Interrupt mask effective when SEI is set in user mode.
+
+|===
+
+The match codes - UMM and HMM - are used to identify matching memory management configurations (see below).
+
+The User Mode Configuration register UMC defines a set of control bits for the user mode:
+
+[cols="8*"]
+|===
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+| -
+| -
+| -
+| RSS
+| -
+| -
+| UMW1
+| UMW0
+
+|===
+
+User Mode Configuration Bits:
+
+[cols="4*"]
+|===
+h| Bit
+h| Name
+h| Explanation
+h| State on Reset
+
+| RSS
+| Restricted Stack Size
+| when set, the user mode stack is restricted to the page $01xx
+| Cleared
+
+| UMW1/UMW0
+| User Mode Width
+| defines the "natural" address width for the user mode. 00=full width, 01=word, 10=long, 11=quad.
+| 00 (natural width)
+
+|===
+
+The User Mode Interrupt Mask register UIM defines which interrupts are masked when the interrupt status flag is set in user mode.
+
+[cols="9*"]
+|===
+h| Register
+h| bit 7
+h| bit 6
+h| bit 5
+h| bit 4
+h| bit 3
+h| bit 2
+h| bit 1
+h| bit 0
+
+h| Value
+h| 128
+h| 64
+h| 32
+h| 16
+h| 8
+h| 4
+h| 2
+h| 1
+
+h| UIM
+| 0
+| 0
+| 0
+| 0
+| 0
+| UIM2
+| UIM1
+| UIM0
+
+|===
+
+User Mode Interrupt Mask bits:
+
+[cols="4*"]
+|===
+h| Bit
+h| Name
+h| Explanation
+h| State on Reset
+
+| UIM2/UIM1/UIM0
+| User mode interrupt mask register
+| When the interrupt status bit is set in user mode (e.g. with SEI), interrupts can be masked with this setting.
+| Reset to the lowest priority interrupt ("110" - so that this is blocked).
+
+|===
+
+[[regmem]]
+== Memory Management Register
+
+The container management has a number of register sets. Each set contains three full size (W bits) registers:
+
+[cols="3*"]
+|===
+h| Container-Register
+h| Definition
+h| Comment
+
+| Addr/matchcode mask
+| 0-7: matchcode mask +
+ 8-W: address mask
+| 
+
+| Addr/matchcode compare value
+| 0-7: matchcode compare value +
+ 8-W: address compare value
+| 
+
+| Addr offset/container control
+| 0-7: Container control +
+ 8-W: address offset value
+| 
+
+|===
+
+There can be any number of register sets. The number can be read from a configuration register. If there are register sets, there must be at least four sets.
+
+To identify which register set is active, the current match code is ANDed with the matchcode mask, then compared with the matchcode compare value. If the values match, the register set is active.
+
+When a register set is active, the address mask is ANDed with the CPU address, and compared with the address compare value. If the values match, then the CPU address is ANDed with the inverse of the address mask, and ORed with the address offset.
+
+For more details see the link:af65002mem.adoc[Memory Management page].
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-29.
+

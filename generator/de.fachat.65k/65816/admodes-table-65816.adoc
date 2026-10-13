@@ -1,0 +1,259 @@
+
+[cols="6*"]
+|===
+h| Name
+h| Alternative Name
+h| Operand Length
+h| Syntax
+h| Origin
+h| Description
+
+| Implied
+| 
+| 0
+| 
+| 
+| Implied by the operation
+
+| Accumulator
+| 
+| 0
+| 
+| 
+| Accumulator operation
+
+| Address
+| 
+| 2
+| abs
+| 
+| The parameter following the opcode is an address (16 bit; for
+				JMP, JSR, JPU)
+
+| Address
+| 
+| 3
+| bank
+| 816
+| The parameter following the opcode is an address (24 bit)
+
+| Immediate
+| 
+| 1
+| #byte
+| 
+| The immediate addressing mode uses the opcode parameter
+				directly, without further lookup. Here it is a byte
+				parameter
+
+| Double Immediate
+| 
+| 2
+| #<op1>, #<op2>
+| 816
+| The double immediate addressing mode uses two opcode parameters
+				directly, without further lookup. Here it is two byte-wide
+				parameters
+
+| Zeropage
+| 
+| 1
+| zp
+| 
+| Zeropage address; The effective address of the operand is a
+				zeropage address (i.e. 8bit)
+
+| Zeropage indexed with X
+| Zeropage X-indexed
+| 1
+| zp,X
+| 
+| Zeropage address, plus content of XR; The effective address of
+				the operand is the opcode parameter (zeropage
+				address), plus the
+				value of the X register
+
+| Stack-relative with offset
+| Zeropage S-indexed
+| 1
+| zp,S
+| 816
+| Stack address, plus a byte offset; The effective address of
+				the operand is the opcode parameter (byte value), plus the
+				value of the S register
+
+| Zeropage indexed with Y
+| Zeropage Y-indexed
+| 1
+| zp,Y
+| 
+| Zeropage address, plus content of YR; The effective address of
+				the operand is the opcode parameter (zeropage
+				address), plus the
+				value of the Y register
+
+| Absolute 16bit
+| Absolute
+| 2
+| abs
+| 
+| 16 bit address; The effective address of the operand is the
+				word
+				address (i.e. 16 bit) given as opcode parameter
+
+| Absolute 16bit indexed with X
+| Absolute X-indexed
+| 2
+| abs,X
+| 
+| 16 bit address, plus content of XR; The effective address is
+				the
+				opcode parameter (word address), plus the value
+				of the X register
+
+| Absolute 16bit indexed with Y
+| Absolute Y-indexed
+| 2
+| abs,Y
+| 
+| 16 bit address, plus content of YR; The effective address is
+				the
+				opcode parameter (word address), plus the value
+				of the Y register
+
+| Absolute 24bit
+| Banked Absolute
+| 3
+| bank
+| 816
+| 24 bit address; The effective address of the operand is the
+				bank plus 16 bit
+				address given as opcode parameter
+
+| Absolute 24bit indexed with X
+| Banked Absolute X-indexed
+| 3
+| bank,X
+| 816
+| 24 bit address; The effective address of the operand is the
+				bank plus 16 bit
+				address given as opcode parameter, plus the content of the X register.
+
+| Zeropage indirect 16bit
+| Zeropage indirect
+| 1
+| (zp)
+| cmos_ind
+| Load effective 16 bit address from zeropage location given;
+				Load
+				effective word (16bit) address from zeropage
+				location given as
+				parameter.
+
+| Zeropage indirect 16bit indexed with Y
+| Zeropage indirect Y-indexed
+| 1
+| (zp),Y
+| 
+| Load effective 16 bit address from zeropage location given,
+				then
+				add content of YR;
+				The effective address is
+				computed as the word
+				(16bit) address read from
+				the zeropage location given as parameter
+				plus the value of the Y
+				register. The resulting address may be larger
+				than 16bit due to
+				overflow when Y is added.
+
+| Stack Vector indirect 16bit indexed with Y
+| Stack offset indirect Y-indexed
+| 1
+| (zp,S),Y
+| 816ce02
+| Add the parameter to the stack register, then
+				load effective 16 bit address from this location,
+				then add content
+				of YR;
+				The effective address is computed as the word
+				(16bit) address read from
+				the stack pointer location offset by the
+				given parameter
+				plus the value of the Y
+				register.
+
+| Zeropage indexed with X indirect 16bit
+| Zeropage X-indexed indirect
+| 1
+| (zp,X)
+| 
+| Load effective 16 bit address from zeropage location given plus
+				content of XR;
+				The effective word (16bit) address
+				is read from the
+				location that is
+				computed as the zeropage location given as parameter
+				plus the value
+				of the X register
+
+| Absolute indirect 16bit
+| Absolute indirect
+| 2
+| (abs)
+| 
+| Load effective 16 bit address from absolute location given;
+				The
+				effective word (16bit) address is read from word
+				location given as
+				parameter.
+
+| Absolute indexed with X indirect 16bit
+| Absolute X-indexed indirect
+| 2
+| (abs,X)
+| cmos
+| Load effective 16 bit address from absolute location given plus
+				content of XR;
+				The effective word address is read
+				from the location
+				that is computed as
+				the word location given as parameter plus the
+				value of the X register
+
+| Absolute indirect 24bit
+| 
+| 2
+| [abs]
+| 816
+| Load effective 24 bit address from absolute location given;
+				The
+				effective (24bit) address is read from the
+				location given as
+				parameter.
+
+| Absolute indirect 24bit indexed with Y
+| 
+| 2
+| [abs],Y
+| 816
+| Load 24 bit address from absolute location given, then add content of Y register to
+			compute effective 24 bit operand address.
+
+| Relative
+| 
+| 1
+| rel
+| 
+| relative addressing modes, used in branches; from -128 to +127
+
+| Relative 16bit
+| Wide relative
+| 2
+| relwide
+| 816ce02
+| relative addressing modes, used in branches; from -32768 to
+				+32767
+
+|===
+

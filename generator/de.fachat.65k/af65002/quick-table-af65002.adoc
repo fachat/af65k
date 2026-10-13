@@ -1,0 +1,312 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TMB0 zp,X
+| TMB0 abs
+| TMB0 zp
+| 
+| RMB0 zp,X
+| RMB0 abs
+| RMB0 zp
+| RDL1 zp
+| ROL1 zp
+| 
+| 
+| 
+| 
+| 
+| BBR0 zp,rel
+
+h| 1
+| 
+| TMB1 zp,X
+| TMB1 abs
+| TMB1 zp
+| 
+| RMB1 zp,X
+| RMB1 abs
+| RMB1 zp
+| RDL2 zp
+| ROL2 zp
+| 
+| 
+| 
+| 
+| 
+| BBR1 zp,rel
+
+h| 2
+| 
+| TMB2 zp,X
+| TMB2 abs
+| TMB2 zp
+| 
+| RMB2 zp,X
+| RMB2 abs
+| RMB2 zp
+| RDL3 zp
+| ROL3 zp
+| 
+| 
+| 
+| 
+| 
+| BBR2 zp,rel
+
+h| 3
+| 
+| TMB3 zp,X
+| TMB3 abs
+| TMB3 zp
+| 
+| RMB3 zp,X
+| RMB3 abs
+| RMB3 zp
+| RDL4 zp
+| ROL4 zp
+| 
+| 
+| 
+| 
+| 
+| BBR3 zp,rel
+
+h| 4
+| 
+| TMB4 zp,X
+| TMB4 abs
+| TMB4 zp
+| 
+| RMB4 zp,X
+| RMB4 abs
+| RMB4 zp
+| RDL5 zp
+| ROL5 zp
+| 
+| 
+| 
+| 
+| 
+| BBR4 zp,rel
+
+h| 5
+| 
+| TMB5 zp,X
+| TMB5 abs
+| TMB5 zp
+| 
+| RMB5 zp,X
+| RMB5 abs
+| RMB5 zp
+| RDL6 zp
+| ROL6 zp
+| 
+| 
+| 
+| 
+| 
+| BBR5 zp,rel
+
+h| 6
+| 
+| TMB6 zp,X
+| TMB6 abs
+| TMB6 zp
+| 
+| RMB6 zp,X
+| RMB6 abs
+| RMB6 zp
+| RDL7 zp
+| ROL7 zp
+| 
+| 
+| 
+| 
+| 
+| BBR6 zp,rel
+
+h| 7
+| 
+| TMB7 zp,X
+| TMB7 abs
+| TMB7 zp
+| 
+| RMB7 zp,X
+| RMB7 abs
+| RMB7 zp
+| RDL8 zp
+| ROL8 zp
+| 
+| 
+| 
+| 
+| 
+| BBR7 zp,rel
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| SMB0 zp,X
+| SMB0 abs
+| SMB0 zp
+| RDR1 zp
+| ROR1 zp
+| 
+| 
+| 
+| 
+| 
+| BBS0 zp,rel
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| SMB1 zp,X
+| SMB1 abs
+| SMB1 zp
+| RDR2 zp
+| ROR2 zp
+| 
+| 
+| 
+| 
+| 
+| BBS1 zp,rel
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| SMB2 zp,X
+| SMB2 abs
+| SMB2 zp
+| RDR3 zp
+| ROR3 zp
+| 
+| 
+| 
+| 
+| 
+| BBS2 zp,rel
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| SMB3 zp,X
+| SMB3 abs
+| SMB3 zp
+| RDR4 zp
+| ROR4 zp
+| 
+| 
+| 
+| 
+| 
+| BBS3 zp,rel
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| SMB4 zp,X
+| SMB4 abs
+| SMB4 zp
+| RDR5 zp
+| ROR5 zp
+| 
+| 
+| 
+| 
+| 
+| BBS4 zp,rel
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| SMB5 zp,X
+| SMB5 abs
+| SMB5 zp
+| RDR6 zp
+| ROR6 zp
+| 
+| 
+| 
+| 
+| 
+| BBS5 zp,rel
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| SMB6 zp,X
+| SMB6 abs
+| SMB6 zp
+| RDR7 zp
+| ROR7 zp
+| 
+| 
+| 
+| 
+| 
+| BBS6 zp,rel
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| SMB7 zp,X
+| SMB7 abs
+| SMB7 zp
+| RDR8 zp
+| ROR8 zp
+| 
+| 
+| 
+| 
+| 
+| BBS7 zp,rel
+
+|===
+

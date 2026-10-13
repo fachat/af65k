@@ -1,0 +1,150 @@
+= 65002 Documentation
+:toc:
+
+This is the reference documentation for the af65002 processor.
+
+On the left hand menu you find the links to the various pages of the documentation.
+
+The af65002 is an extension of the venerable 65C02 8 bit processor. It extends the 6502 with extra registers, wider registers, as well as a user and hypervisor mdoe, featuring many new opcodes to use the new features.
+
+The 65002 is binary compatible with the 65C02 - except for minor quirks required for the extension (see the compatibility issues page).
+
+[[preface]]
+== Preface
+
+[[lic]]
+=== License
+
+This content is licensed under the Creative Commons Attribution Share-Alike license, CC-BY-SA version 3.0.
+
+Note this "content" includes this web page, but does not include the 6502.org header and the left and right web page columns. Click on the "Maximize" link to see the contents covered by this license.
+
+* http://creativecommons.org/licenses/by-sa/3.0/legalcode[CC-BY-SA legal code] 
+* http://creativecommons.org/licenses/by-sa/3.0/[CC-BY-SA license deed (short form)] 
+[[disc]]
+=== Disclaimer
+
+The content comes with no warranty at all! There is no guarantee and no promise that this specification is correct, consistent, will actually work, or will ever be implemented at all.
+
+To my understanding the techniques described here have been used by various processors for decades already. Still there is no guarantee that a processor according to this spec would not be covered by some patents.
+
+Subject to change without notice!
+
+[[cont]]
+=== Contributors
+
+* André Fachat - initial author: link:http://www.6502.org/users/andre[8bit Homepage]
+
+[[todo]]
+== TODO
+
+Here is a list of items still to do:
+
+* Clarify how the memory mapping should work of multiple matches occur
+* Add the LCR/SCR/BCR opcodes. Add the SYS page and related opcodes
+
+[[chg]]
+== Changes
+
+This section describes the changes to the documentation:
+
+[cols="3*"]
+|===
+h| Date
+h| Author
+h| Changes
+
+| 2010-10-23
+| André Fachat
+| First working draft
+
+| 2010-11-04
+| André Fachat
+| Defined the interrupt status/mask/effective mask register; Constrained the interrupt/trap/abort vectors to two-byte vectors; integrated the various extra registers into the configuration register file (for less opcodes necessary); add WAI, STP and FIL/FILU
+
+| 2010-12-22
+| André Fachat
+| Added the "NF" prefix bit
+
+| 2010-12-28
+| André Fachat
+| Moved some LSB $f opcodes to the extension page to add STX abs,Y and STY abs,X
+
+| 2011-01-02
+| André Fachat
+| Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes
+
+| 2011-05-01
+| André Fachat
+| 
+* WAI becomes privileged
+* Moved no-operand opcodes in EXT page from column $f to $8, to be more aligned with standard opcode page
+* Added the INV opcode for the 2s-complement
+* Moved SWP to the EXT page, reordered the prefix codes
+* reordered the EXT column $8 and $a codes
+* Removed the INE/INB/DEE/DEB quick opcodes, added SLX/SRX/SLY/SRY quick opcodes instead
+* Reordered opcode column $f, so all non-prefix opcodes have addressing mode abs,X
+* removed NOP zp/abs, moved STX abs,Y to previous NOP abs location
+* Cleaned up duplicate opcodes for AM=1, clarified table description
+* Changed the BSR prefix usage definition to one similar to JSR, which removes the need for one of the BSR duplicate opcodes
+* Added the EE "early extension" prefix flag
+* reordered some EXT codes
+* Added the stack peek opcodes PKA, PKX, PKY
+* Added the EXT and CUT opcodes
+* Added the Accumulator addressing modes for ADE/ADB/ADS/SBE/SBB/SBS
+
+
+
+| 2011-12-23
+| André Fachat
+| 
+* Remove the EE prefix bit, and replace it with a second bit for the ZE extension - to allow to extend with ones and with the sign. Semantics of ZE changed as well, thus renamed to LE, load extend. Old ZE functionality is covered by EXT opcode
+* Fix the description of the SLX/SLY/SRX/SRY opcodes
+* Deprecated CLX/CLY opcodes, changed CLA to full width only
+* Added "BIT A" variant
+* Removed CUT, as it is the same as EXT
+* Some small changes here and there, esp. clarifications around the interrupt handling
+* Added the Software Compatibility section
+
+
+
+| 2011-12-31
+| André Fachat
+| 
+* Replace manually maintained tables (std/EXT pages and addressing modes) with ones generated from an XML file which will be the basis for an assembler and some VHDL code generation.
+* Added LEA/PEA with relwide addressing modes
+* Cleared up some flag settings
+* Add the RDR/RDL/ASR opcodes, moved a number of opcodes around in the EXT page, also rearranged the QUICK page to accomodate for the new opcodes.
+
+
+
+| 2012-04-23
+| André Fachat
+| 
+* Separated the one-pager into multiple pages and integrated into the af65002 doc build process
+* Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more possible future expansions (prefix3 could now be $8F-$FF).
+
+
+
+| 2012-04-29
+| André Fachat
+| 
+* Reorganized the EXT page. It's less oriented on the standard page, but much more regular now.
+* Added LEA and PEA addressing modes for zp/abs indirect quad, plus zp/abs indirect/indexed quad modes that were all missing.
+* Added the ADD and SUB opcodes with immediate and E-indirect addressing modes.
+* Added all missing tables, plus a TODO section on this page
+
+
+
+|===
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-23.
+

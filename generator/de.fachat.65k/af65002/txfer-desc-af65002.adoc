@@ -1,0 +1,22 @@
+
+* link:af65002opdesc.html#TAB[TAB: ]Transfer AC to B register
+* link:af65002opdesc.html#TAE[TAE: ]Transfer AC to E register
+* link:af65002opdesc.html#TAZ[TAZ: ]Transfer AC to Z Register
+* link:af65002opdesc.html#TBA[TBA: ]Transfer base register B to Accumulator
+* link:af65002opdesc.html#TEA[TEA: ]Transfer E register to Accumulator
+* link:af65002opdesc.html#TEB[TEB: ]Transfer E to B register (full width)
+* link:af65002opdesc.html#TPA[TPA: ]Transfer Program counter to Accumulator
+* link:af65002opdesc.html#TSY[TSY: ]Transfer stack pointer to Y
+* link:af65002opdesc.html#TYS[TYS: ]Transfer Y to stack pointer
+* link:af65002opdesc.html#TZA[TZA: ]Transfer Z Register to AC
+* link:af65002opdesc.html#XAB[XAB: ]eXchange A register with B register. Always done full width, no
+				flags set.
+			
+* link:af65002opdesc.html#XAX[XAX: ]eXchange AC with X register. Always done full width, no flags set.
+			
+* link:af65002opdesc.html#XAY[XAY: ]eXchange AC with Y register. Always done full width, no flags set.
+			
+* link:af65002opdesc.html#XYX[XYX: ]eXchange X with Y register. Always done full width, no flags set.
+			
+* link:af65002opdesc.html#XZX[XZX: ]eXchange X with Z register. Always done full width, no flags set.
+			

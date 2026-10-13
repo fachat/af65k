@@ -1,0 +1,384 @@
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TMB0 zp,X   +
+UM, AM, OF
+| TMB0 abs   +
+UM, AM, OF
+| TMB0 zp   +
+UM, AM, OF
+| 
+| RMB0 zp,X
+| RMB0 abs
+| RMB0 zp
+| RDL1 zp   +
+UM, NF, RS, AM, OF
+| ROL1 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR0 zp,rel   +
+UM, RS, AM, OF
+
+h| 1
+| 
+| TMB1 zp,X   +
+UM, AM, OF
+| TMB1 abs   +
+UM, AM, OF
+| TMB1 zp   +
+UM, AM, OF
+| 
+| RMB1 zp,X
+| RMB1 abs
+| RMB1 zp
+| RDL2 zp   +
+UM, NF, RS, AM, OF
+| ROL2 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR1 zp,rel   +
+UM, RS, AM, OF
+
+h| 2
+| 
+| TMB2 zp,X   +
+UM, AM, OF
+| TMB2 abs   +
+UM, AM, OF
+| TMB2 zp   +
+UM, AM, OF
+| 
+| RMB2 zp,X
+| RMB2 abs
+| RMB2 zp
+| RDL3 zp   +
+UM, NF, RS, AM, OF
+| ROL3 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR2 zp,rel   +
+UM, RS, AM, OF
+
+h| 3
+| 
+| TMB3 zp,X   +
+UM, AM, OF
+| TMB3 abs   +
+UM, AM, OF
+| TMB3 zp   +
+UM, AM, OF
+| 
+| RMB3 zp,X
+| RMB3 abs
+| RMB3 zp
+| RDL4 zp   +
+UM, NF, RS, AM, OF
+| ROL4 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR3 zp,rel   +
+UM, RS, AM, OF
+
+h| 4
+| 
+| TMB4 zp,X   +
+UM, AM, OF
+| TMB4 abs   +
+UM, AM, OF
+| TMB4 zp   +
+UM, AM, OF
+| 
+| RMB4 zp,X
+| RMB4 abs
+| RMB4 zp
+| RDL5 zp   +
+UM, NF, RS, AM, OF
+| ROL5 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR4 zp,rel   +
+UM, RS, AM, OF
+
+h| 5
+| 
+| TMB5 zp,X   +
+UM, AM, OF
+| TMB5 abs   +
+UM, AM, OF
+| TMB5 zp   +
+UM, AM, OF
+| 
+| RMB5 zp,X
+| RMB5 abs
+| RMB5 zp
+| RDL6 zp   +
+UM, NF, RS, AM, OF
+| ROL6 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR5 zp,rel   +
+UM, RS, AM, OF
+
+h| 6
+| 
+| TMB6 zp,X   +
+UM, AM, OF
+| TMB6 abs   +
+UM, AM, OF
+| TMB6 zp   +
+UM, AM, OF
+| 
+| RMB6 zp,X
+| RMB6 abs
+| RMB6 zp
+| RDL7 zp   +
+UM, NF, RS, AM, OF
+| ROL7 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR6 zp,rel   +
+UM, RS, AM, OF
+
+h| 7
+| 
+| TMB7 zp,X   +
+UM, AM, OF
+| TMB7 abs   +
+UM, AM, OF
+| TMB7 zp   +
+UM, AM, OF
+| 
+| RMB7 zp,X
+| RMB7 abs
+| RMB7 zp
+| RDL8 zp   +
+UM, NF, RS, AM, OF
+| ROL8 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR7 zp,rel   +
+UM, RS, AM, OF
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| SMB0 zp,X
+| SMB0 abs
+| SMB0 zp
+| RDR1 zp   +
+UM, NF, RS, AM, OF
+| ROR1 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS0 zp,rel   +
+UM, RS, AM, OF
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| SMB1 zp,X
+| SMB1 abs
+| SMB1 zp
+| RDR2 zp   +
+UM, NF, RS, AM, OF
+| ROR2 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS1 zp,rel   +
+UM, RS, AM, OF
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| SMB2 zp,X
+| SMB2 abs
+| SMB2 zp
+| RDR3 zp   +
+UM, NF, RS, AM, OF
+| ROR3 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS2 zp,rel   +
+UM, RS, AM, OF
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| SMB3 zp,X
+| SMB3 abs
+| SMB3 zp
+| RDR4 zp   +
+UM, NF, RS, AM, OF
+| ROR4 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS3 zp,rel   +
+UM, RS, AM, OF
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| SMB4 zp,X
+| SMB4 abs
+| SMB4 zp
+| RDR5 zp   +
+UM, NF, RS, AM, OF
+| ROR5 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS4 zp,rel   +
+UM, RS, AM, OF
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| SMB5 zp,X
+| SMB5 abs
+| SMB5 zp
+| RDR6 zp   +
+UM, NF, RS, AM, OF
+| ROR6 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS5 zp,rel   +
+UM, RS, AM, OF
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| SMB6 zp,X
+| SMB6 abs
+| SMB6 zp
+| RDR7 zp   +
+UM, NF, RS, AM, OF
+| ROR7 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS6 zp,rel   +
+UM, RS, AM, OF
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| SMB7 zp,X
+| SMB7 abs
+| SMB7 zp
+| RDR8 zp   +
+UM, NF, RS, AM, OF
+| ROR8 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS7 zp,rel   +
+UM, RS, AM, OF
+
+|===
+

@@ -1,0 +1,7901 @@
+
+== List of operations
+
+
+=== Jumps and Returns
+
+
+* <<BRK,BRK>> - Starts the break routine.
+* <<JMP,JMP>> - Jump to new code address
+* <<JSR,JSR>> - Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			
+* <<RTI,RTI>> - Return from interrupt
+* <<RTS,RTS>> - Return from subroutine - read return address from stack
+* <<RTU,RTU>> - Return from trap handler.
+* <<TRP,TRP>> - Trap into 65k supervisor mode
+
+=== Branches
+
+
+* <<BCC,BCC>> - Branch on carry clear - take branch when C flag is cleared
+			
+* <<BCS,BCS>> - Branch on carry set - take branch when C flag is set
+* <<BEQ,BEQ>> - Branch on equal - take branch when Z flag is set
+* <<BEV,BEV>> - Branch on even
+* <<BGES,BGES>> - Branch on signed greater or equal than
+* <<BGT,BGT>> - Branch if greater - take branch when C flag is set but Z flag
+				is
+				clear
+			
+* <<BGTS,BGTS>> - Branch if greater - take branch when signed greater or equal G
+				flag is set but Z flag is clear
+			
+* <<BLE,BLE>> - Branch if less or equal - take branch when C flag is clear or Z
+				flag is set
+			
+* <<BLES,BLES>> - Branch if less or equal - take branch when signed greater or
+				equal flag G is clear or Z flag is set
+			
+* <<BLTS,BLTS>> - Branch on signed less than
+* <<BMI,BMI>> - Branch on minus - take branch when N flag is set
+* <<BNE,BNE>> - Branch on not equal - take branch when Z flag is cleared
+* <<BOD,BOD>> - Branch on odd
+* <<BPL,BPL>> - Branch on plus - take branch when N flag is cleared
+* <<BRA,BRA>> - Branch always - branch independent from any flags
+* <<BSR,BSR>> - Branch subroutine - similar to JSR, but use relative addressing
+				similar to branch opcodes
+			
+* <<BVC,BVC>> - Branch on overflow clear - take branch when V flag is cleared
+			
+* <<BVS,BVS>> - Branch on overflow set - take branch when V flag is set
+
+=== Arithmetic & logic
+
+
+* <<ADC,ADC>> - Add content of memory location to accumulator
+* <<ADD,ADD>> - Add content of memory location to accumulator without using
+				carry as input
+			
+* <<ADE,ADE>> - Add value to E register
+* <<ADI,ADI>> - Add immediate value to a memory location
+* <<ADQ,ADQ>> - Add immediate value to a register
+* <<AND,AND>> - Bitwise AND accumulator with content of memory location
+* <<ASL,ASL>> - Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			
+* <<ASR,ASR>> - Arithmetic Shift Right - Similar to LSR, but shifts in the sign
+				of the value, not zero
+			
+* <<BCN,BCN>> - Bit Count: counts 1-bits in AC or in given location, stores
+				number of 1-bits back in AC
+			
+* <<BSW,BSW>> - Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
+				so on.
+			
+* <<CMP,CMP>> - Compare accumulator with content of memory location
+* <<CPX,CPX>> - Compare X register with content of memory location
+* <<CPY,CPY>> - Compare Y register with content of memory location
+* <<CPZ,CPZ>> - Compare Z register with content of memory location
+* <<DAD,DAD>> - Decimal adjust of a normal ADC of two BCD numbers.
+* <<DAS,DAS>> - Decimal adjust of a normal SBC of two BCD numbers.
+* <<DEC,DEC>> - Decrement the content of a memory location by one
+* <<DEX,DEX>> - Decrement the content of the X register by one
+* <<DEY,DEY>> - Decrement the Y register by one
+* <<DEZ,DEZ>> - Decrement Z register
+* <<EOR,EOR>> - Bitwise Exclusive-OR accumulator with content of memory
+				location
+			
+* <<EXT,EXT>> - Extend a value in AC from RS to the full size. Setting LE
+				defines the type of extension.
+			
+* <<INC,INC>> - Increment the content of a memory location by one
+* <<INV,INV>> - Invert AC, i.e. set AC to the 1s-complement of AC
+* <<INX,INX>> - Increment the content of the X register by one
+* <<INY,INY>> - Increment the content of the Y register by one
+* <<INZ,INZ>> - Increment Z register
+* <<LSR,LSR>> - Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			
+* <<NEG,NEG>> - negate AC, i.e. set AC to the 2s-complement of AC
+* <<ORA,ORA>> - Bitwise OR accumulator with content of memory location
+* <<RDL,RDL>> - Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			
+* <<RDL#,RDL#>> - Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			
+* <<RDR,RDR>> - Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			
+* <<RDR#,RDR#>> - Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			
+* <<ROL,ROL>> - Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+* <<ROL#,ROL#>> - Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+* <<ROR,ROR>> - Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+* <<ROR#,ROR#>> - Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+* <<SBC,SBC>> - Substract content of memory location from accumulator
+* <<SBE,SBE>> - Subtract value from E register
+* <<SBI,SBI>> - Subtract immediate value from a memory location
+* <<SBQ,SBQ>> - Subtract immediate value from a register
+* <<SUB,SUB>> - Subtract content of memory location from accumulator without
+				using the carry flag as input
+			
+* <<SWP,SWP>> - swap upper and lower half of the operand
+			
+
+=== Bit Operations and Tests
+
+
+* <<BBR#,BBR#>> - Branch on bit reset
+* <<BBS#,BBS#>> - Branch on bit set
+* <<BIT,BIT>> - Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			
+* <<RMB#,RMB#>> - Reset memory bit
+* <<SMB#,SMB#>> - Set memory bit
+* <<TMB#,TMB#>> - Test memory bit
+* <<TRB,TRB>> - Test and Reset Bit - AND the memory location with the
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
+				in the
+				memory location that are set in the accumulator.
+			
+* <<TSB,TSB>> - Test and Set Bit - AND the memory location with the
+				accumulator,
+				and set the Z flag from the result, then SET all
+				bits in
+				the
+				memory location that are set in the accumulator.
+			
+
+=== Load/Store
+
+
+* <<LDA,LDA>> - Load accumulator
+* <<LDB,LDB>> - Load B with an immediate value
+* <<LDE,LDE>> - Load E with an immediate value
+* <<LDX,LDX>> - Load X register
+* <<LDY,LDY>> - Load Y register
+* <<LDZ,LDZ>> - Load Z register with a value
+* <<LEA,LEA>> - Load Effective Address: compute the effective address and store
+				it in the E (effective Address) register (always
+				full width)
+			
+* <<STA,STA>> - Store the content of the accumulator into a memory location
+			
+* <<STI,STI>> - Store immediate byte value into a memory location
+* <<STX,STX>> - Store the content of the X register to memory.
+* <<STY,STY>> - Store the content of the Y register to memory.
+* <<STZ,STZ>> - Store zero (or Z-register) into a memory location
+
+=== Pushes/Pulls
+
+
+* <<PHA,PHA>> - Push contents of the accumulator onto the stack
+* <<PHB,PHB>> - Push B onto stack (full width)
+* <<PHE,PHE>> - Push E onto stack (always full width)
+* <<PHI,PHI>> - Push immediate value onto the stack
+* <<PHM,PHM>> - Push contents of multiple registers onto the stack
+* <<PHP,PHP>> - Push processor status register onto the stack
+* <<PHX,PHX>> - Push contents of the X register onto the stack
+* <<PHY,PHY>> - Push contents of the Y register onto the stack
+* <<PHZ,PHZ>> - Push Z Register onto stack
+* <<PLA,PLA>> - Pull the contents of the accumulator from the stack
+* <<PLB,PLB>> - Pull B from stack (full width)
+* <<PLE,PLE>> - Pull E from stack (full width)
+* <<PLM,PLM>> - Pull contents of multiple registers from the stack
+* <<PLP,PLP>> - Pull processor status register from the stack
+* <<PLX,PLX>> - Pull the contents of the X register from the stack
+* <<PLY,PLY>> - Pull the contents of the Y register from the stack
+* <<PLZ,PLZ>> - Pull Z Register from stack
+* <<PRB,PRB>> - Push and Replace Base register: Push base offset register to
+				the
+				stack, then transfer E-register to the base
+				register
+			
+
+=== Transfers
+
+
+* <<TAB,TAB>> - Transfer AC to B register
+* <<TAX,TAX>> - Transfer the contents of accumulator into the X register
+* <<TAY,TAY>> - Transfer the contents of accumulator into the Y register
+* <<TAZ,TAZ>> - Transfer AC to Z Register
+* <<TEA,TEA>> - Transfer E register to Accumulator
+* <<TEB,TEB>> - Transfer E to B register (full width)
+* <<TPA,TPA>> - Transfer Program counter to Accumulator
+* <<TSX,TSX>> - Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			
+* <<TSY,TSY>> - Transfer stack pointer to Y
+* <<TXA,TXA>> - Transfer the contents of the X register into the accumulator
+			
+* <<TXS,TXS>> - Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			
+* <<TYA,TYA>> - Transfer the contents of the Y register into the accumulator
+			
+* <<TYS,TYS>> - Transfer Y to stack pointer
+* <<TZA,TZA>> - Transfer Z Register to AC
+* <<XAB,XAB>> - eXchange A register with B register. Always done full width, no
+				flags set.
+			
+* <<XAX,XAX>> - eXchange AC with X register. Always done full width, no flags set.
+			
+* <<XAY,XAY>> - eXchange AC with Y register. Always done full width, no flags set.
+			
+* <<XYX,XYX>> - eXchange X with Y register. Always done full width, no flags set.
+			
+* <<XZX,XZX>> - eXchange X with Z register. Always done full width, no flags set.
+			
+
+=== Skip prefixes
+
+
+* <<SCC,SCC>> - Skip on carry clear - skip next opcode when C flag is cleared
+* <<SCS,SCS>> - Skip on carry set - skip next opcode when C flag is set
+* <<SEQ,SEQ>> - Skip on equal - skip next opcode when Z flag is set
+* <<SMI,SMI>> - Skip on minus - skip next opcode when N flag is set
+* <<SNE,SNE>> - Skip on not equal - skip next opcode when Z flag is cleared
+* <<SPL,SPL>> - Skip on plus - skip next opcode when N flag is cleared
+* <<SVC,SVC>> - Skip on overflow clear - skip next opcode when V flag is cleared
+* <<SVS,SVS>> - Skip on overflow set - skip next opcode when V flag is set
+
+=== Flags
+
+
+* <<CLC,CLC>> - Clear the C flag
+* <<CLD,CLD>> - Clear the decimal (D) flag
+* <<CLI,CLI>> - Clear the interrupt (I) flag
+* <<CLV,CLV>> - Clear the overflow (V) flag
+* <<NEC,NEC>> - Negate the carry flag
+			
+* <<SEC,SEC>> - Set the C flag
+* <<SED,SED>> - Set the decimal (D) flag
+* <<SEI,SEI>> - Set the interrupt (I) flag
+
+=== System-oriented
+
+
+* <<CSW,CSW>> - Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
+			
+
+=== Others
+
+
+* <<NOP,NOP>> - No operation
+
+== Operations
+
+
+== BRK
+
+[[BRK]]Starts the break routine.
+
+
+[cols="10*"]
+|===
+10+h| BRK
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x00
+| 
+| RS
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ The BRK opcode is used to jump to the BRK vector. It pushes the return address and the status on the stack, then reads the BRK vector (doubling as IRQ vector) and jumps there.  Please note that the address put on the stack is the address of the next instruction. And the BRK opcode is using the immediate addressing mode (although the MOS manual does not state it). Thus the address put on the stack is two bytes behind the address of the BRK!  Before storing the status on the stack, the opcode sets the I-flag to avoid recursive calling of the interrupt routine.  When storing the status on the stack, the B-flag is set to indicate that the shared IRQ/BRK vector has been called from a BRK and not an IRQ.  Stack(SP--) &lt;= > NextPC Stack(SP--) &lt;= &lt; NextPC Stack(SP--) &lt;= Status \| B \| I PC &lt;= ($FFFE) 
+=== 65k
+
+ On the 65k, the RS prefix determines the size of the immediate operand, so that the return address that is pushed onto the stack depends on it.  As opposed to the IRQ, the BRK opcode stays in the user resp. hypervisor mode where it is executed.  In hypervisor mode, once the processor configuration register for abort vector table is set, the BRK vector is taken from the abort vector table. For details see the interrupt handling description.  In user mode the BRK always uses the standard two-byte $FFFE IRQ vector, sign-expanded to full address length. 
+== JMP
+
+[[JMP]]Jump to new code address
+
+
+[cols="10*"]
+|===
+10+h| JMP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x07
+| 65k
+| AM, OF, UM, LE
+| Absolute indirect 64bit
+| 
+| 
+
+| 
+| 0x27
+| 65k
+| AM, OF, UM, LE
+| Absolute indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x4c
+| 
+| AM, OF, UM, LE
+| Address
+| 
+| 
+
+| 
+| 0x6c
+| 
+| AM, OF, UM, LE
+| Absolute indirect 16bit
+| 
+| 
+
+| 
+| 0x7c
+| cmos
+| AM, OF, UM, LE
+| Absolute indexed with X indirect 16bit
+| 
+| 
+
+| EXT
+| 0x4c
+| 65k
+| UM, LE
+| E indirect
+| 
+| 
+
+| EXT
+| 0x6c
+| 65k
+| AM, OF, UM, LE
+| Address Long
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Jump to the address given by the operand (as computed depending on the respective addressing mode).  PC &lt;= Operand 
+=== 65k
+
+The AM, OF, LE and UM prefixes are evaluated by the addressing modes. Note that if UM is set, then the processor jumps into user mode. Status \|= U when UM is set  If the operand is not as wide as required for an address, it is sign-extended. 
+== JSR
+
+[[JSR]]Jump subroutine - jump to a new code location, save return
+				address on stack for RTS
+			
+
+
+[cols="10*"]
+|===
+10+h| JSR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x20
+| 
+| AM, OF, RS, LE
+| Address
+| 
+| 
+
+| EXT
+| 0x5c
+| 65k
+| AM, OF, RS, LE
+| Address Long
+| 
+| 
+
+| 
+| 0xdc
+| 65k
+| AM, OF, RS, LE
+| Absolute indirect 16bit
+| 
+| 
+
+| 
+| 0xfc
+| 65k
+| AM, OF, RS, LE
+| Absolute indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x87
+| 65k
+| AM, OF, RS, LE
+| Absolute indirect 64bit
+| 
+| 
+
+| 
+| 0xa7
+| 65k
+| AM, OF, RS, LE
+| Absolute indexed with X indirect 64bit
+| 
+| 
+
+| EXT
+| 0x20
+| 65k
+| RS, LE
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Jump to the address given by the operand (as computed depending on the respective addressing mode) and store the return address (-1) on the stack to prepare for the RTS opcode  Stack(SP--) &lt;= > NextPC-1 Stack(SP--) &lt;= &lt; NextPC-1 PC &lt;= Operand 
+=== 65k
+
+ The AM, OF, and LE prefixes are evaluated by the addressing modes. Note that the UM prefix is not supported.  If the operand is not wide enough as required for an address, it is sign-extended.  The RS prefix determines the width of the return address put on the stack. Note that the BYTE width prefix denotes the natural width of the processor (respectively its current mode).  The stack pointer used is the stack pointer of the current mode. 
+== RTI
+
+[[RTI]]Return from interrupt
+
+
+[cols="10*"]
+|===
+10+h| RTI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x40
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Returns from an interrupt or a BRK opcode handling. It first pulls the status register from the stack, then takes the return address from the stack, increment it by one, and continue at the new address.  Status &lt;= Stack(++SP) -- bit 5=1 Tmp(0-7) &lt;= Stack(++SP) Tmp(8-15) &lt;= Stack(++SP) PC &lt;= Tmp; 
+=== 65k
+
+ The RTI prefix first reads the status from the current stack. If the "Not extended" flag is set (bit 5 is always 1 in the 6502 status register, so here it is used as "not extended" flag), then the normal handling as described above takes place.  If the "not extended" flag is clear, i.e. an extended stack frame is used:  Status &lt;= Stack(++SP) -- bit 5=0 ExtStatus &lt;= Stack(++SP) Tmp(0-7) &lt;= Stack(++SP) Tmp(8-15) &lt;= Stack(++SP) ... PC &lt;= Tmp;  Here the extended status byte is pulled from the stack after the standard status. In this extended status there are two bit that determine the size of the return address following on the stack. So the return address can be 16-, 32- or 64-bit. Note that the "00" designation (otherwise used for BYTE width) maps to the natural address width of the processor executing the code.  Also the user mode bit is stored in the extended stack frame. If the user mode bit is the same as the current mode, the execution continues in that mode. If the RTI code is executed in the supervisor mode, and the user mode bit is set, then the return address is interpreted as user mode address, and the execution continues in the user mode. If RTI is executed in user mode, and the user mode bit is clear (i.e. hypervisor mode), and ABORT sequence is triggered.  Note that the "natural" address width is taken from the target environment in case the process jumps from hypervisor to user mode.  If the operand is not wide enough as required for an address, it is sign-extended. 
+== RTS
+
+[[RTS]]Return from subroutine - read return address from stack
+
+
+[cols="10*"]
+|===
+10+h| RTS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x60
+| 
+| RS
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Take the return address from the stack, increment it by one, and continue at the new address.  Tmp(0-7) &lt;= Stack(++SP) Tmp(8-15) &lt;= Stack(++SP) PC &lt;= Tmp + 1; 
+=== 65k
+
+ The RS prefix determines the width of the return address read from the stack. Note that the BYTE width prefix denotes the natural width of the processor (respectively its current mode). This is the default.  If the operand is not wide enough as required for an address, it is extended with the rest of the current PC. This is to support running "narrow" code within a e.g. a 64k window in a wide system.  The stack pointer used is the stack pointer of the current mode. 
+== RTU
+
+[[RTU]]Return from trap handler.
+
+
+[cols="10*"]
+|===
+10+h| RTU
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| SYS
+| 0x60
+| 65k
+| 
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Return from trap handling. Reads the extended status byte and the return address from hypervisor stack, then jumps to the return address.  &lt;Tmp &lt;= Stack(++SP) >Tmp &lt;= Stack(++SP) Tmp &lt;= Tmp+1 PC &lt;= Tmp; ExtStatus &lt;= Stack(++SP) 
+=== 65k
+
+ The extended status byte contains the width bits for the return address as well as the user mode bit from where the trap came. In RTU the user mode bit is restored, so the RTU opcode can return to user as well as hypervisor mode.  The stack pointer used is that of the hypervisor stack.  Note for future expansions the RS prefix may extend the number of traps to word, or even wider widths.  When executed in user mode, this opcode triggers an ABORT exception. 
+== TRP
+
+[[TRP]]Trap into 65k supervisor mode
+
+
+[cols="10*"]
+|===
+10+h| TRP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xf4
+| 65k
+| 
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Trap into supervisor mode. Pushes the return address and the extended status byte on the hypervisor stack and jumps into hypervisor mode, using the appropriate trap vector. To return from the trap, the RTU operations is used. For compatibility with RTS, the return address minus one is stored on the stack.  Stack(SP--) &lt;= > NextPC-1 Stack(SP--) &lt;= &lt; NextPC-1 Stack(SP--) &lt;= ExtStatus PC &lt;= TrapVector(Operand) 
+=== 65k
+
+ The address put on the stack always has the natural width of the processor. Currently no further prefix is supported. The stack pointer used is that of the hypervisor stack.  This opcode can be used in user mode as well as in hypervisor mode. The extended status byte contains the user mode bit, so that the RTU opcode knows whether to return to user mode or hypervisor mode.  The extendend status byte also contains width bits that store the width of the return address on stack. BYTE is not used, but the real width is stored with the width bits.  Note for future expansions the RS prefix may extend the trap number (the immediate operand) to word, or even wider widths. 
+== BCC
+
+[[BCC]]Synonyms: BLT
+
+Branch on carry clear - take branch when C flag is cleared
+			
+
+
+[cols="10*"]
+|===
+10+h| BCC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x90
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the carry status flag is clear. After a CMP this is a synonym for "less than". The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BCS
+
+[[BCS]]Synonyms: BGE
+
+Branch on carry set - take branch when C flag is set
+
+
+[cols="10*"]
+|===
+10+h| BCS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xB0
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the carry status flag is set. After a CMP this is a synonym for "greater or equal". The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BEQ
+
+[[BEQ]]Branch on equal - take branch when Z flag is set
+
+
+[cols="10*"]
+|===
+10+h| BEQ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xf0
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the zero status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BEV
+
+[[BEV]]Branch on even
+
+
+[cols="10*"]
+|===
+10+h| BEV
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x10
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) if the odd status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when O=0 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BGES
+
+[[BGES]]Branch on signed greater or equal than
+
+
+[cols="10*"]
+|===
+10+h| BGES
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x70
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) if the signed greater or equal status flag G is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when G=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BGT
+
+[[BGT]]Synonyms: (SEQ BCS)
+
+Branch if greater - take branch when C flag is set but Z flag
+				is
+				clear
+			
+
+
+=== Description
+
+ Execute a branch given the condition that the carry status flag is set and the zero status flag is not set. Synonym to "SEQ BCS", i.e. branch on carry set, skipped if zero is set. 
+== BGTS
+
+[[BGTS]]Synonyms: (SEQ BGES)
+
+Branch if greater - take branch when signed greater or equal G
+				flag is set but Z flag is clear
+			
+
+
+=== Description
+
+ Execute a branch given the condition that the signed greater status flag is set and the zero status flag is not set. Synonym to "SEQ BGES", i.e. branch on signed greater set, skipped if zero is set. 
+== BLE
+
+[[BLE]]Branch if less or equal - take branch when C flag is clear or Z
+				flag is set
+			
+
+
+[cols="10*"]
+|===
+10+h| BLE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x90
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the carry status flag is clear or the zero status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when (N=1 and Z=0) else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BLES
+
+[[BLES]]Branch if less or equal - take branch when signed greater or
+				equal flag G is clear or Z flag is set
+			
+
+
+[cols="10*"]
+|===
+10+h| BLES
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xD0
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the signed greater status flag is clear or the zero status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when (G=0 or Z=1) else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BLTS
+
+[[BLTS]]Branch on signed less than
+
+
+[cols="10*"]
+|===
+10+h| BLTS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x50
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) if the signed greater status or equal flag is not set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when G=0 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BMI
+
+[[BMI]]Branch on minus - take branch when N flag is set
+
+
+[cols="10*"]
+|===
+10+h| BMI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x30
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the negative status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BNE
+
+[[BNE]]Branch on not equal - take branch when Z flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| BNE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xD0
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the zero status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BOD
+
+[[BOD]]Branch on odd
+
+
+[cols="10*"]
+|===
+10+h| BOD
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x30
+| 65k
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) if the odd status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when O=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BPL
+
+[[BPL]]Branch on plus - take branch when N flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| BPL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x10
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the negative status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BRA
+
+[[BRA]]Synonyms: BRU
+
+Branch always - branch independent from any flags
+
+
+[cols="10*"]
+|===
+10+h| BRA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x80
+| cmos
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch (always) to the address given by adding the parameter to the address of the next operation (after the branch opcode). The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BSR
+
+[[BSR]]Branch subroutine - similar to JSR, but use relative addressing
+				similar to branch opcodes
+			
+
+
+[cols="10*"]
+|===
+10+h| BSR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x82
+| 65k
+| AM, RS
+| Relative (BSR)
+| 
+| 
+
+| 
+| 0x44
+| 65k
+| AM, RS
+| Relative 16bit (BSR)
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by the operand as computed similar to the branch opcodes. Store the return address (-1) on the stack to prepare for the RTS opcode.  Stack(SP--) &lt;= > NextPC-1 Stack(SP--) &lt;= &lt; NextPC-1 PC &lt;= NextPC + Operand 
+=== 65k
+
+ The AM prefix is evaluated by the relative addressing modes. Note that the RS prefix is used to determine the return address size on the stack, so it cannot be used as parameter width selector. Thus there are two opcodes to define 8-bit or 16-bit parameter width, using the AM prefix to make that 32- or 64-bit respectively.  Note that the UM prefix is not supported.  If the operand is not wide enough as required for an address, it is sign-extended.  The RS prefix determines the width of the return address put on the stack. Note that the BYTE width prefix denotes the natural width of the processor (respectively its current mode). This is the default.  The stack pointer used is the stack pointer of the current mode. 
+== BVC
+
+[[BVC]]Branch on overflow clear - take branch when V flag is cleared
+			
+
+
+[cols="10*"]
+|===
+10+h| BVC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x50
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the overflow status flag is clear. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== BVS
+
+[[BVS]]Branch on overflow set - take branch when V flag is set
+
+
+[cols="10*"]
+|===
+10+h| BVS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x70
+| 
+| RS
+| Relative
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Branch to the address given by adding the parameter to the address of the next operation (after the branch opcode) given the condition that the overflow status flag is set. The parameter is a signed 8-bit value, i.e. jump distances can be from -128 to +127.  PC &lt;= NextPC + Operand when N=1 else NextPC 
+=== 65k
+
+The RS prefix determines the width of the parameter, the default is 8-bit. With a 16-bit parameter the jump distances can be from -32768 to +32767 and so on. 
+== ADC
+
+[[ADC]]Add content of memory location to accumulator
+
+
+[cols="10*"]
+|===
+10+h| ADC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x61
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x63
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x65
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x69
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0x6d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x71
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x72
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0x73
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x75
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x77
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0x79
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x7d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x69
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Add the operand to the accumulator and store back in the accumulator. Set the flags from the result. Use Decimal or Binary add depending on whether the decimal mode status bis is set or not respectively.  AC, C, V &lt;= AC + Operand, C N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== ADD
+
+[[ADD]]Add content of memory location to accumulator without using
+				carry as input
+			
+
+
+[cols="10*"]
+|===
+10+h| ADD
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x05
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| EXT
+| 0x00
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Add the operand to the accumulator and store back in the accumulator. Set the flags from the result. Use Binary mode add only. Do not use the Carry flag as input.  AC, C, V &lt;= AC + Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== ADE
+
+[[ADE]]Add value to E register
+
+
+[cols="10*"]
+|===
+10+h| ADE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x25
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| EXT
+| 0x24
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== ADI
+
+[[ADI]]Add immediate value to a memory location
+
+
+[cols="10*"]
+|===
+10+h| ADI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x45
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage Address
+| 
+| 
+
+| EXT
+| 0x15
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage Address X-indexed
+| 
+| 
+
+| EXT
+| 0x35
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage indirect Y-indexed address
+| 
+| 
+
+| EXT
+| 0x65
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Absolute Address
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Add the immediate value following the opcode to the address given by the second operand. Carry is assumed cleared  Operand &lt;= Operand + #immediate  The AM and OF prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS determines the width of the operation. If a width larger than the immediate value is used, LE must be set to determine the extension type. Note that the default is RS=00, i.e. byte wide operation. 
+== ADQ
+
+[[ADQ]]Add immediate value to a register
+
+
+[cols="10*"]
+|===
+10+h| ADQ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x55
+| 65k
+| RS, LE, NF
+| Immediate to register
+| 
+| 
+
+| EXT
+| 0x75
+| 65k
+| RS, LE, NF
+| Immediate to register
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Add the immediate value following the opcode to the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.  The following table details the register selection from the uppermost three bits of the immediate value: ValueRegister000A001B010E011reserved100X101Y110Z111reserved  Register &lt;= Register + #immediate  RS determines the width of the operation. If a width larger than the immediate value is used, LE must be set to determine the extension type. Note that the default is RS=00, i.e. byte wide operation. 
+== AND
+
+[[AND]]Bitwise AND accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| AND
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x21
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x23
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x25
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x29
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0x2d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x31
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x32
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0x33
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x35
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x37
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0x39
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x3d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x29
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise AND the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC &amp; Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== ASL
+
+[[ASL]]Arithmetic Shift Left - shift accumulator one bit to the left,
+				shifting in zero in bit 0
+			
+
+
+[cols="10*"]
+|===
+10+h| ASL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x06
+| 
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x0a
+| 
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0x0e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x16
+| 
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x1e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x0f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x0d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in a zero from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= 0 N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== ASR
+
+[[ASR]]Arithmetic Shift Right - Similar to LSR, but shifts in the sign
+				of the value, not zero
+			
+
+
+[cols="10*"]
+|===
+10+h| ASR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x06
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| EXT
+| 0x0a
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+| EXT
+| 0x0e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0x16
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0x1e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x1f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x1d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the sign (uppermost bit) from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== BCN
+
+[[BCN]]Bit Count: counts 1-bits in AC or in given location, stores
+				number of 1-bits back in AC
+			
+
+
+[cols="10*"]
+|===
+10+h| BCN
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xb4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== BSW
+
+[[BSW]]Bit Swap: exchanges bit 0 with bit W-1, bit 1 with bit W-2 and
+				so on.
+			
+
+
+[cols="10*"]
+|===
+10+h| BSW
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xf4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== CMP
+
+[[CMP]]Compare accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CMP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc1
+| 
+| AM, OF, RS, UM, LE
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xc3
+| 65k
+| AM, OF, RS, UM, LE
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0xc5
+| 
+| AM, OF, RS, UM, LE
+| Zeropage
+| 
+| 
+
+| 
+| 0xc9
+| 
+| RS, LE
+| Immediate
+| 
+| 
+
+| 
+| 0xcd
+| 
+| AM, OF, RS, UM, LE
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xd1
+| 
+| AM, OF, RS, UM, LE
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xd2
+| cmos_indz
+| AM, OF, RS, UM, LE
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0xd3
+| 65k
+| AM, OF, RS, UM, LE
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0xd7
+| 65k
+| AM, OF, RS, UM, LE
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0xd5
+| 
+| AM, OF, RS, UM, LE
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xd9
+| 
+| AM, OF, RS, UM, LE
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xdd
+| 
+| AM, OF, RS, UM, LE
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xc9
+| 65k
+| RS, UM, LE
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the accumulator and set the flags appropriately. I.e. substract the operand from AC with an implicitely set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= Y - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  Note that the default is to use BYTE-wide operation without load extension. 
+== CPX
+
+[[CPX]]Compare X register with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CPX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe0
+| 
+| RS, LE
+| Immediate
+| 
+| 
+
+| 
+| 0xe4
+| 
+| AM, OF, RS, UM, LE
+| Zeropage
+| 
+| 
+
+| 
+| 0xec
+| 
+| AM, OF, RS, UM, LE
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0xe0
+| 65k
+| RS, UM, LE
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the X register and set the flags appropriately. I.e. substract the operand from X with an implicitly set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= X - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  Note that the default is to use BYTE-wide operation without load extension. 
+== CPY
+
+[[CPY]]Compare Y register with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CPY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc0
+| 
+| RS, LE
+| Immediate
+| 
+| 
+
+| 
+| 0xc4
+| 
+| AM, OF, RS, UM, LE
+| Zeropage
+| 
+| 
+
+| 
+| 0xcc
+| 
+| AM, OF, RS, UM, LE
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0xc0
+| 65k
+| RS, UM, LE
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the Y register and set the flags appropriately. I.e. substract the operand from Y with an implicitly set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= Y - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  Note that the default is to use BYTE-wide operation without load extension. 
+== CPZ
+
+[[CPZ]]Compare Z register with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| CPZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xd9
+| 65k
+| RS, LE
+| Immediate
+| 
+| 
+
+| EXT
+| 0xe6
+| 65k
+| AM, OF, RS, UM, LE
+| Zeropage
+| 
+| 
+
+| EXT
+| 0xdc
+| 65k
+| AM, OF, RS, UM, LE
+| Absolute 16bit
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Compare the operand with the Z register and set the flags appropriately. I.e. substract the operand from Z with an implicitly set carry in binary mode (even if decimal mode status bit is set), and set the flags from the result.  Tmp, C &lt;= Z - Operand, C=1 N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  Note that the default is to use BYTE-wide operation without load extension. 
+== DAD
+
+[[DAD]]Decimal adjust of a normal ADC of two BCD numbers.
+
+
+[cols="10*"]
+|===
+10+h| DAD
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x1a
+| 65k
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+Adjust the result of an ADC operation to BCD format. For example adding $14 and $08 with ADC (and C=0) gives $1c in normal mode. As an addition of two BCD numbers this should be $22 instead. DAD adjusts the non-BCD result back into a BCD result. DAD only works on the accumulator, i.e. takes the value from there and stores the result there. Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.  AC, C &lt;= DecimalAdjustAdd(AC) N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== DAS
+
+[[DAS]]Decimal adjust of a normal SBC of two BCD numbers.
+
+
+[cols="10*"]
+|===
+10+h| DAS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x3a
+| 65k
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+Adjust the result of an SBC operation to BCD format. For example substracting $08 from $24 with SBC (and C=1) gives $1c in normal mode. As a substraction of two BCD numbers this should be $16 instead. DAD adjusts the non-BCD result back into a BCD result. DAD only works on the accumulator, i.e. takes the value from there and stores the result there. Set the flags from the result. The decimal flag is ignored. C is set when the decimal adjust overflows. V is not affected.  AC, C &lt;= DecimalAdjustSub(AC) N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+== DEC
+
+[[DEC]]Decrement the content of a memory location by one
+
+
+[cols="10*"]
+|===
+10+h| DEC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc6
+| 
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x3a
+| cmos
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0xce
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xd6
+| 
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xde
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xcf
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xcd
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the operand by one, i.e. binary substract one. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Operand &lt;= Operand - 1 N &lt;= OperandC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== DEX
+
+[[DEX]]Decrement the content of the X register by one
+
+
+[cols="10*"]
+|===
+10+h| DEX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xca
+| 
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the X register by one (binary).  X &lt;= X-1 
+=== 65k
+
+ The RS prefix determines the width of the operation. The NF flag allows to perform the operation without setting flags. 
+== DEY
+
+[[DEY]]Decrement the Y register by one
+
+
+[cols="10*"]
+|===
+10+h| DEY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x88
+| 
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Decrement the Y register by one (binary).  Y &lt;= Y-1 
+=== 65k
+
+ The RS prefix determines the width of the operation. The NF flag allows to perform the operation without setting flags. 
+== DEZ
+
+[[DEZ]]Decrement Z register
+
+
+[cols="10*"]
+|===
+10+h| DEZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x38
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== EOR
+
+[[EOR]]Bitwise Exclusive-OR accumulator with content of memory
+				location
+			
+
+
+[cols="10*"]
+|===
+10+h| EOR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x41
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x43
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x45
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x49
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0x4d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x51
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x52
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0x53
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x55
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x57
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0x59
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x5d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x49
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise Exclusive-OR the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC ^ Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== EXT
+
+[[EXT]]Extend a value in AC from RS to the full size. Setting LE
+				defines the type of extension.
+			
+
+
+[cols="10*"]
+|===
+10+h| EXT
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xc4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== INC
+
+[[INC]]Increment the content of a memory location by one
+
+
+[cols="10*"]
+|===
+10+h| INC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe6
+| 
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x1a
+| cmos
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0xee
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xf6
+| 
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xfe
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xef
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xed
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the operand by one, i.e. binary add one. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Operand &lt;= Operand + 1 N &lt;= OperandC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== INV
+
+[[INV]]Invert AC, i.e. set AC to the 1s-complement of AC
+
+
+[cols="10*"]
+|===
+10+h| INV
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x54
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== INX
+
+[[INX]]Increment the content of the X register by one
+
+
+[cols="10*"]
+|===
+10+h| INX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe8
+| 
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the X register by one (binary).  X &lt;= X+1 
+=== 65k
+
+ The RS prefix determines the width of the operation. The NF flag allows to perform the operation without setting flags. 
+== INY
+
+[[INY]]Increment the content of the Y register by one
+
+
+[cols="10*"]
+|===
+10+h| INY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xc8
+| 
+| RS, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Increment the Y register by one (binary).  Y &lt;= Y+1 
+=== 65k
+
+ The RS prefix determines the width of the operation. The NF flag allows to perform the operation without setting flags. 
+== INZ
+
+[[INZ]]Increment Z register
+
+
+[cols="10*"]
+|===
+10+h| INZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x18
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== LSR
+
+[[LSR]]Logical Shift Right - shift accumulator one bit to the right,
+				shifting in zero in the highest bit
+			
+
+
+[cols="10*"]
+|===
+10+h| LSR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x46
+| 
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x4a
+| 
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0x4e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x56
+| 
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x5e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x4f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x4d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in a zero from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= 0 N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== NEG
+
+[[NEG]]negate AC, i.e. set AC to the 2s-complement of AC
+
+
+[cols="10*"]
+|===
+10+h| NEG
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xd4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== ORA
+
+[[ORA]]Bitwise OR accumulator with content of memory location
+
+
+[cols="10*"]
+|===
+10+h| ORA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x01
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x03
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x05
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x09
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0x0d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x11
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x12
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0x13
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x15
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x17
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0x19
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x1d
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x09
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Bitwise OR the accumulator with the operand and store back in the accumulator. Set the flags from the result.  AC &lt;= AC \| Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== RDL
+
+[[RDL]]Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			
+
+
+[cols="10*"]
+|===
+10+h| RDL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x26
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| EXT
+| 0x2a
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+| EXT
+| 0x2e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0x36
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0x3e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x3f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x3d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the sign (uppermost bit) of the original value from the right. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== RDL#
+
+[[RDL#]]Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			
+
+
+[cols="10*"]
+|===
+10+h| RDL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x18
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0x28
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0x38
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0x48
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0x58
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0x68
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0x78
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #8
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the sign (uppermost bit) of the original value from the right. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== RDR
+
+[[RDR]]Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			
+
+
+[cols="10*"]
+|===
+10+h| RDR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x66
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| EXT
+| 0x6a
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+| EXT
+| 0x6e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0x76
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0x7e
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x7f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x7d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in bit 0 (lowermost bit) of the original value from the left. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== RDR#
+
+[[RDR#]]Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			
+
+
+[cols="10*"]
+|===
+10+h| RDR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x88
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x98
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0xa8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0xb8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0xc8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0xd8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0xe8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0xf8
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #8
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in bit 0 (lowermost bit) of the original value from the left. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== ROL
+
+[[ROL]]Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x26
+| 
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x2a
+| 
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0x2e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x36
+| 
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x3e
+| 
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x2f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x2d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== ROL#
+
+[[ROL#]]Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x19
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0x29
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0x39
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0x49
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0x59
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0x69
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0x79
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #8
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== ROR
+
+[[ROR]]Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x66
+| ror
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x6a
+| ror
+| RS, NF
+| Accumulator
+| 
+| 
+
+| 
+| 0x6e
+| ror
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x76
+| ror
+| AM, OF, RS, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x7e
+| ror
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x6f
+| 65k
+| AM, OF, RS, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x6d
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the carry flag from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== ROR#
+
+[[ROR#]]Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			
+
+
+[cols="10*"]
+|===
+10+h| ROR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x89
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x99
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0xa9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0xb9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0xc9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0xd9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0xe9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0xf9
+| 65k
+| AM, OF, RS, UM, NF
+| Zeropage
+| #8
+| 
+
+|===
+
+
+=== Description
+
+ Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the carry flag from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
+== SBC
+
+[[SBC]]Substract content of memory location from accumulator
+
+
+[cols="10*"]
+|===
+10+h| SBC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xe1
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xe3
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0xe5
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0xe9
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0xed
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xf1
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xf2
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0xf3
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0xf5
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xf7
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0xf9
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xfd
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xe9
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Substract the operand from the accumulator and store back in the accumulator. Set the flags from the result. Use Decimal or Binary add depending on whether the decimal mode status bis is set or not respectively. C status flag is used as borrow.  AC, C, V &lt;= AC - Operand, C N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== SBE
+
+[[SBE]]Subtract value from E register
+
+
+[cols="10*"]
+|===
+10+h| SBE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xa5
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| EXT
+| 0xa4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+== SBI
+
+[[SBI]]Subtract immediate value from a memory location
+
+
+[cols="10*"]
+|===
+10+h| SBI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xc5
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage Address
+| 
+| 
+
+| EXT
+| 0x95
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage Address X-indexed
+| 
+| 
+
+| EXT
+| 0xb5
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Zeropage indirect Y-indexed address
+| 
+| 
+
+| EXT
+| 0xe5
+| 65k
+| AM, OF, RS, UM, LE, NF
+| Immediate to Absolute Address
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Subtract the immediate value following the opcode to the address given by the second operand. Carry is assumed set.  Operand &lt;= Operand - #immediate  The AM and OF prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS determines the width of the operation. If a width larger than the immediate value is used, LE must be set to determine the extension type. Note that the default is RS=00, i.e. byte wide operation. 
+== SBQ
+
+[[SBQ]]Subtract immediate value from a register
+
+
+[cols="10*"]
+|===
+10+h| SBQ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xd5
+| 65k
+| RS, LE, NF
+| Immediate to register
+| 
+| 
+
+| EXT
+| 0xf5
+| 65k
+| RS, LE, NF
+| Immediate to register
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Subtract the immediate value following the opcode from the register given by the uppermost three bits of the immediate value. Carry is assumed cleared.  The following table details the register selection from the uppermost three bits of the immediate value: ValueRegister000A001B010E011reserved100X101Y110Z111reserved  Register &lt;= Register - #immediate  RS determines the width of the operation. If a width larger than the immediate value is used, LE must be set to determine the extension type. Note that the default is RS=00, i.e. byte wide operation. 
+== SUB
+
+[[SUB]]Subtract content of memory location from accumulator without
+				using the carry flag as input
+			
+
+
+[cols="10*"]
+|===
+10+h| SUB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x85
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| EXT
+| 0x80
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Substract the operand from the accumulator and store back in the accumulator. Set the flags from the result. Use Binary mode add only. C status flag is not used as input, but set as borrow from the result.  AC, C, V &lt;= AC - Operand N &lt;= Tmp(7) Z &lt;= Z(Tmp)  For a handling of the V-flag please see http://www.6502.org/tutorials/vflag.html . 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS and LE together also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== SWP
+
+[[SWP]]swap upper and lower half of the operand
+			
+
+
+[cols="10*"]
+|===
+10+h| SWP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xe4
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Swap upper and lower part nibble / byte / word / long word of a byte / word / long / quad (longlong) operand in Accumulator 
+== BBR#
+
+[[BBR#]]Branch on bit reset
+
+
+[cols="10*"]
+|===
+10+h| BBR
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0xf
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #0
+| 
+
+| QUICK
+| 0x1f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #1
+| 
+
+| QUICK
+| 0x2f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #2
+| 
+
+| QUICK
+| 0x3f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #3
+| 
+
+| QUICK
+| 0x4f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #4
+| 
+
+| QUICK
+| 0x5f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #5
+| 
+
+| QUICK
+| 0x6f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #6
+| 
+
+| QUICK
+| 0x7f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #7
+| 
+
+|===
+
+
+=== Description
+
+ Examine the operand value, and check the given bit. If the bit is cleared, branch to the given (relative) address. 
+== BBS#
+
+[[BBS#]]Branch on bit set
+
+
+[cols="10*"]
+|===
+10+h| BBS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x8f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #0
+| 
+
+| QUICK
+| 0x9f
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #1
+| 
+
+| QUICK
+| 0xaf
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #2
+| 
+
+| QUICK
+| 0xbf
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #3
+| 
+
+| QUICK
+| 0xcf
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #4
+| 
+
+| QUICK
+| 0xdf
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #5
+| 
+
+| QUICK
+| 0xef
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #6
+| 
+
+| QUICK
+| 0xff
+| 65k
+| AM, OF, UM, RS
+| ZP with branch
+| #7
+| 
+
+|===
+
+
+=== Description
+
+ Examine the operand value, and check the given bit. If the bit is set, branch to the given (relative) address. 
+== BIT
+
+[[BIT]]Bitwise test with accumulator - AND the memory location with
+				the
+				accumulator, and set N (=bit 7), V (=bit 7), Z
+				(iff all bits
+				zero) flags from the result. In case of the accumulator addressing,
+				simply
+				set the flags from the
+				accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| BIT
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x24
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x2c
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x34
+| cmos
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x3c
+| cmos
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| 
+| 0x89
+| cmos
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| EXT
+| 0x89
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+| EXT
+| 0x34
+| 65k
+| RS, NF
+| Accumulator
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and set the N and V flags from the value (from the highest and next-to-highest bit respectively). Then take the operand, and AND it with the accumulator and evaluate the Z-flag.  N &lt;= Operand(7) V &lt;= Operand(6) Tmp &lt;= Operand &amp; AC Z &lt;= Z(Tmp) 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  The NF prefix allows to implement a read-modify-write AND of a memory location (without the usual and/store sequence) - without setting a flag though. 
+== RMB#
+
+[[RMB#]]Reset memory bit
+
+
+[cols="10*"]
+|===
+10+h| RMB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x7
+| 65k
+| 
+| Zeropage
+| #0
+| 
+
+| QUICK
+| 0x17
+| 65k
+| 
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x27
+| 65k
+| 
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0x37
+| 65k
+| 
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0x47
+| 65k
+| 
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0x57
+| 65k
+| 
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0x67
+| 65k
+| 
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0x77
+| 65k
+| 
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0x6
+| 65k
+| 
+| Absolute 16bit
+| #0
+| 
+
+| QUICK
+| 0x16
+| 65k
+| 
+| Absolute 16bit
+| #1
+| 
+
+| QUICK
+| 0x26
+| 65k
+| 
+| Absolute 16bit
+| #2
+| 
+
+| QUICK
+| 0x36
+| 65k
+| 
+| Absolute 16bit
+| #3
+| 
+
+| QUICK
+| 0x46
+| 65k
+| 
+| Absolute 16bit
+| #4
+| 
+
+| QUICK
+| 0x56
+| 65k
+| 
+| Absolute 16bit
+| #5
+| 
+
+| QUICK
+| 0x66
+| 65k
+| 
+| Absolute 16bit
+| #6
+| 
+
+| QUICK
+| 0x76
+| 65k
+| 
+| Absolute 16bit
+| #7
+| 
+
+| QUICK
+| 0x5
+| 65k
+| 
+| Zeropage indexed with X
+| #0
+| 
+
+| QUICK
+| 0x15
+| 65k
+| 
+| Zeropage indexed with X
+| #1
+| 
+
+| QUICK
+| 0x25
+| 65k
+| 
+| Zeropage indexed with X
+| #2
+| 
+
+| QUICK
+| 0x35
+| 65k
+| 
+| Zeropage indexed with X
+| #3
+| 
+
+| QUICK
+| 0x45
+| 65k
+| 
+| Zeropage indexed with X
+| #4
+| 
+
+| QUICK
+| 0x55
+| 65k
+| 
+| Zeropage indexed with X
+| #5
+| 
+
+| QUICK
+| 0x65
+| 65k
+| 
+| Zeropage indexed with X
+| #6
+| 
+
+| QUICK
+| 0x75
+| 65k
+| 
+| Zeropage indexed with X
+| #7
+| 
+
+|===
+
+
+=== Description
+
+ Examine the operand value, and clear the given bit in it. The Z status register bit is set to the previous value of the memory bit. 
+== SMB#
+
+[[SMB#]]Set memory bit
+
+
+[cols="10*"]
+|===
+10+h| SMB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x87
+| 65k
+| 
+| Zeropage
+| #0
+| 
+
+| QUICK
+| 0x97
+| 65k
+| 
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0xa7
+| 65k
+| 
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0xb7
+| 65k
+| 
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0xc7
+| 65k
+| 
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0xd7
+| 65k
+| 
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0xe7
+| 65k
+| 
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0xf7
+| 65k
+| 
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0x86
+| 65k
+| 
+| Absolute 16bit
+| #0
+| 
+
+| QUICK
+| 0x96
+| 65k
+| 
+| Absolute 16bit
+| #1
+| 
+
+| QUICK
+| 0xa6
+| 65k
+| 
+| Absolute 16bit
+| #2
+| 
+
+| QUICK
+| 0xb6
+| 65k
+| 
+| Absolute 16bit
+| #3
+| 
+
+| QUICK
+| 0xc6
+| 65k
+| 
+| Absolute 16bit
+| #4
+| 
+
+| QUICK
+| 0xd6
+| 65k
+| 
+| Absolute 16bit
+| #5
+| 
+
+| QUICK
+| 0xe6
+| 65k
+| 
+| Absolute 16bit
+| #6
+| 
+
+| QUICK
+| 0xf6
+| 65k
+| 
+| Absolute 16bit
+| #7
+| 
+
+| QUICK
+| 0x85
+| 65k
+| 
+| Zeropage indexed with X
+| #0
+| 
+
+| QUICK
+| 0x95
+| 65k
+| 
+| Zeropage indexed with X
+| #1
+| 
+
+| QUICK
+| 0xa5
+| 65k
+| 
+| Zeropage indexed with X
+| #2
+| 
+
+| QUICK
+| 0xb5
+| 65k
+| 
+| Zeropage indexed with X
+| #3
+| 
+
+| QUICK
+| 0xc5
+| 65k
+| 
+| Zeropage indexed with X
+| #4
+| 
+
+| QUICK
+| 0xd5
+| 65k
+| 
+| Zeropage indexed with X
+| #5
+| 
+
+| QUICK
+| 0xe5
+| 65k
+| 
+| Zeropage indexed with X
+| #6
+| 
+
+| QUICK
+| 0xf5
+| 65k
+| 
+| Zeropage indexed with X
+| #7
+| 
+
+|===
+
+
+=== Description
+
+ Examine the operand value, and set the given bit in it. The Z status register bit is set to the previous value of the memory bit. 
+== TMB#
+
+[[TMB#]]Test memory bit
+
+
+[cols="10*"]
+|===
+10+h| TMB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| QUICK
+| 0x3
+| 65k
+| AM, OF, UM
+| Zeropage
+| #0
+| 
+
+| QUICK
+| 0x13
+| 65k
+| AM, OF, UM
+| Zeropage
+| #1
+| 
+
+| QUICK
+| 0x23
+| 65k
+| AM, OF, UM
+| Zeropage
+| #2
+| 
+
+| QUICK
+| 0x33
+| 65k
+| AM, OF, UM
+| Zeropage
+| #3
+| 
+
+| QUICK
+| 0x43
+| 65k
+| AM, OF, UM
+| Zeropage
+| #4
+| 
+
+| QUICK
+| 0x53
+| 65k
+| AM, OF, UM
+| Zeropage
+| #5
+| 
+
+| QUICK
+| 0x63
+| 65k
+| AM, OF, UM
+| Zeropage
+| #6
+| 
+
+| QUICK
+| 0x73
+| 65k
+| AM, OF, UM
+| Zeropage
+| #7
+| 
+
+| QUICK
+| 0x2
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #0
+| 
+
+| QUICK
+| 0x12
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #1
+| 
+
+| QUICK
+| 0x22
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #2
+| 
+
+| QUICK
+| 0x32
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #3
+| 
+
+| QUICK
+| 0x42
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #4
+| 
+
+| QUICK
+| 0x52
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #5
+| 
+
+| QUICK
+| 0x62
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #6
+| 
+
+| QUICK
+| 0x72
+| 65k
+| AM, OF, UM
+| Absolute 16bit
+| #7
+| 
+
+| QUICK
+| 0x1
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #0
+| 
+
+| QUICK
+| 0x11
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #1
+| 
+
+| QUICK
+| 0x21
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #2
+| 
+
+| QUICK
+| 0x31
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #3
+| 
+
+| QUICK
+| 0x41
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #4
+| 
+
+| QUICK
+| 0x51
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #5
+| 
+
+| QUICK
+| 0x61
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #6
+| 
+
+| QUICK
+| 0x71
+| 65k
+| AM, OF, UM
+| Zeropage indexed with X
+| #7
+| 
+
+|===
+
+
+=== Description
+
+ Examine the operand value, and set the Z status register bit from the memory value. 
+== TRB
+
+[[TRB]]Test and Reset Bit - AND the memory location with the
+				accumulator, and set the Z flag from the result, then
+				CLEAR all bits
+				in the
+				memory location that are set in the accumulator.
+			
+
+
+[cols="10*"]
+|===
+10+h| TRB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x14
+| cmos
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x1c
+| cmos
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0x1c
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then clear all bits in the operand that are set in the accumulator (basically AND with the inverse of the accumulator), and store the value back.  The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-clear" primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write to make that operation atomic.  Tmp &lt;= operand &amp; AC Z &lt;= Z(Tmp) operand &lt; operand \| AC 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  The NF prefix allows to implement a read-modify-write AND of a memory location (without the usual and/store sequence) - without setting a flag though. 
+== TSB
+
+[[TSB]]Test and Set Bit - AND the memory location with the
+				accumulator,
+				and set the Z flag from the result, then SET all
+				bits in
+				the
+				memory location that are set in the accumulator.
+			
+
+
+[cols="10*"]
+|===
+10+h| TSB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x04
+| cmos
+| AM, OF, RS, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0x0c
+| cmos
+| AM, OF, RS, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0x0c
+| 65k
+| RS, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Take the operand, and AND it with the accumulator and evaluate the Z-flag. Then OR the operand with the accumulator and store the value back.  The use case for this opcode is the synchronization between processes and implements a variant of the "test-and-set" primitive. Thus this is a Read-Modify-Write operation and will trigger a Memory-Lock between the read and write to make that operation atomic.  Tmp &lt;= operand &amp; AC Z &lt;= Z(Tmp) operand &lt; operand \| AC 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  The NF prefix allows to implement a read-modify-write OR of a memory location (without the usual or/store sequence) - without setting a flag though. 
+== LDA
+
+[[LDA]]Load accumulator
+
+
+[cols="10*"]
+|===
+10+h| LDA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x02
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with Y
+| 
+| 
+
+| 
+| 0x42
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x47
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x62
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x67
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0xa1
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xa3
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0xa5
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0xa9
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0xad
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb1
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xb2
+| cmos_indz
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0xb3
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0xb5
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xb7
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0xb9
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xbd
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xa9
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+| EXT
+| 0x81
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x41
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x82
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Zeropage indirect 64bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x42
+| 65k
+| AM, OF, RS, LE, UM, NF
+| Absolute indirect 64bit indexed with byte offset
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the Accumulator. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) Y &lt;= Operand 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  Note that the default load extension is "zero-extended", to "not surprise" programmers.  The NF prefix lets the flags unmodified. 
+== LDB
+
+[[LDB]]Load B with an immediate value
+
+
+[cols="10*"]
+|===
+10+h| LDB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x59
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the B register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) B &lt;= Operand 
+=== 65k
+
+ The LE and RS prefixes are evaluated by the addressing modes.  Note that the default load extension is "sign-extended".  The NF prefix lets the flags unmodified. 
+== LDE
+
+[[LDE]]Load E with an immediate value
+
+
+[cols="10*"]
+|===
+10+h| LDE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x39
+| 65k
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the E register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) E &lt;= Operand 
+=== 65k
+
+ The LE and RS prefixes are evaluated by the addressing modes.  Note that the default load extension is "sign-extended".  The NF prefix lets the flags unmodified. 
+== LDX
+
+[[LDX]]Load X register
+
+
+[cols="10*"]
+|===
+10+h| LDX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa2
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0xa6
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0xae
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb6
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with Y
+| 
+| 
+
+| 
+| 0xbe
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xad
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the X register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) X &lt;= Operand 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  Note that the default load extension is "zero-extended", to "not surprise" programmers.  The NF prefix lets the flags unmodified. 
+== LDY
+
+[[LDY]]Load Y register
+
+
+[cols="10*"]
+|===
+10+h| LDY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa0
+| 
+| RS, LE, NF
+| Immediate
+| 
+| 
+
+| 
+| 0xa4
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage
+| 
+| 
+
+| 
+| 0xac
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0xb4
+| 
+| AM, OF, RS, LE, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0xbc
+| 
+| AM, OF, RS, LE, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xa0
+| 65k
+| RS, LE, UM, NF
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Read the operand and store it in the Y register. Set the flags appropriately.  N &lt;= Operand(7) Z &lt;= Z(Operand) Y &lt;= Operand 
+=== 65k
+
+ The AM, OF, LE and RS prefixes are evaluated by the addressing modes. The UM prefix determines whether the operand resides in user space or not.  Note that the default load extension is "zero-extended", to "not surprise" programmers.  The NF prefix lets the flags unmodified. 
+== LDZ
+
+[[LDZ]]Load Z register with a value
+
+
+[cols="10*"]
+|===
+10+h| LDZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x99
+| cmos_indz
+| 
+| Immediate
+| 
+| 
+
+| EXT
+| 0xbc
+| cmos_indz
+| 
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0xac
+| cmos_indz
+| 
+| Absolute 16bit
+| 
+| 
+
+|===
+
+
+== LEA
+
+[[LEA]]Load Effective Address: compute the effective address and store
+				it in the E (effective Address) register (always
+				full width)
+			
+
+
+[cols="10*"]
+|===
+10+h| LEA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xf6
+| 65k
+| AM, OF, UM, NF
+| Zeropage indexed with Y
+| 
+| 
+
+| EXT
+| 0x61
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 64bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x71
+| 65k
+| AM, OF, UM, NF
+| Absolute indexed with X indirect 64bit
+| 
+| 
+
+| EXT
+| 0x21
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x31
+| 65k
+| AM, OF, UM, NF
+| Absolute indexed with X indirect 16bit
+| 
+| 
+
+| EXT
+| 0x11
+| 65k
+| AM, OF, UM, NF
+| Relative
+| 
+| 
+
+| EXT
+| 0xa1
+| 65k
+| AM, OF, UM, NF
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| EXT
+| 0x46
+| 65k
+| AM, OF, UM, NF
+| Zeropage
+| 
+| 
+
+| EXT
+| 0xae
+| 65k
+| AM, OF, UM, NF
+| Absolute 16bit
+| 
+| 
+
+| EXT
+| 0xb1
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xb2
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| EXT
+| 0x32
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 16bit
+| 
+| 
+
+| EXT
+| 0xf2
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| EXT
+| 0x72
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 64bit
+| 
+| 
+
+| EXT
+| 0x56
+| 65k
+| AM, OF, UM, NF
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0xbf
+| 65k
+| AM, OF, UM, NF
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xbe
+| 65k
+| AM, OF, UM, NF
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x12
+| 65k
+| AM, OF, UM, NF
+| Relative 16bit
+| 
+| 
+
+| EXT
+| 0xe1
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xf1
+| 65k
+| AM, OF, UM, NF
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| EXT
+| 0xa2
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0xe2
+| 65k
+| AM, OF, UM, NF
+| Zeropage indirect 64bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x22
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x62
+| 65k
+| AM, OF, UM, NF
+| Absolute indirect 64bit indexed with byte offset
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Load the effective address given by the addressing mode into the E register (without accessing the memory pointed to by the parameter).  E &lt;= EffectiveAddress 
+=== 65k
+
+ The value stored in E is always in the natural (full) width of the processor.  The AM and OF prefixes are interpreted as usually when computing the address.  The memory and stack pointers used are the current ones when the user mode prefix is not set. When the user mode prefix is set in hypervisor mode, the memory and stack pointer is that of the user mode. When set in user mode an ABORT is triggered.  With this approach you can use this in trap handling:  LEA.U S,$08 ; load user space address of offset 8 on the user mode stack LDA.U (E) ; load the value from user space 
+== STA
+
+[[STA]]Store the content of the accumulator into a memory location
+			
+
+
+[cols="10*"]
+|===
+10+h| STA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x22
+| 65k
+| AM, OF, RS, UM
+| Zeropage indexed with Y
+| 
+| 
+
+| 
+| 0x81
+| 
+| AM, OF, RS, UM
+| Zeropage indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0x83
+| 65k
+| AM, OF, RS, UM
+| Zeropage indexed with X indirect 64bit
+| 
+| 
+
+| 
+| 0x85
+| 
+| AM, OF, RS, UM
+| Zeropage
+| 
+| 
+
+| 
+| 0x8d
+| 
+| AM, OF, RS, UM
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x91
+| 
+| AM, OF, RS, UM
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x92
+| cmos_indz
+| AM, OF, RS, UM
+| Zeropage indirect 16bit indexed with Z
+| 
+| 
+
+| 
+| 0x93
+| 65k
+| AM, OF, RS, UM
+| Zeropage indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0x95
+| 
+| AM, OF, RS, UM
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x97
+| 65k
+| AM, OF, RS, UM
+| Zeropage indirect 64bit indexed with Z
+| 
+| 
+
+| 
+| 0x99
+| 
+| AM, OF, RS, UM
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| 
+| 0x9d
+| 
+| AM, OF, RS, UM
+| Absolute 16bit indexed with X
+| 
+| 
+
+| 
+| 0xc2
+| 65k
+| AM, OF, RS, UM
+| Absolute indirect 16bit indexed with Y
+| 
+| 
+
+| 
+| 0xc7
+| 65k
+| AM, OF, RS, UM
+| Absolute indirect 64bit indexed with Y
+| 
+| 
+
+| 
+| 0xe2
+| 65k
+| AM, OF, RS, UM
+| Absolute indexed with X indirect 16bit
+| 
+| 
+
+| 
+| 0xe7
+| 65k
+| AM, OF, RS, UM
+| Absolute indexed with X indirect 64bit
+| 
+| 
+
+| EXT
+| 0x8d
+| 65k
+| RS, UM
+| E indirect
+| 
+| 
+
+| EXT
+| 0x91
+| 65k
+| AM, OF, RS, UM
+| Zeropage indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x51
+| 65k
+| AM, OF, RS, UM
+| Absolute indirect 16bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x92
+| 65k
+| AM, OF, RS, UM
+| Zeropage indirect 64bit indexed with byte offset
+| 
+| 
+
+| EXT
+| 0x52
+| 65k
+| AM, OF, RS, UM
+| Absolute indirect 64bit indexed with byte offset
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the accumulator into the address given by the operand.  Operand &lt;= A 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== STI
+
+[[STI]]Store immediate byte value into a memory location
+
+
+[cols="10*"]
+|===
+10+h| STI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xd1
+| 65k
+| AM, OF, RS, UM, LE
+| Immediate to Zeropage Address
+| 
+| 
+
+| EXT
+| 0x01
+| 65k
+| AM, OF, RS, UM, LE
+| Immediate to Absolute Address
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the immediate byte value following the opcode into the address given by the second operand.  Operand &lt;= #immediate  The AM and OF prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS determines the width of the operation. If a width larger than the immediate value is used, LE must be set to determine the extension type. Note that the default is RS=00, i.e. byte wide operation. 
+== STX
+
+[[STX]]Store the content of the X register to memory.
+
+
+[cols="10*"]
+|===
+10+h| STX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x86
+| 
+| AM, OF, RS, UM
+| Zeropage
+| 
+| 
+
+| 
+| 0x8e
+| 
+| AM, OF, RS, UM
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x96
+| 
+| AM, OF, RS, UM
+| Zeropage indexed with Y
+| 
+| 
+
+| EXT
+| 0xaf
+| 65k
+| AM, OF, RS, UM
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x9d
+| 65k
+| RS, UM
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the content of the X register into the address given by the operand.  Operand &lt;= A 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== STY
+
+[[STY]]Store the content of the Y register to memory.
+
+
+[cols="10*"]
+|===
+10+h| STY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x84
+| 
+| AM, OF, RS, UM
+| Zeropage
+| 
+| 
+
+| 
+| 0x8c
+| 
+| AM, OF, RS, UM
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x94
+| 
+| AM, OF, RS, UM
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0x9e
+| 65k
+| AM, OF, RS, UM
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x8c
+| 65k
+| RS, UM
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store the content of the Y register into the address given by the operand.  Operand &lt;= A 
+=== 65k
+
+ The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== STZ
+
+[[STZ]]Store zero (or Z-register) into a memory location
+
+
+[cols="10*"]
+|===
+10+h| STZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x64
+| cmos
+| AM, OF, RS, UM
+| Zeropage
+| 
+| 
+
+| 
+| 0x74
+| cmos
+| AM, OF, RS, UM
+| Zeropage indexed with X
+| 
+| 
+
+| 
+| 0x9c
+| cmos
+| AM, OF, RS, UM
+| Absolute 16bit
+| 
+| 
+
+| 
+| 0x9e
+| cmos
+| AM, OF, RS, UM
+| Absolute 16bit indexed with X
+| 
+| 
+
+| EXT
+| 0x9f
+| 65k
+| AM, OF, RS, UM
+| Absolute 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0x9c
+| 65k
+| RS, UM
+| E indirect
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Store zero into the address given by the operand.  Operand &lt;= 0 
+=== 65k
+
+Instead of zero, write the value of the Z register.  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space.  RS also determine the width of the operation. Note that the default is to use BYTE-wide operation without load extension. 
+== PHA
+
+[[PHA]]Push contents of the accumulator onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x48
+| 
+| RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the accumulator on the stack.  Stack(SP--) &lt;= A 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHB
+
+[[PHB]]Push B onto stack (full width)
+
+
+[cols="10*"]
+|===
+10+h| PHB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x48
+| 65k
+| UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the B register on the stack.  Stack(SP--) &lt;= B 
+=== 65k
+
+ The value stored is always in the natural width of the processor (mode).  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHE
+
+[[PHE]]Push E onto stack (always full width)
+
+
+[cols="10*"]
+|===
+10+h| PHE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x08
+| 65k
+| UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the E register on the stack.  Stack(SP--) &lt;= E 
+=== 65k
+
+ The value stored is always in the natural width of the processor (mode).  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHI
+
+[[PHI]]Push immediate value onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xd2
+| 65k
+| RS, LE
+| Immediate
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the immediate value following the opcode on the stack.  Stack(SP--) &lt;= #operand  The RS prefix determines the width of the value as written on the stack. If LE is set, then RS determines the width of the operand following the opcode, the value is then pushed in full register width after Load Expansion.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHM
+
+[[PHM]]Push contents of multiple registers onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHM
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x44
+| 65k
+| RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of multiple registers on the stack.  Stack(SP--) &lt;= A Stack(SP--) &lt;= B Stack(SP--) &lt;= E Stack(SP--) &lt;= X Stack(SP--) &lt;= Y Stack(SP--) &lt;= Z  The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHP
+
+[[PHP]]Push processor status register onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x08
+| 
+| UM, RS
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the standard status register on the stack.  Stack(SP--) &lt;= Status 
+=== 65k
+
+ The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered.  The not-extended bit is set (so the status is compatible with the 6502 and would denote a standard stack frame) as long as RS is 00.  If RS indicates a word-wide push, the G and OE flags of the extended status registers are pushed (with all other bits zero) before the standard status register. The standard status register has the not-extended bit cleared in this case.  RS set to long or quad lengths are illegal and trap into an ABORT. 
+== PHX
+
+[[PHX]]Push contents of the X register onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xda
+| cmos
+| RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the X register on the stack.  Stack(SP--) &lt;= X 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHY
+
+[[PHY]]Push contents of the Y register onto the stack
+
+
+[cols="10*"]
+|===
+10+h| PHY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x5a
+| cmos
+| RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of the Y register on the stack.  Stack(SP--) &lt;= Y 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PHZ
+
+[[PHZ]]Push Z Register onto stack
+
+
+[cols="10*"]
+|===
+10+h| PHZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x5a
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== PLA
+
+[[PLA]]Pull the contents of the accumulator from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x68
+| 
+| RS, LE, UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the accumulator from the stack.  A &lt;= Stack(++SP) 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLB
+
+[[PLB]]Pull B from stack (full width)
+
+
+[cols="10*"]
+|===
+10+h| PLB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x68
+| 65k
+| UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the B register from the stack.  B &lt;= Stack(++SP) 
+=== 65k
+
+ The value retrieved is always in the natural width of the processor (mode).  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLE
+
+[[PLE]]Pull E from stack (full width)
+
+
+[cols="10*"]
+|===
+10+h| PLE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x28
+| 65k
+| UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the E register from the stack.  E &lt;= Stack(++SP) 
+=== 65k
+
+ The value retrieved is always in the natural width of the processor (mode).  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLM
+
+[[PLM]]Pull contents of multiple registers from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLM
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x64
+| 65k
+| RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Push the content of multiple registers on the stack.  Z &lt;= Stack(++SP) Y &lt;= Stack(++SP) X &lt;= Stack(++SP) E &lt;= Stack(++SP) B &lt;= Stack(++SP) A &lt;= Stack(++SP)  The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is read from user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLP
+
+[[PLP]]Pull processor status register from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x28
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the standard status register on the stack.  Status &lt;= Stack(++SP) 
+=== 65k
+
+ The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered.  When the status register has bit 5 (the not-extended bit) set, then PLP reads the standard status register only.  When the status register has bit 5 cleared, it reads a second byte from the stack and restores the G and OE flags from that byte into the extended status register. (Note that this introduces a slight incompatibility with the 6502. So this behaviour may change to require the RS width set to word.) 
+== PLX
+
+[[PLX]]Pull the contents of the X register from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xfa
+| cmos
+| RS, LE, UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the X register from the stack.  X &lt;= Stack(++SP) 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLY
+
+[[PLY]]Pull the contents of the Y register from the stack
+
+
+[cols="10*"]
+|===
+10+h| PLY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x7a
+| cmos
+| RS, LE, UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Pull the value of the Y register from the stack.  Y &lt;= Stack(++SP) 
+=== 65k
+
+ The RS prefix determines the width of the accumulator value as written on the stack.  The stack pointer used is the one of the current stack if the UM prefix is not set. If UM is set and the opcode is executed in hypervisor mode, the stack pointer used is the user mode stack pointer and the value is stored in user mode memory. If executed in user mode with UM set an ABORT exception is triggered. 
+== PLZ
+
+[[PLZ]]Pull Z Register from stack
+
+
+[cols="10*"]
+|===
+10+h| PLZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x7a
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== PRB
+
+[[PRB]]Push and Replace Base register: Push base offset register to
+				the
+				stack, then transfer E-register to the base
+				register
+			
+
+
+[cols="10*"]
+|===
+10+h| PRB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0x58
+| 65k
+| UM, NF
+| Implied
+| 
+| 
+
+|===
+
+
+== TAB
+
+[[TAB]]Transfer AC to B register
+
+
+[cols="10*"]
+|===
+10+h| TAB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x01
+| 65k
+| NF, LE, RS
+| Implied
+| 
+| 
+
+|===
+
+
+== TAX
+
+[[TAX]]Transfer the contents of accumulator into the X register
+
+
+[cols="10*"]
+|===
+10+h| TAX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xaa
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+| TXFER
+| 0x04
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the accumulator to the X register  X &lt;= A 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags. 
+== TAY
+
+[[TAY]]Transfer the contents of accumulator into the Y register
+
+
+[cols="10*"]
+|===
+10+h| TAY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xa8
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+| TXFER
+| 0x05
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the accumulator to the Y register  Y &lt;= A 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags. 
+== TAZ
+
+[[TAZ]]Transfer AC to Z Register
+
+
+[cols="10*"]
+|===
+10+h| TAZ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x06
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== TEA
+
+[[TEA]]Transfer E register to Accumulator
+
+
+[cols="10*"]
+|===
+10+h| TEA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x20
+| 65k
+| NF
+| Implied
+| 
+| 
+
+|===
+
+
+== TEB
+
+[[TEB]]Transfer E to B register (full width)
+
+
+[cols="10*"]
+|===
+10+h| TEB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x21
+| 65k
+| NF
+| Implied
+| 
+| 
+
+|===
+
+
+== TPA
+
+[[TPA]]Transfer Program counter to Accumulator
+
+
+[cols="10*"]
+|===
+10+h| TPA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0xd0
+| 65k
+| NF
+| Implied
+| 
+| 
+
+|===
+
+
+== TSX
+
+[[TSX]]Transfer the contents of the stack pointer into the X register
+				(Note: needs RS to keep compatibility with 6502)
+			
+
+
+[cols="10*"]
+|===
+10+h| TSX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xba
+| 
+| UM, NF, RS, LE
+| Implied
+| 
+| 
+
+| TXFER
+| 0x74
+| 
+| UM, NF, RS, LE
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the stack pointer to the X register  X &lt;= S 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags.  The stack pointer used is the current stack pointer. If the user mode bit is set in hypervisor mode, the stack pointer used is the user mode stack pointer. If the user mode bit is set in user mode, an ABORT exception is triggered. 
+== TSY
+
+[[TSY]]Transfer stack pointer to Y
+
+
+[cols="10*"]
+|===
+10+h| TSY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x75
+| 65k
+| NF, UM, RS, LE
+| Implied
+| 
+| 
+
+|===
+
+
+== TXA
+
+[[TXA]]Transfer the contents of the X register into the accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| TXA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x8a
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+| TXFER
+| 0x40
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the X register to the accumulator  A &lt;= X 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags. 
+== TXS
+
+[[TXS]]Transfer the contents of X register into the stack pointer
+				(Note: needs RS to keep compatibility with 6502)
+			
+
+
+[cols="10*"]
+|===
+10+h| TXS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x9a
+| 
+| RS, LE, UM
+| Implied
+| 
+| 
+
+| TXFER
+| 0x47
+| 
+| RS, LE, UM
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the X register to the stack pointer.  S &lt;= X 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags.  The stack pointer used is the current stack pointer. If the user mode bit is set in hypervisor mode, the stack pointer used is the user mode stack pointer. If the user mode bit is set in user mode, an ABORT exception is triggered. 
+== TYA
+
+[[TYA]]Transfer the contents of the Y register into the accumulator
+			
+
+
+[cols="10*"]
+|===
+10+h| TYA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x98
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+| TXFER
+| 0x50
+| 
+| RS, LE, NF
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Transfer the value of the Y register to the accumulator  A &lt;= Y 
+=== 65k
+
+ The RS and LE prefixes determines the width of the operation. LE determines how to extend the value loaded to the full (natural) width. The NF flag allows to perform the operation without setting flags. 
+== TYS
+
+[[TYS]]Transfer Y to stack pointer
+
+
+[cols="10*"]
+|===
+10+h| TYS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x57
+| 65k
+| LE, RS, UM
+| Implied
+| 
+| 
+
+|===
+
+
+== TZA
+
+[[TZA]]Transfer Z Register to AC
+
+
+[cols="10*"]
+|===
+10+h| TZA
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x60
+| cmos_indz
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== XAB
+
+[[XAB]]eXchange A register with B register. Always done full width, no
+				flags set.
+			
+
+
+[cols="10*"]
+|===
+10+h| XAB
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x81
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== XAX
+
+[[XAX]]eXchange AC with X register. Always done full width, no flags set.
+			
+
+
+[cols="10*"]
+|===
+10+h| XAX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x84
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== XAY
+
+[[XAY]]eXchange AC with Y register. Always done full width, no flags set.
+			
+
+
+[cols="10*"]
+|===
+10+h| XAY
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0x85
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== XYX
+
+[[XYX]]eXchange X with Y register. Always done full width, no flags set.
+			
+
+
+[cols="10*"]
+|===
+10+h| XYX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0xc5
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== XZX
+
+[[XZX]]eXchange X with Z register. Always done full width, no flags set.
+			
+
+
+[cols="10*"]
+|===
+10+h| XZX
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| TXFER
+| 0xc6
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== SCC
+
+[[SCC]]Skip on carry clear - skip next opcode when C flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| SCC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x9f
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the carry status flag is cleared. 
+== SCS
+
+[[SCS]]Synonyms: SGE
+
+Skip on carry set - skip next opcode when C flag is set
+
+
+[cols="10*"]
+|===
+10+h| SCS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xbf
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the carry status flag is set. 
+== SEQ
+
+[[SEQ]]Skip on equal - skip next opcode when Z flag is set
+
+
+[cols="10*"]
+|===
+10+h| SEQ
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xff
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the zero status flag is set. 
+== SMI
+
+[[SMI]]Skip on minus - skip next opcode when N flag is set
+
+
+[cols="10*"]
+|===
+10+h| SMI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x3f
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the negative status flag is set. 
+== SNE
+
+[[SNE]]Skip on not equal - skip next opcode when Z flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| SNE
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xdf
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the zero status flag is cleared. 
+== SPL
+
+[[SPL]]Skip on plus - skip next opcode when N flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| SPL
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x1f
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the negative status flag is clear. 
+== SVC
+
+[[SVC]]Skip on overflow clear - skip next opcode when V flag is cleared
+
+
+[cols="10*"]
+|===
+10+h| SVC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x5f
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the overflow status flag is cleared. 
+== SVS
+
+[[SVS]]Skip on overflow set - skip next opcode when V flag is set
+
+
+[cols="10*"]
+|===
+10+h| SVS
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x7f
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Skip the next operation (after the skip opcode) given the condition that the overflow status flag is set. 
+== CLC
+
+[[CLC]]Clear the C flag
+
+
+[cols="10*"]
+|===
+10+h| CLC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x18
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the carry status flag. 
+== CLD
+
+[[CLD]]Clear the decimal (D) flag
+
+
+[cols="10*"]
+|===
+10+h| CLD
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xd8
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the decimal mode status flag. 
+== CLI
+
+[[CLI]]Clear the interrupt (I) flag
+
+
+[cols="10*"]
+|===
+10+h| CLI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x58
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the interrupt status flag. 
+=== 65k
+
+ Note that the interrupt handling is much more sophisticated in the 65k. In hypervisor mode setting the interrupt status flag disables all interrupts except the non-maskable interrupt. In user mode setting the interrupt status flag disables all "user level interrupts", but hypervisor interrupts are served. The interrupt level for user level interrupts can be configured in a configuration register. 
+== CLV
+
+[[CLV]]Clear the overflow (V) flag
+
+
+[cols="10*"]
+|===
+10+h| CLV
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xb8
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Clear the overflow status flag. 
+== NEC
+
+[[NEC]]Negate the carry flag
+			
+
+
+[cols="10*"]
+|===
+10+h| NEC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xea
+| 65k
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+== SEC
+
+[[SEC]]Set the C flag
+
+
+[cols="10*"]
+|===
+10+h| SEC
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x38
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the carry status flag. 
+== SED
+
+[[SED]]Set the decimal (D) flag
+
+
+[cols="10*"]
+|===
+10+h| SED
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xf8
+| bcd
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the decimal mode status flag. 
+== SEI
+
+[[SEI]]Set the interrupt (I) flag
+
+
+[cols="10*"]
+|===
+10+h| SEI
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0x78
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ Set the interrupt status flag. 
+=== 65k
+
+ Note that the interrupt handling is much more sophisticated in the 65k. In hypervisor mode setting the interrupt status flag disables all interrupts except the non-maskable interrupt. In user mode setting the interrupt status flag disables all "user level interrupts", but hypervisor interrupts are served. The interrupt level for user level interrupts can be configured in a configuration register. 
+== CSW
+
+[[CSW]]Compare and SWap - compare memory with AC, and if matches, set to value from XR. AC is loaded with the value from the memory location.
+			
+
+
+[cols="10*"]
+|===
+10+h| CSW
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| EXT
+| 0xcc
+| 65k
+| UM, RS
+| E indirect
+| 
+| 
+
+| EXT
+| 0xc6
+| 65k
+| UM, RS, AM
+| Zeropage
+| 
+| 
+
+| EXT
+| 0xd6
+| 65k
+| UM, RS, AM
+| Zeropage indexed with X
+| 
+| 
+
+| EXT
+| 0xc1
+| 65k
+| UM, RS, AM
+| Zeropage indirect 16bit indexed with Y
+| 
+| 
+
+| EXT
+| 0xde
+| 65k
+| UM, RS, AM
+| Absolute 16bit indexed with X
+| 
+| 
+
+|===
+
+
+== NOP
+
+[[NOP]]No operation
+
+
+[cols="10*"]
+|===
+10+h| NOP
+
+h| Page
+h| Opcode
+h| Class
+h| Prefixes
+h| Addressing Mode
+h| Bit/Offset/Num
+
+| 
+| 0xea
+| 
+| 
+| Implied
+| 
+| 
+
+|===
+
+
+=== Description
+
+ No Operation. 

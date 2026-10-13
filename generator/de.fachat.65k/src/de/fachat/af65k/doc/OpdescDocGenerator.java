@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import de.fachat.af65k.doc.html.HtmlWriter;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.Category;
 import de.fachat.af65k.model.objs.Doc;
@@ -55,7 +54,7 @@ public class OpdescDocGenerator {
 		cpu = mycpu;
 	}
 
-	public void generateOperationtable(HtmlWriter wr, String fclass, boolean hasPrefix) {
+	public void generateOperationtable(DocWriter wr, String fclass, boolean hasPrefix) {
 
 		Map<String, CodeMapEntry[]> opcodes = cpu.getOpcodeMap(fclass, false);
 

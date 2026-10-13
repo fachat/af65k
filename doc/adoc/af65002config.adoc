@@ -1,0 +1,154 @@
+= 65002 Configuration Registers
+
+This section describes the configuration registers of the 65002. Please note that more detail is available in the respective feature page related to the configuration register.
+
+Note that there are two opcodes that allow reading and writing the processor configuration registers, LCR, SCR. Also there is BCR, a BIT of AC with the value of the processor configuration register.
+
+[[cr]]
+== Processor Configuration Registers
+
+The configuration value registers are basically constant values that the program can query from the processor. These values can then be used by the program to identify the processor, resp. adapt itself to the processor features present. They also allow to peek into some of the runtime registers, and allow to control e.g. interrupt handling.
+
+The following processor configuration registers are defined (note narrow values are always zero-extended):
+
+[cols="6*"]
+|===
+h| Register#
+h| rw/ro
+h| global/per core
+h| Name
+h| Width
+h| Value
+
+| $00
+| ro
+| global
+| VENDOR
+| 16 bit
+| Defines the vendor of the processor. Currently defined are: 
+[cols="2*"]
+|===
+| $AF
+| A. Fachat
+
+|===
+
+
+
+| $01
+| ro
+| per core
+| MC_MYCORE
+| W bit
+| Number of the core executing the load
+
+| $02
+| ro
+| global
+| MC_NCORE
+| W bit
+| Number of cores
+
+| $03
+| ro
+| global
+| MC_ACTCORE
+| W bit
+| Bitmask of active cores, can be set to start cores and cleared to stop them (except the own core)
+
+| $10
+| ro
+| per core
+| ST_SR
+| 16 bit
+| Status register
+
+| $11
+| rw
+| global
+| ST_IMR
+| 8 bit
+| interrupt mask register
+
+| $12
+| ro
+| global
+| ST_ISR
+| 8 bit
+| interrupt status register
+
+| $13
+| ro
+| global
+| ST_EIM
+| 8 bit
+| effective interrupt mask register
+
+| $14
+| ro
+| per core
+| ST_SP
+| 8 bit
+| stack pointer (hypervisor)
+
+| $15
+| ro
+| per core
+| ST_USP
+| 8 bit
+| stack pointer (user mode)
+
+| $16
+| rw
+| per core
+| ST_MH
+| 8 bit
+| match code (hypervisor)
+
+| $17
+| rw
+| per core
+| ST_MU
+| 8 bit
+| match code (user mode)
+
+| $20
+| rw
+| global
+| ST_IV
+| W bit
+| Interrupt vector base register
+
+| $21
+| rw
+| global
+| ST_AV
+| W bit
+| Abort vector base register
+
+| $22
+| rw
+| global
+| ST_TV
+| W bit
+| Trap vector base register
+
+| $30
+| ro
+| global
+| MM_CONT
+| 8 bit
+| Number of memory management containers
+
+|===
+
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
+'''
+
+Last updated 2012-04-23.
+
