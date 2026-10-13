@@ -130,8 +130,8 @@
         The quad (longlong) indirect addressing modes
         are not reached. Thus the indirect opcodes are mirrored, and extended from long to quad (longlong) indirect
         addressing modes.
-        Row LSB 1 is mirrored thus to row LSB 3, as well as row LSB 2 is mirrored to LSB 7.
-        These values are marked with a green background in the table. The LSB 3 and 7 rows then change from
+        Column LSB 1 is mirrored thus to column LSB 3, as well as column LSB 2 is mirrored to LSB 7.
+        These values are marked with a green background in the table. The LSB 3 and 7 columns then change from
         (normal = word) indirect addressing modes to quad (longlong) indirect addressing modes.
         </p><p>
         Also note that there a are no indirect addressing modes that take a long or quad (longlong) value 
