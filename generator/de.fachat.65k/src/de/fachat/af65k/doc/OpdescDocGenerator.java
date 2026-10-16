@@ -173,7 +173,7 @@ public class OpdescDocGenerator {
 					wr.startTable(optable);
 					wr.startTableRow();
 					Map<String, String> atts = new HashMap<String, String>();
-					atts.put("colspan", "10");
+					atts.put("colspan", "6");
 					wr.startTableHeaderCell(atts);
 					wr.print(op.getName());
 					wr.startTableRow();
@@ -280,7 +280,6 @@ public class OpdescDocGenerator {
 		wr.print(am.getName());
 		wr.startTableCell();
 		wr.print(comment);
-		wr.startTableCell();
 	}
 
 }

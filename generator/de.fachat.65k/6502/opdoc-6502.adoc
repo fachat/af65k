@@ -137,9 +137,9 @@
 [[BRK]]Starts the break routine.
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BRK
+6+h| BRK
 
 h| Page
 h| Opcode
@@ -151,7 +151,6 @@ h| Bit/Offset/Num
 | 0x00
 | 
 | Immediate
-| 
 | 
 
 |===
@@ -165,9 +164,9 @@ h| Bit/Offset/Num
 [[JMP]]Jump to new code address
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| JMP
+6+h| JMP
 
 h| Page
 h| Opcode
@@ -180,13 +179,11 @@ h| Bit/Offset/Num
 | 
 | Address
 | 
-| 
 
 | 
 | 0x6c
 | 
 | Absolute indirect 16bit
-| 
 | 
 
 |===
@@ -202,9 +199,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| JSR
+6+h| JSR
 
 h| Page
 h| Opcode
@@ -216,7 +213,6 @@ h| Bit/Offset/Num
 | 0x20
 | 
 | Address
-| 
 | 
 
 |===
@@ -230,9 +226,9 @@ h| Bit/Offset/Num
 [[RTI]]Return from interrupt
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| RTI
+6+h| RTI
 
 h| Page
 h| Opcode
@@ -244,7 +240,6 @@ h| Bit/Offset/Num
 | 0x40
 | 
 | Implied
-| 
 | 
 
 |===
@@ -258,9 +253,9 @@ h| Bit/Offset/Num
 [[RTS]]Return from subroutine - read return address from stack
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| RTS
+6+h| RTS
 
 h| Page
 h| Opcode
@@ -272,7 +267,6 @@ h| Bit/Offset/Num
 | 0x60
 | 
 | Implied
-| 
 | 
 
 |===
@@ -289,9 +283,9 @@ Branch on carry clear - take branch when C flag is cleared
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BCC
+6+h| BCC
 
 h| Page
 h| Opcode
@@ -303,7 +297,6 @@ h| Bit/Offset/Num
 | 0x90
 | 
 | Relative
-| 
 | 
 
 |===
@@ -319,9 +312,9 @@ h| Bit/Offset/Num
 Branch on carry set - take branch when C flag is set
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BCS
+6+h| BCS
 
 h| Page
 h| Opcode
@@ -333,7 +326,6 @@ h| Bit/Offset/Num
 | 0xB0
 | 
 | Relative
-| 
 | 
 
 |===
@@ -347,9 +339,9 @@ h| Bit/Offset/Num
 [[BEQ]]Branch on equal - take branch when Z flag is set
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BEQ
+6+h| BEQ
 
 h| Page
 h| Opcode
@@ -361,7 +353,6 @@ h| Bit/Offset/Num
 | 0xf0
 | 
 | Relative
-| 
 | 
 
 |===
@@ -375,9 +366,9 @@ h| Bit/Offset/Num
 [[BMI]]Branch on minus - take branch when N flag is set
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BMI
+6+h| BMI
 
 h| Page
 h| Opcode
@@ -389,7 +380,6 @@ h| Bit/Offset/Num
 | 0x30
 | 
 | Relative
-| 
 | 
 
 |===
@@ -403,9 +393,9 @@ h| Bit/Offset/Num
 [[BNE]]Branch on not equal - take branch when Z flag is cleared
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BNE
+6+h| BNE
 
 h| Page
 h| Opcode
@@ -417,7 +407,6 @@ h| Bit/Offset/Num
 | 0xD0
 | 
 | Relative
-| 
 | 
 
 |===
@@ -431,9 +420,9 @@ h| Bit/Offset/Num
 [[BPL]]Branch on plus - take branch when N flag is cleared
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BPL
+6+h| BPL
 
 h| Page
 h| Opcode
@@ -445,7 +434,6 @@ h| Bit/Offset/Num
 | 0x10
 | 
 | Relative
-| 
 | 
 
 |===
@@ -460,9 +448,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BVC
+6+h| BVC
 
 h| Page
 h| Opcode
@@ -474,7 +462,6 @@ h| Bit/Offset/Num
 | 0x50
 | 
 | Relative
-| 
 | 
 
 |===
@@ -488,9 +475,9 @@ h| Bit/Offset/Num
 [[BVS]]Branch on overflow set - take branch when V flag is set
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BVS
+6+h| BVS
 
 h| Page
 h| Opcode
@@ -502,7 +489,6 @@ h| Bit/Offset/Num
 | 0x70
 | 
 | Relative
-| 
 | 
 
 |===
@@ -516,9 +502,9 @@ h| Bit/Offset/Num
 [[ADC]]Add content of memory location to accumulator
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| ADC
+6+h| ADC
 
 h| Page
 h| Opcode
@@ -531,13 +517,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0x65
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -545,13 +529,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0x6d
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -559,13 +541,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x75
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -573,13 +553,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x7d
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -593,9 +571,9 @@ h| Bit/Offset/Num
 [[AND]]Bitwise AND accumulator with content of memory location
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| AND
+6+h| AND
 
 h| Page
 h| Opcode
@@ -608,13 +586,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0x25
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -622,13 +598,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0x2d
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -636,13 +610,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x35
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -650,13 +622,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x3d
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -672,9 +642,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| ASL
+6+h| ASL
 
 h| Page
 h| Opcode
@@ -687,13 +657,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x0a
 | 
 | Accumulator
-| 
 | 
 
 | 
@@ -701,20 +669,17 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x16
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0x1e
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -728,9 +693,9 @@ h| Bit/Offset/Num
 [[CMP]]Compare accumulator with content of memory location
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CMP
+6+h| CMP
 
 h| Page
 h| Opcode
@@ -743,13 +708,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0xc5
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -757,13 +720,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xcd
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -771,13 +732,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xd5
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -785,13 +744,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xdd
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -805,9 +762,9 @@ h| Bit/Offset/Num
 [[CPX]]Compare X register with content of memory location
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CPX
+6+h| CPX
 
 h| Page
 h| Opcode
@@ -820,20 +777,17 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xe4
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0xec
 | 
 | Absolute 16bit
-| 
 | 
 
 |===
@@ -847,9 +801,9 @@ h| Bit/Offset/Num
 [[CPY]]Compare Y register with content of memory location
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CPY
+6+h| CPY
 
 h| Page
 h| Opcode
@@ -862,20 +816,17 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xc4
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0xcc
 | 
 | Absolute 16bit
-| 
 | 
 
 |===
@@ -889,9 +840,9 @@ h| Bit/Offset/Num
 [[DEC]]Decrement the content of a memory location by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| DEC
+6+h| DEC
 
 h| Page
 h| Opcode
@@ -904,13 +855,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0xce
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -918,13 +867,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0xde
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -938,9 +885,9 @@ h| Bit/Offset/Num
 [[DEX]]Decrement the content of the X register by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| DEX
+6+h| DEX
 
 h| Page
 h| Opcode
@@ -952,7 +899,6 @@ h| Bit/Offset/Num
 | 0xca
 | 
 | Implied
-| 
 | 
 
 |===
@@ -966,9 +912,9 @@ h| Bit/Offset/Num
 [[DEY]]Decrement the Y register by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| DEY
+6+h| DEY
 
 h| Page
 h| Opcode
@@ -980,7 +926,6 @@ h| Bit/Offset/Num
 | 0x88
 | 
 | Implied
-| 
 | 
 
 |===
@@ -996,9 +941,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| EOR
+6+h| EOR
 
 h| Page
 h| Opcode
@@ -1011,13 +956,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0x45
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1025,13 +968,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0x4d
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -1039,13 +980,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x55
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -1053,13 +992,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x5d
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1073,9 +1010,9 @@ h| Bit/Offset/Num
 [[INC]]Increment the content of a memory location by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| INC
+6+h| INC
 
 h| Page
 h| Opcode
@@ -1088,13 +1025,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0xee
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -1102,13 +1037,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0xfe
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1122,9 +1055,9 @@ h| Bit/Offset/Num
 [[INX]]Increment the content of the X register by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| INX
+6+h| INX
 
 h| Page
 h| Opcode
@@ -1136,7 +1069,6 @@ h| Bit/Offset/Num
 | 0xe8
 | 
 | Implied
-| 
 | 
 
 |===
@@ -1150,9 +1082,9 @@ h| Bit/Offset/Num
 [[INY]]Increment the content of the Y register by one
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| INY
+6+h| INY
 
 h| Page
 h| Opcode
@@ -1164,7 +1096,6 @@ h| Bit/Offset/Num
 | 0xc8
 | 
 | Implied
-| 
 | 
 
 |===
@@ -1180,9 +1111,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| LSR
+6+h| LSR
 
 h| Page
 h| Opcode
@@ -1195,13 +1126,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x4a
 | 
 | Accumulator
-| 
 | 
 
 | 
@@ -1209,20 +1138,17 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x56
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0x5e
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1236,9 +1162,9 @@ h| Bit/Offset/Num
 [[ORA]]Bitwise OR accumulator with content of memory location
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| ORA
+6+h| ORA
 
 h| Page
 h| Opcode
@@ -1251,13 +1177,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0x05
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1265,13 +1189,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0x0d
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -1279,13 +1201,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x15
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -1293,13 +1213,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x1d
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1318,9 +1236,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| ROL
+6+h| ROL
 
 h| Page
 h| Opcode
@@ -1333,13 +1251,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x2a
 | 
 | Accumulator
-| 
 | 
 
 | 
@@ -1347,20 +1263,17 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x36
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0x3e
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1379,9 +1292,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| ROR
+6+h| ROR
 
 h| Page
 h| Opcode
@@ -1394,13 +1307,11 @@ h| Bit/Offset/Num
 | ror
 | Zeropage
 | 
-| 
 
 | 
 | 0x6a
 | ror
 | Accumulator
-| 
 | 
 
 | 
@@ -1408,20 +1319,17 @@ h| Bit/Offset/Num
 | ror
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x76
 | ror
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0x7e
 | ror
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1435,9 +1343,9 @@ h| Bit/Offset/Num
 [[SBC]]Substract content of memory location from accumulator
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| SBC
+6+h| SBC
 
 h| Page
 h| Opcode
@@ -1450,13 +1358,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0xe5
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1464,13 +1370,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xed
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -1478,13 +1382,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xf5
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -1492,13 +1394,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xfd
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1520,9 +1420,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| BIT
+6+h| BIT
 
 h| Page
 h| Opcode
@@ -1535,13 +1435,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x2c
 | 
 | Absolute 16bit
-| 
 | 
 
 |===
@@ -1555,9 +1453,9 @@ h| Bit/Offset/Num
 [[LDA]]Load accumulator
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| LDA
+6+h| LDA
 
 h| Page
 h| Opcode
@@ -1570,13 +1468,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0xa5
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1584,13 +1480,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xad
 | 
 | Absolute 16bit
-| 
 | 
 
 | 
@@ -1598,13 +1492,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indirect 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xb5
 | 
 | Zeropage indexed with X
-| 
 | 
 
 | 
@@ -1612,13 +1504,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0xbd
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1632,9 +1522,9 @@ h| Bit/Offset/Num
 [[LDX]]Load X register
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| LDX
+6+h| LDX
 
 h| Page
 h| Opcode
@@ -1647,13 +1537,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xa6
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1661,20 +1549,17 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0xb6
 | 
 | Zeropage indexed with Y
 | 
-| 
 
 | 
 | 0xbe
 | 
 | Absolute 16bit indexed with Y
-| 
 | 
 
 |===
@@ -1688,9 +1573,9 @@ h| Bit/Offset/Num
 [[LDY]]Load Y register
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| LDY
+6+h| LDY
 
 h| Page
 h| Opcode
@@ -1703,13 +1588,11 @@ h| Bit/Offset/Num
 | 
 | Immediate
 | 
-| 
 
 | 
 | 0xa4
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1717,20 +1600,17 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0xb4
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0xbc
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1745,9 +1625,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| STA
+6+h| STA
 
 h| Page
 h| Opcode
@@ -1760,13 +1640,11 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X indirect 16bit
 | 
-| 
 
 | 
 | 0x85
 | 
 | Zeropage
-| 
 | 
 
 | 
@@ -1774,13 +1652,11 @@ h| Bit/Offset/Num
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x91
 | 
 | Zeropage indirect 16bit indexed with Y
-| 
 | 
 
 | 
@@ -1788,20 +1664,17 @@ h| Bit/Offset/Num
 | 
 | Zeropage indexed with X
 | 
-| 
 
 | 
 | 0x99
 | 
 | Absolute 16bit indexed with Y
 | 
-| 
 
 | 
 | 0x9d
 | 
 | Absolute 16bit indexed with X
-| 
 | 
 
 |===
@@ -1815,9 +1688,9 @@ h| Bit/Offset/Num
 [[STX]]Store the content of the X register to memory.
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| STX
+6+h| STX
 
 h| Page
 h| Opcode
@@ -1830,20 +1703,17 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x8e
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x96
 | 
 | Zeropage indexed with Y
-| 
 | 
 
 |===
@@ -1857,9 +1727,9 @@ h| Bit/Offset/Num
 [[STY]]Store the content of the Y register to memory.
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| STY
+6+h| STY
 
 h| Page
 h| Opcode
@@ -1872,20 +1742,17 @@ h| Bit/Offset/Num
 | 
 | Zeropage
 | 
-| 
 
 | 
 | 0x8c
 | 
 | Absolute 16bit
 | 
-| 
 
 | 
 | 0x94
 | 
 | Zeropage indexed with X
-| 
 | 
 
 |===
@@ -1899,9 +1766,9 @@ h| Bit/Offset/Num
 [[PHA]]Push contents of the accumulator onto the stack
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| PHA
+6+h| PHA
 
 h| Page
 h| Opcode
@@ -1913,7 +1780,6 @@ h| Bit/Offset/Num
 | 0x48
 | 
 | Implied
-| 
 | 
 
 |===
@@ -1927,9 +1793,9 @@ h| Bit/Offset/Num
 [[PHP]]Push processor status register onto the stack
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| PHP
+6+h| PHP
 
 h| Page
 h| Opcode
@@ -1941,7 +1807,6 @@ h| Bit/Offset/Num
 | 0x08
 | 
 | Implied
-| 
 | 
 
 |===
@@ -1955,9 +1820,9 @@ h| Bit/Offset/Num
 [[PLA]]Pull the contents of the accumulator from the stack
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| PLA
+6+h| PLA
 
 h| Page
 h| Opcode
@@ -1969,7 +1834,6 @@ h| Bit/Offset/Num
 | 0x68
 | 
 | Implied
-| 
 | 
 
 |===
@@ -1983,9 +1847,9 @@ h| Bit/Offset/Num
 [[PLP]]Pull processor status register from the stack
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| PLP
+6+h| PLP
 
 h| Page
 h| Opcode
@@ -1997,7 +1861,6 @@ h| Bit/Offset/Num
 | 0x28
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2011,9 +1874,9 @@ h| Bit/Offset/Num
 [[TAX]]Transfer the contents of accumulator into the X register
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TAX
+6+h| TAX
 
 h| Page
 h| Opcode
@@ -2025,7 +1888,6 @@ h| Bit/Offset/Num
 | 0xaa
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2039,9 +1901,9 @@ h| Bit/Offset/Num
 [[TAY]]Transfer the contents of accumulator into the Y register
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TAY
+6+h| TAY
 
 h| Page
 h| Opcode
@@ -2053,7 +1915,6 @@ h| Bit/Offset/Num
 | 0xa8
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2069,9 +1930,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TSX
+6+h| TSX
 
 h| Page
 h| Opcode
@@ -2083,7 +1944,6 @@ h| Bit/Offset/Num
 | 0xba
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2098,9 +1958,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TXA
+6+h| TXA
 
 h| Page
 h| Opcode
@@ -2112,7 +1972,6 @@ h| Bit/Offset/Num
 | 0x8a
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2128,9 +1987,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TXS
+6+h| TXS
 
 h| Page
 h| Opcode
@@ -2142,7 +2001,6 @@ h| Bit/Offset/Num
 | 0x9a
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2157,9 +2015,9 @@ h| Bit/Offset/Num
 			
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| TYA
+6+h| TYA
 
 h| Page
 h| Opcode
@@ -2171,7 +2029,6 @@ h| Bit/Offset/Num
 | 0x98
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2185,9 +2042,9 @@ h| Bit/Offset/Num
 [[CLC]]Clear the C flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CLC
+6+h| CLC
 
 h| Page
 h| Opcode
@@ -2199,7 +2056,6 @@ h| Bit/Offset/Num
 | 0x18
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2213,9 +2069,9 @@ h| Bit/Offset/Num
 [[CLD]]Clear the decimal (D) flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CLD
+6+h| CLD
 
 h| Page
 h| Opcode
@@ -2227,7 +2083,6 @@ h| Bit/Offset/Num
 | 0xd8
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2241,9 +2096,9 @@ h| Bit/Offset/Num
 [[CLI]]Clear the interrupt (I) flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CLI
+6+h| CLI
 
 h| Page
 h| Opcode
@@ -2255,7 +2110,6 @@ h| Bit/Offset/Num
 | 0x58
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2269,9 +2123,9 @@ h| Bit/Offset/Num
 [[CLV]]Clear the overflow (V) flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| CLV
+6+h| CLV
 
 h| Page
 h| Opcode
@@ -2283,7 +2137,6 @@ h| Bit/Offset/Num
 | 0xb8
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2297,9 +2150,9 @@ h| Bit/Offset/Num
 [[SEC]]Set the C flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| SEC
+6+h| SEC
 
 h| Page
 h| Opcode
@@ -2311,7 +2164,6 @@ h| Bit/Offset/Num
 | 0x38
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2325,9 +2177,9 @@ h| Bit/Offset/Num
 [[SED]]Set the decimal (D) flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| SED
+6+h| SED
 
 h| Page
 h| Opcode
@@ -2339,7 +2191,6 @@ h| Bit/Offset/Num
 | 0xf8
 | bcd
 | Implied
-| 
 | 
 
 |===
@@ -2353,9 +2204,9 @@ h| Bit/Offset/Num
 [[SEI]]Set the interrupt (I) flag
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| SEI
+6+h| SEI
 
 h| Page
 h| Opcode
@@ -2367,7 +2218,6 @@ h| Bit/Offset/Num
 | 0x78
 | 
 | Implied
-| 
 | 
 
 |===
@@ -2381,9 +2231,9 @@ h| Bit/Offset/Num
 [[NOP]]No operation
 
 
-[cols="10*"]
+[cols="6*"]
 |===
-10+h| NOP
+6+h| NOP
 
 h| Page
 h| Opcode
@@ -2395,7 +2245,6 @@ h| Bit/Offset/Num
 | 0xea
 | 
 | Implied
-| 
 | 
 
 |===

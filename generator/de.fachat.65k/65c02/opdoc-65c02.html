@@ -267,9 +267,9 @@
 <h2>Operations</h2>
 <h2>BRK</h2>
 <a name="BRK"> </a><p>Starts the break routine.</p>
-<table class="optable"><tr><th colspan="10">BRK</th></tr>
+<table class="optable"><tr><th colspan="6">BRK</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x00</td><td></td><td>Immediate</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -310,11 +310,11 @@
 					&lt;= ($FFFE)
 				</pre><h2>JMP</h2>
 <a name="JMP"> </a><p>Jump to new code address</p>
-<table class="optable"><tr><th colspan="10">JMP</th></tr>
+<table class="optable"><tr><th colspan="6">JMP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td><td></td></tr>
-<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x7c</td><td>cmos</td><td>Absolute indexed with X indirect 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x4c</td><td></td><td>Address</td><td></td></tr>
+<tr><td></td><td>0x6c</td><td></td><td>Absolute indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x7c</td><td>cmos</td><td>Absolute indexed with X indirect 16bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -327,9 +327,9 @@
 <a name="JSR"> </a><p>Jump subroutine - jump to a new code location, save return
 				address on stack for RTS
 			</p>
-<table class="optable"><tr><th colspan="10">JSR</th></tr>
+<table class="optable"><tr><th colspan="6">JSR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td><td></td></tr>
+<tr><td></td><td>0x20</td><td></td><td>Address</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -346,9 +346,9 @@
 					PC &lt;= Operand
 				</pre><h2>RTI</h2>
 <a name="RTI"> </a><p>Return from interrupt</p>
-<table class="optable"><tr><th colspan="10">RTI</th></tr>
+<table class="optable"><tr><th colspan="6">RTI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x40</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -369,9 +369,9 @@
 					Tmp;
 				</pre><h2>RTS</h2>
 <a name="RTS"> </a><p>Return from subroutine - read return address from stack</p>
-<table class="optable"><tr><th colspan="10">RTS</th></tr>
+<table class="optable"><tr><th colspan="6">RTS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x60</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -385,9 +385,9 @@
 <a name="BCC"> </a><p>Synonyms: BLT</p>
 <p>Branch on carry clear - take branch when C flag is cleared
 			</p>
-<table class="optable"><tr><th colspan="10">BCC</th></tr>
+<table class="optable"><tr><th colspan="6">BCC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x90</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x90</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -409,9 +409,9 @@
 				</pre><h2>BCS</h2>
 <a name="BCS"> </a><p>Synonyms: BGE</p>
 <p>Branch on carry set - take branch when C flag is set</p>
-<table class="optable"><tr><th colspan="10">BCS</th></tr>
+<table class="optable"><tr><th colspan="6">BCS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xB0</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0xB0</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -432,9 +432,9 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>BEQ</h2>
 <a name="BEQ"> </a><p>Branch on equal - take branch when Z flag is set</p>
-<table class="optable"><tr><th colspan="10">BEQ</th></tr>
+<table class="optable"><tr><th colspan="6">BEQ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xf0</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0xf0</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -453,9 +453,9 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>BMI</h2>
 <a name="BMI"> </a><p>Branch on minus - take branch when N flag is set</p>
-<table class="optable"><tr><th colspan="10">BMI</th></tr>
+<table class="optable"><tr><th colspan="6">BMI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x30</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x30</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -474,9 +474,9 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>BNE</h2>
 <a name="BNE"> </a><p>Branch on not equal - take branch when Z flag is cleared</p>
-<table class="optable"><tr><th colspan="10">BNE</th></tr>
+<table class="optable"><tr><th colspan="6">BNE</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xD0</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0xD0</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -495,9 +495,9 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>BPL</h2>
 <a name="BPL"> </a><p>Branch on plus - take branch when N flag is cleared</p>
-<table class="optable"><tr><th colspan="10">BPL</th></tr>
+<table class="optable"><tr><th colspan="6">BPL</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x10</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x10</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -517,9 +517,9 @@
 				</pre><h2>BRA</h2>
 <a name="BRA"> </a><p>Synonyms: BRU</p>
 <p>Branch always - branch independent from any flags</p>
-<table class="optable"><tr><th colspan="10">BRA</th></tr>
+<table class="optable"><tr><th colspan="6">BRA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x80</td><td>cmos</td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x80</td><td>cmos</td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -536,9 +536,9 @@
 				</pre><h2>BVC</h2>
 <a name="BVC"> </a><p>Branch on overflow clear - take branch when V flag is cleared
 			</p>
-<table class="optable"><tr><th colspan="10">BVC</th></tr>
+<table class="optable"><tr><th colspan="6">BVC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x50</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x50</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -557,9 +557,9 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>BVS</h2>
 <a name="BVS"> </a><p>Branch on overflow set - take branch when V flag is set</p>
-<table class="optable"><tr><th colspan="10">BVS</th></tr>
+<table class="optable"><tr><th colspan="6">BVS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x70</td><td></td><td>Relative</td><td></td><td></td></tr>
+<tr><td></td><td>0x70</td><td></td><td>Relative</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -578,17 +578,17 @@
 					PC &lt;= NextPC + Operand when N=1 else NextPC
 				</pre><h2>ADC</h2>
 <a name="ADC"> </a><p>Add content of memory location to accumulator</p>
-<table class="optable"><tr><th colspan="10">ADC</th></tr>
+<table class="optable"><tr><th colspan="6">ADC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x61</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x65</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x69</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0x6d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x71</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x72</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x75</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x79</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x7d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x61</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x65</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x69</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0x6d</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x71</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x72</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x75</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x79</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x7d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -611,17 +611,17 @@
 					.
 				</p><h2>AND</h2>
 <a name="AND"> </a><p>Bitwise AND accumulator with content of memory location</p>
-<table class="optable"><tr><th colspan="10">AND</th></tr>
+<table class="optable"><tr><th colspan="6">AND</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x21</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x25</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x29</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0x2d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x31</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x32</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x35</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x39</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x3d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x21</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x25</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x29</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0x2d</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x31</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x32</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x35</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x39</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x3d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -638,13 +638,13 @@
 <a name="ASL"> </a><p>Arithmetic Shift Left - shift accumulator one bit to the left,
 				shifting in zero in bit 0
 			</p>
-<table class="optable"><tr><th colspan="10">ASL</th></tr>
+<table class="optable"><tr><th colspan="6">ASL</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x06</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x0a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x0e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x16</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x1e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x06</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x0a</td><td></td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x0e</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x16</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x1e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -670,17 +670,17 @@
 					Z &lt;= Z(AC)
 				</pre><h2>CMP</h2>
 <a name="CMP"> </a><p>Compare accumulator with content of memory location</p>
-<table class="optable"><tr><th colspan="10">CMP</th></tr>
+<table class="optable"><tr><th colspan="6">CMP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xc1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xc5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xc9</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xcd</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xd1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xd2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xd5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xd9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xdd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xc1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xc5</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xc9</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xcd</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xd1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xd2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xd5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xd9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xdd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -699,11 +699,11 @@
 					Z(Tmp)
 				</pre><h2>CPX</h2>
 <a name="CPX"> </a><p>Compare X register with content of memory location</p>
-<table class="optable"><tr><th colspan="10">CPX</th></tr>
+<table class="optable"><tr><th colspan="6">CPX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xe0</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xe4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xec</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xe0</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xe4</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xec</td><td></td><td>Absolute 16bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -722,11 +722,11 @@
 					Z(Tmp)
 				</pre><h2>CPY</h2>
 <a name="CPY"> </a><p>Compare Y register with content of memory location</p>
-<table class="optable"><tr><th colspan="10">CPY</th></tr>
+<table class="optable"><tr><th colspan="6">CPY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xc0</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xc4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xcc</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0xc0</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xc4</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xcc</td><td></td><td>Absolute 16bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -745,13 +745,13 @@
 					Z(Tmp)
 				</pre><h2>DEC</h2>
 <a name="DEC"> </a><p>Decrement the content of a memory location by one</p>
-<table class="optable"><tr><th colspan="10">DEC</th></tr>
+<table class="optable"><tr><th colspan="6">DEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xc6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x3a</td><td>cmos</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0xce</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xd6</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xde</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xc6</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x3a</td><td>cmos</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0xce</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xd6</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xde</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -769,9 +769,9 @@
 					Z(AC)
 				</pre><h2>DEX</h2>
 <a name="DEX"> </a><p>Decrement the content of the X register by one</p>
-<table class="optable"><tr><th colspan="10">DEX</th></tr>
+<table class="optable"><tr><th colspan="6">DEX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xca</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xca</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -780,9 +780,9 @@
 					X &lt;= X-1
 				</pre><h2>DEY</h2>
 <a name="DEY"> </a><p>Decrement the Y register by one</p>
-<table class="optable"><tr><th colspan="10">DEY</th></tr>
+<table class="optable"><tr><th colspan="6">DEY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x88</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x88</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -793,17 +793,17 @@
 <a name="EOR"> </a><p>Bitwise Exclusive-OR accumulator with content of memory
 				location
 			</p>
-<table class="optable"><tr><th colspan="10">EOR</th></tr>
+<table class="optable"><tr><th colspan="6">EOR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x41</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x45</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x49</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0x4d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x51</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x52</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x55</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x59</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x5d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x41</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x45</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x49</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0x4d</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x51</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x52</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x55</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x59</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x5d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -819,13 +819,13 @@
 					Z &lt;= Z(Tmp)
 				</pre><h2>INC</h2>
 <a name="INC"> </a><p>Increment the content of a memory location by one</p>
-<table class="optable"><tr><th colspan="10">INC</th></tr>
+<table class="optable"><tr><th colspan="6">INC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xe6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x1a</td><td>cmos</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0xee</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xf6</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xfe</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xe6</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x1a</td><td>cmos</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0xee</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xf6</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xfe</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -842,9 +842,9 @@
 					Z(AC)
 				</pre><h2>INX</h2>
 <a name="INX"> </a><p>Increment the content of the X register by one</p>
-<table class="optable"><tr><th colspan="10">INX</th></tr>
+<table class="optable"><tr><th colspan="6">INX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xe8</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xe8</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -853,9 +853,9 @@
 					X &lt;= X+1
 				</pre><h2>INY</h2>
 <a name="INY"> </a><p>Increment the content of the Y register by one</p>
-<table class="optable"><tr><th colspan="10">INY</th></tr>
+<table class="optable"><tr><th colspan="6">INY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xc8</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xc8</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -866,13 +866,13 @@
 <a name="LSR"> </a><p>Logical Shift Right - shift accumulator one bit to the right,
 				shifting in zero in the highest bit
 			</p>
-<table class="optable"><tr><th colspan="10">LSR</th></tr>
+<table class="optable"><tr><th colspan="6">LSR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x46</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x4a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x4e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x56</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x5e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x46</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x4a</td><td></td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x4e</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x56</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x5e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -897,17 +897,17 @@
 					Z &lt;= Z(AC)
 				</pre><h2>ORA</h2>
 <a name="ORA"> </a><p>Bitwise OR accumulator with content of memory location</p>
-<table class="optable"><tr><th colspan="10">ORA</th></tr>
+<table class="optable"><tr><th colspan="6">ORA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x01</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x05</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x09</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0x0d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x11</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x12</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x15</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x19</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x1d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x01</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x05</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x09</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0x0d</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x11</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x12</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x15</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x19</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x1d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -925,13 +925,13 @@
 				highest bit into the
 				carry flag instead.
 			</p>
-<table class="optable"><tr><th colspan="10">ROL</th></tr>
+<table class="optable"><tr><th colspan="6">ROL</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x26</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x2a</td><td></td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x2e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x36</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x3e</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x26</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x2a</td><td></td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x2e</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x36</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x3e</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -962,13 +962,13 @@
 				bit 0 into the
 				carry flag instead.
 			</p>
-<table class="optable"><tr><th colspan="10">ROR</th></tr>
+<table class="optable"><tr><th colspan="6">ROR</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x66</td><td>ror</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x6a</td><td>ror</td><td>Accumulator</td><td></td><td></td></tr>
-<tr><td></td><td>0x6e</td><td>ror</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x76</td><td>ror</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x7e</td><td>ror</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x66</td><td>ror</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x6a</td><td>ror</td><td>Accumulator</td><td></td></tr>
+<tr><td></td><td>0x6e</td><td>ror</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x76</td><td>ror</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x7e</td><td>ror</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -993,17 +993,17 @@
 					Z &lt;= Z(AC)
 				</pre><h2>SBC</h2>
 <a name="SBC"> </a><p>Substract content of memory location from accumulator</p>
-<table class="optable"><tr><th colspan="10">SBC</th></tr>
+<table class="optable"><tr><th colspan="6">SBC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xe1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xe5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xe9</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xed</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xf1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xf2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xf5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xf9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xfd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xe1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xe5</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xe9</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xed</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xf1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xf2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xf5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xf9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xfd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1036,13 +1036,13 @@
 				set the flags from the
 				accumulator
 			</p>
-<table class="optable"><tr><th colspan="10">BIT</th></tr>
+<table class="optable"><tr><th colspan="6">BIT</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x34</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x3c</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x89</td><td>cmos</td><td>Immediate</td><td></td><td></td></tr>
+<tr><td></td><td>0x24</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x2c</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x34</td><td>cmos</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x3c</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td></tr>
+<tr><td></td><td>0x89</td><td>cmos</td><td>Immediate</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1065,10 +1065,10 @@
 				in the
 				memory location that are set in the accumulator.
 			</p>
-<table class="optable"><tr><th colspan="10">TRB</th></tr>
+<table class="optable"><tr><th colspan="6">TRB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x14</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x1c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x14</td><td>cmos</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x1c</td><td>cmos</td><td>Absolute 16bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1105,10 +1105,10 @@
 				the
 				memory location that are set in the accumulator.
 			</p>
-<table class="optable"><tr><th colspan="10">TSB</th></tr>
+<table class="optable"><tr><th colspan="6">TSB</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x04</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x0c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
+<tr><td></td><td>0x04</td><td>cmos</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x0c</td><td>cmos</td><td>Absolute 16bit</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1135,17 +1135,17 @@
 					&lt; operand | AC
 				</pre><h2>LDA</h2>
 <a name="LDA"> </a><p>Load accumulator</p>
-<table class="optable"><tr><th colspan="10">LDA</th></tr>
+<table class="optable"><tr><th colspan="6">LDA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xa5</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xa9</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xad</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xb2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb5</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xb9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xbd</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xa1</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xa5</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xa9</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xad</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xb1</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xb2</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0xb5</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xb9</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xbd</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1157,13 +1157,13 @@
 					Y &lt;= Operand
 				</pre><h2>LDX</h2>
 <a name="LDX"> </a><p>Load X register</p>
-<table class="optable"><tr><th colspan="10">LDX</th></tr>
+<table class="optable"><tr><th colspan="6">LDX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa2</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xa6</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xae</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb6</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0xbe</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0xa2</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xa6</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xae</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xb6</td><td></td><td>Zeropage indexed with Y</td><td></td></tr>
+<tr><td></td><td>0xbe</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1175,13 +1175,13 @@
 					X &lt;= Operand
 				</pre><h2>LDY</h2>
 <a name="LDY"> </a><p>Load Y register</p>
-<table class="optable"><tr><th colspan="10">LDY</th></tr>
+<table class="optable"><tr><th colspan="6">LDY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa0</td><td></td><td>Immediate</td><td></td><td></td></tr>
-<tr><td></td><td>0xa4</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0xac</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0xb4</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0xbc</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0xa0</td><td></td><td>Immediate</td><td></td></tr>
+<tr><td></td><td>0xa4</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0xac</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0xb4</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0xbc</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1194,16 +1194,16 @@
 				</pre><h2>STA</h2>
 <a name="STA"> </a><p>Store the content of the accumulator into a memory location
 			</p>
-<table class="optable"><tr><th colspan="10">STA</th></tr>
+<table class="optable"><tr><th colspan="6">STA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x92</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td><td></td></tr>
-<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x81</td><td></td><td>Zeropage indexed with X indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x85</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x8d</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x91</td><td></td><td>Zeropage indirect 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x92</td><td>cmos_ind</td><td>Zeropage indirect 16bit</td><td></td></tr>
+<tr><td></td><td>0x95</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x99</td><td></td><td>Absolute 16bit indexed with Y</td><td></td></tr>
+<tr><td></td><td>0x9d</td><td></td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1212,11 +1212,11 @@
 					Operand &lt;= A
 				</pre><h2>STX</h2>
 <a name="STX"> </a><p>Store the content of the X register to memory.</p>
-<table class="optable"><tr><th colspan="10">STX</th></tr>
+<table class="optable"><tr><th colspan="6">STX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td><td></td></tr>
+<tr><td></td><td>0x86</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x8e</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x96</td><td></td><td>Zeropage indexed with Y</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1226,11 +1226,11 @@
 					Operand &lt;= A
 				</pre><h2>STY</h2>
 <a name="STY"> </a><p>Store the content of the Y register to memory.</p>
-<table class="optable"><tr><th colspan="10">STY</th></tr>
+<table class="optable"><tr><th colspan="6">STY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x84</td><td></td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x8c</td><td></td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x94</td><td></td><td>Zeropage indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1240,12 +1240,12 @@
 					Operand &lt;= A
 				</pre><h2>STZ</h2>
 <a name="STZ"> </a><p>Store zero (or Z-register) into a memory location</p>
-<table class="optable"><tr><th colspan="10">STZ</th></tr>
+<table class="optable"><tr><th colspan="6">STZ</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x64</td><td>cmos</td><td>Zeropage</td><td></td><td></td></tr>
-<tr><td></td><td>0x74</td><td>cmos</td><td>Zeropage indexed with X</td><td></td><td></td></tr>
-<tr><td></td><td>0x9c</td><td>cmos</td><td>Absolute 16bit</td><td></td><td></td></tr>
-<tr><td></td><td>0x9e</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td><td></td></tr>
+<tr><td></td><td>0x64</td><td>cmos</td><td>Zeropage</td><td></td></tr>
+<tr><td></td><td>0x74</td><td>cmos</td><td>Zeropage indexed with X</td><td></td></tr>
+<tr><td></td><td>0x9c</td><td>cmos</td><td>Absolute 16bit</td><td></td></tr>
+<tr><td></td><td>0x9e</td><td>cmos</td><td>Absolute 16bit indexed with X</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1254,9 +1254,9 @@
 					Operand &lt;= 0
 				</pre><h2>PHA</h2>
 <a name="PHA"> </a><p>Push contents of the accumulator onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHA</th></tr>
+<table class="optable"><tr><th colspan="6">PHA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x48</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x48</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1265,9 +1265,9 @@
 					Stack(SP--) &lt;= A
 				</pre><h2>PHP</h2>
 <a name="PHP"> </a><p>Push processor status register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHP</th></tr>
+<table class="optable"><tr><th colspan="6">PHP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x08</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x08</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1276,9 +1276,9 @@
 					Stack(SP--) &lt;= Status
 				</pre><h2>PHX</h2>
 <a name="PHX"> </a><p>Push contents of the X register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHX</th></tr>
+<table class="optable"><tr><th colspan="6">PHX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xda</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xda</td><td>cmos</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1287,9 +1287,9 @@
 					Stack(SP--) &lt;= X
 				</pre><h2>PHY</h2>
 <a name="PHY"> </a><p>Push contents of the Y register onto the stack</p>
-<table class="optable"><tr><th colspan="10">PHY</th></tr>
+<table class="optable"><tr><th colspan="6">PHY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x5a</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x5a</td><td>cmos</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1298,9 +1298,9 @@
 					Stack(SP--) &lt;= Y
 				</pre><h2>PLA</h2>
 <a name="PLA"> </a><p>Pull the contents of the accumulator from the stack</p>
-<table class="optable"><tr><th colspan="10">PLA</th></tr>
+<table class="optable"><tr><th colspan="6">PLA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x68</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x68</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1309,9 +1309,9 @@
 					A &lt;= Stack(++SP)
 				</pre><h2>PLP</h2>
 <a name="PLP"> </a><p>Pull processor status register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLP</th></tr>
+<table class="optable"><tr><th colspan="6">PLP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x28</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x28</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1320,9 +1320,9 @@
 					Status &lt;= Stack(++SP)
 				</pre><h2>PLX</h2>
 <a name="PLX"> </a><p>Pull the contents of the X register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLX</th></tr>
+<table class="optable"><tr><th colspan="6">PLX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xfa</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xfa</td><td>cmos</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1331,9 +1331,9 @@
 					X &lt;= Stack(++SP)
 				</pre><h2>PLY</h2>
 <a name="PLY"> </a><p>Pull the contents of the Y register from the stack</p>
-<table class="optable"><tr><th colspan="10">PLY</th></tr>
+<table class="optable"><tr><th colspan="6">PLY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x7a</td><td>cmos</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x7a</td><td>cmos</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1342,9 +1342,9 @@
 					Y &lt;= Stack(++SP)
 				</pre><h2>TAX</h2>
 <a name="TAX"> </a><p>Transfer the contents of accumulator into the X register</p>
-<table class="optable"><tr><th colspan="10">TAX</th></tr>
+<table class="optable"><tr><th colspan="6">TAX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xaa</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xaa</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1353,9 +1353,9 @@
 					X &lt;= A
 				</pre><h2>TAY</h2>
 <a name="TAY"> </a><p>Transfer the contents of accumulator into the Y register</p>
-<table class="optable"><tr><th colspan="10">TAY</th></tr>
+<table class="optable"><tr><th colspan="6">TAY</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xa8</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xa8</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1366,9 +1366,9 @@
 <a name="TSX"> </a><p>Transfer the contents of the stack pointer into the X register
 				(Note: needs RS to keep compatibility with 6502)
 			</p>
-<table class="optable"><tr><th colspan="10">TSX</th></tr>
+<table class="optable"><tr><th colspan="6">TSX</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xba</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xba</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1378,9 +1378,9 @@
 				</pre><h2>TXA</h2>
 <a name="TXA"> </a><p>Transfer the contents of the X register into the accumulator
 			</p>
-<table class="optable"><tr><th colspan="10">TXA</th></tr>
+<table class="optable"><tr><th colspan="6">TXA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x8a</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x8a</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1391,9 +1391,9 @@
 <a name="TXS"> </a><p>Transfer the contents of X register into the stack pointer
 				(Note: needs RS to keep compatibility with 6502)
 			</p>
-<table class="optable"><tr><th colspan="10">TXS</th></tr>
+<table class="optable"><tr><th colspan="6">TXS</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x9a</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x9a</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1403,9 +1403,9 @@
 				</pre><h2>TYA</h2>
 <a name="TYA"> </a><p>Transfer the contents of the Y register into the accumulator
 			</p>
-<table class="optable"><tr><th colspan="10">TYA</th></tr>
+<table class="optable"><tr><th colspan="6">TYA</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x98</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x98</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
@@ -1414,72 +1414,72 @@
 					A &lt;= Y
 				</pre><h2>CLC</h2>
 <a name="CLC"> </a><p>Clear the C flag</p>
-<table class="optable"><tr><th colspan="10">CLC</th></tr>
+<table class="optable"><tr><th colspan="6">CLC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x18</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x18</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Clear the carry status flag.
 				</p><h2>CLD</h2>
 <a name="CLD"> </a><p>Clear the decimal (D) flag</p>
-<table class="optable"><tr><th colspan="10">CLD</th></tr>
+<table class="optable"><tr><th colspan="6">CLD</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xd8</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xd8</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Clear the decimal mode status flag.
 				</p><h2>CLI</h2>
 <a name="CLI"> </a><p>Clear the interrupt (I) flag</p>
-<table class="optable"><tr><th colspan="10">CLI</th></tr>
+<table class="optable"><tr><th colspan="6">CLI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x58</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x58</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Clear the interrupt status flag.
 				</p><h2>CLV</h2>
 <a name="CLV"> </a><p>Clear the overflow (V) flag</p>
-<table class="optable"><tr><th colspan="10">CLV</th></tr>
+<table class="optable"><tr><th colspan="6">CLV</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xb8</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xb8</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Clear the overflow status flag.
 				</p><h2>SEC</h2>
 <a name="SEC"> </a><p>Set the C flag</p>
-<table class="optable"><tr><th colspan="10">SEC</th></tr>
+<table class="optable"><tr><th colspan="6">SEC</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x38</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x38</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Set the carry status flag.
 				</p><h2>SED</h2>
 <a name="SED"> </a><p>Set the decimal (D) flag</p>
-<table class="optable"><tr><th colspan="10">SED</th></tr>
+<table class="optable"><tr><th colspan="6">SED</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xf8</td><td>bcd</td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xf8</td><td>bcd</td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Set the decimal mode status flag.
 				</p><h2>SEI</h2>
 <a name="SEI"> </a><p>Set the interrupt (I) flag</p>
-<table class="optable"><tr><th colspan="10">SEI</th></tr>
+<table class="optable"><tr><th colspan="6">SEI</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0x78</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0x78</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
 					Set the interrupt status flag.
 				</p><h2>NOP</h2>
 <a name="NOP"> </a><p>No operation</p>
-<table class="optable"><tr><th colspan="10">NOP</th></tr>
+<table class="optable"><tr><th colspan="6">NOP</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
-<tr><td></td><td>0xea</td><td></td><td>Implied</td><td></td><td></td></tr>
+<tr><td></td><td>0xea</td><td></td><td>Implied</td><td></td></tr>
 </table>
 <h3>Description</h3>
 <p>
