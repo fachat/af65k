@@ -46,11 +46,32 @@
 	</desc>
   </section>
 
+  <section toc="std" name="SYS Opcode Table">
+	<desc>
+@OPCODES5A@ 
+@OPCODES6@ 
+	</desc>
+  </section>
+
+  <section toc="std" name="QUICK Opcode Table">
+	<desc>
+@OPCODES7@ 
+@OPCODES8@ 
+	</desc>
+  </section>
+
+  <section toc="std" name="TXFER Opcode Table">
+	<desc>
+@OPCODES9@ 
+@OPCODES10@ 
+	</desc>
+  </section>
+
     <disclaimer name="Disclaimer">
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2012-04-23.
+Last updated @LASTMODDATE@.
   </closing>
 </docpage>
 

@@ -785,7 +785,10 @@ more modern browser, like Internet Explorer 8 or later,
 </td></tr>
 </table>
 	<p>
-	This table describes the EXT opcode page:
+       <p>
+        The grey fields here and below note opcodes that are not used in the 65002.
+        </p>
+	These tables describes the EXT, SYS, QUICK, and TXFER opcode page:
 	</p>
 <table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
 <tr><th>0</th><td><div class="opc">ADD (E)</div>
@@ -1111,6 +1114,347 @@ more modern browser, like Internet Explorer 8 or later,
 <div class="prefixes"><br/>UM, NF, AM, OF</div>
 </td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
 </table>
+<p></p>
+<table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>1</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>2</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>3</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>4</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>5</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>6</th><td><div class="opc">RTU #byte</div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>7</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>8</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>9</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>A</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>B</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>C</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>D</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>E</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>F</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</table>
+<p></p>
+<table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td class="unused"></td><td><div class="opc">TMB#0 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#0 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#0 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#0 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#0 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#0 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#1 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#1 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#0 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>1</th><td class="unused"></td><td><div class="opc">TMB#1 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#1 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#1 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#1 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#1 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#1 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#2 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#2 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#1 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>2</th><td class="unused"></td><td><div class="opc">TMB#2 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#2 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#2 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#2 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#2 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#2 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#3 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#3 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#2 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>3</th><td class="unused"></td><td><div class="opc">TMB#3 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#3 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#3 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#3 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#3 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#3 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#4 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#4 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#3 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>4</th><td class="unused"></td><td><div class="opc">TMB#4 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#4 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#4 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#4 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#4 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#4 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#5 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#5 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#4 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>5</th><td class="unused"></td><td><div class="opc">TMB#5 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#5 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#5 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#5 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#5 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#5 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#6 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#6 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#5 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>6</th><td class="unused"></td><td><div class="opc">TMB#6 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#6 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#6 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#6 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#6 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#6 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#7 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#7 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#6 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>7</th><td class="unused"></td><td><div class="opc">TMB#7 zp,X</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#7 abs</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td><div class="opc">TMB#7 zp</div>
+<div class="prefixes"><br/>UM, AM, OF</div>
+</td><td class="unused"></td><td><div class="opc">RMB#7 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#7 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RMB#7 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDL#8 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROL#8 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBR#7 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>8</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#0 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#0 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#0 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#1 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#1 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#0 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>9</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#1 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#1 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#1 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#2 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#2 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#1 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>A</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#2 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#2 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#2 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#3 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#3 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#2 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>B</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#3 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#3 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#3 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#4 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#4 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#3 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>C</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#4 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#4 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#4 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#5 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#5 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#4 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>D</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#5 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#5 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#5 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#6 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#6 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#5 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>E</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#6 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#6 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#6 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#7 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#7 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#6 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+<tr><th>F</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">SMB#7 zp,X</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#7 abs</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">SMB#7 zp</div>
+<div class="prefixes"></div>
+</td><td><div class="opc">RDR#8 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td><div class="opc">ROR#8 zp</div>
+<div class="prefixes"><br/>UM, NF, RS, AM, OF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">BBS#7 zp,rel</div>
+<div class="prefixes"><br/>UM, RS, AM, OF</div>
+</td></tr>
+</table>
+<p></p>
+<table class="optable"><tr><th>LSB-&gt;<br/>MSB</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+<tr><th>0</th><td class="unused"></td><td><div class="opc">TAB </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td><div class="opc">TAE </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td class="unused"></td><td><div class="opc">TAX </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td><div class="opc">TAY </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td><div class="opc">TAZ </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>1</th><td><div class="opc">TBA </div>
+<div class="prefixes"><br/>NF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>2</th><td><div class="opc">TEA </div>
+<div class="prefixes"><br/>NF</div>
+</td><td><div class="opc">TEB </div>
+<div class="prefixes"><br/>NF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>3</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>4</th><td><div class="opc">TXA </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TXS </div>
+<div class="prefixes"><br/>UM, RS, LE</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>5</th><td><div class="opc">TYA </div>
+<div class="prefixes"><br/>NF, RS, LE</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TYS </div>
+<div class="prefixes"><br/>UM, RS, LE</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>6</th><td><div class="opc">TZA </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>7</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">TSX </div>
+<div class="prefixes"><br/>UM, NF, RS, LE</div>
+</td><td><div class="opc">TSY </div>
+<div class="prefixes"><br/>NF, UM, RS, LE</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>8</th><td class="unused"></td><td><div class="opc">XAB </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td><div class="opc">XAX </div>
+<div class="prefixes"></div>
+</td><td><div class="opc">XAY </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>9</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>A</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>B</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>C</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td><div class="opc">XYX </div>
+<div class="prefixes"></div>
+</td><td><div class="opc">XZX </div>
+<div class="prefixes"></div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>D</th><td><div class="opc">TPA </div>
+<div class="prefixes"><br/>NF</div>
+</td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>E</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+<tr><th>F</th><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td><td class="unused"></td></tr>
+</table>
        <p>
         The grey fields note opcodes that are not used in the 65002.
         </p>
@@ -1119,6 +1463,6 @@ All Copyrights are acknowledged.
 The information here is provided under the terms as described
 in <a href="af65002front.html#lic">the license section</a>.
     </div></div><hr />
-Last updated 2012-04-23.
+Last updated 2026-10-13.
   </div></div><div id="footer"> </div></div></body></html> 
 

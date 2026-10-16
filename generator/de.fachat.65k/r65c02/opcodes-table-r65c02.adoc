@@ -28,7 +28,7 @@ h| 0
 | TSB zp
 | ORA zp
 | ASL zp
-| RMB0 zp
+| RMB#0 zp
 | PHP
 | ORA #byte
 | ASL
@@ -36,7 +36,7 @@ h| 0
 | TSB abs
 | ORA abs
 | ASL abs
-| BBR0 zp,rel
+| BBR#0 zp,rel
 
 h| 1
 | BPL rel
@@ -46,7 +46,7 @@ h| 1
 | TRB zp
 | ORA zp,X
 | ASL zp,X
-| RMB1 zp
+| RMB#1 zp
 | CLC
 | ORA abs,Y
 | INC
@@ -54,7 +54,7 @@ h| 1
 | TRB abs
 | ORA abs,X
 | ASL abs,X
-| BBR1 zp,rel
+| BBR#1 zp,rel
 
 h| 2
 | JSR abs
@@ -64,7 +64,7 @@ h| 2
 | BIT zp
 | AND zp
 | ROL zp
-| RMB2 zp
+| RMB#2 zp
 | PLP
 | AND #byte
 | ROL
@@ -72,7 +72,7 @@ h| 2
 | BIT abs
 | AND abs
 | ROL abs
-| BBR2 zp,rel
+| BBR#2 zp,rel
 
 h| 3
 | BMI rel
@@ -82,7 +82,7 @@ h| 3
 | BIT zp,X
 | AND zp,X
 | ROL zp,X
-| RMB3 zp
+| RMB#3 zp
 | SEC
 | AND abs,Y
 | DEC
@@ -90,7 +90,7 @@ h| 3
 | BIT abs,X
 | AND abs,X
 | ROL abs,X
-| BBR3 zp,rel
+| BBR#3 zp,rel
 
 h| 4
 | RTI
@@ -100,7 +100,7 @@ h| 4
 | 
 | EOR zp
 | LSR zp
-| RMB4 zp
+| RMB#4 zp
 | PHA
 | EOR #byte
 | LSR
@@ -108,7 +108,7 @@ h| 4
 | JMP abs
 | EOR abs
 | LSR abs
-| BBR4 zp,rel
+| BBR#4 zp,rel
 
 h| 5
 | BVC rel
@@ -118,7 +118,7 @@ h| 5
 | 
 | EOR zp,X
 | LSR zp,X
-| RMB5 zp
+| RMB#5 zp
 | CLI
 | EOR abs,Y
 | PHY
@@ -126,7 +126,7 @@ h| 5
 | 
 | EOR abs,X
 | LSR abs,X
-| BBR5 zp,rel
+| BBR#5 zp,rel
 
 h| 6
 | RTS
@@ -136,7 +136,7 @@ h| 6
 | STZ zp
 | ADC zp
 | ROR zp
-| RMB6 zp
+| RMB#6 zp
 | PLA
 | ADC #byte
 | ROR
@@ -144,7 +144,7 @@ h| 6
 | JMP (abs)
 | ADC abs
 | ROR abs
-| BBR6 zp,rel
+| BBR#6 zp,rel
 
 h| 7
 | BVS rel
@@ -154,7 +154,7 @@ h| 7
 | STZ zp,X
 | ADC zp,X
 | ROR zp,X
-| RMB7 zp
+| RMB#7 zp
 | SEI
 | ADC abs,Y
 | PLY
@@ -162,7 +162,7 @@ h| 7
 | JMP (abs,X)
 | ADC abs,X
 | ROR abs,X
-| BBR7 zp,rel
+| BBR#7 zp,rel
 
 h| 8
 | BRA rel
@@ -172,7 +172,7 @@ h| 8
 | STY zp
 | STA zp
 | STX zp
-| SMB0 zp
+| SMB#0 zp
 | DEY
 | BIT #byte
 | TXA
@@ -180,7 +180,7 @@ h| 8
 | STY abs
 | STA abs
 | STX abs
-| BBS0 zp,rel
+| BBS#0 zp,rel
 
 h| 9
 | BCC rel
@@ -190,7 +190,7 @@ h| 9
 | STY zp,X
 | STA zp,X
 | STX zp,Y
-| SMB1 zp
+| SMB#1 zp
 | TYA
 | STA abs,Y
 | TXS
@@ -198,7 +198,7 @@ h| 9
 | STZ abs
 | STA abs,X
 | STZ abs,X
-| BBS1 zp,rel
+| BBS#1 zp,rel
 
 h| A
 | LDY #byte
@@ -208,7 +208,7 @@ h| A
 | LDY zp
 | LDA zp
 | LDX zp
-| SMB2 zp
+| SMB#2 zp
 | TAY
 | LDA #byte
 | TAX
@@ -216,7 +216,7 @@ h| A
 | LDY abs
 | LDA abs
 | LDX abs
-| BBS2 zp,rel
+| BBS#2 zp,rel
 
 h| B
 | BCS rel
@@ -226,7 +226,7 @@ h| B
 | LDY zp,X
 | LDA zp,X
 | LDX zp,Y
-| SMB3 zp
+| SMB#3 zp
 | CLV
 | LDA abs,Y
 | TSX
@@ -234,7 +234,7 @@ h| B
 | LDY abs,X
 | LDA abs,X
 | LDX abs,Y
-| BBS3 zp,rel
+| BBS#3 zp,rel
 
 h| C
 | CPY #byte
@@ -244,7 +244,7 @@ h| C
 | CPY zp
 | CMP zp
 | DEC zp
-| SMB4 zp
+| SMB#4 zp
 | INY
 | CMP #byte
 | DEX
@@ -252,7 +252,7 @@ h| C
 | CPY abs
 | CMP abs
 | DEC abs
-| BBS4 zp,rel
+| BBS#4 zp,rel
 
 h| D
 | BNE rel
@@ -262,7 +262,7 @@ h| D
 | 
 | CMP zp,X
 | DEC zp,X
-| SMB5 zp
+| SMB#5 zp
 | CLD
 | CMP abs,Y
 | PHX
@@ -270,7 +270,7 @@ h| D
 | 
 | CMP abs,X
 | DEC abs,X
-| BBS5 zp,rel
+| BBS#5 zp,rel
 
 h| E
 | CPX #byte
@@ -280,7 +280,7 @@ h| E
 | CPX zp
 | SBC zp
 | INC zp
-| SMB6 zp
+| SMB#6 zp
 | INX
 | SBC #byte
 | NOP
@@ -288,7 +288,7 @@ h| E
 | CPX abs
 | SBC abs
 | INC abs
-| BBS6 zp,rel
+| BBS#6 zp,rel
 
 h| F
 | BEQ rel
@@ -298,7 +298,7 @@ h| F
 | 
 | SBC zp,X
 | INC zp,X
-| SMB7 zp
+| SMB#7 zp
 | SED
 | SBC abs,Y
 | PLX
@@ -306,7 +306,7 @@ h| F
 | 
 | SBC abs,X
 | INC abs,X
-| BBS7 zp,rel
+| BBS#7 zp,rel
 
 |===
 

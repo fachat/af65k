@@ -483,7 +483,7 @@ public class Validator {
 							
 							if (op.getExpand() == null && opcode.getExpand() == null) {
 							} else {
-								pageEntry.name = pageEntry.name + "#";
+								//pageEntry.name = pageEntry.name + "#";
 							}
 							addToPage(op.getName(), page, code, pageEntries, pageEntry);								
 						} else 

@@ -319,9 +319,18 @@
 	</p>
 @OPCODES5@
 	<p>
-	This table describes the EXT opcode page:
+       <p>
+        The grey fields here and below note opcodes that are not used in the 65002.
+        </p>
+	These tables describes the EXT, SYS, QUICK, and TXFER opcode page:
 	</p>
 @EXTLONG@
+<p></p>
+@SYSLONG@
+<p></p>
+@QUICKLONG@
+<p></p>
+@TXFERLONG@
        <p>
         The grey fields note opcodes that are not used in the 65002.
         </p>
@@ -333,7 +342,7 @@
 @DISCLAIMER@
     </disclaimer>
   <closing>
-Last updated 2012-04-23.
+Last updated @LASTMODDATE@.
   </closing>
 </docpage>
 

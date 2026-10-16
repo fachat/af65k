@@ -1735,7 +1735,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC(7) Z &lt;= Z(AC) 
 == ROR
 
 [[ROR]]Rotate Right - shift accumulator one bit to the right, shifting
@@ -1898,7 +1898,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| BBR
+6+h| BBR#
 
 h| Page
 h| Opcode
@@ -1967,7 +1967,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| BBS
+6+h| BBS#
 
 h| Page
 h| Opcode
@@ -2095,7 +2095,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| RMB
+6+h| RMB#
 
 h| Page
 h| Opcode
@@ -2164,7 +2164,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| SMB
+6+h| SMB#
 
 h| Page
 h| Opcode

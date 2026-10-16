@@ -22,147 +22,147 @@ h| F
 
 h| 0
 | 
-| TMB0 zp,X
-| TMB0 abs
-| TMB0 zp
+| TMB#0 zp,X
+| TMB#0 abs
+| TMB#0 zp
 | 
-| RMB0 zp,X
-| RMB0 abs
-| RMB0 zp
-| RDL1 zp
-| ROL1 zp
-| 
-| 
+| RMB#0 zp,X
+| RMB#0 abs
+| RMB#0 zp
+| RDL#1 zp
+| ROL#1 zp
 | 
 | 
 | 
-| BBR0 zp,rel
+| 
+| 
+| BBR#0 zp,rel
 
 h| 1
 | 
-| TMB1 zp,X
-| TMB1 abs
-| TMB1 zp
+| TMB#1 zp,X
+| TMB#1 abs
+| TMB#1 zp
 | 
-| RMB1 zp,X
-| RMB1 abs
-| RMB1 zp
-| RDL2 zp
-| ROL2 zp
-| 
-| 
+| RMB#1 zp,X
+| RMB#1 abs
+| RMB#1 zp
+| RDL#2 zp
+| ROL#2 zp
 | 
 | 
 | 
-| BBR1 zp,rel
+| 
+| 
+| BBR#1 zp,rel
 
 h| 2
 | 
-| TMB2 zp,X
-| TMB2 abs
-| TMB2 zp
+| TMB#2 zp,X
+| TMB#2 abs
+| TMB#2 zp
 | 
-| RMB2 zp,X
-| RMB2 abs
-| RMB2 zp
-| RDL3 zp
-| ROL3 zp
-| 
-| 
+| RMB#2 zp,X
+| RMB#2 abs
+| RMB#2 zp
+| RDL#3 zp
+| ROL#3 zp
 | 
 | 
 | 
-| BBR2 zp,rel
+| 
+| 
+| BBR#2 zp,rel
 
 h| 3
 | 
-| TMB3 zp,X
-| TMB3 abs
-| TMB3 zp
+| TMB#3 zp,X
+| TMB#3 abs
+| TMB#3 zp
 | 
-| RMB3 zp,X
-| RMB3 abs
-| RMB3 zp
-| RDL4 zp
-| ROL4 zp
-| 
-| 
+| RMB#3 zp,X
+| RMB#3 abs
+| RMB#3 zp
+| RDL#4 zp
+| ROL#4 zp
 | 
 | 
 | 
-| BBR3 zp,rel
+| 
+| 
+| BBR#3 zp,rel
 
 h| 4
 | 
-| TMB4 zp,X
-| TMB4 abs
-| TMB4 zp
+| TMB#4 zp,X
+| TMB#4 abs
+| TMB#4 zp
 | 
-| RMB4 zp,X
-| RMB4 abs
-| RMB4 zp
-| RDL5 zp
-| ROL5 zp
-| 
-| 
+| RMB#4 zp,X
+| RMB#4 abs
+| RMB#4 zp
+| RDL#5 zp
+| ROL#5 zp
 | 
 | 
 | 
-| BBR4 zp,rel
+| 
+| 
+| BBR#4 zp,rel
 
 h| 5
 | 
-| TMB5 zp,X
-| TMB5 abs
-| TMB5 zp
+| TMB#5 zp,X
+| TMB#5 abs
+| TMB#5 zp
 | 
-| RMB5 zp,X
-| RMB5 abs
-| RMB5 zp
-| RDL6 zp
-| ROL6 zp
-| 
-| 
+| RMB#5 zp,X
+| RMB#5 abs
+| RMB#5 zp
+| RDL#6 zp
+| ROL#6 zp
 | 
 | 
 | 
-| BBR5 zp,rel
+| 
+| 
+| BBR#5 zp,rel
 
 h| 6
 | 
-| TMB6 zp,X
-| TMB6 abs
-| TMB6 zp
+| TMB#6 zp,X
+| TMB#6 abs
+| TMB#6 zp
 | 
-| RMB6 zp,X
-| RMB6 abs
-| RMB6 zp
-| RDL7 zp
-| ROL7 zp
-| 
-| 
+| RMB#6 zp,X
+| RMB#6 abs
+| RMB#6 zp
+| RDL#7 zp
+| ROL#7 zp
 | 
 | 
 | 
-| BBR6 zp,rel
+| 
+| 
+| BBR#6 zp,rel
 
 h| 7
 | 
-| TMB7 zp,X
-| TMB7 abs
-| TMB7 zp
+| TMB#7 zp,X
+| TMB#7 abs
+| TMB#7 zp
 | 
-| RMB7 zp,X
-| RMB7 abs
-| RMB7 zp
-| RDL8 zp
-| ROL8 zp
-| 
-| 
+| RMB#7 zp,X
+| RMB#7 abs
+| RMB#7 zp
+| RDL#8 zp
+| ROL#8 zp
 | 
 | 
 | 
-| BBR7 zp,rel
+| 
+| 
+| BBR#7 zp,rel
 
 h| 8
 | 
@@ -170,17 +170,17 @@ h| 8
 | 
 | 
 | 
-| SMB0 zp,X
-| SMB0 abs
-| SMB0 zp
-| RDR1 zp
-| ROR1 zp
+| SMB#0 zp,X
+| SMB#0 abs
+| SMB#0 zp
+| RDR#1 zp
+| ROR#1 zp
 | 
 | 
 | 
 | 
 | 
-| BBS0 zp,rel
+| BBS#0 zp,rel
 
 h| 9
 | 
@@ -188,17 +188,17 @@ h| 9
 | 
 | 
 | 
-| SMB1 zp,X
-| SMB1 abs
-| SMB1 zp
-| RDR2 zp
-| ROR2 zp
+| SMB#1 zp,X
+| SMB#1 abs
+| SMB#1 zp
+| RDR#2 zp
+| ROR#2 zp
 | 
 | 
 | 
 | 
 | 
-| BBS1 zp,rel
+| BBS#1 zp,rel
 
 h| A
 | 
@@ -206,17 +206,17 @@ h| A
 | 
 | 
 | 
-| SMB2 zp,X
-| SMB2 abs
-| SMB2 zp
-| RDR3 zp
-| ROR3 zp
+| SMB#2 zp,X
+| SMB#2 abs
+| SMB#2 zp
+| RDR#3 zp
+| ROR#3 zp
 | 
 | 
 | 
 | 
 | 
-| BBS2 zp,rel
+| BBS#2 zp,rel
 
 h| B
 | 
@@ -224,17 +224,17 @@ h| B
 | 
 | 
 | 
-| SMB3 zp,X
-| SMB3 abs
-| SMB3 zp
-| RDR4 zp
-| ROR4 zp
+| SMB#3 zp,X
+| SMB#3 abs
+| SMB#3 zp
+| RDR#4 zp
+| ROR#4 zp
 | 
 | 
 | 
 | 
 | 
-| BBS3 zp,rel
+| BBS#3 zp,rel
 
 h| C
 | 
@@ -242,17 +242,17 @@ h| C
 | 
 | 
 | 
-| SMB4 zp,X
-| SMB4 abs
-| SMB4 zp
-| RDR5 zp
-| ROR5 zp
+| SMB#4 zp,X
+| SMB#4 abs
+| SMB#4 zp
+| RDR#5 zp
+| ROR#5 zp
 | 
 | 
 | 
 | 
 | 
-| BBS4 zp,rel
+| BBS#4 zp,rel
 
 h| D
 | 
@@ -260,17 +260,17 @@ h| D
 | 
 | 
 | 
-| SMB5 zp,X
-| SMB5 abs
-| SMB5 zp
-| RDR6 zp
-| ROR6 zp
+| SMB#5 zp,X
+| SMB#5 abs
+| SMB#5 zp
+| RDR#6 zp
+| ROR#6 zp
 | 
 | 
 | 
 | 
 | 
-| BBS5 zp,rel
+| BBS#5 zp,rel
 
 h| E
 | 
@@ -278,17 +278,17 @@ h| E
 | 
 | 
 | 
-| SMB6 zp,X
-| SMB6 abs
-| SMB6 zp
-| RDR7 zp
-| ROR7 zp
+| SMB#6 zp,X
+| SMB#6 abs
+| SMB#6 zp
+| RDR#7 zp
+| ROR#7 zp
 | 
 | 
 | 
 | 
 | 
-| BBS6 zp,rel
+| BBS#6 zp,rel
 
 h| F
 | 
@@ -296,17 +296,17 @@ h| F
 | 
 | 
 | 
-| SMB7 zp,X
-| SMB7 abs
-| SMB7 zp
-| RDR8 zp
-| ROR8 zp
+| SMB#7 zp,X
+| SMB#7 abs
+| SMB#7 zp
+| RDR#8 zp
+| ROR#8 zp
 | 
 | 
 | 
 | 
 | 
-| BBS7 zp,rel
+| BBS#7 zp,rel
 
 |===
 

@@ -82,7 +82,9 @@ echo "Run: " $0 $src $target $base
 		fi
 		mv $t2 $t1
 
-		# insert opcode descriptions
+		#----------------------------------------------
+		# std
+		#		# insert opcode descriptions
 		doinsert1 $t1 $t2 "@OPCODES1@"
 		v=$?
 		if [ $v -eq 1 ]; then
@@ -104,6 +106,9 @@ echo "Run: " $0 $src $target $base
 		fi
 		mv $t2 $t1
 
+		#----------------------------------------------
+		# EXT
+		#
 		# insert opcode descriptions
 		doinsert1 $t1 $t2 "@OPCODES3@"
 		v=$?
@@ -126,6 +131,82 @@ echo "Run: " $0 $src $target $base
 		fi
 		mv $t2 $t1
 
+		#----------------------------------------------
+		# SYS
+		#
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES5A@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/sys-table-$base.$ext"
+			cat $gendir/sys-table-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES5A@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES6@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/sys-table-$base.$ext"
+			cat $gendir/sys-desc-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES6@"
+		fi
+		mv $t2 $t1
+
+		#----------------------------------------------
+		# QUICK
+		#
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES7@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/quick-table-$base.$ext"
+			cat $gendir/quick-table-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES7@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES8@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/quick-table-$base.$ext"
+			cat $gendir/quick-desc-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES8@"
+		fi
+		mv $t2 $t1
+
+		#----------------------------------------------
+		# TXFER
+		#
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES9@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/txfer-table-$base.$ext"
+			cat $gendir/txfer-table-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES9@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@OPCODES10@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/txfer-table-$base.$ext"
+			cat $gendir/txfer-desc-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@OPCODES10@"
+		fi
+		mv $t2 $t1
+
+		#----------------------------------------------
 		# insert opcode descriptions
 		doinsert1 $t1 $t2 "@OPCODES5@"
 		v=$?
@@ -145,6 +226,39 @@ echo "Run: " $0 $src $target $base
 			cat $gendir/ext-longtable-$base.$ext \
 				>> $t2
 			doinsert2 $t1 $t2 "@EXTLONG@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@SYSLONG@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/sys-longtable-$base.$ext"
+			cat $gendir/sys-longtable-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@SYSLONG@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@QUICKLONG@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/quick-longtable-$base.$ext"
+			cat $gendir/quick-longtable-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@QUICKLONG@"
+		fi
+		mv $t2 $t1
+
+		# insert opcode descriptions
+		doinsert1 $t1 $t2 "@TXFERLONG@"
+		v=$?
+		if [ $v -eq 1 ]; then
+			echo "$gendir/txfer-longtable-$base.$ext"
+			cat $gendir/txfer-longtable-$base.$ext \
+				>> $t2
+			doinsert2 $t1 $t2 "@TXFERLONG@"
 		fi
 		mv $t2 $t1
 
@@ -179,6 +293,21 @@ echo "Run: " $0 $src $target $base
 		fi
 		mv $t2 $t1
 
+		#-----------------------------------------
+		# last modified date
+		#
+		if [ ! -f $to ]; then
+			LASTMOD=`date +%d-%m-%Y`
+		else
+			LASTMOD=`git log -1 --format=%cd --date=short $to`
+		fi
+		# insert disclaimer
+		cat $t1 | sed -e "s/@LASTMODDATE@/$LASTMOD/" > $t2
+		mv $t2 $t1
+
+		#-----------------------------------------
+		# finals
+		#
 		#echo "from " $t4 " to " $t5
 		cat $t1 \
 			| sed -e "s/@EMAIL@/afachat@gmx.de/g" \

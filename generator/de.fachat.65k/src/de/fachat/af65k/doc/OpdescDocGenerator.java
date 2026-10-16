@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import de.fachat.af65k.logging.Logger;
+import de.fachat.af65k.logging.LoggerImpl;
 import de.fachat.af65k.model.objs.AddressingMode;
 import de.fachat.af65k.model.objs.Category;
 import de.fachat.af65k.model.objs.Doc;
@@ -50,6 +52,9 @@ public class OpdescDocGenerator {
 
 	final Validator cpu;
 
+	final Logger log = new LoggerImpl();
+	
+	
 	public OpdescDocGenerator(Validator mycpu) {
 		cpu = mycpu;
 	}
@@ -155,6 +160,8 @@ public class OpdescDocGenerator {
 			Operation op = en.getValue();
 			String name = en.getKey();
 			
+			log.info("Processing operation: " + name);
+
 			if (op.getClazz() == null || fclasses.contains(op.getClazz())) {
 
 				wr.startSubsection(name);

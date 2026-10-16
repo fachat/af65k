@@ -287,7 +287,13 @@ At one time this path was the critical path for the timing calculations.
 
 The current version (as of april 11, 2012) has a maximum of 32 levels of logic and a clock limit of about 12 MHz when implemented in a 4ns Spartan 3. This is the result of a long path length, that also seems to be routed all across the CPU. I don't really understand those paths yet though. The paths that are shown in the tool's analysis should not exist...
 
+== Disclaimer
+
+All Copyrights are acknowledged.
+The information here is provided under the terms as described
+in link:af65002front.adoc#lic[the license section].
+
 '''
 
-
+Last updated 2026-10-13.
 

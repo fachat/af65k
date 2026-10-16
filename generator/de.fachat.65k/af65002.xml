@@ -283,11 +283,9 @@
 				</p>
 				<pre>
 					Stack(SP--) &amp;lt;= &gt; NextPC
-					Stack(SP--) &amp;lt;= &amp;lt;
-					NextPC
+					Stack(SP--) &amp;lt;= &amp;lt; NextPC
 					Stack(SP--) &amp;lt;= Status | B | I
-					PC
-					&amp;lt;= ($FFFE)
+					PC &amp;lt;= ($FFFE)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -1361,8 +1359,7 @@
 				</p>
 				<pre>
 					Stack(SP--) &amp;lt;= &gt; NextPC-1
-					Stack(SP--) &amp;lt;=
-					&amp;lt; NextPC-1
+					Stack(SP--) &amp;lt;= &amp;lt; NextPC-1
 					PC &amp;lt;= Operand
 				</pre>
 			</doc>
@@ -1415,8 +1412,7 @@
 				<pre>
 					Stack(SP--) &amp;lt;= &gt; PBR
 					Stack(SP--) &amp;lt;= &gt; NextPC-1
-					Stack(SP--) &amp;lt;=
-					&amp;lt; NextPC-1
+					Stack(SP--) &amp;lt;= &amp;lt; NextPC-1
 					PC &amp;lt;= Operand
 				</pre>
 			</doc>
@@ -1457,8 +1453,7 @@
 				</p>
 				<pre>
 					Stack(SP--) &amp;lt;= &gt; NextPC-1
-					Stack(SP--) &amp;lt;=
-					&amp;lt; NextPC-1
+					Stack(SP--) &amp;lt;= &amp;lt; NextPC-1
 					PC &amp;lt;= NextPC + Operand
 				</pre>
 			</doc>
@@ -1580,11 +1575,9 @@
 				</p>
 				<pre>
 					Status &amp;lt;= Stack(++SP) -- bit 5=1
-					Tmp(0-7) &amp;lt;=
-					Stack(++SP)
+					Tmp(0-7) &amp;lt;= Stack(++SP)
 					Tmp(8-15) &amp;lt;= Stack(++SP)
-					PC &amp;lt;=
-					Tmp;
+					PC &amp;lt;= Tmp;
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -1607,12 +1600,9 @@
 				</p>
 				<pre>
 					Status &amp;lt;= Stack(++SP) -- bit 5=0
-					ExtStatus &amp;lt;=
-					Stack(++SP)
+					ExtStatus &amp;lt;= Stack(++SP)
 					Tmp(0-7) &amp;lt;= Stack(++SP)
-					Tmp(8-15)
-					&amp;lt;=
-					Stack(++SP)
+					Tmp(8-15) &amp;lt;= Stack(++SP)
 					...
 					PC &amp;lt;= Tmp;
 				</pre>
@@ -1721,8 +1711,7 @@
 				<pre>
 					Tmp &amp;lt;= operand &amp;amp; AC
 					Z &amp;lt;= Z(Tmp)
-					operand
-					&amp;lt; operand | AC
+					operand &amp;lt; operand | AC
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -1800,8 +1789,7 @@
 				<pre>
 					Tmp &amp;lt;= operand &amp;amp; AC
 					Z &amp;lt;= Z(Tmp)
-					operand
-					&amp;lt; operand | AC
+					operand &amp;lt; operand | AC
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -1888,8 +1876,7 @@
 				<pre>
 					N &amp;lt;= Operand(7)
 					V &amp;lt;= Operand(6)
-					Tmp &amp;lt;=
-					Operand &amp;amp; AC
+					Tmp &amp;lt;= Operand &amp;amp; AC
 					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
@@ -2224,6 +2211,7 @@
 					appropriately.
 				</p>
 				<pre>
+					AC &amp;lt;= Operand
 					N &amp;lt;= Operand(7)
 					Z &amp;lt;= Z(Operand)
 					Y &amp;lt;= Operand
@@ -2425,8 +2413,7 @@
 				<pre>
 					Tmp, C &amp;lt;= Z - Operand, C=1
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -2566,8 +2553,7 @@
 				<pre>
 					Tmp, C &amp;lt;= Y - Operand, C=1
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -2846,8 +2832,7 @@
 				<pre>
 					AC &amp;lt;= AC &amp;amp; Operand
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -3135,8 +3120,7 @@
 				<pre>
 					AC, C, V &amp;lt;= AC + Operand, C
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 				<p>
 					For a handling of the V-flag please see
@@ -3274,8 +3258,7 @@
 				<pre>
 					AC, C, V &amp;lt;= AC + Operand
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 				<p>
 					For a handling of the V-flag please see
@@ -3434,8 +3417,7 @@
 				<pre>
 					AC, C, V &amp;lt;= AC - Operand, C
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 				<p>
 					For a handling of the V-flag please see
@@ -3498,8 +3480,7 @@
 				<pre>
 					AC, C, V &amp;lt;= AC - Operand
 					N &amp;lt;= Tmp(7)
-					Z &amp;lt;=
-					Z(Tmp)
+					Z &amp;lt;= Z(Tmp)
 				</pre>
 				<p>
 					For a handling of the V-flag please see
@@ -3611,9 +3592,8 @@
 				<pre>
 					C &amp;lt;= AC(0)
 					AC(6-0) &amp;lt;= AC(7-1)
-					N &amp;lt;= AC7)
-					Z
-					&amp;lt;= Z(AC)
+					N &amp;lt;= AC(7)
+					Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -3685,14 +3665,14 @@
 				<opcode>0x3d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
-			<opcodes>
+			<!--opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x08</opcode>
 				<oppage>QUICK</oppage>
 				<feature>65k</feature>
 				<expand>0x70</expand>
 				<expand8>true</expand8>
-			</opcodes>
+			</opcodes-->
 			<doc>
 				<p>
 					Shift the operand or accumulator left one bit (i.e. multiply by
@@ -3714,9 +3694,106 @@
 					C &amp;lt;= AC(7)
 					AC(7-1) &amp;lt;= AC(6-0)
 					AC(0) &amp;lt;= C
-					N
-					&amp;lt;= AC7)
+					N &amp;lt;= AC7)
 					Z &amp;lt;= Z(AC)
+				</pre>
+			</doc>
+			<doc mode="65k">
+				<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p>
+				<p>
+					RS also determine the width of the operation. There is no LE prefix,
+					as the read and write widths are the same.
+					Note that the default is to use BYTE-wide operation without load
+					extension.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>RDL#</name>
+			<category>alu</category>
+			<desc>Rotate Direct Left - similar to ROL, but do not shift in carry,
+				but the highest bit of the original value
+			</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<feature>65k</feature>
+			<!--opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x26</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>A</addressingMode>
+				<opcode>0x2a</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x2e</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x36</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x3e</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x3f</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0x3d</opcode>
+				<oppage>EXT</oppage>
+			</opcodes-->
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x08</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<doc>
+				<p>
+					Shift the operand or accumulator left N bits as given by the opcode expansion
+					Shift
+					in the uppermost bits of
+					the original
+					value from the
+					right.
+					The last bit shifted is also moved into the carry flag.
+					Note this
+					opcode is a read-modify-write opcode
+					and not only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p>
+				<pre>
+					N times
+					  C &amp;lt;= AC(7)
+					  AC(7-1) &amp;lt;= AC(6-0)
+					  AC(0) &amp;lt;= C
+					  N &amp;lt;= AC7)
+					  Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -3786,14 +3863,14 @@
 				<opcode>0x7d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
-			<opcodes>
+			<!--opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x88</opcode>
 				<oppage>QUICK</oppage>
 				<feature>65k</feature>
 				<expand>0x70</expand>
 				<expand8>true</expand8>
-			</opcodes>
+			</opcodes-->
 			<doc>
 				<p>
 					Shift the operand or accumulator right one bit (i.e. divide by
@@ -3814,9 +3891,110 @@
 					C &amp;lt;= AC(0)
 					AC(6-0) &amp;lt;= AC(7-1)
 					AC(7) &amp;lt;= C
-					N
-					&amp;lt;= AC7)
+					N &amp;lt;= AC(7)
 					Z &amp;lt;= Z(AC)
+				</pre>
+			</doc>
+			<doc mode="65k">
+				<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p>
+				<p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>RDR#</name>
+			<category>alu</category>
+			<feature>65k</feature>
+			<desc>Rotate Direct Right - similar to ROR, but do not shift in
+				carry,
+				but the lowest bit of the original value
+			</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<!--opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x66</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>A</addressingMode>
+				<opcode>0x6a</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x6e</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x76</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x7e</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x7f</opcode>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0x7d</opcode>
+				<oppage>EXT</oppage>
+			</opcodes-->
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x88</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<doc>
+				<p>
+					Shift the operand or accumulator right N bits as given by the opcode expansion. Shift
+					in lowermost bits of
+					the original
+					value from the
+					left.
+					The last bit shifted out is also moved into the carry flag.
+					Note this
+					opcode is a read-modify-write opcode
+					and not only has
+					memory-oriented addressing modes but can work
+					on the accumulator
+					alone as well.
+				</p>
+				<pre>
+					N times:
+					  C &amp;lt;= AC(0)
+					  AC(6-0) &amp;lt;= AC(7-1)
+					  AC(7) &amp;lt;= C
+					  N &amp;lt;= AC(7)
+					  Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -3905,8 +4083,7 @@
 					C &amp;lt;= AC(7)
 					AC(7-1) &amp;lt;= AC(6-0)
 					AC(0) &amp;lt;= 0
-					N
-					&amp;lt;= AC7)
+					N &amp;lt;= AC(7)
 					Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
@@ -3993,8 +4170,7 @@
 					C &amp;lt;= AC(0)
 					AC(6-0) &amp;lt;= AC(7-1)
 					AC(7) &amp;lt;= 0
-					N
-					&amp;lt;= AC7)
+					N &amp;lt;= AC(7)
 					Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
@@ -4066,14 +4242,14 @@
 				<opcode>0x2d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
-			<opcodes>
+			<!--opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x09</opcode>
 				<oppage>QUICK</oppage>
 				<feature>65k</feature>
 				<expand>0x70</expand>
 				<expand8>true</expand8>
-			</opcodes>
+			</opcodes-->
 			<doc>
 				<p>
 					Shift the operand or accumulator left one bit (i.e. multiply by
@@ -4093,17 +4269,108 @@
 					Tmp &amp;lt;= AC(7)
 					AC(7-1) &amp;lt;= AC(6-0)
 					AC(0) &amp;lt;= C
-					C
-					&amp;lt;= Tmp
-					N &amp;lt;= AC7)
+					C &amp;lt;= Tmp
+					N &amp;lt;= AC(7)
 					Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
 				<p>
 					The AM, OF and RS prefixes are evaluated by the addressing modes.
-					UM
-					determines
+					UM determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p>
+				<p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>ROL#</name>
+			<category>alu</category>
+			<desc>Rotate Left - shift accumulator one bit to the left, shifting
+				in
+				the carry flag in bit 0, and shifting the
+				highest bit into the
+				carry flag instead.
+			</desc>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<!--opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x26</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>A</addressingMode>
+				<opcode>0x2a</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x2e</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x36</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x3e</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x2f</opcode>
+				<feature>65k</feature>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0x2d</opcode>
+				<oppage>EXT</oppage>
+			</opcodes-->
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x09</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<doc>
+				<p>
+					Shift the operand or accumulator left N bits as given by the opcode expansion, and shift these bits back in from the right, via the Carry flag.
+					Note this opcode is a read-modify-write
+					opcode and not only has
+					memory-oriented addressing modes but can
+					work
+					on the accumulator alone as well.
+				</p>
+				<pre>
+					N times
+					  Tmp &amp;lt;= AC(7)
+				  	  AC(7-1) &amp;lt;= AC(6-0)
+					  AC(0) &amp;lt;= C
+					  C &amp;lt;= Tmp
+					  N &amp;lt;= AC(7)
+					  Z &amp;lt;= Z(AC)
+				</pre>
+			</doc>
+			<doc mode="65k">
+				<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM determines
 					whether the operand is in user
 					space. NF allows to not
 					set the flags.
@@ -4168,14 +4435,14 @@
 				<opcode>0x6d</opcode>
 				<oppage>EXT</oppage>
 			</opcodes>
-			<opcodes>
+			<!--opcodes>
 				<addressingMode>zp</addressingMode>
 				<opcode>0x89</opcode>
 				<oppage>QUICK</oppage>
 				<feature>65k</feature>
 				<expand>0x70</expand>
 				<expand8>true</expand8>
-			</opcodes>
+			</opcodes-->
 			<doc>
 				<p>
 					Shift the operand or accumulator right one bit (i.e. divide by
@@ -4194,10 +4461,104 @@
 					Tmp &amp;lt;= AC(0)
 					AC(6-0) &amp;lt;= AC(7-1)
 					AC(7) &amp;lt;= C
-					C
-					&amp;lt;= Tmp
+					C &amp;lt;= Tmp
 					N &amp;lt;= AC7)
 					Z &amp;lt;= Z(AC)
+				</pre>
+			</doc>
+			<doc mode="65k">
+				<p>
+					The AM, OF and RS prefixes are evaluated by the addressing modes.
+					UM
+					determines
+					whether the operand is in user
+					space. NF allows to not
+					set the flags.
+				</p>
+				<p>
+					RS also determine the width of the operation. There is no LE
+					prefix,
+					as the read and write
+					widths are the same.
+					Note
+					that the
+					default is to use BYTE-wide operation without load
+					extension.
+				</p>
+			</doc>
+		</operation>
+
+		<operation>
+			<name>ROR#</name>
+			<category>alu</category>
+			<desc>Rotate Right - shift accumulator one bit to the right, shifting
+				in the carry flag in the highest bit, and
+				shifting
+				bit 0 into the
+				carry flag instead.
+			</desc>
+			<feature>ror</feature>
+			<prefixBits>AM</prefixBits>
+			<prefixBits>OF</prefixBits>
+			<prefixBits>RS</prefixBits>
+			<prefixBits>UM</prefixBits>
+			<prefixBits>NF</prefixBits>
+			<!--opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x66</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>A</addressingMode>
+				<opcode>0x6a</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>abs</addressingMode>
+				<opcode>0x6e</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>zpx</addressingMode>
+				<opcode>0x76</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absx</addressingMode>
+				<opcode>0x7e</opcode>
+			</opcodes>
+			<opcodes>
+				<addressingMode>absy</addressingMode>
+				<opcode>0x6f</opcode>
+				<feature>65k</feature>
+				<oppage>EXT</oppage>
+			</opcodes>
+			<opcodes>
+				<addressingMode>eind</addressingMode>
+				<opcode>0x6d</opcode>
+				<oppage>EXT</oppage>
+			</opcodes-->
+			<opcodes>
+				<addressingMode>zp</addressingMode>
+				<opcode>0x89</opcode>
+				<oppage>QUICK</oppage>
+				<feature>65k</feature>
+				<expand>0x70</expand>
+				<expand8>true</expand8>
+			</opcodes>
+			<doc>
+				<p>
+					Shift the operand or accumulator right N bits as given by the opcode expansion and shift them back in from the left, via the carry flag.
+					Note this opcode is a read-modify-write
+					opcode and not only has
+					memory-oriented addressing modes but can
+					work
+					on the accumulator alone as well.
+				</p>
+				<pre>
+					N times: 
+					  Tmp &amp;lt;= AC(0)
+					  AC(6-0) &amp;lt;= AC(7-1)
+					  AC(7) &amp;lt;= C
+					  C &amp;lt;= Tmp
+					  N &amp;lt;= AC7)
+					  Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -4301,8 +4662,7 @@
 				<pre>
 					Operand &amp;lt;= Operand + 1
 					N &amp;lt;= OperandC7)
-					Z &amp;lt;=
-					Z(AC)
+					Z &amp;lt;= Z(AC)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -4406,9 +4766,8 @@
 				</p>
 				<pre>
 					Operand &amp;lt;= Operand - 1
-					N &amp;lt;= OperandC7)
-					Z &amp;lt;=
-					Z(AC)
+					N &amp;lt;= Operand(7)
+					Z &amp;lt;= Z(Operand)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -5077,12 +5436,9 @@
 				</p>
 				<pre>
 					Stack(SP--) &amp;lt;= &gt; NextPC-1
-					Stack(SP--) &amp;lt;=
-					&amp;lt; NextPC-1
+					Stack(SP--) &amp;lt;= &amp;lt; NextPC-1
 					Stack(SP--) &amp;lt;= ExtStatus
-					PC
-					&amp;lt;=
-					TrapVector(Operand)
+					PC &amp;lt;= TrapVector(Operand)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -5131,7 +5487,7 @@
 			<desc>Return from trap handler.</desc>
 			<feature>65k</feature>
 			<opcodes>
-				<addressingMode>imm</addressingMode>
+				<addressingMode>implied</addressingMode>
 				<opcode>0x60</opcode>
 				<oppage>SYS</oppage>
 			</opcodes>
@@ -5149,8 +5505,7 @@
 					&gt;Tmp &amp;lt;= Stack(++SP)
 					Tmp &amp;lt;= Tmp+1
 					PC &amp;lt;= Tmp;
-					ExtStatus
-					&amp;lt;= Stack(++SP)
+					ExtStatus &amp;lt;= Stack(++SP)
 				</pre>
 			</doc>
 			<doc mode="65k">
@@ -5167,11 +5522,6 @@
 				</p>
 				<p>
 					The stack pointer used is that of the hypervisor stack.
-				</p>
-				<p>
-					Note for future expansions the RS prefix may extend the number of
-					traps
-					to word, or even wider widths.
 				</p>
 				<p>
 					When executed in user mode, this opcode triggers an ABORT
@@ -8384,7 +8734,7 @@
 		<!-- Rockwell CMOS Bit test/set/branch operations -->
 
 		<operation>
-			<name>RMB</name>
+			<name>RMB#</name>
 			<category>bit</category>
 			<desc>Reset memory bit</desc>
 			<feature>rcmos</feature>
@@ -8422,7 +8772,7 @@
 		</operation>
 
 		<operation>
-			<name>SMB</name>
+			<name>SMB#</name>
 			<category>bit</category>
 			<desc>Set memory bit</desc>
 			<feature>rcmos</feature>
@@ -8460,7 +8810,7 @@
 		</operation>
 
 		<operation>
-			<name>BBR</name>
+			<name>BBR#</name>
 			<category>bit</category>
 			<desc>Branch on bit reset</desc>
 			<feature>rcmos</feature>
@@ -8489,7 +8839,7 @@
 		</operation>
 
 		<operation>
-			<name>BBS</name>
+			<name>BBS#</name>
 			<category>bit</category>
 			<desc>Branch on bit set</desc>
 			<feature>rcmos</feature>
@@ -9191,7 +9541,7 @@
 		<!-- QUICK opcode page, mostly with a 3-bit param encoded in the opcode -->
 		
 		<operation>
-			<name>TMB</name>
+			<name>TMB#</name>
 			<category>bit</category>
 			<desc>Test memory bit</desc>
 			<feature>65k</feature>

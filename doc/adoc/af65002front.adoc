@@ -54,25 +54,58 @@ h| Date
 h| Author
 h| Changes
 
-| 2010-10-23
+| 2026-10-16
 | André Fachat
-| First working draft
+| 
+* reversed history on this page (now going backwards, with newest on top)
+* enable github pages workflow, so can now be found on link:https://fachat.github.io/af65k/af65002front.html[github pages]
+* Small cleanup: put the extended ROR, ROL, RDR, RDL into own operation sections in master xml, so can use different opcode descriptions
+* Made RTU use implied addressing mode
+* Added doc generator for asciidoc
+* Added missing table (for opcode extension pages)s
 
-| 2010-11-04
-| André Fachat
-| Defined the interrupt status/mask/effective mask register; Constrained the interrupt/trap/abort vectors to two-byte vectors; integrated the various extra registers into the configuration register file (for less opcodes necessary); add WAI, STP and FIL/FILU
 
-| 2010-12-22
-| André Fachat
-| Added the "NF" prefix bit
 
-| 2010-12-28
+| 2012-04-29
 | André Fachat
-| Moved some LSB $f opcodes to the extension page to add STX abs,Y and STY abs,X
+| 
+* Reorganized the EXT page. It's less oriented on the standard page, but much more regular now.
+* Added LEA and PEA addressing modes for zp/abs indirect quad, plus zp/abs indirect/indexed quad modes that were all missing.
+* Added the ADD and SUB opcodes with immediate and E-indirect addressing modes.
+* Added all missing tables, plus a TODO section on this page
 
-| 2011-01-02
+
+
+| 2012-04-23
 | André Fachat
-| Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes
+| 
+* Separated the one-pager into multiple pages and integrated into the af65002 doc build process
+* Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more possible future expansions (prefix3 could now be $8F-$FF).
+
+
+
+| 2011-12-31
+| André Fachat
+| 
+* Replace manually maintained tables (std/EXT pages and addressing modes) with ones generated from an XML file which will be the basis for an assembler and some VHDL code generation.
+* Added LEA/PEA with relwide addressing modes
+* Cleared up some flag settings
+* Add the RDR/RDL/ASR opcodes, moved a number of opcodes around in the EXT page, also rearranged the QUICK page to accomodate for the new opcodes.
+
+
+
+| 2011-12-23
+| André Fachat
+| 
+* Remove the EE prefix bit, and replace it with a second bit for the ZE extension - to allow to extend with ones and with the sign. Semantics of ZE changed as well, thus renamed to LE, load extend. Old ZE functionality is covered by EXT opcode
+* Fix the description of the SLX/SLY/SRX/SRY opcodes
+* Deprecated CLX/CLY opcodes, changed CLA to full width only
+* Added "BIT A" variant
+* Removed CUT, as it is the same as EXT
+* Some small changes here and there, esp. clarifications around the interrupt handling
+* Added the Software Compatibility section
+
+
 
 | 2011-05-01
 | André Fachat
@@ -95,46 +128,25 @@ h| Changes
 
 
 
-| 2011-12-23
+| 2011-01-02
 | André Fachat
-| 
-* Remove the EE prefix bit, and replace it with a second bit for the ZE extension - to allow to extend with ones and with the sign. Semantics of ZE changed as well, thus renamed to LE, load extend. Old ZE functionality is covered by EXT opcode
-* Fix the description of the SLX/SLY/SRX/SRY opcodes
-* Deprecated CLX/CLY opcodes, changed CLA to full width only
-* Added "BIT A" variant
-* Removed CUT, as it is the same as EXT
-* Some small changes here and there, esp. clarifications around the interrupt handling
-* Added the Software Compatibility section
+| Moved some opcodes to achieve a more regular mapping of opcodes and addressing modes
 
-
-
-| 2011-12-31
+| 2010-12-28
 | André Fachat
-| 
-* Replace manually maintained tables (std/EXT pages and addressing modes) with ones generated from an XML file which will be the basis for an assembler and some VHDL code generation.
-* Added LEA/PEA with relwide addressing modes
-* Cleared up some flag settings
-* Add the RDR/RDL/ASR opcodes, moved a number of opcodes around in the EXT page, also rearranged the QUICK page to accomodate for the new opcodes.
+| Moved some LSB $f opcodes to the extension page to add STX abs,Y and STY abs,X
 
-
-
-| 2012-04-23
+| 2010-12-22
 | André Fachat
-| 
-* Separated the one-pager into multiple pages and integrated into the af65002 doc build process
-* Moved some new "abs,Y" opcodes from column F to the EXT page, to free some space for more possible future expansions (prefix3 could now be $8F-$FF).
+| Added the "NF" prefix bit
 
-
-
-| 2012-04-29
+| 2010-11-04
 | André Fachat
-| 
-* Reorganized the EXT page. It's less oriented on the standard page, but much more regular now.
-* Added LEA and PEA addressing modes for zp/abs indirect quad, plus zp/abs indirect/indexed quad modes that were all missing.
-* Added the ADD and SUB opcodes with immediate and E-indirect addressing modes.
-* Added all missing tables, plus a TODO section on this page
+| Defined the interrupt status/mask/effective mask register; Constrained the interrupt/trap/abort vectors to two-byte vectors; integrated the various extra registers into the configuration register file (for less opcodes necessary); add WAI, STP and FIL/FILU
 
-
+| 2010-10-23
+| André Fachat
+| First working draft
 
 |===
 
@@ -146,5 +158,5 @@ in link:af65002front.adoc#lic[the license section].
 
 '''
 
-Last updated 2012-04-23.
+Last updated 2026-10-13.
 

@@ -811,8 +811,7 @@
 					C &lt;= AC(0)
 					AC(6-0) &lt;= AC(7-1)
 					N &lt;= AC7)
-					Z
-					&lt;= Z(AC)
+					Z &lt;= Z(AC)
 				</pre><h2>ASW</h2>
 <a name="ASW"> </a><p>Arithmethic Shift left Word</p>
 <table class="optable"><tr><th colspan="6">ASW</th></tr>
@@ -1155,9 +1154,8 @@
 					Tmp &lt;= AC(7)
 					AC(7-1) &lt;= AC(6-0)
 					AC(0) &lt;= C
-					C
-					&lt;= Tmp
-					N &lt;= AC7)
+					C &lt;= Tmp
+					N &lt;= AC(7)
 					Z &lt;= Z(AC)
 				</pre><h2>ROR</h2>
 <a name="ROR"> </a><p>Rotate Right - shift accumulator one bit to the right, shifting
@@ -1238,7 +1236,7 @@
 					.
 				</p><h2>BBR#</h2>
 <a name="BBR#"> </a><p>Branch on bit reset</p>
-<table class="optable"><tr><th colspan="6">BBR</th></tr>
+<table class="optable"><tr><th colspan="6">BBR#</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0xf</td><td>rcmos_bbx</td><td>ZP with branch</td><td>#0</td></tr>
 <tr><td></td><td>0x1f</td><td>rcmos_bbx</td><td>ZP with branch</td><td>#1</td></tr>
@@ -1255,7 +1253,7 @@
 					address.
 				</p><h2>BBS#</h2>
 <a name="BBS#"> </a><p>Branch on bit set</p>
-<table class="optable"><tr><th colspan="6">BBS</th></tr>
+<table class="optable"><tr><th colspan="6">BBS#</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x8f</td><td>rcmos_bbx</td><td>ZP with branch</td><td>#0</td></tr>
 <tr><td></td><td>0x9f</td><td>rcmos_bbx</td><td>ZP with branch</td><td>#1</td></tr>
@@ -1303,7 +1301,7 @@
 					Z &lt;= Z(Tmp)
 				</pre><h2>RMB#</h2>
 <a name="RMB#"> </a><p>Reset memory bit</p>
-<table class="optable"><tr><th colspan="6">RMB</th></tr>
+<table class="optable"><tr><th colspan="6">RMB#</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x7</td><td>rcmos_bbx</td><td>Zeropage</td><td>#0</td></tr>
 <tr><td></td><td>0x17</td><td>rcmos_bbx</td><td>Zeropage</td><td>#1</td></tr>
@@ -1320,7 +1318,7 @@
 					The Z status register bit is set to the previous value of the memory bit.
 				</p><h2>SMB#</h2>
 <a name="SMB#"> </a><p>Set memory bit</p>
-<table class="optable"><tr><th colspan="6">SMB</th></tr>
+<table class="optable"><tr><th colspan="6">SMB#</th></tr>
 <tr><th>Page</th><th>Opcode</th><th>Class</th><th>Addressing Mode</th><th>Bit/Offset/Num</th></tr>
 <tr><td></td><td>0x87</td><td>rcmos_bbx</td><td>Zeropage</td><td>#0</td></tr>
 <tr><td></td><td>0x97</td><td>rcmos_bbx</td><td>Zeropage</td><td>#1</td></tr>

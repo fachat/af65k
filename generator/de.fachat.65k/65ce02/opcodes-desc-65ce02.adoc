@@ -9,8 +9,8 @@
 			
 * link:af65002opdesc.html#ASW[ASW: ]Arithmethic Shift left Word
 * link:af65002opdesc.html#AUG[AUG: ]Augmentation opcode for later extensions
-* link:af65002opdesc.html#BBR[BBR: ]Branch on bit reset
-* link:af65002opdesc.html#BBS[BBS: ]Branch on bit set
+* link:af65002opdesc.html#BBR#[BBR#: ]Branch on bit reset
+* link:af65002opdesc.html#BBS#[BBS#: ]Branch on bit set
 * link:af65002opdesc.html#BCC[BCC: ]Branch on carry clear - take branch when C flag is cleared
 			
 * link:af65002opdesc.html#BCS[BCS: ]Branch on carry set - take branch when C flag is set
@@ -82,7 +82,7 @@
 * link:af65002opdesc.html#PLX[PLX: ]Pull the contents of the X register from the stack
 * link:af65002opdesc.html#PLY[PLY: ]Pull the contents of the Y register from the stack
 * link:af65002opdesc.html#PLZ[PLZ: ]Pull Z Register from stack
-* link:af65002opdesc.html#RMB[RMB: ]Reset memory bit
+* link:af65002opdesc.html#RMB#[RMB#: ]Reset memory bit
 * link:af65002opdesc.html#ROL[ROL: ]Rotate Left - shift accumulator one bit to the left, shifting
 				in
 				the carry flag in bit 0, and shifting the
@@ -103,7 +103,7 @@
 * link:af65002opdesc.html#SED[SED: ]Set the decimal (D) flag
 * link:af65002opdesc.html#SEE[SEE: ]Set Stack Extend disable bit.
 * link:af65002opdesc.html#SEI[SEI: ]Set the interrupt (I) flag
-* link:af65002opdesc.html#SMB[SMB: ]Set memory bit
+* link:af65002opdesc.html#SMB#[SMB#: ]Set memory bit
 * link:af65002opdesc.html#STA[STA: ]Store the content of the accumulator into a memory location
 			
 * link:af65002opdesc.html#STX[STX: ]Store the content of the X register to memory.

@@ -2899,7 +2899,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| RDL
+6+h| RDL#
 
 h| Page
 h| Opcode
@@ -2969,7 +2969,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the sign (uppermost bit) of the original value from the right. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator left N bits as given by the opcode expansion Shift in the uppermost bits of the original value from the right. The last bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  N times C &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
 === 65k
 
  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
@@ -3060,7 +3060,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| RDR
+6+h| RDR#
 
 h| Page
 h| Opcode
@@ -3130,7 +3130,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in bit 0 (lowermost bit) of the original value from the left. The bit shifted is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator right N bits as given by the opcode expansion. Shift in lowermost bits of the original value from the left. The last bit shifted out is also moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  N times: C &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C N &lt;= AC7) Z &lt;= Z(AC) 
 === 65k
 
  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
@@ -3209,7 +3209,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC(7) Z &lt;= Z(AC) 
 === 65k
 
  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
@@ -3225,7 +3225,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| ROL
+6+h| ROL#
 
 h| Page
 h| Opcode
@@ -3295,7 +3295,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator left one bit (i.e. multiply by 2). Shift in the carry flag from the right. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator left N bits as given by the opcode expansion, and shift these bits back in from the right, via the Carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  N times Tmp &lt;= AC(7) AC(7-1) &lt;= AC(6-0) AC(0) &lt;= C C &lt;= Tmp N &lt;= AC(7) Z &lt;= Z(AC) 
 === 65k
 
  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
@@ -3390,7 +3390,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| ROR
+6+h| ROR#
 
 h| Page
 h| Opcode
@@ -3460,7 +3460,7 @@ h| Bit/Offset/Num
 
 === Description
 
- Shift the operand or accumulator right one bit (i.e. divide by 2). Shift in the carry flag from the left. The bit shifted out is moved into the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  Tmp &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
+ Shift the operand or accumulator right N bits as given by the opcode expansion and shift them back in from the left, via the carry flag. Note this opcode is a read-modify-write opcode and not only has memory-oriented addressing modes but can work on the accumulator alone as well.  N times: Tmp &lt;= AC(0) AC(6-0) &lt;= AC(7-1) AC(7) &lt;= C C &lt;= Tmp N &lt;= AC7) Z &lt;= Z(AC) 
 === 65k
 
  The AM, OF and RS prefixes are evaluated by the addressing modes. UM determines whether the operand is in user space. NF allows to not set the flags.  RS also determine the width of the operation. There is no LE prefix, as the read and write widths are the same. Note that the default is to use BYTE-wide operation without load extension. 
@@ -3777,7 +3777,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| BBR
+6+h| BBR#
 
 h| Page
 h| Opcode
@@ -3855,7 +3855,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| BBS
+6+h| BBS#
 
 h| Page
 h| Opcode
@@ -4015,7 +4015,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| RMB
+6+h| RMB#
 
 h| Page
 h| Opcode
@@ -4205,7 +4205,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| SMB
+6+h| SMB#
 
 h| Page
 h| Opcode
@@ -4395,7 +4395,7 @@ h| Bit/Offset/Num
 
 [cols="6*"]
 |===
-6+h| TMB
+6+h| TMB#
 
 h| Page
 h| Opcode
@@ -7389,5 +7389,5 @@ in link:af65002front.adoc#lic[the license section].
 
 '''
 
-Last updated 2012-04-23.
+Last updated 2026-10-16.
 

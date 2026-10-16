@@ -313,7 +313,10 @@
 
   </section>
 
+  <disclaimer name="Disclaimer">
+@DISCLAIMER@
+  </disclaimer>
   <closing>
-@FOOTER@
+Last updated @LASTMODDATE@.
   </closing>
 </docpage>

@@ -901,7 +901,10 @@ UM, NF, RS, AM, OF
 |===
 
 
-This table describes the EXT opcode page:
+
+The grey fields here and below note opcodes that are not used in the 65002.
+
+ These tables describes the EXT, SYS, QUICK, and TXFER opcode page:
 
 
 [cols="17*"]
@@ -1361,6 +1364,1037 @@ UM, NF, AM, OF
 |===
 
 
+
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 1
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 2
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 3
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 4
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 5
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 6
+| RTU #byte
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 7
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+
+
+
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TMB#0 zp,X   +
+UM, AM, OF
+| TMB#0 abs   +
+UM, AM, OF
+| TMB#0 zp   +
+UM, AM, OF
+| 
+| RMB#0 zp,X
+| RMB#0 abs
+| RMB#0 zp
+| RDL#1 zp   +
+UM, NF, RS, AM, OF
+| ROL#1 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#0 zp,rel   +
+UM, RS, AM, OF
+
+h| 1
+| 
+| TMB#1 zp,X   +
+UM, AM, OF
+| TMB#1 abs   +
+UM, AM, OF
+| TMB#1 zp   +
+UM, AM, OF
+| 
+| RMB#1 zp,X
+| RMB#1 abs
+| RMB#1 zp
+| RDL#2 zp   +
+UM, NF, RS, AM, OF
+| ROL#2 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#1 zp,rel   +
+UM, RS, AM, OF
+
+h| 2
+| 
+| TMB#2 zp,X   +
+UM, AM, OF
+| TMB#2 abs   +
+UM, AM, OF
+| TMB#2 zp   +
+UM, AM, OF
+| 
+| RMB#2 zp,X
+| RMB#2 abs
+| RMB#2 zp
+| RDL#3 zp   +
+UM, NF, RS, AM, OF
+| ROL#3 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#2 zp,rel   +
+UM, RS, AM, OF
+
+h| 3
+| 
+| TMB#3 zp,X   +
+UM, AM, OF
+| TMB#3 abs   +
+UM, AM, OF
+| TMB#3 zp   +
+UM, AM, OF
+| 
+| RMB#3 zp,X
+| RMB#3 abs
+| RMB#3 zp
+| RDL#4 zp   +
+UM, NF, RS, AM, OF
+| ROL#4 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#3 zp,rel   +
+UM, RS, AM, OF
+
+h| 4
+| 
+| TMB#4 zp,X   +
+UM, AM, OF
+| TMB#4 abs   +
+UM, AM, OF
+| TMB#4 zp   +
+UM, AM, OF
+| 
+| RMB#4 zp,X
+| RMB#4 abs
+| RMB#4 zp
+| RDL#5 zp   +
+UM, NF, RS, AM, OF
+| ROL#5 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#4 zp,rel   +
+UM, RS, AM, OF
+
+h| 5
+| 
+| TMB#5 zp,X   +
+UM, AM, OF
+| TMB#5 abs   +
+UM, AM, OF
+| TMB#5 zp   +
+UM, AM, OF
+| 
+| RMB#5 zp,X
+| RMB#5 abs
+| RMB#5 zp
+| RDL#6 zp   +
+UM, NF, RS, AM, OF
+| ROL#6 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#5 zp,rel   +
+UM, RS, AM, OF
+
+h| 6
+| 
+| TMB#6 zp,X   +
+UM, AM, OF
+| TMB#6 abs   +
+UM, AM, OF
+| TMB#6 zp   +
+UM, AM, OF
+| 
+| RMB#6 zp,X
+| RMB#6 abs
+| RMB#6 zp
+| RDL#7 zp   +
+UM, NF, RS, AM, OF
+| ROL#7 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#6 zp,rel   +
+UM, RS, AM, OF
+
+h| 7
+| 
+| TMB#7 zp,X   +
+UM, AM, OF
+| TMB#7 abs   +
+UM, AM, OF
+| TMB#7 zp   +
+UM, AM, OF
+| 
+| RMB#7 zp,X
+| RMB#7 abs
+| RMB#7 zp
+| RDL#8 zp   +
+UM, NF, RS, AM, OF
+| ROL#8 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBR#7 zp,rel   +
+UM, RS, AM, OF
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| SMB#0 zp,X
+| SMB#0 abs
+| SMB#0 zp
+| RDR#1 zp   +
+UM, NF, RS, AM, OF
+| ROR#1 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#0 zp,rel   +
+UM, RS, AM, OF
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| SMB#1 zp,X
+| SMB#1 abs
+| SMB#1 zp
+| RDR#2 zp   +
+UM, NF, RS, AM, OF
+| ROR#2 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#1 zp,rel   +
+UM, RS, AM, OF
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| SMB#2 zp,X
+| SMB#2 abs
+| SMB#2 zp
+| RDR#3 zp   +
+UM, NF, RS, AM, OF
+| ROR#3 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#2 zp,rel   +
+UM, RS, AM, OF
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| SMB#3 zp,X
+| SMB#3 abs
+| SMB#3 zp
+| RDR#4 zp   +
+UM, NF, RS, AM, OF
+| ROR#4 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#3 zp,rel   +
+UM, RS, AM, OF
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| SMB#4 zp,X
+| SMB#4 abs
+| SMB#4 zp
+| RDR#5 zp   +
+UM, NF, RS, AM, OF
+| ROR#5 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#4 zp,rel   +
+UM, RS, AM, OF
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| SMB#5 zp,X
+| SMB#5 abs
+| SMB#5 zp
+| RDR#6 zp   +
+UM, NF, RS, AM, OF
+| ROR#6 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#5 zp,rel   +
+UM, RS, AM, OF
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| SMB#6 zp,X
+| SMB#6 abs
+| SMB#6 zp
+| RDR#7 zp   +
+UM, NF, RS, AM, OF
+| ROR#7 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#6 zp,rel   +
+UM, RS, AM, OF
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| SMB#7 zp,X
+| SMB#7 abs
+| SMB#7 zp
+| RDR#8 zp   +
+UM, NF, RS, AM, OF
+| ROR#8 zp   +
+UM, NF, RS, AM, OF
+| 
+| 
+| 
+| 
+| 
+| BBS#7 zp,rel   +
+UM, RS, AM, OF
+
+|===
+
+
+
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TAB    +
+NF, RS, LE
+| TAE    +
+NF, RS, LE
+| 
+| TAX    +
+NF, RS, LE
+| TAY    +
+NF, RS, LE
+| TAZ
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 1
+| TBA    +
+NF
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 2
+| TEA    +
+NF
+| TEB    +
+NF
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 3
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 4
+| TXA    +
+NF, RS, LE
+| 
+| 
+| 
+| 
+| 
+| 
+| TXS    +
+UM, RS, LE
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 5
+| TYA    +
+NF, RS, LE
+| 
+| 
+| 
+| 
+| 
+| 
+| TYS    +
+UM, RS, LE
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 6
+| TZA
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 7
+| 
+| 
+| 
+| 
+| TSX    +
+UM, NF, RS, LE
+| TSY    +
+NF, UM, RS, LE
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 8
+| 
+| XAB
+| 
+| 
+| XAX
+| XAY
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| XYX
+| XZX
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| D
+| TPA    +
+NF
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+
+
 The grey fields note opcodes that are not used in the 65002.
 
 == Disclaimer
@@ -1371,5 +2405,5 @@ in link:af65002front.adoc#lic[the license section].
 
 '''
 
-Last updated 2012-04-23.
+Last updated 2026-10-13.
 

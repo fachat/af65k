@@ -770,6 +770,954 @@ h| F
 |===
 
 
+[[std]]
+== SYS Opcode Table
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 1
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 2
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 3
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 4
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 5
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 6
+| RTU #byte
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 7
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+
+
+[[std]]
+== QUICK Opcode Table
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TMB#0 zp,X
+| TMB#0 abs
+| TMB#0 zp
+| 
+| RMB#0 zp,X
+| RMB#0 abs
+| RMB#0 zp
+| RDL#1 zp
+| ROL#1 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#0 zp,rel
+
+h| 1
+| 
+| TMB#1 zp,X
+| TMB#1 abs
+| TMB#1 zp
+| 
+| RMB#1 zp,X
+| RMB#1 abs
+| RMB#1 zp
+| RDL#2 zp
+| ROL#2 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#1 zp,rel
+
+h| 2
+| 
+| TMB#2 zp,X
+| TMB#2 abs
+| TMB#2 zp
+| 
+| RMB#2 zp,X
+| RMB#2 abs
+| RMB#2 zp
+| RDL#3 zp
+| ROL#3 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#2 zp,rel
+
+h| 3
+| 
+| TMB#3 zp,X
+| TMB#3 abs
+| TMB#3 zp
+| 
+| RMB#3 zp,X
+| RMB#3 abs
+| RMB#3 zp
+| RDL#4 zp
+| ROL#4 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#3 zp,rel
+
+h| 4
+| 
+| TMB#4 zp,X
+| TMB#4 abs
+| TMB#4 zp
+| 
+| RMB#4 zp,X
+| RMB#4 abs
+| RMB#4 zp
+| RDL#5 zp
+| ROL#5 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#4 zp,rel
+
+h| 5
+| 
+| TMB#5 zp,X
+| TMB#5 abs
+| TMB#5 zp
+| 
+| RMB#5 zp,X
+| RMB#5 abs
+| RMB#5 zp
+| RDL#6 zp
+| ROL#6 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#5 zp,rel
+
+h| 6
+| 
+| TMB#6 zp,X
+| TMB#6 abs
+| TMB#6 zp
+| 
+| RMB#6 zp,X
+| RMB#6 abs
+| RMB#6 zp
+| RDL#7 zp
+| ROL#7 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#6 zp,rel
+
+h| 7
+| 
+| TMB#7 zp,X
+| TMB#7 abs
+| TMB#7 zp
+| 
+| RMB#7 zp,X
+| RMB#7 abs
+| RMB#7 zp
+| RDL#8 zp
+| ROL#8 zp
+| 
+| 
+| 
+| 
+| 
+| BBR#7 zp,rel
+
+h| 8
+| 
+| 
+| 
+| 
+| 
+| SMB#0 zp,X
+| SMB#0 abs
+| SMB#0 zp
+| RDR#1 zp
+| ROR#1 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#0 zp,rel
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| SMB#1 zp,X
+| SMB#1 abs
+| SMB#1 zp
+| RDR#2 zp
+| ROR#2 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#1 zp,rel
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| SMB#2 zp,X
+| SMB#2 abs
+| SMB#2 zp
+| RDR#3 zp
+| ROR#3 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#2 zp,rel
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| SMB#3 zp,X
+| SMB#3 abs
+| SMB#3 zp
+| RDR#4 zp
+| ROR#4 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#3 zp,rel
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| SMB#4 zp,X
+| SMB#4 abs
+| SMB#4 zp
+| RDR#5 zp
+| ROR#5 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#4 zp,rel
+
+h| D
+| 
+| 
+| 
+| 
+| 
+| SMB#5 zp,X
+| SMB#5 abs
+| SMB#5 zp
+| RDR#6 zp
+| ROR#6 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#5 zp,rel
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| SMB#6 zp,X
+| SMB#6 abs
+| SMB#6 zp
+| RDR#7 zp
+| ROR#7 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#6 zp,rel
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| SMB#7 zp,X
+| SMB#7 abs
+| SMB#7 zp
+| RDR#8 zp
+| ROR#8 zp
+| 
+| 
+| 
+| 
+| 
+| BBS#7 zp,rel
+
+|===
+
+
+[[std]]
+== TXFER Opcode Table
+
+
+[cols="17*"]
+|===
+h| LSB-> +
+MSB
+h| 0
+h| 1
+h| 2
+h| 3
+h| 4
+h| 5
+h| 6
+h| 7
+h| 8
+h| 9
+h| A
+h| B
+h| C
+h| D
+h| E
+h| F
+
+h| 0
+| 
+| TAB
+| TAE
+| 
+| TAX
+| TAY
+| TAZ
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 1
+| TBA
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 2
+| TEA
+| TEB
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 3
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 4
+| TXA
+| 
+| 
+| 
+| 
+| 
+| 
+| TXS
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 5
+| TYA
+| 
+| 
+| 
+| 
+| 
+| 
+| TYS
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 6
+| TZA
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 7
+| 
+| 
+| 
+| 
+| TSX
+| TSY
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 8
+| 
+| XAB
+| 
+| 
+| XAX
+| XAY
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| 9
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| A
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| B
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| C
+| 
+| 
+| 
+| 
+| 
+| XYX
+| XZX
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| D
+| TPA
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| E
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+h| F
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+| 
+
+|===
+
+
 == Disclaimer
 
 All Copyrights are acknowledged.
@@ -778,5 +1726,5 @@ in link:af65002front.adoc#lic[the license section].
 
 '''
 
-Last updated 2012-04-23.
+Last updated 2026-10-13.
 
